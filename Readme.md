@@ -1,6 +1,6 @@
 # Documentacion Oficial de Inicio del Servidor
 
-## 1ero - Crear Entorno Virtual 
+### 1ero - Crear Entorno Virtual 
 
 "py -m pip install virtualenv" -- Instalar el entorno virtual
 
@@ -8,6 +8,16 @@
 
 ".\venv\Scripts\activate" -- Ejecutar el activador
 
-## 2do - 
+### 2do - Descargar Django en el Entorno Virtual
+
+"py -m pip install django" -- Descargar la libreria de Django
+
+# Ejecutar el Django
+
+### 3ero - Ingresar a la ruta
+
+C:\Users\usuario\Desktop\CuerpoBomberos\Cuerpo_bomberos
+
+### Ejecutar:
 
 "python manage.py runserver" -- Ejecuta el proyecto en la web
