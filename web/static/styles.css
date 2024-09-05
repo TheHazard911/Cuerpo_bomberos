@@ -1,6 +1,6 @@
 /* ******************** Fonts ******************** */
 @import url("https://fonts.googleapis.com/css2?family=Secular+One&display=swap");
-@import url('https://fonts.googleapis.com/css2?family=Kanit:wght@400;800&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Kanit:wght@400;800&display=swap");
 
 .secular-one-regular {
   font-family: "Secular One", sans-serif;
@@ -435,14 +435,15 @@ summary > * {
   filter: blur(3px);
   position: absolute;
 }
-.title-login{
-    position: relative;
-    text-align: center;
-    color: #FFF;
-    font: var(--kanit-regular);
-    font-weight: 800;
-    font-size: 3rem;
-    filter: drop-shadow(1 1 1 1 #000);
+.title-login {
+  position: relative;
+  bottom: 2rem;
+  text-align: center;
+  color: #fff;
+  font: var(--kanit-regular);
+  font-weight: 800;
+  font-size: 3rem;
+  filter: drop-shadow(1 1 1 1 #000);
 }
 .login-form {
   width: 100%;
@@ -466,10 +467,10 @@ summary > * {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;  
+  align-items: center;
   img {
     position: absolute;
-    top: 125px;
+    top: 8rem;
   }
 }
 .inputs-forms {
@@ -486,7 +487,7 @@ summary > * {
     font-family: var(--secular-one);
     font-size: 1.1rem;
   }
-  input::placeholder{
+  input::placeholder {
     color: #0005;
     font-size: 1.1rem;
     padding-left: 0.1rem;
@@ -511,18 +512,17 @@ summary > * {
     cursor: pointer;
   }
 }
-.icons-footer{
-    position: absolute;
-    bottom: 2.5rem;
-    width: 100%;
-    height: auto;
-    
+.icons-footer {
+  position: absolute;
+  bottom: 2.5rem;
+  width: 100%;
+  height: auto;
 }
-.icons{
-    width: auto;
-    height: 12.5vh;
-    margin: 0 auto;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+.icons {
+  width: auto;
+  height: 12.5vh;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
