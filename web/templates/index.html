@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Django Project</title>
+    <title>Cuerpo De Bomberos</title>
     <link rel="stylesheet" href="../static/styles.css" />
   </head>
   <body>
@@ -11,7 +11,8 @@
     <h1 class="title-login">Cuerpo De Bomberos</h1>
     <div class="login-form">
       <section class="form-items">
-        <form action="" class="form-content">
+        <form action="" class="form-content" method="post">
+          {% csrf_token %}
           <img src="../static/assets/logo bomberos 2.svg" alt="" />
           <section class="inputs-forms">
             <label for="user">Usuario:</label>
@@ -34,7 +35,7 @@
             />
           </section>
           <section class="btn-inputs-forms">
-            <input type="button" value="Ingresar" />
+              <button>Ingresar</button>
           </section>
         </form>
       </section>
@@ -42,8 +43,8 @@
     <footer class="icons-footer">
       <div class="icons">
         <img src="../static/assets/logo bomberos 2.svg" alt="Bomberos" />
-        <img src="../static/assets/logo dgnb.svgcj" alt="dgnb" />
-        <img src="../static/assets/logo interior,justicia y paz.svg" alt="Venezuela" />
+        <img src="../static/assets/logo dgnb.svg" alt="dgnb" />
+        <img src="../static/assets/interior,justicia,paz.png" alt="Venezuela" />
         <img src="../static/assets/logo alcaldia.svg" alt="Alcaldia" />
       </div>
     </footer>
