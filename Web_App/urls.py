@@ -16,11 +16,12 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from web.views import Home, Dashboard
+from web.views import Home, Dashboard, Prueba
 
 #Se crean las rutas que se podran visitar en la aplicacion web.
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', Home),
     path('dashboard/', Dashboard),
+    path('prueba/', Prueba),
 ]

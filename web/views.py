@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.http import HttpRequest
-from .models import Usuarios
+from .models import Usuarios, Personal, Divisiones, Procedimientos
+from django.utils import timezone
 
 # Create your views here.
 
@@ -30,3 +31,21 @@ def Home(request):
 # Vista de la ventana del Dashboard
 def Dashboard(request):
     return render(request, "dashboard.html")
+
+# Vista de archivo para hacer pruebas de backend
+def Prueba(request):
+  usuarios = Usuarios.objects.all()
+  divisiones = Divisiones.objects.all()
+  procedimientos = Procedimientos.objects.all()
+  print(divisiones)
+  
+
+  # Obtener la hora actual en la zona horaria configurada
+  hora_actual = timezone.now()
+  print(hora_actual)
+
+  return render(request, "prueba.html", {
+    "usuarios": usuarios,
+    "divisiones": divisiones,
+    "procedimientos": procedimientos,
+  })

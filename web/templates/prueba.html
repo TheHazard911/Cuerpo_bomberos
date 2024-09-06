@@ -1,0 +1,200 @@
+<h1 style="text-align: center">Archivo Nativo Para Hacer Pruebas de Backend</h1>
+
+{% for usuario in usuarios %}
+<div
+  style="
+    width: 50%;
+    height: 40vh;
+    margin: 1rem auto;
+    border: medium solid black;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    padding: 1rem;
+    border-radius: 1rem;
+  "
+>
+  <h2><b>Usuario: </b>{{usuario.user}}</h2>
+  <h2><b>Password: </b>{{usuario.password}}</h2>
+  <h2><b>Encargado: </b>{{usuario.encargado.nombres}}</h2>
+  <h2><b>Jerarquia: </b>{{usuario.encargado.jerarquia}}</h2>
+  <h2><b>Cargo: </b>{{usuario.encargado.cargo}}</h2>
+</div>
+{% endfor %}
+
+<div
+  style="
+    width: 50%;
+    height: auto;
+    margin: 3rem auto;
+    border: medium solid black;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    padding: 1rem;
+    border-radius: 1rem;
+  "
+>
+  {% for division in divisiones %}
+  <div
+    style="
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: center;
+    "
+  >
+    <li>Division De:</li>
+    <h4>{{ division.division}}</h4>
+  </div>
+  {% endfor %}
+</div>
+
+<h1 style="text-align: center; width: 100%">Procedimientos</h1>
+<div
+  style="
+    width: 50%;
+    height: auto;
+    margin: 3rem auto;
+    border: medium solid black;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: center;
+    padding: 1rem;
+    border-radius: 1rem;
+  "
+>
+  {% for procedimiento in procedimientos %}
+  <div
+    style="
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: center;
+      border-right: thin solid black;
+      padding: 0.1rem 1rem;
+    "
+  >
+    <section
+      style="
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+      "
+    >
+      <h2 style="margin-right: 0.5rem; font-size: 1.2rem; padding: 0.8rem">
+        Solicitante:
+      </h2>
+      {{ procedimiento.solicitante }}
+    </section>
+    <section
+      style="
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+      "
+    >
+      <h2 style="margin-right: 0.5rem; font-size: 1.2rem; padding: 0.8rem">
+        Unidad:
+      </h2>
+      {{ procedimiento.unidad }}
+    </section>
+    <section
+      style="
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+      "
+    >
+      <h2 style="margin-right: 0.5rem; font-size: 1.2rem; padding: 0.8rem">
+        Jefe de Comision:
+      </h2>
+      {{ procedimiento.jefe_comision }}
+    </section>
+    <section
+      style="
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+      "
+    >
+      <h2 style="margin-right: 0.5rem; font-size: 1.2rem; padding: 0.8rem">
+        Efectivos Enviados:
+      </h2>
+      {{ procedimiento.efectivos_enviados }}
+    </section>
+    <section
+      style="
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+      "
+    >
+      <h2 style="margin-right: 0.5rem; font-size: 1.2rem; padding: 0.8rem">
+        Municipio:
+      </h2>
+      {{ procedimiento.id_municipio.municipio }}
+    </section>
+    <section
+      style="
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+      "
+    >
+      <h2 style="margin-right: 0.5rem; font-size: 1.2rem; padding: 0.8rem">
+        Parroquia:
+      </h2>
+      {{ procedimiento.id_parroquia.parroquia }}
+    </section>
+    <section
+      style="
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+      "
+    >
+      <h2 style="margin-right: 0.5rem; font-size: 1.2rem; padding: 0.8rem">
+        Fecha y Hora:
+      </h2>
+      {{ procedimiento.fecha_hora|date:"d/m/Y H:i:s" }}
+    </section>
+    <section
+      style="
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+      "
+    >
+      <h2 style="margin-right: 0.5rem; font-size: 1.2rem; padding: 0.8rem">
+        Direccion:
+      </h2>
+      {{ procedimiento.direccion }}
+    </section>
+    <section
+      style="
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+      "
+    >
+      <h2 style="margin-right: 0.5rem; font-size: 1.2rem; padding: 0.8rem">
+        Direccion:
+      </h2>
+      {{ procedimiento.id_tipo_procedimiento.tipo_procedimiento }}
+    </section>
+  </div>
+  {% endfor %}
+</div>
