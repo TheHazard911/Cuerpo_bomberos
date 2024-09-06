@@ -18,8 +18,9 @@ from django.contrib import admin
 from django.urls import path
 from web.views import Home, Dashboard
 
+#Se crean las rutas que se podran visitar en la aplicacion web.
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('home/', Home),
+    path('', Home),
     path('dashboard/', Dashboard),
 ]
