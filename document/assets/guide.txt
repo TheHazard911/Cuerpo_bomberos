@@ -120,3 +120,4 @@ Si las credenciales son incorrectas, se vuelve a cargar la página de login y se
 El código JavaScript detecta el valor de error y muestra una ventana modal con un mensaje de error.
 Si las credenciales son correctas, el usuario es redirigido al menú principal.
 Con esto deberías poder mostrar un modal de error en caso de que el inicio de sesión falle. Si tienes más dudas o algo no funciona como esperas, avísame y lo revisamos.
+
