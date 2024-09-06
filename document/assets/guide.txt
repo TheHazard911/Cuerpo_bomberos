@@ -1,0 +1,122 @@
+Claro, puedo guiarte para implementar esto en Django con una ventana modal que se muestre si los datos ingresados son incorrectos. Para lograrlo, vamos a usar una combinación de Django en el backend, HTML, y JavaScript (con Bootstrap para la ventana modal). Te mostraré cómo puedes hacerlo paso a paso.
+
+Paso 1: Crear la vista del login en Django
+En tu vista de Django, puedes verificar si el usuario y la contraseña son correctos. Si no lo son, pasarás una variable de contexto al template indicando el error.
+
+views.py
+python
+Copiar código
+from django.contrib.auth import authenticate, login
+from django.shortcuts import render, redirect
+
+def login_view(request):
+    if request.method == 'POST':
+        username = request.POST['username']
+        password = request.POST['password']
+        
+        # Verificar las credenciales del usuario
+        user = authenticate(request, username=username, password=password)
+        
+        if user is not None:
+            # Si las credenciales son correctas, iniciar sesión y redirigir al menú principal
+            login(request, user)
+            return redirect('menu_principal')  # Reemplaza 'menu_principal' por el nombre de tu vista
+        else:
+            # Si las credenciales son incorrectas, renderiza la página con un indicador de error
+            return render(request, 'login.html', {'error': True})
+    
+    return render(request, 'login.html')
+En esta vista:
+
+Si los datos ingresados son correctos, se redirige al menú principal.
+Si los datos son incorrectos, se recarga la página de login y se pasa un contexto error=True.
+Paso 2: Crear el template de login
+Ahora, en tu template de login.html, vas a usar Bootstrap para la ventana modal y JavaScript para mostrarla si hay un error.
+
+login.html
+html
+Copiar código
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <!-- Incluye Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+
+    <div class="container">
+        <h2>Login</h2>
+        <form method="POST">
+            {% csrf_token %}
+            <div class="mb-3">
+                <label for="username" class="form-label">Usuario</label>
+                <input type="text" class="form-control" id="username" name="username" required>
+            </div>
+            <div class="mb-3">
+                <label for="password" class="form-label">Contraseña</label>
+                <input type="password" class="form-control" id="password" name="password" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Iniciar Sesión</button>
+        </form>
+    </div>
+
+    <!-- Modal de error -->
+    <div class="modal fade" id="errorModal" tabindex="-1" aria-labelledby="errorModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="errorModalLabel">Error en el inicio de sesión</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    Los datos ingresados son incorrectos. Por favor, intenta nuevamente.
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Incluye Bootstrap JS y dependencias -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Mostrar modal si hay un error -->
+    <script>
+        // Si Django envía la variable 'error', mostramos la ventana modal de error
+        {% if error %}
+        var errorModal = new bootstrap.Modal(document.getElementById('errorModal'));
+        errorModal.show();
+        {% endif %}
+    </script>
+
+</body>
+</html>
+Explicación del template:
+Formulario de login: Es el formulario que envía el nombre de usuario y la contraseña al servidor.
+Ventana modal de Bootstrap: Se define una ventana modal que se activará si las credenciales son incorrectas.
+JavaScript: El código JavaScript verifica si la variable error es True. Si es así, muestra la ventana modal automáticamente cuando la página se recarga.
+Paso 3: Configurar la URL para la vista de login
+En tu archivo urls.py, asegúrate de definir la URL para la vista de login:
+
+python
+Copiar código
+from django.urls import path
+from .views import login_view
+
+urlpatterns = [
+    path('login/', login_view, name='login'),
+    path('menu/', menu_principal_view, name='menu_principal'),  # Reemplaza con tu vista del menú principal
+]
+Paso 4: Estilizar (opcional)
+Si quieres personalizar el estilo de tu modal o formulario, puedes agregar más clases CSS o editar el diseño según tu preferencia.
+
+Resumen del flujo:
+El usuario ingresa sus credenciales en el formulario de login.
+Si las credenciales son incorrectas, se vuelve a cargar la página de login y se pasa un contexto con error=True.
+El código JavaScript detecta el valor de error y muestra una ventana modal con un mensaje de error.
+Si las credenciales son correctas, el usuario es redirigido al menú principal.
+Con esto deberías poder mostrar un modal de error en caso de que el inicio de sesión falle. Si tienes más dudas o algo no funciona como esperas, avísame y lo revisamos.
