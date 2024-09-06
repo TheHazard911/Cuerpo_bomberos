@@ -15,11 +15,26 @@
     border-radius: 1rem;
   "
 >
-  <h2><b>Usuario: </b>{{usuario.user}}</h2>
-  <h2><b>Password: </b>{{usuario.password}}</h2>
-  <h2><b>Encargado: </b>{{usuario.encargado.nombres}}</h2>
-  <h2><b>Jerarquia: </b>{{usuario.encargado.jerarquia}}</h2>
-  <h2><b>Cargo: </b>{{usuario.encargado.cargo}}</h2>
+  <h2>
+    <b>Usuario:</b>
+    {{usuario.user}}
+  </h2>
+  <h2>
+    <b>Password:</b>
+    {{usuario.password}}
+  </h2>
+  <h2>
+    <b>Encargado:</b>
+    {{usuario.encargado.nombres}}
+  </h2>
+  <h2>
+    <b>Jerarquia:</b>
+    {{usuario.encargado.jerarquia}}
+  </h2>
+  <h2>
+    <b>Cargo:</b>
+    {{usuario.encargado.cargo}}
+  </h2>
 </div>
 {% endfor %}
 
@@ -61,6 +76,7 @@
     border: medium solid black;
     display: flex;
     flex-direction: row;
+    flex-wrap: wrap;
     align-items: flex-start;
     justify-content: center;
     padding: 1rem;
@@ -74,8 +90,9 @@
       flex-direction: column;
       align-items: flex-start;
       justify-content: center;
-      border-right: thin solid black;
+      border: thin solid black;
       padding: 0.1rem 1rem;
+      margin: 0.5rem;
     "
   >
     <section
@@ -89,7 +106,8 @@
       <h2 style="margin-right: 0.5rem; font-size: 1.2rem; padding: 0.8rem">
         Solicitante:
       </h2>
-      {{ procedimiento.solicitante }}
+      <!-- prettier-ignore -->
+      <p>{{ procedimiento.id_solicitante.jerarquia }} {{ procedimiento.id_solicitante.nombres }} {{ procedimiento.id_solicitante.apellidos }}.</p>
     </section>
     <section
       style="
@@ -115,7 +133,8 @@
       <h2 style="margin-right: 0.5rem; font-size: 1.2rem; padding: 0.8rem">
         Jefe de Comision:
       </h2>
-      {{ procedimiento.jefe_comision }}
+      <!-- prettier-ignore -->
+      <p>{{ procedimiento.id_jefe_comision.jerarquia }} {{ procedimiento.id_jefe_comision.nombres }} {{ procedimiento.id_jefe_comision.apellidos }}.</p>
     </section>
     <section
       style="
