@@ -37,12 +37,6 @@ def Prueba(request):
   usuarios = Usuarios.objects.all()
   divisiones = Divisiones.objects.all()
   procedimientos = Procedimientos.objects.all()
-  print(divisiones)
-  
-
-  # Obtener la hora actual en la zona horaria configurada
-  hora_actual = timezone.now()
-  print(hora_actual)
 
   return render(request, "prueba.html", {
     "usuarios": usuarios,
