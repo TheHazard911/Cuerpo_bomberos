@@ -9,4 +9,3 @@ admin.site.register(Municipios)
 admin.site.register(Parroquias)
 admin.site.register(Tipos_Procedimientos)
 admin.site.register(Procedimientos)
-

@@ -1,0 +1,73 @@
+Tipos de campos en Django Forms
+Aquí tienes una lista de algunos tipos de campos comunes que puedes usar en Django:
+
+CharField: Campo de texto simple.
+
+python
+Copiar código
+nombre = forms.CharField(max_length=100)
+EmailField: Campo de correo electrónico.
+
+python
+Copiar código
+correo = forms.EmailField()
+IntegerField: Campo para ingresar números enteros.
+
+python
+Copiar código
+edad = forms.IntegerField()
+BooleanField: Campo tipo checkbox (booleano).
+
+python
+Copiar código
+acepto_terminos = forms.BooleanField()
+DateField: Campo para ingresar fechas.
+
+python
+Copiar código
+fecha_nacimiento = forms.DateField(widget=forms.SelectDateWidget)
+DateTimeField: Campo para ingresar fechas y horas.
+
+python
+Copiar código
+fecha_evento = forms.DateTimeField()
+ChoiceField: Campo para seleccionar una opción de una lista de opciones.
+
+python
+Copiar código
+opciones = forms.ChoiceField(choices=[('1', 'Opción 1'), ('2', 'Opción 2')])
+MultipleChoiceField: Campo para seleccionar múltiples opciones de una lista.
+
+python
+Copiar código
+categorias = forms.MultipleChoiceField(choices=[('a', 'Categoría A'), ('b', 'Categoría B')])
+URLField: Campo para ingresar una URL.
+
+python
+Copiar código
+sitio_web = forms.URLField()
+FileField: Campo para cargar archivos.
+
+python
+Copiar código
+archivo = forms.FileField()
+ImageField: Campo para cargar imágenes (requiere Pillow).
+
+python
+Copiar código
+imagen = forms.ImageField()
+TextField: Campo para ingresar texto largo (usualmente renderizado como un <textarea>).
+
+python
+Copiar código
+comentario = forms.CharField(widget=forms.Textarea)
+PasswordInput: Para campos de contraseña (ocultos).
+
+python
+Copiar código
+contraseña = forms.CharField(widget=forms.PasswordInput)
+RadioSelect: Para opciones de selección única con botones de radio.
+
+python
+Copiar código
+genero = forms.ChoiceField(choices=[('M', 'Masculino'), ('F', 'Femenino')], widget=forms.Radi
