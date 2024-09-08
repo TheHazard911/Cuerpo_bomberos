@@ -386,7 +386,7 @@ summary::-webkit-details-marker {
 }
 
 summary::before {
-  content: "▶";
+  content: "►";
   position: absolute;
   top: 1rem;
   left: 0.5rem;
@@ -588,44 +588,61 @@ summary > * {
   display: flex;
   flex-direction: column;
   align-items: center;
-  h4 {
-    font-family: var(--secular-one);
-    margin-bottom: 0.5rem;
+  align-content: center;
+}
+.title-main-dashboard {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  align-content: center;
+  margin: 0 auto;
+  h3 {
+    font-size: 1.8rem;
+    text-align: center;
+    width: 80%;
+    height: auto;
+    margin: 25px 10px;
   }
 }
 .nav-dashboard {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+  align-content: center;
   flex-wrap: wrap;
-  margin: 0 auto;
-  padding: 0;
   font-family: var(--sofia-sans);
   a {
-    margin: 0.4rem 0;
-    padding: 0;
+    display: flex;
+    align-items: center;
+    align-content: center;
+    width: auto;
+    height: auto;
     text-decoration: none;
-    font-size: 1.2rem;
+    font-size: 1.1rem;
+    margin: 0.2rem;
   }
+  a > svg {
+    width: auto;
+    height: auto;
+    display: flex;
+    justify-content: center;
+    padding: 0 0.3rem;
+  }
+
   details {
     display: flex;
     flex-direction: column;
     padding: 0;
-    margin: 0;
-    /* Quitar el estilo de la flecha en navegadores compatibles */
-    appearance: none; /* Firefox, Chrome */
-    -webkit-appearance: none; /* Safari */
-    -moz-appearance: none; /* Firefox */
   }
   summary {
     font-size: 1.2rem;
     text-decoration: none;
-    margin-right: 1rem;
-    /* Quitar el estilo de la flecha en navegadores compatibles */
-    appearance: none; /* Firefox, Chrome */
-    -webkit-appearance: none; /* Safari */
-    -moz-appearance: none; /* Firefox */
+    list-style: none;
+    width: auto;
+    height: 3rem;
+    text-align: left;
   }
+
   details > a {
     margin-left: 1rem;
     padding: 0.1rem;
