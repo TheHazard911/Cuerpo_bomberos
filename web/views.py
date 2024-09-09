@@ -1,36 +1,48 @@
 from django.shortcuts import render, redirect
 from django.http import HttpRequest
 from .models import Usuarios, Personal, Divisiones, Procedimientos
-from django.utils import timezone
+# from django.utils import timezone
+from django.contrib.auth.decorators import login_required
+from django.contrib import messages
+
 
 # Create your views here.
 
 # Vista de la Ventana Inicial (Login)
 def Home(request):
-    # Condicional para ingresar al login si es TRUE  
     if request.method == "GET":
         return render(request, "index.html")
-    # Condicional para consultar base de datos si es FALSE
     else:
-      # Recibe el Usuario ingresado en el formulario
         usuario = request.POST["user"]
-      # Recibe la contraseña ingresado en el formulario
         contrasena = request.POST["password"]
-      # guarda los valores de la tabla que contiene a los usuarios
-        users = Usuarios.objects.values()
-        
-        # Compara si el usuario y contraseña ingresados existen en la base de datos
-        for user in users:
-          # Si es True redirige al Dashboard
-            if usuario == user["user"] and contrasena == user["password"]:
-                return redirect("/dashboard/")
-              
-        # Si al verificar en todos los elementos no encuentra recarga el login
-        return redirect("/")
-
-# Vista de la ventana del Dashboard
+        try:
+            user = Usuarios.objects.get(user=usuario, password=contrasena)
+            encargado = user.encargado  # Obtener el encargado relacionado
+            # Guardar datos en la sesión
+            request.session['user'] = {
+                "user": user.user,
+                "jerarquia": encargado.jerarquia,
+                "nombres": encargado.nombres,
+                "apellidos": encargado.apellidos,
+            }
+            return redirect("/dashboard/")
+        except Usuarios.DoesNotExist:
+            messages.error(request, 'Usuario o contraseña incorrectos')
+            return redirect("/")
+          
+@login_required
 def Dashboard(request):
-    return render(request, "dashboard.html")
+    user = request.session.get('user')
+    
+    if not user:
+        return redirect('/')
+    
+    return render(request, "dashboard.html", {
+        "user": user,
+        "jerarquia": user["jerarquia"],
+        "nombres": user["nombres"],
+        "apellidos": user["apellidos"],
+    })
 
 # Vista de archivo para hacer pruebas de backend
 def Prueba(request):
