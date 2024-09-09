@@ -89,6 +89,7 @@
   /*        style dashboard             */
   --color-main-dashboard: #f5f5f5;
   --color-header-dashboard: #b6243a;
+  --color-general-dashboard: #f8f9fa;
 
   --gradient-primary: linear-gradient(
     45deg,
@@ -650,7 +651,68 @@ summary > * {
     font-size: 1.1rem;
   }
 }
+/*********** Estilos panel principal de estadisticas ************/
+.general-dashboard {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  position: relative;
+  background-color: black;
+  width: 80%;
+  height: 90vh;
+  background-color: var(--color-general-dashboard);
+}
+.div-user-name {
+  display: flex;
+  justify-content: end;
+  align-items: center;
+  padding: 0.5rem;
+  padding-right: 2rem;
+}
+.user-name {
+  width: 14rem;
+  height: 2.5rem;
+  background-color: #fff;
+  border: 0.1px solid black;
+  border-radius: 20px;
+  margin: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  align-self: center;
+  margin: 0.5rem;
+  padding: 0;
+  p {
+    margin-top: 2rem;
+    width: auto;
+    height: auto;
+    font-size: 1rem;
+  }
+}
+.div-stadist-parroquies {
+  width: 100%;
+  height: 40vh;
+  display: flex;
+  flex-direction: column;
+}
+.title-stadist-parroquies {
+  display: flex;
+  justify-content: center;
+  h4 {
+    margin: 0;
+    padding: 0;
+  }
+}
+.stadist-parroquies {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+}
 
+.div-graphic-statistics {
+}
+.div-analytics {
+}
 /****************** componentes reutilizables **************/
 .btn-mod {
   width: 10%;
@@ -663,4 +725,27 @@ summary > * {
   justify-content: center;
   align-content: center;
   padding: 2rem;
+}
+/****    cards de estadisticas principales  ***/
+.card-parroquies {
+  height: 150px;
+  width: 219px;
+  margin-top: 2rem;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  align-content: flex-start;
+}
+.card-blue {
+  background-color: #316cf4;
+}
+.card-yellow {
+  background-color: #f6c344;
+}
+.card-red {
+  background-color: #cb444a;
+}
+.card-gray {
+  background-color: #717783;
 }
