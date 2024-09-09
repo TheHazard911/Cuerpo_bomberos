@@ -55,3 +55,42 @@ def Prueba(request):
     "divisiones": divisiones,
     "procedimientos": procedimientos,
   })
+  
+# Vista de archivo para hacer pruebas de backend
+@login_required
+def View_Procedimiento(request):
+    user = request.session.get('user')    
+    if not user:
+            return redirect('/')
+
+    return render(request, "procedimientos.html", {
+        "user": user,
+        "jerarquia": user["jerarquia"],
+        "nombres": user["nombres"],
+        "apellidos": user["apellidos"],
+    })
+@login_required
+def View_Estadisticas(request):
+    user = request.session.get('user')    
+    if not user:
+            return redirect('/')
+
+    return render(request, "estadisticas.html", {
+        "user": user,
+        "jerarquia": user["jerarquia"],
+        "nombres": user["nombres"],
+        "apellidos": user["apellidos"],
+    })
+    
+@login_required
+def View_Operaciones(request):
+    user = request.session.get('user')    
+    if not user:
+            return redirect('/')
+
+    return render(request, "Divisiones/operaciones.html", {
+        "user": user,
+        "jerarquia": user["jerarquia"],
+        "nombres": user["nombres"],
+        "apellidos": user["apellidos"],
+    })
