@@ -670,7 +670,7 @@ summary > * {
   padding-right: 2rem;
 }
 .user-name {
-  width: 14rem;
+  width: auto;
   height: 2.5rem;
   background-color: #fff;
   border: 0.1px solid black;
@@ -681,7 +681,7 @@ summary > * {
   justify-content: space-evenly;
   align-self: center;
   margin: 0.5rem;
-  padding: 0;
+  padding: 0.8rem;
   p {
     margin-top: 2rem;
     width: auto;
