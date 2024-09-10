@@ -33,6 +33,7 @@
       </svg>
     </section>
   </div>
+  <div class="line"></div>
   <section class="procedures_record">
     <h2 class="title_procedures_record">Registro de Procedimientos:</h2>
   </section>
@@ -40,21 +41,18 @@
     <form action="" method="post">
       {% csrf_token %}
       <div class="form-style">{{ form }}</div>
-      <br /><br />
+      <div class="line"></div>
       <h4>Datos de la Operacion</h4>
-      <div class="form-style">
-        {{ form2 }}
-      </div>
-
-      <br /><br />
+      <div class="form-style">{{ form2 }}</div>
+      <div class="line"></div>
+      <h4>Datos de la Ubicacion</h4>
       <div class="form-style">{{ form3 }}</div>
-
-      <br /><br />
-      <div class="form-style">
-        {{ form4 }}
-      </div>
-      <button type="submit">Continuar</button>
+      <div class="line"></div>
+      <h4>Tipo de Procedimientos</h4>
+      <div class="form-style">{{ form4 }}</div>
+      <button type="submit">Aceptar</button>
     </form>
+    <div class="line"></div>
   </section>
 </div>
 
