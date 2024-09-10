@@ -82,7 +82,7 @@ class Datos_Ubicacion(forms.Form):
         label="Fecha",
         widget=forms.DateInput(attrs={'type': 'date'})
     )
-    hora = forms.CharField(max_length=10)
+    hora = forms.TimeField()
     
 class Selecc_Tipo_Procedimiento(forms.Form):
     tipo_procedimiento = forms.ChoiceField(choices=Asignar_op_Tipos_Procedimientos())

@@ -39,21 +39,20 @@
   <section class="data_form">
     <form action="" method="post">
       {% csrf_token %}
-      {{ form }}
+      <div class="form-style">{{ form }}</div>
+      <br /><br />
+      <h4>Datos de la Operacion</h4>
+      <div class="form-style">
+        {{ form2 }}
+      </div>
 
-      <br><br>
+      <br /><br />
+      <div class="form-style">{{ form3 }}</div>
 
-      {{ form2 }}
-
-      <br><br>
-      
-      {{ form3 }}
-      
-      <br><br>
-
-      {{ form4 }}
-
-      
+      <br /><br />
+      <div class="form-style">
+        {{ form4 }}
+      </div>
       <button type="submit">Continuar</button>
     </form>
   </section>
