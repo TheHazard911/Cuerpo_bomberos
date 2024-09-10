@@ -91,15 +91,40 @@ def View_Procedimiento(request):
         form3 = Datos_Ubicacion(request.POST, prefix='form3')
         form4 = Selecc_Tipo_Procedimiento(request.POST, prefix='form4')
 
+        # Imprimir request.POST para depuración
+        print(request.POST)
+        
+        # Imprimir errores de validación
+        if not form.is_valid():
+            print("Errores en form1:", form.errors)
+        if not form2.is_valid():
+            print("Errores en form2:", form2.errors)
+        if not form3.is_valid():
+            print("Errores en form3:", form3.errors)
+        if not form4.is_valid():
+            print("Errores en form4:", form4.errors)
+
         if form.is_valid() and form2.is_valid() and form3.is_valid() and form4.is_valid():
-            opcion = form.cleaned_data["opciones"]
-            print(opcion)
+            division = form.cleaned_data["opciones"]
+            solicitante = form2.cleaned_data["solicitante"]
+            unidad = form2.cleaned_data["unidad"]
+            efectivos_enviados = form2.cleaned_data["efectivos_enviados"]
+            jefe_comision = form2.cleaned_data["jefe_comision"]
+            municipio = form3.cleaned_data["municipio"]
+            parroquia = form3.cleaned_data["parroquia"]
+            direccion = form3.cleaned_data["direccion"]
+            fecha = form3.cleaned_data["fecha"]
+            hora = form3.cleaned_data["hora"]
+            tipo_procedimiento = form4.cleaned_data["tipo_procedimiento"]
+            
+            lista = [division, solicitante, unidad, efectivos_enviados, jefe_comision, municipio, parroquia, direccion, fecha, hora, tipo_procedimiento]
+            
+            print(lista)
+            
+            
             # Aquí puedes hacer algo con los valores validados
             return redirect("/dashboard/")
-            # Manejar los errores de los formularios
-            # print(form.errors)
-            # print(form2.errors)
-            # print(form3.errors)
+    
     else:
         form = SelectorDivision(prefix='form1')
         form2 = SeleccionarInfo(prefix='form2')
@@ -116,7 +141,6 @@ def View_Procedimiento(request):
         "form3": form3,
         "form4": form4,
     })
-
     
 # Vista de la Seccion de Estadisticas
 def View_Estadisticas(request):
