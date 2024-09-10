@@ -425,10 +425,10 @@ summary > * {
 }
 
 /* ******************** Utilities ******************** */
-.line{
+.line {
   width: 100%;
   height: 2px;
-border: 2px solid #B6243A;
+  border: 2px solid #b6243a;
   background-color: black;
 }
 
