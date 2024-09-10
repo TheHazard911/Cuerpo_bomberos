@@ -1,9 +1,10 @@
 from django.shortcuts import render, redirect
-from django.http import HttpRequest
-from .models import Usuarios, Personal, Divisiones, Procedimientos
+from django.http import HttpResponse
+from .models import Usuarios, Divisiones, Procedimientos
 # from django.utils import timezone
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
+from .forms import SelectorDivision, SeleccionarInfo
 
 
 # Create your views here.
@@ -46,12 +47,73 @@ def Dashboard(request):
 
 # Vista de archivo para hacer pruebas de backend
 def Prueba(request):
-  usuarios = Usuarios.objects.all()
-  divisiones = Divisiones.objects.all()
-  procedimientos = Procedimientos.objects.all()
+    
+    if request.method == 'POST':
+        form = SeleccionarInfo(request.POST)
+        if form.is_valid():
+            
+            usuarios = Usuarios.objects.all()
+            divisiones = Divisiones.objects.all()
+            procedimientos = Procedimientos.objects.all()
+            
+            valor_seleccionado = form.cleaned_data['opciones']
+            # Aquí puedes hacer algo con el valor seleccionado
+            print(valor_seleccionado)
+            return render(request, "prueba.html", {
+            "usuarios": usuarios,
+            "divisiones": divisiones,
+            "procedimientos": procedimientos,
+            "form": SeleccionarInfo(),
+            })
+    else:
+        form = SeleccionarInfo(),
+    
+        usuarios = Usuarios.objects.all()
+        divisiones = Divisiones.objects.all()
+        procedimientos = Procedimientos.objects.all()
+        
+        return render(request, "prueba.html", {
+            "usuarios": usuarios,
+            "divisiones": divisiones,
+            "procedimientos": procedimientos,
+            "form": SeleccionarInfo(),
+            })
+  
+# Vista de archivo para hacer pruebas de backend
+@login_required
+def View_Procedimiento(request):
+    user = request.session.get('user')    
+    if not user:
+            return redirect('/')
 
-  return render(request, "prueba.html", {
-    "usuarios": usuarios,
-    "divisiones": divisiones,
-    "procedimientos": procedimientos,
-  })
+    return render(request, "procedimientos.html", {
+        "user": user,
+        "jerarquia": user["jerarquia"],
+        "nombres": user["nombres"],
+        "apellidos": user["apellidos"],
+    })
+@login_required
+def View_Estadisticas(request):
+    user = request.session.get('user')    
+    if not user:
+            return redirect('/')
+
+    return render(request, "estadisticas.html", {
+        "user": user,
+        "jerarquia": user["jerarquia"],
+        "nombres": user["nombres"],
+        "apellidos": user["apellidos"],
+    })
+    
+@login_required
+def View_Operaciones(request):
+    user = request.session.get('user')    
+    if not user:
+            return redirect('/')
+
+    return render(request, "Divisiones/operaciones.html", {
+        "user": user,
+        "jerarquia": user["jerarquia"],
+        "nombres": user["nombres"],
+        "apellidos": user["apellidos"],
+    })

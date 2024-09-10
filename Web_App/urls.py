@@ -16,7 +16,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from web.views import Home, Dashboard, Prueba
+from web.views import Home, Dashboard, Prueba,View_Procedimiento,View_Estadisticas,View_Operaciones
 
 #Se crean las rutas que se podran visitar en la aplicacion web.
 urlpatterns = [
@@ -24,4 +24,7 @@ urlpatterns = [
     path('', Home),
     path('dashboard/', Dashboard),
     path('prueba/', Prueba),
+    path('procedimientos/', View_Procedimiento),
+    path('estadisticas/', View_Estadisticas),
+    path('operaciones/', View_Operaciones),
 ]
