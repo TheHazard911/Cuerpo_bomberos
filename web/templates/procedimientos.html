@@ -33,6 +33,30 @@
       </svg>
     </section>
   </div>
+  <section class="procedures_record">
+    <h2 class="title_procedures_record">Registro de Procedimientos:</h2>
+  </section>
+  <section class="data_form">
+    <form action="" method="post">
+      {% csrf_token %}
+      {{ form }}
+
+      <br><br>
+
+      {{ form2 }}
+
+      <br><br>
+      
+      {{ form3 }}
+      
+      <br><br>
+
+      {{ form4 }}
+
+      
+      <button type="submit">Continuar</button>
+    </form>
+  </section>
 </div>
 
 {% endblock %}

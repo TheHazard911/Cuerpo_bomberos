@@ -223,7 +223,7 @@ pre[class*="language-"] {
 }
 
 hr {
-  border: thin solid var(--color-contrast);
+  border: thin solid black;
 }
 
 img,
@@ -776,4 +776,8 @@ summary > * {
 }
 .card-gray {
   background-color: #717783;
+}
+
+.general-dashboard ul {
+  visibility: hidden;
 }

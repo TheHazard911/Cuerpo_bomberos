@@ -2,9 +2,10 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from .models import Usuarios, Divisiones, Procedimientos
 # from django.utils import timezone
-from django.contrib.auth.decorators import login_required
+# from django.contrib.auth.decorators import login_required
 from django.contrib import messages
-from .forms import SelectorDivision, SeleccionarInfo
+from .forms import Selecc_Tipo_Procedimiento
+from .forms import SelectorDivision, SeleccionarInfo, Datos_Ubicacion, Selecc_Tipo_Procedimiento
 
 
 # Create your views here.
@@ -31,7 +32,6 @@ def Home(request):
             messages.error(request, 'Usuario o contraseña incorrectos')
             return redirect("/")
           
-@login_required
 def Dashboard(request):
     user = request.session.get('user')
     
@@ -49,24 +49,24 @@ def Dashboard(request):
 def Prueba(request):
     
     if request.method == 'POST':
-        form = SeleccionarInfo(request.POST)
+        form = Selecc_Tipo_Procedimiento(request.POST)
         if form.is_valid():
             
             usuarios = Usuarios.objects.all()
             divisiones = Divisiones.objects.all()
             procedimientos = Procedimientos.objects.all()
             
-            valor_seleccionado = form.cleaned_data['opciones']
+            valor_seleccionado = form.cleaned_data['tipo_procedimiento']
             # Aquí puedes hacer algo con el valor seleccionado
             print(valor_seleccionado)
             return render(request, "prueba.html", {
             "usuarios": usuarios,
             "divisiones": divisiones,
             "procedimientos": procedimientos,
-            "form": SeleccionarInfo(),
+            "form": Selecc_Tipo_Procedimiento(),
             })
     else:
-        form = SeleccionarInfo(),
+        form = Selecc_Tipo_Procedimiento(),
     
         usuarios = Usuarios.objects.all()
         divisiones = Divisiones.objects.all()
@@ -76,23 +76,49 @@ def Prueba(request):
             "usuarios": usuarios,
             "divisiones": divisiones,
             "procedimientos": procedimientos,
-            "form": SeleccionarInfo(),
+            "form": Selecc_Tipo_Procedimiento(),
             })
   
 # Vista de archivo para hacer pruebas de backend
-@login_required
 def View_Procedimiento(request):
     user = request.session.get('user')    
     if not user:
-            return redirect('/')
+        return redirect('/')
+
+    if request.method == 'POST':
+        form = SelectorDivision(request.POST, prefix='form1')
+        form2 = SeleccionarInfo(request.POST, prefix='form2')
+        form3 = Datos_Ubicacion(request.POST, prefix='form3')
+        form4 = Selecc_Tipo_Procedimiento(request.POST, prefix='form4')
+
+        if form.is_valid() and form2.is_valid() and form3.is_valid() and form4.is_valid():
+            opcion = form.cleaned_data["opciones"]
+            print(opcion)
+            # Aquí puedes hacer algo con los valores validados
+            return redirect("/dashboard/")
+            # Manejar los errores de los formularios
+            # print(form.errors)
+            # print(form2.errors)
+            # print(form3.errors)
+    else:
+        form = SelectorDivision(prefix='form1')
+        form2 = SeleccionarInfo(prefix='form2')
+        form3 = Datos_Ubicacion(prefix='form3')
+        form4 = Selecc_Tipo_Procedimiento(prefix='form4')
 
     return render(request, "procedimientos.html", {
         "user": user,
         "jerarquia": user["jerarquia"],
         "nombres": user["nombres"],
         "apellidos": user["apellidos"],
+        "form": form,
+        "form2": form2,
+        "form3": form3,
+        "form4": form4,
     })
-@login_required
+
+    
+# Vista de la Seccion de Estadisticas
 def View_Estadisticas(request):
     user = request.session.get('user')    
     if not user:
@@ -105,7 +131,7 @@ def View_Estadisticas(request):
         "apellidos": user["apellidos"],
     })
     
-@login_required
+# Vista de la Seccion de Operaciones
 def View_Operaciones(request):
     user = request.session.get('user')    
     if not user:

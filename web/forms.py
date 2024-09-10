@@ -1,5 +1,41 @@
 from django import forms
-from.models import Personal
+from.models import Personal, Municipios, Parroquias, Tipos_Procedimientos
+
+def Asignar_ops_Personal():
+    personal = Personal.objects.all()
+    i = 1
+    op = [("0", "Seleccionar Una Opcion")]
+    for persona in personal:
+        op.append((i, f"{persona.jerarquia} {persona.nombres} {persona.apellidos}"))
+        i+=1
+    return op
+
+def Asignar_op_Municipios():
+    municipios = Municipios.objects.all()
+    i = 1
+    op = [("0", "Seleccionar Una Opcion")]
+    for municipio in municipios:
+        op.append((i, municipio))
+        i+=1
+    return op
+
+def Asignar_op_Parroquias():
+    parroquias = Parroquias.objects.all()
+    i = 1
+    op = [("0", "Seleccionar Una Opcion")]
+    for parroquia in parroquias:
+        op.append((i, parroquia))
+        i+=1
+    return op
+
+def Asignar_op_Tipos_Procedimientos():
+    procedimientos = Tipos_Procedimientos.objects.all()
+    i = 1
+    op = [("0", "Seleccionar Una Opcion")]
+    for procedimiento in procedimientos:
+        op.append((i, procedimiento))
+        i+=1
+    return op
 
 # Creacion de Formularios que se podran mostrar en el sitio web.
 class PruebaForm(forms.Form):
@@ -30,15 +66,23 @@ class SelectorDivision(forms.Form):
           ("8", "Capacitacion"),
           ("9", "GRUMAE"),
           ]
-    opciones = forms.ChoiceField(choices=op)
+    opciones = forms.ChoiceField(label="Seleccionar Division", initial="0", choices=op)
     
 class SeleccionarInfo(forms.Form):
-    personal = Personal.objects.all()
-    i = 1
-    op = []
-    for persona in personal:
-        op.append((i, f"{persona.jerarquia} {persona.nombres} {persona.apellidos}"))
-        i+=1
-    print(op)
+    solicitante = forms.ChoiceField(choices=Asignar_ops_Personal())
+    unidad = forms.CharField(max_length=30)
+    efectivos_enviados = forms.DecimalField()
+    jefe_comision = forms.ChoiceField(choices=Asignar_ops_Personal())
+
+class Datos_Ubicacion(forms.Form):
+    municipio = forms.ChoiceField(choices=Asignar_op_Municipios())
+    parroquia = forms.ChoiceField(choices=Asignar_op_Parroquias())
+    direccion = forms.CharField(max_length=100)
+    fecha =  forms.DateField(
+        label="Fecha",
+        widget=forms.DateInput(attrs={'type': 'date'})
+    )
+    hora = forms.CharField(max_length=10)
     
-    opciones = forms.ChoiceField(choices=op)
+class Selecc_Tipo_Procedimiento(forms.Form):
+    tipo_procedimiento = forms.ChoiceField(choices=Asignar_op_Tipos_Procedimientos())
