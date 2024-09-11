@@ -876,3 +876,10 @@ summary > * {
     }
   }
 }
+.position {
+  position: relative;
+  bottom: 10px;
+}
+.modal-content {
+  padding: 0;
+}

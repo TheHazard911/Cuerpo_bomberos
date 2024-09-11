@@ -43,15 +43,17 @@ class Tipos_Procedimientos(models.Model):
       return self.tipo_procedimiento
 
 class Procedimientos(models.Model):
+    id_division  = models.ForeignKey(Divisiones, on_delete=models.CASCADE, default=0)
     id_solicitante = models.ForeignKey(Personal, on_delete=models.CASCADE, related_name="personal1")
     unidad = models.CharField(max_length=40)
     id_jefe_comision = models.ForeignKey(Personal, on_delete=models.CASCADE, related_name="personal2")
     efectivos_enviados = models.CharField(max_length=40)
     id_municipio = models.ForeignKey(Municipios, on_delete=models.CASCADE)
-    id_parroquia = models.ForeignKey(Parroquias, on_delete=models.CASCADE)
-    fecha_hora = models.DateTimeField()
+    id_parroquia = models.ForeignKey(Parroquias, on_delete=models.CASCADE, default="0")
+    fecha = models.DateField(default="1999-01-01")
+    hora = models.TimeField(default="00:00")
     direccion = models.CharField(max_length=50)
     id_tipo_procedimiento = models.ForeignKey(Tipos_Procedimientos, on_delete=models.CASCADE)
  
     def __str__(self):
-      return self.id_solicitante.jerarquia + " " + self.id_solicitante.nombres + " " + self.id_solicitante.apellidos + " -- " + self.unidad + " -- " + self.id_jefe_comision.jerarquia + " -- " + self.id_jefe_comision.nombres + " -- " + self.id_jefe_comision.apellidos + " -- " + self.efectivos_enviados + " -- " + self.id_municipio.municipio + " -- " + self.id_parroquia.parroquia + " -- " + str(self.fecha_hora) + " -- " + self.direccion + " -- " + self.id_tipo_procedimiento.tipo_procedimiento
+      return self.id_division.division + " -- " + self.id_solicitante.jerarquia + " " + self.id_solicitante.nombres + " " + self.id_solicitante.apellidos + " -- " + self.unidad + " -- " + self.id_jefe_comision.jerarquia + " " + self.id_jefe_comision.nombres + " " + self.id_jefe_comision.apellidos + " -- " + self.efectivos_enviados + " -- " + self.id_municipio.municipio + " -- " + self.id_parroquia.parroquia + " -- " + str(self.fecha) + " " + str(self.hora) + " -- " + self.direccion + " -- " + self.id_tipo_procedimiento.tipo_procedimiento

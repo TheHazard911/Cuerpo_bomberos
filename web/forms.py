@@ -71,7 +71,7 @@ class SelectorDivision(forms.Form):
 class SeleccionarInfo(forms.Form):
     solicitante = forms.ChoiceField(choices=Asignar_ops_Personal())
     unidad = forms.CharField(max_length=30)
-    efectivos_enviados = forms.DecimalField()
+    efectivos_enviados = forms.CharField()
     jefe_comision = forms.ChoiceField(choices=Asignar_ops_Personal())
 
 class Datos_Ubicacion(forms.Form):
