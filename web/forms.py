@@ -19,15 +19,6 @@ def Asignar_op_Municipios():
         i+=1
     return op
 
-def Asignar_op_Parroquias():
-    parroquias = Parroquias.objects.all()
-    i = 1
-    op = [("0", "Seleccionar Una Opcion")]
-    for parroquia in parroquias:
-        op.append((i, parroquia))
-        i+=1
-    return op
-
 def Asignar_op_Tipos_Procedimientos():
     procedimientos = Tipos_Procedimientos.objects.all()
     i = 1
@@ -75,8 +66,15 @@ class SeleccionarInfo(forms.Form):
     jefe_comision = forms.ChoiceField(choices=Asignar_ops_Personal())
 
 class Datos_Ubicacion(forms.Form):
+    opc = [("0", "Seleccione una Opcion"),
+        ("1", "La Concordia"),
+        ("2", "Pedro Maria Morantes"),
+        ("3", "San Juan Bautista"),
+        ("4", "San Sebastian")
+    ]
+    
     municipio = forms.ChoiceField(choices=Asignar_op_Municipios())
-    parroquia = forms.ChoiceField(choices=Asignar_op_Parroquias())
+    parroquia = forms.ChoiceField(choices=opc,disabled=True,required=False)
     direccion = forms.CharField(max_length=100)
     fecha =  forms.DateField(
         label="Fecha",
