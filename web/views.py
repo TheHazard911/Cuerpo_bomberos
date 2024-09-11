@@ -6,6 +6,7 @@ from .models import Usuarios, Divisiones, Procedimientos
 from django.contrib import messages
 from .forms import Selecc_Tipo_Procedimiento
 from .forms import SelectorDivision, SeleccionarInfo, Datos_Ubicacion, Selecc_Tipo_Procedimiento
+from .models import Procedimientos, Personal, Tipos_Procedimientos, Municipios, Parroquias
 
 
 # Create your views here.
@@ -30,7 +31,7 @@ def Home(request):
             return redirect("/dashboard/")
         except Usuarios.DoesNotExist:
             messages.error(request, 'Usuario o contraseña incorrectos')
-            return redirect("/")
+            return render(request, 'index.html', {'error': True})
           
 def Dashboard(request):
     user = request.session.get('user')
@@ -117,10 +118,30 @@ def View_Procedimiento(request):
             hora = form3.cleaned_data["hora"]
             tipo_procedimiento = form4.cleaned_data["tipo_procedimiento"]
             
-            lista = [division, solicitante, unidad, efectivos_enviados, jefe_comision, municipio, parroquia, direccion, fecha, hora, tipo_procedimiento]
+            division_instance = Divisiones.objects.get(id=division)
+            solicitante_instance = Personal.objects.get(id=solicitante)
+            jefe_comision_instance = Personal.objects.get(id=jefe_comision)
+            municipio_instance = Municipios.objects.get(id=municipio)
+            parroquia_instance = Parroquias.objects.get(id=parroquia)
+            tipo_procedimiento_instance = Tipos_Procedimientos.objects.get(id=tipo_procedimiento)
             
-            print(lista)
+            # Crear una nueva instancia del modelo Procedimientos
+            nuevo_procedimiento = Procedimientos(
+            id_division=division_instance,
+            id_solicitante=solicitante_instance,
+            unidad=unidad,
+            efectivos_enviados=efectivos_enviados,
+            id_jefe_comision=jefe_comision_instance,
+            id_municipio=municipio_instance,
+            id_parroquia=parroquia_instance,
+            direccion=direccion,
+            fecha=fecha,
+            hora=hora,
+            id_tipo_procedimiento=tipo_procedimiento_instance
+            )
             
+            # Guardar la nueva instancia en la base de datos
+            nuevo_procedimiento.save()
             
             # Aquí puedes hacer algo con los valores validados
             return redirect("/dashboard/")
