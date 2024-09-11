@@ -93,17 +93,16 @@ def View_Procedimiento(request):
         form4 = Selecc_Tipo_Procedimiento(request.POST, prefix='form4')
 
         # Imprimir request.POST para depuración
-        print(request.POST)
         
-        # Imprimir errores de validación
+        #  Imprimir errores de validación
         if not form.is_valid():
-            print("Errores en form1:", form.errors)
+             print("Errores en form1:", form.errors)
         if not form2.is_valid():
-            print("Errores en form2:", form2.errors)
+             print("Errores en form2:", form2.errors)
         if not form3.is_valid():
-            print("Errores en form3:", form3.errors)
+             print("Errores en form3:", form3.errors)
         if not form4.is_valid():
-            print("Errores en form4:", form4.errors)
+             print("Errores en form4:", form4.errors)
 
         if form.is_valid() and form2.is_valid() and form3.is_valid() and form4.is_valid():
             division = form.cleaned_data["opciones"]
@@ -112,35 +111,40 @@ def View_Procedimiento(request):
             efectivos_enviados = form2.cleaned_data["efectivos_enviados"]
             jefe_comision = form2.cleaned_data["jefe_comision"]
             municipio = form3.cleaned_data["municipio"]
-            parroquia = form3.cleaned_data["parroquia"]
             direccion = form3.cleaned_data["direccion"]
             fecha = form3.cleaned_data["fecha"]
             hora = form3.cleaned_data["hora"]
             tipo_procedimiento = form4.cleaned_data["tipo_procedimiento"]
-            
+            parroquia = form3.cleaned_data["parroquia"]
+
+            print(form3.cleaned_data)  # Añade esta línea para ver los datos limpiados
+            print(parroquia)  # Añade esta línea para ver el valor de parroquia
+
             division_instance = Divisiones.objects.get(id=division)
             solicitante_instance = Personal.objects.get(id=solicitante)
             jefe_comision_instance = Personal.objects.get(id=jefe_comision)
             municipio_instance = Municipios.objects.get(id=municipio)
-            parroquia_instance = Parroquias.objects.get(id=parroquia)
             tipo_procedimiento_instance = Tipos_Procedimientos.objects.get(id=tipo_procedimiento)
-            
+
             # Crear una nueva instancia del modelo Procedimientos
             nuevo_procedimiento = Procedimientos(
-            id_division=division_instance,
-            id_solicitante=solicitante_instance,
-            unidad=unidad,
-            efectivos_enviados=efectivos_enviados,
-            id_jefe_comision=jefe_comision_instance,
-            id_municipio=municipio_instance,
-            id_parroquia=parroquia_instance,
-            direccion=direccion,
-            fecha=fecha,
-            hora=hora,
-            id_tipo_procedimiento=tipo_procedimiento_instance
+                id_division=division_instance,
+                id_solicitante=solicitante_instance,
+                unidad=unidad,
+                efectivos_enviados=efectivos_enviados,
+                id_jefe_comision=jefe_comision_instance,
+                id_municipio=municipio_instance,
+                direccion=direccion,
+                fecha=fecha,
+                hora=hora,
+                id_tipo_procedimiento=tipo_procedimiento_instance
             )
-            
-            # Guardar la nueva instancia en la base de datos
+
+            # Solo asignar parroquia si está presente
+            if parroquia:
+                parroquia_instance = Parroquias.objects.get(id=parroquia)
+                nuevo_procedimiento.id_parroquia = parroquia_instance
+
             nuevo_procedimiento.save()
             
             # Aquí puedes hacer algo con los valores validados

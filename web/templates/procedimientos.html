@@ -55,5 +55,15 @@
     <div class="line"></div>
   </section>
 </div>
+<script>
+  document.getElementById("id_form3-municipio").addEventListener("change", function () {
+    var select2 = document.getElementById("id_form3-parroquia");
+    if (this.value != "1") {
+      select2.disabled = true;
+    } else {
+      select2.disabled = false;
+    }
+  });
+</script>
 
 {% endblock %}
