@@ -74,7 +74,7 @@ class Datos_Ubicacion(forms.Form):
     ]
     
     municipio = forms.ChoiceField(choices=Asignar_op_Municipios())
-    parroquia = forms.ChoiceField(choices=opc,disabled=True,required=False)
+    parroquia = forms.ChoiceField(choices=opc, required=False)
     direccion = forms.CharField(max_length=100)
     fecha =  forms.DateField(
         label="Fecha",
