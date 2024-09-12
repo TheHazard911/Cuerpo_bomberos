@@ -76,10 +76,11 @@
         </tr>
       </thead>
       <tbody class="table-group-divider">
-        {% for row in datos %} {% if row.id_division.division == "Operaciones"%}
+        <!-- prettier-ignore -->
+        {% for row in datos %}
         <tr>
           <!-- prettier-ignore -->
-          <th scope="row">{{ row.id }}</th>
+          <th scope="row">{{ forloop.counter }}</th>
           <!-- prettier-ignore -->
           <td>{{ row.id_solicitante.jerarquia }} {{ row.id_solicitante.nombres}} {{ row.id_solicitante.apellidos}}</td>
           <!-- prettier-ignore -->
@@ -146,7 +147,6 @@
           </td>
         </tr>
         <!-- prettier-ignore -->
-        {% endif%} 
         {% endfor %}
       </tbody>
     </table>
@@ -165,12 +165,12 @@
   aria-labelledby="staticBackdropLabel"
   aria-hidden="true"
 >
-  <div class="modal-dialog">
+  <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
       <div class="modal-header">
-        <h1 class="modal-title fs-5" id="staticBackdropLabel">
+        <h2 class="modal-title fs-5" id="staticBackdropLabel">
           Eliminar Procedimiento
-        </h1>
+        </h2>
         <button
           type="button"
           class="btn-close"
@@ -179,7 +179,7 @@
         ></button>
       </div>
       <div class="modal-body">
-        <p id="infoProcedimiento"></p>
+        <div id="infoProcedimiento" class="infoProcedimientos"></div>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
@@ -206,8 +206,12 @@
       const jefe_comision = this.getAttribute("data-jefeComision");
       const fecha = this.getAttribute("data-fecha");
       const tipo_procedimiento = this.getAttribute("data-tipoProcedimiento");
-      infoProcedimiento.textContent = `¿Deseas eliminar el procedimiento: 
-       ID: ${id} - Solicitante: ${solicitante} - Jefe de Comision: ${jefe_comision} - Fecha: ${fecha} - Tipo De Procedimiento: ${tipo_procedimiento}?`;
+      infoProcedimiento.innerHTML = `
+      <p><b>ID: </b>${id} </p>
+      <p><b>Solicitante:</b> ${solicitante}</p>
+      <p><b>Jefe de Comision:</b> ${jefe_comision}</p>
+      <p><b>Fecha:</b> ${fecha}</p>
+      <p><b>Tipo De Procedimiento:</b> ${tipo_procedimiento}</p>` ;
       confirmarEliminar.setAttribute("data-id", id);
     };
   });
