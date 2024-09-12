@@ -104,7 +104,7 @@
             <button
               type="button"
               class="button_delete"
-              data-id="{{ row.id }}"
+              data-id="{{ forloop.counter }}"
               data-solicitante="{{ row.id_solicitante.jerarquia }} {{ row.id_solicitante.nombres}} {{ row.id_solicitante.apellidos}}"
               data-jefeComision="{{ row.id_jefe_comision.jerarquia }} {{ row.id_jefe_comision.nombres}} {{ row.id_jefe_comision.apellidos}}"
               data-fecha="{{ row.fecha|date:'d-m-Y'}}"
