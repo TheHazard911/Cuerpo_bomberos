@@ -33,6 +33,55 @@
       </svg>
     </section>
   </div>
+  <!-- section filter -->
+   <div class="section-filter">
+    <section class="filter-search">
+
+      <input type="search" name="Buscar" id="" placeholder="Buscar">
+    </section>
+   </div>
+  <!-- tabla -->
+  <div class="table-responsive-sm">
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">id</th>
+          <th scope="col">Solicitante</th>
+          <th scope="col">Jefe de comision</th>
+          <th scope="col">Unidad</th>
+          <th scope="col">Efectivos Enviados</th>
+          <th scope="col">Municipio</th>
+          <th scope="col">Parroquia</th>
+          <th scope="col">Direccion</th>
+          <th scope="col">Fecha</th>
+          <th scope="col">Hora</th>
+          <th scope="col">Tipo de procedimiento</th>
+        </tr>
+      </thead>
+      <tbody class="table-group-divider"> 
+          {% for row in datos %}
+          <tr>
+            <th scope="row">{{ row.id }}</th>
+            <td>{{ row.id_solicitante.jerarquia }} {{ row.id_solicitante.nombres}} {{ row.id_solicitante.apellidos}}</td>
+            <td>{{ row.id_jefe_comision.jerarquia }} {{ row.id_jefe_comision.nombres}} {{ row.id_jefe_comision.apellidos}}</td>
+            <td>{{ row.unidad }}</td>
+            <td>{{ row.efectivos_enviados}}</td>
+            <td>{{ row.id_municipio.municipio }}</td>
+            {% if row.id_parroquia.parroquia != "Sin Registro" %}
+              <td>{{ row.id_parroquia.parroquia }}</td>
+            {% else %}
+              <td></td>
+            {% endif %}
+            <td>{{ row.direccion }}</td>
+            <td>{{ row.fecha|date:"d-m-Y" }}</td>
+            <td>{{ row.hora }}</td>
+            <td>{{ row.id_tipo_procedimiento.tipo_procedimiento }}</td>
+          </tr>
+          {% endfor %}
+      </tbody>
+    </table>
+  </div>
+  <!-- div general-dashboard fin -->
 </div>
 
 {% endblock %}

@@ -8,7 +8,6 @@ from .forms import Selecc_Tipo_Procedimiento
 from .forms import SelectorDivision, SeleccionarInfo, Datos_Ubicacion, Selecc_Tipo_Procedimiento
 from .models import Procedimientos, Personal, Tipos_Procedimientos, Municipios, Parroquias
 
-
 # Create your views here.
 
 # Vista de la Ventana Inicial (Login)
@@ -185,10 +184,14 @@ def View_Operaciones(request):
     user = request.session.get('user')    
     if not user:
             return redirect('/')
+        
+    datos = Procedimientos.objects.all()
+    print(datos)
 
     return render(request, "Divisiones/operaciones.html", {
         "user": user,
         "jerarquia": user["jerarquia"],
         "nombres": user["nombres"],
         "apellidos": user["apellidos"],
+        "datos": datos
     })

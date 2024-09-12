@@ -559,7 +559,7 @@ summary > * {
   position: sticky;
   top: 0;
   z-index: 9999;
-  width: 18%;
+  width: 16%;
   height: 100vh;
   background-color: var(--color-main-dashboard);
   display: flex;
@@ -669,7 +669,7 @@ summary > * {
   background-color: black;
   background-color: var(--color-general-dashboard);
   height: auto;
-  width: 80%;
+  width: 84%;
   overflow-y: hidden;
 }
 .div-user-name {
@@ -683,8 +683,8 @@ summary > * {
   width: auto;
   height: auto;
   background-color: #fff;
-  border: 0.1px solid black;
-  border-radius: 20px;
+  border: 0.1px solid rgb(153, 153, 153);
+  border-radius: 15px;
   display: flex;
   align-items: center;
   justify-content: space-evenly;
@@ -882,4 +882,46 @@ summary > * {
 }
 .modal-content {
   padding: 0;
+}
+/**************** estilos de tablas ********************/
+
+.table-responsive-sm{
+  margin: 0 auto;
+  overflow-x: scroll;
+  width: auto;
+  padding: 2rem;
+}
+.table{
+  width: auto;
+  font-size: 1rem;
+  td{
+    font-family: var(--sofia-sans);
+  }
+  th{
+    text-align: center;
+  }
+  tbody tr td{
+    text-align: center;    
+  }
+  tbody tr{
+    border-bottom: .1px solid rgb(188, 188, 188);
+  }
+}
+.section-filter{
+  width: 90%;
+  height: 20vh;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+.filter-search{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  input{
+    border-radius: 10px;
+    outline: none;
+    border: none;
+    width: 15rem;
+  }
 }
