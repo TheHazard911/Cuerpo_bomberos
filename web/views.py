@@ -7,6 +7,9 @@ from django.contrib import messages
 from .forms import Selecc_Tipo_Procedimiento
 from .forms import SelectorDivision, SeleccionarInfo, Datos_Ubicacion, Selecc_Tipo_Procedimiento
 from .models import Procedimientos, Personal, Tipos_Procedimientos, Municipios, Parroquias
+from django.shortcuts import get_object_or_404
+from django.http import JsonResponse
+import json
 
 # Create your views here.
 
@@ -38,11 +41,20 @@ def Dashboard(request):
     if not user:
         return redirect('/')
     
+    concordia = Procedimientos.objects.filter(id_parroquia = 1).count()
+    pedro_m = Procedimientos.objects.filter(id_parroquia = 2).count()
+    san_juan = Procedimientos.objects.filter(id_parroquia = 3).count()
+    san_sebastian = Procedimientos.objects.filter(id_parroquia = 4).count()
+    
     return render(request, "dashboard.html", {
         "user": user,
         "jerarquia": user["jerarquia"],
         "nombres": user["nombres"],
         "apellidos": user["apellidos"],
+        "concordia": concordia,
+        "pedro_m": pedro_m,
+        "san_juan": san_juan,
+        "san_sebastian": san_sebastian,
     })
 
 # Vista de archivo para hacer pruebas de backend
@@ -186,8 +198,17 @@ def View_Operaciones(request):
             return redirect('/')
         
     datos = Procedimientos.objects.all()
-    print(datos)
 
+    if request.method == 'POST':
+        data = json.loads(request.body)
+        id = data.get('id')
+        procedimiento = get_object_or_404(Procedimientos, id=id)
+        try:
+            procedimiento.delete()
+            return JsonResponse({'success': True})
+        except Exception as e:
+            return JsonResponse({'success': False, 'error': str(e)})
+    
     return render(request, "Divisiones/operaciones.html", {
         "user": user,
         "jerarquia": user["jerarquia"],
@@ -195,3 +216,15 @@ def View_Operaciones(request):
         "apellidos": user["apellidos"],
         "datos": datos
     })
+
+# Funcion para eliminar (NO TOCAR)
+# def eliminar_procedimiento(request):
+#     if request.method == 'POST':
+#         data = json.loads(request.body)
+#         id = data.get('id')
+#         procedimiento = get_object_or_404(Procedimientos, id=id)
+#         try:
+#             procedimiento.delete()
+#             return JsonResponse({'success': True})
+#         except Exception as e:
+#             return JsonResponse({'success': False, 'error': str(e)})

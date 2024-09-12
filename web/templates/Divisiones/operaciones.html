@@ -34,12 +34,28 @@
     </section>
   </div>
   <!-- section filter -->
-   <div class="section-filter">
+  <div class="section-filter">
     <section class="filter-search">
-
-      <input type="search" name="Buscar" id="" placeholder="Buscar">
+      <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+        <g
+          id="SVGRepo_tracerCarrier"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        ></g>
+        <g id="SVGRepo_iconCarrier">
+          <path
+            d="M14.9536 14.9458L21 21M17 10C17 13.866 13.866 17 10 17C6.13401 17 3 13.866 3 10C3 6.13401 6.13401 3 10 3C13.866 3 17 6.13401 17 10Z"
+            stroke="#000000"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          ></path>
+        </g>
+      </svg>
+      <input type="search" name="Buscar" id="" placeholder="Buscar" />
     </section>
-   </div>
+  </div>
   <!-- tabla -->
   <div class="table-responsive-sm">
     <table class="table">
@@ -50,38 +66,194 @@
           <th scope="col">Jefe de comision</th>
           <th scope="col">Unidad</th>
           <th scope="col">Efectivos Enviados</th>
-          <th scope="col">Municipio</th>
           <th scope="col">Parroquia</th>
+          <th scope="col">Municipio</th>
           <th scope="col">Direccion</th>
           <th scope="col">Fecha</th>
           <th scope="col">Hora</th>
           <th scope="col">Tipo de procedimiento</th>
+          <th scope="col">Acciones</th>
         </tr>
       </thead>
-      <tbody class="table-group-divider"> 
-          {% for row in datos %}
-          <tr>
-            <th scope="row">{{ row.id }}</th>
-            <td>{{ row.id_solicitante.jerarquia }} {{ row.id_solicitante.nombres}} {{ row.id_solicitante.apellidos}}</td>
-            <td>{{ row.id_jefe_comision.jerarquia }} {{ row.id_jefe_comision.nombres}} {{ row.id_jefe_comision.apellidos}}</td>
-            <td>{{ row.unidad }}</td>
-            <td>{{ row.efectivos_enviados}}</td>
-            <td>{{ row.id_municipio.municipio }}</td>
-            {% if row.id_parroquia.parroquia != "Sin Registro" %}
-              <td>{{ row.id_parroquia.parroquia }}</td>
-            {% else %}
-              <td></td>
-            {% endif %}
-            <td>{{ row.direccion }}</td>
-            <td>{{ row.fecha|date:"d-m-Y" }}</td>
-            <td>{{ row.hora }}</td>
-            <td>{{ row.id_tipo_procedimiento.tipo_procedimiento }}</td>
-          </tr>
-          {% endfor %}
+      <tbody class="table-group-divider">
+        {% for row in datos %} {% if row.id_division.division == "Operaciones"%}
+        <tr>
+          <!-- prettier-ignore -->
+          <th scope="row">{{ row.id }}</th>
+          <!-- prettier-ignore -->
+          <td>{{ row.id_solicitante.jerarquia }} {{ row.id_solicitante.nombres}} {{ row.id_solicitante.apellidos}}</td>
+          <!-- prettier-ignore -->
+          <td>{{ row.id_jefe_comision.jerarquia }} {{ row.id_jefe_comision.nombres}} {{ row.id_jefe_comision.apellidos}}</td>
+          <!-- prettier-ignore -->
+          <td>{{ row.unidad }}</td>
+          <!-- prettier-ignore -->
+          <td>{{ row.efectivos_enviados}}</td>
+          {% if row.id_parroquia.parroquia != "Sin Registro" %}
+          <td>{{ row.id_parroquia.parroquia }}</td>
+          {% else %}
+          <td>Otros Municipios</td>
+          {% endif %}
+          <!-- prettier-ignore -->
+          <td>{{ row.id_municipio.municipio }}</td>
+          <td>{{ row.direccion }}</td>
+          <td>{{ row.fecha|date:"d-m-Y" }}</td>
+          <td>{{ row.hora }}</td>
+          <td>{{ row.id_tipo_procedimiento.tipo_procedimiento }}</td>
+          <td class="icons-accion">
+            <button
+              type="button"
+              class="button_delete"
+              data-id="{{ row.id }}"
+              data-solicitante="{{ row.id_solicitante.jerarquia }} {{ row.id_solicitante.nombres}} {{ row.id_solicitante.apellidos}}"
+              data-jefeComision="{{ row.id_jefe_comision.jerarquia }} {{ row.id_jefe_comision.nombres}} {{ row.id_jefe_comision.apellidos}}"
+              data-fecha="{{ row.fecha|date:'d-m-Y'}}"
+              data-tipoProcedimiento="{{ row.id_tipo_procedimiento.tipo_procedimiento }}"
+              data-bs-toggle="modal"
+              data-bs-target="#staticBackdrop"
+            >
+              <svg width="109px" height="109px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M10 12V17" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path> <path d="M14 12V17" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path> <path d="M4 7H20" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path> <path d="M6 10V18C6 19.6569 7.34315 21 9 21H15C16.6569 21 18 19.6569 18 18V10" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path> <path d="M9 5C9 3.89543 9.89543 3 11 3H13C14.1046 3 15 3.89543 15 5V7H9V5Z" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path> </g></svg>
+            </button>
+
+            <!-- NO TOCAR -->
+            <button
+              type="button"
+              class="button_delete"
+              id="view-info"
+              data-bs-toggle=""
+              data-bs-target="#"
+            >
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                <g
+                  id="SVGRepo_tracerCarrier"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                ></g>
+                <g id="SVGRepo_iconCarrier">
+                  <path
+                    fill-rule="evenodd"
+                    clip-rule="evenodd"
+                    d="M22 12C22 17.5228 17.5228 22 12 22C6.47715 22 2 17.5228 2 12C2 6.47715 6.47715 2 12 2C17.5228 2 22 6.47715 22 12ZM12 17.75C12.4142 17.75 12.75 17.4142 12.75 17V11C12.75 10.5858 12.4142 10.25 12 10.25C11.5858 10.25 11.25 10.5858 11.25 11V17C11.25 17.4142 11.5858 17.75 12 17.75ZM12 7C12.5523 7 13 7.44772 13 8C13 8.55228 12.5523 9 12 9C11.4477 9 11 8.55228 11 8C11 7.44772 11.4477 7 12 7Z"
+                    fill="#000000"
+                  ></path>
+                </g>
+              </svg>
+            </button>
+          </td>
+        </tr>
+        <!-- prettier-ignore -->
+        {% endif%} 
+        {% endfor %}
       </tbody>
     </table>
   </div>
   <!-- div general-dashboard fin -->
 </div>
 
+<!----------------------- Modal delete ---------------------------------->
+<!-- Modal -->
+<div
+  class="modal fade"
+  id="staticBackdrop"
+  data-bs-backdrop="static"
+  data-bs-keyboard="false"
+  tabindex="-1"
+  aria-labelledby="staticBackdropLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="staticBackdropLabel">
+          Eliminar Procedimiento
+        </h1>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <p id="infoProcedimiento"></p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+          Cerrar
+        </button>
+        <button type="button" class="btn btn-primary" id="confirmarEliminar">
+          Eliminar
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  // Obtener elementos
+  const infoProcedimiento = document.getElementById("infoProcedimiento");
+  const confirmarEliminar = document.getElementById("confirmarEliminar");
+
+  // Abrir modal y mostrar información
+  document.querySelectorAll(".button_delete").forEach((button) => {
+    button.onclick = function () {
+      const id = this.getAttribute("data-id");
+      const solicitante = this.getAttribute("data-solicitante");
+      const jefe_comision = this.getAttribute("data-jefeComision");
+      const fecha = this.getAttribute("data-fecha");
+      const tipo_procedimiento = this.getAttribute("data-tipoProcedimiento");
+      infoProcedimiento.textContent = `¿Deseas eliminar el procedimiento: 
+       ID: ${id} - Solicitante: ${solicitante} - Jefe de Comision: ${jefe_comision} - Fecha: ${fecha} - Tipo De Procedimiento: ${tipo_procedimiento}?`;
+      confirmarEliminar.setAttribute("data-id", id);
+    };
+  });
+
+  // Confirmar eliminación
+confirmarEliminar.onclick = function() {
+  const id = this.getAttribute('data-id');
+  eliminarProcedimiento(id);
+}
+
+// Función para eliminar procedimiento
+function eliminarProcedimiento(id) {
+  fetch('/operaciones/', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'X-CSRFToken': getCookie('csrftoken') // Asegúrate de incluir el token CSRF
+    },
+    body: JSON.stringify({ id: id })
+  })
+  .then(response => response.json())
+  .then(data => {
+    if (data.success) {
+      // Eliminar el procedimiento de la vista
+      document.querySelector(`button[data-id="${id}"]`).parentElement.remove();
+      location.reload();
+    } else {
+      alert('Error al eliminar el procedimiento');
+    }
+  });
+}
+
+// Función para obtener el token CSRF
+function getCookie(name) {
+  let cookieValue = null;
+  if (document.cookie && document.cookie !== '') {
+    const cookies = document.cookie.split(';');
+    for (let i = 0; i < cookies.length; i++) {
+      const cookie = cookies[i].trim();
+      if (cookie.substring(0, name.length + 1) === (name + '=')) {
+        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+        break;
+      }
+    }
+  }
+  return cookieValue;
+}
+</script>
 {% endblock %}
