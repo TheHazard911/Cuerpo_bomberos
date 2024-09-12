@@ -197,7 +197,7 @@ def View_Operaciones(request):
     if not user:
             return redirect('/')
         
-    datos = Procedimientos.objects.all()
+    datos = Procedimientos.objects.filter(id_division = 2)
 
     if request.method == 'POST':
         data = json.loads(request.body)
@@ -214,7 +214,7 @@ def View_Operaciones(request):
         "jerarquia": user["jerarquia"],
         "nombres": user["nombres"],
         "apellidos": user["apellidos"],
-        "datos": datos
+        "datos": datos,
     })
 
 # Funcion para eliminar (NO TOCAR)
