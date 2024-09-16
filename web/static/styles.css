@@ -785,10 +785,6 @@ summary > * {
   background-color: #717783;
 }
 
-.general-dashboard ul {
-  visibility: hidden;
-}
-
 /*************** styles divisiones *******************/
 
 .procedures_record {
@@ -808,6 +804,7 @@ summary > * {
   height: auto;
   margin: 0 auto;
 }
+
 .data_form form {
   display: flex;
   justify-content: center;
@@ -893,28 +890,34 @@ summary > * {
   padding: 2rem;
 }
 .table {
-  width: 150%;
+  width: 160%;
   font-size: 1rem;
   td {
     font-family: var(--sofia-sans);
   }
   th {
     text-align: center;
-  }
-  tbody tr td {
-    text-align: center;
+    font-size: 1.2rem;
   }
   tbody tr {
+    text-align: justify;
+    vertical-align: middle;
+  }
+  tbody td {
+    text-align: center;
     border-bottom: 0.1px solid rgb(188, 188, 188);
+    font-size: 1.2rem;
   }
 }
 .icons-accion {
   width: 10rem;
+  padding: 0;
   button {
     width: 50px;
     height: 60px;
     background-color: transparent;
     border: none;
+    padding: 0;
   }
 }
 .section-filter {
@@ -957,4 +960,19 @@ summary > * {
     margin: 0;
     padding: 0;
   }
+}
+
+.general-dashboard ul{
+  visibility: visible;
+  display: none;
+}
+.modal-header{
+  flex-direction: column-reverse;
+  justify-content: center;
+  width: 100%;
+  padding: 1.2rem
+  ;
+}
+.modal-title{
+  margin: 0;
 }
