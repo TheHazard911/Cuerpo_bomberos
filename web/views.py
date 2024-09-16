@@ -97,6 +97,8 @@ def View_Procedimiento(request):
     if not user:
         return redirect('/')
 
+    result = None
+
     if request.method == 'POST':
         form = SelectorDivision(request.POST, prefix='form1')
         form2 = SeleccionarInfo(request.POST, prefix='form2')
@@ -104,18 +106,24 @@ def View_Procedimiento(request):
         form4 = Selecc_Tipo_Procedimiento(request.POST, prefix='form4')
 
         # Imprimir request.POST para depuración
-        
-        #  Imprimir errores de validación
+
         if not form.is_valid():
-             print("Errores en form1:", form.errors)
+            #print("Errores en form1:", form.errors)
+            result = True
         if not form2.is_valid():
-             print("Errores en form2:", form2.errors)
+            #print("Errores en form2:", form2.errors)
+            result = True
         if not form3.is_valid():
-             print("Errores en form3:", form3.errors)
+            #print("Errores en form3:", form3.errors)
+            result = True
         if not form4.is_valid():
-             print("Errores en form4:", form4.errors)
+            #print("Errores en form4:", form4.errors)
+            result = True
 
         if form.is_valid() and form2.is_valid() and form3.is_valid() and form4.is_valid():
+            
+            result = False
+            
             division = form.cleaned_data["opciones"]
             solicitante = form2.cleaned_data["solicitante"]
             unidad = form2.cleaned_data["unidad"]
@@ -176,6 +184,7 @@ def View_Procedimiento(request):
         "form2": form2,
         "form3": form3,
         "form4": form4,
+        "errors": result
     })
     
 # Vista de la Seccion de Estadisticas
@@ -228,3 +237,4 @@ def View_Operaciones(request):
 #             return JsonResponse({'success': True})
 #         except Exception as e:
 #             return JsonResponse({'success': False, 'error': str(e)})
+

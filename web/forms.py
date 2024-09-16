@@ -4,7 +4,7 @@ from.models import Personal, Municipios, Parroquias, Tipos_Procedimientos
 def Asignar_ops_Personal():
     personal = Personal.objects.all()
     i = 1
-    op = [("0", "Seleccionar Una Opcion")]
+    op = [("0", "Seleccione Una Opcion")]
     for persona in personal:
         op.append((i, f"{persona.jerarquia} {persona.nombres} {persona.apellidos}"))
         i+=1
@@ -13,7 +13,7 @@ def Asignar_ops_Personal():
 def Asignar_op_Municipios():
     municipios = Municipios.objects.all()
     i = 1
-    op = [("0", "Seleccionar Una Opcion")]
+    op = [("0", "Seleccione Una Opcion")]
     for municipio in municipios:
         op.append((i, municipio))
         i+=1
@@ -22,7 +22,7 @@ def Asignar_op_Municipios():
 def Asignar_op_Tipos_Procedimientos():
     procedimientos = Tipos_Procedimientos.objects.all()
     i = 1
-    op = [("0", "Seleccionar Una Opcion")]
+    op = [("0", "Seleccione Una Opcion")]
     for procedimiento in procedimientos:
         op.append((i, procedimiento))
         i+=1
@@ -45,26 +45,37 @@ class PruebaForm(forms.Form):
     contraseña = forms.CharField(widget=forms.PasswordInput)
     genero = forms.ChoiceField(choices=[('M', 'Masculino'), ('F', 'Femenino')], widget=forms.RadioSelect)
     
+# Form1
 class SelectorDivision(forms.Form):
-    op = [("0", "Seleccione una Opcion"),
-          ("1", "Rescate"),
-          ("2", "Operaciones"),
-          ("3", "Prevencion"),
-          ("4", "Prehospitalaria"),
-          ("5", "Enfermeria"),
-          ("6", "Servicios Medicos"),
-          ("7", "Psicologia"),
-          ("8", "Capacitacion"),
-          ("9", "GRUMAE"),
-          ]
-    opciones = forms.ChoiceField(label="Seleccionar Division", initial="0", choices=op)
-    
+    op = [
+        ("", "Seleccione una Opción"),
+        ("1", "Rescate"),
+        ("2", "Operaciones"),
+        ("3", "Prevención"),
+        ("4", "Prehospitalaria"),
+        ("5", "Enfermería"),
+        ("6", "Servicios Médicos"),
+        ("7", "Psicología"),
+        ("8", "Capacitación"),
+        ("9", "GRUMAE"),
+    ]
+    opciones = forms.ChoiceField(
+        label="Seleccionar División",
+        choices=op,
+        required=True,
+        widget=forms.Select(attrs={'class': 'disable-first-option'})
+    )
+
+# Form2 
 class SeleccionarInfo(forms.Form):
-    solicitante = forms.ChoiceField(choices=Asignar_ops_Personal())
+    solicitante = forms.ChoiceField(choices=Asignar_ops_Personal(), required=True,
+        widget=forms.Select(attrs={'class': 'disable-first-option'}))
     unidad = forms.CharField(max_length=30)
     efectivos_enviados = forms.CharField()
-    jefe_comision = forms.ChoiceField(choices=Asignar_ops_Personal())
+    jefe_comision = forms.ChoiceField(choices=Asignar_ops_Personal(), required=True,
+        widget=forms.Select(attrs={'class': 'disable-first-option'}))
 
+# Form3
 class Datos_Ubicacion(forms.Form):
     opc = [("0", "Seleccione una Opcion"),
         ("1", "La Concordia"),
@@ -73,14 +84,18 @@ class Datos_Ubicacion(forms.Form):
         ("4", "San Sebastian")
     ]
     
-    municipio = forms.ChoiceField(choices=Asignar_op_Municipios())
-    parroquia = forms.ChoiceField(choices=opc, required=False)
+    municipio = forms.ChoiceField(choices=Asignar_op_Municipios(), required=True,
+        widget=forms.Select(attrs={'class': 'disable-first-option'}))
+    parroquia = forms.ChoiceField(choices=opc, required=False,
+        widget=forms.Select(attrs={'class': 'disable-first-option'}))
     direccion = forms.CharField(max_length=100)
     fecha =  forms.DateField(
         label="Fecha",
         widget=forms.DateInput(attrs={'type': 'date'})
     )
     hora = forms.TimeField()
-    
+
+# Form4
 class Selecc_Tipo_Procedimiento(forms.Form):
-    tipo_procedimiento = forms.ChoiceField(choices=Asignar_op_Tipos_Procedimientos())
+    tipo_procedimiento = forms.ChoiceField(choices=Asignar_op_Tipos_Procedimientos(), required=True,
+        widget=forms.Select(attrs={'class': 'disable-first-option'}))
