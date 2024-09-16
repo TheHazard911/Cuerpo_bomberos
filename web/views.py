@@ -4,8 +4,7 @@ from .models import Usuarios, Divisiones, Procedimientos
 # from django.utils import timezone
 # from django.contrib.auth.decorators import login_required
 from django.contrib import messages
-from .forms import Selecc_Tipo_Procedimiento
-from .forms import SelectorDivision, SeleccionarInfo, Datos_Ubicacion, Selecc_Tipo_Procedimiento
+from .forms import *
 from .models import Procedimientos, Personal, Tipos_Procedimientos, Municipios, Parroquias
 from django.shortcuts import get_object_or_404
 from django.http import JsonResponse
@@ -75,7 +74,7 @@ def Prueba(request):
             "usuarios": usuarios,
             "divisiones": divisiones,
             "procedimientos": procedimientos,
-            "form": Selecc_Tipo_Procedimiento(),
+            "form": formulario_abastecimiento_agua(),
             })
     else:
         form = Selecc_Tipo_Procedimiento(),
@@ -88,7 +87,7 @@ def Prueba(request):
             "usuarios": usuarios,
             "divisiones": divisiones,
             "procedimientos": procedimientos,
-            "form": Selecc_Tipo_Procedimiento(),
+            "form": formulario_abastecimiento_agua(),
             })
   
 # Vista de archivo para hacer pruebas de backend
@@ -136,9 +135,6 @@ def View_Procedimiento(request):
             tipo_procedimiento = form4.cleaned_data["tipo_procedimiento"]
             parroquia = form3.cleaned_data["parroquia"]
 
-            print(form3.cleaned_data)  # Añade esta línea para ver los datos limpiados
-            print(parroquia)  # Añade esta línea para ver el valor de parroquia
-
             division_instance = Divisiones.objects.get(id=division)
             solicitante_instance = Personal.objects.get(id=solicitante)
             jefe_comision_instance = Personal.objects.get(id=jefe_comision)
@@ -166,8 +162,7 @@ def View_Procedimiento(request):
 
             nuevo_procedimiento.save()
             
-            # Aquí puedes hacer algo con los valores validados
-            return redirect("/dashboard/")
+            return redirect('/form-details/')
     
     else:
         form = SelectorDivision(prefix='form1')
@@ -184,7 +179,8 @@ def View_Procedimiento(request):
         "form2": form2,
         "form3": form3,
         "form4": form4,
-        "errors": result
+        "errors": result,
+        "form_abastecimiento_agua": formulario_abastecimiento_agua()
     })
     
 # Vista de la Seccion de Estadisticas
@@ -238,3 +234,16 @@ def View_Operaciones(request):
 #         except Exception as e:
 #             return JsonResponse({'success': False, 'error': str(e)})
 
+def view_details_operations(request):
+    
+    user = request.session.get('user')    
+    if not user:
+            return redirect('/')
+    
+    return render(request, "form-details-operations.html",{
+        "user": user,
+        "jerarquia": user["jerarquia"],
+        "nombres": user["nombres"],
+        "apellidos": user["apellidos"],
+        "form_abastecimiento_agua": formulario_abastecimiento_agua()
+    } )

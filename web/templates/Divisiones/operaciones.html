@@ -101,6 +101,7 @@
           <td>{{ row.hora }}</td>
           <td>{{ row.id_tipo_procedimiento.tipo_procedimiento }}</td>
           <td class="icons-accion">
+            <!-- NO TOCAR BOTON ELIMINAR-->
             <button
               type="button"
               class="button_delete"
@@ -166,13 +167,13 @@
               </svg>
             </button>
 
-            <!-- NO TOCAR -->
+            <!-- NO TOCAR Boton informacion-->
             <button
               type="button"
-              class="button_delete"
+              class="button-info"
               id="view-info"
-              data-bs-toggle=""
-              data-bs-target="#"
+              data-bs-toggle="modal"
+              data-bs-target="#modal-info"
             >
               <svg
                 viewBox="0 0 24 24"
@@ -205,7 +206,6 @@
   <!-- div general-dashboard fin -->
 </div>
 <!----------------------- Modal delete ---------------------------------->
-<!-- Modal -->
 <div
   class="modal fade"
   id="staticBackdrop"
@@ -242,6 +242,31 @@
     </div>
   </div>
 </div>
+<!----------------------- Modal Info ---------------------------------->
+<div class="modal fade" tabindex="-1" id="modal-info">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Informacion del Procedimiento</h4>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <p>Texto con infromacion de la modal</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+          Cerrar
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
 <!-- no tocar solo dios sabe como funciona -->
 <script>
   // Obtener elementos

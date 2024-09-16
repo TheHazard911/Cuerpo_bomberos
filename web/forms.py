@@ -1,5 +1,5 @@
 from django import forms
-from.models import Personal, Municipios, Parroquias, Tipos_Procedimientos
+from.models import Personal, Municipios, Tipos_Procedimientos, Tipo_Institucion
 
 def Asignar_ops_Personal():
     personal = Personal.objects.all()
@@ -28,23 +28,15 @@ def Asignar_op_Tipos_Procedimientos():
         i+=1
     return op
 
-# Creacion de Formularios que se podran mostrar en el sitio web.
-class PruebaForm(forms.Form):
-    nombre = forms.CharField(max_length=100)
-    correo = forms.EmailField()
-    edad = forms.IntegerField()
-    acepto_terminos = forms.BooleanField()
-    fecha_nacimiento = forms.DateField(widget=forms.SelectDateWidget)
-    fecha_evento = forms.DateTimeField()
-    opciones = forms.ChoiceField(choices=[('1', 'Opción 1'), ('2', 'Opción 2')])
-    categorias = forms.MultipleChoiceField(choices=[('a', 'Categoría A'), ('b', 'Categoría B')])
-    sitio_web = forms.URLField()
-    archivo = forms.FileField()
-    imagen = forms.ImageField()
-    comentario = forms.CharField(widget=forms.Textarea)
-    contraseña = forms.CharField(widget=forms.PasswordInput)
-    genero = forms.ChoiceField(choices=[('M', 'Masculino'), ('F', 'Femenino')], widget=forms.RadioSelect)
-    
+def Asignar_opc_tipos_suministros():
+     procedimientos = Tipo_Institucion.objects.all()
+     i = 1
+     op = [("0", "Seleccione Una Opcion")]
+     for procedimiento in procedimientos:
+         op.append((i, procedimiento))
+         i+=1
+     return op
+
 # Form1
 class SelectorDivision(forms.Form):
     op = [
@@ -99,3 +91,16 @@ class Datos_Ubicacion(forms.Form):
 class Selecc_Tipo_Procedimiento(forms.Form):
     tipo_procedimiento = forms.ChoiceField(choices=Asignar_op_Tipos_Procedimientos(), required=True,
         widget=forms.Select(attrs={'class': 'disable-first-option'}))
+
+# Formulario Abastecimiento de Agua -- :D
+class formulario_abastecimiento_agua(forms.Form):
+    
+     tipo_servicio = forms.ChoiceField(choices=Asignar_opc_tipos_suministros(), required=True, widget=forms.Select(attrs={'class': 'disable-first-option'}))
+     nombres = forms.CharField(max_length=40)
+     apellidos = forms.CharField(max_length=40)
+     cedula = forms.CharField(max_length=10)
+     ltrs_agua = forms.CharField(max_length=10)
+     personas_atendidas = forms.CharField(max_length=10)
+     descripcion = forms.CharField(max_length=40)
+     material_utilizado = forms.CharField(max_length=40)
+     status = forms.CharField(max_length=20)
