@@ -78,6 +78,20 @@
         <h4>Atendido No Efectuado</h4>
         <div class="form-style">{{ form_atendido_no_efectuado }}</div>
       </div>
+    
+      <!-- Detalles de Procedimiento (Despliegue de seguridad) -->
+      <div class="data_form" id="desp_seguridad" style="display: none">
+        <div class="line"></div>
+        <h4>Despliegue de Seguridad</h4>
+        <div class="form-style">{{ form_despliegue_seguridad }}</div>
+      </div>
+      
+      <!-- Detalles de Procedimiento (Falsa Alarma) -->
+      <div class="data_form" id="falsa_alarm" style="display: none">
+        <div class="line"></div>
+        <h4>Falsa Alarma</h4>
+        <div class="form-style">{{ form_falsa_alarma }}</div>
+      </div>
 
       <!-- Boton Enviar -->
       <button type="submit" id="button_submit" style="display: none">
@@ -151,34 +165,58 @@
       var abast_agua = document.getElementById("abast_agua");
       var apoyo_unid = document.getElementById("apoyo_unid");
       var guard_prev = document.getElementById("guard_prev");
+      var desp_seguridad = document.getElementById("desp_seguridad");
       var atend_no_efect = document.getElementById("atend_no_efect");
+      var falsa_alarm = document.getElementById("falsa_alarm");
       var button_submit = document.getElementById("button_submit");
 
       if (this.value == "1") {
-        abast_agua.style.display = "block";
         apoyo_unid.style.display = "none";
         guard_prev.style.display = "none";
         atend_no_efect.style.display = "none";
+        desp_seguridad.style.display = "none";
+        abast_agua.style.display = "block";
         button_submit.style.display = "block";
       } else if (this.value == "2") {
         abast_agua.style.display = "none";
-        apoyo_unid.style.display = "block";
         guard_prev.style.display = "none";
         atend_no_efect.style.display = "none";
+        desp_seguridad.style.display = "none";
+        apoyo_unid.style.display = "block";
         button_submit.style.display = "block";
       } else if (this.value == "3") {
         abast_agua.style.display = "none";
         apoyo_unid.style.display = "none";
         guard_prev.style.display = "block";
         atend_no_efect.style.display = "none";
+        desp_seguridad.style.display = "none";
         button_submit.style.display = "block";
       } else if (this.value == "4") {
         abast_agua.style.display = "none";
         apoyo_unid.style.display = "none";
         guard_prev.style.display = "none";
+        desp_seguridad.style.display = "none";
         atend_no_efect.style.display = "block";
         button_submit.style.display = "block";
-      } else {
+      } 
+      else if (this.value == "5") {
+        abast_agua.style.display = "none";
+        apoyo_unid.style.display = "none";
+        guard_prev.style.display = "none";
+        atend_no_efect.style.display = "none";
+        desp_seguridad.style.display = "block";
+        button_submit.style.display = "block";
+      } 
+      else if (this.value == "6") {
+        abast_agua.style.display = "none";
+        apoyo_unid.style.display = "none";
+        guard_prev.style.display = "none";
+        atend_no_efect.style.display = "none";
+        desp_seguridad.style.display = "none";
+        falsa_alarm.style.display = "block";
+        button_submit.style.display = "block";
+      } 
+      else {
         errorModal.show();
         apoyo_unid.style.display = "none";
         button_submit.style.display = "none";
@@ -203,6 +241,7 @@
 <!-- Mostrar modal si hay un error -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
+<!-- desactivar primera casilla de select -->
 <script>
   document.addEventListener("DOMContentLoaded", function () {
     const selects = document.querySelectorAll(".disable-first-option");

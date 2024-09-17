@@ -107,6 +107,7 @@ def View_Procedimiento(request):
         apoyo_unid = Formulario_apoyo_unidades(request.POST, prefix='apoyo_unid')
         guard_prev = Formulario_guardia_prevencion(request.POST, prefix='guard_prev')   
         atend_no_efec = Formulario_atendido_no_efectuado(request.POST, prefix='atend_no_efec')   
+        desp_seguridad = Formulario_despliegue_seguridad(request.POST, prefix='desp_seguridad')   
 
         # Imprimir request.POST para depuración
 
@@ -256,7 +257,30 @@ def View_Procedimiento(request):
                 nuevo_atend_no_efect.save()
             
                 return redirect('/dashboard/')
+            
+            if tipo_procedimiento == "5" and desp_seguridad.is_valid():          
+                descripcion = desp_seguridad.cleaned_data["descripcion"]
+                material_utilizado = desp_seguridad.cleaned_data["material_utilizado"]
+                status =desp_seguridad.cleaned_data["status"]
+                motv_despliegue = desp_seguridad.cleaned_data["motv_despliegue"]
                 
+                Tipo_Motivo_instance = Motivo_Despliegue.objects.get(id=motv_despliegue)
+                print("Datos Obtenidos")
+                
+                desp_seguridad = Despliegue_Seguridad(
+                    id_procedimiento=nuevo_procedimiento,
+                    motivo_despliegue = Tipo_Motivo_instance,
+                    descripcion=descripcion,
+                    material_utilizado=material_utilizado,
+                    status=status
+                )
+                print(desp_seguridad)
+                desp_seguridad.save()
+            
+                return redirect('/dashboard/')
+                
+            # agregar el numero 6 falsa alarma     
+        
     else:
         form = SelectorDivision(prefix='form1')
         form2 = SeleccionarInfo(prefix='form2')
@@ -266,6 +290,7 @@ def View_Procedimiento(request):
         apoyo_unid = Formulario_apoyo_unidades(prefix='apoyo_unid')
         guard_prev = Formulario_guardia_prevencion(prefix='guard_prev')
         atend_no_efec = Formulario_atendido_no_efectuado(prefix='atend_no_efec')
+        desp_seguridad = Formulario_despliegue_seguridad(prefix='desp_seguridad')
 
     return render(request, "procedimientos.html", {
         "user": user,
@@ -281,6 +306,7 @@ def View_Procedimiento(request):
         "form_apoyo_unidades": apoyo_unid,
         "form_guardia_prevencion": guard_prev,
         "form_atendido_no_efectuado": atend_no_efec,
+        "form_despliegue_seguridad": desp_seguridad,
     })
     
 # Vista de la Seccion de Estadisticas

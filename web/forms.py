@@ -55,6 +55,15 @@ def Asignar_opc_motivo_prevencion():
          i+=1
      return op
 
+def Asignar_opc_motivo_despliegue():
+     procedimientos = Motivo_Despliegue.objects.all()
+     i = 1
+     op = [("0", "Seleccione Una Opcion")]
+     for procedimiento in procedimientos:
+         op.append((i, procedimiento))
+         i+=1
+     return op
+
 # Form1
 class SelectorDivision(forms.Form):
     op = [
@@ -121,7 +130,8 @@ class formulario_abastecimiento_agua(forms.Form):
      descripcion = forms.CharField(max_length=40, required=False)
      material_utilizado = forms.CharField(max_length=40, required=False)
      status = forms.ChoiceField(choices=[("-", "Seleccione Una Opcion"), ("Culminado", "Culminado"), ("En Proceso", "En Proceso")], widget=forms.Select(attrs={"class": "disable-first-option"}))
-    
+
+# Formulario Apoyo a otras Unidades
 class Formulario_apoyo_unidades(forms.Form):
     tipo_apoyo = forms.ChoiceField(choices=Asignar_opc_tipos_apoyos(), widget=forms.Select(attrs={"class": "disable-first-option"}))
     unidad_apoyada = forms.CharField(max_length=50, required=False)
@@ -129,13 +139,29 @@ class Formulario_apoyo_unidades(forms.Form):
     material_utilizado = forms.CharField(max_length=50, required=False)
     status = forms.ChoiceField(choices=[("-", "Seleccione Una Opcion"), ("Culminado", "Culminado"), ("En Proceso", "En Proceso")], widget=forms.Select(attrs={"class": "disable-first-option"}))
 
+# Formulario Guardia de Prevencion
 class Formulario_guardia_prevencion(forms.Form):
      motivo_prevencion = forms.ChoiceField(choices=Asignar_opc_motivo_prevencion(), widget=forms.Select(attrs={"class": "disable-first-option"}))
      descripcion = forms.CharField(max_length=50, required=False)
      material_utilizado = forms.CharField(max_length=50, required=False)
      status = forms.ChoiceField(choices=[("-", "Seleccione Una Opcion"), ("Culminado", "Culminado"), ("En Proceso", "En Proceso")], widget=forms.Select(attrs={"class": "disable-first-option"}))
 
+# Formulario Atendido no Efectuado 
 class Formulario_atendido_no_efectuado(forms.Form):
+     descripcion = forms.CharField(max_length=50, required=False)
+     material_utilizado = forms.CharField(max_length=50, required=False)
+     status = forms.ChoiceField(choices=[("-", "Seleccione Una Opcion"), ("Culminado", "Culminado"), ("En Proceso", "En Proceso")], widget=forms.Select(attrs={"class": "disable-first-option"}))
+
+# Formulario Despliegue de Seguridad 
+class Formulario_despliegue_seguridad(forms.Form):
+     motv_despliegue = forms.ChoiceField(choices=Asignar_opc_motivo_despliegue(), widget=forms.Select(attrs={"class": "disable-first-option"}))
+     descripcion = forms.CharField(max_length=50, required=False)
+     material_utilizado = forms.CharField(max_length=50, required=False)
+     status = forms.ChoiceField(choices=[("-", "Seleccione Una Opcion"), ("Culminado", "Culminado"), ("En Proceso", "En Proceso")], widget=forms.Select(attrs={"class": "disable-first-option"}))
+
+# Formulario Falsa Alarma 
+class Formulario_falsa_alarma(forms.Form):
+     motv_alarma = forms.CharField(max_length=50, required=False)
      descripcion = forms.CharField(max_length=50, required=False)
      material_utilizado = forms.CharField(max_length=50, required=False)
      status = forms.ChoiceField(choices=[("-", "Seleccione Una Opcion"), ("Culminado", "Culminado"), ("En Proceso", "En Proceso")], widget=forms.Select(attrs={"class": "disable-first-option"}))
