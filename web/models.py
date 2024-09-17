@@ -42,6 +42,12 @@ class Tipo_Institucion(models.Model):
   def __str__(self):
      return self.nombre_institucion
   
+class Tipo_apoyo(models.Model):
+  tipo_apoyo = models.CharField(max_length=50)
+  
+  def __str__(self):
+    return self.tipo_apoyo
+
 class Tipos_Procedimientos(models.Model):
     tipo_procedimiento = models.CharField(max_length=40)
     
