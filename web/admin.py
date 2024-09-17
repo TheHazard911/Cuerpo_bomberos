@@ -14,3 +14,6 @@ admin.site.register(Apoyo_Unidades)
 admin.site.register(Guardia_prevencion)
 admin.site.register(Tipo_Institucion)
 admin.site.register(Tipo_apoyo)
+admin.site.register(Motivo_Prevencion)
+admin.site.register(Atendido_no_Efectuado)
+

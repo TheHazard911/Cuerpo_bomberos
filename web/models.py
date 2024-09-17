@@ -36,6 +36,12 @@ class Parroquias(models.Model):
     def __str__(self):
       return self.parroquia
 
+class Motivo_Prevencion(models.Model):
+    motivo = models.CharField(max_length=40)
+    
+    def __str__(self):
+      return self.motivo
+
 class Tipo_Institucion(models.Model):
   nombre_institucion = models.CharField(max_length=50)
   
@@ -83,26 +89,34 @@ class Abastecimiento_agua(models.Model):
   status = models.CharField(max_length=20, default="...")
   
   def __str__(self):
-    return self.id_procedimiento.id_division.division + " -- " + self.tipo_servicio + " -- " + self.nombres + " -- " + self.apellidos + " -- " + self.cedula + " -- " + self.ltrs_agua + " -- " + self.personas_atendidas + " -- " + self.descripcion + " -- " + self.material_utilizado + " -- " + self.status
+    return self.id_procedimiento.id_division.division + " -- " + self.id_tipo_servicio.nombre_institucion + " -- " + self.nombres + " -- " + self.apellidos + " -- " + self.cedula + " -- " + self.ltrs_agua + " -- " + self.personas_atendidas + " -- " + self.descripcion + " -- " + self.material_utilizado + " -- " + self.status
   
 class Apoyo_Unidades(models.Model):
   id_procedimiento = models.ForeignKey(Procedimientos, on_delete=models.CASCADE)
-  tipo_apoyo = models.CharField(max_length=50)
+  id_tipo_apoyo = models.ForeignKey(Tipo_apoyo, on_delete=models.CASCADE)
   unidad_apoyada = models.CharField(max_length=50)
   descripcion = models.CharField(max_length=50)
   material_utilizado = models.CharField(max_length=50)
   status = models.CharField(max_length=50)
   
   def __str__(self):
-    return self.id_procedimiento.id_division.division + " -- " + self.tipo_apoyo + " -- " + self.unidad_apoyada + " -- " + self.descripcion + " -- " + self.material_utilizado + " -- " + self.status
+    return self.id_procedimiento.id_division.division + " -- " + self.id_tipo_apoyo.tipo_apoyo + " -- " + self.unidad_apoyada + " -- " + self.descripcion + " -- " + self.material_utilizado + " -- " + self.status
   
 class Guardia_prevencion(models.Model):
   id_procedimiento = models.ForeignKey(Procedimientos, on_delete=models.CASCADE)
-  motivo_prevencion = models.CharField(max_length=40)
+  id_motivo_prevencion = models.ForeignKey(Motivo_Prevencion, on_delete=models.CASCADE)
+  descripcion = models.CharField(max_length=50)
+  material_utilizado = models.CharField(max_length=50)
+  status = models.CharField(max_length=50)
+  
+  def __str__(self):
+    return self.id_procedimiento.id_division.division + "--" + self.id_motivo_prevencion.motivo + " -- " + self.descripcion + " -- " + self.material_utilizado + " -- " + self.status
+
+class Atendido_no_Efectuado(models.Model):
+  id_procedimiento = models.ForeignKey(Procedimientos, on_delete=models.CASCADE)
   descripcion = models.CharField(max_length=50)
   material_utilizado = models.CharField(max_length=50)
   status = models.CharField(max_length=50)
   
   def __str__(self):
     return self.id_procedimiento.id_division.division + " -- " + self.descripcion + " -- " + self.material_utilizado + " -- " + self.status
-

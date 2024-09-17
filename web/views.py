@@ -5,7 +5,7 @@ from .models import Usuarios, Divisiones, Procedimientos
 # from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from .forms import *
-from .models import Procedimientos, Personal, Tipos_Procedimientos, Municipios, Parroquias
+from .models import *
 from django.shortcuts import get_object_or_404
 from django.http import JsonResponse
 import json
@@ -103,24 +103,27 @@ def View_Procedimiento(request):
         form2 = SeleccionarInfo(request.POST, prefix='form2')
         form3 = Datos_Ubicacion(request.POST, prefix='form3')
         form4 = Selecc_Tipo_Procedimiento(request.POST, prefix='form4')
+        abast_agua = formulario_abastecimiento_agua(request.POST, prefix='abast_agua')
+        apoyo_unid = Formulario_apoyo_unidades(request.POST, prefix='apoyo_unid')
+        guard_prev = Formulario_guardia_prevencion(request.POST, prefix='guard_prev')   
+        atend_no_efec = Formulario_atendido_no_efectuado(request.POST, prefix='atend_no_efec')   
 
         # Imprimir request.POST para depuración
 
         if not form.is_valid():
-            #print("Errores en form1:", form.errors)
+            print("Errores en form1:", form.errors)
             result = True
         if not form2.is_valid():
-            #print("Errores en form2:", form2.errors)
+            print("Errores en form2:", form2.errors)
             result = True
         if not form3.is_valid():
-            #print("Errores en form3:", form3.errors)
+            print("Errores en form3:", form3.errors)
             result = True
         if not form4.is_valid():
-            #print("Errores en form4:", form4.errors)
+            print("Errores en form4:", form4.errors)
             result = True
 
         if form.is_valid() and form2.is_valid() and form3.is_valid() and form4.is_valid():
-            
             result = False
             
             division = form.cleaned_data["opciones"]
@@ -140,7 +143,7 @@ def View_Procedimiento(request):
             jefe_comision_instance = Personal.objects.get(id=jefe_comision)
             municipio_instance = Municipios.objects.get(id=municipio)
             tipo_procedimiento_instance = Tipos_Procedimientos.objects.get(id=tipo_procedimiento)
-
+            
             # Crear una nueva instancia del modelo Procedimientos
             nuevo_procedimiento = Procedimientos(
                 id_division=division_instance,
@@ -154,7 +157,7 @@ def View_Procedimiento(request):
                 hora=hora,
                 id_tipo_procedimiento=tipo_procedimiento_instance
             )
-
+            
             # Solo asignar parroquia si está presente
             if parroquia:
                 parroquia_instance = Parroquias.objects.get(id=parroquia)
@@ -162,13 +165,107 @@ def View_Procedimiento(request):
 
             nuevo_procedimiento.save()
             
-            return redirect('/form-details/')
-    
+            if tipo_procedimiento == "1" and abast_agua.is_valid():
+                id_tipo_servicio = abast_agua.cleaned_data["tipo_servicio"]          
+                nombres = abast_agua.cleaned_data["nombres"]
+                apellidos = abast_agua.cleaned_data["apellidos"]
+                cedula = abast_agua.cleaned_data["cedula"]
+                ltrs_agua = abast_agua.cleaned_data["ltrs_agua"]
+                personas_atendidas = abast_agua.cleaned_data["personas_atendidas"]
+                descripcion = abast_agua.cleaned_data["descripcion"]
+                material_utilizado = abast_agua.cleaned_data["material_utilizado"]
+                status = abast_agua.cleaned_data["status"]
+                
+                tipo_servicio_instance = Tipo_Institucion.objects.get(id=id_tipo_servicio)
+               
+                # Crear y guardar la instancia de Abastecimiento_agua
+                nuevo_abast_agua = Abastecimiento_agua(
+                    id_procedimiento=nuevo_procedimiento,
+                    id_tipo_servicio=tipo_servicio_instance,
+                    nombres=nombres,
+                    apellidos=apellidos,
+                    cedula=cedula,
+                    ltrs_agua=ltrs_agua,
+                    personas_atendidas=personas_atendidas,
+                    descripcion=descripcion,
+                    material_utilizado=material_utilizado,
+                    status=status
+                )
+                nuevo_abast_agua.save()
+            
+                return redirect('/dashboard/')
+        
+            if tipo_procedimiento == "2" and apoyo_unid.is_valid():
+                tipo_apoyo = apoyo_unid.cleaned_data["tipo_apoyo"]          
+                unidad_apoyada = apoyo_unid.cleaned_data["unidad_apoyada"]
+                descripcion = apoyo_unid.cleaned_data["descripcion"]
+                material_utilizado = apoyo_unid.cleaned_data["material_utilizado"]
+                status = apoyo_unid.cleaned_data["status"]
+                
+                tipo_apoyo_instance = Tipo_apoyo.objects.get(id=tipo_apoyo)
+                print("Datos Obtenidos")
+                
+                nuevo_apoyo_unidad = Apoyo_Unidades(
+                    id_procedimiento=nuevo_procedimiento,
+                    id_tipo_apoyo=tipo_apoyo_instance,
+                    unidad_apoyada=unidad_apoyada,
+                    descripcion=descripcion,
+                    material_utilizado=material_utilizado,
+                    status=status
+                )
+                print(nuevo_apoyo_unidad)
+                nuevo_apoyo_unidad.save()
+            
+                return redirect('/dashboard/')
+                
+            if tipo_procedimiento == "3" and guard_prev.is_valid():
+                mot_prevencion = guard_prev.cleaned_data["motivo_prevencion"]          
+                descripcion = guard_prev.cleaned_data["descripcion"]
+                material_utilizado = guard_prev.cleaned_data["material_utilizado"]
+                status = guard_prev.cleaned_data["status"]
+                
+                Tipo_Motivo_instance = Motivo_Prevencion.objects.get(id=mot_prevencion)
+                print("Datos Obtenidos")
+                
+                nuevo_guard_prevencion = Guardia_prevencion(
+                    id_procedimiento=nuevo_procedimiento,
+                    id_motivo_prevencion=Tipo_Motivo_instance,
+                    descripcion=descripcion,
+                    material_utilizado=material_utilizado,
+                    status=status
+                )
+                print(nuevo_guard_prevencion)
+                nuevo_guard_prevencion.save()
+            
+                return redirect('/dashboard/')
+                
+            if tipo_procedimiento == "4" and atend_no_efec.is_valid():          
+                descripcion = atend_no_efec.cleaned_data["descripcion"]
+                material_utilizado = atend_no_efec.cleaned_data["material_utilizado"]
+                status = atend_no_efec.cleaned_data["status"]
+                
+                print("Datos Obtenidos")
+                
+                nuevo_atend_no_efect = Atendido_no_Efectuado(
+                    id_procedimiento=nuevo_procedimiento,
+                    descripcion=descripcion,
+                    material_utilizado=material_utilizado,
+                    status=status
+                )
+                print(nuevo_atend_no_efect)
+                nuevo_atend_no_efect.save()
+            
+                return redirect('/dashboard/')
+                
     else:
         form = SelectorDivision(prefix='form1')
         form2 = SeleccionarInfo(prefix='form2')
         form3 = Datos_Ubicacion(prefix='form3')
         form4 = Selecc_Tipo_Procedimiento(prefix='form4')
+        abast_agua = formulario_abastecimiento_agua(prefix='abast_agua')
+        apoyo_unid = Formulario_apoyo_unidades(prefix='apoyo_unid')
+        guard_prev = Formulario_guardia_prevencion(prefix='guard_prev')
+        atend_no_efec = Formulario_atendido_no_efectuado(prefix='atend_no_efec')
 
     return render(request, "procedimientos.html", {
         "user": user,
@@ -180,8 +277,10 @@ def View_Procedimiento(request):
         "form3": form3,
         "form4": form4,
         "errors": result,
-        "form_abastecimiento_agua": formulario_abastecimiento_agua(),
-        "form_apoyo_unidades": Formulario_apoyo_unidades()
+        "form_abastecimiento_agua": abast_agua,
+        "form_apoyo_unidades": apoyo_unid,
+        "form_guardia_prevencion": guard_prev,
+        "form_atendido_no_efectuado": atend_no_efec,
     })
     
 # Vista de la Seccion de Estadisticas
@@ -223,6 +322,210 @@ def View_Operaciones(request):
         "datos": datos,
     })
 
+# Vista de la Seccion de Operaciones
+def View_Rescate(request):
+    user = request.session.get('user')    
+    if not user:
+            return redirect('/')
+        
+    datos = Procedimientos.objects.filter(id_division = 1)
+
+    if request.method == 'POST':
+        data = json.loads(request.body)
+        id = data.get('id')
+        procedimiento = get_object_or_404(Procedimientos, id=id)
+        try:
+            procedimiento.delete()
+            return JsonResponse({'success': True})
+        except Exception as e:
+            return JsonResponse({'success': False, 'error': str(e)})
+    
+    return render(request, "Divisiones/rescate.html", {
+        "user": user,
+        "jerarquia": user["jerarquia"],
+        "nombres": user["nombres"],
+        "apellidos": user["apellidos"],
+        "datos": datos,
+    })
+
+def View_Prevencion(request):
+    user = request.session.get('user')    
+    if not user:
+            return redirect('/')
+        
+    datos = Procedimientos.objects.filter(id_division = 3)
+
+    if request.method == 'POST':
+        data = json.loads(request.body)
+        id = data.get('id')
+        procedimiento = get_object_or_404(Procedimientos, id=id)
+        try:
+            procedimiento.delete()
+            return JsonResponse({'success': True})
+        except Exception as e:
+            return JsonResponse({'success': False, 'error': str(e)})
+    
+    return render(request, "Divisiones/prevencion.html", {
+        "user": user,
+        "jerarquia": user["jerarquia"],
+        "nombres": user["nombres"],
+        "apellidos": user["apellidos"],
+        "datos": datos,
+    })
+
+def View_grumae(request):
+    user = request.session.get('user')    
+    if not user:
+            return redirect('/')
+        
+    datos = Procedimientos.objects.filter(id_division = 4)
+
+    if request.method == 'POST':
+        data = json.loads(request.body)
+        id = data.get('id')
+        procedimiento = get_object_or_404(Procedimientos, id=id)
+        try:
+            procedimiento.delete()
+            return JsonResponse({'success': True})
+        except Exception as e:
+            return JsonResponse({'success': False, 'error': str(e)})
+    
+    return render(request, "Divisiones/grumae.html", {
+        "user": user,
+        "jerarquia": user["jerarquia"],
+        "nombres": user["nombres"],
+        "apellidos": user["apellidos"],
+        "datos": datos,
+    })
+
+def View_prehospitalaria(request):
+    user = request.session.get('user')    
+    if not user:
+            return redirect('/')
+        
+    datos = Procedimientos.objects.filter(id_division = 5)
+
+    if request.method == 'POST':
+        data = json.loads(request.body)
+        id = data.get('id')
+        procedimiento = get_object_or_404(Procedimientos, id=id)
+        try:
+            procedimiento.delete()
+            return JsonResponse({'success': True})
+        except Exception as e:
+            return JsonResponse({'success': False, 'error': str(e)})
+    
+    return render(request, "Divisiones/prehospitalaria.html", {
+        "user": user,
+        "jerarquia": user["jerarquia"],
+        "nombres": user["nombres"],
+        "apellidos": user["apellidos"],
+        "datos": datos,
+    })
+
+def View_capacitacion(request):
+    user = request.session.get('user')    
+    if not user:
+            return redirect('/')
+        
+    datos = Procedimientos.objects.filter(id_division = 9)
+
+    if request.method == 'POST':
+        data = json.loads(request.body)
+        id = data.get('id')
+        procedimiento = get_object_or_404(Procedimientos, id=id)
+        try:
+            procedimiento.delete()
+            return JsonResponse({'success': True})
+        except Exception as e:
+            return JsonResponse({'success': False, 'error': str(e)})
+    
+    return render(request, "Divisiones/capacitacion.html", {
+        "user": user,
+        "jerarquia": user["jerarquia"],
+        "nombres": user["nombres"],
+        "apellidos": user["apellidos"],
+        "datos": datos,
+    })
+
+def View_enfermeria(request):
+    user = request.session.get('user')    
+    if not user:
+            return redirect('/')
+        
+    datos = Procedimientos.objects.filter(id_division = 6)
+
+    if request.method == 'POST':
+        data = json.loads(request.body)
+        id = data.get('id')
+        procedimiento = get_object_or_404(Procedimientos, id=id)
+        try:
+            procedimiento.delete()
+            return JsonResponse({'success': True})
+        except Exception as e:
+            return JsonResponse({'success': False, 'error': str(e)})
+    
+    return render(request, "Divisiones/enfermeria.html", {
+        "user": user,
+        "jerarquia": user["jerarquia"],
+        "nombres": user["nombres"],
+        "apellidos": user["apellidos"],
+        "datos": datos,
+    })
+
+def View_serviciosmedicos(request):
+    user = request.session.get('user')    
+    if not user:
+            return redirect('/')
+        
+    datos = Procedimientos.objects.filter(id_division = 7)
+
+    if request.method == 'POST':
+        data = json.loads(request.body)
+        id = data.get('id')
+        procedimiento = get_object_or_404(Procedimientos, id=id)
+        try:
+            procedimiento.delete()
+            return JsonResponse({'success': True})
+        except Exception as e:
+            return JsonResponse({'success': False, 'error': str(e)})
+    
+    return render(request, "Divisiones/serviciosmedicos.html", {
+        "user": user,
+        "jerarquia": user["jerarquia"],
+        "nombres": user["nombres"],
+        "apellidos": user["apellidos"],
+        "datos": datos,
+    })
+
+def View_psicologia(request):
+    user = request.session.get('user')    
+    if not user:
+            return redirect('/')
+        
+    datos = Procedimientos.objects.filter(id_division = 8)
+
+    if request.method == 'POST':
+        data = json.loads(request.body)
+        id = data.get('id')
+        procedimiento = get_object_or_404(Procedimientos, id=id)
+        try:
+            procedimiento.delete()
+            return JsonResponse({'success': True})
+        except Exception as e:
+            return JsonResponse({'success': False, 'error': str(e)})
+    
+    return render(request, "Divisiones/psicologia.html", {
+        "user": user,
+        "jerarquia": user["jerarquia"],
+        "nombres": user["nombres"],
+        "apellidos": user["apellidos"],
+        "datos": datos,
+    })
+
+
+
+
 # Funcion para eliminar (NO TOCAR)
 # def eliminar_procedimiento(request):
 #     if request.method == 'POST':
@@ -234,17 +537,3 @@ def View_Operaciones(request):
 #             return JsonResponse({'success': True})
 #         except Exception as e:
 #             return JsonResponse({'success': False, 'error': str(e)})
-
-def view_details_operations(request):
-    
-    user = request.session.get('user')    
-    if not user:
-            return redirect('/')
-    
-    return render(request, "form-details-operations.html",{
-        "user": user,
-        "jerarquia": user["jerarquia"],
-        "nombres": user["nombres"],
-        "apellidos": user["apellidos"],
-        "form_abastecimiento_agua": formulario_abastecimiento_agua()
-    } )

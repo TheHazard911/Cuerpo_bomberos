@@ -1,5 +1,5 @@
 from django import forms
-from.models import Personal, Municipios, Tipos_Procedimientos, Tipo_apoyo, Tipo_Institucion
+from.models import *
 
 def Asignar_ops_Personal():
     personal = Personal.objects.all()
@@ -45,6 +45,15 @@ def Asignar_opc_tipos_apoyos():
          op.append((i, procedimiento))
          i+=1
      return op
+ 
+def Asignar_opc_motivo_prevencion():
+     procedimientos = Motivo_Prevencion.objects.all()
+     i = 1
+     op = [("0", "Seleccione Una Opcion")]
+     for procedimiento in procedimientos:
+         op.append((i, procedimiento))
+         i+=1
+     return op
 
 # Form1
 class SelectorDivision(forms.Form):
@@ -53,12 +62,12 @@ class SelectorDivision(forms.Form):
         ("1", "Rescate"),
         ("2", "Operaciones"),
         ("3", "Prevención"),
-        ("4", "Prehospitalaria"),
-        ("5", "Enfermería"),
-        ("6", "Servicios Médicos"),
-        ("7", "Psicología"),
-        ("8", "Capacitación"),
-        ("9", "GRUMAE"),
+        ("4", "GRUMAE"),
+        ("5", "Prehospitalaria"),
+        ("6", "Enfermería"),
+        ("7", "Servicios Médicos"),
+        ("8", "Psicología"),
+        ("9", "Capacitación"),
     ]
     opciones = forms.ChoiceField(
         label="Seleccionar División",
@@ -103,20 +112,30 @@ class Selecc_Tipo_Procedimiento(forms.Form):
 
 # Formulario Abastecimiento de Agua -- :D
 class formulario_abastecimiento_agua(forms.Form):
-     tipo_servicio = forms.ChoiceField(choices=Asignar_opc_tipos_suministros(), required=True, widget=forms.Select(attrs={'class': 'disable-first-option'}))
-     nombres = forms.CharField(max_length=40)
-     apellidos = forms.CharField(max_length=40)
-     cedula = forms.CharField(max_length=10)
-     ltrs_agua = forms.CharField(max_length=10)
-     personas_atendidas = forms.CharField(max_length=10)
-     descripcion = forms.CharField(max_length=40)
-     material_utilizado = forms.CharField(max_length=40)
-     status = forms.CharField(max_length=20)
+     tipo_servicio = forms.ChoiceField(choices=Asignar_opc_tipos_suministros(), widget=forms.Select(attrs={'class': 'disable-first-option'}))
+     nombres = forms.CharField(max_length=40, required=False)
+     apellidos = forms.CharField(max_length=40, required=False)
+     cedula = forms.CharField(max_length=10, required=False)
+     ltrs_agua = forms.CharField(max_length=10, required=False)
+     personas_atendidas = forms.CharField(max_length=10, required=False)
+     descripcion = forms.CharField(max_length=40, required=False)
+     material_utilizado = forms.CharField(max_length=40, required=False)
+     status = forms.ChoiceField(choices=[("-", "Seleccione Una Opcion"), ("Culminado", "Culminado"), ("En Proceso", "En Proceso")], widget=forms.Select(attrs={"class": "disable-first-option"}))
     
 class Formulario_apoyo_unidades(forms.Form):
-  tipo_apoyo = forms.ChoiceField(choices=Asignar_opc_tipos_apoyos(), required=True, widget=forms.Select(attrs={"class": "disable-first-option"}))
-  unidad_apoyada = forms.CharField(max_length=50)
-  descripcion = forms.CharField(max_length=50)
-  material_utilizado = forms.CharField(max_length=50)
-  status = forms.CharField(max_length=50)
-  
+    tipo_apoyo = forms.ChoiceField(choices=Asignar_opc_tipos_apoyos(), widget=forms.Select(attrs={"class": "disable-first-option"}))
+    unidad_apoyada = forms.CharField(max_length=50, required=False)
+    descripcion = forms.CharField(max_length=50, required=False)
+    material_utilizado = forms.CharField(max_length=50, required=False)
+    status = forms.ChoiceField(choices=[("-", "Seleccione Una Opcion"), ("Culminado", "Culminado"), ("En Proceso", "En Proceso")], widget=forms.Select(attrs={"class": "disable-first-option"}))
+
+class Formulario_guardia_prevencion(forms.Form):
+     motivo_prevencion = forms.ChoiceField(choices=Asignar_opc_motivo_prevencion(), widget=forms.Select(attrs={"class": "disable-first-option"}))
+     descripcion = forms.CharField(max_length=50, required=False)
+     material_utilizado = forms.CharField(max_length=50, required=False)
+     status = forms.ChoiceField(choices=[("-", "Seleccione Una Opcion"), ("Culminado", "Culminado"), ("En Proceso", "En Proceso")], widget=forms.Select(attrs={"class": "disable-first-option"}))
+
+class Formulario_atendido_no_efectuado(forms.Form):
+     descripcion = forms.CharField(max_length=50, required=False)
+     material_utilizado = forms.CharField(max_length=50, required=False)
+     status = forms.ChoiceField(choices=[("-", "Seleccione Una Opcion"), ("Culminado", "Culminado"), ("En Proceso", "En Proceso")], widget=forms.Select(attrs={"class": "disable-first-option"}))
