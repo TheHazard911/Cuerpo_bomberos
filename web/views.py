@@ -180,7 +180,8 @@ def View_Procedimiento(request):
         "form3": form3,
         "form4": form4,
         "errors": result,
-        "form_abastecimiento_agua": formulario_abastecimiento_agua()
+        "form_abastecimiento_agua": formulario_abastecimiento_agua(),
+        "form_apoyo_unidades": Formulario_apoyo_unidades()
     })
     
 # Vista de la Seccion de Estadisticas

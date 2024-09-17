@@ -1,5 +1,5 @@
 from django import forms
-from.models import Personal, Municipios, Tipos_Procedimientos, Tipo_Institucion
+from.models import Personal, Municipios, Tipos_Procedimientos, Tipo_apoyo, Tipo_Institucion
 
 def Asignar_ops_Personal():
     personal = Personal.objects.all()
@@ -30,6 +30,15 @@ def Asignar_op_Tipos_Procedimientos():
 
 def Asignar_opc_tipos_suministros():
      procedimientos = Tipo_Institucion.objects.all()
+     i = 1
+     op = [("0", "Seleccione Una Opcion")]
+     for procedimiento in procedimientos:
+         op.append((i, procedimiento))
+         i+=1
+     return op
+   
+def Asignar_opc_tipos_apoyos():
+     procedimientos = Tipo_apoyo.objects.all()
      i = 1
      op = [("0", "Seleccione Una Opcion")]
      for procedimiento in procedimientos:
@@ -94,7 +103,6 @@ class Selecc_Tipo_Procedimiento(forms.Form):
 
 # Formulario Abastecimiento de Agua -- :D
 class formulario_abastecimiento_agua(forms.Form):
-    
      tipo_servicio = forms.ChoiceField(choices=Asignar_opc_tipos_suministros(), required=True, widget=forms.Select(attrs={'class': 'disable-first-option'}))
      nombres = forms.CharField(max_length=40)
      apellidos = forms.CharField(max_length=40)
@@ -104,3 +112,11 @@ class formulario_abastecimiento_agua(forms.Form):
      descripcion = forms.CharField(max_length=40)
      material_utilizado = forms.CharField(max_length=40)
      status = forms.CharField(max_length=20)
+    
+class Formulario_apoyo_unidades(forms.Form):
+  tipo_apoyo = forms.ChoiceField(choices=Asignar_opc_tipos_apoyos(), required=True, widget=forms.Select(attrs={"class": "disable-first-option"}))
+  unidad_apoyada = forms.CharField(max_length=50)
+  descripcion = forms.CharField(max_length=50)
+  material_utilizado = forms.CharField(max_length=50)
+  status = forms.CharField(max_length=50)
+  
