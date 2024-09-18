@@ -26,4 +26,5 @@ admin.site.register(Tipo_Rescate)
 admin.site.register(Rescate_Persona)
 admin.site.register(Rescate_Animal)
 admin.site.register(Tipo_servicios)
+admin.site.register(Motivo_Alarma)
 

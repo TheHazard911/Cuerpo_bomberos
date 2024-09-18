@@ -3,66 +3,67 @@ from.models import *
 
 def Asignar_ops_Personal():
     personal = Personal.objects.all()
-    i = 1
     op = [("0", "Seleccione Una Opcion")]
     for persona in personal:
-        op.append((i, f"{persona.jerarquia} {persona.nombres} {persona.apellidos}"))
-        i+=1
+        op.append((str(persona.id), f"{persona.jerarquia} {persona.nombres} {persona.apellidos}"))
     return op
 
 def Asignar_op_Municipios():
     municipios = Municipios.objects.all()
-    i = 1
     op = [("0", "Seleccione Una Opcion")]
     for municipio in municipios:
-        op.append((i, municipio))
-        i+=1
+        op.append((str(municipio.id), municipio))
     return op
 
 def Asignar_op_Tipos_Procedimientos():
     procedimientos = Tipos_Procedimientos.objects.all()
-    i = 1
     op = [("0", "Seleccione Una Opcion")]
     for procedimiento in procedimientos:
-        op.append((i, procedimiento))
-        i+=1
+        op.append((str(procedimiento.id), procedimiento))
     return op
 
 def Asignar_opc_tipos_suministros():
      procedimientos = Tipo_Institucion.objects.all()
-     i = 1
      op = [("0", "Seleccione Una Opcion")]
      for procedimiento in procedimientos:
-         op.append((i, procedimiento))
-         i+=1
+         op.append((str(procedimiento.id), procedimiento))
      return op
    
 def Asignar_opc_tipos_apoyos():
      procedimientos = Tipo_apoyo.objects.all()
-     i = 1
      op = [("0", "Seleccione Una Opcion")]
      for procedimiento in procedimientos:
-         op.append((i, procedimiento))
-         i+=1
+         op.append((str(procedimiento.id), procedimiento))
      return op
  
 def Asignar_opc_motivo_prevencion():
      procedimientos = Motivo_Prevencion.objects.all()
-     i = 1
      op = [("0", "Seleccione Una Opcion")]
      for procedimiento in procedimientos:
-         op.append((i, procedimiento))
-         i+=1
+         op.append((str(procedimiento.id), procedimiento))
      return op
 
 def Asignar_opc_motivo_despliegue():
      procedimientos = Motivo_Despliegue.objects.all()
-     i = 1
      op = [("0", "Seleccione Una Opcion")]
      for procedimiento in procedimientos:
-         op.append((i, procedimiento))
-         i+=1
+         op.append((str(procedimiento.id), procedimiento))
      return op
+ 
+def Asignar_opc_motivo_fals_alarm():
+   procedimientos = Motivo_Alarma.objects.all()
+   op = [("0", "Seleccione Una Opcion")]
+   for procedimiento in procedimientos:
+       op.append((str(procedimiento.id), procedimiento.motivo))
+   return op
+
+def Asignar_opc_tipo_servicios():
+   procedimientos = Tipo_servicios.objects.all()
+   op = [("0", "Seleccione Una Opcion")]
+   for procedimiento in procedimientos:
+       op.append((str(procedimiento.id), procedimiento.serv_especiales))
+   return op
+
 
 # Form1
 class SelectorDivision(forms.Form):
@@ -154,14 +155,21 @@ class Formulario_atendido_no_efectuado(forms.Form):
 
 # Formulario Despliegue de Seguridad 
 class Formulario_despliegue_seguridad(forms.Form):
-     motv_despliegue = forms.ChoiceField(choices=Asignar_opc_motivo_despliegue(), widget=forms.Select(attrs={"class": "disable-first-option"}))
+     motv_despliegue = forms.ChoiceField(choices=Asignar_opc_motivo_despliegue(),label="Motivo Despliegue", widget=forms.Select(attrs={"class": "disable-first-option"}))
      descripcion = forms.CharField(max_length=50, required=False)
      material_utilizado = forms.CharField(max_length=50, required=False)
      status = forms.ChoiceField(choices=[("-", "Seleccione Una Opcion"), ("Culminado", "Culminado"), ("En Proceso", "En Proceso")], widget=forms.Select(attrs={"class": "disable-first-option"}))
 
 # Formulario Falsa Alarma 
 class Formulario_falsa_alarma(forms.Form):
-     motv_alarma = forms.CharField(max_length=50, required=False)
-     descripcion = forms.CharField(max_length=50, required=False)
-     material_utilizado = forms.CharField(max_length=50, required=False)
-     status = forms.ChoiceField(choices=[("-", "Seleccione Una Opcion"), ("Culminado", "Culminado"), ("En Proceso", "En Proceso")], widget=forms.Select(attrs={"class": "disable-first-option"}))
+   motv_alarma = forms.ChoiceField(choices=Asignar_opc_motivo_fals_alarm(),label="Motivo Alarma", widget=forms.Select(attrs={"class": "disable-first-option"}))
+   descripcion = forms.CharField(max_length=50, required=False)
+   material_utilizado = forms.CharField(max_length=50, required=False)
+   status = forms.ChoiceField(choices=[("-", "Seleccione Una Opcion"), ("Culminado", "Culminado"), ("En Proceso", "En Proceso")], widget=forms.Select(attrs={"class": "disable-first-option"}))
+   
+# Formulario Falsa Alarma 
+class Formulario_Servicios_Especiales(forms.Form):
+   tipo_servicio = forms.ChoiceField(choices=Asignar_opc_tipo_servicios(),label="Motivo Servicio", widget=forms.Select(attrs={"class": "disable-first-option"}))
+   descripcion = forms.CharField(max_length=50, required=False)
+   material_utilizado = forms.CharField(max_length=50, required=False)
+   status = forms.ChoiceField(choices=[("-", "Seleccione Una Opcion"), ("Culminado", "Culminado"), ("En Proceso", "En Proceso")], widget=forms.Select(attrs={"class": "disable-first-option"}))

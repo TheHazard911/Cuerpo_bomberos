@@ -78,6 +78,12 @@ class Tipo_servicios(models.Model):
   
   def __str__(self):
     return self.serv_especiales
+  
+class Motivo_Alarma(models.Model):
+  motivo = models.CharField(max_length=30)
+  
+  def __str__(self):
+    return self.motivo
 
 class Lesionados(models.Model):
   pass
@@ -180,13 +186,13 @@ class Fallecidos(models.Model):
 
 class Falsa_Alarma(models.Model):
   id_procedimiento = models.ForeignKey(Procedimientos, on_delete=models.CASCADE)
-  motivo_alarma = models.CharField(max_length=50)
+  motivo_alarma = models.ForeignKey(Motivo_Alarma, on_delete=models.CASCADE)
   descripcion = models.CharField(max_length=50)
   material_utilizado = models.CharField(max_length=50)
   status = models.CharField(max_length=20)
   
   def __str__(self):
-   return self.id_procedimiento.id_division.division + " -- " + self.motivo_alarma + " -- " + self.descripcion + " -- " + self.material_utilizado + " -- " + self.status
+   return self.id_procedimiento.id_division.division + " -- " + self.motivo_alarma.motivo + " -- " + self.descripcion + " -- " + self.material_utilizado + " -- " + self.status
  
 class Atenciones_Paramedicas(models.Model):
   pass
@@ -229,3 +235,4 @@ class Rescate_Animal(models.Model):
   
   def __str__(self):
     return self.id_rescate.tipo_rescate.tipo_rescate  + " -- " + self.especie + " -- " + self.descripcion
+

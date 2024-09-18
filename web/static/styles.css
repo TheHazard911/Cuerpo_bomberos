@@ -967,6 +967,11 @@ summary > * {
 }
 
 .graphic-statistics {
-  width: 40%;
-  height: 5vh;
+  display: flex;
+  justify-content: center;
+  width: auto;
+  height: auto;
+}
+.char{
+  width: 100%;
 }
