@@ -92,6 +92,13 @@
         <h4>Falsa Alarma</h4>
         <div class="form-style">{{ form_falsa_alarma }}</div>
       </div>
+      
+      <!-- Detalles de Procedimiento (Servicios_especiales) -->
+      <div class="data_form" id="serv_especiales" style="display: none">
+        <div class="line"></div>
+        <h4>Servicios Especiales</h4>
+        <div class="form-style">{{ form_servicios_especiales }}</div>
+      </div>
 
       <!-- Boton Enviar -->
       <button type="submit" id="button_submit" style="display: none">
@@ -168,6 +175,7 @@
       var desp_seguridad = document.getElementById("desp_seguridad");
       var atend_no_efect = document.getElementById("atend_no_efect");
       var falsa_alarm = document.getElementById("falsa_alarm");
+      var serv_especiales = document.getElementById("serv_especiales");
       var button_submit = document.getElementById("button_submit");
 
       if (this.value == "1") {
@@ -175,27 +183,35 @@
         guard_prev.style.display = "none";
         atend_no_efect.style.display = "none";
         desp_seguridad.style.display = "none";
+        falsa_alarm.style.display = "none";
+        serv_especiales.style.display = "none";
         abast_agua.style.display = "block";
         button_submit.style.display = "block";
       } else if (this.value == "2") {
         abast_agua.style.display = "none";
         guard_prev.style.display = "none";
+        falsa_alarm.style.display = "none";
         atend_no_efect.style.display = "none";
         desp_seguridad.style.display = "none";
+        serv_especiales.style.display = "none";
         apoyo_unid.style.display = "block";
         button_submit.style.display = "block";
       } else if (this.value == "3") {
         abast_agua.style.display = "none";
         apoyo_unid.style.display = "none";
-        guard_prev.style.display = "block";
         atend_no_efect.style.display = "none";
         desp_seguridad.style.display = "none";
+        falsa_alarm.style.display = "none";
+        serv_especiales.style.display = "none";
+        guard_prev.style.display = "block";
         button_submit.style.display = "block";
       } else if (this.value == "4") {
         abast_agua.style.display = "none";
         apoyo_unid.style.display = "none";
         guard_prev.style.display = "none";
         desp_seguridad.style.display = "none";
+        falsa_alarm.style.display = "none";
+        serv_especiales.style.display = "none";
         atend_no_efect.style.display = "block";
         button_submit.style.display = "block";
       } 
@@ -204,6 +220,9 @@
         apoyo_unid.style.display = "none";
         guard_prev.style.display = "none";
         atend_no_efect.style.display = "none";
+        falsa_alarm.style.display = "none";
+        serv_especiales.style.display = "none";
+        
         desp_seguridad.style.display = "block";
         button_submit.style.display = "block";
       } 
@@ -214,6 +233,17 @@
         atend_no_efect.style.display = "none";
         desp_seguridad.style.display = "none";
         falsa_alarm.style.display = "block";
+        button_submit.style.display = "block";
+        serv_especiales.style.display = "none";
+      } 
+      else if (this.value == "9") {
+        abast_agua.style.display = "none";
+        apoyo_unid.style.display = "none";
+        guard_prev.style.display = "none";
+        atend_no_efect.style.display = "none";
+        desp_seguridad.style.display = "none";
+        falsa_alarm.style.display = "none";
+        serv_especiales.style.display = "block";
         button_submit.style.display = "block";
       } 
       else {

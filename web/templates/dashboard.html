@@ -57,25 +57,22 @@
     </section>
   </div>
   <div class="graphic-statistics">
-    <canvas id="myChart"></canvas>
+    <canvas id="myChart" class=""></canvas>
   </div>
   <div class="div-analytics"></div>
 </div>
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
-  const ctx = document.getElementById("myChart");
+  const ctx = document.getElementById('myChart');
 
   new Chart(ctx, {
-    type: "bar",
+    type: 'bar',
     data: {
-      labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
-      datasets: [
-        {
-          label: "# of Votes",
-          data: [12, 19, 3, 5, 2, 3],
-          borderWidth: 1
-        }
-      ]
+      labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+      datasets: [{
+        label: '# of Votes',
+        data: [12, 19, 3, 5, 2, 3],
+        borderWidth: 1
+      }]
     },
     options: {
       scales: {

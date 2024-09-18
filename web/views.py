@@ -108,6 +108,9 @@ def View_Procedimiento(request):
         guard_prev = Formulario_guardia_prevencion(request.POST, prefix='guard_prev')   
         atend_no_efec = Formulario_atendido_no_efectuado(request.POST, prefix='atend_no_efec')   
         desp_seguridad = Formulario_despliegue_seguridad(request.POST, prefix='desp_seguridad')   
+        fals_alarm = Formulario_falsa_alarma(request.POST, prefix='fals_alarm')   
+        serv_especial = Formulario_Servicios_Especiales(request.POST, prefix='serv_especial')   
+        
 
         # Imprimir request.POST para depuración
 
@@ -278,9 +281,51 @@ def View_Procedimiento(request):
                 desp_seguridad.save()
             
                 return redirect('/dashboard/')
+            
+            if tipo_procedimiento == "6" and fals_alarm.is_valid():          
+                descripcion = fals_alarm.cleaned_data["descripcion"]
+                material_utilizado = fals_alarm.cleaned_data["material_utilizado"]
+                status = fals_alarm.cleaned_data["status"]
+                motv_alarma = fals_alarm.cleaned_data["motv_alarma"]
                 
-            # agregar el numero 6 falsa alarma     
-        
+                Tipo_Motivo_instance = Motivo_Alarma.objects.get(id=motv_alarma)
+                print("Datos Obtenidos")
+                
+                nueva_falsa_alarma = Falsa_Alarma(
+                    id_procedimiento=nuevo_procedimiento,
+                    motivo_alarma = Tipo_Motivo_instance,
+                    descripcion=descripcion,
+                    material_utilizado=material_utilizado,
+                    status=status
+                )
+                print(nueva_falsa_alarma)
+                nueva_falsa_alarma.save()
+            
+                return redirect('/dashboard/')
+                
+            print(tipo_procedimiento)
+            if tipo_procedimiento == "9" and serv_especial.is_valid():          
+                descripcion = serv_especial.cleaned_data["descripcion"]
+                material_utilizado = serv_especial.cleaned_data["material_utilizado"]
+                status = serv_especial.cleaned_data["status"]
+                tipo_servicio = serv_especial.cleaned_data["tipo_servicio"]
+                
+                print(tipo_servicio)
+                tipo_servicio_instance = Tipo_servicios.objects.get(id=tipo_servicio)
+                print("Datos Obtenidos")
+                
+                nuevo_Servicio_especial = Servicios_Especiales(
+                    id_procedimientos=nuevo_procedimiento,
+                    tipo_servicio = tipo_servicio_instance,
+                    descripcion=descripcion,
+                    material_utilizado=material_utilizado,
+                    status=status
+                )
+                print(nuevo_Servicio_especial)
+                nuevo_Servicio_especial.save()
+            
+                return redirect('/dashboard/')
+         
     else:
         form = SelectorDivision(prefix='form1')
         form2 = SeleccionarInfo(prefix='form2')
@@ -291,6 +336,8 @@ def View_Procedimiento(request):
         guard_prev = Formulario_guardia_prevencion(prefix='guard_prev')
         atend_no_efec = Formulario_atendido_no_efectuado(prefix='atend_no_efec')
         desp_seguridad = Formulario_despliegue_seguridad(prefix='desp_seguridad')
+        fals_alarm = Formulario_falsa_alarma(prefix='fals_alarm')
+        serv_especial = Formulario_Servicios_Especiales(prefix='serv_especial')
 
     return render(request, "procedimientos.html", {
         "user": user,
@@ -307,6 +354,8 @@ def View_Procedimiento(request):
         "form_guardia_prevencion": guard_prev,
         "form_atendido_no_efectuado": atend_no_efec,
         "form_despliegue_seguridad": desp_seguridad,
+        "form_falsa_alarma": fals_alarm,
+        "form_servicios_especiales": serv_especial,
     })
     
 # Vista de la Seccion de Estadisticas
@@ -324,7 +373,7 @@ def View_Estadisticas(request):
     
 # Vista de la Seccion de Operaciones
 def View_Operaciones(request):
-    user = request.session.get('user')    
+    user = request.session.get('user')   
     if not user:
             return redirect('/')
         
@@ -548,9 +597,6 @@ def View_psicologia(request):
         "apellidos": user["apellidos"],
         "datos": datos,
     })
-
-
-
 
 # Funcion para eliminar (NO TOCAR)
 # def eliminar_procedimiento(request):
