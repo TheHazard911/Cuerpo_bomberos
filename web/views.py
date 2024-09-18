@@ -303,14 +303,12 @@ def View_Procedimiento(request):
             
                 return redirect('/dashboard/')
                 
-            print(tipo_procedimiento)
             if tipo_procedimiento == "9" and serv_especial.is_valid():          
                 descripcion = serv_especial.cleaned_data["descripcion"]
                 material_utilizado = serv_especial.cleaned_data["material_utilizado"]
                 status = serv_especial.cleaned_data["status"]
                 tipo_servicio = serv_especial.cleaned_data["tipo_servicio"]
                 
-                print(tipo_servicio)
                 tipo_servicio_instance = Tipo_servicios.objects.get(id=tipo_servicio)
                 print("Datos Obtenidos")
                 
