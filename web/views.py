@@ -110,7 +110,11 @@ def View_Procedimiento(request):
         desp_seguridad = Formulario_despliegue_seguridad(request.POST, prefix='desp_seguridad')   
         fals_alarm = Formulario_falsa_alarma(request.POST, prefix='fals_alarm')   
         serv_especial = Formulario_Servicios_Especiales(request.POST, prefix='serv_especial')   
+        form_fallecido = Formulario_Fallecidos(request.POST, prefix='form_fallecido')   
+        rescate_form = Formulario_Rescate(request.POST, prefix='rescate_form')   
         
+        rescate_form_persona = Formulario_Rescate_Persona(request.POST, prefix='rescate_form_persona')   
+        rescate_form_animal = Formulario_Rescate_Animal(request.POST, prefix='rescate_form_animal')   
 
         # Imprimir request.POST para depuración
 
@@ -324,6 +328,93 @@ def View_Procedimiento(request):
             
                 return redirect('/dashboard/')
          
+            if tipo_procedimiento == "10" and rescate_form.is_valid():  
+                material_utilizado = rescate_form.cleaned_data["material_utilizado"]
+                status = rescate_form.cleaned_data["status"]
+                id_tipo_rescate = rescate_form.cleaned_data["tipo_rescate"]
+                
+                
+                tipo_rescate_instance = Tipo_Rescate.objects.get(id=id_tipo_rescate)
+                
+                print("Datos Obtenidos")
+                
+                nuevo_proc_rescate = Rescate(
+                    id_procedimientos = nuevo_procedimiento,
+                    material_utilizado=material_utilizado,
+                    tipo_rescate = tipo_rescate_instance,
+                    status=status
+                )
+                print(nuevo_proc_rescate)
+                nuevo_proc_rescate.save()
+                
+                if id_tipo_rescate == "1" and rescate_form_animal.is_valid():
+                    especie = rescate_form_animal.cleaned_data["especie"]
+                    descripcion = rescate_form_animal.cleaned_data["descripcion"]
+
+                    new_rescate_animal = Rescate_Animal(
+                        id_rescate = nuevo_proc_rescate,
+                        especie = especie,
+                        descripcion = descripcion,
+                    )
+                
+                    print(new_rescate_animal)
+                    new_rescate_animal.save()
+                    
+                    return redirect('/dashboard/')
+                
+                if id_tipo_rescate == "2" and rescate_form_persona.is_valid():
+                    nombre_persona = rescate_form_persona.cleaned_data["nombre_persona"]
+                    apellido_persona = rescate_form_persona.cleaned_data["apellido_persona"]
+                    cedula_persona = rescate_form_persona.cleaned_data["cedula_persona"]
+                    edad_persona = rescate_form_persona.cleaned_data["edad_persona"]
+                    sexo_persona = rescate_form_persona.cleaned_data["sexo_persona"]
+                    descripcion = rescate_form_persona.cleaned_data["descripcion"]
+
+                    new_rescate_persona = Rescate_Persona(
+                        id_rescate = nuevo_proc_rescate,
+                        nombre = nombre_persona,
+                        apellidos = apellido_persona,
+                        cedula = cedula_persona,
+                        edad = edad_persona,
+                        sexo = sexo_persona,
+                        descripcion = descripcion,
+                    )
+                
+                    print(new_rescate_persona)
+                    new_rescate_persona.save()
+                    
+                    return redirect('/dashboard/')
+         
+            if tipo_procedimiento == "12" and form_fallecido.is_valid():  
+                motivo_fallecimiento = form_fallecido.cleaned_data["motivo_fallecimiento"]       
+                nom_fallecido = form_fallecido.cleaned_data["nom_fallecido"]
+                apellido_fallecido = form_fallecido.cleaned_data["apellido_fallecido"]
+                cedula_fallecido = form_fallecido.cleaned_data["cedula_fallecido"]
+                edad = form_fallecido.cleaned_data["edad"]
+                sexo = form_fallecido.cleaned_data["sexo"]
+                descripcion = form_fallecido.cleaned_data["descripcion"]
+                material_utilizado = form_fallecido.cleaned_data["material_utilizado"]
+                status = form_fallecido.cleaned_data["status"]
+                
+                print("Datos Obtenidos")
+                
+                nuevo_proc_fallecido = Fallecidos(
+                    id_procedimiento = nuevo_procedimiento,
+                    motivo_fallecimiento = motivo_fallecimiento,
+                    nombres = nom_fallecido,
+                    apellidos = apellido_fallecido,
+                    cedula = cedula_fallecido,
+                    edad = edad,
+                    sexo = sexo,
+                    descripcion=descripcion,
+                    material_utilizado=material_utilizado,
+                    status=status
+                )
+                print(nuevo_proc_fallecido)
+                nuevo_proc_fallecido.save()
+            
+                return redirect('/dashboard/')
+         
     else:
         form = SelectorDivision(prefix='form1')
         form2 = SeleccionarInfo(prefix='form2')
@@ -336,6 +427,12 @@ def View_Procedimiento(request):
         desp_seguridad = Formulario_despliegue_seguridad(prefix='desp_seguridad')
         fals_alarm = Formulario_falsa_alarma(prefix='fals_alarm')
         serv_especial = Formulario_Servicios_Especiales(prefix='serv_especial')
+        form_fallecido = Formulario_Fallecidos(prefix='form_fallecido')
+        rescate_form = Formulario_Rescate(prefix='rescate_form')   
+        
+        rescate_form_persona = Formulario_Rescate_Persona(prefix='rescate_form_persona')   
+        rescate_form_animal = Formulario_Rescate_Animal(prefix='rescate_form_animal')   
+
 
     return render(request, "procedimientos.html", {
         "user": user,
@@ -354,6 +451,10 @@ def View_Procedimiento(request):
         "form_despliegue_seguridad": desp_seguridad,
         "form_falsa_alarma": fals_alarm,
         "form_servicios_especiales": serv_especial,
+        "form_fallecido": form_fallecido,
+        "rescate_form": rescate_form,
+        "rescate_form_animal": rescate_form_animal,
+        "rescate_form_persona": rescate_form_persona,
     })
     
 # Vista de la Seccion de Estadisticas
