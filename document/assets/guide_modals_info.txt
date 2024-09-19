@@ -1,0 +1,174 @@
+Si decides manejar las ventanas modales específicas para cada tipo de procedimiento y utilizar JavaScript para controlar cuál mostrar, puedes hacerlo de una manera más sencilla y directa. Este enfoque implica tener una ventana modal para cada tipo de procedimiento y mostrarla o esconderla dinámicamente según el tipo que corresponda.
+
+A continuación te muestro cómo podrías hacerlo paso a paso.
+
+Paso 1: Crear las ventanas modales en el HTML
+Debes definir una ventana modal para cada tipo de procedimiento: una para Abastecimiento_agua, una para Apoyo_Unidades, y otra para Guardia_prevencion.
+
+Aquí te dejo un ejemplo básico de cómo crear las tres ventanas modales. Cada ventana contiene los campos específicos del tipo de procedimiento correspondiente.
+
+html
+Copiar código
+<!-- Modal para Abastecimiento de Agua -->
+<div class="modal fade" id="modal-abastecimiento-agua" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Detalles Abastecimiento de Agua</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p><strong>Nombre:</strong> <span id="nombre-abastecimiento"></span></p>
+        <p><strong>Cantidad de Litros:</strong> <span id="ltrs_agua"></span></p>
+        <p><strong>Personas Atendidas:</strong> <span id="personas_atendidas"></span></p>
+        <p><strong>Descripción:</strong> <span id="descripcion-abastecimiento"></span></p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal para Apoyo de Unidades -->
+<div class="modal fade" id="modal-apoyo-unidades" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Detalles Apoyo de Unidades</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p><strong>Unidad Apoyada:</strong> <span id="unidad_apoyada"></span></p>
+        <p><strong>Material Utilizado:</strong> <span id="material_utilizado-apoyo"></span></p>
+        <p><strong>Descripción:</strong> <span id="descripcion-apoyo"></span></p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal para Guardia Prevención -->
+<div class="modal fade" id="modal-guardia-prevencion" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Detalles Guardia de Prevención</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p><strong>Motivo:</strong> <span id="motivo-prevencion"></span></p>
+        <p><strong>Descripción:</strong> <span id="descripcion-prevencion"></span></p>
+        <p><strong>Material Utilizado:</strong> <span id="material_utilizado-prevencion"></span></p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+      </div>
+    </div>
+  </div>
+</div>
+Paso 2: Botones para abrir la ventana modal
+En el listado de procedimientos, tendrás un botón que, al ser presionado, activará el modal correspondiente basado en el tipo de procedimiento.
+
+html
+Copiar código
+<ul>
+  {% for procedimiento in procedimientos %}
+    <li>
+      <button type="button" class="btn btn-info" onclick="mostrarModal('{{ procedimiento.tipo }}', {{ procedimiento.id }})">
+        Ver detalles de {{ procedimiento.nombre }}
+      </button>
+    </li>
+  {% endfor %}
+</ul>
+Paso 3: Código JavaScript para mostrar el modal correcto
+Necesitas escribir una función JavaScript que, dado el tipo de procedimiento, abra la ventana modal correspondiente y cargue los datos dentro de ella. Aquí te dejo un ejemplo básico de cómo hacerlo.
+
+html
+Copiar código
+<script>
+  // Función para abrir el modal correcto basado en el tipo de procedimiento
+  function mostrarModal(tipo, id) {
+    // Hacer una petición para obtener los detalles del procedimiento
+    fetch(`/procedimiento-detalle/${id}/`)
+      .then(response => response.json())
+      .then(data => {
+        // Basado en el tipo, llenar los datos en la ventana modal correcta
+        if (tipo === 'abastecimiento_agua') {
+          document.getElementById('nombre-abastecimiento').innerText = data.nombres;
+          document.getElementById('ltrs_agua').innerText = data.ltrs_agua;
+          document.getElementById('personas_atendidas').innerText = data.personas_atendidas;
+          document.getElementById('descripcion-abastecimiento').innerText = data.descripcion;
+          $('#modal-abastecimiento-agua').modal('show');
+        } else if (tipo === 'apoyo_unidades') {
+          document.getElementById('unidad_apoyada').innerText = data.unidad_apoyada;
+          document.getElementById('material_utilizado-apoyo').innerText = data.material_utilizado;
+          document.getElementById('descripcion-apoyo').innerText = data.descripcion;
+          $('#modal-apoyo-unidades').modal('show');
+        } else if (tipo === 'guardia_prevencion') {
+          document.getElementById('motivo-prevencion').innerText = data.motivo;
+          document.getElementById('descripcion-prevencion').innerText = data.descripcion;
+          document.getElementById('material_utilizado-prevencion').innerText = data.material_utilizado;
+          $('#modal-guardia-prevencion').modal('show');
+        }
+      })
+      .catch(error => console.error('Error al cargar los detalles:', error));
+  }
+</script>
+Paso 4: Crear la vista que envía los datos al frontend (en JSON)
+En tu backend (en la vista de Django), necesitas crear una vista que devuelva los detalles del procedimiento en formato JSON. Esto se hace para que el fetch en JavaScript pueda obtener los datos dinámicamente.
+
+python
+Copiar código
+from django.http import JsonResponse
+from .models import Abastecimiento_agua, Apoyo_Unidades, Guardia_prevencion
+
+def procedimiento_detalle_json(request, procedimiento_id):
+    procedimiento = Procedimientos.objects.get(id=procedimiento_id)
+    
+    # Verificar el tipo de procedimiento y devolver los datos correspondientes
+    if procedimiento.content_type.model == 'abastecimiento_agua':
+        detalle = Abastecimiento_agua.objects.get(id=procedimiento.object_id)
+        data = {
+            'nombres': detalle.nombres,
+            'ltrs_agua': detalle.ltrs_agua,
+            'personas_atendidas': detalle.personas_atendidas,
+            'descripcion': detalle.descripcion
+        }
+    elif procedimiento.content_type.model == 'apoyo_unidades':
+        detalle = Apoyo_Unidades.objects.get(id=procedimiento.object_id)
+        data = {
+            'unidad_apoyada': detalle.unidad_apoyada,
+            'material_utilizado': detalle.material_utilizado,
+            'descripcion': detalle.descripcion
+        }
+    elif procedimiento.content_type.model == 'guardia_prevencion':
+        detalle = Guardia_prevencion.objects.get(id=procedimiento.object_id)
+        data = {
+            'motivo': detalle.id_motivo_prevencion.motivo,
+            'descripcion': detalle.descripcion,
+            'material_utilizado': detalle.material_utilizado
+        }
+    
+    return JsonResponse(data)
+Paso 5: Ruta para la vista JSON
+Debes agregar la ruta en urls.py para que puedas acceder a la vista que proporciona los datos del procedimiento en formato JSON.
+
+python
+Copiar código
+from django.urls import path
+from .views import procedimiento_detalle_json
+
+urlpatterns = [
+    path('procedimiento-detalle/<int:procedimiento_id>/', procedimiento_detalle_json, name='procedimiento-detalle-json'),
+]
+Conclusión
+Con este enfoque, cada vez que se presiona un botón, JavaScript hace una llamada AJAX (usando fetch) para obtener los datos del procedimiento desde el backend y luego muestra la ventana modal correspondiente. Esto te permite mantener tres ventanas modales separadas y decidir cuál mostrar según el tipo de procedimiento, sin duplicar demasiado el código.
