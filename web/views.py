@@ -40,6 +40,7 @@ def Dashboard(request):
     if not user:
         return redirect('/')
     
+    otros_municipios = Procedimientos.objects.filter(id_parroquia = 0).count()
     concordia = Procedimientos.objects.filter(id_parroquia = 1).count()
     pedro_m = Procedimientos.objects.filter(id_parroquia = 2).count()
     san_juan = Procedimientos.objects.filter(id_parroquia = 3).count()
@@ -54,6 +55,7 @@ def Dashboard(request):
         "pedro_m": pedro_m,
         "san_juan": san_juan,
         "san_sebastian": san_sebastian,
+        "otros_municipios": otros_municipios,
     })
 
 # Vista de archivo para hacer pruebas de backend
@@ -708,3 +710,74 @@ def View_psicologia(request):
 #             return JsonResponse({'success': True})
 #         except Exception as e:
 #             return JsonResponse({'success': False, 'error': str(e)})
+
+def obtener_procedimiento(request, id):
+    procedimiento = get_object_or_404(Procedimientos, pk=id)
+    data = {
+        'id': procedimiento.id,
+        'solicitante': f"{procedimiento.id_solicitante.jerarquia} {procedimiento.id_solicitante.nombres} {procedimiento.id_solicitante.apellidos}",
+        'jefe_comision': f"{procedimiento.id_jefe_comision.jerarquia} {procedimiento.id_jefe_comision.nombres} {procedimiento.id_jefe_comision.apellidos}",
+        'unidad': procedimiento.unidad,
+        'efectivos': procedimiento.efectivos_enviados,
+        'parroquia': procedimiento.id_parroquia.parroquia,
+        'municipio': procedimiento.id_municipio.municipio,
+        'direccion': procedimiento.direccion,
+        'fecha': procedimiento.fecha,
+        'hora': procedimiento.hora,
+        'tipo_procedimiento': procedimiento.id_tipo_procedimiento.tipo_procedimiento,
+    }
+    
+    
+    if str(procedimiento.id_tipo_procedimiento.id) == "1":
+        detalle_procedimiento = get_object_or_404(Abastecimiento_agua, id_procedimiento=id)
+        
+        data = dict(data,
+                    tipo_servicio = detalle_procedimiento.id_tipo_servicio.nombre_institucion,
+                    nombres = detalle_procedimiento.nombres,
+                    apellidos = detalle_procedimiento.apellidos,
+                    cedula = detalle_procedimiento.cedula,
+                    ltrs_agua = detalle_procedimiento.ltrs_agua,
+                    personas_atendidas = detalle_procedimiento.personas_atendidas,
+                    descripcion = detalle_procedimiento.descripcion,
+                    material_utilizado = detalle_procedimiento.material_utilizado,
+                    status = detalle_procedimiento.status)
+    
+    if str(procedimiento.id_tipo_procedimiento.id) == "2":
+        detalle_procedimiento = get_object_or_404(Apoyo_Unidades, id_procedimiento=id)
+        data = dict(data,
+                    tipo_apoyo = detalle_procedimiento.id_tipo_apoyo.tipo_apoyo,
+                    unidad_apoyada = detalle_procedimiento.unidad_apoyada,
+                    descripcion = detalle_procedimiento.descripcion,
+                    material_utilizado = detalle_procedimiento.material_utilizado,
+                    status = detalle_procedimiento.status,
+                    )
+        
+    if str(procedimiento.id_tipo_procedimiento.id) == "3":
+        detalle_procedimiento = get_object_or_404(Guardia_prevencion, id_procedimiento=id)
+        data = dict(data,
+                    motivo_prevencion = detalle_procedimiento.id_motivo_prevencion.motivo,
+                    descripcion = detalle_procedimiento.descripcion,
+                    material_utilizado = detalle_procedimiento.material_utilizado,
+                    status = detalle_procedimiento.status,
+                    )
+        
+    if str(procedimiento.id_tipo_procedimiento.id) == "4":
+        detalle_procedimiento = get_object_or_404(Atendido_no_Efectuado, id_procedimiento=id)
+        data = dict(data,
+                    descripcion = detalle_procedimiento.descripcion,
+                    material_utilizado = detalle_procedimiento.material_utilizado,
+                    status = detalle_procedimiento.status,
+                    )
+        
+    if str(procedimiento.id_tipo_procedimiento.id) == "5":
+        detalle_procedimiento = get_object_or_404(Despliegue_Seguridad, id_procedimiento=id)
+        data = dict(data,
+                    motivo_despliegue = detalle_procedimiento. motivo_despliegue.motivo,
+                    descripcion = detalle_procedimiento.descripcion,
+                    material_utilizado = detalle_procedimiento.material_utilizado,
+                    status = detalle_procedimiento.status,
+                    )
+        
+    # nombre_diccionario = dict(nombre_diccionario, key=valor, kay=valor)
+    
+    return JsonResponse(data)
