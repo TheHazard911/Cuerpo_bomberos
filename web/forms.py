@@ -64,6 +64,13 @@ def Asignar_opc_tipo_servicios():
        op.append((str(procedimiento.id), procedimiento.serv_especiales))
    return op
 
+def Asignar_opc_tipo_rescate():
+   procedimientos = Tipo_Rescate.objects.all()
+   op = [("0", "Seleccione Una Opcion")]
+   for procedimiento in procedimientos:
+       op.append((str(procedimiento.id), procedimiento.tipo_rescate))
+   return op
+
 
 # Form1
 class SelectorDivision(forms.Form):
@@ -167,9 +174,39 @@ class Formulario_falsa_alarma(forms.Form):
    material_utilizado = forms.CharField(max_length=50, required=False)
    status = forms.ChoiceField(choices=[("-", "Seleccione Una Opcion"), ("Culminado", "Culminado"), ("En Proceso", "En Proceso")], widget=forms.Select(attrs={"class": "disable-first-option"}))
    
-# Formulario Falsa Alarma 
+# Formulario Servicios Especiales
 class Formulario_Servicios_Especiales(forms.Form):
    tipo_servicio = forms.ChoiceField(choices=Asignar_opc_tipo_servicios(),label="Motivo Servicio", widget=forms.Select(attrs={"class": "disable-first-option"}))
    descripcion = forms.CharField(max_length=50, required=False)
    material_utilizado = forms.CharField(max_length=50, required=False)
    status = forms.ChoiceField(choices=[("-", "Seleccione Una Opcion"), ("Culminado", "Culminado"), ("En Proceso", "En Proceso")], widget=forms.Select(attrs={"class": "disable-first-option"}))
+
+# Formulatio Fallecidos
+class Formulario_Fallecidos(forms.Form):
+    motivo_fallecimiento = forms.CharField(max_length=50, required=False)
+    nom_fallecido = forms.CharField(max_length=40, required=False)
+    apellido_fallecido = forms.CharField(max_length=40, required=False)
+    cedula_fallecido = forms.CharField(max_length=10, required=False)
+    edad = forms.CharField(max_length=3, required=False)
+    sexo = forms.CharField(max_length=10, required=False)
+    descripcion = forms.CharField(max_length=50, required=False)
+    material_utilizado = forms.CharField(max_length=50, required=False)
+    status = forms.ChoiceField(choices=[("-", "Seleccione Una Opcion"), ("Culminado", "Culminado"), ("En Proceso", "En Proceso")], widget=forms.Select(attrs={"class": "disable-first-option"}))
+
+# Formulario Rescate
+class Formulario_Rescate(forms.Form):
+    material_utilizado = forms.CharField(max_length=50, required=False)
+    status = forms.ChoiceField(choices=[("-", "Seleccione Una Opcion"), ("Culminado", "Culminado"), ("En Proceso", "En Proceso")], widget=forms.Select(attrs={"class": "disable-first-option"}))
+    tipo_rescate = forms.ChoiceField(choices=Asignar_opc_tipo_rescate, widget=forms.Select(attrs={"class": "disable-first-option"}))
+    
+class Formulario_Rescate_Persona(forms.Form):
+    nombre_persona = forms.CharField(max_length=30, required=False)
+    apellido_persona = forms.CharField(max_length=30, required=False)
+    cedula_persona = forms.CharField(max_length=10, required=False)
+    edad_persona = forms.CharField(max_length=3, required=False)
+    sexo_persona = forms.CharField(max_length=10, required=False)
+    descripcion = forms.CharField(max_length=40, required=False)
+    
+class Formulario_Rescate_Animal(forms.Form):
+    especie = forms.CharField(max_length=30, required=False)
+    descripcion = forms.CharField(max_length=40, required=False)

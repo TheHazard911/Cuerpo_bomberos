@@ -231,7 +231,7 @@ class Rescate_Persona(models.Model):
 class Rescate_Animal(models.Model):
   id_rescate = models.ForeignKey(Rescate, on_delete=models.CASCADE)
   especie = models.CharField(max_length=40)
-  descripcion = models.CharField(max_length=40)
+  descripcion = models.CharField(max_length=40, )
   
   def __str__(self):
     return self.id_rescate.tipo_rescate.tipo_rescate  + " -- " + self.especie + " -- " + self.descripcion
