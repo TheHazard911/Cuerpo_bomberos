@@ -35,4 +35,5 @@ urlpatterns = [
     path('enfermeria/', View_enfermeria),
     path('serviciosmedicos/', View_serviciosmedicos),
     path('psicologia/', View_psicologia),
+    path('api/procedimientos/<int:id>/', obtener_procedimiento, name='obtener_procedimiento'),
 ]
