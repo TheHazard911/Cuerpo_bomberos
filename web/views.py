@@ -777,7 +777,66 @@ def obtener_procedimiento(request, id):
                     material_utilizado = detalle_procedimiento.material_utilizado,
                     status = detalle_procedimiento.status,
                     )
+    
+    if str(procedimiento.id_tipo_procedimiento.id) == "6":
+        detalle_procedimiento = get_object_or_404(Falsa_Alarma, id_procedimiento=id)
+        data = dict(data,
+                    motivo_alarma = detalle_procedimiento.motivo_alarma.motivo,
+                    descripcion = detalle_procedimiento.descripcion,
+                    material_utilizado = detalle_procedimiento.material_utilizado,
+                    status = detalle_procedimiento.status,
+                    )
+   
+    if str(procedimiento.id_tipo_procedimiento.id) == "9":
+        detalle_procedimiento = get_object_or_404(Servicios_Especiales, id_procedimientos=id)
+        data = dict(data,
+                    tipo_servicio = detalle_procedimiento.tipo_servicio.serv_especiales,
+                    descripcion = detalle_procedimiento.descripcion,
+                    material_utilizado = detalle_procedimiento.material_utilizado,
+                    status = detalle_procedimiento.status,
+                    )
+    
+    if str(procedimiento.id_tipo_procedimiento.id) == "10":
+        detalle_procedimiento = get_object_or_404(Rescate, id_procedimientos=id)
+        data = dict(data,
+                    material_utilizado = detalle_procedimiento.material_utilizado,
+                    status = detalle_procedimiento.status,
+                    tipo_rescate = detalle_procedimiento.tipo_rescate.tipo_rescate,
+                    )
+    
+        if detalle_procedimiento.tipo_rescate.tipo_rescate == "Animal":
+            detalle_tipo_rescate = get_object_or_404(Rescate_Animal, id_rescate=detalle_procedimiento.id)
+            print(detalle_tipo_rescate)
+            data = dict(data,
+                        especie = detalle_tipo_rescate.especie, 
+                        descripcion = detalle_tipo_rescate.descripcion,
+                        )
+            
+        if detalle_procedimiento.tipo_rescate.tipo_rescate == "Persona":
+            detalle_tipo_rescate = get_object_or_404(Rescate_Persona, id_rescate=detalle_procedimiento.id)
+            data = dict(data,
+                        nombres = detalle_tipo_rescate.nombre, 
+                        apellidos = detalle_tipo_rescate.apellidos, 
+                        cedula = detalle_tipo_rescate.cedula,
+                        edad = detalle_tipo_rescate.edad,
+                        sexo = detalle_tipo_rescate.sexo,
+                        descripcion = detalle_tipo_rescate.descripcion,
+                        )
         
+    if str(procedimiento.id_tipo_procedimiento.id) == "12":
+        detalle_procedimiento = get_object_or_404(Fallecidos, id_procedimiento=id)
+        data = dict(data,
+                    motivo_fallecimiento = detalle_procedimiento.motivo_fallecimiento,
+                    nombres = detalle_procedimiento.nombres,
+                    apellidos = detalle_procedimiento.apellidos,
+                    cedula = detalle_procedimiento.cedula,
+                    edad = detalle_procedimiento.edad,
+                    sexo = detalle_procedimiento.sexo,
+                    descripcion = detalle_procedimiento.descripcion,
+                    material_utilizado = detalle_procedimiento.material_utilizado,
+                    status = detalle_procedimiento.status,
+                    )
+
     # nombre_diccionario = dict(nombre_diccionario, key=valor, kay=valor)
     
     return JsonResponse(data)
