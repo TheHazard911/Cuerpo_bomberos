@@ -71,6 +71,12 @@ def Asignar_opc_tipo_rescate():
        op.append((str(procedimiento.id), procedimiento.tipo_rescate))
    return op
 
+def Asignar_opc_tipo_incendio():
+   procedimientos = Tipo_Incendio.objects.all()
+   op = [("0", "Seleccione Una Opcion")]
+   for procedimiento in procedimientos:
+       op.append((str(procedimiento.id), procedimiento.tipo_incendio))
+   return op
 
 # Form1
 class SelectorDivision(forms.Form):
@@ -210,3 +216,26 @@ class Formulario_Rescate_Persona(forms.Form):
 class Formulario_Rescate_Animal(forms.Form):
     especie = forms.CharField(max_length=30, required=False)
     descripcion = forms.CharField(max_length=40, required=False)
+
+# Formulario de Incendio
+class Formulario_Incendio(forms.Form):
+    tipo_incendio = forms.ChoiceField(choices=Asignar_opc_tipo_incendio, widget=forms.Select(attrs={"class": "disable-first-option"}))
+    descripcion = forms.CharField(max_length=30, required=False)
+    material_utilizado = forms.CharField(max_length=30, required=False)
+    status = forms.ChoiceField(choices=[("-", "Seleccione Una Opcion"), ("Culminado", "Culminado"), ("En Proceso", "En Proceso")], widget=forms.Select(attrs={"class": "disable-first-option"}))
+    check_agregar_persona = forms.BooleanField()
+    check_agregar_vehiculo = forms.BooleanField()
+    
+class Formulario_Persona_Presente(forms.Form):
+    nombre = forms.CharField(max_length=30, required=False)
+    apellido = forms.CharField(max_length=30, required=False)
+    cedula = forms.CharField(max_length=10, required=False)
+    edad = forms.CharField(max_length=3, required=False)
+
+class Formulario_Detalles_Vehiculos(forms.Form):
+    modelo = forms.CharField(max_length=40, required=40)
+    marca = forms.CharField(max_length=40, required=40)
+    color = forms.CharField(max_length=40, required=40)
+    año = forms.CharField(max_length=40, required=40)
+    placas = forms.CharField(max_length=40, required=40)
+    

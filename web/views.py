@@ -64,7 +64,6 @@ def Prueba(request):
     if request.method == 'POST':
         form = Selecc_Tipo_Procedimiento(request.POST)
         if form.is_valid():
-            
             usuarios = Usuarios.objects.all()
             divisiones = Divisiones.objects.all()
             procedimientos = Procedimientos.objects.all()
@@ -76,7 +75,7 @@ def Prueba(request):
             "usuarios": usuarios,
             "divisiones": divisiones,
             "procedimientos": procedimientos,
-            "form": formulario_abastecimiento_agua(),
+            "form": Formulario_Detalles_Vehiculos(),
             })
     else:
         form = Selecc_Tipo_Procedimiento(),
@@ -89,7 +88,7 @@ def Prueba(request):
             "usuarios": usuarios,
             "divisiones": divisiones,
             "procedimientos": procedimientos,
-            "form": formulario_abastecimiento_agua(),
+            "form": Formulario_Detalles_Vehiculos(),
             })
   
 # Vista de archivo para hacer pruebas de backend
@@ -113,7 +112,12 @@ def View_Procedimiento(request):
         fals_alarm = Formulario_falsa_alarma(request.POST, prefix='fals_alarm')   
         serv_especial = Formulario_Servicios_Especiales(request.POST, prefix='serv_especial')   
         form_fallecido = Formulario_Fallecidos(request.POST, prefix='form_fallecido')   
-        rescate_form = Formulario_Rescate(request.POST, prefix='rescate_form')   
+        rescate_form = Formulario_Rescate(request.POST, prefix='rescate_form')
+        incendio_form = Formulario_Incendio(request.POST, prefix='incendio_form')
+        
+        
+        persona_presente_form = Formulario_Persona_Presente(request.POST, prefix='persona_presente_form')
+        detalles_vehiculo_form = Formulario_Detalles_Vehiculos(request.POST, prefix='detalles_vehiculo_form')
         
         rescate_form_persona = Formulario_Rescate_Persona(request.POST, prefix='rescate_form_persona')   
         rescate_form_animal = Formulario_Rescate_Animal(request.POST, prefix='rescate_form_animal')   
@@ -387,6 +391,69 @@ def View_Procedimiento(request):
                     
                     return redirect('/dashboard/')
          
+            if tipo_procedimiento == "11" and incendio_form.is_valid():
+                id_tipo_incendio = incendio_form.cleaned_data["tipo_incendio"]
+                descripcion = incendio_form.cleaned_data["descripcion"]
+                material_utilizado = incendio_form.cleaned_data["material_utilizado"]
+                status = incendio_form.cleaned_data["status"]
+                
+                tipo_incendio_instance = Tipo_Incendio.objects.get(id=id_tipo_incendio)
+                
+                print("Datos Obtenidos")
+                
+                nuevo_proc_incendio = Incendios(
+                    id_procedimientos = nuevo_procedimiento,
+                    id_tipo_incendio = tipo_incendio_instance,
+                    descripcion=descripcion,
+                    material_utilizado=material_utilizado,
+                    status=status
+                )
+                print(nuevo_proc_incendio)
+                nuevo_proc_incendio.save()
+                
+                check_agregar_persona = incendio_form.cleaned_data["check_agregar_persona"]
+                
+                if check_agregar_persona == True and persona_presente_form.is_valid():
+                    nombre = persona_presente_form.cleaned_data["nombre"]
+                    apellido = persona_presente_form.cleaned_data["apellido"]
+                    cedula = persona_presente_form.cleaned_data["cedula"]
+                    edad = persona_presente_form.cleaned_data["edad"]
+
+                    new_persona_presente = Persona_Presente(
+                        id_incendio = nuevo_proc_incendio,
+                        nombre = nombre,
+                        apellidos = apellido,
+                        cedula = cedula,
+                        edad = edad,
+                    )
+                
+                    print(new_persona_presente)
+                    new_persona_presente.save()
+                    
+                    
+                check_agregar_vehiculos = incendio_form.cleaned_data["check_agregar_vehiculo"]
+                
+                if check_agregar_vehiculos == True and detalles_vehiculo_form.is_valid():
+                    modelo = detalles_vehiculo_form.cleaned_data["modelo"]
+                    marca = detalles_vehiculo_form.cleaned_data["marca"]
+                    color = detalles_vehiculo_form.cleaned_data["color"]
+                    año = detalles_vehiculo_form.cleaned_data["año"]
+                    placas = detalles_vehiculo_form.cleaned_data["placas"]
+
+                    new_agregar_vehiculo = Detalles_Vehiculos(
+                        id_vehiculo = nuevo_proc_incendio,
+                        modelo = modelo,
+                        marca = marca,
+                        color = color,
+                        año = año,
+                        placas = placas,
+                    )
+                
+                    print(new_agregar_vehiculo)
+                    new_agregar_vehiculo.save()
+                    
+                return redirect('/dashboard/')
+         
             if tipo_procedimiento == "12" and form_fallecido.is_valid():  
                 motivo_fallecimiento = form_fallecido.cleaned_data["motivo_fallecimiento"]       
                 nom_fallecido = form_fallecido.cleaned_data["nom_fallecido"]
@@ -430,11 +497,15 @@ def View_Procedimiento(request):
         fals_alarm = Formulario_falsa_alarma(prefix='fals_alarm')
         serv_especial = Formulario_Servicios_Especiales(prefix='serv_especial')
         form_fallecido = Formulario_Fallecidos(prefix='form_fallecido')
-        rescate_form = Formulario_Rescate(prefix='rescate_form')   
+        rescate_form = Formulario_Rescate(prefix='rescate_form')
+        incendio_form = Formulario_Incendio(prefix='incendio_form')
+        
+        
+        persona_presente_form = Formulario_Persona_Presente(prefix='persona_presente_form')
+        detalles_vehiculo_form = Formulario_Detalles_Vehiculos(prefix='detalles_vehiculo_form')
         
         rescate_form_persona = Formulario_Rescate_Persona(prefix='rescate_form_persona')   
         rescate_form_animal = Formulario_Rescate_Animal(prefix='rescate_form_animal')   
-
 
     return render(request, "procedimientos.html", {
         "user": user,
@@ -457,6 +528,9 @@ def View_Procedimiento(request):
         "rescate_form": rescate_form,
         "rescate_form_animal": rescate_form_animal,
         "rescate_form_persona": rescate_form_persona,
+        "incendio_form": incendio_form,
+        "persona_presente_form": persona_presente_form,
+        "detalles_vehiculo_form": detalles_vehiculo_form
     })
     
 # Vista de la Seccion de Estadisticas
