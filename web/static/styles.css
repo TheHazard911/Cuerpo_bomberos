@@ -189,7 +189,6 @@ body {
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   overflow-x: hidden;
-
   background-color: var(--color-bg);
   color: var(--color-text);
 }
@@ -544,43 +543,32 @@ summary > * {
   }
 }
 /********************** Diseño dashboard *****************/
-.position-dashboard {
-  display: flex;
-  flex-wrap: wrap;
-}
 .header-dashboard {
   width: 100%;
-  height: 10vh;
+  height: auto;
   background-color: var(--color-header-dashboard);
   display: flex;
   justify-content: space-between;
-}
-.main-dashboard {
+  align-items: center;
+  padding: 0.5rem;
   position: sticky;
   top: 0;
-  z-index: 1;
-  width: 16%;
-  height: 100vh;
-  background-color: var(--color-main-dashboard);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  align-content: center;
+  z-index: 10;
 }
 .title-icon {
   display: flex;
   justify-content: flex-start;
   align-items: center;
   margin-left: 1rem;
-
   img {
-    width: 80px;
-    height: 80%;
+    width: 4rem;
+    margin-left: 2rem;
   }
   h1 {
     font-size: 2.5rem;
     font-family: var(--secular-one);
     color: #fff;
+    margin: 0;
   }
 }
 .tools-exit-help {
@@ -588,7 +576,6 @@ summary > * {
   justify-content: space-evenly;
   align-items: center;
   align-content: center;
-  padding: 1.8rem;
   img {
     width: 50px;
     height: 50px;
@@ -667,8 +654,8 @@ summary > * {
   flex-direction: column;
   position: relative;
   background-color: var(--color-general-dashboard);
+  width: 100%;
   height: auto;
-  width: 84%;
   overflow-y: hidden;
 }
 .div-user-name {
@@ -698,7 +685,8 @@ summary > * {
   }
 }
 .div-stadist-parroquies {
-  width: 100%;
+  margin: 0 auto;
+  width: 80%;
   height: auto;
   margin-bottom: 1.2rem;
 }
@@ -715,13 +703,12 @@ summary > * {
   align-items: center;
   flex-wrap: wrap;
   justify-content: space-evenly;
+  width: auto;
   height: auto;
 }
 
 .div-analytics {
   width: 100%;
-  height: 80pxw;
-  background-color: gray;
 }
 /****************** componentes reutilizables **************/
 .btn-mod {
@@ -782,18 +769,21 @@ summary > * {
 /*************** styles divisiones *******************/
 
 .procedures_record {
+  margin: 0 auto;
+  height: auto;
   margin: 0;
   padding: 0;
 }
 .title_procedures_record {
+  text-align: center;
   font-size: 2rem;
-  margin-left: 2rem;
+  margin: 1rem;
 }
 .data_form > form {
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 80%;
+  width: 65%;
   height: auto;
   margin: 0 auto;
 }
@@ -880,17 +870,18 @@ summary > * {
   margin: 0 auto;
   overflow-x: scroll;
   width: auto;
-  padding: 2rem;
+  padding: 0.5rem;
+  height: auto;
 }
 .table {
-  width: 160%;
-  font-size: 1rem;
+  width: auto;
+  font-size: 0.2rem;
   td {
     font-family: var(--sofia-sans);
   }
   th {
     text-align: center;
-    font-size: 1.2rem;
+    font-size: 1.1rem;
   }
   tbody tr {
     text-align: justify;
@@ -899,7 +890,7 @@ summary > * {
   tbody td {
     text-align: center;
     border-bottom: 0.1px solid rgb(188, 188, 188);
-    font-size: 1.2rem;
+    font-size: .9rem;
   }
 }
 .icons-accion {
@@ -914,8 +905,9 @@ summary > * {
   }
 }
 .section-filter {
-  width: 90%;
+  width: 100%;
   height: 10vh;
+  padding: 2rem;
   display: flex;
   justify-content: flex-end;
   align-items: center;
@@ -943,8 +935,10 @@ summary > * {
 .infoProcedimientos {
   padding: 0;
   margin: 0;
+  height: 20vh;
   display: flex;
   flex-direction: column;
+  justify-content: center;
   p {
     text-align: start;
     margin: 0;
@@ -962,7 +956,9 @@ summary > * {
 .modal-header {
   flex-direction: column-reverse;
   justify-content: center;
-  width: 100%;
+  /* background-color: var(--color-header-dashboard); */
+  /* width: 100%; */
+  /* color: #FFF; */
   padding: 1.2rem;
 }
 .modal-title {
@@ -973,12 +969,12 @@ summary > * {
   display: flex;
   justify-content: center;
   width: auto;
-  height: auto;
+  height: 70vh;
 }
 .char {
   width: 100%;
 }
-.modal-header{
+.modal-header {
   width: auto;
   height: auto;
   align-items: center;
@@ -989,11 +985,11 @@ summary > * {
   height: 7rem;
   padding: 0;
   background-color: var(--color-header-dashboard);
-  display: flex;  
-  .title-icon{
+  display: flex;
+  .title-icon {
     height: auto;
-    h1{
-      margin: 0 ;
+    h1 {
+      margin: 0;
     }
   }
 }
@@ -1005,31 +1001,66 @@ summary > * {
   justify-content: center;
   align-content: center;
 }
-.modal-body{
+.modal-body {
   width: auto;
   display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.modal-body-two{
+  height: auto;
 }
 
-.info-modal{
-  position: relative;
-  width: calc(100/2);
+.info-modal {
+  width: calc(100 / 2);
   display: flex;
   justify-content: flex-start;
   text-align: start;
   align-items: center;
   align-content: center;
-  p{
-    margin: .5rem;
+  p {
+    font-size: 1.1rem;
+    margin: 0.1rem;
   }
 }
-.section-left{
-  padding: 2rem;
-    display: flex;
-  flex-direction: column;
-  border-right: 5px solid var(--color-button);
-}
-.section-right{
+.section-left {
+  height: auto;
   display: flex;
+  padding: 1.5rem;
   flex-direction: column;
-  padding: 2rem;
+  border-right: 3px solid var(--color-button);
+}
+.section-right {
+  display: flex;
+  height: auto;
+  flex-direction: column;
+  padding: 1.5rem;
+}
+.offcanvas-title {
+  font-family: var(--secular-one);
+  font-size: 1.5rem;
+  margin: 0;
+}
+.offcanvas-header {
+  background-color: var(--color-header-dashboard);
+  color: #fff;
+  height: 5.35rem;
+}
+.btn-close {
+  fill: #fff;
+  filter: invert(1);
+  opacity: 100;
+}
+.division-title {
+  text-align: center;
+  margin: 0;
+}
+.title-modal-info {
+  margin: 0.5rem;
+}
+.config-modal-delete{
+  width: 100%;
+  background-color: var(--color-button);
+  color: #fff;
 }
