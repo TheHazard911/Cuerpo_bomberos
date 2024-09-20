@@ -668,7 +668,7 @@ summary > * {
   position: relative;
   background-color: var(--color-general-dashboard);
   height: auto;
-  width: 84%;
+  width: auto;
   overflow-y: hidden;
 }
 .div-user-name {
@@ -978,7 +978,7 @@ summary > * {
 .char {
   width: 100%;
 }
-.modal-header{
+.modal-header {
   width: auto;
   height: auto;
   align-items: center;
@@ -989,11 +989,11 @@ summary > * {
   height: 7rem;
   padding: 0;
   background-color: var(--color-header-dashboard);
-  display: flex;  
-  .title-icon{
+  display: flex;
+  .title-icon {
     height: auto;
-    h1{
-      margin: 0 ;
+    h1 {
+      margin: 0;
     }
   }
 }
@@ -1005,30 +1005,30 @@ summary > * {
   justify-content: center;
   align-content: center;
 }
-.modal-body{
+.modal-body {
   width: auto;
   display: flex;
 }
 
-.info-modal{
+.info-modal {
   position: relative;
-  width: calc(100/2);
+  width: calc(100 / 2);
   display: flex;
   justify-content: flex-start;
   text-align: start;
   align-items: center;
   align-content: center;
-  p{
-    margin: .5rem;
+  p {
+    margin: 0.5rem;
   }
 }
-.section-left{
+.section-left {
   padding: 2rem;
-    display: flex;
+  display: flex;
   flex-direction: column;
   border-right: 5px solid var(--color-button);
 }
-.section-right{
+.section-right {
   display: flex;
   flex-direction: column;
   padding: 2rem;
