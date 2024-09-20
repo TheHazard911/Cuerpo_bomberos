@@ -2,6 +2,7 @@ from django.db import models
 
 # Modelos Para Agregar Datos Aparte
 
+# Tabla personal cuerpo de bomberos
 class Personal(models.Model):
   nombres = models.CharField(max_length=50)
   apellidos = models.CharField(max_length=50)
@@ -11,6 +12,7 @@ class Personal(models.Model):
   def __str__(self):
     return self.nombres + " -- " + self.apellidos + " -- " + self.jerarquia + " -- " + self.cargo
 
+# Tabla de usuarios que pueden entrar a la pagina
 class Usuarios(models.Model):
     user = models.CharField(max_length=20)
     password = models.CharField(max_length=20)
@@ -19,83 +21,105 @@ class Usuarios(models.Model):
     def __str__(self):
       return self.user + " -- " + self.password + " -- " + self.encargado.nombres + " " + self.encargado.apellidos
 
+# Tabla de divisiones del cuerpo de bomberos
 class Divisiones(models.Model):
     division = models.CharField(max_length=20)
     
     def __str__(self):
       return self.division
 
+# tabla de municipios
 class Municipios(models.Model):
     municipio = models.CharField(max_length=40)
     
     def __str__(self):
       return self.municipio
 
+# tabla de parroquias
 class Parroquias(models.Model):
     parroquia = models.CharField(max_length=40)
     
     def __str__(self):
       return self.parroquia
 
+# tabla de posibles motivos para guardias de prevencion
 class Motivo_Prevencion(models.Model):
     motivo = models.CharField(max_length=40)
     
     def __str__(self):
       return self.motivo
 
+# tabla de lugares de suministros de agua
 class Tipo_Institucion(models.Model):
   nombre_institucion = models.CharField(max_length=50)
   
   def __str__(self):
      return self.nombre_institucion
-  
+
+# tabla de posibles apoyos a otras unidades
 class Tipo_apoyo(models.Model):
   tipo_apoyo = models.CharField(max_length=50)
   
   def __str__(self):
     return self.tipo_apoyo
 
+# tabla de tipos de procedimientos
 class Tipos_Procedimientos(models.Model):
     tipo_procedimiento = models.CharField(max_length=40)
     
     def __str__(self):
       return self.tipo_procedimiento
 
+# tabla de posibles motivos para Despliegues de seguridad
 class Motivo_Despliegue(models.Model):
   motivo = models.CharField(max_length=50)
   
   def __str__(self):
     return self.motivo
 
+# tabla de posibles tipos de rescate
 class Tipo_Rescate(models.Model):
   tipo_rescate = models.CharField(max_length=30)
   
   def __str__(self):
     return self.tipo_rescate
 
+# tabla de posibles tipos de servicios especiales
 class Tipo_servicios(models.Model):
   serv_especiales = models.CharField(max_length=30)
   
   def __str__(self):
     return self.serv_especiales
   
+# tabla de posibles motivos de falsa alarma
 class Motivo_Alarma(models.Model):
   motivo = models.CharField(max_length=30)
   
   def __str__(self):
     return self.motivo
 
+# tabla de lesionados para procedmiento atenciones paramedicas
 class Lesionados(models.Model):
   pass
 
+# tabla de accidentes de transito para procedimiento atenciones paramedicas
 class Accidentes_Transito(models.Model):
   pass
 
-class Detalles_vehiculo(models.Model):
-  pass
+# tabla de listado de unidades del cuerpo de bomberos
+class Unidades(models.Model):
+  nombre_unidad = models.CharField(max_length=40)
+  
+  def __str__(self):
+    return self.nombre_unidad
 
+class Tipo_Incendio(models.Model):
+  tipo_incendio = models.CharField(max_length=40)
+
+  def __str__(self):
+    return self.tipo_incendio
+    
 # Modelo Proncipal para todos los Procedimientos
-
 class Procedimientos(models.Model):
     id_division  = models.ForeignKey(Divisiones, on_delete=models.CASCADE, default=0)
     id_solicitante = models.ForeignKey(Personal, on_delete=models.CASCADE, related_name="personal1")
@@ -236,3 +260,33 @@ class Rescate_Animal(models.Model):
   def __str__(self):
     return self.id_rescate.tipo_rescate.tipo_rescate  + " -- " + self.especie + " -- " + self.descripcion
 
+class Incendios(models.Model): 
+  id_procedimientos = models.ForeignKey(Procedimientos, on_delete=models.CASCADE)
+  id_tipo_incendio = models.ForeignKey(Tipo_Incendio, on_delete=models.CASCADE)
+  descripcion = models.CharField(max_length=40)
+  material_utilizado = models.CharField(max_length=40)
+  status = models.CharField(max_length=40)
+  
+  def __str__(self):
+    return self.id_procedimientos.id_tipo_procedimiento.tipo_procedimiento + " -- " + self.id_tipo_incendio.tipo_incendio + " -- " + self.descripcion + " -- " + self.material_utilizado + " -- " + self.status
+  
+class Persona_Presente(models.Model):
+  id_incendio = models.ForeignKey(Incendios, on_delete=models.CASCADE)
+  nombre = models.CharField(max_length=40)
+  apellidos = models.CharField(max_length=40)
+  cedula = models.CharField(max_length=10)
+  edad = models.CharField(max_length=3)
+  
+  def __str__(self):
+    return self.id_incendio.id_tipo_incendio.tipo_incendio + " -- " + self.nombre + " -- " + self.apellidos + " -- " + self.cedula + " -- " + self.edad
+  
+class Detalles_Vehiculos(models.Model):
+  id_vehiculo = models.ForeignKey(Incendios, on_delete=models.CASCADE)
+  modelo = models.CharField(max_length=40)
+  marca = models.CharField(max_length=40)
+  color = models.CharField(max_length=40)
+  año = models.CharField(max_length=40)
+  placas = models.CharField(max_length=40)
+  
+  def __str__(self):
+    return self.id_vehiculo.id_tipo_incendio.tipo_incendio + " -- " + self.modelo + " -- " + self.marca + " -- " + self.color + " -- " + self.año + " -- " + self.placas
