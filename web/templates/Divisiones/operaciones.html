@@ -309,6 +309,7 @@
                 <p><b>Material Utilizado: </b> ${data.material_utilizado}</p>
                 <p><b>Status: </b> ${data.status}</p>
               </article>`;
+              </article>`;
               break;
 
             case "Guardia de Prevencion":
@@ -320,6 +321,7 @@
                 <p><b>Material Utilizado: </b> ${data.material_utilizado}</p>
                 <p><b>Status: </b> ${data.status}</p>
               </article>`;
+              </article>`;
               break;
 
             case "Atendido No Efectuado":
@@ -330,7 +332,9 @@
                 <p><b>Material Utilizado: </b> ${data.material_utilizado}</p>
                 <p><b>Status: </b> ${data.status}</p>
               </article>`;
+              </article>`;
               break;
+
 
             case "Despliegue de Seguridad":
               mensaje += `
@@ -340,6 +344,7 @@
                 <p><b>Descripcion: </b> ${data.descripcion}</p>
                 <p><b>Material Utilizado: </b> ${data.material_utilizado}</p>
                 <p><b>Status: </b> ${data.status}</p>
+              </article>`;
               </article>`;
               break;
 
@@ -357,7 +362,9 @@
                 <p><b>Material Utilizado: </b> ${data.material_utilizado}</p>
                 <p><b>Status: </b> ${data.status}</p>
               </article>`;
+              </article>`;
               break;
+
 
             case "Falsa Alarma":
               mensaje += `
@@ -368,7 +375,9 @@
                 <p><b>Material Utilizado: </b> ${data.material_utilizado}</p>
                 <p><b>Status: </b> ${data.status}</p>
               </article>`;
+              </article>`;
               break;
+
 
             case "Servicios Especiales":
               mensaje += `
@@ -381,21 +390,24 @@
               </article>`;
               break;
 
+
             case "Rescate":
               mensaje += `
               <article class="section-right">
+                <p><b>Tipo de Procedimiento: </b> ${data.tipo_procedimiento}</p>
+                <p><b>Tipo de Rescate: </b> ${data.tipo_rescate}</p>
                 <p><b>Material Utilizado: </b> ${data.material_utilizado}</p>
                 <p><b>Status: </b> ${data.status}</p>
                 <p><b>Tipo de Rescate: </b> ${data.tipo_rescate}</p>`;
 
-              if (data.tipo_rescate == "Animal") {
+              if (data.tipo_rescate == "Animal")  {
                 mensaje += `
                 <p><b>Especie: </b> ${data.especie}</p>
                 <p><b>Descripcion: </b> ${data.descripcion}</p>
-                </article>;`;
+                </article>;`;;
               }
 
-              if (data.tipo_rescate == "Persona") {
+              if (data.tipo_rescate == "Persona")  {
                 mensaje += `
                 <p><b>Nombre: </b> ${data.nombres}</p>
                 <p><b>Apellido: </b> ${data.apellidos}</p>
@@ -403,9 +415,10 @@
                 <p><b>Edad: </b> ${data.edad}</p>
                 <p><b>Sexo: </b> ${data.sexo}</p>
                 <p><b>Descripcion: </b> ${data.descripcion}</p>
-                </article>;`;
+                </article>;`;;
               }
               break;
+
 
             default:
               mensaje = "<h2> Error</h2>";

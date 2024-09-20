@@ -656,6 +656,7 @@ summary > * {
   background-color: var(--color-general-dashboard);
   width: 100%;
   height: auto;
+  width: auto;
   overflow-y: hidden;
 }
 .div-user-name {
@@ -990,8 +991,11 @@ summary > * {
     height: auto;
     h1 {
       margin: 0;
+    h1 {
+      margin: 0;
     }
   }
+}
 }
 .modal-content-two {
   width: auto;
@@ -1012,22 +1016,21 @@ summary > * {
   height: auto;
 }
 
-.info-modal {
-  width: calc(100 / 2);
+.info-modal{
+  position: relative;
+  width: calc(100/2);
   display: flex;
   justify-content: flex-start;
   text-align: start;
   align-items: center;
   align-content: center;
-  p {
-    font-size: 1.1rem;
-    margin: 0.1rem;
+  p{
+    margin: .5rem;
   }
 }
-.section-left {
-  height: auto;
-  display: flex;
-  padding: 1.5rem;
+.section-left{
+  padding: 2rem;
+    display: flex;
   flex-direction: column;
   border-right: 3px solid var(--color-button);
 }

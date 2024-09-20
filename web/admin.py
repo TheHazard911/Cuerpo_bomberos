@@ -27,4 +27,8 @@ admin.site.register(Rescate_Persona)
 admin.site.register(Rescate_Animal)
 admin.site.register(Tipo_servicios)
 admin.site.register(Motivo_Alarma)
+admin.site.register(Incendios)
+admin.site.register(Tipo_Incendio)
+admin.site.register(Persona_Presente)
+admin.site.register(Detalles_Vehiculos)
 
