@@ -75,7 +75,7 @@ def Prueba(request):
             "usuarios": usuarios,
             "divisiones": divisiones,
             "procedimientos": procedimientos,
-            "form": Formulario_Detalles_Vehiculos(),
+            "form": Formulario_Incendio(),
             })
     else:
         form = Selecc_Tipo_Procedimiento(),
@@ -88,7 +88,7 @@ def Prueba(request):
             "usuarios": usuarios,
             "divisiones": divisiones,
             "procedimientos": procedimientos,
-            "form": Formulario_Detalles_Vehiculos(),
+            "form": Formulario_Incendio(),
             })
   
 # Vista de archivo para hacer pruebas de backend
@@ -896,6 +896,46 @@ def obtener_procedimiento(request, id):
                         sexo = detalle_tipo_rescate.sexo,
                         descripcion = detalle_tipo_rescate.descripcion,
                         )
+        
+    if str(procedimiento.id_tipo_procedimiento.id) == "11":
+      # Obtener el detalle del procedimiento
+      detalle_procedimiento = get_object_or_404(Incendios, id_procedimientos=id)
+      print(detalle_procedimiento)
+      
+      # Agregar detalles del procedimiento a los datos
+      data = dict(data,
+                  tipo_incendio=detalle_procedimiento.id_tipo_incendio.tipo_incendio,
+                  descripcion=detalle_procedimiento.descripcion,
+                  status=detalle_procedimiento.status,
+                  material_utilizado=detalle_procedimiento.material_utilizado,
+                )
+      
+      if Persona_Presente.objects.filter(id_incendio=detalle_procedimiento.id).exists():
+          print("Si existe el elemento")
+          persona_presente_detalles = Persona_Presente.objects.get(id_incendio=detalle_procedimiento.id)
+          data.update({
+              "persona": True,
+              "nombre": persona_presente_detalles.nombre,
+              "apellidos": persona_presente_detalles.apellidos,
+              "cedula": persona_presente_detalles.cedula,
+              "edad": persona_presente_detalles.edad,
+          })
+      else:
+          print("No Existe este Elemento")
+          
+      if Detalles_Vehiculos.objects.filter(id_vehiculo=detalle_procedimiento.id).exists():
+          vehiculo_detalles = Detalles_Vehiculos.objects.get(id_vehiculo=detalle_procedimiento.id)
+          print("Si existe el elemento")
+          data.update({
+              "vehiculo": True,
+              "modelo": vehiculo_detalles.modelo,
+              "marca": vehiculo_detalles.marca,
+              "color": vehiculo_detalles.color,
+              "año": vehiculo_detalles.año,
+              "placas": vehiculo_detalles.placas,
+          })
+      else:
+          print("No Existe este Elemento")
         
     if str(procedimiento.id_tipo_procedimiento.id) == "12":
         detalle_procedimiento = get_object_or_404(Fallecidos, id_procedimiento=id)

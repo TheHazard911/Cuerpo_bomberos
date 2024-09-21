@@ -128,24 +128,25 @@
       </div>
 
       <!-- Detalles de Procedimiento (Incendio) -->
-      <div class="data_form" id="incendio" style="display: none;">
+      <div class="data_form" id="incendio_form" style="display: none">
         <div class="line"></div>
         <h4>Incendio</h4>
         <div class="form-style">
           {{ incendio_form }}
-          
           <!-- Detalles de Procedimiento (persona Presente) -->
           <div id="persona_presente">
+            <h4>Agregar Datos Persona Presente</h4>
             {{ persona_presente_form }}
           </div>
-          
+
           <!-- Detalles de Procedimiento (Detalles Vehiculos) -->
           <div id="detalles_vehiculo">
+            <h4>Agregar Datos de Vehiculo</h4>
             {{ detalles_vehiculo_form }}
           </div>
-        </div>        
+        </div>
       </div>
-      
+
       <!-- Boton Enviar -->
       <button type="submit" id="button_submit" style="display: none">
         Aceptar
@@ -225,12 +226,13 @@
       var rescate_form = document.getElementById("rescate");
       var rescate_form_animal = document.getElementById("rescate_animal");
       var rescate_form_persona = document.getElementById("rescate_persona");
-      var incendio_form = document.getElementById("incendio");
+      var incendio_form = document.getElementById("incendio_form");
       var persona_presente_form = document.getElementById("persona_presente");
       var detalles_vehiculo = document.getElementById("detalles_vehiculo");
 
       var button_submit = document.getElementById("button_submit");
 
+      console.log(this.value);
       if (this.value == "1") {
         apoyo_unid.style.display = "none";
         guard_prev.style.display = "none";
@@ -242,14 +244,13 @@
         rescate_form.style.display = "none";
         rescate_form_animal.style.display = "none";
         rescate_form_persona.style.display = "none";
-        incendio_form = "none"
-        persona_presente_form = "none"
-        detalles_vehiculo = "none"
+        incendio_form.style.display = "none";
+        persona_presente_form.style.display = "none";
+        detalles_vehiculo.style.display = "none";
 
         abast_agua.style.display = "block";
         button_submit.style.display = "block";
-      } 
-      else if (this.value == "2") {
+      } else if (this.value == "2") {
         abast_agua.style.display = "none";
         guard_prev.style.display = "none";
         falsa_alarm.style.display = "none";
@@ -260,14 +261,13 @@
         rescate_form.style.display = "none";
         rescate_form_animal.style.display = "none";
         rescate_form_persona.style.display = "none";
-        incendio_form = "none"
-        persona_presente_form = "none"
-        detalles_vehiculo = "none"
+        incendio_form.style.display = "none";
+        persona_presente_form.style.display = "none";
+        detalles_vehiculo.style.display = "none";
 
         apoyo_unid.style.display = "block";
         button_submit.style.display = "block";
-      } 
-      else if (this.value == "3") {
+      } else if (this.value == "3") {
         abast_agua.style.display = "none";
         apoyo_unid.style.display = "none";
         atend_no_efect.style.display = "none";
@@ -278,14 +278,13 @@
         rescate_form.style.display = "none";
         rescate_form_animal.style.display = "none";
         rescate_form_persona.style.display = "none";
-        incendio_form = "none"
-        persona_presente_form = "none"
-        detalles_vehiculo = "none"
+        incendio_form.style.display = "none";
+        persona_presente_form.style.display = "none";
+        detalles_vehiculo.style.display = "none";
 
         guard_prev.style.display = "block";
         button_submit.style.display = "block";
-      } 
-      else if (this.value == "4") {
+      } else if (this.value == "4") {
         abast_agua.style.display = "none";
         apoyo_unid.style.display = "none";
         guard_prev.style.display = "none";
@@ -296,14 +295,13 @@
         rescate_form.style.display = "none";
         rescate_form_animal.style.display = "none";
         rescate_form_persona.style.display = "none";
-        incendio_form = "none"
-        persona_presente_form = "none"
-        detalles_vehiculo = "none"
+        incendio_form.style.display = "none";
+        persona_presente_form.style.display = "none";
+        detalles_vehiculo.style.display = "none";
 
         atend_no_efect.style.display = "block";
         button_submit.style.display = "block";
-      }
-      else if (this.value == "5") {
+      } else if (this.value == "5") {
         abast_agua.style.display = "none";
         apoyo_unid.style.display = "none";
         guard_prev.style.display = "none";
@@ -314,14 +312,13 @@
         rescate_form.style.display = "none";
         rescate_form_animal.style.display = "none";
         rescate_form_persona.style.display = "none";
-        incendio_form = "none"
-        persona_presente_form = "none"
-        detalles_vehiculo = "none"
+        incendio_form.style.display = "none";
+        persona_presente_form.style.display = "none";
+        detalles_vehiculo.style.display = "none";
 
         desp_seguridad.style.display = "block";
         button_submit.style.display = "block";
-      } 
-      else if (this.value == "6") {
+      } else if (this.value == "6") {
         abast_agua.style.display = "none";
         apoyo_unid.style.display = "none";
         guard_prev.style.display = "none";
@@ -332,14 +329,13 @@
         rescate_form.style.display = "none";
         rescate_form_animal.style.display = "none";
         rescate_form_persona.style.display = "none";
-        incendio_form = "none"
-        persona_presente_form = "none"
-        detalles_vehiculo = "none"
+        incendio_form.style.display = "none";
+        persona_presente_form.style.display = "none";
+        detalles_vehiculo.style.display = "none";
 
         button_submit.style.display = "block";
         falsa_alarm.style.display = "block";
-      } 
-      else if (this.value == "9") {
+      } else if (this.value == "9") {
         abast_agua.style.display = "none";
         apoyo_unid.style.display = "none";
         guard_prev.style.display = "none";
@@ -350,14 +346,13 @@
         rescate_form.style.display = "none";
         rescate_form_animal.style.display = "none";
         rescate_form_persona.style.display = "none";
-        incendio_form = "none"
-        persona_presente_form = "none"
-        detalles_vehiculo = "none"
+        incendio_form.style.display = "none";
+        persona_presente_form.style.display = "none";
+        detalles_vehiculo.style.display = "none";
 
         serv_especiales.style.display = "block";
         button_submit.style.display = "block";
-      } 
-      else if (this.value == "10") {
+      } else if (this.value == "10") {
         abast_agua.style.display = "none";
         apoyo_unid.style.display = "none";
         guard_prev.style.display = "none";
@@ -366,9 +361,9 @@
         falsa_alarm.style.display = "none";
         form_fallecido.style.display = "none";
         serv_especiales.style.display = "none";
-        incendio_form = "none"
-        persona_presente_form = "none"
-        detalles_vehiculo = "none"
+        incendio_form.style.display = "none";
+        persona_presente_form.style.display = "none";
+        detalles_vehiculo.style.display = "none";
 
         rescate_form_animal.style.display = "none";
         rescate_form_persona.style.display = "none";
@@ -390,8 +385,8 @@
               button_submit.style.display = "block";
             }
           });
-      } 
-      else if (this.value == "11") {
+      } else if (this.value == "11") {
+        console.log(this.value);
         abast_agua.style.display = "none";
         apoyo_unid.style.display = "none";
         guard_prev.style.display = "none";
@@ -403,14 +398,32 @@
         rescate_form_animal.style.display = "none";
         rescate_form_persona.style.display = "none";
         form_fallecido.style.display = "none";
-        
-        persona_presente_form = "none"
-        detalles_vehiculo = "none"
-        
-        incendio_form = "block"
+
+        persona_presente_form.style.display = "none";
+        detalles_vehiculo.style.display = "none";
+
+        incendio_form.style.display = "block";
         button_submit.style.display = "block";
-      } 
-      else if (this.value == "12") {
+
+        document
+          .getElementById("id_incendio_form-check_agregar_persona")
+          .addEventListener("change", function () {
+            if (this.checked) {
+              persona_presente_form.style.display = "block";
+            } else {
+              persona_presente_form.style.display = "none";
+            }
+          });
+        document
+          .getElementById("id_incendio_form-check_agregar_vehiculo")
+          .addEventListener("change", function () {
+            if (this.checked) {
+              detalles_vehiculo.style.display = "block";
+            } else {
+              detalles_vehiculo.style.display = "none";
+            }
+          });
+      } else if (this.value == "12") {
         abast_agua.style.display = "none";
         apoyo_unid.style.display = "none";
         guard_prev.style.display = "none";
@@ -421,14 +434,13 @@
         rescate_form.style.display = "none";
         rescate_form_animal.style.display = "none";
         rescate_form_persona.style.display = "none";
-        incendio_form = "none"
-        persona_presente_form = "none"
-        detalles_vehiculo = "none"
+        incendio_form.style.display = "none";
+        persona_presente_form.style.display = "none";
+        detalles_vehiculo.style.display = "none";
 
         form_fallecido.style.display = "block";
         button_submit.style.display = "block";
-      } 
-      else {
+      } else {
         errorModal.show();
         apoyo_unid.style.display = "none";
         button_submit.style.display = "none";

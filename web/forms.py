@@ -223,8 +223,8 @@ class Formulario_Incendio(forms.Form):
     descripcion = forms.CharField(max_length=30, required=False)
     material_utilizado = forms.CharField(max_length=30, required=False)
     status = forms.ChoiceField(choices=[("-", "Seleccione Una Opcion"), ("Culminado", "Culminado"), ("En Proceso", "En Proceso")], widget=forms.Select(attrs={"class": "disable-first-option"}))
-    check_agregar_persona = forms.BooleanField()
-    check_agregar_vehiculo = forms.BooleanField()
+    check_agregar_persona = forms.BooleanField(required=False)
+    check_agregar_vehiculo = forms.BooleanField(required=False)
     
 class Formulario_Persona_Presente(forms.Form):
     nombre = forms.CharField(max_length=30, required=False)
@@ -233,9 +233,9 @@ class Formulario_Persona_Presente(forms.Form):
     edad = forms.CharField(max_length=3, required=False)
 
 class Formulario_Detalles_Vehiculos(forms.Form):
-    modelo = forms.CharField(max_length=40, required=40)
-    marca = forms.CharField(max_length=40, required=40)
-    color = forms.CharField(max_length=40, required=40)
-    año = forms.CharField(max_length=40, required=40)
-    placas = forms.CharField(max_length=40, required=40)
+    modelo = forms.CharField(max_length=40, required=False)
+    marca = forms.CharField(max_length=40, required=False)
+    color = forms.CharField(max_length=40, required=False)
+    año = forms.CharField(max_length=40, required=False)
+    placas = forms.CharField(max_length=40, required=False)
     
