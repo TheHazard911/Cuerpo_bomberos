@@ -69,24 +69,34 @@
   const ctx = document.getElementById("myChart");
 
   new Chart(ctx, {
-    type: "bar",
+    type: "line",
     data: {
-      labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange","black","gray","white"],
+      labels: [
+        "Red",
+        "Blue",
+        "Yellow",
+        "Green",
+        "Purple",
+        "Orange",
+        "black",
+        "gray",
+        "white"
+      ],
       datasets: [
         {
           label: "# of Votes",
-          data: [12, 50, 3, 5, 2, 3,3, 5, 2, 3],
-          borderWidth: 1,
-        },
-      ],
+          data: [12, 50, 3, 5, 2, 3, 3, 5, 2, 3],
+          borderWidth: 1
+        }
+      ]
     },
     options: {
       scales: {
         y: {
-          beginAtZero: true,
-        },
-      },
-    },
+          beginAtZero: true
+        }
+      }
+    }
   });
 </script>
 {% endblock %}

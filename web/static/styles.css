@@ -170,7 +170,6 @@
 
 html {
   font-size: 100%;
-  text-size-adjust: 100%;
   scroll-behavior: smooth;
 }
 
@@ -304,8 +303,6 @@ table {
 
 p {
   overflow-wrap: break-word;
-  text-wrap: pretty;
-  hyphens: auto;
 }
 
 ul ul {
@@ -453,7 +450,10 @@ summary > * {
   font: var(--kanit-regular);
   font-weight: 800;
   font-size: 3rem;
-  filter: drop-shadow(1 1 1 1 #000);
+  filter: drop-shadow(100 10 10 10 #000);
+  h1 {
+    border: 4px solid black;
+  }
 }
 .login-form {
   width: 100%;
@@ -469,10 +469,10 @@ summary > * {
   align-items: center;
 }
 .form-content {
-  width: 20rem;
+  width: 18rem;
   height: 20rem;
-  background-color: #ffffff45;
-  border: 0.1px solid #ffffff60;
+  background-color: #ffffff3a;
+  border: 0.2px solid #ffffff7a;
   border-radius: 1rem;
   display: flex;
   flex-direction: column;
@@ -495,17 +495,17 @@ summary > * {
     padding-left: 1rem;
     margin-top: 0.6rem;
     font-family: var(--secular-one);
-    font-size: 1.1rem;
+    font-size: 1rem;
   }
   input::placeholder {
     color: #0005;
-    font-size: 1.1rem;
+    font-size: 0.9rem;
     padding-left: 0.1rem;
   }
   label {
-    color: #fff;
+    color: #ffffff;
     font-family: var(--secular-one);
-    font-size: 1.2rem;
+    font-size: 1.1rem;
   }
 }
 .btn-inputs-forms {
@@ -520,26 +520,28 @@ summary > * {
     background-color: #6c7385;
     color: #fff;
     cursor: pointer;
+    font-size: 1rem;
   }
 }
 .icons-footer {
   position: absolute;
-  bottom: 2.5rem;
+  bottom: 2rem;
   width: 100%;
   height: auto;
 }
 .icons {
-  width: 40%;
-  height: 12.5vh;
+  width: auto;
+  height: auto;
   margin: 0 auto;
   display: flex;
   align-items: center;
-  justify-content: space-evenly;
+  justify-content: center;
   flex-wrap: wrap;
   img {
-    width: 100px;
-    height: 100px;
-    border-radius: 30px;
+    margin: 1rem;
+    width: 5rem;
+    height: auto;
+    border-radius: 10px;
   }
 }
 /********************** Diseño dashboard *****************/
@@ -561,11 +563,12 @@ summary > * {
   align-items: center;
   margin-left: 1rem;
   img {
-    width: 4rem;
+    width: 3rem;
+    height: auto;
     margin-left: 2rem;
   }
   h1 {
-    font-size: 2.5rem;
+    font-size: 2rem;
     font-family: var(--secular-one);
     color: #fff;
     margin: 0;
@@ -577,13 +580,13 @@ summary > * {
   align-items: center;
   align-content: center;
   img {
-    width: 50px;
-    height: 50px;
+    width: 2.2rem;
+    height: auto;
     margin: 0.5rem;
   }
   img:nth-child(2) {
-    width: 40px;
-    height: 40px;
+    width: 2rem;
+    height: auto;
   }
 }
 .title-main-dashboard {
@@ -677,25 +680,27 @@ summary > * {
   justify-content: space-evenly;
   align-self: center;
   margin: 0.5rem;
-  padding: 0.3rem;
+  padding: 0.4rem;
   p {
     margin: 0;
     width: auto;
     height: auto;
-    font-size: 1rem;
+    font-size: 1.1rem;
   }
 }
 .div-stadist-parroquies {
   margin: 0 auto;
-  width: 80%;
+  width: auto;
   height: auto;
-  margin-bottom: 1.2rem;
+  margin-bottom: 1rem;
 }
 .title-stadist-parroquies {
   display: flex;
   justify-content: center;
   h4 {
-    margin: 0;
+    text-align: center;
+    font-size: 2.6rem;
+    margin: 1rem;
     padding: 0;
   }
 }
@@ -726,8 +731,8 @@ summary > * {
 }
 /****    cards de estadisticas principales  ***/
 .card-parroquies {
-  width: 13.6rem;
-  height: 9.5rem;
+  width: 14rem;
+  height: 9rem;
   margin-top: 2rem;
   border-radius: 10px;
   display: flex;
@@ -740,10 +745,13 @@ summary > * {
   color: #fff;
   font-weight: bold;
   text-align: center;
+  margin: 1rem;
   h5 {
     margin: 0;
     padding: 0;
-    font-size: 1.5rem;
+    font-size: 1.3rem;
+    width: auto;
+    height: auto;
   }
   span {
     margin: 0;
@@ -758,13 +766,13 @@ summary > * {
   background-color: #f6c344;
 }
 .card-red {
-  background-color: #cb444a;
+  background-color: #be4349;
 }
 .card-gray {
   background-color: #717783;
 }
 .card-green {
-  background-color: #10cc00;
+  background-color: #eb8500;
 }
 
 /*************** styles divisiones *******************/
@@ -814,9 +822,9 @@ summary > * {
   }
 }
 .form-style {
-  background-color: #f0f0f0;
-  border-radius: 20px;
-  border: 0.1px solid rgb(184, 184, 184);
+  background-color: #f0f0f0e3;
+  border-radius: 15px;
+  border: 0.1px solid rgb(131, 131, 131);
   width: 90%;
   height: auto;
   display: flex;
@@ -825,9 +833,8 @@ summary > * {
   flex-wrap: wrap;
   justify-content: space-around;
   margin: 2rem;
-  padding: 1rem;
+  padding: 0.5rem;
   div {
-    font-size: 1.2rem;
     display: flex;
     width: auto;
     height: auto;
@@ -837,6 +844,7 @@ summary > * {
     flex-wrap: wrap;
     padding-bottom: 1rem;
     font-family: var(--sofia-sans);
+    font-size: 1.1rem;
 
     label {
       font-weight: 600;
@@ -873,25 +881,26 @@ summary > * {
   width: auto;
   padding: 0.5rem;
   height: auto;
+  margin: 2.5rem;
 }
 .table {
   width: auto;
-  font-size: 0.2rem;
+  font-size: 0.5rem;
   td {
     font-family: var(--sofia-sans);
   }
   th {
     text-align: center;
-    font-size: 1.1rem;
+    font-size: 1.2rem;
   }
   tbody tr {
-    text-align: justify;
+    text-align: center;
     vertical-align: middle;
   }
   tbody td {
     text-align: center;
-    border-bottom: 0.1px solid rgb(188, 188, 188);
-    font-size: .9rem;
+    border-bottom: 0.1px solid rgb(179, 179, 179);
+    font-size: 0.9rem;
   }
 }
 .icons-accion {
@@ -970,7 +979,7 @@ summary > * {
   display: flex;
   justify-content: center;
   width: auto;
-  height: 70vh;
+  height: 55vh;
 }
 .char {
   width: 100%;
@@ -991,11 +1000,11 @@ summary > * {
     height: auto;
     h1 {
       margin: 0;
-    h1 {
-      margin: 0;
+      h1 {
+        margin: 0;
+      }
     }
   }
-}
 }
 .modal-content-two {
   width: auto;
@@ -1011,26 +1020,32 @@ summary > * {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  padding: 0;
+  h4 {
+    margin: 1rem;
+  }
 }
-.modal-body-two{
+.modal-body-two {
+  padding: 2rem;
+  width: auto;
   height: auto;
 }
 
-.info-modal{
+.info-modal {
   position: relative;
-  width: calc(100/2);
+  width: calc(100 / 2);
   display: flex;
   justify-content: flex-start;
   text-align: start;
   align-items: center;
   align-content: center;
-  p{
-    margin: .5rem;
+  p {
+    margin: 0.4rem;
   }
 }
-.section-left{
-  padding: 2rem;
-    display: flex;
+.section-left {
+  padding: 1rem;
+  display: flex;
   flex-direction: column;
   border-right: 3px solid var(--color-button);
 }
@@ -1038,7 +1053,7 @@ summary > * {
   display: flex;
   height: auto;
   flex-direction: column;
-  padding: 1.5rem;
+  padding: 1rem;
 }
 .offcanvas-title {
   font-family: var(--secular-one);
@@ -1062,7 +1077,7 @@ summary > * {
 .title-modal-info {
   margin: 0.5rem;
 }
-.config-modal-delete{
+.config-modal-delete {
   width: 100%;
   background-color: var(--color-button);
   color: #fff;
