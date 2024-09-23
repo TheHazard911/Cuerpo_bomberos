@@ -1,6 +1,7 @@
 {% extends "layouts/header-main.html" %} {% block content %}
 <div class="general-dashboard">
-  <div class="div-user-name">
+  <div class="div-user-name username-space">
+    <h3 class="division-title">Operaciones</h3>
     <section class="user-name">
       <p>{{ jerarquia }} {{ nombres }} {{ apellidos }} / {{ user.user }}</p>
       <svg
@@ -33,33 +34,46 @@
       </svg>
     </section>
   </div>
-  <h3 class="division-title">Operaciones</h3>
   <!-- section filter -->
   <div class="section-filter">
-    <section class="filter-search">
-      <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
-        <g
-          id="SVGRepo_tracerCarrier"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-        ></g>
-        <g id="SVGRepo_iconCarrier">
-          <path
-            d="M14.9536 14.9458L21 21M17 10C17 13.866 13.866 17 10 17C6.13401 17 3 13.866 3 10C3 6.13401 6.13401 3 10 3C13.866 3 17 6.13401 17 10Z"
-            stroke="#000000"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-          ></path>
-        </g>
-      </svg>
-      <input type="search" name="Buscar" id="" placeholder="Buscar" />
+        <section class="totals-procediments">
+      <b>Procedimientos Totales: </b><span>{{ total }}</span>
     </section>
+    <section class="totals-procediments">
+      <b>Registros de Hoy: </b><span>{{ hoy }}</span>
+    </section>
+    <section class="filter-search">
+      <label for=""><b>Parroquia:</b></label>
+      <input
+        type="search"
+        name="Buscar"
+        id="search-input-two"
+        placeholder="Ubicacion"
+      />
+    </section>
+        <section class="filter-search">
+      <label for=""><b>Fecha:</b></label>
+      <input
+        type="search"
+        name="Buscar"
+        id="search-input"
+        placeholder="DD-MM-AA"
+      />
+    </section>
+        <section class="filter-search">
+      <label for=""><b>Procedimientos:</b></label>
+      <input
+        type="search"
+        name="Buscar"
+        id="search-input-three"
+        placeholder="Tipo"
+      />
+    </section>
+
   </div>
   <!-- tabla -->
   <div class="table-responsive-sm">
-    <table class="table">
+    <table class="table" id="data-table">
       <thead>
         <tr>
           <th scope="col">ID</th>
@@ -239,8 +253,7 @@
           <h1>Cuerpo de Bomberos</h1>
         </section>
       </div>
-      <h3 class="title-modal-info">Informacion del Procedimiento</h3>
-      <div class="modal-body modal-body-two">
+      <div class="modal-body modal-body-two modal-body-three">
         <section class="info-modal" id="info_modal"></section>
       </div>
       <div class="modal-footer">
@@ -271,52 +284,52 @@
         .then((data) => {
           let mensaje = `<article class="section-left">
                 <section class="datos_division">
-                  <h4>Datos De La Division: </h4>
+                  <h4>Division</h4>
                   <p><b>Division: </b> ${data.division}</p>
                   <p><b>ID Procedimiento: </b> #${data.id}</p>
                 </section>
                 <section class="datos_operacion">
-                  <h4>Datos De La Operacion: </h4>
+                  <h4>Operacion</h4>
                   <p><b>Solicitante: </b> ${data.solicitante}</p>
                   <p><b>Jefe de Comision: </b> ${data.jefe_comision}</p>
                   <p><b>Unidad Enviada: </b> ${data.unidad}</p>
                   <p><b>Efectivos Enviados: </b> ${data.efectivos}</p>
                 </section>
                 <section class="datos_ubicacion">
-                  <h4>Datos De La Ubicacion: </h4>
+                  <h4>Ubicacion</h4>
                   <p><b>Parroquia: </b> ${data.parroquia}</p>
                   <p><b>Municipio: </b> ${data.municipio}</p>
                   <p><b>Direccion: </b> ${data.direccion}</p>
                   <p><b>Fecha: </b> ${data.fecha}</p>
                   <p><b>Hora: </b> ${data.hora}</p>
-                </section>
-              </article>`;
+                </section>`;
 
           switch (id_tipo_procedimiento) {
             case "Abastecimiento de agua":
               mensaje += `
-              <article class="section-right">
                 <section class="detalles_procedimiento">
-                  <h4>Detalles: </h4>
+                  <h4>Detalles</h4>
                   <p><b>Tipo de Procedimiento: </b> ${data.tipo_procedimiento}</p>
                   <p><b>Tipo de Servicio: </b> ${data.tipo_servicio}</p>
-                  <p><b>Nombre Persona Presente: </b> ${data.nombres}</p>
-                  <p><b>Apellidos Persona Presente: </b> ${data.apellidos}</p>
-                  <p><b>Cedula Persona Presente: </b> V-${data.cedula}</p>
-                  <p><b>Litros de Agua Suministrada: </b> ${data.ltrs_agua}</p>
-                  <p><b>Personas Atendidas: </b> ${data.personas_atendidas}</p>
                   <p><b>Descripcion: </b> ${data.descripcion}</p>
                   <p><b>Material Utilizado: </b> ${data.material_utilizado}</p>
                   <p><b>Status: </b> ${data.status}</p>
-                </section>
+                  </section>
+                  <section>
+                    <h4>Comunidad</h4>
+                    <p><b>Personas Atendidas: </b> ${data.personas_atendidas}</p>
+                    <p><b>Nombre Persona Presente: </b> ${data.nombres}</p>
+                    <p><b>Apellidos Persona Presente: </b> ${data.apellidos}</p>
+                    <p><b>Cedula Persona Presente: </b> V-${data.cedula}</p>
+                    <p><b>Litros de Agua Suministrada: </b> ${data.ltrs_agua}</p>
+                    </section>
               </article>`;
               break;
 
             case "Apoyo a Otras Unidades":
               mensaje += `
-              <article class="section-right">
                 <section class="detalles_procedimiento">
-                  <h4>Detalles: </h4>
+                  <h4>Detalles</h4>
                   <p><b>Tipo de Procedimiento: </b> ${data.tipo_procedimiento}</p>
                   <p><b>Tipo de Apoyo: </b> ${data.tipo_apoyo}</p>
                   <p><b>Unidad Apoyada: </b> ${data.unidad_apoyada}</p>
@@ -328,9 +341,9 @@
               break;
 
             case "Guardia de Prevencion":
-              mensaje += `<article class="section-right">
+              mensaje += `
                 <section class="detalles_procedimiento">
-                  <h4>Detalles: </h4>
+                  <h4>Detalles</h4>
                   <p><b>Tipo de Procedimiento: </b> ${data.tipo_procedimiento}</p>
                   <p><b>Motivo de Prevencion: </b> ${data.motivo_prevencion}</p>
                   <p><b>Descripcion: </b> ${data.descripcion}</p>
@@ -342,9 +355,9 @@
 
             case "Atendido No Efectuado":
               mensaje += `
-              <article class="section-right">
+              
                 <section class="detalles_procedimiento">
-                  <h4>Detalles: </h4>
+                  <h4>Detalles</h4>
                   <p><b>Tipo de Procedimiento: </b> ${data.tipo_procedimiento}</p>
                   <p><b>Descripcion: </b> ${data.descripcion}</p>
                   <p><b>Material Utilizado: </b> ${data.material_utilizado}</p>
@@ -355,9 +368,9 @@
 
             case "Despliegue de Seguridad":
               mensaje += `
-              <article class="section-right">
+              
                 <section class="detalles_procedimiento">
-                  <h4>Detalles: </h4>
+                  <h4>Detalles</h4>
                   <p><b>Tipo de Procedimiento: </b> ${data.tipo_procedimiento}</p>
                   <p><b>Motivo Despliegue: </b> ${data.motivo_despliegue}</p>
                   <p><b>Descripcion: </b> ${data.descripcion}</p>
@@ -369,9 +382,9 @@
 
             case "Fallecidos":
               mensaje += `
-              <article class="section-right">
+             
               <section class="detalles_procedimiento">
-                <h4>Detalles: </h4>
+                <h4>Detalles</h4>
                 <p><b>Tipo de Procedimiento: </b> ${data.tipo_procedimiento}</p>
                 <p><b>Motivo Fallecimiento: </b> ${data.motivo_fallecimiento}</p>
                 <p><b>Nombre: </b> ${data.nombres}</p>
@@ -388,9 +401,9 @@
 
             case "Falsa Alarma":
               mensaje += `
-              <article class="section-right">
+             
                 <section class="detalles_procedimiento">
-                  <h4>Detalles: </h4>
+                  <h4>Detalles</h4>
                   <p><b>Tipo de Procedimiento: </b> ${data.tipo_procedimiento}</p>
                   <p><b>Motivo de Alarma: </b> ${data.motivo_alarma}</p>
                   <p><b>Descripcion: </b> ${data.descripcion}</p>
@@ -402,9 +415,9 @@
 
             case "Servicios Especiales":
               mensaje += `
-              <article class="section-right">
+         
                 <section class="detalles_procedimiento">
-                  <h4>Detalles: </h4>
+                  <h4>Detalles</h4>
                   <p><b>Tipo de Procedimiento: </b> ${data.tipo_procedimiento}</p>
                   <p><b>Tipo de Servicio: </b> ${data.tipo_servicio}</p>
                   <p><b>Descripcion: </b> ${data.descripcion}</p>
@@ -416,9 +429,9 @@
 
             case "Rescate":
               mensaje += `
-              <article class="section-right">
+       
                 <section class="detalles_procedimiento">
-                  <h4>Detalles: </h4>
+                  <h4>Detalles</h4>
                   <p><b>Tipo de Procedimiento: </b> ${data.tipo_procedimiento}</p>
                   <p><b>Tipo de Rescate: </b> ${data.tipo_rescate}</p>
                   <p><b>Material Utilizado: </b> ${data.material_utilizado}</p>
@@ -426,12 +439,11 @@
                   <p><b>Tipo de Rescate: </b> ${data.tipo_rescate}</p>
                 </section>
                   `;
-                  
 
               if (data.tipo_rescate == "Animal") {
                 mensaje += `
                 <section class="detalles_rescate_animal">
-                  <h4>Datos del Animal: </h4>
+                  <h4>Animal</h4>
                   <p><b>Especie: </b> ${data.especie}</p>
                   <p><b>Descripcion: </b> ${data.descripcion}</p>
                 </section>
@@ -441,7 +453,7 @@
               if (data.tipo_rescate == "Persona") {
                 mensaje += `
                 <section class="detalles_rescate_persona">
-                  <h4>Datos de la Persona: </h4>
+                  <h4>Persona </h4>
                   <p><b>Nombre: </b> ${data.nombres}</p>
                   <p><b>Apellido: </b> ${data.apellidos}</p>
                   <p><b>Cedula: </b> ${data.cedula}</p>
@@ -455,9 +467,9 @@
 
             case "Incendios":
               mensaje += `
-              <article class="section-right">
+     
                 <section class="detalles_procedimiento">
-                  <h4>Detalles: </h4>
+                  <h4>Detalles</h4>
                   <p><b>Tipo de Procedimiento: </b> ${data.tipo_procedimiento}</p>
                   <p><b>Tipo de Incendio: </b> ${data.tipo_incendio}</p>
                   <p><b>Descripcion: </b> ${data.descripcion}</p>
@@ -470,7 +482,7 @@
               if (data.persona == true) {
                 mensaje += `
                 <section class="detalles_persona_sitio">
-                  <h4>Datos de La Persona en el Sitio: </h4>
+                  <h4>Persona en el Sitio</h4>
                   <p><b>Nombre: </b> ${data.nombre}</p>
                   <p><b>Apellido: </b> ${data.apellidos}</p>
                   <p><b>Cedula: </b> ${data.cedula}</p>
@@ -482,7 +494,7 @@
               if (data.vehiculo == true) {
                 mensaje += `
                 <section class="detalles_vehiculo">
-                  <h4>Datos Del Vehiculo: </h4>
+                  <h4>Vehiculo</h4>
                   <p><b>Modelo: </b> ${data.modelo}</p>
                   <p><b>Marca: </b> ${data.marca}</p>
                   <p><b>Color: </b> ${data.color}</p>
@@ -575,4 +587,49 @@
   }
 </script>
 
+<script>
+(function() {
+  function setupSearch(inputId, columnIndex) {
+    document.getElementById(inputId).addEventListener('input', function() {
+      const filter = this.value.toLowerCase();
+      const rows = document.querySelectorAll('#data-table tbody tr');
+
+      rows.forEach(row => {
+        const dateCell = row.querySelector(`td:nth-child(${columnIndex})`);
+        const originalText = dateCell.textContent;
+        const dateText = originalText.toLowerCase();
+
+        if (dateText.includes(filter)) {
+          const startIndex = dateText.indexOf(filter);
+          const endIndex = startIndex + filter.length;
+
+          // Crear un nuevo span para la parte resaltada
+          const highlightedText = document.createElement('span');
+          highlightedText.style.backgroundColor = 'yellow';
+          highlightedText.textContent = originalText.substring(startIndex, endIndex);
+
+          // Crear un contenedor para el texto resaltado y el resto del texto
+          const beforeText = document.createTextNode(originalText.substring(0, startIndex));
+          const afterText = document.createTextNode(originalText.substring(endIndex));
+
+          dateCell.innerHTML = ''; // Limpiar el contenido anterior
+          dateCell.appendChild(beforeText);
+          dateCell.appendChild(highlightedText);
+          dateCell.appendChild(afterText);
+          row.style.display = '';
+        } else {
+          dateCell.innerHTML = originalText; // Resetear cualquier resaltado previo
+          row.style.display = 'none';
+        }
+      });
+    });
+  }
+
+  // Llamar a la función para cada input y su columna correspondiente
+  setupSearch('search-input', 9);
+  setupSearch('search-input-two', 6);
+  setupSearch('search-input-three', 11);
+})();
+
+</script>
 {% endblock %}
