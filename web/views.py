@@ -789,6 +789,7 @@ def obtener_procedimiento(request, id):
     procedimiento = get_object_or_404(Procedimientos, pk=id)
     data = {
         'id': procedimiento.id,
+        'division': procedimiento.id_division.division,
         'solicitante': f"{procedimiento.id_solicitante.jerarquia} {procedimiento.id_solicitante.nombres} {procedimiento.id_solicitante.apellidos}",
         'jefe_comision': f"{procedimiento.id_jefe_comision.jerarquia} {procedimiento.id_jefe_comision.nombres} {procedimiento.id_jefe_comision.apellidos}",
         'unidad': procedimiento.unidad,

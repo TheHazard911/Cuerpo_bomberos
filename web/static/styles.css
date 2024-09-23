@@ -877,10 +877,10 @@ summary > * {
 
 .table-responsive-sm {
   margin: 0 auto;
-  overflow-x: scroll;
+  overflow-y: scroll;
   width: auto;
   padding: 0.5rem;
-  height: auto;
+  height: 100vh;
   margin: 2.5rem;
 }
 .table {
@@ -992,7 +992,7 @@ summary > * {
 }
 .header-dashboard-two {
   width: 100%;
-  height: 7rem;
+  height: 4.5rem;
   padding: 0;
   background-color: var(--color-header-dashboard);
   display: flex;
@@ -1026,7 +1026,7 @@ summary > * {
   }
 }
 .modal-body-two {
-  padding: 2rem;
+  padding: 0;
   width: auto;
   height: auto;
 }
@@ -1035,25 +1035,48 @@ summary > * {
   position: relative;
   width: calc(100 / 2);
   display: flex;
-  justify-content: flex-start;
   text-align: start;
-  align-items: center;
   align-content: center;
+  flex-direction: column;
   p {
+    font-size: 1.1rem;
     margin: 0.4rem;
   }
 }
 .section-left {
-  padding: 1rem;
   display: flex;
-  flex-direction: column;
-  border-right: 3px solid var(--color-button);
+  flex-direction: row;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  height: auto;
+  align-items: stretch;
+  justify-content: flex-start;
+
+  section {
+    background-color: #f8f9fa;
+    height: auto;
+    width: auto;
+    padding: 1rem;
+    margin: .5rem;
+    border-radius: 20px;
+    align-items: center;
+  }
 }
 .section-right {
   display: flex;
   height: auto;
-  flex-direction: column;
-  padding: 1rem;
+  justify-content: center;
+  align-items: stretch;
+  flex-direction: row;
+  padding: .5rem;
+  section {
+    background-color: #f8f9fa;
+    height: auto;
+    width: auto;
+    padding: 1rem;
+    margin: 1rem;
+    border-radius: 20px;
+  }
 }
 .offcanvas-title {
   font-family: var(--secular-one);
@@ -1081,4 +1104,7 @@ summary > * {
   width: 100%;
   background-color: var(--color-button);
   color: #fff;
+}
+.size-nav {
+  width: 320px !important;
 }

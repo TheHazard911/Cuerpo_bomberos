@@ -228,7 +228,7 @@
 </div>
 <!----------------------- Modal Info ---------------------------------->
 <div class="modal fade" tabindex="-1" id="modal-info">
-  <div class="modal-dialog modal-lg">
+  <div class="modal-dialog modal-xl">
     <div class="modal-content modal-content-two">
       <div class="modal-header header-dashboard-two">
         <section class="title-icon">
@@ -270,81 +270,108 @@
         .then((response) => response.json())
         .then((data) => {
           let mensaje = `<article class="section-left">
-              <p><b>ID Procedimiento: </b> #${data.id}</p>
-              <p><b>Solicitante: </b> ${data.solicitante}</p>
-              <p><b>Jefe de Comision: </b> ${data.jefe_comision}</p>
-              <p><b>Unidad Enviada: </b> ${data.unidad}</p>
-              <p><b>Efectivos Enviados: </b> ${data.efectivos}</p>
-              <p><b>Parroquia: </b> ${data.parroquia}</p>
-              <p><b>Municipio: </b> ${data.municipio}</p>
-              <p><b>Direccion: </b> ${data.direccion}</p>
-              <p><b>Fecha: </b> ${data.fecha}</p>
-              <p><b>Hora: </b> ${data.hora}</p>
+                <section class="datos_division">
+                  <h4>Datos De La Division: </h4>
+                  <p><b>Division: </b> ${data.division}</p>
+                  <p><b>ID Procedimiento: </b> #${data.id}</p>
+                </section>
+                <section class="datos_operacion">
+                  <h4>Datos De La Operacion: </h4>
+                  <p><b>Solicitante: </b> ${data.solicitante}</p>
+                  <p><b>Jefe de Comision: </b> ${data.jefe_comision}</p>
+                  <p><b>Unidad Enviada: </b> ${data.unidad}</p>
+                  <p><b>Efectivos Enviados: </b> ${data.efectivos}</p>
+                </section>
+                <section class="datos_ubicacion">
+                  <h4>Datos De La Ubicacion: </h4>
+                  <p><b>Parroquia: </b> ${data.parroquia}</p>
+                  <p><b>Municipio: </b> ${data.municipio}</p>
+                  <p><b>Direccion: </b> ${data.direccion}</p>
+                  <p><b>Fecha: </b> ${data.fecha}</p>
+                  <p><b>Hora: </b> ${data.hora}</p>
+                </section>
               </article>`;
 
           switch (id_tipo_procedimiento) {
             case "Abastecimiento de agua":
               mensaje += `
               <article class="section-right">
-                <p><b>Tipo de Procedimiento: </b> ${data.tipo_procedimiento}</p>
-                <p><b>Tipo de Servicio: </b> ${data.tipo_servicio}</p>
-                <p><b>Nombre Persona Presente: </b> ${data.nombres}</p>
-                <p><b>Apellidos Persona Presente: </b> ${data.apellidos}</p>
-                <p><b>Cedula Persona Presente: </b> V-${data.cedula}</p>
-                <p><b>Litros de Agua Suministrada: </b> ${data.ltrs_agua}</p>
-                <p><b>Personas Atendidas: </b> ${data.personas_atendidas}</p>
-                <p><b>Descripcion: </b> ${data.descripcion}</p>
-                <p><b>Material Utilizado: </b> ${data.material_utilizado}</p>
-                <p><b>Status: </b> ${data.status}</p>
+                <section class="detalles_procedimiento">
+                  <h4>Detalles: </h4>
+                  <p><b>Tipo de Procedimiento: </b> ${data.tipo_procedimiento}</p>
+                  <p><b>Tipo de Servicio: </b> ${data.tipo_servicio}</p>
+                  <p><b>Nombre Persona Presente: </b> ${data.nombres}</p>
+                  <p><b>Apellidos Persona Presente: </b> ${data.apellidos}</p>
+                  <p><b>Cedula Persona Presente: </b> V-${data.cedula}</p>
+                  <p><b>Litros de Agua Suministrada: </b> ${data.ltrs_agua}</p>
+                  <p><b>Personas Atendidas: </b> ${data.personas_atendidas}</p>
+                  <p><b>Descripcion: </b> ${data.descripcion}</p>
+                  <p><b>Material Utilizado: </b> ${data.material_utilizado}</p>
+                  <p><b>Status: </b> ${data.status}</p>
+                </section>
               </article>`;
               break;
 
             case "Apoyo a Otras Unidades":
               mensaje += `
               <article class="section-right">
-                <p><b>Tipo de Procedimiento: </b> ${data.tipo_procedimiento}</p>
-                <p><b>Tipo de Apoyo: </b> ${data.tipo_apoyo}</p>
-                <p><b>Unidad Apoyada: </b> ${data.unidad_apoyada}</p>
-                <p><b>Descripcion: </b> ${data.descripcion}</p>
-                <p><b>Material Utilizado: </b> ${data.material_utilizado}</p>
-                <p><b>Status: </b> ${data.status}</p>
+                <section class="detalles_procedimiento">
+                  <h4>Detalles: </h4>
+                  <p><b>Tipo de Procedimiento: </b> ${data.tipo_procedimiento}</p>
+                  <p><b>Tipo de Apoyo: </b> ${data.tipo_apoyo}</p>
+                  <p><b>Unidad Apoyada: </b> ${data.unidad_apoyada}</p>
+                  <p><b>Descripcion: </b> ${data.descripcion}</p>
+                  <p><b>Material Utilizado: </b> ${data.material_utilizado}</p>
+                  <p><b>Status: </b> ${data.status}</p>
+                </section>
               </article>`;
               break;
 
             case "Guardia de Prevencion":
               mensaje += `<article class="section-right">
-                <p><b>Tipo de Procedimiento: </b> ${data.tipo_procedimiento}</p>
-                <p><b>Motivo de Prevencion: </b> ${data.motivo_prevencion}</p>
-                <p><b>Descripcion: </b> ${data.descripcion}</p>
-                <p><b>Material Utilizado: </b> ${data.material_utilizado}</p>
-                <p><b>Status: </b> ${data.status}</p>
+                <section class="detalles_procedimiento">
+                  <h4>Detalles: </h4>
+                  <p><b>Tipo de Procedimiento: </b> ${data.tipo_procedimiento}</p>
+                  <p><b>Motivo de Prevencion: </b> ${data.motivo_prevencion}</p>
+                  <p><b>Descripcion: </b> ${data.descripcion}</p>
+                  <p><b>Material Utilizado: </b> ${data.material_utilizado}</p>
+                  <p><b>Status: </b> ${data.status}</p>
+                </section>
               </article>`;
               break;
 
             case "Atendido No Efectuado":
               mensaje += `
               <article class="section-right">
-                <p><b>Tipo de Procedimiento: </b> ${data.tipo_procedimiento}</p>
-                <p><b>Descripcion: </b> ${data.descripcion}</p>
-                <p><b>Material Utilizado: </b> ${data.material_utilizado}</p>
-                <p><b>Status: </b> ${data.status}</p>
+                <section class="detalles_procedimiento">
+                  <h4>Detalles: </h4>
+                  <p><b>Tipo de Procedimiento: </b> ${data.tipo_procedimiento}</p>
+                  <p><b>Descripcion: </b> ${data.descripcion}</p>
+                  <p><b>Material Utilizado: </b> ${data.material_utilizado}</p>
+                  <p><b>Status: </b> ${data.status}</p>
+                </section>
               </article>`;
               break;
 
             case "Despliegue de Seguridad":
               mensaje += `
               <article class="section-right">
-                <p><b>Tipo de Procedimiento: </b> ${data.tipo_procedimiento}</p>
-                <p><b>Motivo Despliegue: </b> ${data.motivo_despliegue}</p>
-                <p><b>Descripcion: </b> ${data.descripcion}</p>
-                <p><b>Material Utilizado: </b> ${data.material_utilizado}</p>
-                <p><b>Status: </b> ${data.status}</p>
+                <section class="detalles_procedimiento">
+                  <h4>Detalles: </h4>
+                  <p><b>Tipo de Procedimiento: </b> ${data.tipo_procedimiento}</p>
+                  <p><b>Motivo Despliegue: </b> ${data.motivo_despliegue}</p>
+                  <p><b>Descripcion: </b> ${data.descripcion}</p>
+                  <p><b>Material Utilizado: </b> ${data.material_utilizado}</p>
+                  <p><b>Status: </b> ${data.status}</p>
+                </section>
               </article>`;
               break;
 
             case "Fallecidos":
               mensaje += `
               <article class="section-right">
+              <section class="detalles_procedimiento">
+                <h4>Detalles: </h4>
                 <p><b>Tipo de Procedimiento: </b> ${data.tipo_procedimiento}</p>
                 <p><b>Motivo Fallecimiento: </b> ${data.motivo_fallecimiento}</p>
                 <p><b>Nombre: </b> ${data.nombres}</p>
@@ -355,55 +382,73 @@
                 <p><b>Descripcion: </b> ${data.descripcion}</p>
                 <p><b>Material Utilizado: </b> ${data.material_utilizado}</p>
                 <p><b>Status: </b> ${data.status}</p>
+              </section>
               </article>`;
               break;
 
             case "Falsa Alarma":
               mensaje += `
               <article class="section-right">
-                <p><b>Tipo de Procedimiento: </b> ${data.tipo_procedimiento}</p>
-                <p><b>Motivo de Alarma: </b> ${data.motivo_alarma}</p>
-                <p><b>Descripcion: </b> ${data.descripcion}</p>
-                <p><b>Material Utilizado: </b> ${data.material_utilizado}</p>
-                <p><b>Status: </b> ${data.status}</p>
+                <section class="detalles_procedimiento">
+                  <h4>Detalles: </h4>
+                  <p><b>Tipo de Procedimiento: </b> ${data.tipo_procedimiento}</p>
+                  <p><b>Motivo de Alarma: </b> ${data.motivo_alarma}</p>
+                  <p><b>Descripcion: </b> ${data.descripcion}</p>
+                  <p><b>Material Utilizado: </b> ${data.material_utilizado}</p>
+                  <p><b>Status: </b> ${data.status}</p>
+                </section>
               </article>`;
               break;
 
             case "Servicios Especiales":
               mensaje += `
               <article class="section-right">
-                <p><b>Tipo de Procedimiento: </b> ${data.tipo_procedimiento}</p>
-                <p><b>Tipo de Servicio: </b> ${data.tipo_servicio}</p>
-                <p><b>Descripcion: </b> ${data.descripcion}</p>
-                <p><b>Material Utilizado: </b> ${data.material_utilizado}</p>
-                <p><b>Status: </b> ${data.status}</p>
+                <section class="detalles_procedimiento">
+                  <h4>Detalles: </h4>
+                  <p><b>Tipo de Procedimiento: </b> ${data.tipo_procedimiento}</p>
+                  <p><b>Tipo de Servicio: </b> ${data.tipo_servicio}</p>
+                  <p><b>Descripcion: </b> ${data.descripcion}</p>
+                  <p><b>Material Utilizado: </b> ${data.material_utilizado}</p>
+                  <p><b>Status: </b> ${data.status}</p>
+                </section>
               </article>`;
               break;
 
             case "Rescate":
               mensaje += `
               <article class="section-right">
-                <p><b>Tipo de Procedimiento: </b> ${data.tipo_procedimiento}</p>
-                <p><b>Tipo de Rescate: </b> ${data.tipo_rescate}</p>
-                <p><b>Material Utilizado: </b> ${data.material_utilizado}</p>
-                <p><b>Status: </b> ${data.status}</p>
-                <p><b>Tipo de Rescate: </b> ${data.tipo_rescate}</p>`;
+                <section class="detalles_procedimiento">
+                  <h4>Detalles: </h4>
+                  <p><b>Tipo de Procedimiento: </b> ${data.tipo_procedimiento}</p>
+                  <p><b>Tipo de Rescate: </b> ${data.tipo_rescate}</p>
+                  <p><b>Material Utilizado: </b> ${data.material_utilizado}</p>
+                  <p><b>Status: </b> ${data.status}</p>
+                  <p><b>Tipo de Rescate: </b> ${data.tipo_rescate}</p>
+                </section>
+                  `;
+                  
 
               if (data.tipo_rescate == "Animal") {
                 mensaje += `
-                <p><b>Especie: </b> ${data.especie}</p>
-                <p><b>Descripcion: </b> ${data.descripcion}</p>
+                <section class="detalles_rescate_animal">
+                  <h4>Datos del Animal: </h4>
+                  <p><b>Especie: </b> ${data.especie}</p>
+                  <p><b>Descripcion: </b> ${data.descripcion}</p>
+                </section>
                 </article>`;
               }
 
               if (data.tipo_rescate == "Persona") {
                 mensaje += `
-                <p><b>Nombre: </b> ${data.nombres}</p>
-                <p><b>Apellido: </b> ${data.apellidos}</p>
-                <p><b>Cedula: </b> ${data.cedula}</p>
-                <p><b>Edad: </b> ${data.edad}</p>
-                <p><b>Sexo: </b> ${data.sexo}</p>
-                <p><b>Descripcion: </b> ${data.descripcion}</p>
+                <section class="detalles_rescate_persona">
+                  <h4>Datos de la Persona: </h4>
+                  <p><b>Nombre: </b> ${data.nombres}</p>
+                  <p><b>Apellido: </b> ${data.apellidos}</p>
+                  <p><b>Cedula: </b> ${data.cedula}</p>
+                  <p><b>Edad: </b> ${data.edad}</p>
+                  <p><b>Sexo: </b> ${data.sexo}</p>
+                  <p><b>Descripcion: </b> ${data.descripcion}</p>
+                </section>
                 </article>`;
               }
               break;
@@ -411,32 +456,39 @@
             case "Incendios":
               mensaje += `
               <article class="section-right">
-                <p><b>Tipo de Procedimiento: </b> ${data.tipo_procedimiento}</p>
-                <p><b>Tipo de Incendio: </b> ${data.tipo_incendio}</p>
-                <p><b>Descripcion: </b> ${data.descripcion}</p>
-                <p><b>Material Utilizado: </b> ${data.material_utilizado}</p>
-                <p><b>Status: </b> ${data.status}</p>
+                <section class="detalles_procedimiento">
+                  <h4>Detalles: </h4>
+                  <p><b>Tipo de Procedimiento: </b> ${data.tipo_procedimiento}</p>
+                  <p><b>Tipo de Incendio: </b> ${data.tipo_incendio}</p>
+                  <p><b>Descripcion: </b> ${data.descripcion}</p>
+                  <p><b>Material Utilizado: </b> ${data.material_utilizado}</p>
+                  <p><b>Status: </b> ${data.status}</p>
+                </section>
                 `;
 
               console.log(data.persona);
               if (data.persona == true) {
                 mensaje += `
-                <h4>Datos de La Persona en el Sitio: </h4>
-                <p><b>Nombre: </b> ${data.nombre}</p>
-                <p><b>Apellido: </b> ${data.apellidos}</p>
-                <p><b>Cedula: </b> ${data.cedula}</p>
-                <p><b>Edad: </b> ${data.edad}</p>`;
+                <section class="detalles_persona_sitio">
+                  <h4>Datos de La Persona en el Sitio: </h4>
+                  <p><b>Nombre: </b> ${data.nombre}</p>
+                  <p><b>Apellido: </b> ${data.apellidos}</p>
+                  <p><b>Cedula: </b> ${data.cedula}</p>
+                  <p><b>Edad: </b> ${data.edad}</p>
+                </section>`;
               }
 
               console.log(data.vehiculo);
               if (data.vehiculo == true) {
                 mensaje += `
-                <h4>Datos Del Vehiculo: </h4>
-                <p><b>Modelo: </b> ${data.modelo}</p>
-                <p><b>Marca: </b> ${data.marca}</p>
-                <p><b>Color: </b> ${data.color}</p>
-                <p><b>Año: </b> ${data.año}</p>
-                <p><b>Placas: </b> ${data.placas}</p>`;
+                <section class="detalles_vehiculo">
+                  <h4>Datos Del Vehiculo: </h4>
+                  <p><b>Modelo: </b> ${data.modelo}</p>
+                  <p><b>Marca: </b> ${data.marca}</p>
+                  <p><b>Color: </b> ${data.color}</p>
+                  <p><b>Año: </b> ${data.año}</p>
+                  <p><b>Placas: </b> ${data.placas}</p>
+                </section>`;
               }
               mensaje += "</article>";
               break;
