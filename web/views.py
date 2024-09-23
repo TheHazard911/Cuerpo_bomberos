@@ -9,6 +9,7 @@ from .models import *
 from django.shortcuts import get_object_or_404
 from django.http import JsonResponse
 import json
+from datetime import datetime
 
 # Create your views here.
 
@@ -552,7 +553,19 @@ def View_Operaciones(request):
     if not user:
             return redirect('/')
         
-    datos = Procedimientos.objects.filter(id_division = 2)
+    datos = Procedimientos.objects.filter(id_division=2)
+    total = datos.count()
+
+    # Obtener la fecha de hoy
+    hoy = datetime.now().date()
+
+    # Filtrar procedimientos con la fecha de hoy
+    fechas = datos.values_list("fecha", flat=True)
+    procedimientos_hoy = [fecha for fecha in fechas if fecha == hoy]
+    
+    hoy = len(procedimientos_hoy)
+    print(hoy)
+    
 
     if request.method == 'POST':
         data = json.loads(request.body)
@@ -570,6 +583,8 @@ def View_Operaciones(request):
         "nombres": user["nombres"],
         "apellidos": user["apellidos"],
         "datos": datos,
+        "total": total,
+        "hoy": hoy
     })
 
 # Vista de la Seccion de Operaciones
@@ -789,6 +804,7 @@ def obtener_procedimiento(request, id):
     procedimiento = get_object_or_404(Procedimientos, pk=id)
     data = {
         'id': procedimiento.id,
+        'division': procedimiento.id_division.division,
         'solicitante': f"{procedimiento.id_solicitante.jerarquia} {procedimiento.id_solicitante.nombres} {procedimiento.id_solicitante.apellidos}",
         'jefe_comision': f"{procedimiento.id_jefe_comision.jerarquia} {procedimiento.id_jefe_comision.nombres} {procedimiento.id_jefe_comision.apellidos}",
         'unidad': procedimiento.unidad,
