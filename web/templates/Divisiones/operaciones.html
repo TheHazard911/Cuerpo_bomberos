@@ -54,7 +54,7 @@
         <section class="filter-search">
       <label for=""><b>Fecha:</b></label>
       <input
-        type="search"
+        type="number"
         name="Buscar"
         id="search-input"
         placeholder="DD-MM-AA"
@@ -265,194 +265,116 @@
   </div>
 </div>
 
+<!-- Script informacion ventana modal -->
 <script>
   // Obtener elementos
   const info_modal = document.getElementById("info_modal");
 
   document.querySelectorAll(".button-info").forEach((button) => {
-    console.log("Botón clickeado");
     button.onclick = function () {
       const id = this.getAttribute("data-id");
       const id_tipo_procedimiento = this.getAttribute("data-id_procedimiento");
 
-      // Verifica que los atributos se obtienen correctamente
-      console.log("ID:", id);
-      console.log("ID Tipo Procedimiento:", id_tipo_procedimiento);
-
       fetch(`/api/procedimientos/${id}/`)
         .then((response) => response.json())
         .then((data) => {
-          let mensaje = `<article class="section-left">
-                <section class="datos_division">
-                  <h4>Division</h4>
-                  <p><b>Division: </b> ${data.division}</p>
-                  <p><b>ID Procedimiento: </b> #${data.id}</p>
-                </section>
-                <section class="datos_operacion">
-                  <h4>Operacion</h4>
-                  <p><b>Solicitante: </b> ${data.solicitante}</p>
-                  <p><b>Jefe de Comision: </b> ${data.jefe_comision}</p>
-                  <p><b>Unidad Enviada: </b> ${data.unidad}</p>
-                  <p><b>Efectivos Enviados: </b> ${data.efectivos}</p>
-                </section>
-                <section class="datos_ubicacion">
-                  <h4>Ubicacion</h4>
-                  <p><b>Parroquia: </b> ${data.parroquia}</p>
-                  <p><b>Municipio: </b> ${data.municipio}</p>
-                  <p><b>Direccion: </b> ${data.direccion}</p>
-                  <p><b>Fecha: </b> ${data.fecha}</p>
-                  <p><b>Hora: </b> ${data.hora}</p>
-                </section>`;
+          const baseInfo = `
+            <article class="section-left">
+              <section class="datos_division">
+                <h4>Division</h4>
+                <p><b>Division: </b> ${data.division}</p>
+                <p><b>ID Procedimiento: </b> #${data.id}</p>
+              </section>
+              <section class="datos_operacion">
+                <h4>Operacion</h4>
+                <p><b>Solicitante: </b> ${data.solicitante}</p>
+                <p><b>Jefe de Comision: </b> ${data.jefe_comision}</p>
+                <p><b>Unidad Enviada: </b> ${data.unidad}</p>
+                <p><b>Efectivos Enviados: </b> ${data.efectivos}</p>
+              </section>
+              <section class="datos_ubicacion">
+                <h4>Ubicacion</h4>
+                <p><b>Parroquia: </b> ${data.parroquia}</p>
+                <p><b>Municipio: </b> ${data.municipio}</p>
+                <p><b>Direccion: </b> ${data.direccion}</p>
+                <p><b>Fecha: </b> ${data.fecha}</p>
+                <p><b>Hora: </b> ${data.hora}</p>
+              </section>`;
 
-          switch (id_tipo_procedimiento) {
-            case "Abastecimiento de agua":
-              mensaje += `
+          const detailSections = {
+            "Abastecimiento de agua": () => `
                 <section class="detalles_procedimiento">
                   <h4>Detalles</h4>
-                  <p><b>Tipo de Procedimiento: </b> ${data.tipo_procedimiento}</p>
-                  <p><b>Tipo de Servicio: </b> ${data.tipo_servicio}</p>
-                  <p><b>Descripcion: </b> ${data.descripcion}</p>
-                  <p><b>Material Utilizado: </b> ${data.material_utilizado}</p>
-                  <p><b>Status: </b> ${data.status}</p>
-                  </section>
-                  <section>
-                    <h4>Comunidad</h4>
-                    <p><b>Personas Atendidas: </b> ${data.personas_atendidas}</p>
-                    <p><b>Nombre Persona Presente: </b> ${data.nombres}</p>
-                    <p><b>Apellidos Persona Presente: </b> ${data.apellidos}</p>
-                    <p><b>Cedula Persona Presente: </b> V-${data.cedula}</p>
-                    <p><b>Litros de Agua Suministrada: </b> ${data.ltrs_agua}</p>
-                    </section>
-              </article>`;
-              break;
-
-            case "Apoyo a Otras Unidades":
-              mensaje += `
-                <section class="detalles_procedimiento">
-                  <h4>Detalles</h4>
-                  <p><b>Tipo de Procedimiento: </b> ${data.tipo_procedimiento}</p>
-                  <p><b>Tipo de Apoyo: </b> ${data.tipo_apoyo}</p>
-                  <p><b>Unidad Apoyada: </b> ${data.unidad_apoyada}</p>
-                  <p><b>Descripcion: </b> ${data.descripcion}</p>
-                  <p><b>Material Utilizado: </b> ${data.material_utilizado}</p>
-                  <p><b>Status: </b> ${data.status}</p>
+                  ${generateCommonDetails(data)}
                 </section>
-              </article>`;
-              break;
-
-            case "Guardia de Prevencion":
-              mensaje += `
-                <section class="detalles_procedimiento">
-                  <h4>Detalles</h4>
-                  <p><b>Tipo de Procedimiento: </b> ${data.tipo_procedimiento}</p>
-                  <p><b>Motivo de Prevencion: </b> ${data.motivo_prevencion}</p>
-                  <p><b>Descripcion: </b> ${data.descripcion}</p>
-                  <p><b>Material Utilizado: </b> ${data.material_utilizado}</p>
-                  <p><b>Status: </b> ${data.status}</p>
+                <section>
+                  <h4>Comunidad</h4>
+                  <p><b>Personas Atendidas: </b> ${data.personas_atendidas}</p>
+                  <p><b>Nombre Persona Presente: </b> ${data.nombres}</p>
+                  <p><b>Apellidos Persona Presente: </b> ${data.apellidos}</p>
+                  <p><b>Cedula Persona Presente: </b> V-${data.cedula}</p>
+                  <p><b>Litros de Agua Suministrada: </b> ${data.ltrs_agua}</p>
                 </section>
-              </article>`;
-              break;
+              </section>`,
 
-            case "Atendido No Efectuado":
-              mensaje += `
-              
-                <section class="detalles_procedimiento">
-                  <h4>Detalles</h4>
-                  <p><b>Tipo de Procedimiento: </b> ${data.tipo_procedimiento}</p>
-                  <p><b>Descripcion: </b> ${data.descripcion}</p>
-                  <p><b>Material Utilizado: </b> ${data.material_utilizado}</p>
-                  <p><b>Status: </b> ${data.status}</p>
-                </section>
-              </article>`;
-              break;
-
-            case "Despliegue de Seguridad":
-              mensaje += `
-              
-                <section class="detalles_procedimiento">
-                  <h4>Detalles</h4>
-                  <p><b>Tipo de Procedimiento: </b> ${data.tipo_procedimiento}</p>
-                  <p><b>Motivo Despliegue: </b> ${data.motivo_despliegue}</p>
-                  <p><b>Descripcion: </b> ${data.descripcion}</p>
-                  <p><b>Material Utilizado: </b> ${data.material_utilizado}</p>
-                  <p><b>Status: </b> ${data.status}</p>
-                </section>
-              </article>`;
-              break;
-
-            case "Fallecidos":
-              mensaje += `
-             
+            "Apoyo a Otras Unidades": () => `
               <section class="detalles_procedimiento">
                 <h4>Detalles</h4>
-                <p><b>Tipo de Procedimiento: </b> ${data.tipo_procedimiento}</p>
-                <p><b>Motivo Fallecimiento: </b> ${data.motivo_fallecimiento}</p>
+                ${generateCommonDetails(data, 'tipo_apoyo', 'unidad_apoyada')}
+              </section>`,
+
+            "Guardia de Prevencion": () => `
+              <section class="detalles_procedimiento">
+                <h4>Detalles</h4>
+                ${generateCommonDetails(data, 'motivo_prevencion')}
+              </section>`,
+
+            "Atendido No Efectuado": () => `
+              <section class="detalles_procedimiento">
+                <h4>Detalles</h4>
+                ${generateCommonDetails(data)}
+              </section>`,
+
+            "Despliegue de Seguridad": () => `
+              <section class="detalles_procedimiento">
+                <h4>Detalles</h4>
+                ${generateCommonDetails(data, 'motivo_despliegue')}
+              </section>`,
+
+            "Fallecidos": () => `
+              <section class="detalles_procedimiento">
+                <h4>Detalles</h4>
+                ${generateCommonDetails(data, 'motivo_fallecimiento')}
                 <p><b>Nombre: </b> ${data.nombres}</p>
                 <p><b>Apellido: </b> ${data.apellidos}</p>
                 <p><b>Cedula: </b> ${data.cedula}</p>
                 <p><b>Edad: </b> ${data.edad}</p>
                 <p><b>Sexo: </b> ${data.sexo}</p>
-                <p><b>Descripcion: </b> ${data.descripcion}</p>
-                <p><b>Material Utilizado: </b> ${data.material_utilizado}</p>
-                <p><b>Status: </b> ${data.status}</p>
+              </section>`,
+
+            "Falsa Alarma": () => `
+              <section class="detalles_procedimiento">
+                <h4>Detalles</h4>
+                ${generateCommonDetails(data, 'motivo_alarma')}
+              </section>`,
+
+            "Servicios Especiales": () => `
+              <section class="detalles_procedimiento">
+                <h4>Detalles</h4>
+                ${generateCommonDetails(data)}
+              </section>`,
+
+            "Rescate": () => `
+              <section class="detalles_procedimiento">
+                <h4>Detalles</h4>
+                ${generateCommonDetails(data, 'tipo_rescate')}
               </section>
-              </article>`;
-              break;
-
-            case "Falsa Alarma":
-              mensaje += `
-             
-                <section class="detalles_procedimiento">
-                  <h4>Detalles</h4>
-                  <p><b>Tipo de Procedimiento: </b> ${data.tipo_procedimiento}</p>
-                  <p><b>Motivo de Alarma: </b> ${data.motivo_alarma}</p>
-                  <p><b>Descripcion: </b> ${data.descripcion}</p>
-                  <p><b>Material Utilizado: </b> ${data.material_utilizado}</p>
-                  <p><b>Status: </b> ${data.status}</p>
-                </section>
-              </article>`;
-              break;
-
-            case "Servicios Especiales":
-              mensaje += `
-         
-                <section class="detalles_procedimiento">
-                  <h4>Detalles</h4>
-                  <p><b>Tipo de Procedimiento: </b> ${data.tipo_procedimiento}</p>
-                  <p><b>Tipo de Servicio: </b> ${data.tipo_servicio}</p>
-                  <p><b>Descripcion: </b> ${data.descripcion}</p>
-                  <p><b>Material Utilizado: </b> ${data.material_utilizado}</p>
-                  <p><b>Status: </b> ${data.status}</p>
-                </section>
-              </article>`;
-              break;
-
-            case "Rescate":
-              mensaje += `
-       
-                <section class="detalles_procedimiento">
-                  <h4>Detalles</h4>
-                  <p><b>Tipo de Procedimiento: </b> ${data.tipo_procedimiento}</p>
-                  <p><b>Tipo de Rescate: </b> ${data.tipo_rescate}</p>
-                  <p><b>Material Utilizado: </b> ${data.material_utilizado}</p>
-                  <p><b>Status: </b> ${data.status}</p>
-                  <p><b>Tipo de Rescate: </b> ${data.tipo_rescate}</p>
-                </section>
-                  `;
-
-              if (data.tipo_rescate == "Animal") {
-                mensaje += `
-                <section class="detalles_rescate_animal">
+                ${data.tipo_rescate == "Animal" ? `<section class="detalles_rescate_animal">
                   <h4>Animal</h4>
                   <p><b>Especie: </b> ${data.especie}</p>
                   <p><b>Descripcion: </b> ${data.descripcion}</p>
-                </section>
-                </article>`;
-              }
-
-              if (data.tipo_rescate == "Persona") {
-                mensaje += `
-                <section class="detalles_rescate_persona">
+              </section>` : ''}
+                ${data.tipo_rescate == "Persona" ? `<section class="detalles_rescate_persona">
                   <h4>Persona </h4>
                   <p><b>Nombre: </b> ${data.nombres}</p>
                   <p><b>Apellido: </b> ${data.apellidos}</p>
@@ -460,59 +382,47 @@
                   <p><b>Edad: </b> ${data.edad}</p>
                   <p><b>Sexo: </b> ${data.sexo}</p>
                   <p><b>Descripcion: </b> ${data.descripcion}</p>
-                </section>
-                </article>`;
-              }
-              break;
-
-            case "Incendios":
-              mensaje += `
-     
-                <section class="detalles_procedimiento">
-                  <h4>Detalles</h4>
-                  <p><b>Tipo de Procedimiento: </b> ${data.tipo_procedimiento}</p>
-                  <p><b>Tipo de Incendio: </b> ${data.tipo_incendio}</p>
-                  <p><b>Descripcion: </b> ${data.descripcion}</p>
-                  <p><b>Material Utilizado: </b> ${data.material_utilizado}</p>
-                  <p><b>Status: </b> ${data.status}</p>
-                </section>
-                `;
-
-              console.log(data.persona);
-              if (data.persona == true) {
-                mensaje += `
-                <section class="detalles_persona_sitio">
+              </section>` : ''}`,
+              
+            "Incendios": () => `
+              <section class="detalles_procedimiento">
+                <h4>Detalles</h4>
+                ${generateCommonDetails(data, 'tipo_incendio')}
+              </section>
+                ${data.persona ? `<section class="detalles_persona_sitio">
                   <h4>Persona en el Sitio</h4>
                   <p><b>Nombre: </b> ${data.nombre}</p>
                   <p><b>Apellido: </b> ${data.apellidos}</p>
                   <p><b>Cedula: </b> ${data.cedula}</p>
                   <p><b>Edad: </b> ${data.edad}</p>
-                </section>`;
-              }
-
-              console.log(data.vehiculo);
-              if (data.vehiculo == true) {
-                mensaje += `
-                <section class="detalles_vehiculo">
+                </section>` : ''}
+                ${data.vehiculo ? `<section class="detalles_vehiculo">
                   <h4>Vehiculo</h4>
                   <p><b>Modelo: </b> ${data.modelo}</p>
                   <p><b>Marca: </b> ${data.marca}</p>
                   <p><b>Color: </b> ${data.color}</p>
                   <p><b>Año: </b> ${data.año}</p>
                   <p><b>Placas: </b> ${data.placas}</p>
-                </section>`;
-              }
-              mensaje += "</article>";
-              break;
+                </section>` : ''}`};
 
-            default:
-              mensaje = "<h2> Error</h2>";
-          }
-          info_modal.innerHTML = mensaje;
+          const detalles = detailSections[id_tipo_procedimiento] ? detailSections[id_tipo_procedimiento]() : "<h2>Error</h2>";
+
+          info_modal.innerHTML = baseInfo + detalles + '</article>';
         })
         .catch((error) => console.error("Error:", error));
     };
   });
+
+  function generateCommonDetails(data, additionalField = '', additionalField2 = '') {
+    return `
+      <p><b>Tipo de Procedimiento: </b> ${data.tipo_procedimiento}</p>
+      ${additionalField ? `<p><b>${additionalField.replace(/_/g, ' ').replace(/\b\w/g, c => c.toUpperCase())}: </b> ${data[additionalField]}</p>` : ''}
+      ${additionalField2 ? `<p><b>${additionalField2.replace(/_/g, ' ').replace(/\b\w/g, c => c.toUpperCase())}: </b> ${data[additionalField2]}</p>` : ''}
+      <p><b>Descripcion: </b> ${data.descripcion}</p>
+      <p><b>Material Utilizado: </b> ${data.material_utilizado}</p>
+      <p><b>Status: </b> ${data.status}</p>
+    `;
+  }
 </script>
 
 <!-- no tocar solo dios sabe como funciona -->
@@ -587,6 +497,7 @@
   }
 </script>
 
+<!-- Script de filtrado de tablas -->
 <script>
 (function() {
   function setupSearch(inputId, columnIndex) {
