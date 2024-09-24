@@ -1207,7 +1207,7 @@ summary > * {
 .div-analytics {
   margin: 0 auto;
   width: 85%;
-  height: 20vh;
+  height: auto;
   background-color: #f0f0f06a;
   border: thin solid #969696db;
   border-radius: 50px;
@@ -1216,14 +1216,16 @@ summary > * {
   display: flex;
   align-items: center;
   justify-content: space-around;
+  flex-wrap: wrap;
 }
 .progress-bar{
   width: auto;
   height: auto;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: space-between;
   p{
+    width: 12rem;
     padding: 0;
     margin: 0;
  }
