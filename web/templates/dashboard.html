@@ -70,74 +70,95 @@
 <div class="div-analytics">
   <section class="progress-bar">
     <p>Operaciones</p>
-    <p>0%</p>
+    <p id="progress-text-operaciones">0%</p>
     <div
       class="progress"
       role="progressbar"
       aria-label="Success example"
-      aria-valuenow="25"
+      aria-valuenow="0"
       aria-valuemin="0"
       aria-valuemax="100"
     >
-      <div class="progress-bar bg-success" style="width: 25%"></div>
+      <div
+        class="progress-bar bg-success"
+        id="progress-bar-operaciones"
+        style="width: 0%"
+      ></div>
     </div>
   </section>
   <section class="progress-bar">
     <p>PreHospitalaria</p>
-    <p>0%</p>
+    <p id="progress-text-prehospitalaria">0%</p>
     <div
       class="progress"
       role="progressbar"
-      aria-label="Info example"
-      aria-valuenow="50"
+      aria-label="Success example"
+      aria-valuenow="0"
       aria-valuemin="0"
       aria-valuemax="100"
     >
-      <div class="progress-bar bg-info" style="width: 50%"></div>
+      <div
+        class="progress-bar bg-info"
+        id="progress-bar-prehospitalaria"
+        style="width: 0%"
+      ></div>
     </div>
   </section>
   <section class="progress-bar">
     <p>Rescate</p>
-    <p>0%</p>
+    <p id="progress-text-rescate">0%</p>
     <div
       class="progress"
       role="progressbar"
-      aria-label="Warning example"
-      aria-valuenow="75"
+      aria-label="Success example"
+      aria-valuenow="0"
       aria-valuemin="0"
       aria-valuemax="100"
     >
-      <div class="progress-bar bg-warning" style="width: 75%"></div>
+      <div
+        class="progress-bar bg-warning"
+        id="progress-bar-rescate"
+        style="width: 0%"
+      ></div>
     </div>
   </section>
   <section class="progress-bar">
     <p>Grumae</p>
-    <p>0%</p>
+    <p id="progress-text-grumae">0%</p>
     <div
       class="progress"
       role="progressbar"
-      aria-label="Danger example"
-      aria-valuenow="100"
+      aria-label="Success example"
+      aria-valuenow="0"
       aria-valuemin="0"
       aria-valuemax="100"
     >
-      <div class="progress-bar bg-danger" style="width: 100%"></div>
+      <div
+        class="progress-bar"
+        id="progress-bar-grumae"
+        style="width: 0%"
+      ></div>
     </div>
   </section>
   <section class="progress-bar">
-    <p>Servicios Medicos</p>
-    <p>0%</p>
+    <p>Servicios medicos</p>
+    <p id="progress-text-servicios-medicos">0%</p>
     <div
       class="progress"
       role="progressbar"
-      aria-label="Default striped example"
-      aria-valuenow="10"
+      aria-label="Success example"
+      aria-valuenow="0"
       aria-valuemin="0"
       aria-valuemax="100"
     >
-      <div class="progress-bar progress-bar-striped" style="width: 10%"></div>
+      <div
+        class="progress-bar bg-danger"
+        id="progress-bar-servicios-medicos"
+        style="width: 0%"
+      ></div>
     </div>
   </section>
+
+  <script src="../static/js/graphic.js"></script>
+  {% endblock %}
 </div>
-<script src="../static/js/graphic.js"></script>
-{% endblock %}
