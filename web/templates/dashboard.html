@@ -60,43 +60,13 @@
       </div>
     </section>
   </div>
+  <section></section>
+  <h3 class="title-stadist-parroquies">Grafico de operaciones Anuales</h3>
   <div class="graphic-statistics">
-    <canvas id="myChart" class=""></canvas>
+    <canvas id="myChart"></canvas>
   </div>
-  <div class="div-analytics"></div>
 </div>
-<script>
-  const ctx = document.getElementById("myChart");
-
-  new Chart(ctx, {
-    type: "line",
-    data: {
-      labels: [
-        "Red",
-        "Blue",
-        "Yellow",
-        "Green",
-        "Purple",
-        "Orange",
-        "black",
-        "gray",
-        "white"
-      ],
-      datasets: [
-        {
-          label: "# of Votes",
-          data: [12, 50, 3, 5, 2, 3, 3, 5, 2, 3],
-          borderWidth: 1
-        }
-      ]
-    },
-    options: {
-      scales: {
-        y: {
-          beginAtZero: true
-        }
-      }
-    }
-  });
-</script>
+<h3 class="title-stadist-parroquies">Resumen de Procedimientos</h3>
+<div class="div-analytics"></div>
+<script src="../static/js/graphic.js"></script>
 {% endblock %}
