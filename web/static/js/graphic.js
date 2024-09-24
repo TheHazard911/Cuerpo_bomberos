@@ -79,7 +79,7 @@ function animateProgress(id, targetValue) {
 }
 
 // Valores fijos para cada barra de progreso
-const progressValues = {
+var progressValues = {
     'operaciones': 15,
     'prehospitalaria': 60,
     'rescate': 100,
