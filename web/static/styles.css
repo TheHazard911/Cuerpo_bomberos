@@ -773,16 +773,6 @@ summary > * {
   border-radius: 50px;
   padding: 2rem;
 }
-
-.div-analytics {
-  margin: 0 auto;
-  width: 85%;
-  height: 20vh;
-  background-color: #f0f0f06a;
-  border: thin solid #969696db;
-  border-radius: 50px;
-  margin-bottom: 4rem;
-}
 /****************** componentes reutilizables **************/
 .btn-mod {
   width: 10%;
@@ -892,7 +882,7 @@ summary > * {
 .form-style {
   border-radius: 15px;
   background-color: #f0f0f06a;
-  border: thin solid #969696db;
+  border: 3px solid #969696db;
   width: 90%;
   height: auto;
   display: flex;
@@ -933,6 +923,9 @@ summary > * {
       border: thin solid rgb(114, 114, 114);
     }
   }
+}
+.mod-title-width{
+  width: 58rem;
 }
 .position {
   position: relative;
@@ -1213,4 +1206,31 @@ summary > * {
   margin: 1.5rem;
   background-color: #f0f0f06a;
   border: thin solid #dcdcdcdb;
+}
+.div-analytics {
+  margin: 0 auto;
+  width: 85%;
+  height: auto;
+  background-color: #f0f0f06a;
+  border: thin solid #969696db;
+  border-radius: 50px;
+  margin-bottom: 4rem;
+  padding: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
+.progress-bar{
+  width: auto;
+  height: auto;
+  display: flex;
+  align-content: center;
+  flex-direction: column;
+  justify-content: space-between;
+  p{
+    width: 12rem;
+    padding: 0;
+    margin: 0;
+ }
 }

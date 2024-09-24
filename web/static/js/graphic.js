@@ -59,3 +59,35 @@ new Chart(ctx, {
         },
     },
 });
+function updateProgressBar(id, progressValue) {
+    const progressBar = document.getElementById(`progress-bar-${id}`);
+    const progressText = document.getElementById(`progress-text-${id}`);
+    progressBar.style.width = progressValue + '%';
+    progressText.textContent = progressValue + '%';
+}
+
+function animateProgress(id, targetValue) {
+    let progress = 0;
+    const interval = setInterval(() => {
+        if (progress >= targetValue) {
+            clearInterval(interval);
+        } else {
+            progress++;
+            updateProgressBar(id, progress);
+        }
+    }, 10); // Ajusta la velocidad de la animación aquí
+}
+
+// Valores fijos para cada barra de progreso
+var progressValues = {
+    'operaciones': 15,
+    'prehospitalaria': 60,
+    'rescate': 100,
+    'grumae': 40,
+    'servicios-medicos': 80
+};
+
+// Inicia la animación para cada barra con los valores fijos
+for (const id in progressValues) {
+    animateProgress(id, progressValues[id]);
+}
