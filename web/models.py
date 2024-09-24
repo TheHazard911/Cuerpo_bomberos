@@ -98,13 +98,7 @@ class Motivo_Alarma(models.Model):
   def __str__(self):
     return self.motivo
 
-# tabla de lesionados para procedmiento atenciones paramedicas
-class Lesionados(models.Model):
-  pass
 
-# tabla de accidentes de transito para procedimiento atenciones paramedicas
-class Accidentes_Transito(models.Model):
-  pass
 
 # tabla de listado de unidades del cuerpo de bomberos
 class Unidades(models.Model):
@@ -217,9 +211,7 @@ class Falsa_Alarma(models.Model):
   
   def __str__(self):
    return self.id_procedimiento.id_division.division + " -- " + self.motivo_alarma.motivo + " -- " + self.descripcion + " -- " + self.material_utilizado + " -- " + self.status
- 
-class Atenciones_Paramedicas(models.Model):
-  pass
+
 
 class Servicios_Especiales(models.Model):
   id_procedimientos = models.ForeignKey(Procedimientos, on_delete=models.CASCADE)
@@ -290,3 +282,87 @@ class Detalles_Vehiculos(models.Model):
   
   def __str__(self):
     return self.id_vehiculo.id_tipo_incendio.tipo_incendio + " -- " + self.modelo + " -- " + self.marca + " -- " + self.color + " -- " + self.año + " -- " + self.placas
+
+ 
+class Atenciones_Paramedicas(models.Model):
+  id_procedimientos = models.ForeignKey(Procedimientos, on_delete=models.CASCADE)
+  tipo_atencion = models.CharField(max_length=30)
+  
+  def __str__(self):
+    return self.id_procedimientos.id_tipo_procedimiento.tipo_procedimiento + " -- "  + self.tipo_atencion
+
+# tabla de Emergencias Medicas para procedmiento atenciones paramedicas
+class Emergencias_Medicas(models.Model):
+  id_atencion = models.ForeignKey(Atenciones_Paramedicas, on_delete=models.CASCADE)
+  nombres = models.CharField(max_length=30)
+  apellidos = models.CharField(max_length=30)
+  cedula = models.CharField(max_length=10)
+  edad = models.CharField(max_length=3)
+  sexo = models.CharField(max_length=12)
+  idx = models.CharField(max_length=40)
+  descripcion = models.CharField(max_length=40)
+  material_utilizado = models.CharField(max_length=30)
+  status = models.CharField(max_length=20)
+  
+  def __str__(self):
+    return self.id_atencion.tipo_atencion + " -- " + self.nombres + " -- " + self.apellidos + " -- " + self.cedula + " -- " + self.edad + " -- " + self.sexo + " -- " + self.idx + " -- " + self.descripcion
+  
+class Traslado(models.Model):
+  id_lesionado = models.ForeignKey(Emergencias_Medicas, on_delete=models.CASCADE)
+  hospital_trasladado = models.CharField(max_length=40)
+  medico_receptor = models.CharField(max_length=40)
+  mpps_cmt = models.CharField(max_length=20)
+  
+  def __str__(self):
+    return self.hospital_trasladado + " -- " + self.medico_receptor + " -- " + self.mpps_cmt
+
+# tabla de accidentes de transito para procedimiento atenciones paramedicas
+class Tipo_Accidente(models.Model):
+  tipo_accidente = models.CharField(max_length=40)
+  
+  def __str__(self):
+    return self.tipo_accidente
+
+class Accidentes_Transito(models.Model):
+  id_atencion = models.ForeignKey(Atenciones_Paramedicas, on_delete=models.CASCADE)
+  tipo_de_accidente = models.ForeignKey(Tipo_Accidente, on_delete=models.CASCADE)
+  cantidad_lesionados = models.CharField(max_length=20)
+  material_utilizado = models.CharField(max_length=30)
+  status = models.CharField(max_length=20)
+  
+  def __str__(self):
+    return self.id_atencion.tipo_atencion + " -- " + self.tipo_de_accidente.tipo_accidente + " -- " + self.cantidad_lesionados
+
+class Detalles_Vehiculos_Accidente(models.Model):
+  id_vehiculo = models.ForeignKey(Accidentes_Transito, on_delete=models.CASCADE)
+  modelo = models.CharField(max_length=40)
+  marca = models.CharField(max_length=40)
+  color = models.CharField(max_length=40)
+  año = models.CharField(max_length=40)
+  placas = models.CharField(max_length=40)
+  
+  def __str__(self):
+    return self.id_vehiculo.tipo_de_accidente.tipo_accidente + " -- " + self.modelo + " -- " + self.marca + " -- " + self.color + " -- " + self.año + " -- " + self.placas
+  
+class Lesionados(models.Model):
+    id_accidente = models.ForeignKey(Accidentes_Transito, on_delete=models.CASCADE)
+    nombres = models.CharField(max_length=30)
+    apellidos = models.CharField(max_length=30)
+    cedula = models.CharField(max_length=10)
+    edad = models.CharField(max_length=3)
+    sexo = models.CharField(max_length=12)
+    idx = models.CharField(max_length=40)
+    descripcion = models.CharField(max_length=40)
+    status = models.CharField(max_length=30)
+    
+    def __str__(self):
+      return self.id_accidente.tipo_de_accidente.tipo_accidente + " -- " + self.nombres + " -- " + self.apellidos + " -- " + self.cedula + " -- " + self.edad + " -- " + self.sexo + " -- " + self.idx + " -- " + self.descripcion
+    
+class Traslado_Accidente(models.Model):
+  id_lesionado = models.ForeignKey(Lesionados, on_delete=models.CASCADE)
+  hospital_trasladado = models.CharField(max_length=40)
+  medico_receptor = models.CharField(max_length=40)
+  mpps_cmt = models.CharField(max_length=20)
+  
+  def __str__(self):
+    return self.hospital_trasladado + " -- " + self.medico_receptor + " -- " + self.mpps_cmt

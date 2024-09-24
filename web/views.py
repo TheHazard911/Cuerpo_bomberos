@@ -101,7 +101,7 @@ def Prueba(request):
             "usuarios": usuarios,
             "divisiones": divisiones,
             "procedimientos": procedimientos,
-            "form": Formulario_Incendio(),
+            "form": Formulario_Traslado_Accidente(),
             })
   
 # Vista de archivo para hacer pruebas de backend
@@ -127,7 +127,10 @@ def View_Procedimiento(request):
         form_fallecido = Formulario_Fallecidos(request.POST, prefix='form_fallecido')   
         rescate_form = Formulario_Rescate(request.POST, prefix='rescate_form')
         incendio_form = Formulario_Incendio(request.POST, prefix='incendio_form')
+        atenciones_paramedicas = Formulario_Atenciones_Paramedicas(request.POST, prefix='atenciones_paramedicas')
         
+        emergencias_medicas = Formulario_Emergencias_Medicas(request.POST, prefix='emergencias_medicas')
+        traslados_emergencias = Formulario_Traslados(request.POST, prefix='traslados_emergencias')
         
         persona_presente_form = Formulario_Persona_Presente(request.POST, prefix='persona_presente_form')
         detalles_vehiculo_form = Formulario_Detalles_Vehiculos(request.POST, prefix='detalles_vehiculo_form')
@@ -326,6 +329,29 @@ def View_Procedimiento(request):
             
                 return redirect('/dashboard/')
                 
+            if tipo_procedimiento == "7" and atenciones_paramedicas.is_valid():          
+                # descripcion = fals_alarm.cleaned_data["descripcion"]
+                # material_utilizado = fals_alarm.cleaned_data["material_utilizado"]
+                # status = fals_alarm.cleaned_data["status"]
+                # motv_alarma = fals_alarm.cleaned_data["motv_alarma"]
+                
+                # Tipo_Motivo_instance = Motivo_Alarma.objects.get(id=motv_alarma)
+                # print("Datos Obtenidos")
+                
+                # nueva_falsa_alarma = Falsa_Alarma(
+                #     id_procedimiento=nuevo_procedimiento,
+                #     motivo_alarma = Tipo_Motivo_instance,
+                #     descripcion=descripcion,
+                #     material_utilizado=material_utilizado,
+                #     status=status
+                # )
+                # print(nueva_falsa_alarma)
+                # nueva_falsa_alarma.save()
+            
+                return redirect('/dashboard/')
+                
+            
+                
             if tipo_procedimiento == "9" and serv_especial.is_valid():          
                 descripcion = serv_especial.cleaned_data["descripcion"]
                 material_utilizado = serv_especial.cleaned_data["material_utilizado"]
@@ -512,6 +538,10 @@ def View_Procedimiento(request):
         form_fallecido = Formulario_Fallecidos(prefix='form_fallecido')
         rescate_form = Formulario_Rescate(prefix='rescate_form')
         incendio_form = Formulario_Incendio(prefix='incendio_form')
+        atenciones_paramedicas = Formulario_Atenciones_Paramedicas(request.POST, prefix='atenciones_paramedicas')
+        
+        emergencias_medicas = Formulario_Emergencias_Medicas(request.POST, prefix='emergencias_medicas')
+        traslados_emergencias = Formulario_Traslados(request.POST, prefix='traslados_emergencias')
         
         
         persona_presente_form = Formulario_Persona_Presente(prefix='persona_presente_form')
@@ -543,7 +573,10 @@ def View_Procedimiento(request):
         "rescate_form_persona": rescate_form_persona,
         "incendio_form": incendio_form,
         "persona_presente_form": persona_presente_form,
-        "detalles_vehiculo_form": detalles_vehiculo_form
+        "detalles_vehiculo_form": detalles_vehiculo_form,
+        "atenciones_paramedicas": atenciones_paramedicas,
+        "emergencias_medicas": emergencias_medicas,
+        "traslados_emergencias": traslados_emergencias,
     })
     
 # Vista de la Seccion de Estadisticas
