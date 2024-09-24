@@ -135,6 +135,13 @@ def View_Procedimiento(request):
         persona_presente_form = Formulario_Persona_Presente(request.POST, prefix='persona_presente_form')
         detalles_vehiculo_form = Formulario_Detalles_Vehiculos(request.POST, prefix='detalles_vehiculo_form')
         
+        formulario_accidentes_transito = Formulario_Accidentes_Transito(request.POST, prefix='formulario_accidentes_transito')
+        detalles_lesionados_accidentes = Formulario_Detalles_Lesionados(request.POST, prefix='detalles_lesionados_accidentes')
+        traslados_accidentes = Formulario_Traslado_Accidente(request.POST, prefix='traslados_accidentes')
+        detalles_vehiculo_accidentes = Formulario_Detalles_Vehiculos(request.POST, prefix='detalles_vehiculos_accidentes')
+        detalles_vehiculo_accidentes2 = Formulario_Detalles_Vehiculos2(request.POST, prefix='detalles_vehiculos_accidentes2')
+        detalles_vehiculo_accidentes3 = Formulario_Detalles_Vehiculos3(request.POST, prefix='detalles_vehiculos_accidentes3')
+        
         rescate_form_persona = Formulario_Rescate_Persona(request.POST, prefix='rescate_form_persona')   
         rescate_form_animal = Formulario_Rescate_Animal(request.POST, prefix='rescate_form_animal')   
 
@@ -174,24 +181,24 @@ def View_Procedimiento(request):
             municipio_instance = Municipios.objects.get(id=municipio)
             tipo_procedimiento_instance = Tipos_Procedimientos.objects.get(id=tipo_procedimiento)
             
-            # Crear una nueva instancia del modelo Procedimientos
+            # # Crear una nueva instancia del modelo Procedimientos
             nuevo_procedimiento = Procedimientos(
-                id_division=division_instance,
-                id_solicitante=solicitante_instance,
-                unidad=unidad,
-                efectivos_enviados=efectivos_enviados,
-                id_jefe_comision=jefe_comision_instance,
-                id_municipio=municipio_instance,
-                direccion=direccion,
-                fecha=fecha,
-                hora=hora,
-                id_tipo_procedimiento=tipo_procedimiento_instance
+               id_division=division_instance,
+               id_solicitante=solicitante_instance,
+               unidad=unidad,
+               efectivos_enviados=efectivos_enviados,
+               id_jefe_comision=jefe_comision_instance,
+               id_municipio=municipio_instance,
+               direccion=direccion,
+               fecha=fecha,
+               hora=hora,
+               id_tipo_procedimiento=tipo_procedimiento_instance
             )
             
-            # Solo asignar parroquia si está presente
+            # # Solo asignar parroquia si está presente
             if parroquia:
-                parroquia_instance = Parroquias.objects.get(id=parroquia)
-                nuevo_procedimiento.id_parroquia = parroquia_instance
+               parroquia_instance = Parroquias.objects.get(id=parroquia)
+               nuevo_procedimiento.id_parroquia = parroquia_instance
 
             nuevo_procedimiento.save()
             
@@ -330,27 +337,178 @@ def View_Procedimiento(request):
                 return redirect('/dashboard/')
                 
             if tipo_procedimiento == "7" and atenciones_paramedicas.is_valid():          
-                # descripcion = fals_alarm.cleaned_data["descripcion"]
-                # material_utilizado = fals_alarm.cleaned_data["material_utilizado"]
-                # status = fals_alarm.cleaned_data["status"]
-                # motv_alarma = fals_alarm.cleaned_data["motv_alarma"]
                 
-                # Tipo_Motivo_instance = Motivo_Alarma.objects.get(id=motv_alarma)
-                # print("Datos Obtenidos")
+                tipo_atencion = atenciones_paramedicas.cleaned_data["tipo_atencion"]
                 
-                # nueva_falsa_alarma = Falsa_Alarma(
-                #     id_procedimiento=nuevo_procedimiento,
-                #     motivo_alarma = Tipo_Motivo_instance,
-                #     descripcion=descripcion,
-                #     material_utilizado=material_utilizado,
-                #     status=status
-                # )
-                # print(nueva_falsa_alarma)
-                # nueva_falsa_alarma.save()
-            
+                nueva_atencion_paramedica = Atenciones_Paramedicas(
+                  id_procedimientos = nuevo_procedimiento,
+                  tipo_atencion = tipo_atencion
+                )
+                nueva_atencion_paramedica.save()
+                
+                print(tipo_atencion, "Todo chido aqui tambien")
+                
+                if tipo_atencion == "Emergencias Medicas" and emergencias_medicas.is_valid():
+                    nombre = emergencias_medicas.cleaned_data["nombre"]
+                    apellido = emergencias_medicas.cleaned_data["apellido"]
+                    cedula = emergencias_medicas.cleaned_data["cedula"]
+                    edad = emergencias_medicas.cleaned_data["edad"]
+                    sexo = emergencias_medicas.cleaned_data["sexo"]
+                    idx = emergencias_medicas.cleaned_data["idx"]
+                    descripcion = emergencias_medicas.cleaned_data["descripcion"]
+                    material_utilizado = emergencias_medicas.cleaned_data["material_utilizado"]
+                    status = emergencias_medicas.cleaned_data["status"]
+                    trasladado = emergencias_medicas.cleaned_data["trasladado"]
+                    
+                    print("Todo Chido en emeergencias Medicas")
+                    nueva_emergencia_medica = Emergencias_Medicas(
+                       id_atencion = nueva_atencion_paramedica,
+                       nombres = nombre,
+                       apellidos = apellido,
+                       cedula = cedula,
+                       edad = edad,
+                       sexo = sexo,
+                       idx = idx,
+                       descripcion = descripcion,
+                       material_utilizado = material_utilizado,
+                       status = status,
+                    )
+                    nueva_emergencia_medica.save()
+                
+                    print(trasladado)
+                    
+                    if trasladado == True and traslados_emergencias.is_valid():
+                        hospital = traslados_emergencias.cleaned_data["hospital_trasladado"]
+                        medico = traslados_emergencias.cleaned_data["medico_receptor"]
+                        mpps_cmt = traslados_emergencias.cleaned_data["mpps_cmt"]
+                        
+                        print("Todo Chido En el Traslado")
+                        
+                        nuevo_traslado_emergencia = Traslado(
+                           id_lesionado = nueva_emergencia_medica,
+                           hospital_trasladado = hospital,
+                           medico_receptor = medico,
+                           mpps_cmt = mpps_cmt,
+                        )
+                        nuevo_traslado_emergencia.save()
+                
+                if tipo_atencion == "Accidentes de Transito" and formulario_accidentes_transito.is_valid():
+                    tipo_accidente = formulario_accidentes_transito.cleaned_data["tipo_accidente"]
+                    cantidad_lesionado = formulario_accidentes_transito.cleaned_data["cantidad_lesionado"]
+                    material_utilizado = formulario_accidentes_transito.cleaned_data["material_utilizado"]
+                    status = formulario_accidentes_transito.cleaned_data["status"]
+                    agg_vehiculo = formulario_accidentes_transito.cleaned_data["agg_vehiculo"]
+                    agg_lesionado = formulario_accidentes_transito.cleaned_data["agg_lesionado"]
+                    
+                    tipo_accidente_instance = Tipo_Accidente.objects.get(id=tipo_accidente)
+                    
+                    print("Todo Chido Accidentes de Transito:  ", agg_vehiculo, agg_lesionado)
+                    
+                    nuevo_accidente_transito = Accidentes_Transito(
+                      id_atencion = nueva_atencion_paramedica,
+                      tipo_de_accidente = tipo_accidente_instance,
+                      cantidad_lesionados = cantidad_lesionado,
+                      material_utilizado = material_utilizado,
+                      status = status,
+                    )
+                    nuevo_accidente_transito.save()
+                    
+                    if agg_vehiculo == True and detalles_vehiculo_accidentes.is_valid():
+                        modelo1 = detalles_vehiculo_accidentes.cleaned_data["modelo"]
+                        marca1 = detalles_vehiculo_accidentes.cleaned_data["marca"]
+                        color1 = detalles_vehiculo_accidentes.cleaned_data["color"]
+                        año1 = detalles_vehiculo_accidentes.cleaned_data["año"]
+                        placas1 = detalles_vehiculo_accidentes.cleaned_data["placas"]
+                        agg_vehiculo2 = detalles_vehiculo_accidentes.cleaned_data["agg_vehiculo"]
+                        
+                        nuevo_vehiculo_accidente = Detalles_Vehiculos_Accidente(
+                            id_vehiculo = nuevo_accidente_transito,
+                            modelo = modelo1,
+                            marca = marca1,
+                            color = color1,
+                            año = año1,
+                            placas = placas1,
+                        )
+                        nuevo_vehiculo_accidente.save()
+                        print("Vehiculo 1 Guardado")
+                        
+                        if agg_vehiculo2 == True and detalles_vehiculo_accidentes2.is_valid():
+                            modelo2 = detalles_vehiculo_accidentes2.cleaned_data["modelo"]
+                            marca2 = detalles_vehiculo_accidentes2.cleaned_data["marca"]
+                            color2 = detalles_vehiculo_accidentes2.cleaned_data["color"]
+                            año2 = detalles_vehiculo_accidentes2.cleaned_data["año"]
+                            placas2 = detalles_vehiculo_accidentes2.cleaned_data["placas"]
+                            agg_vehiculo3 = detalles_vehiculo_accidentes2.cleaned_data["agg_vehiculo"]
+                            
+                            nuevo_vehiculo_accidente2 = Detalles_Vehiculos_Accidente(
+                                id_vehiculo = nuevo_accidente_transito,
+                                modelo = modelo2,
+                                marca = marca2,
+                                color = color2,
+                                año = año2,
+                                placas = placas2,
+                            )
+                            nuevo_vehiculo_accidente2.save()
+                            print("Vehiculo 2 Guardado")
+                            
+                            if agg_vehiculo3 == True and detalles_vehiculo_accidentes3.is_valid():
+                                modelo3 = detalles_vehiculo_accidentes3.cleaned_data["modelo"]
+                                marca3 = detalles_vehiculo_accidentes3.cleaned_data["marca"]
+                                color3 = detalles_vehiculo_accidentes3.cleaned_data["color"]
+                                año3 = detalles_vehiculo_accidentes3.cleaned_data["año"]
+                                placas3 = detalles_vehiculo_accidentes3.cleaned_data["placas"]
+                                
+                                nuevo_vehiculo_accidente3 = Detalles_Vehiculos_Accidente(
+                                    id_vehiculo = nuevo_accidente_transito,
+                                    modelo = modelo3,
+                                    marca = marca3,
+                                    color = color3,
+                                    año = año3,
+                                    placas = placas3,
+                                )
+                                nuevo_vehiculo_accidente3.save()
+                                print("Vehiculo 3 Guardado")
+                        
+                
+                    if agg_lesionado == True and detalles_lesionados_accidentes.is_valid():
+                        nombre = detalles_lesionados_accidentes.cleaned_data["nombre"]
+                        apellido = detalles_lesionados_accidentes.cleaned_data["apellido"]
+                        cedula = detalles_lesionados_accidentes.cleaned_data["cedula"]
+                        edad = detalles_lesionados_accidentes.cleaned_data["edad"]
+                        sexo = detalles_lesionados_accidentes.cleaned_data["sexo"]
+                        idx = detalles_lesionados_accidentes.cleaned_data["idx"]
+                        descripcion = detalles_lesionados_accidentes.cleaned_data["descripcion"]
+                        trasladado = detalles_lesionados_accidentes.cleaned_data["trasladado"]
+
+                        nuevo_lesionado = Lesionados(
+                            id_accidente = nuevo_accidente_transito,
+                            nombres = nombre,
+                            apellidos = apellido,
+                            cedula = cedula,
+                            edad = edad,
+                            sexo = sexo,
+                            idx = idx,
+                            descripcion = descripcion,
+                        )
+                        nuevo_lesionado.save()
+                        print("Lesionado Guardado")
+                        
+                        if trasladado == True and traslados_accidentes.is_valid():
+                            hospital = traslados_accidentes.cleaned_data["hospital_trasladado"]
+                            medico = traslados_accidentes.cleaned_data["medico_receptor"]
+                            mpps_cmt = traslados_accidentes.cleaned_data["mpps_cmt"]
+                            
+                            nuevo_traslado_accidente = Traslado_Accidente(
+                                id_lesionado = nuevo_lesionado,
+                                hospital_trasladado = hospital,
+                                medico_receptor = medico,
+                                mpps_cmt = mpps_cmt
+                            )
+                            nuevo_traslado_accidente.save()
+                            print("Traslado Guardado")
+                        
+                print("Todo Guardado Con Exito Guardado")
                 return redirect('/dashboard/')
-                
-            
                 
             if tipo_procedimiento == "9" and serv_especial.is_valid():          
                 descripcion = serv_especial.cleaned_data["descripcion"]
@@ -547,6 +705,13 @@ def View_Procedimiento(request):
         persona_presente_form = Formulario_Persona_Presente(prefix='persona_presente_form')
         detalles_vehiculo_form = Formulario_Detalles_Vehiculos(prefix='detalles_vehiculo_form')
         
+        formulario_accidentes_transito = Formulario_Accidentes_Transito(request.POST, prefix='formulario_accidentes_transito')
+        detalles_vehiculo_accidentes = Formulario_Detalles_Vehiculos(request.POST, prefix='detalles_vehiculos_accidentes')
+        detalles_lesionados_accidentes = Formulario_Detalles_Lesionados(request.POST, prefix='detalles_lesionados_accidentes')
+        traslados_accidentes = Formulario_Traslado_Accidente(request.POST, prefix='traslados_accidentes')
+        detalles_vehiculo_accidentes2 = Formulario_Detalles_Vehiculos2(request.POST, prefix='detalles_vehiculos_accidentes2')
+        detalles_vehiculo_accidentes3 = Formulario_Detalles_Vehiculos3(request.POST, prefix='detalles_vehiculos_accidentes3')
+        
         rescate_form_persona = Formulario_Rescate_Persona(prefix='rescate_form_persona')   
         rescate_form_animal = Formulario_Rescate_Animal(prefix='rescate_form_animal')   
 
@@ -577,6 +742,12 @@ def View_Procedimiento(request):
         "atenciones_paramedicas": atenciones_paramedicas,
         "emergencias_medicas": emergencias_medicas,
         "traslados_emergencias": traslados_emergencias,
+        "formulario_accidentes_transito": formulario_accidentes_transito,
+        "detalles_vehiculo_accidentes":  detalles_vehiculo_accidentes,
+        "detalles_vehiculo_accidentes2":  detalles_vehiculo_accidentes2,
+        "detalles_vehiculo_accidentes3":  detalles_vehiculo_accidentes3,
+        "detalles_lesionados_accidentes": detalles_lesionados_accidentes,
+        "traslados_accidentes": traslados_accidentes,
     })
     
 # Vista de la Seccion de Estadisticas
@@ -920,7 +1091,41 @@ def obtener_procedimiento(request, id):
                     material_utilizado = detalle_procedimiento.material_utilizado,
                     status = detalle_procedimiento.status,
                     )
-   
+
+    if str(procedimiento.id_tipo_procedimiento.id) == "7":
+        # Obtener el detalle del procedimiento
+        detalle_procedimiento = get_object_or_404(Atenciones_Paramedicas, id_procedimientos=id)
+        
+        # Agregar detalles del procedimiento a los datos
+        data = dict(data,
+                    tipo_atencion=detalle_procedimiento.tipo_atencion,
+                    )
+        
+        if detalle_procedimiento.tipo_atencion == "Emergencias Medicas": 
+            emergencia = Emergencias_Medicas.objects.get(id_atencion=detalle_procedimiento.id)
+            data = dict(data,
+                nombres = emergencia.nombres,
+                apellidos = emergencia.apellidos,
+                cedula = emergencia.cedula,
+                edad = emergencia.edad,
+                sexo = emergencia.sexo,
+                idx = emergencia.idx,
+                descripcion = emergencia.descripcion,
+                material_utilizado = emergencia.material_utilizado,
+                status = emergencia.status,
+            )
+            
+            if Traslado.objects.filter(id_lesionado=emergencia.id).exists():
+                traslado = Traslado.objects.get(id_lesionado = emergencia.id)
+                
+                data = dict(data, 
+                            hospital = traslado.hospital_trasladado,
+                            medico = traslado.medico_receptor,
+                            mpps_cmt = traslado.mpps_cmt,
+                        )          
+            
+            print(data)
+
     if str(procedimiento.id_tipo_procedimiento.id) == "9":
         detalle_procedimiento = get_object_or_404(Servicios_Especiales, id_procedimientos=id)
         data = dict(data,
