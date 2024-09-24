@@ -248,53 +248,68 @@ class Formulario_Detalles_Vehiculos(forms.Form):
 
 # Formulario de Atenciones Paramedicas
 class Formulario_Atenciones_Paramedicas(forms.Form):
-    tipo_atencion = forms.ChoiceField(choices=[("-", "Seleccione Una Opcion"), ("1", "Emergencias Medicas"), ("2", "Accidentes de Transito")], widget=forms.Select(attrs={"class": "disable-first-option"}))
+    tipo_atencion = forms.ChoiceField(choices=[("-", "Seleccione Una Opcion"), ("Emergencias Medicas", "Emergencias Medicas"), ("Accidentes de Transito", "Accidentes de Transito")], widget=forms.Select(attrs={"class": "disable-first-option"}))
     
 class Formulario_Emergencias_Medicas(forms.Form):
-    nombre = forms.CharField(max_length=40)
-    apellido = forms.CharField(max_length=40)
-    cedula = forms.CharField(max_length=10)
-    edad = forms.CharField(max_length=3)
-    sexo = forms.CharField(max_length=12)
-    idx = forms.CharField(max_length=40)
-    descripcion = forms.CharField(max_length=40)
-    material_utilizado = forms.CharField(max_length=40)
+    nombre = forms.CharField(max_length=40, required=False)
+    apellido = forms.CharField(max_length=40, required=False)
+    cedula = forms.CharField(max_length=10, required=False)
+    edad = forms.CharField(max_length=3, required=False)
+    sexo = forms.CharField(max_length=12, required=False)
+    idx = forms.CharField(max_length=40, required=False)
+    descripcion = forms.CharField(max_length=120, required=False)
+    material_utilizado = forms.CharField(max_length=100, required=False)
     status = forms.ChoiceField(choices=[("-", "Seleccione Una Opcion"), ("Culminado", "Culminado"), ("En Proceso", "En Proceso")], widget=forms.Select(attrs={"class": "disable-first-option"}))
+    trasladado = forms.BooleanField(required=False)
 
 class Formulario_Traslados(forms.Form):
-    hospital_trasladado = forms.CharField(max_length=50)
-    medico_receptor = forms.CharField(max_length=50)
-    mpps_cmt = forms.CharField(max_length=20)
+    hospital_trasladado = forms.CharField(max_length=50, required=False)
+    medico_receptor = forms.CharField(max_length=50, required=False)
+    mpps_cmt = forms.CharField(max_length=20, required=False)
     
 # Formulario de Accidentes de Transito
 class Formulario_Accidentes_Transito(forms.Form):
     tipo_accidente = forms.ChoiceField(choices=Asignar_opc_tipo_accidente, widget=forms.Select(attrs={"class": "disable-first-option"}))
-    cantidad_lesionado = forms.CharField(max_length=4)
-    material_utilizado = forms.CharField(max_length=30)
+    cantidad_lesionado = forms.CharField(max_length=4, required=False)
+    material_utilizado = forms.CharField(max_length=30, required=False)
     status = forms.ChoiceField(choices=[("-", "Seleccione Una Opcion"), ("Culminado", "Culminado"), ("En Proceso", "En Proceso")], widget=forms.Select(attrs={"class": "disable-first-option"}))
-    agg_vehiculo = forms.BooleanField()
-    agg_lesionado = forms.BooleanField()
+    agg_vehiculo = forms.BooleanField(required=False)
+    agg_lesionado = forms.BooleanField(required=False)
     
 class Formulario_Detalles_Vehiculos(forms.Form):
-    modelo = forms.CharField(max_length=30)
-    marca = forms.CharField(max_length=30)
-    color = forms.CharField(max_length=30)
-    año = forms.CharField(max_length=30)
-    placas = forms.CharField(max_length=30)
-    agg_vehiculo = forms.BooleanField()
+    modelo = forms.CharField(max_length=30, required=False)
+    marca = forms.CharField(max_length=30, required=False)
+    color = forms.CharField(max_length=30, required=False)
+    año = forms.CharField(max_length=30, required=False)
+    placas = forms.CharField(max_length=30, required=False)
+    agg_vehiculo = forms.BooleanField(required=False)
+
+class Formulario_Detalles_Vehiculos2(forms.Form):
+    modelo = forms.CharField(max_length=30, required=False)
+    marca = forms.CharField(max_length=30, required=False)
+    color = forms.CharField(max_length=30, required=False)
+    año = forms.CharField(max_length=30, required=False)
+    placas = forms.CharField(max_length=30, required=False)
+    agg_vehiculo = forms.BooleanField(required=False)
+    
+class Formulario_Detalles_Vehiculos3(forms.Form):
+    modelo = forms.CharField(max_length=30, required=False)
+    marca = forms.CharField(max_length=30, required=False)
+    color = forms.CharField(max_length=30, required=False)
+    año = forms.CharField(max_length=30, required=False)
+    placas = forms.CharField(max_length=30, required=False)
 
 class Formulario_Detalles_Lesionados(forms.Form):
-    nombre = forms.CharField(max_length=40)
-    apellido = forms.CharField(max_length=40)
-    cedula = forms.CharField(max_length=10)
-    edad = forms.CharField(max_length=3)
-    sexo = forms.CharField(max_length=12)
-    idx = forms.CharField(max_length=40)
-    descripcion = forms.CharField(max_length=40)
-    material_utilizado = forms.CharField(max_length=40)
-    status = forms.ChoiceField(choices=[("-", "Seleccione Una Opcion"), ("Culminado", "Culminado"), ("En Proceso", "En Proceso")], widget=forms.Select(attrs={"class": "disable-first-option"}))
-    
+    nombre = forms.CharField(max_length=40, required=False)
+    apellido = forms.CharField(max_length=40, required=False)
+    cedula = forms.CharField(max_length=10, required=False)
+    edad = forms.CharField(max_length=3, required=False)
+    sexo = forms.CharField(max_length=12, required=False)
+    idx = forms.CharField(max_length=40, required=False)
+    descripcion = forms.CharField(max_length=40, required=False)
+    trasladado = forms.BooleanField(required=False)
+
 class Formulario_Traslado_Accidente(forms.Form):
-    hospital_trasladado = forms.CharField(max_length=50)
-    medico_receptor = forms.CharField(max_length=50)
-    mpps_cmt = forms.CharField(max_length=20)
+    hospital_trasladado = forms.CharField(max_length=50, required=False)
+    medico_receptor = forms.CharField(max_length=50, required=False)
+    mpps_cmt = forms.CharField(max_length=20, required=False)
