@@ -78,6 +78,13 @@ def Asignar_opc_tipo_incendio():
        op.append((str(procedimiento.id), procedimiento.tipo_incendio))
    return op
 
+def Asignar_opc_tipo_accidente():
+   procedimientos = Tipo_Accidente.objects.all()
+   op = [("0", "Seleccione Una Opcion")]
+   for procedimiento in procedimientos:
+       op.append((str(procedimiento.id), procedimiento.tipo_accidente))
+   return op
+
 # Form1
 class SelectorDivision(forms.Form):
     op = [
@@ -238,4 +245,56 @@ class Formulario_Detalles_Vehiculos(forms.Form):
     color = forms.CharField(max_length=40, required=False)
     año = forms.CharField(max_length=40, required=False)
     placas = forms.CharField(max_length=40, required=False)
+
+# Formulario de Atenciones Paramedicas
+class Formulario_Atenciones_Paramedicas(forms.Form):
+    tipo_atencion = forms.ChoiceField(choices=[("-", "Seleccione Una Opcion"), ("1", "Emergencias Medicas"), ("2", "Accidentes de Transito")], widget=forms.Select(attrs={"class": "disable-first-option"}))
     
+class Formulario_Emergencias_Medicas(forms.Form):
+    nombre = forms.CharField(max_length=40)
+    apellido = forms.CharField(max_length=40)
+    cedula = forms.CharField(max_length=10)
+    edad = forms.CharField(max_length=3)
+    sexo = forms.CharField(max_length=12)
+    idx = forms.CharField(max_length=40)
+    descripcion = forms.CharField(max_length=40)
+    material_utilizado = forms.CharField(max_length=40)
+    status = forms.ChoiceField(choices=[("-", "Seleccione Una Opcion"), ("Culminado", "Culminado"), ("En Proceso", "En Proceso")], widget=forms.Select(attrs={"class": "disable-first-option"}))
+
+class Formulario_Traslados(forms.Form):
+    hospital_trasladado = forms.CharField(max_length=50)
+    medico_receptor = forms.CharField(max_length=50)
+    mpps_cmt = forms.CharField(max_length=20)
+    
+# Formulario de Accidentes de Transito
+class Formulario_Accidentes_Transito(forms.Form):
+    tipo_accidente = forms.ChoiceField(choices=Asignar_opc_tipo_accidente, widget=forms.Select(attrs={"class": "disable-first-option"}))
+    cantidad_lesionado = forms.CharField(max_length=4)
+    material_utilizado = forms.CharField(max_length=30)
+    status = forms.ChoiceField(choices=[("-", "Seleccione Una Opcion"), ("Culminado", "Culminado"), ("En Proceso", "En Proceso")], widget=forms.Select(attrs={"class": "disable-first-option"}))
+    agg_vehiculo = forms.BooleanField()
+    agg_lesionado = forms.BooleanField()
+    
+class Formulario_Detalles_Vehiculos(forms.Form):
+    modelo = forms.CharField(max_length=30)
+    marca = forms.CharField(max_length=30)
+    color = forms.CharField(max_length=30)
+    año = forms.CharField(max_length=30)
+    placas = forms.CharField(max_length=30)
+    agg_vehiculo = forms.BooleanField()
+
+class Formulario_Detalles_Lesionados(forms.Form):
+    nombre = forms.CharField(max_length=40)
+    apellido = forms.CharField(max_length=40)
+    cedula = forms.CharField(max_length=10)
+    edad = forms.CharField(max_length=3)
+    sexo = forms.CharField(max_length=12)
+    idx = forms.CharField(max_length=40)
+    descripcion = forms.CharField(max_length=40)
+    material_utilizado = forms.CharField(max_length=40)
+    status = forms.ChoiceField(choices=[("-", "Seleccione Una Opcion"), ("Culminado", "Culminado"), ("En Proceso", "En Proceso")], widget=forms.Select(attrs={"class": "disable-first-option"}))
+    
+class Formulario_Traslado_Accidente(forms.Form):
+    hospital_trasladado = forms.CharField(max_length=50)
+    medico_receptor = forms.CharField(max_length=50)
+    mpps_cmt = forms.CharField(max_length=20)

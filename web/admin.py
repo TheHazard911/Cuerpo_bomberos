@@ -31,4 +31,12 @@ admin.site.register(Incendios)
 admin.site.register(Tipo_Incendio)
 admin.site.register(Persona_Presente)
 admin.site.register(Detalles_Vehiculos)
+admin.site.register(Atenciones_Paramedicas)
+admin.site.register(Emergencias_Medicas)
+admin.site.register(Traslado)
+admin.site.register(Tipo_Accidente)
+admin.site.register(Accidentes_Transito)
+admin.site.register(Detalles_Vehiculos_Accidente)
+admin.site.register(Lesionados)
+
 
