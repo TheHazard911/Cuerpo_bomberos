@@ -403,7 +403,21 @@
                   <p><b>Color: </b> ${data.color}</p>
                   <p><b>Año: </b> ${data.año}</p>
                   <p><b>Placas: </b> ${data.placas}</p>
-                </section>` : ''}`};
+                </section>` : ''}`,
+              
+            "Atenciones Paramedicas": () => `
+              <section class="detalles_procedimiento">
+                <h4>Detalles</h4>
+                <p><b>Tipo de Atencion: </b> ${data.tipo_atencion}</p>
+              </section>
+              <section class="detalles_procedimiento">
+                <h4>Detalles</h4>
+                <p><b>Tipo de Atencion: </b> ${data.tipo_atencion}</p>
+              </section>
+            `
+                
+                
+                };
 
           const detalles = detailSections[id_tipo_procedimiento] ? detailSections[id_tipo_procedimiento]() : "<h2>Error</h2>";
 

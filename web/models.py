@@ -305,7 +305,7 @@ class Emergencias_Medicas(models.Model):
   status = models.CharField(max_length=20)
   
   def __str__(self):
-    return self.id_atencion.tipo_atencion + " -- " + self.nombres + " -- " + self.apellidos + " -- " + self.cedula + " -- " + self.edad + " -- " + self.sexo + " -- " + self.idx + " -- " + self.descripcion
+    return self.id_atencion.tipo_atencion + " -- " + self.nombres + " -- " + self.apellidos + " -- " + self.cedula + " -- " + self.edad + " -- " + self.sexo + " -- " + self.idx + " -- " + self.descripcion + " -- " +  self.material_utilizado + " -- " + self.status
   
 class Traslado(models.Model):
   id_lesionado = models.ForeignKey(Emergencias_Medicas, on_delete=models.CASCADE)
@@ -353,7 +353,6 @@ class Lesionados(models.Model):
     sexo = models.CharField(max_length=12)
     idx = models.CharField(max_length=40)
     descripcion = models.CharField(max_length=40)
-    status = models.CharField(max_length=30)
     
     def __str__(self):
       return self.id_accidente.tipo_de_accidente.tipo_accidente + " -- " + self.nombres + " -- " + self.apellidos + " -- " + self.cedula + " -- " + self.edad + " -- " + self.sexo + " -- " + self.idx + " -- " + self.descripcion
