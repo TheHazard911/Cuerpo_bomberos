@@ -43,38 +43,22 @@ def Dashboard(request):
     
     # Obtener la fecha de hoy
     hoy = datetime.now().date()
-    
-    otros_municipios = Procedimientos.objects.filter(id_parroquia = 0)
-    concordia = Procedimientos.objects.filter(id_parroquia = 1).count()
-    pedro_m = Procedimientos.objects.filter(id_parroquia = 2).count()
-    san_juan = Procedimientos.objects.filter(id_parroquia = 3).count()
-    san_sebastian = Procedimientos.objects.filter(id_parroquia = 4).count()
-    
-    # Filtrar procedimientos con la fecha de hoy
-    fechas = otros_municipios.values_list("fecha", flat=True)
-    otros_municipios_hoy = [fecha for fecha in fechas if fecha == hoy]
-    otros_municipios_hoy = len(otros_municipios_hoy)
-    
-    # Filtrar procedimientos con la fecha de hoy
-    fechas = concordia.values_list("fecha", flat=True)
-    concordia_hoy = [fecha for fecha in fechas if fecha == hoy]
-    concordia_hoy = len(concordia_hoy)
-    
-    # Filtrar procedimientos con la fecha de hoy
-    fechas = pedro_m.values_list("fecha", flat=True)
-    pedro_m_hoy = [fecha for fecha in fechas if fecha == hoy]
-    pedro_m_hoy = len(pedro_m_hoy)
-    
-    # Filtrar procedimientos con la fecha de hoy
-    fechas = san_juan.values_list("fecha", flat=True)
-    san_juan_hoy = [fecha for fecha in fechas if fecha == hoy]
-    san_juan_hoy = len(san_juan_hoy)
-    
-    # Filtrar procedimientos con la fecha de hoy
-    fechas = san_juan.values_list("fecha", flat=True)
-    san_sebastian_hoy = [fecha for fecha in fechas if fecha == hoy]
-    san_sebastian_hoy = len(san_sebastian_hoy)
-    
+
+    # Consultas de procedimientos para cada parroquia
+    otros_municipios = Procedimientos.objects.filter(id_parroquia=0)
+    concordia = Procedimientos.objects.filter(id_parroquia=1)
+    pedro_m = Procedimientos.objects.filter(id_parroquia=2)
+    san_juan = Procedimientos.objects.filter(id_parroquia=3)
+    san_sebastian = Procedimientos.objects.filter(id_parroquia=4)
+
+    # Filtrar procedimientos por la fecha de hoy para cada parroquia
+    otros_municipios_hoy = otros_municipios.filter(fecha=hoy).count()
+    concordia_hoy = concordia.filter(fecha=hoy).count()
+    pedro_m_hoy = pedro_m.filter(fecha=hoy).count()
+    san_juan_hoy = san_juan.filter(fecha=hoy).count()
+    san_sebastian_hoy = san_sebastian.filter(fecha=hoy).count()
+
+    # Renderizar la página con los datos
     return render(request, "dashboard.html", {
         "user": user,
         "jerarquia": user["jerarquia"],
