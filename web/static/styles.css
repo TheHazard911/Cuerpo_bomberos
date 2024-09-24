@@ -722,7 +722,7 @@ summary > * {
   padding: 0.5rem;
   padding-right: 2rem;
 }
-.username-space{
+.username-space {
   justify-content: space-between;
 }
 .user-name {
@@ -980,7 +980,7 @@ summary > * {
 .section-filter {
   width: 95%;
   height: auto;
-  padding: .5rem;
+  padding: 0.5rem;
   display: flex;
   justify-content: space-evenly;
   align-items: center;
@@ -1008,7 +1008,7 @@ summary > * {
     height: 25px;
   }
 }
-.totals-procediments{
+.totals-procediments {
   width: 50%;
   text-align: center;
   margin-bottom: 1rem;
@@ -1180,4 +1180,24 @@ summary > * {
 }
 .size-nav {
   width: 320px !important;
+}
+/*------------------------ estadisticas -----------------------------------*/
+.position-cards-stadists {
+  width: 100%;
+  height: auto;
+  padding: 2rem;
+}
+.column-one {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+.cards-stadists {
+  width: 500px;
+  height: auto;
+  border-radius: 20px;
+  align-items: center;
+  margin: 1.5rem;
+  background-color: #f0f0f06a;
+  border: thin solid #dcdcdcdb;
 }
