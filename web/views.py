@@ -1104,6 +1104,7 @@ def obtener_procedimiento(request, id):
         if detalle_procedimiento.tipo_atencion == "Emergencias Medicas": 
             emergencia = Emergencias_Medicas.objects.get(id_atencion=detalle_procedimiento.id)
             data = dict(data,
+                emergencia = True,
                 nombres = emergencia.nombres,
                 apellidos = emergencia.apellidos,
                 cedula = emergencia.cedula,
@@ -1119,13 +1120,73 @@ def obtener_procedimiento(request, id):
                 traslado = Traslado.objects.get(id_lesionado = emergencia.id)
                 
                 data = dict(data, 
+                            traslado = True,
                             hospital = traslado.hospital_trasladado,
                             medico = traslado.medico_receptor,
                             mpps_cmt = traslado.mpps_cmt,
                         )          
+        
+        print(data)
+        
+        if detalle_procedimiento.tipo_atencion == "Accidentes de Transito": 
+            accidente = Accidentes_Transito.objects.get(id_atencion=detalle_procedimiento.id)
+            data = dict(data,
+                accidente = True,
+                tipo_accidente=accidente.tipo_de_accidente.tipo_accidente,
+                cantidad_lesionados=accidente.cantidad_lesionados,
+                material_utilizado=accidente.material_utilizado,
+                status=accidente.status,
+            )
+            
+            # Filtrar todos los vehículos relacionados con el accidente
+            vehiculos = Detalles_Vehiculos_Accidente.objects.filter(id_vehiculo=accidente.id)
+
+            # Si hay vehículos, recopilarlos en una lista
+            if vehiculos:
+                data = dict(data,
+                    vehiculo = True
+                )
+                vehiculos_list = []
+                for vehiculo in vehiculos:
+                    vehiculos_list.append({
+                        'marca': vehiculo.marca,
+                        'modelo': vehiculo.modelo,
+                        'color': vehiculo.color,
+                        'año': vehiculo.año,
+                        'placas': vehiculo.placas,
+                        # Añade aquí otros campos que necesites
+                    })
+                data['vehiculos'] = vehiculos_list  # Agrega la lista de vehículos a 'data'
+            else:
+                print("No hay na")
+                data['vehiculos'] = []  # O puedes omitir esta línea si prefieres no agregar la clave
+            
+            if Lesionados.objects.filter(id_accidente=accidente.id).exists():
+                lesionados = Lesionados.objects.get(id_accidente = accidente.id)
+                
+                data = dict(data, 
+                            lesionados = True,
+                            nombre = lesionados.nombres,
+                            apellidos = lesionados.apellidos,
+                            cedula = lesionados.cedula,
+                            edad = lesionados.edad,
+                            sexo = lesionados.sexo,
+                            idx = lesionados.idx,
+                            descripcion = lesionados.descripcion,
+                        )          
+                
+                if Traslado_Accidente.objects.filter(id_lesionado=lesionados.id).exists():
+                    traslados = Traslado_Accidente.objects.get(id_lesionado = lesionados.id)
+                    
+                    data = dict(data, 
+                                traslado = True,
+                                hospita = traslados.hospital_trasladado,
+                                medico = traslados.medico_receptor,
+                                mpps_cmt = traslados.mpps_cmt,
+                            )          
             
             print(data)
-
+            
     if str(procedimiento.id_tipo_procedimiento.id) == "9":
         detalle_procedimiento = get_object_or_404(Servicios_Especiales, id_procedimientos=id)
         data = dict(data,
