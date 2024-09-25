@@ -85,6 +85,13 @@ def Asignar_opc_tipo_accidente():
        op.append((str(procedimiento.id), procedimiento.tipo_accidente))
    return op
 
+def Asignar_opc_motivos_riesgo():
+   procedimientos = Motivo_Riesgo.objects.all()
+   op = [("0", "Seleccione Una Opcion")]
+   for procedimiento in procedimientos:
+       op.append((str(procedimiento.id), procedimiento.tipo_riesgo))
+   return op
+
 # Form1
 class SelectorDivision(forms.Form):
     op = [
@@ -313,3 +320,10 @@ class Formulario_Traslado_Accidente(forms.Form):
     hospital_trasladado = forms.CharField(max_length=50, required=False)
     medico_receptor = forms.CharField(max_length=50, required=False)
     mpps_cmt = forms.CharField(max_length=20, required=False)
+    
+class Forulario_Evaluacion_Riesgo(forms.Form):
+    tipo_riesgo = forms.ChoiceField(choices=Asignar_opc_motivos_riesgo, widget=forms.Select(attrs={"class": "disable-first-option"}))
+    descripcion = forms.CharField(max_length=100, required=False)
+    material_utilizado = forms.CharField(max_length=100, required=False)
+    status = forms.ChoiceField(choices=[("-", "Seleccione Una Opcion"), ("Culminado", "Culminado"), ("En Proceso", "En Proceso")], widget=forms.Select(attrs={"class": "disable-first-option"}))
+    
