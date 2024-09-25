@@ -40,5 +40,7 @@ admin.site.register(Detalles_Vehiculos_Accidente)
 admin.site.register(Lesionados)
 admin.site.register(Motivo_Riesgo)
 admin.site.register(Evaluacion_Riesgo)
+admin.site.register(Mitigacion_riesgo)
+admin.site.register(Mitigacion_Riesgos)
 
 

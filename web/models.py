@@ -104,6 +104,12 @@ class Motivo_Riesgo(models.Model):
   
   def __str__(self):
     return self.tipo_riesgo
+# tabla de posibles mitigacion de riesgo
+class Mitigacion_riesgo(models.Model):
+  tipo_servicio = models.CharField(max_length=100)
+  
+  def __str__(self):
+    return self.tipo_servicio
 
 # tabla de listado de unidades del cuerpo de bomberos
 class Unidades(models.Model):
@@ -380,3 +386,13 @@ class Evaluacion_Riesgo(models.Model):
   
   def __str__(self):
     return self.id_procedimientos.id_tipo_procedimiento.tipo_procedimiento + " -- " + self.id_tipo_riesgo.tipo_riesgo + " -- " + self.descripcion + " -- " + self.material_utilizado + " -- " + self.status
+
+class Mitigacion_Riesgos(models.Model):
+  id_procedimientos = models.ForeignKey(Procedimientos, on_delete=models.CASCADE)
+  id_tipo_servicio = models.ForeignKey(Mitigacion_riesgo, on_delete=models.CASCADE)
+  descripcion = models.CharField(max_length=100)
+  material_utilizado = models.CharField(max_length=100)
+  status = models.CharField(max_length=100)
+  
+  def __str__(self):
+    return self.id_procedimientos.id_tipo_procedimiento.tipo_procedimiento + " -- " + self.id_tipo_servicio.tipo_riesgo + " -- " + self.descripcion + " -- " + self.material_utilizado + " -- " + self.status
