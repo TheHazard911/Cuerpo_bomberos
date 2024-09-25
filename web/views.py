@@ -1037,7 +1037,7 @@ def obtener_procedimiento(request, id):
         detalle_procedimiento = get_object_or_404(Abastecimiento_agua, id_procedimiento=id)
         
         data = dict(data,
-                    tipo_servicio = detalle_procedimiento.id_tipo_servicio.nombre_institucion,
+                    ente_suministrado = detalle_procedimiento.id_tipo_servicio.nombre_institucion,
                     nombres = detalle_procedimiento.nombres,
                     apellidos = detalle_procedimiento.apellidos,
                     cedula = detalle_procedimiento.cedula,
@@ -1125,8 +1125,6 @@ def obtener_procedimiento(request, id):
                             medico = traslado.medico_receptor,
                             mpps_cmt = traslado.mpps_cmt,
                         )          
-        
-        print(data)
         
         if detalle_procedimiento.tipo_atencion == "Accidentes de Transito": 
             accidente = Accidentes_Transito.objects.get(id_atencion=detalle_procedimiento.id)
