@@ -143,7 +143,9 @@ def View_Procedimiento(request):
         detalles_vehiculo_accidentes3 = Formulario_Detalles_Vehiculos3(request.POST, prefix='detalles_vehiculos_accidentes3')
         
         rescate_form_persona = Formulario_Rescate_Persona(request.POST, prefix='rescate_form_persona')   
-        rescate_form_animal = Formulario_Rescate_Animal(request.POST, prefix='rescate_form_animal')   
+        rescate_form_animal = Formulario_Rescate_Animal(request.POST, prefix='rescate_form_animal')
+        
+        evaluacion_riesgo_form = Forulario_Evaluacion_Riesgo(request.POST, prefix='evaluacion_riesgo_form')
 
         # Imprimir request.POST para depuración
 
@@ -680,6 +682,28 @@ def View_Procedimiento(request):
                 nuevo_proc_fallecido.save()
             
                 return redirect('/dashboard/')
+            
+            if tipo_procedimiento == "14" and evaluacion_riesgo_form.is_valid():  
+                tipo_riesgo = evaluacion_riesgo_form.cleaned_data["tipo_riesgo"]       
+                descripcion = evaluacion_riesgo_form.cleaned_data["descripcion"]
+                material_utilizado = evaluacion_riesgo_form.cleaned_data["material_utilizado"]
+                status = evaluacion_riesgo_form.cleaned_data["status"]
+                
+                print("Datos Obtenidos")
+                
+                tipo_riesgo_instance = Motivo_Riesgo.objects.get(id=tipo_riesgo)
+                
+                nuevo_proc_eval = Evaluacion_Riesgo(
+                    id_procedimientos = nuevo_procedimiento,
+                    id_tipo_riesgo = tipo_riesgo_instance,
+                    descripcion=descripcion,
+                    material_utilizado=material_utilizado,
+                    status=status
+                )
+                print(nuevo_proc_eval)
+                nuevo_proc_eval.save()
+            
+                return redirect('/dashboard/')
          
     else:
         form = SelectorDivision(prefix='form1')
@@ -696,25 +720,26 @@ def View_Procedimiento(request):
         form_fallecido = Formulario_Fallecidos(prefix='form_fallecido')
         rescate_form = Formulario_Rescate(prefix='rescate_form')
         incendio_form = Formulario_Incendio(prefix='incendio_form')
-        atenciones_paramedicas = Formulario_Atenciones_Paramedicas(request.POST, prefix='atenciones_paramedicas')
+        atenciones_paramedicas = Formulario_Atenciones_Paramedicas(prefix='atenciones_paramedicas')
         
-        emergencias_medicas = Formulario_Emergencias_Medicas(request.POST, prefix='emergencias_medicas')
-        traslados_emergencias = Formulario_Traslados(request.POST, prefix='traslados_emergencias')
-        
+        emergencias_medicas = Formulario_Emergencias_Medicas(prefix='emergencias_medicas')
+        traslados_emergencias = Formulario_Traslados(prefix='traslados_emergencias')
         
         persona_presente_form = Formulario_Persona_Presente(prefix='persona_presente_form')
         detalles_vehiculo_form = Formulario_Detalles_Vehiculos(prefix='detalles_vehiculo_form')
         
-        formulario_accidentes_transito = Formulario_Accidentes_Transito(request.POST, prefix='formulario_accidentes_transito')
-        detalles_vehiculo_accidentes = Formulario_Detalles_Vehiculos(request.POST, prefix='detalles_vehiculos_accidentes')
-        detalles_lesionados_accidentes = Formulario_Detalles_Lesionados(request.POST, prefix='detalles_lesionados_accidentes')
-        traslados_accidentes = Formulario_Traslado_Accidente(request.POST, prefix='traslados_accidentes')
-        detalles_vehiculo_accidentes2 = Formulario_Detalles_Vehiculos2(request.POST, prefix='detalles_vehiculos_accidentes2')
-        detalles_vehiculo_accidentes3 = Formulario_Detalles_Vehiculos3(request.POST, prefix='detalles_vehiculos_accidentes3')
+        formulario_accidentes_transito = Formulario_Accidentes_Transito(prefix='formulario_accidentes_transito')
+        detalles_vehiculo_accidentes = Formulario_Detalles_Vehiculos(prefix='detalles_vehiculos_accidentes')
+        detalles_lesionados_accidentes = Formulario_Detalles_Lesionados(prefix='detalles_lesionados_accidentes')
+        traslados_accidentes = Formulario_Traslado_Accidente(prefix='traslados_accidentes')
+        detalles_vehiculo_accidentes2 = Formulario_Detalles_Vehiculos2(prefix='detalles_vehiculos_accidentes2')
+        detalles_vehiculo_accidentes3 = Formulario_Detalles_Vehiculos3(prefix='detalles_vehiculos_accidentes3')
         
         rescate_form_persona = Formulario_Rescate_Persona(prefix='rescate_form_persona')   
         rescate_form_animal = Formulario_Rescate_Animal(prefix='rescate_form_animal')   
 
+        evaluacion_riesgo_form = Forulario_Evaluacion_Riesgo(prefix='evaluacion_riesgo_form')
+        
     return render(request, "procedimientos.html", {
         "user": user,
         "jerarquia": user["jerarquia"],
@@ -748,6 +773,7 @@ def View_Procedimiento(request):
         "detalles_vehiculo_accidentes3":  detalles_vehiculo_accidentes3,
         "detalles_lesionados_accidentes": detalles_lesionados_accidentes,
         "traslados_accidentes": traslados_accidentes,
+        "evaluacion_riesgo_form": evaluacion_riesgo_form,
     })
     
 # Vista de la Seccion de Estadisticas

@@ -98,7 +98,12 @@ class Motivo_Alarma(models.Model):
   def __str__(self):
     return self.motivo
 
-
+# tabla de posibles motivos de evaluacion de riesgo
+class Motivo_Riesgo(models.Model):
+  tipo_riesgo = models.CharField(max_length=100)
+  
+  def __str__(self):
+    return self.tipo_riesgo
 
 # tabla de listado de unidades del cuerpo de bomberos
 class Unidades(models.Model):
@@ -211,7 +216,6 @@ class Falsa_Alarma(models.Model):
   
   def __str__(self):
    return self.id_procedimiento.id_division.division + " -- " + self.motivo_alarma.motivo + " -- " + self.descripcion + " -- " + self.material_utilizado + " -- " + self.status
-
 
 class Servicios_Especiales(models.Model):
   id_procedimientos = models.ForeignKey(Procedimientos, on_delete=models.CASCADE)
@@ -365,3 +369,14 @@ class Traslado_Accidente(models.Model):
   
   def __str__(self):
     return self.hospital_trasladado + " -- " + self.medico_receptor + " -- " + self.mpps_cmt
+
+# Tabla Eevaluacion de Riesgo
+class Evaluacion_Riesgo(models.Model):
+  id_procedimientos = models.ForeignKey(Procedimientos, on_delete=models.CASCADE)
+  id_tipo_riesgo = models.ForeignKey(Motivo_Riesgo, on_delete=models.CASCADE)
+  descripcion = models.CharField(max_length=100)
+  material_utilizado = models.CharField(max_length=100)
+  status = models.CharField(max_length=100)
+  
+  def __str__(self):
+    return self.id_procedimientos.id_tipo_procedimiento.tipo_procedimiento + " -- " + self.id_tipo_riesgo.tipo_riesgo + " -- " + self.descripcion + " -- " + self.material_utilizado + " -- " + self.status
