@@ -146,6 +146,7 @@ def View_Procedimiento(request):
         rescate_form_animal = Formulario_Rescate_Animal(request.POST, prefix='rescate_form_animal')
         
         evaluacion_riesgo_form = Forulario_Evaluacion_Riesgo(request.POST, prefix='evaluacion_riesgo_form')
+        mitigacion_riesgo_form = Formulario_Mitigacion_Riesgos(request.POST, prefix='mitigacion_riesgo_form')
 
         # Imprimir request.POST para depuración
 
@@ -182,12 +183,13 @@ def View_Procedimiento(request):
             jefe_comision_instance = Personal.objects.get(id=jefe_comision)
             municipio_instance = Municipios.objects.get(id=municipio)
             tipo_procedimiento_instance = Tipos_Procedimientos.objects.get(id=tipo_procedimiento)
+            unidad_instance = Unidades.objects.get(id=unidad)
             
             # # Crear una nueva instancia del modelo Procedimientos
             nuevo_procedimiento = Procedimientos(
                id_division=division_instance,
                id_solicitante=solicitante_instance,
-               unidad=unidad,
+               unidad=unidad_instance,
                efectivos_enviados=efectivos_enviados,
                id_jefe_comision=jefe_comision_instance,
                id_municipio=municipio_instance,
@@ -683,6 +685,28 @@ def View_Procedimiento(request):
             
                 return redirect('/dashboard/')
             
+            if tipo_procedimiento == "13" and mitigacion_riesgo_form.is_valid():  
+                tipo_riesgo = mitigacion_riesgo_form.cleaned_data["tipo_riesgo"]       
+                descripcion = mitigacion_riesgo_form.cleaned_data["descripcion"]
+                material_utilizado = mitigacion_riesgo_form.cleaned_data["material_utilizado"]
+                status = mitigacion_riesgo_form.cleaned_data["status"]
+                
+                print("Datos Obtenidos")
+                
+                tipo_riesgo_instance = Mitigacion_riesgo.objects.get(id=tipo_riesgo)
+                
+                nuevo_proc_mit = Mitigacion_Riesgos(
+                    id_procedimientos = nuevo_procedimiento,
+                    id_tipo_servicio = tipo_riesgo_instance,
+                    descripcion=descripcion,
+                    material_utilizado=material_utilizado,
+                    status=status
+                )
+                print(nuevo_proc_mit)
+                nuevo_proc_mit.save()
+            
+                return redirect('/dashboard/')
+            
             if tipo_procedimiento == "14" and evaluacion_riesgo_form.is_valid():  
                 tipo_riesgo = evaluacion_riesgo_form.cleaned_data["tipo_riesgo"]       
                 descripcion = evaluacion_riesgo_form.cleaned_data["descripcion"]
@@ -726,7 +750,7 @@ def View_Procedimiento(request):
         traslados_emergencias = Formulario_Traslados(prefix='traslados_emergencias')
         
         persona_presente_form = Formulario_Persona_Presente(prefix='persona_presente_form')
-        detalles_vehiculo_form = Formulario_Detalles_Vehiculos(prefix='detalles_vehiculo_form')
+        detalles_vehiculo_form = Formulario_Detalles_Vehiculos_Incendio(prefix='detalles_vehiculo_form')
         
         formulario_accidentes_transito = Formulario_Accidentes_Transito(prefix='formulario_accidentes_transito')
         detalles_vehiculo_accidentes = Formulario_Detalles_Vehiculos(prefix='detalles_vehiculos_accidentes')
@@ -739,6 +763,7 @@ def View_Procedimiento(request):
         rescate_form_animal = Formulario_Rescate_Animal(prefix='rescate_form_animal')   
 
         evaluacion_riesgo_form = Forulario_Evaluacion_Riesgo(prefix='evaluacion_riesgo_form')
+        mitigacion_riesgo_form = Formulario_Mitigacion_Riesgos(prefix='mitigacion_riesgo_form')
         
     return render(request, "procedimientos.html", {
         "user": user,
@@ -774,6 +799,8 @@ def View_Procedimiento(request):
         "detalles_lesionados_accidentes": detalles_lesionados_accidentes,
         "traslados_accidentes": traslados_accidentes,
         "evaluacion_riesgo_form": evaluacion_riesgo_form,
+        "mitigacion_riesgo_form": mitigacion_riesgo_form,
+        
     })
     
 # Vista de la Seccion de Estadisticas
@@ -1048,7 +1075,7 @@ def obtener_procedimiento(request, id):
         'division': procedimiento.id_division.division,
         'solicitante': f"{procedimiento.id_solicitante.jerarquia} {procedimiento.id_solicitante.nombres} {procedimiento.id_solicitante.apellidos}",
         'jefe_comision': f"{procedimiento.id_jefe_comision.jerarquia} {procedimiento.id_jefe_comision.nombres} {procedimiento.id_jefe_comision.apellidos}",
-        'unidad': procedimiento.unidad,
+        'unidad': procedimiento.unidad.nombre_unidad,
         'efectivos': procedimiento.efectivos_enviados,
         'parroquia': procedimiento.id_parroquia.parroquia,
         'municipio': procedimiento.id_municipio.municipio,
@@ -1230,7 +1257,6 @@ def obtener_procedimiento(request, id):
     
         if detalle_procedimiento.tipo_rescate.tipo_rescate == "Animal":
             detalle_tipo_rescate = get_object_or_404(Rescate_Animal, id_rescate=detalle_procedimiento.id)
-            print(detalle_tipo_rescate)
             data = dict(data,
                         especie = detalle_tipo_rescate.especie, 
                         descripcion = detalle_tipo_rescate.descripcion,
@@ -1250,7 +1276,6 @@ def obtener_procedimiento(request, id):
     if str(procedimiento.id_tipo_procedimiento.id) == "11":
       # Obtener el detalle del procedimiento
       detalle_procedimiento = get_object_or_404(Incendios, id_procedimientos=id)
-      print(detalle_procedimiento)
       
       # Agregar detalles del procedimiento a los datos
       data = dict(data,
@@ -1261,7 +1286,6 @@ def obtener_procedimiento(request, id):
                 )
       
       if Persona_Presente.objects.filter(id_incendio=detalle_procedimiento.id).exists():
-          print("Si existe el elemento")
           persona_presente_detalles = Persona_Presente.objects.get(id_incendio=detalle_procedimiento.id)
           data.update({
               "persona": True,
@@ -1275,7 +1299,6 @@ def obtener_procedimiento(request, id):
           
       if Detalles_Vehiculos.objects.filter(id_vehiculo=detalle_procedimiento.id).exists():
           vehiculo_detalles = Detalles_Vehiculos.objects.get(id_vehiculo=detalle_procedimiento.id)
-          print("Si existe el elemento")
           data.update({
               "vehiculo": True,
               "modelo": vehiculo_detalles.modelo,
@@ -1300,7 +1323,23 @@ def obtener_procedimiento(request, id):
                     material_utilizado = detalle_procedimiento.material_utilizado,
                     status = detalle_procedimiento.status,
                     )
-
-    # nombre_diccionario = dict(nombre_diccionario, key=valor, kay=valor)
+        
+    if str(procedimiento.id_tipo_procedimiento.id) == "13":
+        detalle_procedimiento = get_object_or_404(Mitigacion_Riesgos, id_procedimientos=id)
+        data = dict(data,
+                    tipo_servicio = detalle_procedimiento.id_tipo_servicio.tipo_servicio,
+                    descripcion = detalle_procedimiento.descripcion, 
+                    material_utilizado = detalle_procedimiento.material_utilizado,
+                    status = detalle_procedimiento.status,
+                    )
+    
+    if str(procedimiento.id_tipo_procedimiento.id) == "14":
+        detalle_procedimiento = get_object_or_404(Evaluacion_Riesgo, id_procedimientos=id)
+        data = dict(data,
+                    tipo_de_evaluacion = detalle_procedimiento.id_tipo_riesgo.tipo_riesgo,
+                    descripcion = detalle_procedimiento.descripcion, 
+                    material_utilizado = detalle_procedimiento.material_utilizado,
+                    status = detalle_procedimiento.status,
+                    )
     
     return JsonResponse(data)

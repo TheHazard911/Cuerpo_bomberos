@@ -17,7 +17,7 @@ def Asignar_op_Municipios():
 
 def Asignar_op_Tipos_Procedimientos():
     procedimientos = Tipos_Procedimientos.objects.all()
-    op = [("0", "Seleccione Una Opcion")]
+    op = [("-", "Seleccione Una Opcion")]
     for procedimiento in procedimientos:
         op.append((str(procedimiento.id), procedimiento))
     return op
@@ -92,6 +92,20 @@ def Asignar_opc_motivos_riesgo():
        op.append((str(procedimiento.id), procedimiento.tipo_riesgo))
    return op
 
+def Asignar_opc_motivos_riesgo_mitigacion():
+   procedimientos = Mitigacion_riesgo.objects.all()
+   op = [("0", "Seleccione Una Opcion")]
+   for procedimiento in procedimientos:
+       op.append((str(procedimiento.id), procedimiento.tipo_servicio))
+   return op
+
+def Asignar_opc_unidades():
+   procedimientos = Unidades.objects.all()
+   op = [("0", "Seleccione Una Opcion")]
+   for procedimiento in procedimientos:
+       op.append((str(procedimiento.id), procedimiento.nombre_unidad))
+   return op
+
 # Form1
 class SelectorDivision(forms.Form):
     op = [
@@ -109,15 +123,15 @@ class SelectorDivision(forms.Form):
     opciones = forms.ChoiceField(
         label="Seleccionar División",
         choices=op,
-        required=True,
-        widget=forms.Select(attrs={'class': 'disable-first-option'})
+        required=True, widget=forms.Select(attrs={"class": "disable-first-option"})
     )
 
 # Form2 
 class SeleccionarInfo(forms.Form):
     solicitante = forms.ChoiceField(choices=Asignar_ops_Personal(), required=True,
         widget=forms.Select(attrs={'class': 'disable-first-option'}))
-    unidad = forms.CharField(max_length=30)
+    unidad = forms.ChoiceField(choices=Asignar_opc_unidades(), required=True,
+        widget=forms.Select(attrs={'class': 'disable-first-option'}))
     efectivos_enviados = forms.CharField()
     jefe_comision = forms.ChoiceField(choices=Asignar_ops_Personal(), required=True,
         widget=forms.Select(attrs={'class': 'disable-first-option'}))
@@ -144,8 +158,7 @@ class Datos_Ubicacion(forms.Form):
 
 # Form4
 class Selecc_Tipo_Procedimiento(forms.Form):
-    tipo_procedimiento = forms.ChoiceField(choices=Asignar_op_Tipos_Procedimientos(), required=True,
-        widget=forms.Select(attrs={'class': 'disable-first-option'}))
+    tipo_procedimiento = forms.ChoiceField(choices=Asignar_op_Tipos_Procedimientos(), required=True, widget=forms.Select(attrs={"class": "disable-first-option"}))
 
 # Formulario Abastecimiento de Agua -- :D
 class formulario_abastecimiento_agua(forms.Form):
@@ -246,7 +259,7 @@ class Formulario_Persona_Presente(forms.Form):
     cedula = forms.CharField(max_length=10, required=False)
     edad = forms.CharField(max_length=3, required=False)
 
-class Formulario_Detalles_Vehiculos(forms.Form):
+class Formulario_Detalles_Vehiculos_Incendio(forms.Form):
     modelo = forms.CharField(max_length=40, required=False)
     marca = forms.CharField(max_length=40, required=False)
     color = forms.CharField(max_length=40, required=False)
@@ -323,6 +336,12 @@ class Formulario_Traslado_Accidente(forms.Form):
     
 class Forulario_Evaluacion_Riesgo(forms.Form):
     tipo_riesgo = forms.ChoiceField(choices=Asignar_opc_motivos_riesgo, widget=forms.Select(attrs={"class": "disable-first-option"}))
+    descripcion = forms.CharField(max_length=100, required=False)
+    material_utilizado = forms.CharField(max_length=100, required=False)
+    status = forms.ChoiceField(choices=[("-", "Seleccione Una Opcion"), ("Culminado", "Culminado"), ("En Proceso", "En Proceso")], widget=forms.Select(attrs={"class": "disable-first-option"}))
+    
+class Formulario_Mitigacion_Riesgos(forms.Form):
+    tipo_riesgo = forms.ChoiceField(choices=Asignar_opc_motivos_riesgo_mitigacion, widget=forms.Select(attrs={"class": "disable-first-option"}))
     descripcion = forms.CharField(max_length=100, required=False)
     material_utilizado = forms.CharField(max_length=100, required=False)
     status = forms.ChoiceField(choices=[("-", "Seleccione Una Opcion"), ("Culminado", "Culminado"), ("En Proceso", "En Proceso")], widget=forms.Select(attrs={"class": "disable-first-option"}))
