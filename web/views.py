@@ -147,7 +147,13 @@ def View_Procedimiento(request):
         
         evaluacion_riesgo_form = Forulario_Evaluacion_Riesgo(request.POST, prefix='evaluacion_riesgo_form')
         mitigacion_riesgo_form = Formulario_Mitigacion_Riesgos(request.POST, prefix='mitigacion_riesgo_form')
-
+        puesto_avanzada_form = Formulario_Puesto_Avanzada(request.POST, prefix='puesto_avanzada_form')
+        traslados_prehospitalaria_form = Formulario_Traslados_Prehospitalaria(request.POST, prefix='traslados_prehospitalaria_form')
+        asesoramiento_form = Formulario_Asesoramiento(request.POST, prefix='asesoramiento_form')
+        persona_presente_eval_form = Formularia_Persona_Presente_Eval(request.POST, prefix='persona_presente_eval_form')
+        reinspeccion_prevencion = Formulario_Reinspeccion_Prevencion(request.POST, prefix='reinspeccion_prevencion')
+        retencion_preventiva = Formulario_Retencion_Preventiva(request.POST, prefix='retencion_preventiva')
+        
         # Imprimir request.POST para depuración
 
         if not form.is_valid():
@@ -713,8 +719,6 @@ def View_Procedimiento(request):
                 material_utilizado = evaluacion_riesgo_form.cleaned_data["material_utilizado"]
                 status = evaluacion_riesgo_form.cleaned_data["status"]
                 
-                print("Datos Obtenidos")
-                
                 tipo_riesgo_instance = Motivo_Riesgo.objects.get(id=tipo_riesgo)
                 
                 nuevo_proc_eval = Evaluacion_Riesgo(
@@ -724,8 +728,151 @@ def View_Procedimiento(request):
                     material_utilizado=material_utilizado,
                     status=status
                 )
-                print(nuevo_proc_eval)
                 nuevo_proc_eval.save()
+         
+                if division == "3" and tipo_procedimiento == "14" and persona_presente_eval_form.is_valid():  
+                    nombre = persona_presente_eval_form.cleaned_data["nombre"]
+                    apellido = persona_presente_eval_form.cleaned_data["apellidos"]
+                    cedula = persona_presente_eval_form.cleaned_data["cedula"]
+                    telefono = persona_presente_eval_form.cleaned_data["telefono"]
+                    
+                    nuevo_per_presente = Persona_Presente_Eval(
+                        id_persona = nuevo_proc_eval,
+                        nombre = nombre,
+                        apellidos = apellido,
+                        cedula = cedula,
+                        telefono = telefono,
+                    )
+                    print(nuevo_per_presente)
+                    nuevo_per_presente.save()
+            
+                return redirect('/dashboard/')
+         
+            if tipo_procedimiento == "15" and puesto_avanzada_form.is_valid():  
+                tipo_avanzada = puesto_avanzada_form.cleaned_data["tipo_avanzada"]       
+                descripcion = puesto_avanzada_form.cleaned_data["descripcion"]
+                material_utilizado = puesto_avanzada_form.cleaned_data["material_utilizado"]
+                status = puesto_avanzada_form.cleaned_data["status"]
+                
+                print("Datos Obtenidos")
+                
+                tipo_avanzada_instance = Motivo_Avanzada.objects.get(id=tipo_avanzada)
+                
+                nuevo_proc_avan = Puesto_Avanzada(
+                    id_procedimientos = nuevo_procedimiento,
+                    id_tipo_servicio = tipo_avanzada_instance,
+                    descripcion=descripcion,
+                    material_utilizado=material_utilizado,
+                    status=status
+                )
+                print(nuevo_proc_avan)
+                nuevo_proc_avan.save()
+            
+                return redirect('/dashboard/')
+         
+            if tipo_procedimiento == "16" and traslados_prehospitalaria_form.is_valid():  
+                tipo_traslado = traslados_prehospitalaria_form.cleaned_data["tipo_traslado"]       
+                nombre = traslados_prehospitalaria_form.cleaned_data["nombre"]
+                apellido = traslados_prehospitalaria_form.cleaned_data["apellido"]
+                cedula = traslados_prehospitalaria_form.cleaned_data["cedula"]
+                edad = traslados_prehospitalaria_form.cleaned_data["edad"]
+                sexo = traslados_prehospitalaria_form.cleaned_data["sexo"]
+                idx = traslados_prehospitalaria_form.cleaned_data["idx"]
+                hospital_trasladado = traslados_prehospitalaria_form.cleaned_data["hospital_trasladado"]
+                medico_receptor = traslados_prehospitalaria_form.cleaned_data["medico_receptor"]
+                mpps_cmt = traslados_prehospitalaria_form.cleaned_data["mpps_cmt"]
+                descripcion = traslados_prehospitalaria_form.cleaned_data["descripcion"]
+                material_utilizado = traslados_prehospitalaria_form.cleaned_data["material_utilizado"]
+                status = traslados_prehospitalaria_form.cleaned_data["status"]
+                
+                tipo_traslado_instance = Tipos_Traslado.objects.get(id=tipo_traslado)
+                
+                nuevo_proc_tras = Traslado_Prehospitalaria(
+                    id_procedimiento = nuevo_procedimiento,
+                    id_tipo_traslado = tipo_traslado_instance,
+                    nombre = nombre,
+                    apellido = apellido,
+                    cedula = cedula,
+                    edad = edad,
+                    sexo = sexo,
+                    idx = idx,
+                    hospital_trasladado = hospital_trasladado,
+                    medico_receptor = medico_receptor,
+                    mpps_cmt = mpps_cmt,
+                    descripcion=descripcion,
+                    material_utilizado=material_utilizado,
+                    status=status
+                )
+                nuevo_proc_tras.save()
+            
+                return redirect('/dashboard/')
+         
+            if tipo_procedimiento == "17" and asesoramiento_form.is_valid():  
+                nombre = asesoramiento_form.cleaned_data["nombres"]
+                apellido = asesoramiento_form.cleaned_data["apellidos"]
+                cedula = asesoramiento_form.cleaned_data["cedula"]
+                telefono = asesoramiento_form.cleaned_data["telefono"]
+                descripcion = asesoramiento_form.cleaned_data["descripcion"]
+                material_utilizado = asesoramiento_form.cleaned_data["material_utilizado"]
+                status = asesoramiento_form.cleaned_data["status"]
+                
+                nuevo_proc_ase = Asesoramiento(
+                    id_procedimiento = nuevo_procedimiento,
+                    nombres = nombre,
+                    apellidos = apellido,
+                    cedula = cedula,
+                    telefono = telefono,
+                    descripcion=descripcion,
+                    material_utilizado=material_utilizado,
+                    status=status
+                )
+                nuevo_proc_ase.save()
+            
+                return redirect('/dashboard/')
+         
+            if tipo_procedimiento == "20" and reinspeccion_prevencion.is_valid():  
+                nombre = reinspeccion_prevencion.cleaned_data["nombre"]
+                apellido = reinspeccion_prevencion.cleaned_data["apellidos"]
+                cedula = reinspeccion_prevencion.cleaned_data["cedula"]
+                telefono = reinspeccion_prevencion.cleaned_data["telefono"]
+                descripcion = reinspeccion_prevencion.cleaned_data["descripcion"]
+                material_utilizado = reinspeccion_prevencion.cleaned_data["material_utilizado"]
+                status = reinspeccion_prevencion.cleaned_data["status"]
+                
+                nuevo_proc_reins = Reinspeccion_Prevencion(
+                    id_procedimiento = nuevo_procedimiento,
+                    nombre = nombre,
+                    apellidos = apellido,
+                    cedula = cedula,
+                    telefono = telefono,
+                    descripcion=descripcion,
+                    material_utilizado=material_utilizado,
+                    status=status
+                )
+                nuevo_proc_reins.save()
+            
+                return redirect('/dashboard/')
+         
+            if tipo_procedimiento == "21" and retencion_preventiva.is_valid():  
+                tipo_cilindro = retencion_preventiva.cleaned_data["tipo_cilindro"]
+                capacidad = retencion_preventiva.cleaned_data["capacidad"]
+                serial = retencion_preventiva.cleaned_data["serial"]
+                nro_constancia_retencion = retencion_preventiva.cleaned_data["nro_constancia_retencion"]
+                descripcion = retencion_preventiva.cleaned_data["descripcion"]
+                material_utilizado = retencion_preventiva.cleaned_data["material_utilizado"]
+                status = retencion_preventiva.cleaned_data["status"]
+                
+                nuevo_proc_reten = Retencion_Preventiva(
+                    id_procedimiento = nuevo_procedimiento,
+                    tipo_cilindro = tipo_cilindro,
+                    capacidad = capacidad,
+                    serial = serial,
+                    nro_constancia_retencion = nro_constancia_retencion,
+                    descripcion=descripcion,
+                    material_utilizado=material_utilizado,
+                    status=status
+                )
+                nuevo_proc_reten.save()
             
                 return redirect('/dashboard/')
          
@@ -765,6 +912,13 @@ def View_Procedimiento(request):
         evaluacion_riesgo_form = Forulario_Evaluacion_Riesgo(prefix='evaluacion_riesgo_form')
         mitigacion_riesgo_form = Formulario_Mitigacion_Riesgos(prefix='mitigacion_riesgo_form')
         
+        puesto_avanzada_form = Formulario_Puesto_Avanzada(prefix='puesto_avanzada_form')
+        traslados_prehospitalaria_form = Formulario_Traslados_Prehospitalaria(prefix='traslados_prehospitalaria_form')
+        asesoramiento_form = Formulario_Asesoramiento(prefix='asesoramiento_form')
+        persona_presente_eval_form = Formularia_Persona_Presente_Eval(prefix='persona_presente_eval_form')
+        reinspeccion_prevencion = Formulario_Reinspeccion_Prevencion(prefix='reinspeccion_prevencion')
+        retencion_preventiva = Formulario_Retencion_Preventiva(prefix='retencion_preventiva')
+        
     return render(request, "procedimientos.html", {
         "user": user,
         "jerarquia": user["jerarquia"],
@@ -800,7 +954,12 @@ def View_Procedimiento(request):
         "traslados_accidentes": traslados_accidentes,
         "evaluacion_riesgo_form": evaluacion_riesgo_form,
         "mitigacion_riesgo_form": mitigacion_riesgo_form,
-        
+        "puesto_avanzada_form": puesto_avanzada_form,
+        "traslados_prehospitalaria_form": traslados_prehospitalaria_form,
+        "asesoramiento_form": asesoramiento_form,
+        "persona_presente_eval_form": persona_presente_eval_form,
+        "reinspeccion_prevencion": reinspeccion_prevencion,
+        "retencion_preventiva": retencion_preventiva,
     })
     
 # Vista de la Seccion de Estadisticas

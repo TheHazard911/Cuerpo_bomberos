@@ -208,7 +208,11 @@
       <div class="data_form" id="evaluacion_riesgo" style="display: none">
         <div class="line"></div>
         <h4>Evaluacion de Riesgo</h4>
-        <div class="form-style">{{ evaluacion_riesgo_form }}</div>
+        <div class="form-style">{{ evaluacion_riesgo_form }}
+          <div id="form_persona_presente" style="display: none;">
+            <h4>Persona Presente</h4>
+            {{ persona_presente_eval_form }}</div>
+        </div>
       </div>
 
       <!-- Detalles de Procedimiento (Mitigacion de Riesgo) -->
@@ -216,6 +220,41 @@
         <div class="line"></div>
         <h4>Mitigacion de Riesgo</h4>
         <div class="form-style">{{ mitigacion_riesgo_form }}</div>
+      </div>
+
+      <!-- Detalles de Procedimiento (Mitigacion de Riesgo) -->
+      <div class="data_form" id="puesto_avanzada" style="display: none">
+        <div class="line"></div>
+        <h4>Puesto de Avanzada</h4>
+        <div class="form-style">{{ puesto_avanzada_form }}</div>
+      </div>
+
+      <!-- Detalles de Procedimiento (Mitigacion de Riesgo) -->
+      <div class="data_form" id="traslados_prehospitalaria" style="display: none">
+        <div class="line"></div>
+        <h4>Traslados</h4>
+        <div class="form-style">{{ traslados_prehospitalaria_form }}</div>
+      </div>
+      
+      <!-- Detalles de Procedimiento (Asesoramiento) -->
+      <div class="data_form" id="asesoramiento_form" style="display: none">
+        <div class="line"></div>
+        <h4>Asesoramiento</h4>
+        <div class="form-style">{{ asesoramiento_form }}</div>
+      </div>
+
+      <!-- Detalles de Procedimiento (Reinspeccion de Prevencion) -->
+      <div class="data_form" id="reinspeccion_prevencion" style="display: none">
+        <div class="line"></div>
+        <h4>Reinspeccion de Prevencion</h4>
+        <div class="form-style">{{ reinspeccion_prevencion }}</div>
+      </div>
+
+      <!-- Detalles de Procedimiento (Retencion Preventiva) -->
+      <div class="data_form" id="retencion_preventiva" style="display: none">
+        <div class="line"></div>
+        <h4>Retencion Preventiva</h4>
+        <div class="form-style">{{ retencion_preventiva }}</div>
       </div>
 
       <!-- Boton Enviar -->
@@ -290,7 +329,16 @@
       { value: "-", text: "Elige Una Division Burra"}
     ],
     "1": [
-      { value: "10", text: "Rescate" }
+      { value: "2", text: "Apoyo a Otras Unidades" },
+      { value: "3", text: "Guardia de Prevención" },
+      { value: "6", text: "Falsa Alarma" },
+      { value: "7", text: "Atenciones Paramedicas" },
+      { value: "9", text: "Servicios Especiales" },
+      { value: "10", text: "Rescate" },
+      { value: "11", text: "Incendios" },
+      { value: "13", text: "Mitigación de Riesgos" },
+      { value: "14", text: "Evaluación de Riesgos" },
+      { value: "15", text: "Puesto de Avanzada" },
     ],
     "2": [
       { value: "1", text: "Abastecimiento de agua" },
@@ -307,8 +355,42 @@
       { value: "13", text: "Mitigación de Riesgos" },
       { value: "14", text: "Evaluación de Riesgos" }
     ],
+    "3": [
+      { value: "14", text: "Evaluacion de Riesgos" },
+      { value: "17", text: "Asesoramiento" },
+      { value: "18", text: "Inspeccion" },
+      { value: "19", text: "Investigacion" },
+      { value: "20", text: "Reinspeccion de Prevencion" },
+      { value: "21", text: "Retencion Preventiva" },
+    ],
+    "4": [
+      { value: "1", text: "Abastecimiento de agua" },
+      { value: "2", text: "Apoyo a Otras Unidades" },
+      { value: "3", text: "Guardia de Prevención" },
+      { value: "4", text: "Atendido No Efectuado" },
+      { value: "6", text: "Falsa Alarma" },
+      { value: "7", text: "Atenciones Paramedicas" },
+      { value: "9", text: "Servicios Especiales" },
+      { value: "10", text: "Rescate" },
+      { value: "11", text: "Incendios" },
+      { value: "12", text: "Fallecidos" },
+      { value: "13", text: "Mitigación de Riesgos" },
+      { value: "14", text: "Evaluación de Riesgos" },
+      { value: "15", text: "Puesto de Avanzada" },
+    ],
+    "5": [
+      { value: "3", text: "Guardia de Prevención" },
+      { value: "4", text: "Atendido No Efectuado" },
+      { value: "6", text: "Falsa Alarma" },
+      { value: "7", text: "Atenciones Paramedicas" },
+      { value: "9", text: "Servicios Especiales" },
+      { value: "12", text: "Fallecidos" },
+      { value: "15", text: "Puesto de Avanzada" },
+      { value: "16", text: "Traslados" },
+    ],
+    
     "8": [
-      { value: "15", text: "Terapia Psicológica" }
+      { value: "00", text: "Terapia Psicológica" }
     ],
     // Puedes agregar más categorías según sea necesario
   };
@@ -379,6 +461,12 @@
         "traslado_accidente",
         "evaluacion_riesgo",
         "mitigacion_riesgo",
+        "puesto_avanzada",
+        "traslados_prehospitalaria",
+        "asesoramiento_form",
+        "form_persona_presente",
+        "reinspeccion_prevencion",
+        "retencion_preventiva",
       ];
 
       const showElements = (elements) => {
@@ -540,6 +628,31 @@
           break;
         case "14":
           showElements(["evaluacion_riesgo"]);
+          document.getElementById("button_submit").style.display = "block";
+          
+          query = document.getElementById("id_form1-opciones")
+            if (query.value === "3"){
+              showElements(["evaluacion_riesgo", "form_persona_presente"])
+            }
+          break;
+        case "15":
+          showElements(["puesto_avanzada"]);
+          document.getElementById("button_submit").style.display = "block";
+          break;
+        case "16":
+          showElements(["traslados_prehospitalaria"]);
+          document.getElementById("button_submit").style.display = "block";
+          break;
+        case "17":
+          showElements(["asesoramiento_form"]);
+          document.getElementById("button_submit").style.display = "block";
+          break;
+        case "20":
+          showElements(["reinspeccion_prevencion"]);
+          document.getElementById("button_submit").style.display = "block";
+          break;
+        case "21":
+          showElements(["retencion_preventiva"]);
           document.getElementById("button_submit").style.display = "block";
           break;
         default:
