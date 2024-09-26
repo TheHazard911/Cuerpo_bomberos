@@ -104,9 +104,17 @@ class Motivo_Riesgo(models.Model):
   
   def __str__(self):
     return self.tipo_riesgo
+
 # tabla de posibles mitigacion de riesgo
 class Mitigacion_riesgo(models.Model):
   tipo_servicio = models.CharField(max_length=100)
+  
+  def __str__(self):
+    return self.tipo_servicio
+
+# Tabla de motivos para el procedimiento de Puesto de Avanzada
+class Motivo_Avanzada(models.Model):
+  tipo_servicio = models.CharField(max_length=60)
   
   def __str__(self):
     return self.tipo_servicio
@@ -128,7 +136,7 @@ class Tipo_Incendio(models.Model):
 class Procedimientos(models.Model):
     id_division  = models.ForeignKey(Divisiones, on_delete=models.CASCADE, default=0)
     id_solicitante = models.ForeignKey(Personal, on_delete=models.CASCADE, related_name="personal1")
-    unidad = models.CharField(max_length=40)
+    unidad = models.ForeignKey(Unidades, on_delete=models.CASCADE)
     id_jefe_comision = models.ForeignKey(Personal, on_delete=models.CASCADE, related_name="personal2")
     efectivos_enviados = models.CharField(max_length=40)
     id_municipio = models.ForeignKey(Municipios, on_delete=models.CASCADE)
@@ -139,7 +147,7 @@ class Procedimientos(models.Model):
     id_tipo_procedimiento = models.ForeignKey(Tipos_Procedimientos, on_delete=models.CASCADE)
  
     def __str__(self):
-      return self.id_division.division + " -- " + self.id_solicitante.jerarquia + " " + self.id_solicitante.nombres + " " + self.id_solicitante.apellidos + " -- " + self.unidad + " -- " + self.id_jefe_comision.jerarquia + " " + self.id_jefe_comision.nombres + " " + self.id_jefe_comision.apellidos + " -- " + self.efectivos_enviados + " -- " + self.id_municipio.municipio + " -- " + self.id_parroquia.parroquia + " -- " + str(self.fecha) + " " + str(self.hora) + " -- " + self.direccion + " -- " + self.id_tipo_procedimiento.tipo_procedimiento
+      return self.id_division.division + " -- " + self.id_solicitante.jerarquia + " " + self.id_solicitante.nombres + " " + self.id_solicitante.apellidos + " -- " + self.unidad.nombre_unidad + " -- " + self.id_jefe_comision.jerarquia + " " + self.id_jefe_comision.nombres + " " + self.id_jefe_comision.apellidos + " -- " + self.efectivos_enviados + " -- " + self.id_municipio.municipio + " -- " + self.id_parroquia.parroquia + " -- " + str(self.fecha) + " " + str(self.hora) + " -- " + self.direccion + " -- " + self.id_tipo_procedimiento.tipo_procedimiento
 
 # Modelos de los detalles por procedimiento
 
@@ -326,6 +334,32 @@ class Traslado(models.Model):
   def __str__(self):
     return self.hospital_trasladado + " -- " + self.medico_receptor + " -- " + self.mpps_cmt
 
+class Tipos_Traslado(models.Model):
+  tipo_traslado = models.CharField(max_length=50)
+  
+  def __str__(self):
+    return self.tipo_traslado
+
+# Tabla de Traslados(Prehospitalaria)
+class Traslado_Prehospitalaria(models.Model):
+  id_procedimiento = models.ForeignKey(Procedimientos, on_delete=models.CASCADE)
+  id_tipo_traslado = models.ForeignKey(Tipos_Traslado, on_delete=models.CASCADE)
+  nombre = models.CharField(max_length=40)
+  apellido = models.CharField(max_length=40)
+  cedula = models.CharField(max_length=10)
+  edad = models.CharField(max_length=3)
+  sexo = models.CharField(max_length=12)
+  idx = models.CharField(max_length=40)
+  hospital_trasladado = models.CharField(max_length=50)
+  medico_receptor = models.CharField(max_length=50)
+  mpps_cmt = models.CharField(max_length=20)
+  descripcion = models.CharField(max_length=120)
+  material_utilizado = models.CharField(max_length=100)
+  status = models.CharField(max_length=100)
+
+  def __str__(self):
+    return self.id_procedimiento.id_tipo_procedimiento.tipo_procedimiento + " -- " + self.id_tipo_traslado.tipo_traslado + " -- " + self.nombre + " -- " + self.apellido + " -- " + self.cedula + " -- " + self.edad + " -- " + self.sexo + " -- " + self.idx + " -- " + self.hospital_trasladado + " -- " + self.medico_receptor + " -- " + self.mpps_cmt + " -- " + self.descripcion + " -- " + self.material_utilizado + " -- " + self.material_utilizado + " -- " + self.status
+
 # tabla de accidentes de transito para procedimiento atenciones paramedicas
 class Tipo_Accidente(models.Model):
   tipo_accidente = models.CharField(max_length=40)
@@ -387,6 +421,7 @@ class Evaluacion_Riesgo(models.Model):
   def __str__(self):
     return self.id_procedimientos.id_tipo_procedimiento.tipo_procedimiento + " -- " + self.id_tipo_riesgo.tipo_riesgo + " -- " + self.descripcion + " -- " + self.material_utilizado + " -- " + self.status
 
+# Tabla Mitigacion de Riesgos
 class Mitigacion_Riesgos(models.Model):
   id_procedimientos = models.ForeignKey(Procedimientos, on_delete=models.CASCADE)
   id_tipo_servicio = models.ForeignKey(Mitigacion_riesgo, on_delete=models.CASCADE)
@@ -395,4 +430,67 @@ class Mitigacion_Riesgos(models.Model):
   status = models.CharField(max_length=100)
   
   def __str__(self):
-    return self.id_procedimientos.id_tipo_procedimiento.tipo_procedimiento + " -- " + self.id_tipo_servicio.tipo_riesgo + " -- " + self.descripcion + " -- " + self.material_utilizado + " -- " + self.status
+    return self.id_procedimientos.id_tipo_procedimiento.tipo_procedimiento + " -- " + self.id_tipo_servicio.tipo_servicio + " -- " + self.descripcion + " -- " + self.material_utilizado + " -- " + self.status
+  
+# Tabla Puesto de Avanzada
+class Puesto_Avanzada(models.Model):
+  id_procedimientos = models.ForeignKey(Procedimientos, on_delete=models.CASCADE)
+  id_tipo_servicio = models.ForeignKey(Motivo_Avanzada, on_delete=models.CASCADE)
+  descripcion = models.CharField(max_length=100)
+  material_utilizado = models.CharField(max_length=100)
+  status = models.CharField(max_length=100)
+  
+  def __str__(self):
+    return self.id_procedimientos.id_tipo_procedimiento.tipo_procedimiento + " -- " + self.id_tipo_servicio.tipo_servicio + " -- " + self.descripcion + " -- " + self.material_utilizado + " -- " + self.status
+  
+# tabla de Emergencias Medicas para procedmiento atenciones paramedicas
+class Asesoramiento(models.Model):
+  id_procedimiento = models.ForeignKey(Procedimientos, on_delete=models.CASCADE)
+  nombres = models.CharField(max_length=30)
+  apellidos = models.CharField(max_length=30)
+  cedula = models.CharField(max_length=10)
+  telefono = models.CharField(max_length=12)
+  descripcion = models.CharField(max_length=40)
+  material_utilizado = models.CharField(max_length=30)
+  status = models.CharField(max_length=20)
+  
+  def __str__(self):
+    return self.id_procedimiento.id_tipo_procedimiento.tipo_procedimiento + " -- " + self.nombres + " -- " + self.apellidos + " -- " + self.cedula + " -- " + self.telefono + " -- " + self.descripcion + " -- " +  self.material_utilizado + " -- " + self.status
+  
+class Persona_Presente_Eval(models.Model):
+  id_persona = models.ForeignKey(Evaluacion_Riesgo, on_delete=models.CASCADE)
+  nombre = models.CharField(max_length=40)
+  apellidos = models.CharField(max_length=40)
+  cedula = models.CharField(max_length=10)
+  telefono = models.CharField(max_length=20)
+  
+  def __str__(self):
+    return self.id_persona.id_tipo_riesgo.tipo_riesgo + " -- " + self.nombre + " -- " + self.apellidos + " -- " + self.cedula + " -- " + self.telefono
+  
+# Tabla de Reinspeccion de prevencion
+class Reinspeccion_Prevencion(models.Model):
+  id_procedimiento = models.ForeignKey(Procedimientos, on_delete=models.CASCADE)
+  nombre = models.CharField(max_length=40)
+  apellidos = models.CharField(max_length=40)
+  cedula = models.CharField(max_length=10)
+  telefono = models.CharField(max_length=20)
+  descripcion = models.CharField(max_length=100)
+  material_utilizado = models.CharField(max_length=100)
+  status = models.CharField(max_length=20)
+  
+  def __str__(self):
+    return self.id_procedimiento.id_tipo_procedimiento.tipo_procedimiento + " -- " + self.nombre + " -- " + self.apellidos + " -- " + self.cedula + " -- " + self.telefono + " -- " + self.descripcion + " -- " + self.material_utilizado + " -- " + self.status
+
+# Tabla de Retencion Preventiva (GLP)
+class Retencion_Preventiva(models.Model):
+  id_procedimiento = models.ForeignKey(Procedimientos, on_delete=models.CASCADE)
+  tipo_cilindro = models.CharField(max_length=50)
+  capacidad = models.CharField(max_length=50)
+  serial = models.CharField(max_length=50)
+  nro_constancia_retencion = models.CharField(max_length=50)
+  descripcion = models.CharField(max_length=50)
+  material_utilizado = models.CharField(max_length=50)
+  status = models.CharField(max_length=50)
+  
+  def __str__(self):
+    return self.id_procedimiento.id_tipo_procedimiento.tipo_procedimiento + " -- " + self.tipo_cilindro + " -- " + self.capacidad + " -- " + self.serial + " -- " + self.nro_constancia_retencion + " -- " + self.descripcion + " -- " + self.material_utilizado + " -- " + self.status

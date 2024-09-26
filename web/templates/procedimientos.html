@@ -208,7 +208,53 @@
       <div class="data_form" id="evaluacion_riesgo" style="display: none">
         <div class="line"></div>
         <h4>Evaluacion de Riesgo</h4>
-        <div class="form-style">{{ evaluacion_riesgo_form }}</div>
+        <div class="form-style">{{ evaluacion_riesgo_form }}
+          <div id="form_persona_presente" style="display: none;">
+            <h4>Persona Presente</h4>
+            {{ persona_presente_eval_form }}</div>
+        </div>
+      </div>
+
+      <!-- Detalles de Procedimiento (Mitigacion de Riesgo) -->
+      <div class="data_form" id="mitigacion_riesgo" style="display: none">
+        <div class="line"></div>
+        <h4>Mitigacion de Riesgo</h4>
+        <div class="form-style">{{ mitigacion_riesgo_form }}</div>
+      </div>
+
+      <!-- Detalles de Procedimiento (Mitigacion de Riesgo) -->
+      <div class="data_form" id="puesto_avanzada" style="display: none">
+        <div class="line"></div>
+        <h4>Puesto de Avanzada</h4>
+        <div class="form-style">{{ puesto_avanzada_form }}</div>
+      </div>
+
+      <!-- Detalles de Procedimiento (Mitigacion de Riesgo) -->
+      <div class="data_form" id="traslados_prehospitalaria" style="display: none">
+        <div class="line"></div>
+        <h4>Traslados</h4>
+        <div class="form-style">{{ traslados_prehospitalaria_form }}</div>
+      </div>
+      
+      <!-- Detalles de Procedimiento (Asesoramiento) -->
+      <div class="data_form" id="asesoramiento_form" style="display: none">
+        <div class="line"></div>
+        <h4>Asesoramiento</h4>
+        <div class="form-style">{{ asesoramiento_form }}</div>
+      </div>
+
+      <!-- Detalles de Procedimiento (Reinspeccion de Prevencion) -->
+      <div class="data_form" id="reinspeccion_prevencion" style="display: none">
+        <div class="line"></div>
+        <h4>Reinspeccion de Prevencion</h4>
+        <div class="form-style">{{ reinspeccion_prevencion }}</div>
+      </div>
+
+      <!-- Detalles de Procedimiento (Retencion Preventiva) -->
+      <div class="data_form" id="retencion_preventiva" style="display: none">
+        <div class="line"></div>
+        <h4>Retencion Preventiva</h4>
+        <div class="form-style">{{ retencion_preventiva }}</div>
       </div>
 
       <!-- Boton Enviar -->
@@ -274,665 +320,351 @@
     </div>
   </div>
 </div>
-<!-- select validacion procedimientos -->
+
+<!-- Script para cambiar el menu desplegable de tipo de procedimiento segun la division -->
+<script>
+  // Define las opciones por categoría
+  const opcionesPorCategoria = {
+    "": [
+      { value: "-", text: "Elige Una Division Burra"}
+    ],
+    "1": [
+      { value: "2", text: "Apoyo a Otras Unidades" },
+      { value: "3", text: "Guardia de Prevención" },
+      { value: "6", text: "Falsa Alarma" },
+      { value: "7", text: "Atenciones Paramedicas" },
+      { value: "9", text: "Servicios Especiales" },
+      { value: "10", text: "Rescate" },
+      { value: "11", text: "Incendios" },
+      { value: "13", text: "Mitigación de Riesgos" },
+      { value: "14", text: "Evaluación de Riesgos" },
+      { value: "15", text: "Puesto de Avanzada" },
+    ],
+    "2": [
+      { value: "1", text: "Abastecimiento de agua" },
+      { value: "2", text: "Apoyo a Otras Unidades" },
+      { value: "3", text: "Guardia de Prevención" },
+      { value: "4", text: "Atendido No Efectuado" },
+      { value: "5", text: "Despliegue de Seguridad" },
+      { value: "6", text: "Falsa Alarma" },
+      { value: "7", text: "Atenciones Paramedicas" },
+      { value: "9", text: "Servicios Especiales" },
+      { value: "10", text: "Rescate" },
+      { value: "11", text: "Incendios" },
+      { value: "12", text: "Fallecidos" },
+      { value: "13", text: "Mitigación de Riesgos" },
+      { value: "14", text: "Evaluación de Riesgos" }
+    ],
+    "3": [
+      { value: "14", text: "Evaluacion de Riesgos" },
+      { value: "17", text: "Asesoramiento" },
+      { value: "18", text: "Inspeccion" },
+      { value: "19", text: "Investigacion" },
+      { value: "20", text: "Reinspeccion de Prevencion" },
+      { value: "21", text: "Retencion Preventiva" },
+    ],
+    "4": [
+      { value: "1", text: "Abastecimiento de agua" },
+      { value: "2", text: "Apoyo a Otras Unidades" },
+      { value: "3", text: "Guardia de Prevención" },
+      { value: "4", text: "Atendido No Efectuado" },
+      { value: "6", text: "Falsa Alarma" },
+      { value: "7", text: "Atenciones Paramedicas" },
+      { value: "9", text: "Servicios Especiales" },
+      { value: "10", text: "Rescate" },
+      { value: "11", text: "Incendios" },
+      { value: "12", text: "Fallecidos" },
+      { value: "13", text: "Mitigación de Riesgos" },
+      { value: "14", text: "Evaluación de Riesgos" },
+      { value: "15", text: "Puesto de Avanzada" },
+    ],
+    "5": [
+      { value: "3", text: "Guardia de Prevención" },
+      { value: "4", text: "Atendido No Efectuado" },
+      { value: "6", text: "Falsa Alarma" },
+      { value: "7", text: "Atenciones Paramedicas" },
+      { value: "9", text: "Servicios Especiales" },
+      { value: "12", text: "Fallecidos" },
+      { value: "15", text: "Puesto de Avanzada" },
+      { value: "16", text: "Traslados" },
+    ],
+    
+    "8": [
+      { value: "00", text: "Terapia Psicológica" }
+    ],
+    // Puedes agregar más categorías según sea necesario
+  };
+
+  const selectOpciones = document.getElementById("id_form1-opciones");
+  const selectTipoProcedimiento = document.getElementById("id_form4-tipo_procedimiento");
+
+  // Función para actualizar las opciones del segundo select
+  function actualizarOpciones() {
+    const selectedValue = selectOpciones.value;
+
+    // Limpia las opciones actuales del segundo select
+    selectTipoProcedimiento.innerHTML = '';
+
+    // Si hay opciones para la categoría seleccionada, agrégalas
+    if (opcionesPorCategoria[selectedValue]) {
+      // Agrega una opción predeterminada
+      const defaultOption = document.createElement("option");
+      defaultOption.value = "";
+      defaultOption.textContent = "Seleccione una Opción";
+      defaultOption.disabled = true;
+      defaultOption.selected = true;
+      selectTipoProcedimiento.appendChild(defaultOption);
+
+      // Agrega las opciones correspondientes
+      opcionesPorCategoria[selectedValue].forEach(optionData => {
+        const optionElement = document.createElement("option");
+        optionElement.value = optionData.value;
+        optionElement.textContent = optionData.text;
+        selectTipoProcedimiento.appendChild(optionElement);
+      });
+    }
+  }
+
+  actualizarOpciones()
+  // Evento cuando cambia el primer select
+  selectOpciones.addEventListener("change", actualizarOpciones);
+</script>
+
+<!-- Script para el manejo de formularios -->
 <script>
   document
     .getElementById("id_form4-tipo_procedimiento")
     .addEventListener("change", function () {
-      var abast_agua = document.getElementById("abast_agua");
-      var apoyo_unid = document.getElementById("apoyo_unid");
-      var guard_prev = document.getElementById("guard_prev");
-      var desp_seguridad = document.getElementById("desp_seguridad");
-      var atend_no_efect = document.getElementById("atend_no_efect");
-      var falsa_alarm = document.getElementById("falsa_alarm");
-      var serv_especiales = document.getElementById("serv_especiales");
-      var form_fallecido = document.getElementById("fallecidos");
-      var rescate_form = document.getElementById("rescate");
-      var rescate_form_animal = document.getElementById("rescate_animal");
-      var rescate_form_persona = document.getElementById("rescate_persona");
-      var incendio_form = document.getElementById("incendio_form");
-      var persona_presente_form = document.getElementById("persona_presente");
-      var detalles_vehiculo = document.getElementById("detalles_vehiculo");
-      var evaluacion_riesgo = document.getElementById("evaluacion_riesgo")
+      const elementsToHide = [
+        "abast_agua",
+        "apoyo_unid",
+        "guard_prev",
+        "atend_no_efect",
+        "desp_seguridad",
+        "falsa_alarm",
+        "serv_especiales",
+        "fallecidos",
+        "rescate",
+        "rescate_animal",
+        "rescate_persona",
+        "incendio_form",
+        "persona_presente",
+        "detalles_vehiculo",
+        "atenciones_paramedicas",
+        "emergencias_medicas",
+        "traslados_emergencias",
+        "accidentes_transito",
+        "vehiculo_accidente",
+        "otro_vehiculo_accidente",
+        "otro_vehiculo_accidente2",
+        "lesionado_accidente",
+        "traslado_accidente",
+        "evaluacion_riesgo",
+        "mitigacion_riesgo",
+        "puesto_avanzada",
+        "traslados_prehospitalaria",
+        "asesoramiento_form",
+        "form_persona_presente",
+        "reinspeccion_prevencion",
+        "retencion_preventiva",
+      ];
 
-      var atenciones_paramedicas = document.getElementById(
-        "atenciones_paramedicas"
-      );
-      var emergencias_medicas = document.getElementById("emergencias_medicas");
-      var traslados_emergencias = document.getElementById(
-        "traslados_emergencias"
-      );
+      const showElements = (elements) => {
+        elementsToHide.forEach(
+          (id) => (document.getElementById(id).style.display = "none")
+        );
+        elements.forEach(
+          (id) => (document.getElementById(id).style.display = "block")
+        );
+      };
 
-      var accidentes_transito = document.getElementById("accidentes_transito");
-      var vehiculo_accidente = document.getElementById("vehiculo_accidente");
-      var otro_vehiculo_accidente = document.getElementById(
-        "otro_vehiculo_accidente"
-      );
-      var otro_vehiculo_accidente2 = document.getElementById(
-        "otro_vehiculo_accidente2"
-      );
-      var lesionado_accidente = document.getElementById("lesionado_accidente");
-      var traslado_accidente = document.getElementById("traslado_accidente");
+      switch (this.value) {
+        case "1":
+          showElements(["abast_agua"]);
+          document.getElementById("button_submit").style.display = "block";
+          break;
+        case "2":
+          showElements(["apoyo_unid"]);
+          document.getElementById("button_submit").style.display = "block";
+          break;
+        case "3":
+          showElements(["guard_prev"]);
+          document.getElementById("button_submit").style.display = "block";
+          break;
+        case "4":
+          showElements(["atend_no_efect"]);
+          document.getElementById("button_submit").style.display = "block";
+          break;
+        case "5":
+          showElements(["desp_seguridad"]);
+          document.getElementById("button_submit").style.display = "block";
+          break;
+        case "6":
+          showElements(["falsa_alarm"]);
+          document.getElementById("button_submit").style.display = "block";
+          break;
+        case "7":
+          showElements(["atenciones_paramedicas"]);
+          document.getElementById("button_submit").style.display = "none";
 
-      var button_submit = document.getElementById("button_submit");
+          document
+            .getElementById("id_atenciones_paramedicas-tipo_atencion")
+            .addEventListener("change", function () {
+              if (this.value === "Emergencias Medicas") {
+                showElements(["atenciones_paramedicas", "emergencias_medicas"]);
+                document.getElementById("button_submit").style.display = "block";
 
-      console.log(this.value);
-      if (this.value == "1") {
-        apoyo_unid.style.display = "none";
-        guard_prev.style.display = "none";
-        atend_no_efect.style.display = "none";
-        desp_seguridad.style.display = "none";
-        falsa_alarm.style.display = "none";
-        serv_especiales.style.display = "none";
-        form_fallecido.style.display = "none";
-        rescate_form.style.display = "none";
-        rescate_form_animal.style.display = "none";
-        rescate_form_persona.style.display = "none";
-        incendio_form.style.display = "none";
-        persona_presente_form.style.display = "none";
-        detalles_vehiculo.style.display = "none";
+                document
+                  .getElementById("id_emergencias_medicas-trasladado")
+                  .addEventListener("change", function () {
+                    document.getElementById(
+                      "traslados_emergencias"
+                    ).style.display = this.checked ? "block" : "none";
+                  });
+              } 
+              else if (this.value === "Accidentes de Transito") {
+                showElements(["atenciones_paramedicas", "accidentes_transito"]);
 
-        accidentes_transito.style.display = "none";
-        vehiculo_accidente.style.display = "none";
-        otro_vehiculo_accidente.style.display = "none";
-        otro_vehiculo_accidente2.style.display = "none";
-        lesionado_accidente.style.display = "none";
-        traslado_accidente.style.display = "none";
-
-        atenciones_paramedicas.style.display = "none";
-        emergencias_medicas.style.display = "none";
-        traslados_emergencias.style.display = "none";
-        evaluacion_riesgo.style.display = "none";
-
-        abast_agua.style.display = "block";
-        button_submit.style.display = "block";
-      } 
-      else if (this.value == "2") {
-        abast_agua.style.display = "none";
-        guard_prev.style.display = "none";
-        falsa_alarm.style.display = "none";
-        atend_no_efect.style.display = "none";
-        desp_seguridad.style.display = "none";
-        serv_especiales.style.display = "none";
-        form_fallecido.style.display = "none";
-        rescate_form.style.display = "none";
-        rescate_form_animal.style.display = "none";
-        rescate_form_persona.style.display = "none";
-        incendio_form.style.display = "none";
-        persona_presente_form.style.display = "none";
-        detalles_vehiculo.style.display = "none";
-        atenciones_paramedicas.style.display = "none";
-        emergencias_medicas.style.display = "none";
-        traslados_emergencias.style.display = "none";
-        accidentes_transito.style.display = "none";
-        vehiculo_accidente.style.display = "none";
-        otro_vehiculo_accidente.style.display = "none";
-        lesionado_accidente.style.display = "none";
-        traslado_accidente.style.display = "none";
-        otro_vehiculo_accidente2.style.display = "none";
-        evaluacion_riesgo.style.display = "none";
-
-        apoyo_unid.style.display = "block";
-        button_submit.style.display = "block";
-      } 
-      else if (this.value == "3") {
-        abast_agua.style.display = "none";
-        apoyo_unid.style.display = "none";
-        atend_no_efect.style.display = "none";
-        desp_seguridad.style.display = "none";
-        falsa_alarm.style.display = "none";
-        serv_especiales.style.display = "none";
-        form_fallecido.style.display = "none";
-        rescate_form.style.display = "none";
-        rescate_form_animal.style.display = "none";
-        rescate_form_persona.style.display = "none";
-        incendio_form.style.display = "none";
-        persona_presente_form.style.display = "none";
-        detalles_vehiculo.style.display = "none";
-        atenciones_paramedicas.style.display = "none";
-        emergencias_medicas.style.display = "none";
-        traslados_emergencias.style.display = "none";
-        accidentes_transito.style.display = "none";
-        vehiculo_accidente.style.display = "none";
-        otro_vehiculo_accidente.style.display = "none";
-        lesionado_accidente.style.display = "none";
-        traslado_accidente.style.display = "none";
-        otro_vehiculo_accidente2.style.display = "none";
-        evaluacion_riesgo.style.display = "none";
-
-        guard_prev.style.display = "block";
-        button_submit.style.display = "block";
-      } 
-      else if (this.value == "4") {
-        abast_agua.style.display = "none";
-        apoyo_unid.style.display = "none";
-        guard_prev.style.display = "none";
-        desp_seguridad.style.display = "none";
-        falsa_alarm.style.display = "none";
-        serv_especiales.style.display = "none";
-        form_fallecido.style.display = "none";
-        rescate_form.style.display = "none";
-        rescate_form_animal.style.display = "none";
-        rescate_form_persona.style.display = "none";
-        incendio_form.style.display = "none";
-        persona_presente_form.style.display = "none";
-        detalles_vehiculo.style.display = "none";
-        atenciones_paramedicas.style.display = "none";
-        emergencias_medicas.style.display = "none";
-        traslados_emergencias.style.display = "none";
-        accidentes_transito.style.display = "none";
-        vehiculo_accidente.style.display = "none";
-        otro_vehiculo_accidente.style.display = "none";
-        lesionado_accidente.style.display = "none";
-        traslado_accidente.style.display = "none";
-        otro_vehiculo_accidente2.style.display = "none";
-        evaluacion_riesgo.style.display = "none";
-
-        atend_no_efect.style.display = "block";
-        button_submit.style.display = "block";
-      } 
-      else if (this.value == "5") {
-        abast_agua.style.display = "none";
-        apoyo_unid.style.display = "none";
-        guard_prev.style.display = "none";
-        atend_no_efect.style.display = "none";
-        falsa_alarm.style.display = "none";
-        serv_especiales.style.display = "none";
-        form_fallecido.style.display = "none";
-        rescate_form.style.display = "none";
-        rescate_form_animal.style.display = "none";
-        rescate_form_persona.style.display = "none";
-        incendio_form.style.display = "none";
-        persona_presente_form.style.display = "none";
-        detalles_vehiculo.style.display = "none";
-        atenciones_paramedicas.style.display = "none";
-        emergencias_medicas.style.display = "none";
-        traslados_emergencias.style.display = "none";
-        accidentes_transito.style.display = "none";
-        vehiculo_accidente.style.display = "none";
-        otro_vehiculo_accidente.style.display = "none";
-        lesionado_accidente.style.display = "none";
-        traslado_accidente.style.display = "none";
-        otro_vehiculo_accidente2.style.display = "none";
-        evaluacion_riesgo.style.display = "none";
-
-        desp_seguridad.style.display = "block";
-        button_submit.style.display = "block";
-      } 
-      else if (this.value == "6") {
-        abast_agua.style.display = "none";
-        apoyo_unid.style.display = "none";
-        guard_prev.style.display = "none";
-        atend_no_efect.style.display = "none";
-        desp_seguridad.style.display = "none";
-        form_fallecido.style.display = "none";
-        serv_especiales.style.display = "none";
-        rescate_form.style.display = "none";
-        rescate_form_animal.style.display = "none";
-        rescate_form_persona.style.display = "none";
-        incendio_form.style.display = "none";
-        persona_presente_form.style.display = "none";
-        detalles_vehiculo.style.display = "none";
-        atenciones_paramedicas.style.display = "none";
-        emergencias_medicas.style.display = "none";
-        traslados_emergencias.style.display = "none";
-        accidentes_transito.style.display = "none";
-        vehiculo_accidente.style.display = "none";
-        otro_vehiculo_accidente.style.display = "none";
-        lesionado_accidente.style.display = "none";
-        traslado_accidente.style.display = "none";
-        otro_vehiculo_accidente2.style.display = "none";
-        evaluacion_riesgo.style.display = "none";
-
-        button_submit.style.display = "block";
-        falsa_alarm.style.display = "block";
-      } 
-      else if (this.value == "7") {
-        abast_agua.style.display = "none";
-        apoyo_unid.style.display = "none";
-        guard_prev.style.display = "none";
-        atend_no_efect.style.display = "none";
-        desp_seguridad.style.display = "none";
-        form_fallecido.style.display = "none";
-        serv_especiales.style.display = "none";
-        rescate_form.style.display = "none";
-        rescate_form_animal.style.display = "none";
-        rescate_form_persona.style.display = "none";
-        incendio_form.style.display = "none";
-        persona_presente_form.style.display = "none";
-        detalles_vehiculo.style.display = "none";
-        falsa_alarm.style.display = "none";
-        evaluacion_riesgo.style.display = "none";
-
-        document
-          .getElementById("id_atenciones_paramedicas-tipo_atencion")
-          .addEventListener("change", function () {
-            console.log(this.value);
-
-            if (this.value == "Emergencias Medicas") {
-              abast_agua.style.display = "none";
-              apoyo_unid.style.display = "none";
-              guard_prev.style.display = "none";
-              atend_no_efect.style.display = "none";
-              desp_seguridad.style.display = "none";
-              form_fallecido.style.display = "none";
-              serv_especiales.style.display = "none";
-              rescate_form.style.display = "none";
-              rescate_form_animal.style.display = "none";
-              rescate_form_persona.style.display = "none";
-              incendio_form.style.display = "none";
-              persona_presente_form.style.display = "none";
-              detalles_vehiculo.style.display = "none";
-              falsa_alarm.style.display = "none";
-              accidentes_transito.style.display = "none";
-              evaluacion_riesgo.style.display = "none";
-
-              emergencias_medicas.style.display = "block";
-              button_submit.style.display = "block";
-
-              document
-                .getElementById("id_emergencias_medicas-trasladado")
-                .addEventListener("change", function () {
-                  if (this.checked) {
-                    traslados_emergencias.style.display = "block";
-                    abast_agua.style.display = "none";
-                    apoyo_unid.style.display = "none";
-                    guard_prev.style.display = "none";
-                    atend_no_efect.style.display = "none";
-                    desp_seguridad.style.display = "none";
-                    form_fallecido.style.display = "none";
-                    serv_especiales.style.display = "none";
-                    rescate_form.style.display = "none";
-                    rescate_form_animal.style.display = "none";
-                    rescate_form_persona.style.display = "none";
-                    incendio_form.style.display = "none";
-                    persona_presente_form.style.display = "none";
-                    detalles_vehiculo.style.display = "none";
-                    falsa_alarm.style.display = "none";
-                  } else {
-                    traslados_emergencias.style.display = "none";
-                    abast_agua.style.display = "none";
-                    apoyo_unid.style.display = "none";
-                    guard_prev.style.display = "none";
-                    atend_no_efect.style.display = "none";
-                    desp_seguridad.style.display = "none";
-                    form_fallecido.style.display = "none";
-                    serv_especiales.style.display = "none";
-                    rescate_form.style.display = "none";
-                    rescate_form_animal.style.display = "none";
-                    rescate_form_persona.style.display = "none";
-                    incendio_form.style.display = "none";
-                    persona_presente_form.style.display = "none";
-                    detalles_vehiculo.style.display = "none";
-                    falsa_alarm.style.display = "none";
-                  }
-                });
-            }
-            if (this.value == "Accidentes de Transito") {
-              emergencias_medicas.style.display = "none";
-              button_submit.style.display = "block";
-              accidentes_transito.style.display = "block";
-
-              document
-                .getElementById(
-                  "id_formulario_accidentes_transito-agg_vehiculo"
-                )
-                .addEventListener("change", function () {
-                  if (this.checked) {
-                    abast_agua.style.display = "none";
-                    apoyo_unid.style.display = "none";
-                    guard_prev.style.display = "none";
-                    atend_no_efect.style.display = "none";
-                    desp_seguridad.style.display = "none";
-                    form_fallecido.style.display = "none";
-                    serv_especiales.style.display = "none";
-                    rescate_form.style.display = "none";
-                    rescate_form_animal.style.display = "none";
-                    rescate_form_persona.style.display = "none";
-                    incendio_form.style.display = "none";
-                    persona_presente_form.style.display = "none";
-                    detalles_vehiculo.style.display = "none";
-                    falsa_alarm.style.display = "none";
-                    vehiculo_accidente.style.display = "block";
-                    evaluacion_riesgo.style.display = "none";
+                document
+                  .getElementById(
+                    "id_formulario_accidentes_transito-agg_vehiculo"
+                  )
+                  .addEventListener("change", function () {
+                    document.getElementById(
+                      "vehiculo_accidente"
+                    ).style.display = this.checked ? "block" : "none";
+                    document.getElementById("button_submit").style.display = "block";
 
                     document
                       .getElementById(
                         "id_detalles_vehiculos_accidentes-agg_vehiculo"
                       )
                       .addEventListener("change", function () {
-                        if (this.checked) {
-                          abast_agua.style.display = "none";
-                          apoyo_unid.style.display = "none";
-                          guard_prev.style.display = "none";
-                          atend_no_efect.style.display = "none";
-                          desp_seguridad.style.display = "none";
-                          form_fallecido.style.display = "none";
-                          serv_especiales.style.display = "none";
-                          rescate_form.style.display = "none";
-                          rescate_form_animal.style.display = "none";
-                          rescate_form_persona.style.display = "none";
-                          incendio_form.style.display = "none";
-                          persona_presente_form.style.display = "none";
-                          detalles_vehiculo.style.display = "none";
-                          falsa_alarm.style.display = "none";
-                          otro_vehiculo_accidente.style.display = "block";
+                        document.getElementById(
+                          "otro_vehiculo_accidente"
+                        ).style.display = this.checked ? "block" : "none";
 
-                          document
-                            .getElementById(
-                              "id_detalles_vehiculos_accidentes2-agg_vehiculo"
-                            )
-                            .addEventListener("change", function () {
-                              if (this.checked) {
-                                otro_vehiculo_accidente2.style.display =
-                                  "block";
-                              } else {
-                                otro_vehiculo_accidente2.style.display = "none";
-                              }
-                            });
-                        } else {
-                          otro_vehiculo_accidente2.style.display = "none";
-                          otro_vehiculo_accidente.style.display = "none";
-                        }
+                        document
+                          .getElementById(
+                            "id_detalles_vehiculos_accidentes2-agg_vehiculo"
+                          )
+                          .addEventListener("change", function () {
+                            document.getElementById(
+                              "otro_vehiculo_accidente2"
+                            ).style.display = this.checked ? "block" : "none";
+                          });
                       });
-                  } else {
-                    vehiculo_accidente.style.display = "none";
-                    otro_vehiculo_accidente.style.display = "none";
-                    otro_vehiculo_accidente2.style.display = "none";
-                  }
-                });
+                  });
 
-              document
-                .getElementById(
-                  "id_formulario_accidentes_transito-agg_lesionado"
-                )
-                .addEventListener("change", function () {
-                  if (this.checked) {
-                    lesionado_accidente.style.display = "block";
+                document
+                  .getElementById(
+                    "id_formulario_accidentes_transito-agg_lesionado"
+                  )
+                  .addEventListener("change", function () {
+                    document.getElementById(
+                      "lesionado_accidente"
+                    ).style.display = this.checked ? "block" : "none";
+
                     document
                       .getElementById(
                         "id_detalles_lesionados_accidentes-trasladado"
                       )
                       .addEventListener("change", function () {
-                        if (this.checked) {
-                          traslado_accidente.style.display = "block";
-                        } else {
-                          traslado_accidente.style.display = "none";
-                        }
+                        document.getElementById(
+                          "traslado_accidente"
+                        ).style.display = this.checked ? "block" : "none";
                       });
-                    } else {
-                    traslado_accidente.style.display = "none";
-                    lesionado_accidente.style.display = "none";
-                  }
-                });
+                  });
+              }
+            });
+          break;
+        case "9":
+          showElements(["serv_especiales"]);
+          document.getElementById("button_submit").style.display = "block";
+          break;
+        case "10":
+          showElements(["rescate"]);
+          document.getElementById("button_submit").style.display = "none";
+
+          document
+            .getElementById("id_rescate_form-tipo_rescate")
+            .addEventListener("change", function () {
+              if (this.value == "1") {
+                showElements(["rescate", "rescate_animal"]);
+                document.getElementById("button_submit").style.display = "block";
+              } else if (this.value == "2") {
+                showElements(["rescate", "rescate_persona"]);
+                document.getElementById("button_submit").style.display = "block";
+              }
+            });
+          break;
+        case "11":
+          showElements(["incendio_form"]);
+          document
+            .getElementById("id_incendio_form-check_agregar_persona")
+            .addEventListener("change", function () {
+              document.getElementById("persona_presente").style.display = this
+                .checked
+                ? "block"
+                : "none";
+            });
+          document
+            .getElementById("id_incendio_form-check_agregar_vehiculo")
+            .addEventListener("change", function () {
+              document.getElementById("detalles_vehiculo").style.display = this
+                .checked
+                ? "block"
+                : "none";
+            });
+            document.getElementById("button_submit").style.display = "block";
+          break;
+        case "12":
+          showElements(["fallecidos"]);
+          document.getElementById("button_submit").style.display = "block";
+          break;
+        case "13":
+          showElements(["mitigacion_riesgo"]);
+          document.getElementById("button_submit").style.display = "block";
+          break;
+        case "14":
+          showElements(["evaluacion_riesgo"]);
+          document.getElementById("button_submit").style.display = "block";
+          
+          query = document.getElementById("id_form1-opciones")
+            if (query.value === "3"){
+              showElements(["evaluacion_riesgo", "form_persona_presente"])
             }
-          });
-
-        vehiculo_accidente.style.display = "none";
-        button_submit.style.display = "none";
-        otro_vehiculo_accidente.style.display = "none";
-        lesionado_accidente.style.display = "none";
-        traslado_accidente.style.display = "none";
-        otro_vehiculo_accidente2.style.display = "none";
-
-        atenciones_paramedicas.style.display = "block";
-        emergencias_medicas.style.display = "none";
-        traslados_emergencias.style.display = "none";
-      } 
-      else if (this.value == "9") {
-        abast_agua.style.display = "none";
-        apoyo_unid.style.display = "none";
-        guard_prev.style.display = "none";
-        atend_no_efect.style.display = "none";
-        desp_seguridad.style.display = "none";
-        falsa_alarm.style.display = "none";
-        form_fallecido.style.display = "none";
-        rescate_form.style.display = "none";
-        rescate_form_animal.style.display = "none";
-        rescate_form_persona.style.display = "none";
-        incendio_form.style.display = "none";
-        persona_presente_form.style.display = "none";
-        detalles_vehiculo.style.display = "none";
-        atenciones_paramedicas.style.display = "none";
-        emergencias_medicas.style.display = "none";
-        traslados_emergencias.style.display = "none";
-        accidentes_transito.style.display = "none";
-        vehiculo_accidente.style.display = "none";
-        otro_vehiculo_accidente.style.display = "none";
-        lesionado_accidente.style.display = "none";
-        traslado_accidente.style.display = "none";
-        otro_vehiculo_accidente2.style.display = "none";
-        evaluacion_riesgo.style.display = "none";
-
-        serv_especiales.style.display = "block";
-        button_submit.style.display = "block";
-      }
-       else if (this.value == "10") {
-        abast_agua.style.display = "none";
-        apoyo_unid.style.display = "none";
-        guard_prev.style.display = "none";
-        atend_no_efect.style.display = "none";
-        desp_seguridad.style.display = "none";
-        falsa_alarm.style.display = "none";
-        form_fallecido.style.display = "none";
-        serv_especiales.style.display = "none";
-        incendio_form.style.display = "none";
-        persona_presente_form.style.display = "none";
-        detalles_vehiculo.style.display = "none";
-        atenciones_paramedicas.style.display = "none";
-        emergencias_medicas.style.display = "none";
-        traslados_emergencias.style.display = "none";
-
-        rescate_form_animal.style.display = "none";
-        rescate_form_persona.style.display = "none";
-        accidentes_transito.style.display = "none";
-        vehiculo_accidente.style.display = "none";
-        otro_vehiculo_accidente.style.display = "none";
-        lesionado_accidente.style.display = "none";
-        traslado_accidente.style.display = "none";
-        otro_vehiculo_accidente2.style.display = "none";
-        evaluacion_riesgo.style.display = "none";
-
-        rescate_form.style.display = "block";
-        button_submit.style.display = "none";
-
-        document
-          .getElementById("id_rescate_form-tipo_rescate")
-          .addEventListener("change", function () {
-            if (this.value == "1") {
-              rescate_form_persona.style.display = "none";
-              abast_agua.style.display = "none";
-              apoyo_unid.style.display = "none";
-              guard_prev.style.display = "none";
-              atend_no_efect.style.display = "none";
-              desp_seguridad.style.display = "none";
-              falsa_alarm.style.display = "none";
-              form_fallecido.style.display = "none";
-              serv_especiales.style.display = "none";
-              incendio_form.style.display = "none";
-              persona_presente_form.style.display = "none";
-              detalles_vehiculo.style.display = "none";
-              atenciones_paramedicas.style.display = "none";
-              emergencias_medicas.style.display = "none";
-              traslados_emergencias.style.display = "none";
-
-              rescate_form_animal.style.display = "none";
-              rescate_form_persona.style.display = "none";
-              accidentes_transito.style.display = "none";
-              vehiculo_accidente.style.display = "none";
-              otro_vehiculo_accidente.style.display = "none";
-              lesionado_accidente.style.display = "none";
-              traslado_accidente.style.display = "none";
-              otro_vehiculo_accidente2.style.display = "none";
-              rescate_form_animal.style.display = "block";
-              button_submit.style.display = "block";
-            }
-            if (this.value == "2") {
-              rescate_form_animal.style.display = "none";
-              abast_agua.style.display = "none";
-              apoyo_unid.style.display = "none";
-              guard_prev.style.display = "none";
-              atend_no_efect.style.display = "none";
-              desp_seguridad.style.display = "none";
-              falsa_alarm.style.display = "none";
-              form_fallecido.style.display = "none";
-              serv_especiales.style.display = "none";
-              incendio_form.style.display = "none";
-              persona_presente_form.style.display = "none";
-              detalles_vehiculo.style.display = "none";
-              atenciones_paramedicas.style.display = "none";
-              emergencias_medicas.style.display = "none";
-              traslados_emergencias.style.display = "none";
-
-              rescate_form_animal.style.display = "none";
-              rescate_form_persona.style.display = "none";
-              accidentes_transito.style.display = "none";
-              vehiculo_accidente.style.display = "none";
-              otro_vehiculo_accidente.style.display = "none";
-              lesionado_accidente.style.display = "none";
-              traslado_accidente.style.display = "none";
-              otro_vehiculo_accidente2.style.display = "none";
-              rescate_form_persona.style.display = "block";
-              button_submit.style.display = "block";
-            }
-          });
-      } 
-      else if (this.value == "11") {
-        abast_agua.style.display = "none";
-        apoyo_unid.style.display = "none";
-        guard_prev.style.display = "none";
-        atend_no_efect.style.display = "none";
-        desp_seguridad.style.display = "none";
-        falsa_alarm.style.display = "none";
-        serv_especiales.style.display = "none";
-        rescate_form.style.display = "none";
-        rescate_form_animal.style.display = "none";
-        rescate_form_persona.style.display = "none";
-        form_fallecido.style.display = "none";
-        atenciones_paramedicas.style.display = "none";
-        emergencias_medicas.style.display = "none";
-        traslados_emergencias.style.display = "none";
-        accidentes_transito.style.display = "none";
-        vehiculo_accidente.style.display = "none";
-        otro_vehiculo_accidente.style.display = "none";
-        lesionado_accidente.style.display = "none";
-        traslado_accidente.style.display = "none";
-        otro_vehiculo_accidente2.style.display = "none";
-
-        persona_presente_form.style.display = "none";
-        detalles_vehiculo.style.display = "none";
-        evaluacion_riesgo.style.display = "none";
-
-        incendio_form.style.display = "block";
-        button_submit.style.display = "block";
-
-        document
-          .getElementById("id_incendio_form-check_agregar_persona")
-          .addEventListener("change", function () {
-            if (this.checked) {
-              persona_presente_form.style.display = "block";
-            } else {
-              persona_presente_form.style.display = "none";
-            }
-          });
-        document
-          .getElementById("id_incendio_form-check_agregar_vehiculo")
-          .addEventListener("change", function () {
-            if (this.checked) {
-              detalles_vehiculo.style.display = "block";
-            } else {
-              detalles_vehiculo.style.display = "none";
-            }
-          });
-      } 
-      else if (this.value == "12") {
-        abast_agua.style.display = "none";
-        apoyo_unid.style.display = "none";
-        guard_prev.style.display = "none";
-        atend_no_efect.style.display = "none";
-        desp_seguridad.style.display = "none";
-        falsa_alarm.style.display = "none";
-        serv_especiales.style.display = "none";
-        rescate_form.style.display = "none";
-        rescate_form_animal.style.display = "none";
-        rescate_form_persona.style.display = "none";
-        incendio_form.style.display = "none";
-        persona_presente_form.style.display = "none";
-        detalles_vehiculo.style.display = "none";
-        atenciones_paramedicas.style.display = "none";
-        emergencias_medicas.style.display = "none";
-        traslados_emergencias.style.display = "none";
-        accidentes_transito.style.display = "none";
-        vehiculo_accidente.style.display = "none";
-        otro_vehiculo_accidente.style.display = "none";
-        lesionado_accidente.style.display = "none";
-        traslado_accidente.style.display = "none";
-        otro_vehiculo_accidente2.style.display = "none";
-        evaluacion_riesgo.style.display = "none";
-
-        form_fallecido.style.display = "block";
-        button_submit.style.display = "block";
-      } 
-      else if (this.value == "14") {
-        abast_agua.style.display = "none";
-        apoyo_unid.style.display = "none";
-        guard_prev.style.display = "none";
-        atend_no_efect.style.display = "none";
-        desp_seguridad.style.display = "none";
-        falsa_alarm.style.display = "none";
-        serv_especiales.style.display = "none";
-        rescate_form.style.display = "none";
-        rescate_form_animal.style.display = "none";
-        rescate_form_persona.style.display = "none";
-        incendio_form.style.display = "none";
-        persona_presente_form.style.display = "none";
-        detalles_vehiculo.style.display = "none";
-        atenciones_paramedicas.style.display = "none";
-        emergencias_medicas.style.display = "none";
-        traslados_emergencias.style.display = "none";
-        accidentes_transito.style.display = "none";
-        vehiculo_accidente.style.display = "none";
-        otro_vehiculo_accidente.style.display = "none";
-        lesionado_accidente.style.display = "none";
-        traslado_accidente.style.display = "none";
-        otro_vehiculo_accidente2.style.display = "none";
-        form_fallecido.style.display = "none";
-        
-        evaluacion_riesgo.style.display = "block";
-        button_submit.style.display = "block";
-      } 
-      else {
-        errorModal.show();
-        abast_agua.style.display = "none";
-        apoyo_unid.style.display = "none";
-        guard_prev.style.display = "none";
-        atend_no_efect.style.display = "none";
-        desp_seguridad.style.display = "none";
-        falsa_alarm.style.display = "none";
-        serv_especiales.style.display = "none";
-        rescate_form.style.display = "none";
-        rescate_form_animal.style.display = "none";
-        rescate_form_persona.style.display = "none";
-        incendio_form.style.display = "none";
-        persona_presente_form.style.display = "none";
-        detalles_vehiculo.style.display = "none";
-        atenciones_paramedicas.style.display = "none";
-        emergencias_medicas.style.display = "none";
-        traslados_emergencias.style.display = "none";
-        accidentes_transito.style.display = "none";
-        vehiculo_accidente.style.display = "none";
-        otro_vehiculo_accidente.style.display = "none";
-        lesionado_accidente.style.display = "none";
-        traslado_accidente.style.display = "none";
-        otro_vehiculo_accidente2.style.display = "none";
-
-        form_fallecido.style.display = "none";
-        button_submit.style.display = "none";
-        apoyo_unid.style.display = "none";
-        button_submit.style.display = "none";
+          break;
+        case "15":
+          showElements(["puesto_avanzada"]);
+          document.getElementById("button_submit").style.display = "block";
+          break;
+        case "16":
+          showElements(["traslados_prehospitalaria"]);
+          document.getElementById("button_submit").style.display = "block";
+          break;
+        case "17":
+          showElements(["asesoramiento_form"]);
+          document.getElementById("button_submit").style.display = "block";
+          break;
+        case "20":
+          showElements(["reinspeccion_prevencion"]);
+          document.getElementById("button_submit").style.display = "block";
+          break;
+        case "21":
+          showElements(["retencion_preventiva"]);
+          document.getElementById("button_submit").style.display = "block";
+          break;
+        default:
+          elementsToHide.forEach(
+            (id) => (document.getElementById(id).style.display = "none")
+          );
+          document.getElementById("button_submit").style.display = "none";
+          break;
       }
     });
 </script>
+
 <!-- select input validation -->
 <script>
   document
