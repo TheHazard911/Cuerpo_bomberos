@@ -91,3 +91,4 @@ var progressValues = {
 for (const id in progressValues) {
     animateProgress(id, progressValues[id]);
 }
+
