@@ -1021,6 +1021,19 @@ def View_Rescate(request):
             return redirect('/')
         
     datos = Procedimientos.objects.filter(id_division = 1)
+          
+    total = datos.count()
+
+    # Obtener la fecha de hoy
+    hoy = datetime.now().date()
+
+    # Filtrar procedimientos con la fecha de hoy
+    fechas = datos.values_list("fecha", flat=True)
+    procedimientos_hoy = [fecha for fecha in fechas if fecha == hoy]
+    
+    hoy = len(procedimientos_hoy)
+    
+
 
     if request.method == 'POST':
         data = json.loads(request.body)
@@ -1038,6 +1051,8 @@ def View_Rescate(request):
         "nombres": user["nombres"],
         "apellidos": user["apellidos"],
         "datos": datos,
+        "total": total,
+        "hoy": hoy
     })
 
 def View_Prevencion(request):
@@ -1046,6 +1061,16 @@ def View_Prevencion(request):
             return redirect('/')
         
     datos = Procedimientos.objects.filter(id_division = 3)
+    total = datos.count()
+
+    # Obtener la fecha de hoy
+    hoy = datetime.now().date()
+
+    # Filtrar procedimientos con la fecha de hoy
+    fechas = datos.values_list("fecha", flat=True)
+    procedimientos_hoy = [fecha for fecha in fechas if fecha == hoy]
+    
+    hoy = len(procedimientos_hoy)
 
     if request.method == 'POST':
         data = json.loads(request.body)
@@ -1063,6 +1088,8 @@ def View_Prevencion(request):
         "nombres": user["nombres"],
         "apellidos": user["apellidos"],
         "datos": datos,
+        "total": total,
+        "hoy": hoy
     })
 
 def View_grumae(request):
@@ -1071,6 +1098,19 @@ def View_grumae(request):
             return redirect('/')
         
     datos = Procedimientos.objects.filter(id_division = 4)
+           
+    total = datos.count()
+
+    # Obtener la fecha de hoy
+    hoy = datetime.now().date()
+
+    # Filtrar procedimientos con la fecha de hoy
+    fechas = datos.values_list("fecha", flat=True)
+    procedimientos_hoy = [fecha for fecha in fechas if fecha == hoy]
+    
+    hoy = len(procedimientos_hoy)
+    
+
 
     if request.method == 'POST':
         data = json.loads(request.body)
@@ -1088,6 +1128,8 @@ def View_grumae(request):
         "nombres": user["nombres"],
         "apellidos": user["apellidos"],
         "datos": datos,
+        "total": total,
+        "hoy": hoy
     })
 
 def View_prehospitalaria(request):
@@ -1096,6 +1138,18 @@ def View_prehospitalaria(request):
             return redirect('/')
         
     datos = Procedimientos.objects.filter(id_division = 5)
+            
+    total = datos.count()
+
+    # Obtener la fecha de hoy
+    hoy = datetime.now().date()
+
+    # Filtrar procedimientos con la fecha de hoy
+    fechas = datos.values_list("fecha", flat=True)
+    procedimientos_hoy = [fecha for fecha in fechas if fecha == hoy]
+    
+    hoy = len(procedimientos_hoy)
+    
 
     if request.method == 'POST':
         data = json.loads(request.body)
@@ -1113,6 +1167,8 @@ def View_prehospitalaria(request):
         "nombres": user["nombres"],
         "apellidos": user["apellidos"],
         "datos": datos,
+        "total": total,
+        "hoy": hoy
     })
 
 def View_capacitacion(request):
@@ -1121,6 +1177,17 @@ def View_capacitacion(request):
             return redirect('/')
         
     datos = Procedimientos.objects.filter(id_division = 9)
+
+    total = datos.count()
+
+    # Obtener la fecha de hoy
+    hoy = datetime.now().date()
+
+    # Filtrar procedimientos con la fecha de hoy
+    fechas = datos.values_list("fecha", flat=True)
+    procedimientos_hoy = [fecha for fecha in fechas if fecha == hoy]
+    
+    hoy = len(procedimientos_hoy)
 
     if request.method == 'POST':
         data = json.loads(request.body)
@@ -1138,6 +1205,8 @@ def View_capacitacion(request):
         "nombres": user["nombres"],
         "apellidos": user["apellidos"],
         "datos": datos,
+        "total": total,
+        "hoy": hoy
     })
 
 def View_enfermeria(request):
@@ -1146,7 +1215,18 @@ def View_enfermeria(request):
             return redirect('/')
         
     datos = Procedimientos.objects.filter(id_division = 6)
+    
+    total = datos.count()
 
+    # Obtener la fecha de hoy
+    hoy = datetime.now().date()
+
+    # Filtrar procedimientos con la fecha de hoy
+    fechas = datos.values_list("fecha", flat=True)
+    procedimientos_hoy = [fecha for fecha in fechas if fecha == hoy]
+    
+    hoy = len(procedimientos_hoy)
+    
     if request.method == 'POST':
         data = json.loads(request.body)
         id = data.get('id')
@@ -1163,6 +1243,8 @@ def View_enfermeria(request):
         "nombres": user["nombres"],
         "apellidos": user["apellidos"],
         "datos": datos,
+        "total": total,
+        "hoy": hoy
     })
 
 def View_serviciosmedicos(request):
@@ -1171,6 +1253,18 @@ def View_serviciosmedicos(request):
             return redirect('/')
         
     datos = Procedimientos.objects.filter(id_division = 7)
+    
+    total = datos.count()
+
+    # Obtener la fecha de hoy
+    hoy = datetime.now().date()
+
+    # Filtrar procedimientos con la fecha de hoy
+    fechas = datos.values_list("fecha", flat=True)
+    procedimientos_hoy = [fecha for fecha in fechas if fecha == hoy]
+    
+    hoy = len(procedimientos_hoy)
+
 
     if request.method == 'POST':
         data = json.loads(request.body)
@@ -1188,6 +1282,8 @@ def View_serviciosmedicos(request):
         "nombres": user["nombres"],
         "apellidos": user["apellidos"],
         "datos": datos,
+        "total": total,
+        "hoy": hoy
     })
 
 def View_psicologia(request):
@@ -1196,6 +1292,18 @@ def View_psicologia(request):
             return redirect('/')
         
     datos = Procedimientos.objects.filter(id_division = 8)
+    
+    total = datos.count()
+
+    # Obtener la fecha de hoy
+    hoy = datetime.now().date()
+
+    # Filtrar procedimientos con la fecha de hoy
+    fechas = datos.values_list("fecha", flat=True)
+    procedimientos_hoy = [fecha for fecha in fechas if fecha == hoy]
+    
+    hoy = len(procedimientos_hoy)
+
 
     if request.method == 'POST':
         data = json.loads(request.body)
@@ -1213,6 +1321,8 @@ def View_psicologia(request):
         "nombres": user["nombres"],
         "apellidos": user["apellidos"],
         "datos": datos,
+        "total": total,
+        "hoy": hoy
     })
 
 # Funcion para eliminar (NO TOCAR)
@@ -1496,6 +1606,80 @@ def obtener_procedimiento(request, id):
         detalle_procedimiento = get_object_or_404(Evaluacion_Riesgo, id_procedimientos=id)
         data = dict(data,
                     tipo_de_evaluacion = detalle_procedimiento.id_tipo_riesgo.tipo_riesgo,
+                    descripcion = detalle_procedimiento.descripcion, 
+                    material_utilizado = detalle_procedimiento.material_utilizado,
+                    status = detalle_procedimiento.status,
+                    )
+        
+        if str(detalle_procedimiento.id_procedimientos.id_division) == "Prevencion":
+            detalle_persona = get_object_or_404(Persona_Presente_Eval, id_persona=detalle_procedimiento.id)
+            print(detalle_persona)
+            data = dict(data,
+                        nombre = detalle_persona.nombre,
+                        apellido = detalle_persona.apellidos, 
+                        cedula = detalle_persona.cedula,
+                        telefono = detalle_persona.telefono,
+                        )
+    
+    if str(procedimiento.id_tipo_procedimiento.id) == "15":
+        detalle_procedimiento = get_object_or_404(Puesto_Avanzada, id_procedimientos=id)
+        data = dict(data,
+                    tipo_de_servicio = detalle_procedimiento.id_tipo_servicio.tipo_servicio,
+                    descripcion = detalle_procedimiento.descripcion, 
+                    material_utilizado = detalle_procedimiento.material_utilizado,
+                    status = detalle_procedimiento.status,
+                    )
+    
+    if str(procedimiento.id_tipo_procedimiento.id) == "16":
+        detalle_procedimiento = get_object_or_404(Traslado_Prehospitalaria, id_procedimiento=id)
+        data = dict(data,
+                    traslado = detalle_procedimiento.id_tipo_traslado.tipo_traslado,
+                    descripcion = detalle_procedimiento.descripcion, 
+                    material_utilizado = detalle_procedimiento.material_utilizado,
+                    status = detalle_procedimiento.status,
+                    nombre = detalle_procedimiento.nombre,
+                    apellido = detalle_procedimiento.apellido,
+                    cedula = detalle_procedimiento.cedula,
+                    edad = detalle_procedimiento.edad,
+                    sexo = detalle_procedimiento.sexo,
+                    idx = detalle_procedimiento.idx,
+                    hospital = detalle_procedimiento.hospital_trasladado,
+                    medico = detalle_procedimiento.medico_receptor,
+                    mpps = detalle_procedimiento.mpps_cmt
+                    )
+        
+    if str(procedimiento.id_tipo_procedimiento.id) == "17":
+        detalle_procedimiento = get_object_or_404(Asesoramiento, id_procedimiento=id)
+        data = dict(data,
+                    nombre = detalle_procedimiento.nombres,
+                    apellido = detalle_procedimiento.apellidos,
+                    cedula = detalle_procedimiento.cedula,
+                    telefono = detalle_procedimiento.telefono,
+                    descripcion = detalle_procedimiento.descripcion, 
+                    material_utilizado = detalle_procedimiento.material_utilizado,
+                    status = detalle_procedimiento.status,
+                    )
+        
+    if str(procedimiento.id_tipo_procedimiento.id) == "20":
+        detalle_procedimiento = get_object_or_404(Reinspeccion_Prevencion, id_procedimiento=id)
+        data = dict(data,
+                    nombre = detalle_procedimiento.nombre,
+                    apellido = detalle_procedimiento.apellidos,
+                    cedula = detalle_procedimiento.cedula,
+                    telefono = detalle_procedimiento.telefono,
+                    descripcion = detalle_procedimiento.descripcion, 
+                    material_utilizado = detalle_procedimiento.material_utilizado,
+                    status = detalle_procedimiento.status,
+                    )
+    
+    if str(procedimiento.id_tipo_procedimiento.id) == "21":
+        detalle_procedimiento = get_object_or_404(Retencion_Preventiva, id_procedimiento=id)
+        data = dict(data,
+                    tipo_retencion = "Cilindro GLP",
+                    tipo_cilindro = detalle_procedimiento.tipo_cilindro,
+                    capacidad = detalle_procedimiento.capacidad,
+                    serial = detalle_procedimiento.serial,
+                    nro_constancia = detalle_procedimiento.nro_constancia_retencion,
                     descripcion = detalle_procedimiento.descripcion, 
                     material_utilizado = detalle_procedimiento.material_utilizado,
                     status = detalle_procedimiento.status,
