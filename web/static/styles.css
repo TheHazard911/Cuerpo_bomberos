@@ -548,7 +548,8 @@ summary > * {
   }
 }
 .checkbox-styles div:nth-child(5),
-.checkbox-styles div:nth-child(6) {
+.checkbox-styles div:nth-child(6),
+.checkbox-styles div:nth-child(10) {
   width: 20rem;
   display: flex;
   flex-direction: row;
@@ -564,7 +565,6 @@ summary > * {
     position: relative;
     overflow: hidden;
   }
-
   input[type="checkbox"]:checked::before {
     z-index: 9;
     content: "";
@@ -890,6 +890,7 @@ summary > * {
   align-items: flex-start;
   flex-wrap: wrap;
   justify-content: space-around;
+  align-items: center;
   margin: 2rem;
   padding: 0.5rem;
   div {
@@ -924,7 +925,7 @@ summary > * {
     }
   }
 }
-.mod-title-width{
+.mod-title-width {
   width: 58rem;
 }
 .position {
@@ -1221,16 +1222,32 @@ summary > * {
   justify-content: space-around;
   flex-wrap: wrap;
 }
-.progress-bar{
+.progress-bar {
   width: auto;
   height: auto;
   display: flex;
   align-content: center;
   flex-direction: column;
   justify-content: space-between;
-  p{
+  p {
     width: 12rem;
     padding: 0;
     margin: 0;
- }
+  }
+}
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.stadist-parroquies span {
+  display: inline-block;
+  opacity: 0;
+  animation: fadeIn 1s forwards;
 }
