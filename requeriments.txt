@@ -1,9 +1,7 @@
-django>=3.2,<4.0
+python -m venv venv
 
-python -m venv env
+source venv/bin/activate  
 
-.\env\Scripts\activate
-
-pip install --upgrade pip
+# En Windows usa `venv\Scripts\activate`
 
 pip install -r requirements.txt
