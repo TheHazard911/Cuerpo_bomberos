@@ -1251,3 +1251,62 @@ summary > * {
   opacity: 0;
   animation: fadeIn 1s forwards;
 }
+
+.procediments-contain {
+  width: 90%;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+  background-color: #f0f0f06a;
+  border: thin solid #969696db;
+  border-radius: 50px;
+  margin-bottom: 5rem;  
+
+  section:nth-child(1){
+    background-color: #73cffa;
+  }
+  section:nth-child(2){
+    background-color: #f6c344;
+  }
+  section:nth-child(3){
+    background-color: #b6243a;
+  }
+  section:nth-child(4){
+    background-color: #7a7b7d;
+  }
+  section:nth-child(5){
+    background-color: #5e6dda;
+  }
+  section:nth-child(6){
+    background-color: #1ead0b;
+  }
+  section:nth-child(7){
+    background-color: #1164b7;
+  }
+  section:nth-child(8){
+    background-color: #eb8500;
+  }
+  section:nth-child(9){
+    background-color: #ac4ef4;
+  }
+}
+.procediments {
+  width: 15%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0;
+  margin: 1rem;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+  padding: .5rem;
+  border-radius: 1rem;
+  color: white;
+  font-weight: 700;
+  background-color: #7a7b7d;
+  *{
+    margin: 0;
+  }
+  
+}

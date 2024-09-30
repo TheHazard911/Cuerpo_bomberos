@@ -57,6 +57,15 @@ def Dashboard(request):
     pedro_m_hoy = pedro_m.filter(fecha=hoy).count()
     san_juan_hoy = san_juan.filter(fecha=hoy).count()
     san_sebastian_hoy = san_sebastian.filter(fecha=hoy).count()
+    
+    rescate = Procedimientos.objects.filter(id_division=1)
+    rescate_hoy = rescate.filter(fecha=hoy).count()
+    
+    operaciones = Procedimientos.objects.filter(id_division=2)
+    op_hoy = operaciones.filter(fecha=hoy).count()
+    
+    prevencion = Procedimientos.objects.filter(id_division=3)
+    prevencion_hoy = operaciones.filter(fecha=hoy).count()
 
     # Renderizar la página con los datos
     return render(request, "dashboard.html", {
@@ -69,6 +78,9 @@ def Dashboard(request):
         "san_juan": san_juan_hoy,
         "san_sebastian": san_sebastian_hoy,
         "otros_municipios": otros_municipios_hoy,
+        "rescate": rescate_hoy,
+        "op_hoy": op_hoy,
+        "prevencion_hoy": prevencion_hoy,
     })
 
 # Vista de archivo para hacer pruebas de backend

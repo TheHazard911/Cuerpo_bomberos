@@ -65,6 +65,7 @@
     <canvas id="myChart"></canvas>
   </div>
 </div>
+<!-- Resumen de procedimientos  -->
 <h3 class="title-stadist-parroquies">Resumen de Procedimientos</h3>
 <div class="div-analytics">
   <section class="progress-bar">
@@ -157,8 +158,49 @@
       ></div>
     </div>
   </section>
-
-  <script src="../static/js/graphic.js"></script>
-  <script src="../static/js/animate.js"></script>
-  {% endblock %}
 </div>
+<!-- fin resumen de procedimientos -->
+<!-- resumen de procedimientos por division -->
+<h3 class="title-stadist-parroquies">Resumen de Divisiones (Hoy)</h3>
+<div class="procediments-contain">
+  <section class="procediments">
+    <p>Operaciones</p>
+    <p id="">{{ op_hoy }}</p>
+  </section>
+  <section class="procediments">
+    <p>PreHospitalaria</p>
+    <p id="">0</p>
+  </section>
+  <section class="procediments">
+    <p>Grumae</p>
+    <p id="">0</p>
+  </section>
+  <section class="procediments">
+    <p>Rescate</p>
+    <p id="">{{ rescate }}</p>
+  </section>
+  <section class="procediments">
+    <p>Prevencion</p>
+    <p id="">{{ prevencion_hoy }}</p>
+  </section>
+  <section class="procediments">
+    <p>Servicios Medicos</p>
+    <p id="">0</p>
+  </section>
+  <section class="procediments">
+    <p>Enfermeria</p>
+    <p id="">0</p>
+  </section>
+  <section class="procediments">
+    <p>Psicologia</p>
+    <p id="">0</p>
+  </section>
+  <section class="procediments">
+    <p>Capacitacion</p>
+    <p id="">0</p>
+  </section>
+</div>
+
+<script src="../static/js/graphic.js"></script>
+<script src="../static/js/animate.js"></script>
+{% endblock %}
