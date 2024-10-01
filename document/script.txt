@@ -1,708 +1,2573 @@
-<script>
-  document
-    .getElementById("id_form4-tipo_procedimiento")
-    .addEventListener("change", function () {
-      var abast_agua = document.getElementById("abast_agua");
-      var apoyo_unid = document.getElementById("apoyo_unid");
-      var guard_prev = document.getElementById("guard_prev");
-      var desp_seguridad = document.getElementById("desp_seguridad");
-      var atend_no_efect = document.getElementById("atend_no_efect");
-      var falsa_alarm = document.getElementById("falsa_alarm");
-      var serv_especiales = document.getElementById("serv_especiales");
-      var form_fallecido = document.getElementById("fallecidos");
-      var rescate_form = document.getElementById("rescate");
-      var rescate_form_animal = document.getElementById("rescate_animal");
-      var rescate_form_persona = document.getElementById("rescate_persona");
-      var incendio_form = document.getElementById("incendio_form");
-      var persona_presente_form = document.getElementById("persona_presente");
-      var detalles_vehiculo = document.getElementById("detalles_vehiculo");
-      var evaluacion_riesgo = document.getElementById("evaluacion_riesgo")
-      var mitigacion_riesgo = document.getElementById("mitigacion_riesgo")
+<form action="" method="post">
+  <input
+    type="hidden"
+    name="csrfmiddlewaretoken"
+    value="Dg0gBQtRXWYJ5OPtL7V2fE35keCe0ZaqnKhPJxxJo7knZotwIEeZrKrc4B38QtJH"
+  />
+  <div class="form-style">
+    <div>
+      <label for="id_form1-opciones">Seleccionar División:</label>
 
-      var atenciones_paramedicas = document.getElementById(
-        "atenciones_paramedicas"
-      );
-      var emergencias_medicas = document.getElementById("emergencias_medicas");
-      var traslados_emergencias = document.getElementById(
-        "traslados_emergencias"
-      );
+      <select
+        name="form1-opciones"
+        class="disable-first-option"
+        required=""
+        id="id_form1-opciones"
+      >
+        <option value="" selected="" disabled="">Seleccione una Opción</option>
+        <option value="1">Rescate</option>
+        <option value="2">Operaciones</option>
+        <option value="3">Prevención</option>
+        <option value="4">GRUMAE</option>
+        <option value="5">Prehospitalaria</option>
+        <option value="6">Enfermería</option>
+        <option value="7">Servicios Médicos</option>
+        <option value="8">Psicología</option>
+        <option value="9">Capacitación</option>
+      </select>
+    </div>
+  </div>
+  <div class="line"></div>
+  <h4>Datos de la Operacion</h4>
+  <div class="form-style">
+    <div>
+      <label for="id_form2-solicitante">Solicitante:</label>
 
-      var accidentes_transito = document.getElementById("accidentes_transito");
-      var vehiculo_accidente = document.getElementById("vehiculo_accidente");
-      var otro_vehiculo_accidente = document.getElementById(
-        "otro_vehiculo_accidente"
-      );
-      var otro_vehiculo_accidente2 = document.getElementById(
-        "otro_vehiculo_accidente2"
-      );
-      var lesionado_accidente = document.getElementById("lesionado_accidente");
-      var traslado_accidente = document.getElementById("traslado_accidente");
+      <select
+        name="form2-solicitante"
+        class="disable-first-option"
+        id="id_form2-solicitante"
+      >
+        <option value="0" disabled="">Seleccione Una Opcion</option>
 
-      var button_submit = document.getElementById("button_submit");
+        <option value="1">Coronel Antonio Briceño</option>
 
-      console.log(this.value);
-      if (this.value == "1") {
-        apoyo_unid.style.display = "none";
-        guard_prev.style.display = "none";
-        atend_no_efect.style.display = "none";
-        desp_seguridad.style.display = "none";
-        falsa_alarm.style.display = "none";
-        serv_especiales.style.display = "none";
-        form_fallecido.style.display = "none";
-        rescate_form.style.display = "none";
-        rescate_form_animal.style.display = "none";
-        rescate_form_persona.style.display = "none";
-        incendio_form.style.display = "none";
-        persona_presente_form.style.display = "none";
-        detalles_vehiculo.style.display = "none";
+        <option value="2">Comandante Eduard Casas</option>
 
-        accidentes_transito.style.display = "none";
-        vehiculo_accidente.style.display = "none";
-        otro_vehiculo_accidente.style.display = "none";
-        otro_vehiculo_accidente2.style.display = "none";
-        lesionado_accidente.style.display = "none";
-        traslado_accidente.style.display = "none";
+        <option value="3">Comandante Elias Hernandes</option>
 
-        atenciones_paramedicas.style.display = "none";
-        emergencias_medicas.style.display = "none";
-        traslados_emergencias.style.display = "none";
-        evaluacion_riesgo.style.display = "none";
-        mitigacion_riesgo.style.display = "none";
+        <option value="4">Admin Anthony Mora</option>
 
-        abast_agua.style.display = "block";
-        button_submit.style.display = "block";
-      } 
-      else if (this.value == "2") {
-        abast_agua.style.display = "none";
-        guard_prev.style.display = "none";
-        falsa_alarm.style.display = "none";
-        atend_no_efect.style.display = "none";
-        desp_seguridad.style.display = "none";
-        serv_especiales.style.display = "none";
-        form_fallecido.style.display = "none";
-        rescate_form.style.display = "none";
-        rescate_form_animal.style.display = "none";
-        rescate_form_persona.style.display = "none";
-        incendio_form.style.display = "none";
-        persona_presente_form.style.display = "none";
-        detalles_vehiculo.style.display = "none";
-        atenciones_paramedicas.style.display = "none";
-        emergencias_medicas.style.display = "none";
-        traslados_emergencias.style.display = "none";
-        accidentes_transito.style.display = "none";
-        vehiculo_accidente.style.display = "none";
-        otro_vehiculo_accidente.style.display = "none";
-        lesionado_accidente.style.display = "none";
-        traslado_accidente.style.display = "none";
-        otro_vehiculo_accidente2.style.display = "none";
-        evaluacion_riesgo.style.display = "none";
-        mitigacion_riesgo.style.display = "none";
+        <option value="5">Teniente Daniel Alarcon</option>
 
-        apoyo_unid.style.display = "block";
-        button_submit.style.display = "block";
-      } 
-      else if (this.value == "3") {
-        abast_agua.style.display = "none";
-        apoyo_unid.style.display = "none";
-        atend_no_efect.style.display = "none";
-        desp_seguridad.style.display = "none";
-        falsa_alarm.style.display = "none";
-        serv_especiales.style.display = "none";
-        form_fallecido.style.display = "none";
-        rescate_form.style.display = "none";
-        rescate_form_animal.style.display = "none";
-        rescate_form_persona.style.display = "none";
-        incendio_form.style.display = "none";
-        persona_presente_form.style.display = "none";
-        detalles_vehiculo.style.display = "none";
-        atenciones_paramedicas.style.display = "none";
-        emergencias_medicas.style.display = "none";
-        traslados_emergencias.style.display = "none";
-        accidentes_transito.style.display = "none";
-        vehiculo_accidente.style.display = "none";
-        otro_vehiculo_accidente.style.display = "none";
-        lesionado_accidente.style.display = "none";
-        traslado_accidente.style.display = "none";
-        otro_vehiculo_accidente2.style.display = "none";
-        evaluacion_riesgo.style.display = "none";
-        mitigacion_riesgo.style.display = "none";
+        <option value="6">Administrativo Eber Colmenares</option>
+      </select>
+    </div>
 
-        guard_prev.style.display = "block";
-        button_submit.style.display = "block";
-      } 
-      else if (this.value == "4") {
-        abast_agua.style.display = "none";
-        apoyo_unid.style.display = "none";
-        guard_prev.style.display = "none";
-        desp_seguridad.style.display = "none";
-        falsa_alarm.style.display = "none";
-        serv_especiales.style.display = "none";
-        form_fallecido.style.display = "none";
-        rescate_form.style.display = "none";
-        rescate_form_animal.style.display = "none";
-        rescate_form_persona.style.display = "none";
-        incendio_form.style.display = "none";
-        persona_presente_form.style.display = "none";
-        detalles_vehiculo.style.display = "none";
-        atenciones_paramedicas.style.display = "none";
-        emergencias_medicas.style.display = "none";
-        traslados_emergencias.style.display = "none";
-        accidentes_transito.style.display = "none";
-        vehiculo_accidente.style.display = "none";
-        otro_vehiculo_accidente.style.display = "none";
-        lesionado_accidente.style.display = "none";
-        traslado_accidente.style.display = "none";
-        otro_vehiculo_accidente2.style.display = "none";
-        evaluacion_riesgo.style.display = "none";
-        mitigacion_riesgo.style.display = "none";
+    <div>
+      <label for="id_form2-unidad">Unidad:</label>
 
-        atend_no_efect.style.display = "block";
-        button_submit.style.display = "block";
-      } 
-      else if (this.value == "5") {
-        abast_agua.style.display = "none";
-        apoyo_unid.style.display = "none";
-        guard_prev.style.display = "none";
-        atend_no_efect.style.display = "none";
-        falsa_alarm.style.display = "none";
-        serv_especiales.style.display = "none";
-        form_fallecido.style.display = "none";
-        rescate_form.style.display = "none";
-        rescate_form_animal.style.display = "none";
-        rescate_form_persona.style.display = "none";
-        incendio_form.style.display = "none";
-        persona_presente_form.style.display = "none";
-        detalles_vehiculo.style.display = "none";
-        atenciones_paramedicas.style.display = "none";
-        emergencias_medicas.style.display = "none";
-        traslados_emergencias.style.display = "none";
-        accidentes_transito.style.display = "none";
-        vehiculo_accidente.style.display = "none";
-        otro_vehiculo_accidente.style.display = "none";
-        lesionado_accidente.style.display = "none";
-        traslado_accidente.style.display = "none";
-        otro_vehiculo_accidente2.style.display = "none";
-        evaluacion_riesgo.style.display = "none";
-        mitigacion_riesgo.style.display = "none";
+      <select
+        name="form2-unidad"
+        class="disable-first-option"
+        id="id_form2-unidad"
+      >
+        <option value="0" disabled="">Seleccione Una Opcion</option>
 
-        desp_seguridad.style.display = "block";
-        button_submit.style.display = "block";
-      } 
-      else if (this.value == "6") {
-        abast_agua.style.display = "none";
-        apoyo_unid.style.display = "none";
-        guard_prev.style.display = "none";
-        atend_no_efect.style.display = "none";
-        desp_seguridad.style.display = "none";
-        form_fallecido.style.display = "none";
-        serv_especiales.style.display = "none";
-        rescate_form.style.display = "none";
-        rescate_form_animal.style.display = "none";
-        rescate_form_persona.style.display = "none";
-        incendio_form.style.display = "none";
-        persona_presente_form.style.display = "none";
-        detalles_vehiculo.style.display = "none";
-        atenciones_paramedicas.style.display = "none";
-        emergencias_medicas.style.display = "none";
-        traslados_emergencias.style.display = "none";
-        accidentes_transito.style.display = "none";
-        vehiculo_accidente.style.display = "none";
-        otro_vehiculo_accidente.style.display = "none";
-        lesionado_accidente.style.display = "none";
-        traslado_accidente.style.display = "none";
-        otro_vehiculo_accidente2.style.display = "none";
-        evaluacion_riesgo.style.display = "none";
-        mitigacion_riesgo.style.display = "none";
+        <option value="1">Alfa 04</option>
 
-        button_submit.style.display = "block";
-        falsa_alarm.style.display = "block";
-      } 
-      else if (this.value == "7") {
-        abast_agua.style.display = "none";
-        apoyo_unid.style.display = "none";
-        guard_prev.style.display = "none";
-        atend_no_efect.style.display = "none";
-        desp_seguridad.style.display = "none";
-        form_fallecido.style.display = "none";
-        serv_especiales.style.display = "none";
-        rescate_form.style.display = "none";
-        rescate_form_animal.style.display = "none";
-        rescate_form_persona.style.display = "none";
-        incendio_form.style.display = "none";
-        persona_presente_form.style.display = "none";
-        detalles_vehiculo.style.display = "none";
-        falsa_alarm.style.display = "none";
-        evaluacion_riesgo.style.display = "none";
-        mitigacion_riesgo.style.display = "none";
+        <option value="2">Alfa 01</option>
 
-        document
-          .getElementById("id_atenciones_paramedicas-tipo_atencion")
-          .addEventListener("change", function () {
-            console.log(this.value);
+        <option value="3">Alfa 02</option>
 
-            if (this.value == "Emergencias Medicas") {
-              abast_agua.style.display = "none";
-              apoyo_unid.style.display = "none";
-              guard_prev.style.display = "none";
-              atend_no_efect.style.display = "none";
-              desp_seguridad.style.display = "none";
-              form_fallecido.style.display = "none";
-              serv_especiales.style.display = "none";
-              rescate_form.style.display = "none";
-              rescate_form_animal.style.display = "none";
-              rescate_form_persona.style.display = "none";
-              incendio_form.style.display = "none";
-              persona_presente_form.style.display = "none";
-              detalles_vehiculo.style.display = "none";
-              falsa_alarm.style.display = "none";
-              accidentes_transito.style.display = "none";
-              evaluacion_riesgo.style.display = "none";
-              mitigacion_riesgo.style.display = "none";
+        <option value="4">Alfa 03</option>
 
-              emergencias_medicas.style.display = "block";
-              button_submit.style.display = "block";
+        <option value="5">Supresion 01</option>
 
-              document
-                .getElementById("id_emergencias_medicas-trasladado")
-                .addEventListener("change", function () {
-                  if (this.checked) {
-                    traslados_emergencias.style.display = "block";
-                    abast_agua.style.display = "none";
-                    apoyo_unid.style.display = "none";
-                    guard_prev.style.display = "none";
-                    atend_no_efect.style.display = "none";
-                    desp_seguridad.style.display = "none";
-                    form_fallecido.style.display = "none";
-                    serv_especiales.style.display = "none";
-                    rescate_form.style.display = "none";
-                    rescate_form_animal.style.display = "none";
-                    rescate_form_persona.style.display = "none";
-                    incendio_form.style.display = "none";
-                    persona_presente_form.style.display = "none";
-                    detalles_vehiculo.style.display = "none";
-                    falsa_alarm.style.display = "none";
-                    mitigacion_riesgo.style.display = "none";
-                  } else {
-                    traslados_emergencias.style.display = "none";
-                    abast_agua.style.display = "none";
-                    apoyo_unid.style.display = "none";
-                    guard_prev.style.display = "none";
-                    atend_no_efect.style.display = "none";
-                    desp_seguridad.style.display = "none";
-                    form_fallecido.style.display = "none";
-                    serv_especiales.style.display = "none";
-                    rescate_form.style.display = "none";
-                    rescate_form_animal.style.display = "none";
-                    rescate_form_persona.style.display = "none";
-                    incendio_form.style.display = "none";
-                    persona_presente_form.style.display = "none";
-                    detalles_vehiculo.style.display = "none";
-                    falsa_alarm.style.display = "none";
-                    mitigacion_riesgo.style.display = "none";
-                  }
-                });
-            }
-            if (this.value == "Accidentes de Transito") {
-              emergencias_medicas.style.display = "none";
-              button_submit.style.display = "block";
-              accidentes_transito.style.display = "block";
+        <option value="6">Supresión 02</option>
 
-              document
-                .getElementById(
-                  "id_formulario_accidentes_transito-agg_vehiculo"
-                )
-                .addEventListener("change", function () {
-                  if (this.checked) {
-                    abast_agua.style.display = "none";
-                    apoyo_unid.style.display = "none";
-                    guard_prev.style.display = "none";
-                    atend_no_efect.style.display = "none";
-                    desp_seguridad.style.display = "none";
-                    form_fallecido.style.display = "none";
-                    serv_especiales.style.display = "none";
-                    rescate_form.style.display = "none";
-                    rescate_form_animal.style.display = "none";
-                    rescate_form_persona.style.display = "none";
-                    incendio_form.style.display = "none";
-                    persona_presente_form.style.display = "none";
-                    detalles_vehiculo.style.display = "none";
-                    falsa_alarm.style.display = "none";
-                    vehiculo_accidente.style.display = "block";
-                    evaluacion_riesgo.style.display = "none";
-                    mitigacion_riesgo.style.display = "none";
+        <option value="7">Supresión 03</option>
 
-                    document
-                      .getElementById(
-                        "id_detalles_vehiculos_accidentes-agg_vehiculo"
-                      )
-                      .addEventListener("change", function () {
-                        if (this.checked) {
-                          abast_agua.style.display = "none";
-                          apoyo_unid.style.display = "none";
-                          guard_prev.style.display = "none";
-                          atend_no_efect.style.display = "none";
-                          desp_seguridad.style.display = "none";
-                          form_fallecido.style.display = "none";
-                          serv_especiales.style.display = "none";
-                          rescate_form.style.display = "none";
-                          rescate_form_animal.style.display = "none";
-                          rescate_form_persona.style.display = "none";
-                          incendio_form.style.display = "none";
-                          persona_presente_form.style.display = "none";
-                          detalles_vehiculo.style.display = "none";
-                          falsa_alarm.style.display = "none";
-                          mitigacion_riesgo.style.display = "none";
-                          otro_vehiculo_accidente.style.display = "block";
+        <option value="8">Supresión 04</option>
 
-                          document
-                            .getElementById(
-                              "id_detalles_vehiculos_accidentes2-agg_vehiculo"
-                            )
-                            .addEventListener("change", function () {
-                              if (this.checked) {
-                                otro_vehiculo_accidente2.style.display =
-                                  "block";
-                              } else {
-                                otro_vehiculo_accidente2.style.display = "none";
-                              }
-                            });
-                        } else {
-                          otro_vehiculo_accidente2.style.display = "none";
-                          otro_vehiculo_accidente.style.display = "none";
-                        }
-                      });
-                  } else {
-                    vehiculo_accidente.style.display = "none";
-                    otro_vehiculo_accidente.style.display = "none";
-                    otro_vehiculo_accidente2.style.display = "none";
-                  }
-                });
+        <option value="9">Cisterna 01</option>
 
-              document
-                .getElementById(
-                  "id_formulario_accidentes_transito-agg_lesionado"
-                )
-                .addEventListener("change", function () {
-                  if (this.checked) {
-                    lesionado_accidente.style.display = "block";
-                    document
-                      .getElementById(
-                        "id_detalles_lesionados_accidentes-trasladado"
-                      )
-                      .addEventListener("change", function () {
-                        if (this.checked) {
-                          traslado_accidente.style.display = "block";
-                        } else {
-                          traslado_accidente.style.display = "none";
-                        }
-                      });
-                    } else {
-                    traslado_accidente.style.display = "none";
-                    lesionado_accidente.style.display = "none";
-                  }
-                });
-            }
-          });
+        <option value="10">Cisterna 02</option>
 
-        vehiculo_accidente.style.display = "none";
-        button_submit.style.display = "none";
-        otro_vehiculo_accidente.style.display = "none";
-        lesionado_accidente.style.display = "none";
-        traslado_accidente.style.display = "none";
-        otro_vehiculo_accidente2.style.display = "none";
+        <option value="11">Cisterna 03</option>
 
-        atenciones_paramedicas.style.display = "block";
-        emergencias_medicas.style.display = "none";
-        traslados_emergencias.style.display = "none";
-      } 
-      else if (this.value == "9") {
-        abast_agua.style.display = "none";
-        apoyo_unid.style.display = "none";
-        guard_prev.style.display = "none";
-        atend_no_efect.style.display = "none";
-        desp_seguridad.style.display = "none";
-        falsa_alarm.style.display = "none";
-        form_fallecido.style.display = "none";
-        rescate_form.style.display = "none";
-        rescate_form_animal.style.display = "none";
-        rescate_form_persona.style.display = "none";
-        incendio_form.style.display = "none";
-        persona_presente_form.style.display = "none";
-        detalles_vehiculo.style.display = "none";
-        atenciones_paramedicas.style.display = "none";
-        emergencias_medicas.style.display = "none";
-        traslados_emergencias.style.display = "none";
-        accidentes_transito.style.display = "none";
-        vehiculo_accidente.style.display = "none";
-        otro_vehiculo_accidente.style.display = "none";
-        lesionado_accidente.style.display = "none";
-        traslado_accidente.style.display = "none";
-        otro_vehiculo_accidente2.style.display = "none";
-        evaluacion_riesgo.style.display = "none";
-        mitigacion_riesgo.style.display = "none";
+        <option value="12">Moto 45</option>
 
-        serv_especiales.style.display = "block";
-        button_submit.style.display = "block";
-      }
-       else if (this.value == "10") {
-        abast_agua.style.display = "none";
-        apoyo_unid.style.display = "none";
-        guard_prev.style.display = "none";
-        atend_no_efect.style.display = "none";
-        desp_seguridad.style.display = "none";
-        falsa_alarm.style.display = "none";
-        form_fallecido.style.display = "none";
-        serv_especiales.style.display = "none";
-        incendio_form.style.display = "none";
-        persona_presente_form.style.display = "none";
-        detalles_vehiculo.style.display = "none";
-        atenciones_paramedicas.style.display = "none";
-        emergencias_medicas.style.display = "none";
-        traslados_emergencias.style.display = "none";
+        <option value="13">Moto 47</option>
 
-        rescate_form_animal.style.display = "none";
-        rescate_form_persona.style.display = "none";
-        accidentes_transito.style.display = "none";
-        vehiculo_accidente.style.display = "none";
-        otro_vehiculo_accidente.style.display = "none";
-        lesionado_accidente.style.display = "none";
-        traslado_accidente.style.display = "none";
-        otro_vehiculo_accidente2.style.display = "none";
-        evaluacion_riesgo.style.display = "none";
-        mitigacion_riesgo.style.display = "none";
+        <option value="14">Logística 31</option>
 
-        rescate_form.style.display = "block";
-        button_submit.style.display = "none";
+        <option value="15">Logística 36</option>
 
-        document
-          .getElementById("id_rescate_form-tipo_rescate")
-          .addEventListener("change", function () {
-            if (this.value == "1") {
-              rescate_form_persona.style.display = "none";
-              abast_agua.style.display = "none";
-              apoyo_unid.style.display = "none";
-              guard_prev.style.display = "none";
-              atend_no_efect.style.display = "none";
-              desp_seguridad.style.display = "none";
-              falsa_alarm.style.display = "none";
-              form_fallecido.style.display = "none";
-              serv_especiales.style.display = "none";
-              incendio_form.style.display = "none";
-              persona_presente_form.style.display = "none";
-              detalles_vehiculo.style.display = "none";
-              atenciones_paramedicas.style.display = "none";
-              emergencias_medicas.style.display = "none";
-              traslados_emergencias.style.display = "none";
-              mitigacion_riesgo.style.display = "none";
+        <option value="16">R-1 (Elevacion)</option>
 
-              rescate_form_animal.style.display = "none";
-              rescate_form_persona.style.display = "none";
-              accidentes_transito.style.display = "none";
-              vehiculo_accidente.style.display = "none";
-              otro_vehiculo_accidente.style.display = "none";
-              lesionado_accidente.style.display = "none";
-              traslado_accidente.style.display = "none";
-              otro_vehiculo_accidente2.style.display = "none";
-              rescate_form_animal.style.display = "block";
-              button_submit.style.display = "block";
-            }
-            if (this.value == "2") {
-              rescate_form_animal.style.display = "none";
-              abast_agua.style.display = "none";
-              apoyo_unid.style.display = "none";
-              guard_prev.style.display = "none";
-              atend_no_efect.style.display = "none";
-              desp_seguridad.style.display = "none";
-              falsa_alarm.style.display = "none";
-              form_fallecido.style.display = "none";
-              serv_especiales.style.display = "none";
-              incendio_form.style.display = "none";
-              persona_presente_form.style.display = "none";
-              detalles_vehiculo.style.display = "none";
-              atenciones_paramedicas.style.display = "none";
-              emergencias_medicas.style.display = "none";
-              traslados_emergencias.style.display = "none";
-              mitigacion_riesgo.style.display = "none";
+        <option value="17">Lince 01</option>
 
-              rescate_form_animal.style.display = "none";
-              rescate_form_persona.style.display = "none";
-              accidentes_transito.style.display = "none";
-              vehiculo_accidente.style.display = "none";
-              otro_vehiculo_accidente.style.display = "none";
-              lesionado_accidente.style.display = "none";
-              traslado_accidente.style.display = "none";
-              otro_vehiculo_accidente2.style.display = "none";
-              rescate_form_persona.style.display = "block";
-              button_submit.style.display = "block";
-            }
-          });
-      } 
-      else if (this.value == "11") {
-        abast_agua.style.display = "none";
-        apoyo_unid.style.display = "none";
-        guard_prev.style.display = "none";
-        atend_no_efect.style.display = "none";
-        desp_seguridad.style.display = "none";
-        falsa_alarm.style.display = "none";
-        serv_especiales.style.display = "none";
-        rescate_form.style.display = "none";
-        rescate_form_animal.style.display = "none";
-        rescate_form_persona.style.display = "none";
-        form_fallecido.style.display = "none";
-        atenciones_paramedicas.style.display = "none";
-        emergencias_medicas.style.display = "none";
-        traslados_emergencias.style.display = "none";
-        accidentes_transito.style.display = "none";
-        vehiculo_accidente.style.display = "none";
-        otro_vehiculo_accidente.style.display = "none";
-        lesionado_accidente.style.display = "none";
-        traslado_accidente.style.display = "none";
-        otro_vehiculo_accidente2.style.display = "none";
-        mitigacion_riesgo.style.display = "none";
+        <option value="18">Lince 02</option>
 
-        persona_presente_form.style.display = "none";
-        detalles_vehiculo.style.display = "none";
-        evaluacion_riesgo.style.display = "none";
+        <option value="19">Lince 03</option>
 
-        incendio_form.style.display = "block";
-        button_submit.style.display = "block";
+        <option value="20">Lince 04</option>
 
-        document
-          .getElementById("id_incendio_form-check_agregar_persona")
-          .addEventListener("change", function () {
-            if (this.checked) {
-              persona_presente_form.style.display = "block";
-            } else {
-              persona_presente_form.style.display = "none";
-            }
-          });
-        document
-          .getElementById("id_incendio_form-check_agregar_vehiculo")
-          .addEventListener("change", function () {
-            if (this.checked) {
-              detalles_vehiculo.style.display = "block";
-            } else {
-              detalles_vehiculo.style.display = "none";
-            }
-          });
-      } 
-      else if (this.value == "12") {
-        abast_agua.style.display = "none";
-        apoyo_unid.style.display = "none";
-        guard_prev.style.display = "none";
-        atend_no_efect.style.display = "none";
-        desp_seguridad.style.display = "none";
-        falsa_alarm.style.display = "none";
-        serv_especiales.style.display = "none";
-        rescate_form.style.display = "none";
-        rescate_form_animal.style.display = "none";
-        rescate_form_persona.style.display = "none";
-        incendio_form.style.display = "none";
-        persona_presente_form.style.display = "none";
-        detalles_vehiculo.style.display = "none";
-        atenciones_paramedicas.style.display = "none";
-        emergencias_medicas.style.display = "none";
-        traslados_emergencias.style.display = "none";
-        accidentes_transito.style.display = "none";
-        vehiculo_accidente.style.display = "none";
-        otro_vehiculo_accidente.style.display = "none";
-        lesionado_accidente.style.display = "none";
-        traslado_accidente.style.display = "none";
-        otro_vehiculo_accidente2.style.display = "none";
-        evaluacion_riesgo.style.display = "none";
-        mitigacion_riesgo.style.display = "none";
+        <option value="21">Lince 05</option>
 
-        form_fallecido.style.display = "block";
-        button_submit.style.display = "block";
-      } 
-      else if (this.value == "13") {
-        abast_agua.style.display = "none";
-        apoyo_unid.style.display = "none";
-        guard_prev.style.display = "none";
-        atend_no_efect.style.display = "none";
-        desp_seguridad.style.display = "none";
-        falsa_alarm.style.display = "none";
-        serv_especiales.style.display = "none";
-        rescate_form.style.display = "none";
-        rescate_form_animal.style.display = "none";
-        rescate_form_persona.style.display = "none";
-        incendio_form.style.display = "none";
-        persona_presente_form.style.display = "none";
-        detalles_vehiculo.style.display = "none";
-        atenciones_paramedicas.style.display = "none";
-        emergencias_medicas.style.display = "none";
-        traslados_emergencias.style.display = "none";
-        accidentes_transito.style.display = "none";
-        vehiculo_accidente.style.display = "none";
-        otro_vehiculo_accidente.style.display = "none";
-        lesionado_accidente.style.display = "none";
-        traslado_accidente.style.display = "none";
-        otro_vehiculo_accidente2.style.display = "none";
-        form_fallecido.style.display = "none";
-        evaluacion_riesgo.style.display = "none";
-        
-        mitigacion_riesgo.style.display = "block";
-        button_submit.style.display = "block";
-      } 
-      else if (this.value == "14") {
-        abast_agua.style.display = "none";
-        apoyo_unid.style.display = "none";
-        guard_prev.style.display = "none";
-        atend_no_efect.style.display = "none";
-        desp_seguridad.style.display = "none";
-        falsa_alarm.style.display = "none";
-        serv_especiales.style.display = "none";
-        rescate_form.style.display = "none";
-        rescate_form_animal.style.display = "none";
-        rescate_form_persona.style.display = "none";
-        incendio_form.style.display = "none";
-        persona_presente_form.style.display = "none";
-        detalles_vehiculo.style.display = "none";
-        atenciones_paramedicas.style.display = "none";
-        emergencias_medicas.style.display = "none";
-        traslados_emergencias.style.display = "none";
-        accidentes_transito.style.display = "none";
-        vehiculo_accidente.style.display = "none";
-        otro_vehiculo_accidente.style.display = "none";
-        lesionado_accidente.style.display = "none";
-        traslado_accidente.style.display = "none";
-        otro_vehiculo_accidente2.style.display = "none";
-        form_fallecido.style.display = "none";
-        mitigacion_riesgo.style.display = "none";
-        
-        evaluacion_riesgo.style.display = "block";
-        button_submit.style.display = "block";
-      } 
-      else {
-        errorModal.show();
-        abast_agua.style.display = "none";
-        apoyo_unid.style.display = "none";
-        guard_prev.style.display = "none";
-        atend_no_efect.style.display = "none";
-        desp_seguridad.style.display = "none";
-        falsa_alarm.style.display = "none";
-        serv_especiales.style.display = "none";
-        rescate_form.style.display = "none";
-        rescate_form_animal.style.display = "none";
-        rescate_form_persona.style.display = "none";
-        incendio_form.style.display = "none";
-        persona_presente_form.style.display = "none";
-        detalles_vehiculo.style.display = "none";
-        atenciones_paramedicas.style.display = "none";
-        emergencias_medicas.style.display = "none";
-        traslados_emergencias.style.display = "none";
-        accidentes_transito.style.display = "none";
-        vehiculo_accidente.style.display = "none";
-        otro_vehiculo_accidente.style.display = "none";
-        lesionado_accidente.style.display = "none";
-        traslado_accidente.style.display = "none";
-        otro_vehiculo_accidente2.style.display = "none";
-        mitigacion_riesgo.style.display = "none";
+        <option value="22">Lince 06</option>
 
-        form_fallecido.style.display = "none";
-        button_submit.style.display = "none";
-        apoyo_unid.style.display = "none";
-        button_submit.style.display = "none";
-      }
-    });
-</script>
+        <option value="23">Lince 07</option>
+
+        <option value="24">Lince 08</option>
+
+        <option value="25">Lince 09</option>
+      </select>
+    </div>
+
+    <div>
+      <label for="id_form2-efectivos_enviados">Efectivos enviados:</label>
+
+      <input
+        type="text"
+        name="form2-efectivos_enviados"
+        required=""
+        id="id_form2-efectivos_enviados"
+      />
+    </div>
+
+    <div>
+      <label for="id_form2-jefe_comision">Jefe comision:</label>
+
+      <select
+        name="form2-jefe_comision"
+        class="disable-first-option"
+        id="id_form2-jefe_comision"
+      >
+        <option value="0" disabled="">Seleccione Una Opcion</option>
+
+        <option value="1">Coronel Antonio Briceño</option>
+
+        <option value="2">Comandante Eduard Casas</option>
+
+        <option value="3">Comandante Elias Hernandes</option>
+
+        <option value="4">Admin Anthony Mora</option>
+
+        <option value="5">Teniente Daniel Alarcon</option>
+
+        <option value="6">Administrativo Eber Colmenares</option>
+      </select>
+    </div>
+  </div>
+  <div class="line"></div>
+  <h4>Datos de la Ubicacion</h4>
+  <div class="form-style">
+    <div>
+      <label for="id_form3-municipio">Municipio:</label>
+
+      <select
+        name="form3-municipio"
+        class="disable-first-option"
+        id="id_form3-municipio"
+      >
+        <option value="0" disabled="">Seleccione Una Opcion</option>
+
+        <option value="1">San Cristobal</option>
+
+        <option value="2">Cardenas</option>
+
+        <option value="3">Lobatera</option>
+
+        <option value="4">Independencia</option>
+
+        <option value="5">Libertador</option>
+      </select>
+    </div>
+
+    <div>
+      <label for="id_form3-parroquia">Parroquia:</label>
+
+      <select
+        name="form3-parroquia"
+        class="disable-first-option"
+        id="id_form3-parroquia"
+      >
+        <option value="0" disabled="">Seleccione una Opcion</option>
+
+        <option value="1">La Concordia</option>
+
+        <option value="2">Pedro Maria Morantes</option>
+
+        <option value="3">San Juan Bautista</option>
+
+        <option value="4">San Sebastian</option>
+
+        <option value="6">Francisco Romero Lobo</option>
+      </select>
+    </div>
+
+    <div>
+      <label for="id_form3-direccion">Direccion:</label>
+
+      <input
+        type="text"
+        name="form3-direccion"
+        maxlength="100"
+        required=""
+        id="id_form3-direccion"
+      />
+    </div>
+
+    <div>
+      <label for="id_form3-fecha">Fecha:</label>
+
+      <input type="date" name="form3-fecha" required="" id="id_form3-fecha" />
+    </div>
+
+    <div>
+      <label for="id_form3-hora">Hora:</label>
+
+      <input type="text" name="form3-hora" required="" id="id_form3-hora" />
+    </div>
+  </div>
+  <div class="line"></div>
+  <h4>Tipo de Procedimientos</h4>
+  <div class="form-style">
+    <div>
+      <label for="id_form4-tipo_procedimiento">Tipo procedimiento:</label>
+
+      <select
+        name="form4-tipo_procedimiento"
+        class="disable-first-option"
+        id="id_form4-tipo_procedimiento"
+      >
+        <option value="" disabled="">Seleccione una Opción</option>
+        <option value="-">Elige Una Division</option>
+      </select>
+    </div>
+  </div>
+
+  <!-- Detalles de Procedimiento (Abastecimiento de Agua) -->
+  <div class="data_form" id="abast_agua" style="display: none">
+    <div class="line"></div>
+    <h4>Abastecimiento de Agua</h4>
+    <div class="form-style">
+      <div>
+        <label for="id_abast_agua-tipo_servicio">Tipo servicio:</label>
+
+        <select
+          name="abast_agua-tipo_servicio"
+          class="disable-first-option"
+          id="id_abast_agua-tipo_servicio"
+        >
+          <option value="0" disabled="">Seleccione Una Opcion</option>
+
+          <option value="1">Comunidades</option>
+
+          <option value="2">Instituciones Educativas (Publicas)</option>
+
+          <option value="3">Instituciones Educativas (Privadas)</option>
+
+          <option value="4">Instituciones Hospitalarias</option>
+
+          <option value="5">
+            Instituciones Privadas (Comercios, Empresas)
+          </option>
+
+          <option value="6">
+            Instituciones Públicas (Militares, Policiales)
+          </option>
+
+          <option value="7">Especificar Direccion</option>
+        </select>
+      </div>
+
+      <div>
+        <label for="id_abast_agua-nombres">Nombres:</label>
+
+        <input
+          type="text"
+          name="abast_agua-nombres"
+          maxlength="40"
+          id="id_abast_agua-nombres"
+        />
+      </div>
+
+      <div>
+        <label for="id_abast_agua-apellidos">Apellidos:</label>
+
+        <input
+          type="text"
+          name="abast_agua-apellidos"
+          maxlength="40"
+          id="id_abast_agua-apellidos"
+        />
+      </div>
+
+      <div>
+        <label for="id_abast_agua-cedula">Cedula:</label>
+
+        <input
+          type="text"
+          name="abast_agua-cedula"
+          maxlength="10"
+          id="id_abast_agua-cedula"
+        />
+      </div>
+
+      <div>
+        <label for="id_abast_agua-ltrs_agua">Ltrs agua:</label>
+
+        <input
+          type="text"
+          name="abast_agua-ltrs_agua"
+          maxlength="10"
+          id="id_abast_agua-ltrs_agua"
+        />
+      </div>
+
+      <div>
+        <label for="id_abast_agua-personas_atendidas"
+          >Personas atendidas:</label
+        >
+
+        <input
+          type="text"
+          name="abast_agua-personas_atendidas"
+          maxlength="10"
+          id="id_abast_agua-personas_atendidas"
+        />
+      </div>
+
+      <div>
+        <label for="id_abast_agua-descripcion">Descripcion:</label>
+
+        <input
+          type="text"
+          name="abast_agua-descripcion"
+          maxlength="40"
+          id="id_abast_agua-descripcion"
+        />
+      </div>
+
+      <div>
+        <label for="id_abast_agua-material_utilizado"
+          >Material utilizado:</label
+        >
+
+        <input
+          type="text"
+          name="abast_agua-material_utilizado"
+          maxlength="40"
+          id="id_abast_agua-material_utilizado"
+        />
+      </div>
+
+      <div>
+        <label for="id_abast_agua-status">Status:</label>
+
+        <select
+          name="abast_agua-status"
+          class="disable-first-option"
+          id="id_abast_agua-status"
+        >
+          <option value="-" disabled="">Seleccione Una Opcion</option>
+
+          <option value="Culminado">Culminado</option>
+
+          <option value="En Proceso">En Proceso</option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <!-- Detalles de Procedimiento (Apoyo a Otras Unidades) -->
+  <div class="data_form" id="apoyo_unid" style="display: none">
+    <div class="line"></div>
+    <h4>Apoyo a Otras Unidades</h4>
+    <div class="form-style">
+      <div>
+        <label for="id_apoyo_unid-tipo_apoyo">Tipo apoyo:</label>
+
+        <select
+          name="apoyo_unid-tipo_apoyo"
+          class="disable-first-option"
+          id="id_apoyo_unid-tipo_apoyo"
+        >
+          <option value="0" disabled="">Seleccione Una Opcion</option>
+
+          <option value="1">Por Rescate</option>
+
+          <option value="2">Por Incendio</option>
+
+          <option value="3">Por Traslado de Paciente</option>
+
+          <option value="4">Por Accidente de Transito</option>
+
+          <option value="5">Por Tala de Arbol</option>
+        </select>
+      </div>
+
+      <div>
+        <label for="id_apoyo_unid-unidad_apoyada">Unidad apoyada:</label>
+
+        <input
+          type="text"
+          name="apoyo_unid-unidad_apoyada"
+          maxlength="50"
+          id="id_apoyo_unid-unidad_apoyada"
+        />
+      </div>
+
+      <div>
+        <label for="id_apoyo_unid-descripcion">Descripcion:</label>
+
+        <input
+          type="text"
+          name="apoyo_unid-descripcion"
+          maxlength="50"
+          id="id_apoyo_unid-descripcion"
+        />
+      </div>
+
+      <div>
+        <label for="id_apoyo_unid-material_utilizado"
+          >Material utilizado:</label
+        >
+
+        <input
+          type="text"
+          name="apoyo_unid-material_utilizado"
+          maxlength="50"
+          id="id_apoyo_unid-material_utilizado"
+        />
+      </div>
+
+      <div>
+        <label for="id_apoyo_unid-status">Status:</label>
+
+        <select
+          name="apoyo_unid-status"
+          class="disable-first-option"
+          id="id_apoyo_unid-status"
+        >
+          <option value="-" disabled="">Seleccione Una Opcion</option>
+
+          <option value="Culminado">Culminado</option>
+
+          <option value="En Proceso">En Proceso</option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <!-- Detalles de Procedimiento (Guardia de Prevencion) -->
+  <div class="data_form" id="guard_prev" style="display: none">
+    <div class="line"></div>
+    <h4>Guardia de Prevencion</h4>
+    <div class="form-style">
+      <div>
+        <label for="id_guard_prev-motivo_prevencion">Motivo prevencion:</label>
+
+        <select
+          name="guard_prev-motivo_prevencion"
+          class="disable-first-option"
+          id="id_guard_prev-motivo_prevencion"
+        >
+          <option value="0" disabled="">Seleccione Una Opcion</option>
+
+          <option value="1">Evento deportivo</option>
+
+          <option value="2">Evento Musical</option>
+
+          <option value="3">Evento Religioso</option>
+
+          <option value="4">Evento Politico</option>
+
+          <option value="5">Evento Cultural</option>
+
+          <option value="6">Actividades Recreativas</option>
+
+          <option value="7">Acto Funebre</option>
+        </select>
+      </div>
+
+      <div>
+        <label for="id_guard_prev-descripcion">Descripcion:</label>
+
+        <input
+          type="text"
+          name="guard_prev-descripcion"
+          maxlength="50"
+          id="id_guard_prev-descripcion"
+        />
+      </div>
+
+      <div>
+        <label for="id_guard_prev-material_utilizado"
+          >Material utilizado:</label
+        >
+
+        <input
+          type="text"
+          name="guard_prev-material_utilizado"
+          maxlength="50"
+          id="id_guard_prev-material_utilizado"
+        />
+      </div>
+
+      <div>
+        <label for="id_guard_prev-status">Status:</label>
+
+        <select
+          name="guard_prev-status"
+          class="disable-first-option"
+          id="id_guard_prev-status"
+        >
+          <option value="-" disabled="">Seleccione Una Opcion</option>
+
+          <option value="Culminado">Culminado</option>
+
+          <option value="En Proceso">En Proceso</option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <!-- Detalles de Procedimiento (Atendido No Efectuado) -->
+  <div class="data_form" id="atend_no_efect" style="display: none">
+    <div class="line"></div>
+    <h4>Atendido No Efectuado</h4>
+    <div class="form-style">
+      <div>
+        <label for="id_atend_no_efec-descripcion">Descripcion:</label>
+
+        <input
+          type="text"
+          name="atend_no_efec-descripcion"
+          maxlength="50"
+          id="id_atend_no_efec-descripcion"
+        />
+      </div>
+
+      <div>
+        <label for="id_atend_no_efec-material_utilizado"
+          >Material utilizado:</label
+        >
+
+        <input
+          type="text"
+          name="atend_no_efec-material_utilizado"
+          maxlength="50"
+          id="id_atend_no_efec-material_utilizado"
+        />
+      </div>
+
+      <div>
+        <label for="id_atend_no_efec-status">Status:</label>
+
+        <select
+          name="atend_no_efec-status"
+          class="disable-first-option"
+          id="id_atend_no_efec-status"
+        >
+          <option value="-" disabled="">Seleccione Una Opcion</option>
+
+          <option value="Culminado">Culminado</option>
+
+          <option value="En Proceso">En Proceso</option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <!-- Detalles de Procedimiento (Despliegue de seguridad) -->
+  <div class="data_form" id="desp_seguridad" style="display: none">
+    <div class="line"></div>
+    <h4>Despliegue de Seguridad</h4>
+    <div class="form-style">
+      <div>
+        <label for="id_desp_seguridad-motv_despliegue"
+          >Motivo Despliegue:</label
+        >
+
+        <select
+          name="desp_seguridad-motv_despliegue"
+          class="disable-first-option"
+          id="id_desp_seguridad-motv_despliegue"
+        >
+          <option value="0" disabled="">Seleccione Una Opcion</option>
+
+          <option value="1">Evento deportivo</option>
+
+          <option value="2">Seguridad Ciudadana</option>
+        </select>
+      </div>
+
+      <div>
+        <label for="id_desp_seguridad-descripcion">Descripcion:</label>
+
+        <input
+          type="text"
+          name="desp_seguridad-descripcion"
+          maxlength="50"
+          id="id_desp_seguridad-descripcion"
+        />
+      </div>
+
+      <div>
+        <label for="id_desp_seguridad-material_utilizado"
+          >Material utilizado:</label
+        >
+
+        <input
+          type="text"
+          name="desp_seguridad-material_utilizado"
+          maxlength="50"
+          id="id_desp_seguridad-material_utilizado"
+        />
+      </div>
+
+      <div>
+        <label for="id_desp_seguridad-status">Status:</label>
+
+        <select
+          name="desp_seguridad-status"
+          class="disable-first-option"
+          id="id_desp_seguridad-status"
+        >
+          <option value="-" disabled="">Seleccione Una Opcion</option>
+
+          <option value="Culminado">Culminado</option>
+
+          <option value="En Proceso">En Proceso</option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <!-- Detalles de Procedimiento (Falsa Alarma) -->
+  <div class="data_form" id="falsa_alarm" style="display: none">
+    <div class="line"></div>
+    <h4>Falsa Alarma</h4>
+    <div class="form-style">
+      <div>
+        <label for="id_fals_alarm-motv_alarma">Motivo Alarma:</label>
+
+        <select
+          name="fals_alarm-motv_alarma"
+          class="disable-first-option"
+          id="id_fals_alarm-motv_alarma"
+        >
+          <option value="0" disabled="">Seleccione Una Opcion</option>
+
+          <option value="1">Incendio</option>
+        </select>
+      </div>
+
+      <div>
+        <label for="id_fals_alarm-descripcion">Descripcion:</label>
+
+        <input
+          type="text"
+          name="fals_alarm-descripcion"
+          maxlength="50"
+          id="id_fals_alarm-descripcion"
+        />
+      </div>
+
+      <div>
+        <label for="id_fals_alarm-material_utilizado"
+          >Material utilizado:</label
+        >
+
+        <input
+          type="text"
+          name="fals_alarm-material_utilizado"
+          maxlength="50"
+          id="id_fals_alarm-material_utilizado"
+        />
+      </div>
+
+      <div>
+        <label for="id_fals_alarm-status">Status:</label>
+
+        <select
+          name="fals_alarm-status"
+          class="disable-first-option"
+          id="id_fals_alarm-status"
+        >
+          <option value="-" disabled="">Seleccione Una Opcion</option>
+
+          <option value="Culminado">Culminado</option>
+
+          <option value="En Proceso">En Proceso</option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <!-- Detalles de Procedimiento (Servicios_especiales) -->
+  <div class="data_form" id="serv_especiales" style="display: none">
+    <div class="line"></div>
+    <h4>Servicios Especiales</h4>
+    <div class="form-style">
+      <div>
+        <label for="id_serv_especial-tipo_servicio">Motivo Servicio:</label>
+
+        <select
+          name="serv_especial-tipo_servicio"
+          class="disable-first-option"
+          id="id_serv_especial-tipo_servicio"
+        >
+          <option value="0" disabled="">Seleccione Una Opcion</option>
+
+          <option value="1">Lavado</option>
+
+          <option value="3">Regado</option>
+
+          <option value="4">Dispersion De Particulas</option>
+
+          <option value="5">Destape de Alcantarilla</option>
+
+          <option value="6">Colocacion de Drisa</option>
+
+          <option value="7">Desinfeccion Covid-19</option>
+        </select>
+      </div>
+
+      <div>
+        <label for="id_serv_especial-descripcion">Descripcion:</label>
+
+        <input
+          type="text"
+          name="serv_especial-descripcion"
+          maxlength="50"
+          id="id_serv_especial-descripcion"
+        />
+      </div>
+
+      <div>
+        <label for="id_serv_especial-material_utilizado"
+          >Material utilizado:</label
+        >
+
+        <input
+          type="text"
+          name="serv_especial-material_utilizado"
+          maxlength="50"
+          id="id_serv_especial-material_utilizado"
+        />
+      </div>
+
+      <div>
+        <label for="id_serv_especial-status">Status:</label>
+
+        <select
+          name="serv_especial-status"
+          class="disable-first-option"
+          id="id_serv_especial-status"
+        >
+          <option value="-" disabled="">Seleccione Una Opcion</option>
+
+          <option value="Culminado">Culminado</option>
+
+          <option value="En Proceso">En Proceso</option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <!-- Detalles de Procedimiento (Fallecidos) -->
+  <div class="data_form" id="fallecidos" style="display: none">
+    <div class="line"></div>
+    <h4>Fallecidos</h4>
+    <div class="form-style">
+      <div>
+        <label for="id_form_fallecido-motivo_fallecimiento"
+          >Motivo fallecimiento:</label
+        >
+
+        <input
+          type="text"
+          name="form_fallecido-motivo_fallecimiento"
+          maxlength="50"
+          id="id_form_fallecido-motivo_fallecimiento"
+        />
+      </div>
+
+      <div>
+        <label for="id_form_fallecido-nom_fallecido">Nom fallecido:</label>
+
+        <input
+          type="text"
+          name="form_fallecido-nom_fallecido"
+          maxlength="40"
+          id="id_form_fallecido-nom_fallecido"
+        />
+      </div>
+
+      <div>
+        <label for="id_form_fallecido-apellido_fallecido"
+          >Apellido fallecido:</label
+        >
+
+        <input
+          type="text"
+          name="form_fallecido-apellido_fallecido"
+          maxlength="40"
+          id="id_form_fallecido-apellido_fallecido"
+        />
+      </div>
+
+      <div>
+        <label for="id_form_fallecido-cedula_fallecido"
+          >Cedula fallecido:</label
+        >
+
+        <input
+          type="text"
+          name="form_fallecido-cedula_fallecido"
+          maxlength="10"
+          id="id_form_fallecido-cedula_fallecido"
+        />
+      </div>
+
+      <div>
+        <label for="id_form_fallecido-edad">Edad:</label>
+
+        <input
+          type="text"
+          name="form_fallecido-edad"
+          maxlength="3"
+          id="id_form_fallecido-edad"
+        />
+      </div>
+
+      <div>
+        <label for="id_form_fallecido-sexo">Sexo:</label>
+
+        <input
+          type="text"
+          name="form_fallecido-sexo"
+          maxlength="10"
+          id="id_form_fallecido-sexo"
+        />
+      </div>
+
+      <div>
+        <label for="id_form_fallecido-descripcion">Descripcion:</label>
+
+        <input
+          type="text"
+          name="form_fallecido-descripcion"
+          maxlength="50"
+          id="id_form_fallecido-descripcion"
+        />
+      </div>
+
+      <div>
+        <label for="id_form_fallecido-material_utilizado"
+          >Material utilizado:</label
+        >
+
+        <input
+          type="text"
+          name="form_fallecido-material_utilizado"
+          maxlength="50"
+          id="id_form_fallecido-material_utilizado"
+        />
+      </div>
+
+      <div>
+        <label for="id_form_fallecido-status">Status:</label>
+
+        <select
+          name="form_fallecido-status"
+          class="disable-first-option"
+          id="id_form_fallecido-status"
+        >
+          <option value="-" disabled="">Seleccione Una Opcion</option>
+
+          <option value="Culminado">Culminado</option>
+
+          <option value="En Proceso">En Proceso</option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <!-- Detalles de Procedimiento (Rescate) -->
+  <div class="data_form" id="rescate" style="display: none">
+    <div class="line"></div>
+    <h4>Rescate</h4>
+    <div class="form-style">
+      <div>
+        <label for="id_rescate_form-material_utilizado"
+          >Material utilizado:</label
+        >
+
+        <input
+          type="text"
+          name="rescate_form-material_utilizado"
+          maxlength="50"
+          id="id_rescate_form-material_utilizado"
+        />
+      </div>
+
+      <div>
+        <label for="id_rescate_form-status">Status:</label>
+
+        <select
+          name="rescate_form-status"
+          class="disable-first-option"
+          id="id_rescate_form-status"
+        >
+          <option value="-" disabled="">Seleccione Una Opcion</option>
+
+          <option value="Culminado">Culminado</option>
+
+          <option value="En Proceso">En Proceso</option>
+        </select>
+      </div>
+
+      <div>
+        <label for="id_rescate_form-tipo_rescate">Tipo rescate:</label>
+
+        <select
+          name="rescate_form-tipo_rescate"
+          class="disable-first-option"
+          id="id_rescate_form-tipo_rescate"
+        >
+          <option value="0" disabled="">Seleccione Una Opcion</option>
+
+          <option value="1">Animal</option>
+
+          <option value="2">Persona</option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <!-- Detalles de Procedimiento (Rescate Animal) -->
+  <div class="data_form" id="rescate_animal" style="display: none">
+    <div class="line"></div>
+    <h4>Rescate Animal</h4>
+    <div class="form-style">
+      <div>
+        <label for="id_rescate_form_animal-especie">Especie:</label>
+
+        <input
+          type="text"
+          name="rescate_form_animal-especie"
+          maxlength="30"
+          id="id_rescate_form_animal-especie"
+        />
+      </div>
+
+      <div>
+        <label for="id_rescate_form_animal-descripcion">Descripcion:</label>
+
+        <input
+          type="text"
+          name="rescate_form_animal-descripcion"
+          maxlength="40"
+          id="id_rescate_form_animal-descripcion"
+        />
+      </div>
+    </div>
+  </div>
+
+  <!-- Detalles de Procedimiento (Rescate Persona) -->
+  <div class="data_form" id="rescate_persona" style="display: none">
+    <div class="line"></div>
+    <h4>Rescate Persona</h4>
+    <div class="form-style">
+      <div>
+        <label for="id_rescate_form_persona-nombre_persona"
+          >Nombre persona:</label
+        >
+
+        <input
+          type="text"
+          name="rescate_form_persona-nombre_persona"
+          maxlength="30"
+          id="id_rescate_form_persona-nombre_persona"
+        />
+      </div>
+
+      <div>
+        <label for="id_rescate_form_persona-apellido_persona"
+          >Apellido persona:</label
+        >
+
+        <input
+          type="text"
+          name="rescate_form_persona-apellido_persona"
+          maxlength="30"
+          id="id_rescate_form_persona-apellido_persona"
+        />
+      </div>
+
+      <div>
+        <label for="id_rescate_form_persona-cedula_persona"
+          >Cedula persona:</label
+        >
+
+        <input
+          type="text"
+          name="rescate_form_persona-cedula_persona"
+          maxlength="10"
+          id="id_rescate_form_persona-cedula_persona"
+        />
+      </div>
+
+      <div>
+        <label for="id_rescate_form_persona-edad_persona">Edad persona:</label>
+
+        <input
+          type="text"
+          name="rescate_form_persona-edad_persona"
+          maxlength="3"
+          id="id_rescate_form_persona-edad_persona"
+        />
+      </div>
+
+      <div>
+        <label for="id_rescate_form_persona-sexo_persona">Sexo persona:</label>
+
+        <input
+          type="text"
+          name="rescate_form_persona-sexo_persona"
+          maxlength="10"
+          id="id_rescate_form_persona-sexo_persona"
+        />
+      </div>
+
+      <div>
+        <label for="id_rescate_form_persona-descripcion">Descripcion:</label>
+
+        <input
+          type="text"
+          name="rescate_form_persona-descripcion"
+          maxlength="40"
+          id="id_rescate_form_persona-descripcion"
+        />
+      </div>
+    </div>
+  </div>
+
+  <!-- Detalles de Procedimiento (Incendio) -->
+  <div class="data_form" id="incendio_form" style="display: none">
+    <div class="line"></div>
+    <h4>Incendio</h4>
+    <div class="form-style checkbox-styles">
+      <div>
+        <label for="id_incendio_form-tipo_incendio">Tipo incendio:</label>
+
+        <select
+          name="incendio_form-tipo_incendio"
+          class="disable-first-option"
+          id="id_incendio_form-tipo_incendio"
+        >
+          <option value="0" disabled="">Seleccione Una Opcion</option>
+
+          <option value="1">Incendio de Estructura</option>
+
+          <option value="2">Incendio de Vehiculo</option>
+
+          <option value="3">Incendio de Vegetacion</option>
+        </select>
+      </div>
+
+      <div>
+        <label for="id_incendio_form-descripcion">Descripcion:</label>
+
+        <input
+          type="text"
+          name="incendio_form-descripcion"
+          maxlength="30"
+          id="id_incendio_form-descripcion"
+        />
+      </div>
+
+      <div>
+        <label for="id_incendio_form-material_utilizado"
+          >Material utilizado:</label
+        >
+
+        <input
+          type="text"
+          name="incendio_form-material_utilizado"
+          maxlength="30"
+          id="id_incendio_form-material_utilizado"
+        />
+      </div>
+
+      <div>
+        <label for="id_incendio_form-status">Status:</label>
+
+        <select
+          name="incendio_form-status"
+          class="disable-first-option"
+          id="id_incendio_form-status"
+        >
+          <option value="-" disabled="">Seleccione Una Opcion</option>
+
+          <option value="Culminado">Culminado</option>
+
+          <option value="En Proceso">En Proceso</option>
+        </select>
+      </div>
+
+      <div>
+        <label for="id_incendio_form-check_agregar_persona"
+          >Check agregar persona:</label
+        >
+
+        <input
+          type="checkbox"
+          name="incendio_form-check_agregar_persona"
+          id="id_incendio_form-check_agregar_persona"
+        />
+      </div>
+
+      <div>
+        <label for="id_incendio_form-check_agregar_vehiculo"
+          >Check agregar vehiculo:</label
+        >
+
+        <input
+          type="checkbox"
+          name="incendio_form-check_agregar_vehiculo"
+          id="id_incendio_form-check_agregar_vehiculo"
+        />
+      </div>
+      <!-- Detalles de Procedimiento (persona Presente) -->
+      <div id="persona_presente">
+        <h4>Datos Persona Presente</h4>
+        <div>
+          <label for="id_persona_presente_form-nombre">Nombre:</label>
+
+          <input
+            type="text"
+            name="persona_presente_form-nombre"
+            maxlength="30"
+            id="id_persona_presente_form-nombre"
+          />
+        </div>
+
+        <div>
+          <label for="id_persona_presente_form-apellido">Apellido:</label>
+
+          <input
+            type="text"
+            name="persona_presente_form-apellido"
+            maxlength="30"
+            id="id_persona_presente_form-apellido"
+          />
+        </div>
+
+        <div>
+          <label for="id_persona_presente_form-cedula">Cedula:</label>
+
+          <input
+            type="text"
+            name="persona_presente_form-cedula"
+            maxlength="10"
+            id="id_persona_presente_form-cedula"
+          />
+        </div>
+
+        <div>
+          <label for="id_persona_presente_form-edad">Edad:</label>
+
+          <input
+            type="text"
+            name="persona_presente_form-edad"
+            maxlength="3"
+            id="id_persona_presente_form-edad"
+          />
+        </div>
+      </div>
+
+      <!-- Detalles de Procedimiento (Detalles Vehiculos) -->
+      <div id="detalles_vehiculo">
+        <h4>Datos de Vehiculo</h4>
+        <div>
+          <label for="id_detalles_vehiculo_form-modelo">Modelo:</label>
+
+          <input
+            type="text"
+            name="detalles_vehiculo_form-modelo"
+            maxlength="40"
+            id="id_detalles_vehiculo_form-modelo"
+          />
+        </div>
+
+        <div>
+          <label for="id_detalles_vehiculo_form-marca">Marca:</label>
+
+          <input
+            type="text"
+            name="detalles_vehiculo_form-marca"
+            maxlength="40"
+            id="id_detalles_vehiculo_form-marca"
+          />
+        </div>
+
+        <div>
+          <label for="id_detalles_vehiculo_form-color">Color:</label>
+
+          <input
+            type="text"
+            name="detalles_vehiculo_form-color"
+            maxlength="40"
+            id="id_detalles_vehiculo_form-color"
+          />
+        </div>
+
+        <div>
+          <label for="id_detalles_vehiculo_form-año">Año:</label>
+
+          <input
+            type="text"
+            name="detalles_vehiculo_form-año"
+            maxlength="40"
+            id="id_detalles_vehiculo_form-año"
+          />
+        </div>
+
+        <div>
+          <label for="id_detalles_vehiculo_form-placas">Placas:</label>
+
+          <input
+            type="text"
+            name="detalles_vehiculo_form-placas"
+            maxlength="40"
+            id="id_detalles_vehiculo_form-placas"
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Detalles de Procedimiento (Atenciones Paramedicas) -->
+  <div class="data_form" id="atenciones_paramedicas" style="display: none">
+    <div class="line"></div>
+    <h4 class="mod-title-width">Atenciones Paramedicas</h4>
+    <div class="form-style checkbox-styles">
+      <div>
+        <label for="id_atenciones_paramedicas-tipo_atencion"
+          >Tipo atencion:</label
+        >
+
+        <select
+          name="atenciones_paramedicas-tipo_atencion"
+          class="disable-first-option"
+          id="id_atenciones_paramedicas-tipo_atencion"
+        >
+          <option value="-" disabled="">Seleccione Una Opcion</option>
+
+          <option value="Emergencias Medicas">Emergencias Medicas</option>
+
+          <option value="Accidentes de Transito">Accidentes de Transito</option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <!-- Detalles de Procedimiento (Emergencias Medicas) -->
+  <div class="data_form" id="emergencias_medicas" style="display: none">
+    <div class="line"></div>
+    <h4>Emergencias Medicas</h4>
+    <div class="form-style checkbox-styles">
+      <div>
+        <label for="id_emergencias_medicas-nombre">Nombre:</label>
+
+        <input
+          type="text"
+          name="emergencias_medicas-nombre"
+          maxlength="40"
+          id="id_emergencias_medicas-nombre"
+        />
+      </div>
+
+      <div>
+        <label for="id_emergencias_medicas-apellido">Apellido:</label>
+
+        <input
+          type="text"
+          name="emergencias_medicas-apellido"
+          maxlength="40"
+          id="id_emergencias_medicas-apellido"
+        />
+      </div>
+
+      <div>
+        <label for="id_emergencias_medicas-cedula">Cedula:</label>
+
+        <input
+          type="text"
+          name="emergencias_medicas-cedula"
+          maxlength="10"
+          id="id_emergencias_medicas-cedula"
+        />
+      </div>
+
+      <div>
+        <label for="id_emergencias_medicas-edad">Edad:</label>
+
+        <input
+          type="text"
+          name="emergencias_medicas-edad"
+          maxlength="3"
+          id="id_emergencias_medicas-edad"
+        />
+      </div>
+
+      <div>
+        <label for="id_emergencias_medicas-sexo">Sexo:</label>
+
+        <input
+          type="text"
+          name="emergencias_medicas-sexo"
+          maxlength="12"
+          id="id_emergencias_medicas-sexo"
+        />
+      </div>
+
+      <div>
+        <label for="id_emergencias_medicas-idx">Idx:</label>
+
+        <input
+          type="text"
+          name="emergencias_medicas-idx"
+          maxlength="40"
+          id="id_emergencias_medicas-idx"
+        />
+      </div>
+
+      <div>
+        <label for="id_emergencias_medicas-descripcion">Descripcion:</label>
+
+        <input
+          type="text"
+          name="emergencias_medicas-descripcion"
+          maxlength="120"
+          id="id_emergencias_medicas-descripcion"
+        />
+      </div>
+
+      <div>
+        <label for="id_emergencias_medicas-material_utilizado"
+          >Material utilizado:</label
+        >
+
+        <input
+          type="text"
+          name="emergencias_medicas-material_utilizado"
+          maxlength="100"
+          id="id_emergencias_medicas-material_utilizado"
+        />
+      </div>
+
+      <div>
+        <label for="id_emergencias_medicas-status">Status:</label>
+
+        <select
+          name="emergencias_medicas-status"
+          class="disable-first-option"
+          id="id_emergencias_medicas-status"
+        >
+          <option value="-" disabled="">Seleccione Una Opcion</option>
+
+          <option value="Culminado">Culminado</option>
+
+          <option value="En Proceso">En Proceso</option>
+        </select>
+      </div>
+
+      <div>
+        <label for="id_emergencias_medicas-trasladado">Trasladado:</label>
+
+        <input
+          type="checkbox"
+          name="emergencias_medicas-trasladado"
+          id="id_emergencias_medicas-trasladado"
+        />
+      </div>
+      <!-- Detalles de Procedimiento (Detalles Traslado) -->
+      <div id="traslados_emergencias">
+        <h4>Datos del Traslado</h4>
+        <div>
+          <label for="id_traslados_emergencias-hospital_trasladado"
+            >Hospital trasladado:</label
+          >
+
+          <input
+            type="text"
+            name="traslados_emergencias-hospital_trasladado"
+            maxlength="50"
+            id="id_traslados_emergencias-hospital_trasladado"
+          />
+        </div>
+
+        <div>
+          <label for="id_traslados_emergencias-medico_receptor"
+            >Medico receptor:</label
+          >
+
+          <input
+            type="text"
+            name="traslados_emergencias-medico_receptor"
+            maxlength="50"
+            id="id_traslados_emergencias-medico_receptor"
+          />
+        </div>
+
+        <div>
+          <label for="id_traslados_emergencias-mpps_cmt">Mpps cmt:</label>
+
+          <input
+            type="text"
+            name="traslados_emergencias-mpps_cmt"
+            maxlength="20"
+            id="id_traslados_emergencias-mpps_cmt"
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Detalles de Procedimiento (Accidentes de Transito) -->
+  <div class="data_form" id="accidentes_transito" style="display: none">
+    <div class="line"></div>
+    <h4>Accidentes de Transito</h4>
+    <div class="form-style checkbox-styles">
+      <div>
+        <label for="id_formulario_accidentes_transito-tipo_accidente"
+          >Tipo accidente:</label
+        >
+
+        <select
+          name="formulario_accidentes_transito-tipo_accidente"
+          class="disable-first-option"
+          id="id_formulario_accidentes_transito-tipo_accidente"
+        >
+          <option value="0" disabled="">Seleccione Una Opcion</option>
+
+          <option value="1">Colision Vehiculo-Moto</option>
+
+          <option value="2">Colision Vehiculo-Vehiculo</option>
+
+          <option value="3">Colision Vehiculo-Moto-Objeto Fijo</option>
+        </select>
+      </div>
+
+      <div>
+        <label for="id_formulario_accidentes_transito-cantidad_lesionado"
+          >Cantidad lesionado:</label
+        >
+
+        <input
+          type="text"
+          name="formulario_accidentes_transito-cantidad_lesionado"
+          maxlength="4"
+          id="id_formulario_accidentes_transito-cantidad_lesionado"
+        />
+      </div>
+
+      <div>
+        <label for="id_formulario_accidentes_transito-material_utilizado"
+          >Material utilizado:</label
+        >
+
+        <input
+          type="text"
+          name="formulario_accidentes_transito-material_utilizado"
+          maxlength="30"
+          id="id_formulario_accidentes_transito-material_utilizado"
+        />
+      </div>
+
+      <div>
+        <label for="id_formulario_accidentes_transito-status">Status:</label>
+
+        <select
+          name="formulario_accidentes_transito-status"
+          class="disable-first-option"
+          id="id_formulario_accidentes_transito-status"
+        >
+          <option value="-" disabled="">Seleccione Una Opcion</option>
+
+          <option value="Culminado">Culminado</option>
+
+          <option value="En Proceso">En Proceso</option>
+        </select>
+      </div>
+
+      <div>
+        <label for="id_formulario_accidentes_transito-agg_vehiculo"
+          >Agg vehiculo:</label
+        >
+
+        <input
+          type="checkbox"
+          name="formulario_accidentes_transito-agg_vehiculo"
+          id="id_formulario_accidentes_transito-agg_vehiculo"
+        />
+      </div>
+
+      <div>
+        <label for="id_formulario_accidentes_transito-agg_lesionado"
+          >Agg lesionado:</label
+        >
+
+        <input
+          type="checkbox"
+          name="formulario_accidentes_transito-agg_lesionado"
+          id="id_formulario_accidentes_transito-agg_lesionado"
+        />
+      </div>
+      <!-- Detalles de Procedimiento (Detalles Vehiculo) -->
+      <div id="vehiculo_accidente">
+        <h4>Datos del Vehiculo</h4>
+        <div>
+          <label for="id_detalles_vehiculos_accidentes-modelo">Modelo:</label>
+
+          <input
+            type="text"
+            name="detalles_vehiculos_accidentes-modelo"
+            maxlength="30"
+            id="id_detalles_vehiculos_accidentes-modelo"
+          />
+        </div>
+
+        <div>
+          <label for="id_detalles_vehiculos_accidentes-marca">Marca:</label>
+
+          <input
+            type="text"
+            name="detalles_vehiculos_accidentes-marca"
+            maxlength="30"
+            id="id_detalles_vehiculos_accidentes-marca"
+          />
+        </div>
+
+        <div>
+          <label for="id_detalles_vehiculos_accidentes-color">Color:</label>
+
+          <input
+            type="text"
+            name="detalles_vehiculos_accidentes-color"
+            maxlength="30"
+            id="id_detalles_vehiculos_accidentes-color"
+          />
+        </div>
+
+        <div>
+          <label for="id_detalles_vehiculos_accidentes-año">Año:</label>
+
+          <input
+            type="text"
+            name="detalles_vehiculos_accidentes-año"
+            maxlength="30"
+            id="id_detalles_vehiculos_accidentes-año"
+          />
+        </div>
+
+        <div>
+          <label for="id_detalles_vehiculos_accidentes-placas">Placas:</label>
+
+          <input
+            type="text"
+            name="detalles_vehiculos_accidentes-placas"
+            maxlength="30"
+            id="id_detalles_vehiculos_accidentes-placas"
+          />
+        </div>
+
+        <div>
+          <label for="id_detalles_vehiculos_accidentes-agg_vehiculo"
+            >Agg vehiculo:</label
+          >
+
+          <input
+            type="checkbox"
+            name="detalles_vehiculos_accidentes-agg_vehiculo"
+            id="id_detalles_vehiculos_accidentes-agg_vehiculo"
+          />
+        </div>
+      </div>
+      <!-- Detalles de Procedimiento (Detalles Vehiculo) -->
+      <div id="otro_vehiculo_accidente">
+        <h4>Otro Vehiculo</h4>
+        <div>
+          <label for="id_detalles_vehiculos_accidentes2-modelo">Modelo:</label>
+
+          <input
+            type="text"
+            name="detalles_vehiculos_accidentes2-modelo"
+            maxlength="30"
+            id="id_detalles_vehiculos_accidentes2-modelo"
+          />
+        </div>
+
+        <div>
+          <label for="id_detalles_vehiculos_accidentes2-marca">Marca:</label>
+
+          <input
+            type="text"
+            name="detalles_vehiculos_accidentes2-marca"
+            maxlength="30"
+            id="id_detalles_vehiculos_accidentes2-marca"
+          />
+        </div>
+
+        <div>
+          <label for="id_detalles_vehiculos_accidentes2-color">Color:</label>
+
+          <input
+            type="text"
+            name="detalles_vehiculos_accidentes2-color"
+            maxlength="30"
+            id="id_detalles_vehiculos_accidentes2-color"
+          />
+        </div>
+
+        <div>
+          <label for="id_detalles_vehiculos_accidentes2-año">Año:</label>
+
+          <input
+            type="text"
+            name="detalles_vehiculos_accidentes2-año"
+            maxlength="30"
+            id="id_detalles_vehiculos_accidentes2-año"
+          />
+        </div>
+
+        <div>
+          <label for="id_detalles_vehiculos_accidentes2-placas">Placas:</label>
+
+          <input
+            type="text"
+            name="detalles_vehiculos_accidentes2-placas"
+            maxlength="30"
+            id="id_detalles_vehiculos_accidentes2-placas"
+          />
+        </div>
+
+        <div>
+          <label for="id_detalles_vehiculos_accidentes2-agg_vehiculo"
+            >Agg vehiculo:</label
+          >
+
+          <input
+            type="checkbox"
+            name="detalles_vehiculos_accidentes2-agg_vehiculo"
+            id="id_detalles_vehiculos_accidentes2-agg_vehiculo"
+          />
+        </div>
+      </div>
+      <!-- Detalles de Procedimiento (Detalles Vehiculo) -->
+      <div id="otro_vehiculo_accidente2">
+        <h4>Ultimo Vehiculo</h4>
+        <div>
+          <label for="id_detalles_vehiculos_accidentes3-modelo">Modelo:</label>
+
+          <input
+            type="text"
+            name="detalles_vehiculos_accidentes3-modelo"
+            maxlength="30"
+            id="id_detalles_vehiculos_accidentes3-modelo"
+          />
+        </div>
+
+        <div>
+          <label for="id_detalles_vehiculos_accidentes3-marca">Marca:</label>
+
+          <input
+            type="text"
+            name="detalles_vehiculos_accidentes3-marca"
+            maxlength="30"
+            id="id_detalles_vehiculos_accidentes3-marca"
+          />
+        </div>
+
+        <div>
+          <label for="id_detalles_vehiculos_accidentes3-color">Color:</label>
+
+          <input
+            type="text"
+            name="detalles_vehiculos_accidentes3-color"
+            maxlength="30"
+            id="id_detalles_vehiculos_accidentes3-color"
+          />
+        </div>
+
+        <div>
+          <label for="id_detalles_vehiculos_accidentes3-año">Año:</label>
+
+          <input
+            type="text"
+            name="detalles_vehiculos_accidentes3-año"
+            maxlength="30"
+            id="id_detalles_vehiculos_accidentes3-año"
+          />
+        </div>
+
+        <div>
+          <label for="id_detalles_vehiculos_accidentes3-placas">Placas:</label>
+
+          <input
+            type="text"
+            name="detalles_vehiculos_accidentes3-placas"
+            maxlength="30"
+            id="id_detalles_vehiculos_accidentes3-placas"
+          />
+        </div>
+      </div>
+      <!-- Detalles de Procedimiento (Detalles Lesionado) -->
+      <div id="lesionado_accidente">
+        <h4>Datos del Lesionado</h4>
+        <div>
+          <label for="id_detalles_lesionados_accidentes-nombre">Nombre:</label>
+
+          <input
+            type="text"
+            name="detalles_lesionados_accidentes-nombre"
+            maxlength="40"
+            id="id_detalles_lesionados_accidentes-nombre"
+          />
+        </div>
+
+        <div>
+          <label for="id_detalles_lesionados_accidentes-apellido"
+            >Apellido:</label
+          >
+
+          <input
+            type="text"
+            name="detalles_lesionados_accidentes-apellido"
+            maxlength="40"
+            id="id_detalles_lesionados_accidentes-apellido"
+          />
+        </div>
+
+        <div>
+          <label for="id_detalles_lesionados_accidentes-cedula">Cedula:</label>
+
+          <input
+            type="text"
+            name="detalles_lesionados_accidentes-cedula"
+            maxlength="10"
+            id="id_detalles_lesionados_accidentes-cedula"
+          />
+        </div>
+
+        <div>
+          <label for="id_detalles_lesionados_accidentes-edad">Edad:</label>
+
+          <input
+            type="text"
+            name="detalles_lesionados_accidentes-edad"
+            maxlength="3"
+            id="id_detalles_lesionados_accidentes-edad"
+          />
+        </div>
+
+        <div>
+          <label for="id_detalles_lesionados_accidentes-sexo">Sexo:</label>
+
+          <input
+            type="text"
+            name="detalles_lesionados_accidentes-sexo"
+            maxlength="12"
+            id="id_detalles_lesionados_accidentes-sexo"
+          />
+        </div>
+
+        <div>
+          <label for="id_detalles_lesionados_accidentes-idx">Idx:</label>
+
+          <input
+            type="text"
+            name="detalles_lesionados_accidentes-idx"
+            maxlength="40"
+            id="id_detalles_lesionados_accidentes-idx"
+          />
+        </div>
+
+        <div>
+          <label for="id_detalles_lesionados_accidentes-descripcion"
+            >Descripcion:</label
+          >
+
+          <input
+            type="text"
+            name="detalles_lesionados_accidentes-descripcion"
+            maxlength="40"
+            id="id_detalles_lesionados_accidentes-descripcion"
+          />
+        </div>
+
+        <div>
+          <label for="id_detalles_lesionados_accidentes-trasladado"
+            >Trasladado:</label
+          >
+
+          <input
+            type="checkbox"
+            name="detalles_lesionados_accidentes-trasladado"
+            id="id_detalles_lesionados_accidentes-trasladado"
+          />
+        </div>
+      </div>
+      <!-- Detalles de Procedimiento (Detalles Traslado) -->
+      <div id="traslado_accidente">
+        <h4>Datos del Traslado</h4>
+        <div>
+          <label for="id_traslados_accidentes-hospital_trasladado"
+            >Hospital trasladado:</label
+          >
+
+          <input
+            type="text"
+            name="traslados_accidentes-hospital_trasladado"
+            maxlength="50"
+            id="id_traslados_accidentes-hospital_trasladado"
+          />
+        </div>
+
+        <div>
+          <label for="id_traslados_accidentes-medico_receptor"
+            >Medico receptor:</label
+          >
+
+          <input
+            type="text"
+            name="traslados_accidentes-medico_receptor"
+            maxlength="50"
+            id="id_traslados_accidentes-medico_receptor"
+          />
+        </div>
+
+        <div>
+          <label for="id_traslados_accidentes-mpps_cmt">Mpps cmt:</label>
+
+          <input
+            type="text"
+            name="traslados_accidentes-mpps_cmt"
+            maxlength="20"
+            id="id_traslados_accidentes-mpps_cmt"
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Detalles de Procedimiento (Evaluacion de Riesgo) -->
+  <div class="data_form" id="evaluacion_riesgo" style="display: none">
+    <div class="line"></div>
+    <h4>Evaluacion de Riesgo</h4>
+    <div class="form-style">
+      <div>
+        <label for="id_evaluacion_riesgo_form-tipo_riesgo">Tipo riesgo:</label>
+
+        <select
+          name="evaluacion_riesgo_form-tipo_riesgo"
+          class="disable-first-option"
+          id="id_evaluacion_riesgo_form-tipo_riesgo"
+        >
+          <option value="0" disabled="">Seleccione Una Opcion</option>
+
+          <option value="1">Colapso de Estructura</option>
+
+          <option value="2">Inundacion</option>
+
+          <option value="3">Desbordamiento de Afluentes Hidricos</option>
+
+          <option value="4">Deslizamiento</option>
+
+          <option value="5">Censo</option>
+        </select>
+      </div>
+
+      <div>
+        <label for="id_evaluacion_riesgo_form-descripcion">Descripcion:</label>
+
+        <input
+          type="text"
+          name="evaluacion_riesgo_form-descripcion"
+          maxlength="100"
+          id="id_evaluacion_riesgo_form-descripcion"
+        />
+      </div>
+
+      <div>
+        <label for="id_evaluacion_riesgo_form-material_utilizado"
+          >Material utilizado:</label
+        >
+
+        <input
+          type="text"
+          name="evaluacion_riesgo_form-material_utilizado"
+          maxlength="100"
+          id="id_evaluacion_riesgo_form-material_utilizado"
+        />
+      </div>
+
+      <div>
+        <label for="id_evaluacion_riesgo_form-status">Status:</label>
+
+        <select
+          name="evaluacion_riesgo_form-status"
+          class="disable-first-option"
+          id="id_evaluacion_riesgo_form-status"
+        >
+          <option value="-" disabled="">Seleccione Una Opcion</option>
+
+          <option value="Culminado">Culminado</option>
+
+          <option value="En Proceso">En Proceso</option>
+        </select>
+      </div>
+      <div id="form_persona_presente" style="display: none">
+        <h4>Persona Presente</h4>
+        <div>
+          <label for="id_persona_presente_eval_form-nombre">Nombre:</label>
+
+          <input
+            type="text"
+            name="persona_presente_eval_form-nombre"
+            maxlength="40"
+            id="id_persona_presente_eval_form-nombre"
+          />
+        </div>
+
+        <div>
+          <label for="id_persona_presente_eval_form-apellidos"
+            >Apellidos:</label
+          >
+
+          <input
+            type="text"
+            name="persona_presente_eval_form-apellidos"
+            maxlength="40"
+            id="id_persona_presente_eval_form-apellidos"
+          />
+        </div>
+
+        <div>
+          <label for="id_persona_presente_eval_form-cedula">Cedula:</label>
+
+          <input
+            type="text"
+            name="persona_presente_eval_form-cedula"
+            maxlength="10"
+            id="id_persona_presente_eval_form-cedula"
+          />
+        </div>
+
+        <div>
+          <label for="id_persona_presente_eval_form-telefono">Telefono:</label>
+
+          <input
+            type="text"
+            name="persona_presente_eval_form-telefono"
+            maxlength="20"
+            id="id_persona_presente_eval_form-telefono"
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Detalles de Procedimiento (Mitigacion de Riesgo) -->
+  <div class="data_form" id="mitigacion_riesgo" style="display: none">
+    <div class="line"></div>
+    <h4>Mitigacion de Riesgo</h4>
+    <div class="form-style">
+      <div>
+        <label for="id_mitigacion_riesgo_form-tipo_riesgo">Tipo riesgo:</label>
+
+        <select
+          name="mitigacion_riesgo_form-tipo_riesgo"
+          class="disable-first-option"
+          id="id_mitigacion_riesgo_form-tipo_riesgo"
+        >
+          <option value="0" disabled="">Seleccione Una Opcion</option>
+
+          <option value="1">Derrame de Combustible</option>
+
+          <option value="2">Pode de Árbol</option>
+
+          <option value="3">Procedimiento por Himenopteros</option>
+
+          <option value="4">Roleada de Árbol</option>
+
+          <option value="5">Tala de Árbol</option>
+        </select>
+      </div>
+
+      <div>
+        <label for="id_mitigacion_riesgo_form-descripcion">Descripcion:</label>
+
+        <input
+          type="text"
+          name="mitigacion_riesgo_form-descripcion"
+          maxlength="100"
+          id="id_mitigacion_riesgo_form-descripcion"
+        />
+      </div>
+
+      <div>
+        <label for="id_mitigacion_riesgo_form-material_utilizado"
+          >Material utilizado:</label
+        >
+
+        <input
+          type="text"
+          name="mitigacion_riesgo_form-material_utilizado"
+          maxlength="100"
+          id="id_mitigacion_riesgo_form-material_utilizado"
+        />
+      </div>
+
+      <div>
+        <label for="id_mitigacion_riesgo_form-status">Status:</label>
+
+        <select
+          name="mitigacion_riesgo_form-status"
+          class="disable-first-option"
+          id="id_mitigacion_riesgo_form-status"
+        >
+          <option value="-" disabled="">Seleccione Una Opcion</option>
+
+          <option value="Culminado">Culminado</option>
+
+          <option value="En Proceso">En Proceso</option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <!-- Detalles de Procedimiento (Mitigacion de Riesgo) -->
+  <div class="data_form" id="puesto_avanzada" style="display: none">
+    <div class="line"></div>
+    <h4>Puesto de Avanzada</h4>
+    <div class="form-style">
+      <div>
+        <label for="id_puesto_avanzada_form-tipo_avanzada"
+          >Tipo avanzada:</label
+        >
+
+        <select
+          name="puesto_avanzada_form-tipo_avanzada"
+          class="disable-first-option"
+          id="id_puesto_avanzada_form-tipo_avanzada"
+        >
+          <option value="0" disabled="">Seleccione Una Opcion</option>
+
+          <option value="1">Fortalecimiento de los Cuadrantes de Paz</option>
+
+          <option value="2">Patrullaje Mixto</option>
+        </select>
+      </div>
+
+      <div>
+        <label for="id_puesto_avanzada_form-descripcion">Descripcion:</label>
+
+        <input
+          type="text"
+          name="puesto_avanzada_form-descripcion"
+          maxlength="100"
+          id="id_puesto_avanzada_form-descripcion"
+        />
+      </div>
+
+      <div>
+        <label for="id_puesto_avanzada_form-material_utilizado"
+          >Material utilizado:</label
+        >
+
+        <input
+          type="text"
+          name="puesto_avanzada_form-material_utilizado"
+          maxlength="100"
+          id="id_puesto_avanzada_form-material_utilizado"
+        />
+      </div>
+
+      <div>
+        <label for="id_puesto_avanzada_form-status">Status:</label>
+
+        <select
+          name="puesto_avanzada_form-status"
+          class="disable-first-option"
+          id="id_puesto_avanzada_form-status"
+        >
+          <option value="-" disabled="">Seleccione Una Opcion</option>
+
+          <option value="Culminado">Culminado</option>
+
+          <option value="En Proceso">En Proceso</option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <!-- Detalles de Procedimiento (Mitigacion de Riesgo) -->
+  <div class="data_form" id="traslados_prehospitalaria" style="display: none">
+    <div class="line"></div>
+    <h4>Traslados</h4>
+    <div class="form-style">
+      <div>
+        <label for="id_traslados_prehospitalaria_form-tipo_traslado"
+          >Tipo traslado:</label
+        >
+
+        <select
+          name="traslados_prehospitalaria_form-tipo_traslado"
+          class="disable-first-option"
+          id="id_traslados_prehospitalaria_form-tipo_traslado"
+        >
+          <option value="0" disabled="">Seleccione Una Opcion</option>
+
+          <option value="1">Traslado en Ambulancia</option>
+
+          <option value="2">Traslado Interhospitalario</option>
+
+          <option value="3">Traslado Inhospitalario</option>
+        </select>
+      </div>
+
+      <div>
+        <label for="id_traslados_prehospitalaria_form-nombre">Nombre:</label>
+
+        <input
+          type="text"
+          name="traslados_prehospitalaria_form-nombre"
+          maxlength="40"
+          id="id_traslados_prehospitalaria_form-nombre"
+        />
+      </div>
+
+      <div>
+        <label for="id_traslados_prehospitalaria_form-apellido"
+          >Apellido:</label
+        >
+
+        <input
+          type="text"
+          name="traslados_prehospitalaria_form-apellido"
+          maxlength="40"
+          id="id_traslados_prehospitalaria_form-apellido"
+        />
+      </div>
+
+      <div>
+        <label for="id_traslados_prehospitalaria_form-cedula">Cedula:</label>
+
+        <input
+          type="text"
+          name="traslados_prehospitalaria_form-cedula"
+          maxlength="10"
+          id="id_traslados_prehospitalaria_form-cedula"
+        />
+      </div>
+
+      <div>
+        <label for="id_traslados_prehospitalaria_form-edad">Edad:</label>
+
+        <input
+          type="text"
+          name="traslados_prehospitalaria_form-edad"
+          maxlength="3"
+          id="id_traslados_prehospitalaria_form-edad"
+        />
+      </div>
+
+      <div>
+        <label for="id_traslados_prehospitalaria_form-sexo">Sexo:</label>
+
+        <input
+          type="text"
+          name="traslados_prehospitalaria_form-sexo"
+          maxlength="12"
+          id="id_traslados_prehospitalaria_form-sexo"
+        />
+      </div>
+
+      <div>
+        <label for="id_traslados_prehospitalaria_form-idx">Idx:</label>
+
+        <input
+          type="text"
+          name="traslados_prehospitalaria_form-idx"
+          maxlength="40"
+          id="id_traslados_prehospitalaria_form-idx"
+        />
+      </div>
+
+      <div>
+        <label for="id_traslados_prehospitalaria_form-hospital_trasladado"
+          >Hospital trasladado:</label
+        >
+
+        <input
+          type="text"
+          name="traslados_prehospitalaria_form-hospital_trasladado"
+          maxlength="50"
+          id="id_traslados_prehospitalaria_form-hospital_trasladado"
+        />
+      </div>
+
+      <div>
+        <label for="id_traslados_prehospitalaria_form-medico_receptor"
+          >Medico receptor:</label
+        >
+
+        <input
+          type="text"
+          name="traslados_prehospitalaria_form-medico_receptor"
+          maxlength="50"
+          id="id_traslados_prehospitalaria_form-medico_receptor"
+        />
+      </div>
+
+      <div>
+        <label for="id_traslados_prehospitalaria_form-mpps_cmt"
+          >Mpps cmt:</label
+        >
+
+        <input
+          type="text"
+          name="traslados_prehospitalaria_form-mpps_cmt"
+          maxlength="20"
+          id="id_traslados_prehospitalaria_form-mpps_cmt"
+        />
+      </div>
+
+      <div>
+        <label for="id_traslados_prehospitalaria_form-descripcion"
+          >Descripcion:</label
+        >
+
+        <input
+          type="text"
+          name="traslados_prehospitalaria_form-descripcion"
+          maxlength="120"
+          id="id_traslados_prehospitalaria_form-descripcion"
+        />
+      </div>
+
+      <div>
+        <label for="id_traslados_prehospitalaria_form-material_utilizado"
+          >Material utilizado:</label
+        >
+
+        <input
+          type="text"
+          name="traslados_prehospitalaria_form-material_utilizado"
+          maxlength="120"
+          id="id_traslados_prehospitalaria_form-material_utilizado"
+        />
+      </div>
+
+      <div>
+        <label for="id_traslados_prehospitalaria_form-status">Status:</label>
+
+        <select
+          name="traslados_prehospitalaria_form-status"
+          class="disable-first-option"
+          id="id_traslados_prehospitalaria_form-status"
+        >
+          <option value="-" disabled="">Seleccione Una Opcion</option>
+
+          <option value="Culminado">Culminado</option>
+
+          <option value="En Proceso">En Proceso</option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <!-- Detalles de Procedimiento (Asesoramiento) -->
+  <div class="data_form" id="asesoramiento_form" style="display: none">
+    <div class="line"></div>
+    <h4>Asesoramiento</h4>
+    <div class="form-style">
+      <div>
+        <label for="id_asesoramiento_form-nombres">Nombres:</label>
+
+        <input
+          type="text"
+          name="asesoramiento_form-nombres"
+          maxlength="30"
+          id="id_asesoramiento_form-nombres"
+        />
+      </div>
+
+      <div>
+        <label for="id_asesoramiento_form-apellidos">Apellidos:</label>
+
+        <input
+          type="text"
+          name="asesoramiento_form-apellidos"
+          maxlength="30"
+          id="id_asesoramiento_form-apellidos"
+        />
+      </div>
+
+      <div>
+        <label for="id_asesoramiento_form-cedula">Cedula:</label>
+
+        <input
+          type="text"
+          name="asesoramiento_form-cedula"
+          maxlength="10"
+          id="id_asesoramiento_form-cedula"
+        />
+      </div>
+
+      <div>
+        <label for="id_asesoramiento_form-telefono">Telefono:</label>
+
+        <input
+          type="text"
+          name="asesoramiento_form-telefono"
+          maxlength="12"
+          id="id_asesoramiento_form-telefono"
+        />
+      </div>
+
+      <div>
+        <label for="id_asesoramiento_form-descripcion">Descripcion:</label>
+
+        <input
+          type="text"
+          name="asesoramiento_form-descripcion"
+          maxlength="100"
+          id="id_asesoramiento_form-descripcion"
+        />
+      </div>
+
+      <div>
+        <label for="id_asesoramiento_form-material_utilizado"
+          >Material utilizado:</label
+        >
+
+        <input
+          type="text"
+          name="asesoramiento_form-material_utilizado"
+          maxlength="100"
+          id="id_asesoramiento_form-material_utilizado"
+        />
+      </div>
+
+      <div>
+        <label for="id_asesoramiento_form-status">Status:</label>
+
+        <select
+          name="asesoramiento_form-status"
+          class="disable-first-option"
+          id="id_asesoramiento_form-status"
+        >
+          <option value="-" disabled="">Seleccione Una Opcion</option>
+
+          <option value="Culminado">Culminado</option>
+
+          <option value="En Proceso">En Proceso</option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <!-- Detalles de Procedimiento (Reinspeccion de Prevencion) -->
+  <div class="data_form" id="reinspeccion_prevencion" style="display: none">
+    <div class="line"></div>
+    <h4>Reinspeccion de Prevencion</h4>
+    <div class="form-style">
+      <div>
+        <label for="id_reinspeccion_prevencion-nombre">Nombre:</label>
+
+        <input
+          type="text"
+          name="reinspeccion_prevencion-nombre"
+          maxlength="40"
+          id="id_reinspeccion_prevencion-nombre"
+        />
+      </div>
+
+      <div>
+        <label for="id_reinspeccion_prevencion-apellidos">Apellidos:</label>
+
+        <input
+          type="text"
+          name="reinspeccion_prevencion-apellidos"
+          maxlength="40"
+          id="id_reinspeccion_prevencion-apellidos"
+        />
+      </div>
+
+      <div>
+        <label for="id_reinspeccion_prevencion-cedula">Cedula:</label>
+
+        <input
+          type="text"
+          name="reinspeccion_prevencion-cedula"
+          maxlength="10"
+          id="id_reinspeccion_prevencion-cedula"
+        />
+      </div>
+
+      <div>
+        <label for="id_reinspeccion_prevencion-telefono">Telefono:</label>
+
+        <input
+          type="text"
+          name="reinspeccion_prevencion-telefono"
+          maxlength="20"
+          id="id_reinspeccion_prevencion-telefono"
+        />
+      </div>
+
+      <div>
+        <label for="id_reinspeccion_prevencion-descripcion">Descripcion:</label>
+
+        <input
+          type="text"
+          name="reinspeccion_prevencion-descripcion"
+          maxlength="100"
+          id="id_reinspeccion_prevencion-descripcion"
+        />
+      </div>
+
+      <div>
+        <label for="id_reinspeccion_prevencion-material_utilizado"
+          >Material utilizado:</label
+        >
+
+        <input
+          type="text"
+          name="reinspeccion_prevencion-material_utilizado"
+          maxlength="100"
+          id="id_reinspeccion_prevencion-material_utilizado"
+        />
+      </div>
+
+      <div>
+        <label for="id_reinspeccion_prevencion-status">Status:</label>
+
+        <select
+          name="reinspeccion_prevencion-status"
+          class="disable-first-option"
+          id="id_reinspeccion_prevencion-status"
+        >
+          <option value="-" disabled="">Seleccione Una Opcion</option>
+
+          <option value="Culminado">Culminado</option>
+
+          <option value="En Proceso">En Proceso</option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <!-- Detalles de Procedimiento (Retencion Preventiva) -->
+  <div class="data_form" id="retencion_preventiva" style="display: none">
+    <div class="line"></div>
+    <h4>Retencion Preventiva</h4>
+    <div class="form-style">
+      <div>
+        <label for="id_retencion_preventiva-tipo_cilindro"
+          >Tipo cilindro:</label
+        >
+
+        <select
+          name="retencion_preventiva-tipo_cilindro"
+          class="disable-first-option"
+          id="id_retencion_preventiva-tipo_cilindro"
+        >
+          <option value="0" disabled="">Seleccione Una Opcion</option>
+
+          <option value="G.L.P.">G.L.P</option>
+        </select>
+      </div>
+
+      <div>
+        <label for="id_retencion_preventiva-capacidad">Capacidad:</label>
+
+        <input
+          type="text"
+          name="retencion_preventiva-capacidad"
+          maxlength="50"
+          id="id_retencion_preventiva-capacidad"
+        />
+      </div>
+
+      <div>
+        <label for="id_retencion_preventiva-serial">Serial:</label>
+
+        <input
+          type="text"
+          name="retencion_preventiva-serial"
+          maxlength="50"
+          id="id_retencion_preventiva-serial"
+        />
+      </div>
+
+      <div>
+        <label for="id_retencion_preventiva-nro_constancia_retencion"
+          >Nro constancia retencion:</label
+        >
+
+        <input
+          type="text"
+          name="retencion_preventiva-nro_constancia_retencion"
+          maxlength="50"
+          id="id_retencion_preventiva-nro_constancia_retencion"
+        />
+      </div>
+
+      <div>
+        <label for="id_retencion_preventiva-descripcion">Descripcion:</label>
+
+        <input
+          type="text"
+          name="retencion_preventiva-descripcion"
+          maxlength="100"
+          id="id_retencion_preventiva-descripcion"
+        />
+      </div>
+
+      <div>
+        <label for="id_retencion_preventiva-material_utilizado"
+          >Material utilizado:</label
+        >
+
+        <input
+          type="text"
+          name="retencion_preventiva-material_utilizado"
+          maxlength="100"
+          id="id_retencion_preventiva-material_utilizado"
+        />
+      </div>
+
+      <div>
+        <label for="id_retencion_preventiva-status">Status:</label>
+
+        <select
+          name="retencion_preventiva-status"
+          class="disable-first-option"
+          id="id_retencion_preventiva-status"
+        >
+          <option value="-" disabled="">Seleccione Una Opcion</option>
+
+          <option value="Culminado">Culminado</option>
+
+          <option value="En Proceso">En Proceso</option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <!-- Boton Enviar -->
+  <button type="submit" id="button_submit" style="display: none">
+    Aceptar
+  </button>
+</form>

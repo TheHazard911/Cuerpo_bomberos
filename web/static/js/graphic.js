@@ -1,64 +1,94 @@
-const ctx = document.getElementById("myChart").getContext("2d");
-const labels = [
-    "Enero",
-    "Febrero",
-    "Marzo",
-    "Abril",
-    "Mayo",
-    "Junio",
-    "Julio",
-    "Agosto",
-    "Septimbre",
-    "Octubre",
-    "Noviembre",
-    "Diciembre",
-];
+// Variable global para almacenar los datos de procedimientos
+let procedimientosMensuales = [];
 
-new Chart(ctx, {
-    type: "line",
-    data: {
-        labels: labels,
-        datasets: [
-            {
-                label: "Operaciones Anuales",
-                data: [59, 80, 65, 59, 80, 81, 56, 55, 40, 56, 55, 40],
-                fill: false,
-                borderColor: "rgb(75, 192, 192)",
-                tension: 0.4,
-                pointStyle: "circle",
-                borderWidth: 2,
-                pointRadius: 4
-            },
-        ],
-    },
-    options: {
-        maintainAspectRatio: false,
-        scales: {
-            y: {
-                beginAtZero: true,
-            },
-        },
-        tooltips: {
-            titleFontSize: 16, // Tamaño de la fuente del título del tooltip
-            bodyFontSize: 14, // Tamaño de la fuente del cuerpo del tooltip
-            xPadding: 10, // Espaciado horizontal interno del tooltip
-            yPadding: 10, // Espaciado vertical interno del tooltip
-            caretSize: 8, // Tamaño del triángulo del tooltip
-            cornerRadius: 4, // Radio de las esquinas del tooltip
-        },
-    },
-    plugins: {
-        legend: {
-            labels: {
-                font: {
-                    size: 32, // Tamaño de la fuente del label
-                    lineHeight: 1.5, // Altura de línea para aumentar la altura
+// Función para obtener procedimientos por mes
+function obtenerProcedimientosPorMes() {
+    fetch('/api/meses/')  // Asegúrate de que esta URL sea correcta
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Error en la solicitud: ' + response.status);
+            }
+            return response.json();  // Convertir la respuesta a JSON
+        })
+        .then(data => {
+            // Asignar los datos a la variable global
+            procedimientosMensuales = [data.enero, data.febrero, data.marzo, data.abril, data.mayo, data.junio, data.julio, data.agosto, data.septiembre, data.octubre, data.noviembre, data.diciembre];
+            console.log(procedimientosMensuales);
+            // Llamar a la función para actualizar el gráfico
+            actualizarGrafico();
+        })
+        .catch(error => console.error('Error al obtener los datos:', error));
+}
+
+// Función para actualizar el gráfico
+function actualizarGrafico() {
+    const ctx = document.getElementById("myChart").getContext("2d");
+    const labels = [
+        "Enero",
+        "Febrero",
+        "Marzo",
+        "Abril",
+        "Mayo",
+        "Junio",
+        "Julio",
+        "Agosto",
+        "Septiembre",
+        "Octubre",
+        "Noviembre",
+        "Diciembre",
+    ];
+
+    // Crear el gráfico o actualizarlo
+    new Chart(ctx, {
+        type: "line",
+        data: {
+            labels: labels,
+            datasets: [
+                {
+                    label: "Operaciones Anuales",
+                    data: procedimientosMensuales, // Usar los datos obtenidos
+                    fill: false,
+                    borderColor: "rgb(200, 36, 58)",
+                    tension: 0.4,
+                    pointStyle: "circle",
+                    borderWidth: 2,
+                    pointRadius: 4
                 },
-                padding: 20, // Espaciado para aumentar el ancho
+            ],
+        },
+        options: {
+            maintainAspectRatio: false,
+            scales: {
+                y: {
+                    beginAtZero: true,
+                },
+            },
+            tooltips: {
+                titleFontSize: 16,
+                bodyFontSize: 14,
+                xPadding: 10,
+                yPadding: 10,
+                caretSize: 8,
+                cornerRadius: 4,
             },
         },
-    },
-});
+        plugins: {
+            legend: {
+                labels: {
+                    font: {
+                        size: 32,
+                        lineHeight: 1.5,
+                    },
+                    padding: 20,
+                },
+            },
+        },
+    });
+}
+
+// Llama a la función para obtener los datos cuando el DOM esté listo
+document.addEventListener('DOMContentLoaded', obtenerProcedimientosPorMes);
+
 function updateProgressBar(id, progressValue) {
     const progressBar = document.getElementById(`progress-bar-${id}`);
     const progressText = document.getElementById(`progress-text-${id}`);
@@ -80,11 +110,11 @@ function animateProgress(id, targetValue) {
 
 // Valores fijos para cada barra de progreso
 var progressValues = {
-    'operaciones': 15,
-    'prehospitalaria': 60,
-    'rescate': 100,
-    'grumae': 40,
-    'servicios-medicos': 80
+    'operaciones': 10,
+    'prehospitalaria': 10,
+    'rescate': 10,
+    'grumae': 10,
+    'servicios-medicos': 10
 };
 
 // Inicia la animación para cada barra con los valores fijos

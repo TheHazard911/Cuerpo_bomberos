@@ -1,4 +1,5 @@
 {% extends "layouts/header-main.html" %} {% block content %}
+{% load static %}  <!-- Carga el tag static al inicio del archivo -->
 <div class="general-dashboard">
   <div class="div-user-name">
     <section class="user-name">
@@ -53,6 +54,10 @@
       <div class="card-parroquies card-blue">
         <h5>San Sebastian</h5>
         <span id="san_sebastian">{{ san_sebastian }}</span>
+      </div>
+      <div class="card-parroquies card-azul-claro">
+        <h5>Francisco Romero Lobo</h5>
+        <span id="san_sebastian">{{ francisco_romero_lobo }}</span>
       </div>
       <div class="card-parroquies card-green">
         <h5>Otros Municipios</h5>
@@ -169,11 +174,11 @@
   </section>
   <section class="procediments">
     <p>PreHospitalaria</p>
-    <p id="">0</p>
+    <p id="">{{ prehospitalaria_hoy }}</p>
   </section>
   <section class="procediments">
     <p>Grumae</p>
-    <p id="">0</p>
+    <p id="">{{ grumae_hoy }}</p>
   </section>
   <section class="procediments">
     <p>Rescate</p>
@@ -185,22 +190,22 @@
   </section>
   <section class="procediments">
     <p>Servicios Medicos</p>
-    <p id="">0</p>
+    <p id="">{{ servicios_medicos_hoy }}</p>
   </section>
   <section class="procediments">
     <p>Enfermeria</p>
-    <p id="">0</p>
+    <p id="">{{ enfermeria_hoy }}</p>
   </section>
   <section class="procediments">
     <p>Psicologia</p>
-    <p id="">0</p>
+    <p id="">{{ psicologia_hoy }}</p>
   </section>
   <section class="procediments">
     <p>Capacitacion</p>
-    <p id="">0</p>
+    <p id="">{{ capacitacion_hoy }} </p>
   </section>
 </div>
 
-<script src="../static/js/graphic.js"></script>
 <script src="../static/js/animate.js"></script>
+<script src="../static/js/graphic.js"></script>
 {% endblock %}
