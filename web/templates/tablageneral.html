@@ -1,7 +1,6 @@
 {% extends "layouts/header-main.html" %} {% block content %}
 <div class="general-dashboard">
-  <div class="div-user-name username-space">
-    <h3 class="division-title">Enfermeria</h3>
+  <div class="div-user-name">
     <section class="user-name">
       <p>{{ jerarquia }} {{ nombres }} {{ apellidos }} / {{ user.user }}</p>
       <svg
@@ -34,7 +33,7 @@
       </svg>
     </section>
   </div>
-  <!-- section filter -->
+ <!-- section filter -->
   <div class="section-filter">
     <section class="totals-procediments">
       <b>Procedimientos Totales: </b><span>{{ total }}</span>
@@ -60,7 +59,7 @@
         placeholder="Tipo"
       />
     </section>
-        <section class="filter-search">
+    <section class="filter-search">
       <label for="fechaFiltro"><b>Selecciona una fecha:</b></label>
       <input id="fechaDesde" type="date" placeholder="Fecha" />
     </section>
@@ -71,6 +70,7 @@
       <thead>
         <tr>
           <th scope="col">ID</th>
+          <th scope="col">Division</th>
           <th scope="col">Solicitante</th>
           <th scope="col">Jefe de comision</th>
           <th scope="col">Unidad</th>
@@ -90,6 +90,8 @@
         <tr>
           <!-- prettier-ignore -->
           <th scope="row">{{ forloop.counter }}</th>
+          <!-- prettier-ignore -->
+          <td> {{ row.id_division.division  }}</td>
           <!-- prettier-ignore -->
           <td>{{ row.id_solicitante.jerarquia }} {{ row.id_solicitante.nombres}} {{ row.id_solicitante.apellidos}}</td>
           <!-- prettier-ignore -->
@@ -259,9 +261,10 @@
   </div>
 </div>
 
-<!-- Script final definitivo para Mostrar detalles procedmientos -->
-<script src="../../static/js/enfermeria.js"></script>
-<script src="../../static/js/info_modal.js"></script>
-<script src="../../static/js/filters.js"></script>
+<!-- Script final  -->
+<script src="../static/js/operaciones.js"></script>
+<script src="../static/js/info_modal.js"></script>
+<script src="../../static/js/table-general-filter.js"></script>
 
-{% endblock %}
+</div>
+  {% endblock %}

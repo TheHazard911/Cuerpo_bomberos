@@ -24,6 +24,7 @@ urlpatterns = [
     path('', Home),
     path('dashboard/', Dashboard),
     path('prueba/', Prueba),
+    path('tablageneral/', tabla_general),
     path('procedimientos/', View_Procedimiento, name='view_procedimiento'),
     path('estadisticas/', View_Estadisticas),
     path('rescate/', View_Rescate),
@@ -36,4 +37,5 @@ urlpatterns = [
     path('serviciosmedicos/', View_serviciosmedicos),
     path('psicologia/', View_psicologia),
     path('api/procedimientos/<int:id>/', obtener_procedimiento, name='obtener_procedimiento'),
+    path('api/meses/', obtener_meses, name='obtener_meses'),
 ]

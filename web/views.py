@@ -13,6 +13,46 @@ from datetime import datetime
 
 # Create your views here.
 
+def filtrado_mes(mes):
+    año_actual = datetime.now().year
+    
+    # Filtrado de datos por mes para la grafica anual
+    procedimientos_mes = Procedimientos.objects.filter(
+    fecha__month=mes,  # Septiembre
+    fecha__year=año_actual  # Año 2023
+    )
+    return procedimientos_mes.count()
+
+def obtener_meses(request):
+    enero = filtrado_mes(1)
+    febrero = filtrado_mes(2)
+    marzo = filtrado_mes(3)
+    abril = filtrado_mes(4)
+    mayo = filtrado_mes(5)
+    junio = filtrado_mes(6)
+    julio = filtrado_mes(7)
+    agosto = filtrado_mes(8)
+    septiembre = filtrado_mes(9)
+    octubre = filtrado_mes(10)
+    noviembre = filtrado_mes(11)
+    diciembre = filtrado_mes(12)
+    
+    data = {
+        "enero": enero,
+        "febrero": febrero,
+        "marzo": marzo,
+        "abril": abril,
+        "mayo": mayo,
+        "junio": junio,
+        "julio": julio,
+        "agosto": agosto,
+        "septiembre": septiembre,
+        "octubre": octubre,
+        "noviembre": noviembre,
+        "diciembre": diciembre,
+    }
+    return JsonResponse(data)
+
 # Vista de la Ventana Inicial (Login)
 def Home(request):
     if request.method == "GET":
@@ -34,7 +74,7 @@ def Home(request):
         except Usuarios.DoesNotExist:
             messages.error(request, 'Usuario o contraseña incorrectos')
             return render(request, 'index.html', {'error': True})
-          
+
 def Dashboard(request):
     user = request.session.get('user')
     
@@ -50,6 +90,7 @@ def Dashboard(request):
     pedro_m = Procedimientos.objects.filter(id_parroquia=2)
     san_juan = Procedimientos.objects.filter(id_parroquia=3)
     san_sebastian = Procedimientos.objects.filter(id_parroquia=4)
+    francisco_romero_lobo = Procedimientos.objects.filter(id_parroquia=6)
 
     # Filtrar procedimientos por la fecha de hoy para cada parroquia
     otros_municipios_hoy = otros_municipios.filter(fecha=hoy).count()
@@ -57,7 +98,36 @@ def Dashboard(request):
     pedro_m_hoy = pedro_m.filter(fecha=hoy).count()
     san_juan_hoy = san_juan.filter(fecha=hoy).count()
     san_sebastian_hoy = san_sebastian.filter(fecha=hoy).count()
-
+    francisco_romero_lobo_hoy = francisco_romero_lobo.filter(fecha=hoy).count()
+    
+    # Filtrado de procedimientos por division a la fecha de hoy
+    rescate = Procedimientos.objects.filter(id_division=1)
+    rescate_hoy = rescate.filter(fecha=hoy).count()
+    
+    operaciones = Procedimientos.objects.filter(id_division=2)
+    op_hoy = operaciones.filter(fecha=hoy).count()
+    
+    prevencion = Procedimientos.objects.filter(id_division=3)
+    prevencion_hoy = prevencion.filter(fecha=hoy).count()
+    
+    grumae = Procedimientos.objects.filter(id_division=4)
+    grumae_hoy = grumae.filter(fecha=hoy).count()
+    
+    prehospitalaria = Procedimientos.objects.filter(id_division=5)
+    prehospitalaria_hoy = prehospitalaria.filter(fecha=hoy).count()
+    
+    enfermeria = Procedimientos.objects.filter(id_division=6)
+    enfermeria_hoy = enfermeria.filter(fecha=hoy).count()
+    
+    servicios_medicos = Procedimientos.objects.filter(id_division=7)
+    servicios_medicos_hoy = servicios_medicos.filter(fecha=hoy).count()
+    
+    psicologia = Procedimientos.objects.filter(id_division=8)
+    psicologia_hoy = psicologia.filter(fecha=hoy).count()
+    
+    capacitacion = Procedimientos.objects.filter(id_division=9)
+    capacitacion_hoy = capacitacion.filter(fecha=hoy).count()
+    
     # Renderizar la página con los datos
     return render(request, "dashboard.html", {
         "user": user,
@@ -68,7 +138,17 @@ def Dashboard(request):
         "pedro_m": pedro_m_hoy,
         "san_juan": san_juan_hoy,
         "san_sebastian": san_sebastian_hoy,
+        "francisco_romero_lobo": francisco_romero_lobo_hoy,
         "otros_municipios": otros_municipios_hoy,
+        "rescate": rescate_hoy,
+        "op_hoy": op_hoy,
+        "prevencion_hoy": prevencion_hoy,
+        "grumae_hoy": grumae_hoy,
+        "prehospitalaria_hoy": prehospitalaria_hoy,
+        "enfermeria_hoy": enfermeria_hoy,
+        "servicios_medicos_hoy": servicios_medicos_hoy,
+        "psicologia_hoy": psicologia_hoy,
+        "capacitacion_hoy": capacitacion_hoy,
     })
 
 # Vista de archivo para hacer pruebas de backend
@@ -83,7 +163,6 @@ def Prueba(request):
             
             valor_seleccionado = form.cleaned_data['tipo_procedimiento']
             # Aquí puedes hacer algo con el valor seleccionado
-            print(valor_seleccionado)
             return render(request, "prueba.html", {
             "usuarios": usuarios,
             "divisiones": divisiones,
@@ -209,39 +288,26 @@ def View_Procedimiento(request):
             if parroquia:
                parroquia_instance = Parroquias.objects.get(id=parroquia)
                nuevo_procedimiento.id_parroquia = parroquia_instance
-
+            
             nuevo_procedimiento.save()
             
+            # Ahora dependiendo del tipo de procedimiento, verifica el formulario correspondiente y guarda la instancia
             if tipo_procedimiento == "1" and abast_agua.is_valid():
-                id_tipo_servicio = abast_agua.cleaned_data["tipo_servicio"]          
-                nombres = abast_agua.cleaned_data["nombres"]
-                apellidos = abast_agua.cleaned_data["apellidos"]
-                cedula = abast_agua.cleaned_data["cedula"]
-                ltrs_agua = abast_agua.cleaned_data["ltrs_agua"]
-                personas_atendidas = abast_agua.cleaned_data["personas_atendidas"]
-                descripcion = abast_agua.cleaned_data["descripcion"]
-                material_utilizado = abast_agua.cleaned_data["material_utilizado"]
-                status = abast_agua.cleaned_data["status"]
-                
-                tipo_servicio_instance = Tipo_Institucion.objects.get(id=id_tipo_servicio)
-               
-                # Crear y guardar la instancia de Abastecimiento_agua
+                # Abastecimiento de Agua
                 nuevo_abast_agua = Abastecimiento_agua(
                     id_procedimiento=nuevo_procedimiento,
-                    id_tipo_servicio=tipo_servicio_instance,
-                    nombres=nombres,
-                    apellidos=apellidos,
-                    cedula=cedula,
-                    ltrs_agua=ltrs_agua,
-                    personas_atendidas=personas_atendidas,
-                    descripcion=descripcion,
-                    material_utilizado=material_utilizado,
-                    status=status
+                    id_tipo_servicio=Tipo_Institucion.objects.get(id=abast_agua.cleaned_data["tipo_servicio"]),
+                    nombres=abast_agua.cleaned_data["nombres"],
+                    apellidos=abast_agua.cleaned_data["apellidos"],
+                    cedula=abast_agua.cleaned_data["cedula"],
+                    ltrs_agua=abast_agua.cleaned_data["ltrs_agua"],
+                    personas_atendidas=abast_agua.cleaned_data["personas_atendidas"],
+                    descripcion=abast_agua.cleaned_data["descripcion"],
+                    material_utilizado=abast_agua.cleaned_data["material_utilizado"],
+                    status=abast_agua.cleaned_data["status"]
                 )
                 nuevo_abast_agua.save()
-            
-                return redirect('/dashboard/')
-        
+               
             if tipo_procedimiento == "2" and apoyo_unid.is_valid():
                 tipo_apoyo = apoyo_unid.cleaned_data["tipo_apoyo"]          
                 unidad_apoyada = apoyo_unid.cleaned_data["unidad_apoyada"]
@@ -250,7 +316,6 @@ def View_Procedimiento(request):
                 status = apoyo_unid.cleaned_data["status"]
                 
                 tipo_apoyo_instance = Tipo_apoyo.objects.get(id=tipo_apoyo)
-                print("Datos Obtenidos")
                 
                 nuevo_apoyo_unidad = Apoyo_Unidades(
                     id_procedimiento=nuevo_procedimiento,
@@ -260,10 +325,7 @@ def View_Procedimiento(request):
                     material_utilizado=material_utilizado,
                     status=status
                 )
-                print(nuevo_apoyo_unidad)
                 nuevo_apoyo_unidad.save()
-            
-                return redirect('/dashboard/')
                 
             if tipo_procedimiento == "3" and guard_prev.is_valid():
                 mot_prevencion = guard_prev.cleaned_data["motivo_prevencion"]          
@@ -272,8 +334,7 @@ def View_Procedimiento(request):
                 status = guard_prev.cleaned_data["status"]
                 
                 Tipo_Motivo_instance = Motivo_Prevencion.objects.get(id=mot_prevencion)
-                print("Datos Obtenidos")
-                
+
                 nuevo_guard_prevencion = Guardia_prevencion(
                     id_procedimiento=nuevo_procedimiento,
                     id_motivo_prevencion=Tipo_Motivo_instance,
@@ -281,17 +342,12 @@ def View_Procedimiento(request):
                     material_utilizado=material_utilizado,
                     status=status
                 )
-                print(nuevo_guard_prevencion)
                 nuevo_guard_prevencion.save()
-            
-                return redirect('/dashboard/')
                 
             if tipo_procedimiento == "4" and atend_no_efec.is_valid():          
                 descripcion = atend_no_efec.cleaned_data["descripcion"]
                 material_utilizado = atend_no_efec.cleaned_data["material_utilizado"]
                 status = atend_no_efec.cleaned_data["status"]
-                
-                print("Datos Obtenidos")
                 
                 nuevo_atend_no_efect = Atendido_no_Efectuado(
                     id_procedimiento=nuevo_procedimiento,
@@ -299,10 +355,7 @@ def View_Procedimiento(request):
                     material_utilizado=material_utilizado,
                     status=status
                 )
-                print(nuevo_atend_no_efect)
                 nuevo_atend_no_efect.save()
-            
-                return redirect('/dashboard/')
             
             if tipo_procedimiento == "5" and desp_seguridad.is_valid():          
                 descripcion = desp_seguridad.cleaned_data["descripcion"]
@@ -311,7 +364,6 @@ def View_Procedimiento(request):
                 motv_despliegue = desp_seguridad.cleaned_data["motv_despliegue"]
                 
                 Tipo_Motivo_instance = Motivo_Despliegue.objects.get(id=motv_despliegue)
-                print("Datos Obtenidos")
                 
                 desp_seguridad = Despliegue_Seguridad(
                     id_procedimiento=nuevo_procedimiento,
@@ -320,11 +372,8 @@ def View_Procedimiento(request):
                     material_utilizado=material_utilizado,
                     status=status
                 )
-                print(desp_seguridad)
                 desp_seguridad.save()
-            
-                return redirect('/dashboard/')
-            
+                
             if tipo_procedimiento == "6" and fals_alarm.is_valid():          
                 descripcion = fals_alarm.cleaned_data["descripcion"]
                 material_utilizado = fals_alarm.cleaned_data["material_utilizado"]
@@ -332,7 +381,6 @@ def View_Procedimiento(request):
                 motv_alarma = fals_alarm.cleaned_data["motv_alarma"]
                 
                 Tipo_Motivo_instance = Motivo_Alarma.objects.get(id=motv_alarma)
-                print("Datos Obtenidos")
                 
                 nueva_falsa_alarma = Falsa_Alarma(
                     id_procedimiento=nuevo_procedimiento,
@@ -341,10 +389,7 @@ def View_Procedimiento(request):
                     material_utilizado=material_utilizado,
                     status=status
                 )
-                print(nueva_falsa_alarma)
                 nueva_falsa_alarma.save()
-            
-                return redirect('/dashboard/')
                 
             if tipo_procedimiento == "7" and atenciones_paramedicas.is_valid():          
                 
@@ -355,8 +400,6 @@ def View_Procedimiento(request):
                   tipo_atencion = tipo_atencion
                 )
                 nueva_atencion_paramedica.save()
-                
-                print(tipo_atencion, "Todo chido aqui tambien")
                 
                 if tipo_atencion == "Emergencias Medicas" and emergencias_medicas.is_valid():
                     nombre = emergencias_medicas.cleaned_data["nombre"]
@@ -370,7 +413,6 @@ def View_Procedimiento(request):
                     status = emergencias_medicas.cleaned_data["status"]
                     trasladado = emergencias_medicas.cleaned_data["trasladado"]
                     
-                    print("Todo Chido en emeergencias Medicas")
                     nueva_emergencia_medica = Emergencias_Medicas(
                        id_atencion = nueva_atencion_paramedica,
                        nombres = nombre,
@@ -384,15 +426,11 @@ def View_Procedimiento(request):
                        status = status,
                     )
                     nueva_emergencia_medica.save()
-                
-                    print(trasladado)
                     
                     if trasladado == True and traslados_emergencias.is_valid():
                         hospital = traslados_emergencias.cleaned_data["hospital_trasladado"]
                         medico = traslados_emergencias.cleaned_data["medico_receptor"]
                         mpps_cmt = traslados_emergencias.cleaned_data["mpps_cmt"]
-                        
-                        print("Todo Chido En el Traslado")
                         
                         nuevo_traslado_emergencia = Traslado(
                            id_lesionado = nueva_emergencia_medica,
@@ -411,8 +449,6 @@ def View_Procedimiento(request):
                     agg_lesionado = formulario_accidentes_transito.cleaned_data["agg_lesionado"]
                     
                     tipo_accidente_instance = Tipo_Accidente.objects.get(id=tipo_accidente)
-                    
-                    print("Todo Chido Accidentes de Transito:  ", agg_vehiculo, agg_lesionado)
                     
                     nuevo_accidente_transito = Accidentes_Transito(
                       id_atencion = nueva_atencion_paramedica,
@@ -440,7 +476,6 @@ def View_Procedimiento(request):
                             placas = placas1,
                         )
                         nuevo_vehiculo_accidente.save()
-                        print("Vehiculo 1 Guardado")
                         
                         if agg_vehiculo2 == True and detalles_vehiculo_accidentes2.is_valid():
                             modelo2 = detalles_vehiculo_accidentes2.cleaned_data["modelo"]
@@ -459,7 +494,6 @@ def View_Procedimiento(request):
                                 placas = placas2,
                             )
                             nuevo_vehiculo_accidente2.save()
-                            print("Vehiculo 2 Guardado")
                             
                             if agg_vehiculo3 == True and detalles_vehiculo_accidentes3.is_valid():
                                 modelo3 = detalles_vehiculo_accidentes3.cleaned_data["modelo"]
@@ -477,7 +511,6 @@ def View_Procedimiento(request):
                                     placas = placas3,
                                 )
                                 nuevo_vehiculo_accidente3.save()
-                                print("Vehiculo 3 Guardado")
                         
                 
                     if agg_lesionado == True and detalles_lesionados_accidentes.is_valid():
@@ -501,7 +534,6 @@ def View_Procedimiento(request):
                             descripcion = descripcion,
                         )
                         nuevo_lesionado.save()
-                        print("Lesionado Guardado")
                         
                         if trasladado == True and traslados_accidentes.is_valid():
                             hospital = traslados_accidentes.cleaned_data["hospital_trasladado"]
@@ -515,10 +547,6 @@ def View_Procedimiento(request):
                                 mpps_cmt = mpps_cmt
                             )
                             nuevo_traslado_accidente.save()
-                            print("Traslado Guardado")
-                        
-                print("Todo Guardado Con Exito Guardado")
-                return redirect('/dashboard/')
                 
             if tipo_procedimiento == "9" and serv_especial.is_valid():          
                 descripcion = serv_especial.cleaned_data["descripcion"]
@@ -527,7 +555,6 @@ def View_Procedimiento(request):
                 tipo_servicio = serv_especial.cleaned_data["tipo_servicio"]
                 
                 tipo_servicio_instance = Tipo_servicios.objects.get(id=tipo_servicio)
-                print("Datos Obtenidos")
                 
                 nuevo_Servicio_especial = Servicios_Especiales(
                     id_procedimientos=nuevo_procedimiento,
@@ -536,10 +563,7 @@ def View_Procedimiento(request):
                     material_utilizado=material_utilizado,
                     status=status
                 )
-                print(nuevo_Servicio_especial)
                 nuevo_Servicio_especial.save()
-            
-                return redirect('/dashboard/')
          
             if tipo_procedimiento == "10" and rescate_form.is_valid():  
                 material_utilizado = rescate_form.cleaned_data["material_utilizado"]
@@ -549,15 +573,12 @@ def View_Procedimiento(request):
                 
                 tipo_rescate_instance = Tipo_Rescate.objects.get(id=id_tipo_rescate)
                 
-                print("Datos Obtenidos")
-                
                 nuevo_proc_rescate = Rescate(
                     id_procedimientos = nuevo_procedimiento,
                     material_utilizado=material_utilizado,
                     tipo_rescate = tipo_rescate_instance,
                     status=status
                 )
-                print(nuevo_proc_rescate)
                 nuevo_proc_rescate.save()
                 
                 if id_tipo_rescate == "1" and rescate_form_animal.is_valid():
@@ -569,8 +590,6 @@ def View_Procedimiento(request):
                         especie = especie,
                         descripcion = descripcion,
                     )
-                
-                    print(new_rescate_animal)
                     new_rescate_animal.save()
                     
                     return redirect('/dashboard/')
@@ -592,8 +611,6 @@ def View_Procedimiento(request):
                         sexo = sexo_persona,
                         descripcion = descripcion,
                     )
-                
-                    print(new_rescate_persona)
                     new_rescate_persona.save()
                     
                     return redirect('/dashboard/')
@@ -606,8 +623,6 @@ def View_Procedimiento(request):
                 
                 tipo_incendio_instance = Tipo_Incendio.objects.get(id=id_tipo_incendio)
                 
-                print("Datos Obtenidos")
-                
                 nuevo_proc_incendio = Incendios(
                     id_procedimientos = nuevo_procedimiento,
                     id_tipo_incendio = tipo_incendio_instance,
@@ -615,7 +630,6 @@ def View_Procedimiento(request):
                     material_utilizado=material_utilizado,
                     status=status
                 )
-                print(nuevo_proc_incendio)
                 nuevo_proc_incendio.save()
                 
                 check_agregar_persona = incendio_form.cleaned_data["check_agregar_persona"]
@@ -633,8 +647,6 @@ def View_Procedimiento(request):
                         cedula = cedula,
                         edad = edad,
                     )
-                
-                    print(new_persona_presente)
                     new_persona_presente.save()
                     
                     
@@ -655,11 +667,7 @@ def View_Procedimiento(request):
                         año = año,
                         placas = placas,
                     )
-                
-                    print(new_agregar_vehiculo)
                     new_agregar_vehiculo.save()
-                    
-                return redirect('/dashboard/')
          
             if tipo_procedimiento == "12" and form_fallecido.is_valid():  
                 motivo_fallecimiento = form_fallecido.cleaned_data["motivo_fallecimiento"]       
@@ -671,8 +679,6 @@ def View_Procedimiento(request):
                 descripcion = form_fallecido.cleaned_data["descripcion"]
                 material_utilizado = form_fallecido.cleaned_data["material_utilizado"]
                 status = form_fallecido.cleaned_data["status"]
-                
-                print("Datos Obtenidos")
                 
                 nuevo_proc_fallecido = Fallecidos(
                     id_procedimiento = nuevo_procedimiento,
@@ -686,18 +692,13 @@ def View_Procedimiento(request):
                     material_utilizado=material_utilizado,
                     status=status
                 )
-                print(nuevo_proc_fallecido)
                 nuevo_proc_fallecido.save()
-            
-                return redirect('/dashboard/')
             
             if tipo_procedimiento == "13" and mitigacion_riesgo_form.is_valid():  
                 tipo_riesgo = mitigacion_riesgo_form.cleaned_data["tipo_riesgo"]       
                 descripcion = mitigacion_riesgo_form.cleaned_data["descripcion"]
                 material_utilizado = mitigacion_riesgo_form.cleaned_data["material_utilizado"]
                 status = mitigacion_riesgo_form.cleaned_data["status"]
-                
-                print("Datos Obtenidos")
                 
                 tipo_riesgo_instance = Mitigacion_riesgo.objects.get(id=tipo_riesgo)
                 
@@ -708,10 +709,7 @@ def View_Procedimiento(request):
                     material_utilizado=material_utilizado,
                     status=status
                 )
-                print(nuevo_proc_mit)
                 nuevo_proc_mit.save()
-            
-                return redirect('/dashboard/')
             
             if tipo_procedimiento == "14" and evaluacion_riesgo_form.is_valid():  
                 tipo_riesgo = evaluacion_riesgo_form.cleaned_data["tipo_riesgo"]       
@@ -743,18 +741,13 @@ def View_Procedimiento(request):
                         cedula = cedula,
                         telefono = telefono,
                     )
-                    print(nuevo_per_presente)
                     nuevo_per_presente.save()
-            
-                return redirect('/dashboard/')
          
             if tipo_procedimiento == "15" and puesto_avanzada_form.is_valid():  
                 tipo_avanzada = puesto_avanzada_form.cleaned_data["tipo_avanzada"]       
                 descripcion = puesto_avanzada_form.cleaned_data["descripcion"]
                 material_utilizado = puesto_avanzada_form.cleaned_data["material_utilizado"]
                 status = puesto_avanzada_form.cleaned_data["status"]
-                
-                print("Datos Obtenidos")
                 
                 tipo_avanzada_instance = Motivo_Avanzada.objects.get(id=tipo_avanzada)
                 
@@ -765,10 +758,7 @@ def View_Procedimiento(request):
                     material_utilizado=material_utilizado,
                     status=status
                 )
-                print(nuevo_proc_avan)
                 nuevo_proc_avan.save()
-            
-                return redirect('/dashboard/')
          
             if tipo_procedimiento == "16" and traslados_prehospitalaria_form.is_valid():  
                 tipo_traslado = traslados_prehospitalaria_form.cleaned_data["tipo_traslado"]       
@@ -804,8 +794,6 @@ def View_Procedimiento(request):
                     status=status
                 )
                 nuevo_proc_tras.save()
-            
-                return redirect('/dashboard/')
          
             if tipo_procedimiento == "17" and asesoramiento_form.is_valid():  
                 nombre = asesoramiento_form.cleaned_data["nombres"]
@@ -827,8 +815,6 @@ def View_Procedimiento(request):
                     status=status
                 )
                 nuevo_proc_ase.save()
-            
-                return redirect('/dashboard/')
          
             if tipo_procedimiento == "20" and reinspeccion_prevencion.is_valid():  
                 nombre = reinspeccion_prevencion.cleaned_data["nombre"]
@@ -850,8 +836,6 @@ def View_Procedimiento(request):
                     status=status
                 )
                 nuevo_proc_reins.save()
-            
-                return redirect('/dashboard/')
          
             if tipo_procedimiento == "21" and retencion_preventiva.is_valid():  
                 tipo_cilindro = retencion_preventiva.cleaned_data["tipo_cilindro"]
@@ -874,8 +858,8 @@ def View_Procedimiento(request):
                 )
                 nuevo_proc_reten.save()
             
-                return redirect('/dashboard/')
-         
+            # Redirige a /dashboard/ después de guardar los datos
+            return redirect('/dashboard/')
     else:
         form = SelectorDivision(prefix='form1')
         form2 = SeleccionarInfo(prefix='form2')
@@ -1324,6 +1308,44 @@ def View_psicologia(request):
         "total": total,
         "hoy": hoy
     })
+def tabla_general(request):
+    user = request.session.get('user')    
+    if not user:
+            return redirect('/')
+        
+    datos = Procedimientos.objects.filter()
+    
+    total = datos.count()
+
+    # Obtener la fecha de hoy
+    hoy = datetime.now().date()
+
+    # Filtrar procedimientos con la fecha de hoy
+    fechas = datos.values_list("fecha", flat=True)
+    procedimientos_hoy = [fecha for fecha in fechas if fecha == hoy]
+    
+    hoy = len(procedimientos_hoy)
+
+
+    if request.method == 'POST':
+        data = json.loads(request.body)
+        id = data.get('id')
+        procedimiento = get_object_or_404(Procedimientos, id=id)
+        try:
+            procedimiento.delete()
+            return JsonResponse({'success': True})
+        except Exception as e:
+            return JsonResponse({'success': False, 'error': str(e)})
+    
+    return render(request, "tablageneral.html", {
+        "user": user,
+        "jerarquia": user["jerarquia"],
+        "nombres": user["nombres"],
+        "apellidos": user["apellidos"],
+        "datos": datos,
+        "total": total,
+        "hoy": hoy
+    })
 
 # Funcion para eliminar (NO TOCAR)
 # def eliminar_procedimiento(request):
@@ -1478,7 +1500,6 @@ def obtener_procedimiento(request, id):
                     })
                 data['vehiculos'] = vehiculos_list  # Agrega la lista de vehículos a 'data'
             else:
-                print("No hay na")
                 data['vehiculos'] = []  # O puedes omitir esta línea si prefieres no agregar la clave
             
             if Lesionados.objects.filter(id_accidente=accidente.id).exists():
@@ -1504,8 +1525,6 @@ def obtener_procedimiento(request, id):
                                 medico = traslados.medico_receptor,
                                 mpps_cmt = traslados.mpps_cmt,
                             )          
-            
-            print(data)
             
     if str(procedimiento.id_tipo_procedimiento.id) == "9":
         detalle_procedimiento = get_object_or_404(Servicios_Especiales, id_procedimientos=id)
@@ -1564,7 +1583,7 @@ def obtener_procedimiento(request, id):
               "edad": persona_presente_detalles.edad,
           })
       else:
-          print("No Existe este Elemento")
+          pass
           
       if Detalles_Vehiculos.objects.filter(id_vehiculo=detalle_procedimiento.id).exists():
           vehiculo_detalles = Detalles_Vehiculos.objects.get(id_vehiculo=detalle_procedimiento.id)
@@ -1577,7 +1596,7 @@ def obtener_procedimiento(request, id):
               "placas": vehiculo_detalles.placas,
           })
       else:
-          print("No Existe este Elemento")
+          pass
         
     if str(procedimiento.id_tipo_procedimiento.id) == "12":
         detalle_procedimiento = get_object_or_404(Fallecidos, id_procedimiento=id)
@@ -1613,7 +1632,6 @@ def obtener_procedimiento(request, id):
         
         if str(detalle_procedimiento.id_procedimientos.id_division) == "Prevencion":
             detalle_persona = get_object_or_404(Persona_Presente_Eval, id_persona=detalle_procedimiento.id)
-            print(detalle_persona)
             data = dict(data,
                         nombre = detalle_persona.nombre,
                         apellido = detalle_persona.apellidos, 
