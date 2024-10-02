@@ -906,17 +906,17 @@ summary > * {
     font-family: var(--sofia-sans);
     font-size: 1.1rem;
   }
-  div label {
+  label {
     font-weight: 600;
   }
-  div select {
+  select {
     width: 20rem;
     height: 2.5rem;
     padding: 0.5rem;
     border-radius: 18px;
     outline: none;
   }
-  div input {
+  input {
     width: 20rem;
     height: 2.5rem;
     padding: 1rem;
