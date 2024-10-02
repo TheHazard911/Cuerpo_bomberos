@@ -28,13 +28,17 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'django-insecure-usf!gyb)c_93(yhk-ab2gm%&_(hlk1ough81m110qhhrn4$cvy'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+# Debug true significa desarrollo modo de pruebas
+# DEBUG = True
 
-# esto para el render
+#------------- modo produccion-----------------
+# Debug false significa produccion quiere decir listo para usarse
 DEBUG = False
 
 # ALLOWED_HOSTS = []
-ALLOWED_HOSTS = ['cuerpo-bomberos.onrender.com']
+
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'cuerpo-bomberos.onrender.com']
+
 
 
 
@@ -61,6 +65,8 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
+
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 ROOT_URLCONF = 'Web_App.urls'
 
