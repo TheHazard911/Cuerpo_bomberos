@@ -268,7 +268,6 @@ h6 {
   /* font-weight: 700; */
   line-height: 1.2;
   overflow-wrap: break-word;
-  text-wrap: balance;
 }
 
 h1 {
@@ -797,7 +796,7 @@ summary > * {
   align-items: center;
   justify-content: space-between;
   padding: 0.5rem;
-  padding-top: .8rem;
+  padding-top: 0.8rem;
   color: #fff;
   font-weight: bold;
   text-align: center;
@@ -1263,33 +1262,33 @@ summary > * {
   background-color: #f0f0f06a;
   border: thin solid #969696db;
   border-radius: 50px;
-  margin-bottom: 5rem;  
+  margin-bottom: 5rem;
 
-  section:nth-child(1){
+  section:nth-child(1) {
     background-color: #73cffa;
   }
-  section:nth-child(2){
+  section:nth-child(2) {
     background-color: #f6c344;
   }
-  section:nth-child(3){
+  section:nth-child(3) {
     background-color: #b6243a;
   }
-  section:nth-child(4){
+  section:nth-child(4) {
     background-color: #7a7b7d;
   }
-  section:nth-child(5){
+  section:nth-child(5) {
     background-color: #5e6dda;
   }
-  section:nth-child(6){
+  section:nth-child(6) {
     background-color: #1ead0b;
   }
-  section:nth-child(7){
+  section:nth-child(7) {
     background-color: #1164b7;
   }
-  section:nth-child(8){
+  section:nth-child(8) {
     background-color: #eb8500;
   }
-  section:nth-child(9){
+  section:nth-child(9) {
     background-color: #ac4ef4;
   }
 }
@@ -1302,13 +1301,15 @@ summary > * {
   margin: 1rem;
   margin-top: 2rem;
   margin-bottom: 2rem;
-  padding: .5rem;
+  padding: 0.5rem;
   border-radius: 1rem;
   color: white;
   font-weight: 700;
   background-color: #7a7b7d;
-  *{
+  * {
     margin: 0;
   }
-  
+}
+.disp-none {
+  display: none;
 }
