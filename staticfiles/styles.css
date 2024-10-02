@@ -905,25 +905,24 @@ summary > * {
     padding-bottom: 1rem;
     font-family: var(--sofia-sans);
     font-size: 1.1rem;
-
-    label {
-      font-weight: 600;
-    }
-    select {
-      width: 20rem;
-      height: 2.5rem;
-      padding: 0.5rem;
-      border-radius: 18px;
-      outline: none;
-    }
-    input {
-      width: 20rem;
-      height: 2.5rem;
-      padding: 1rem;
-      border-radius: 18px;
-      outline: none;
-      border: thin solid rgb(114, 114, 114);
-    }
+  }
+  div label {
+    font-weight: 600;
+  }
+  div select {
+    width: 20rem;
+    height: 2.5rem;
+    padding: 0.5rem;
+    border-radius: 18px;
+    outline: none;
+  }
+  div input {
+    width: 20rem;
+    height: 2.5rem;
+    padding: 1rem;
+    border-radius: 18px;
+    outline: none;
+    border: thin solid rgb(114, 114, 114);
   }
 }
 .mod-title-width {
