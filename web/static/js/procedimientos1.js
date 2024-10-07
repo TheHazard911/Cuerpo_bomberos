@@ -492,80 +492,76 @@ document
         setRequired(campos, true); // Agregar required a la nueva sección
         document.getElementById("button_submit").style.display = "block";
         break;
-      // case "10":
-      //   requiredFalse();
-      //   showElements(["rescate"]);
-      //   campos = document.getElementById("rescate").querySelectorAll("selec, input");
-      //   console.log(campos)
-      //   setRequired(campos, true);
-      //   document.getElementById("button_submit").style.display = "none";
-      //   document.
-      //     getElementById("id_rescate_form-tipo_rescate")
-      //     .addEventListener("change", function () {
-      //       if (this.value == "1") {
-      //         requiredExceptions(
-      //           document.getElementById("rescate_persona").querySelectorAll("select, input")
-      //         );
-      //         showElements(["rescate", "rescate_animal"]);
-      //         let campos2 = document.getElementById("rescate_animal").querySelectorAll("selec, input");
-      //         setRequired(campos2, true);
-      //         document.getElementById("button_submit").style.display = "block";
-      //       } else if (this.value == "2") {
-      //         requiredExceptions(
-      //           document
-      //             .getElementById("rescate_animal")
-      //             .querySelectorAll("select, input")
-      //         );
-      //         showElements(["rescate", "rescate_persona"]);
-      //         let campos2 = document
-      //           .getElementById("rescate_persona")
-      //           .querySelectorAll("selec, input");
-      //         setRequired(campos2, true);
-      //         document.getElementById("button_submit").style.display = "block";
-      //       }
-      //     });
-      //   break;
       case "10":
         requiredFalse();
         showElements(["rescate"]);
-        let campos = document.getElementById("rescate").querySelectorAll("select, input"); // Corregido "selec" a "select"
-        console.log(campos);
+        campos = document.getElementById("rescate").querySelectorAll("select, input");
+        console.log(campos)
         setRequired(campos, true);
         document.getElementById("button_submit").style.display = "none";
-
-        document.getElementById("id_rescate_form-tipo_rescate").addEventListener("change", function () {
-          if (this.value == "1") {
-            requiredExceptions(document.getElementById("rescate_persona").querySelectorAll("select, input")); // Corregido "selec" a "select"
-            showElements(["rescate", "rescate_animal"]);
-            let campos2 = document.getElementById("rescate_animal").querySelectorAll("select, input"); // Corregido "selec" a "select"
-            setRequired(campos2, true);
-            document.getElementById("button_submit").style.display = "block";
-          } else if (this.value == "2") {
-            requiredExceptions(document.getElementById("rescate_animal").querySelectorAll("select, input")); // Corregido "selec" a "select"
-            showElements(["rescate", "rescate_persona"]);
-            let campos2 = document.getElementById("rescate_persona").querySelectorAll("select, input"); // Corregido "selec" a "select"
-            setRequired(campos2, true);
-            document.getElementById("button_submit").style.display = "block";
-          }
-        });
+        document.
+          getElementById("id_rescate_form-tipo_rescate")
+          .addEventListener("change", function () {
+            if (this.value == "1") {
+              requiredExceptions(
+                document.getElementById("rescate_persona").querySelectorAll("select, input")
+              );
+              showElements(["rescate", "rescate_animal"]);
+              let campos2 = document.getElementById("rescate_animal").querySelectorAll("select, input");
+              setRequired(campos2, true);
+              document.getElementById("button_submit").style.display = "block";
+            } else if (this.value == "2") {
+              requiredExceptions(
+                document
+                  .getElementById("rescate_animal")
+                  .querySelectorAll("select, input")
+              );
+              showElements(["rescate", "rescate_persona"]);
+              let campos2 = document
+                .getElementById("rescate_persona")
+                .querySelectorAll("select, input");
+              setRequired(campos2, true);
+              document.getElementById("button_submit").style.display = "block";
+            }
+          });
         break;
       case "11":
+        requiredFalse()
         showElements(["incendio_form"]);
+        campos = document.getElementById("incendio_form").querySelectorAll("select, input")
+        setRequired(campos, true)
+        requiredExceptions(document.getElementById("detalles_vehiculo").querySelectorAll("select, input"))
+        requiredExceptions(document.getElementById("persona_presente").querySelectorAll("select, input"))
+
         document
           .getElementById("id_incendio_form-check_agregar_persona")
           .addEventListener("change", function () {
-            document.getElementById("persona_presente").style.display = this
-              .checked
-              ? "block"
-              : "none";
+            
+            if(this.checked){
+              let campo2 = document.getElementById("persona_presente").querySelectorAll("select, input")
+              setRequired(campo2, true)
+              document.getElementById("persona_presente").style.display = "block"
+            } else{
+              let campo2 = document.getElementById("persona_presente").querySelectorAll("select, input")
+              requiredExceptions(campo2)
+              document.getElementById("persona_presente").style.display = "none"
+            }
+
           });
-        document
+          document
           .getElementById("id_incendio_form-check_agregar_vehiculo")
           .addEventListener("change", function () {
-            document.getElementById("detalles_vehiculo").style.display = this
-              .checked
-              ? "block"
-              : "none";
+
+            if (this.checked){
+              let campo2 = document.getElementById("detalles_vehiculo").querySelectorAll("select, input")
+              setRequired(campo2, true)
+              document.getElementById("detalles_vehiculo").style.display = "block" 
+            } else{
+              let campo2 = document.getElementById("detalles_vehiculo").querySelectorAll("select, input")
+              requiredExceptions(campo2)
+              document.getElementById("detalles_vehiculo").style.display = "none" 
+            }
+
           });
         document.getElementById("button_submit").style.display = "block";
         break;
