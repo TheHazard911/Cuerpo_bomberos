@@ -39,93 +39,103 @@
   <section class="data_form">
     <form action="" method="post">
       {% csrf_token %}
-      <div class="form-style">{{ form }}</div>
+      <div class="form-style">
+        <div>{{ form }}</div>
+      </div>
       <div class="line"></div>
       <h4>Datos de la Operacion</h4>
-      <div class="form-style">{{ form2 }}</div>
+      <div class="form-style"><div>{{ form2 }}</div></div>
       <div class="line"></div>
       <h4>Datos de la Ubicacion</h4>
-      <div class="form-style">{{ form3 }}</div>
+      <div class="form-style"><div>{{ form3 }}</div></div>
       <div class="line"></div>
       <h4>Tipo de Procedimientos</h4>
-      <div class="form-style">{{ form4 }}</div>
+      <div class="form-style"><div>{{ form4 }}</div></div>
 
       <article id="detalles-form">
         <!-- Detalles de Procedimiento (Abastecimiento de Agua) -->
         <div class="data_form disp-none" id="abast_agua">
           <div class="line"></div>
           <h4>Abastecimiento de Agua</h4>
-          <div class="form-style">{{ form_abastecimiento_agua }}</div>
+          <div class="form-style">
+            <div>{{ form_abastecimiento_agua }}</div>
+          </div>
         </div>
 
         <!-- Detalles de Procedimiento (Apoyo a Otras Unidades) -->
         <div class="data_form disp-none" id="apoyo_unid">
           <div class="line"></div>
           <h4>Apoyo a Otras Unidades</h4>
-          <div class="form-style">{{ form_apoyo_unidades }}</div>
+          <div class="form-style"><div>{{ form_apoyo_unidades }}</div></div>
         </div>
 
         <!-- Detalles de Procedimiento (Guardia de Prevencion) -->
         <div class="data_form disp-none" id="guard_prev">
           <div class="line"></div>
           <h4>Guardia de Prevencion</h4>
-          <div class="form-style">{{ form_guardia_prevencion }}</div>
+          <div class="form-style"><div>{{ form_guardia_prevencion }}</div></div>
         </div>
 
         <!-- Detalles de Procedimiento (Atendido No Efectuado) -->
         <div class="data_form disp-none" id="atend_no_efect">
           <div class="line"></div>
           <h4>Atendido No Efectuado</h4>
-          <div class="form-style">{{ form_atendido_no_efectuado }}</div>
+          <div class="form-style">
+            <div>{{ form_atendido_no_efectuado }}</div>
+          </div>
         </div>
 
         <!-- Detalles de Procedimiento (Despliegue de seguridad) -->
         <div class="data_form disp-none" id="desp_seguridad">
           <div class="line"></div>
           <h4>Despliegue de Seguridad</h4>
-          <div class="form-style">{{ form_despliegue_seguridad }}</div>
+          <div class="form-style">
+            <div>{{ form_despliegue_seguridad }}</div>
+          </div>
         </div>
 
         <!-- Detalles de Procedimiento (Falsa Alarma) -->
         <div class="data_form disp-none" id="falsa_alarm">
           <div class="line"></div>
           <h4>Falsa Alarma</h4>
-          <div class="form-style">{{ form_falsa_alarma }}</div>
+          <div class="form-style"><div>{{ form_falsa_alarma }}</div></div>
         </div>
 
         <!-- Detalles de Procedimiento (Servicios_especiales) -->
         <div class="data_form disp-none" id="serv_especiales">
           <div class="line"></div>
           <h4>Servicios Especiales</h4>
-          <div class="form-style">{{ form_servicios_especiales }}</div>
+          <div class="form-style">
+            <div>{{ form_servicios_especiales }}</div>
+          </div>
         </div>
 
         <!-- Detalles de Procedimiento (Fallecidos) -->
         <div class="data_form disp-none" id="fallecidos">
           <div class="line"></div>
           <h4>Fallecidos</h4>
-          <div class="form-style">{{ form_fallecido }}</div>
+          <div class="form-style"><div>{{ form_fallecido }}</div></div>
         </div>
 
         <!-- Detalles de Procedimiento (Rescate) -->
         <div class="data_form disp-none" id="rescate">
           <div class="line"></div>
           <h4>Rescate</h4>
-          <div class="form-style">{{ rescate_form }}</div>
+          <div class="form-style"><div>{{ rescate_form }}</div></div>
         </div>
 
         <!-- Detalles de Procedimiento (Rescate Animal) -->
         <div class="data_form disp-none" id="rescate_animal">
           <div class="line"></div>
           <h4>Rescate Animal</h4>
-          <div class="form-style">{{ rescate_form_animal }}</div>
+          <div class="form-style"><div>{{ rescate_form_animal }}</div></div>
         </div>
 
         <!-- Detalles de Procedimiento (Rescate Persona) -->
         <div class="data_form disp-none" id="rescate_persona">
           <div class="line"></div>
           <h4>Rescate Persona</h4>
-          <div class="form-style">{{ rescate_form_persona }}</div>
+          <div class="form-style"><div>{{ rescate_form_persona }}</div></div>
         </div>
 
         <!-- Detalles de Procedimiento (Incendio) -->
@@ -133,17 +143,17 @@
           <div class="line"></div>
           <h4>Incendio</h4>
           <div class="form-style checkbox-styles">
-            {{ incendio_form }}
+            <div>{{ incendio_form }}</div>
             <!-- Detalles de Procedimiento (persona Presente) -->
             <div id="persona_presente">
               <h4>Datos Persona Presente</h4>
-              {{ persona_presente_form }}
+              <div>{{ persona_presente_form }}</div>
             </div>
 
             <!-- Detalles de Procedimiento (Detalles Vehiculos) -->
             <div id="detalles_vehiculo">
               <h4>Datos de Vehiculo</h4>
-              {{ detalles_vehiculo_form }}
+              <div>{{ detalles_vehiculo_form }}</div>
             </div>
           </div>
         </div>
@@ -153,7 +163,7 @@
           <div class="line"></div>
           <h4 class="mod-title-width">Atenciones Paramedicas</h4>
           <div class="form-style checkbox-styles">
-            {{ atenciones_paramedicas }}
+            <div>{{ atenciones_paramedicas }}</div>
           </div>
         </div>
 
@@ -162,11 +172,11 @@
           <div class="line"></div>
           <h4>Emergencias Medicas</h4>
           <div class="form-style checkbox-styles">
-            {{ emergencias_medicas }}
+            <div>{{ emergencias_medicas }}</div>
             <!-- Detalles de Procedimiento (Detalles Traslado) -->
             <div id="traslados_emergencias">
               <h4>Datos del Traslado</h4>
-              {{ traslados_emergencias }}
+              <div>{{ traslados_emergencias }}</div>
             </div>
           </div>
         </div>
@@ -176,31 +186,31 @@
           <div class="line"></div>
           <h4>Accidentes de Transito</h4>
           <div class="form-style checkbox-styles">
-            {{ formulario_accidentes_transito }}
+            <div>{{ formulario_accidentes_transito }}</div>
             <!-- Detalles de Procedimiento (Detalles Vehiculo) -->
             <div id="vehiculo_accidente">
               <h4>Datos del Vehiculo</h4>
-              {{ detalles_vehiculo_accidentes }}
+              <div>{{ detalles_vehiculo_accidentes }}</div>
             </div>
             <!-- Detalles de Procedimiento (Detalles Vehiculo) -->
             <div id="otro_vehiculo_accidente">
               <h4>Otro Vehiculo</h4>
-              {{ detalles_vehiculo_accidentes2 }}
+              <div>{{ detalles_vehiculo_accidentes2 }}</div>
             </div>
             <!-- Detalles de Procedimiento (Detalles Vehiculo) -->
             <div id="otro_vehiculo_accidente2">
               <h4>Ultimo Vehiculo</h4>
-              {{ detalles_vehiculo_accidentes3 }}
+              <div>{{ detalles_vehiculo_accidentes3 }}</div>
             </div>
             <!-- Detalles de Procedimiento (Detalles Lesionado) -->
             <div id="lesionado_accidente">
               <h4>Datos del Lesionado</h4>
-              {{ detalles_lesionados_accidentes }}
+              <div>{{ detalles_lesionados_accidentes }}</div>
             </div>
             <!-- Detalles de Procedimiento (Detalles Traslado) -->
             <div id="traslado_accidente">
               <h4>Datos del Traslado</h4>
-              {{ traslados_accidentes }}
+              <div>{{ traslados_accidentes }}</div>
             </div>
           </div>
         </div>
@@ -210,10 +220,10 @@
           <div class="line"></div>
           <h4>Evaluacion de Riesgo</h4>
           <div class="form-style">
-            {{ evaluacion_riesgo_form }}
+            <div>{{ evaluacion_riesgo_form }}</div>
             <div id="form_persona_presente" class="disp-none">
               <h4>Persona Presente</h4>
-              {{ persona_presente_eval_form }}
+              <div>{{ persona_presente_eval_form }}</div>
             </div>
           </div>
         </div>
@@ -222,42 +232,44 @@
         <div class="data_form disp-none" id="mitigacion_riesgo">
           <div class="line"></div>
           <h4>Mitigacion de Riesgo</h4>
-          <div class="form-style">{{ mitigacion_riesgo_form }}</div>
+          <div class="form-style"><div>{{ mitigacion_riesgo_form }}</div></div>
         </div>
 
         <!-- Detalles de Procedimiento (Mitigacion de Riesgo) -->
         <div class="data_form disp-none" id="puesto_avanzada">
           <div class="line"></div>
           <h4>Puesto de Avanzada</h4>
-          <div class="form-style">{{ puesto_avanzada_form }}</div>
+          <div class="form-style"><div>{{ puesto_avanzada_form }}</div></div>
         </div>
 
         <!-- Detalles de Procedimiento (Mitigacion de Riesgo) -->
         <div class="data_form disp-none" id="traslados_prehospitalaria">
           <div class="line"></div>
           <h4>Traslados</h4>
-          <div class="form-style">{{ traslados_prehospitalaria_form }}</div>
+          <div class="form-style">
+            <div>{{ traslados_prehospitalaria_form }}</div>
+          </div>
         </div>
 
         <!-- Detalles de Procedimiento (Asesoramiento) -->
         <div class="data_form disp-none" id="asesoramiento_form">
           <div class="line"></div>
           <h4>Asesoramiento</h4>
-          <div class="form-style">{{ asesoramiento_form }}</div>
+          <div class="form-style"><div>{{ asesoramiento_form }}</div></div>
         </div>
 
         <!-- Detalles de Procedimiento (Reinspeccion de Prevencion) -->
         <div class="data_form disp-none" id="reinspeccion_prevencion">
           <div class="line"></div>
           <h4>Reinspeccion de Prevencion</h4>
-          <div class="form-style">{{ reinspeccion_prevencion }}</div>
+          <div class="form-style"><div>{{ reinspeccion_prevencion }}</div></div>
         </div>
 
         <!-- Detalles de Procedimiento (Retencion Preventiva) -->
         <div class="data_form disp-none" id="retencion_preventiva">
           <div class="line"></div>
           <h4>Retencion Preventiva</h4>
-          <div class="form-style">{{ retencion_preventiva }}</div>
+          <div class="form-style"><div>{{ retencion_preventiva }}</div></div>
         </div>
       </article>
 
