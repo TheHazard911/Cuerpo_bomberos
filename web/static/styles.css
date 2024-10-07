@@ -898,7 +898,7 @@ summary > * {
     display: flex;
     width: auto;
     height: auto;
-    flex-direction: column;
+    flex-direction: row;
     align-items: flex-start;
     margin: 1rem;
     flex-wrap: wrap;
