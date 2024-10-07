@@ -48,5 +48,6 @@ admin.site.register(Motivo_Avanzada)
 admin.site.register(Tipos_Traslado)
 admin.site.register(Traslado_Prehospitalaria)
 admin.site.register(Asesoramiento)
+admin.site.register(Tipo_Cilindro)
 
 

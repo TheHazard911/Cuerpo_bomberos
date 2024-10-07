@@ -29,11 +29,11 @@ SECRET_KEY = 'django-insecure-usf!gyb)c_93(yhk-ab2gm%&_(hlk1ough81m110qhhrn4$cvy
 
 # SECURITY WARNING: don't run with debug turned on in production!
 # Debug true significa desarrollo modo de pruebas
-# DEBUG = True
+DEBUG = True
 
 #------------- modo produccion-----------------
 # Debug false significa produccion quiere decir listo para usarse
-DEBUG = False
+# DEBUG = False
 
 # ALLOWED_HOSTS = []
 
@@ -64,7 +64,11 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
+
 ]
+LOGIN_URL = 'home'  # Cambia esto al nombre de tu URL de inicio de sesión
+LOGIN_REDIRECT_URL = '/dashboard/'  # Cambia esto a la vista a la que quieres redirigir después del inicio de sesión
+
 
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 

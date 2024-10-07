@@ -21,8 +21,8 @@ from web.views import *
 #Se crean las rutas que se podran visitar en la aplicacion web.
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', Home),
-    path('dashboard/', Dashboard),
+    path('', Home,name="home"),
+    path('dashboard/', Dashboard,name='dashboard') ,
     path('prueba/', Prueba),
     path('tablageneral/', tabla_general),
     path('procedimientos/', View_Procedimiento, name='view_procedimiento'),

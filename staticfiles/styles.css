@@ -546,9 +546,10 @@ summary > * {
     border-radius: 10px;
   }
 }
-.checkbox-styles div:nth-child(5),
+/* .checkbox-styles div:nth-child(5),
 .checkbox-styles div:nth-child(6),
-.checkbox-styles div:nth-child(10) {
+.checkbox-styles div:nth-child(10) { */
+  .checkbox-styles div *{
   width: 20rem;
   display: flex;
   flex-direction: row;
@@ -1313,6 +1314,18 @@ summary > * {
   display: none;
 }
 
-.width {
-  width: 100%;
+.non-visible{
+  display: none;
+}
+.visible{
+  display: block;
+}
+
+.display-row {
+  display: flex;
+  flex-direction: row !important;
+  justify-content: center;
+  h4 {
+    width: 100% !important;
+  }
 }

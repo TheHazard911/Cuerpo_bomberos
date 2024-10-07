@@ -17,3 +17,4 @@ function sendPing() {
 
 // Llamar la función de ping cada 5 minutos (300,000 ms)
 setInterval(sendPing, 300000); // 5 minutos en milisegundos
+

@@ -55,6 +55,12 @@ class Tipo_Institucion(models.Model):
   
   def __str__(self):
      return self.nombre_institucion
+# tabla de cilindros de gas
+class Tipo_Cilindro(models.Model):
+  nombre_cilindro = models.CharField(max_length=50)
+  
+  def __str__(self):
+     return self.nombre_cilindro
 
 # tabla de posibles apoyos a otras unidades
 class Tipo_apoyo(models.Model):
