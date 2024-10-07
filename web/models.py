@@ -55,6 +55,12 @@ class Tipo_Institucion(models.Model):
   
   def __str__(self):
      return self.nombre_institucion
+# tabla de cilindros de gas
+class Tipo_Cilindro(models.Model):
+  nombre_cilindro = models.CharField(max_length=50)
+  
+  def __str__(self):
+     return self.nombre_cilindro
 
 # tabla de posibles apoyos a otras unidades
 class Tipo_apoyo(models.Model):
@@ -136,6 +142,7 @@ class Tipo_Incendio(models.Model):
 class Procedimientos(models.Model):
     id_division  = models.ForeignKey(Divisiones, on_delete=models.CASCADE, default=0)
     id_solicitante = models.ForeignKey(Personal, on_delete=models.CASCADE, related_name="personal1")
+    solicitante_externo = models.CharField(max_length=20, default="Interno")
     unidad = models.ForeignKey(Unidades, on_delete=models.CASCADE)
     id_jefe_comision = models.ForeignKey(Personal, on_delete=models.CASCADE, related_name="personal2")
     efectivos_enviados = models.CharField(max_length=40)

@@ -1,6 +1,28 @@
 // < !--Script para cambiar el menu desplegable de tipo de procedimiento segun la division-- >
 // Define las opciones por categoría
 
+var inputExterno = document.getElementById("id_form2-solicitante_externo");
+
+// Luego selecciona el div que es el padre del input
+var divContainer = inputExterno.parentElement;
+
+// Ocultar el div
+divContainer.style.display = "none";
+inputExterno.removeAttribute("required")
+
+document
+  .getElementById("id_form2-solicitante")
+  .addEventListener("change", function () {
+
+    if (this.value == "0") {  // Ajusta el valor de "1" según tu lógica
+      divContainer.style.display = "flex";
+      inputExterno.setAttribute("required", "required")
+    } else {
+      divContainer.style.display = "none";   // Ocultar solicitante_externo
+      inputExterno.removeAttribute("required")
+    }
+  });
+
 const opcionesPorCategoria = {
   "": [{ value: "-", text: "Elige Una Division" }],
   1: [
@@ -36,8 +58,7 @@ const opcionesPorCategoria = {
     { value: "18", text: "Inspeccion" },
     { value: "19", text: "Investigacion" },
     { value: "20", text: "Reinspeccion de Prevencion" },
-    { value: "21", text: "Retencion Preventiva" },
-    { value: "9", text: "Servicios Especiales" },
+    { value: "21", text: "Retencion Preventiva" }
   ],
   4: [
     { value: "1", text: "Abastecimiento de agua" },
@@ -76,6 +97,7 @@ const selectTipoProcedimiento = document.getElementById(
 
 // Función para actualizar las opciones del segundo select
 function actualizarOpciones() {
+  hideAllForms()
   const selectedValue = selectOpciones.value;
 
   // Limpia las opciones actuales del segundo select
@@ -104,6 +126,13 @@ function actualizarOpciones() {
 actualizarOpciones();
 // Evento cuando cambia el primer select
 selectOpciones.addEventListener("change", actualizarOpciones);
+
+function hideAllForms() {
+  const forms = document.querySelectorAll(".disp-none");
+  forms.forEach(form => {
+    form.style.display = "none";
+  });
+}
 
 function requiredFalse() {
   const campos = document
@@ -158,13 +187,22 @@ document
       "retencion_preventiva",
     ];
 
-    const showElements = (elements) => {
-      elementsToHide.forEach(
-        (id) => (document.getElementById(id).style.display = "none")
-      );
-      elements.forEach(
-        (id) => (document.getElementById(id).style.display = "block")
-      );
+    const showElements = (elementsToShow) => {
+      // Primero ocultamos todos los elementos, usando la clase 'non-visible'
+      elementsToHide.forEach(id => {
+        const element = document.getElementById(id);
+        if (element) {
+          element.style.display = "none";
+        }
+      });
+
+      // Luego mostramos los elementos específicos, usando la clase 'visible'
+      elementsToShow.forEach(id => {
+        const element = document.getElementById(id);
+        if (element) {
+          element.style.display = "block";
+        }
+      });
     };
 
     let campos;
@@ -346,7 +384,8 @@ document
                   if (this.checked) {
                     document.getElementById(
                       "vehiculo_accidente"
-                    ).style.display = "block";
+                    ).style.display = "flex";
+
                     document
                       .getElementById("vehiculo_accidente")
                       .querySelectorAll("select, input")
@@ -354,9 +393,7 @@ document
                         ele.setAttribute("required", true);
                       });
                   } else {
-                    document.getElementById(
-                      "vehiculo_accidente"
-                    ).style.display = "none";
+                    document.getElementById("vehiculo_accidente").style.display = "none"
                     document
                       .getElementById("vehiculo_accidente")
                       .querySelectorAll("select, input")
@@ -379,7 +416,7 @@ document
                           });
                         document.getElementById(
                           "otro_vehiculo_accidente"
-                        ).style.display = "block";
+                        ).style.display = "flex";
                       } else {
                         document
                           .getElementById("otro_vehiculo_accidente")
@@ -406,7 +443,7 @@ document
                           });
                         document.getElementById(
                           "otro_vehiculo_accidente2"
-                        ).style.display = "block";
+                        ).style.display = "flex";
                       } else {
                         document
                           .getElementById("otro_vehiculo_accidente2")
@@ -435,7 +472,7 @@ document
                       });
                     document.getElementById(
                       "lesionado_accidente"
-                    ).style.display = "block";
+                    ).style.display = "flex";
                   } else {
                     document
                       .getElementById("lesionado_accidente")
@@ -462,7 +499,7 @@ document
                           });
                         document.getElementById(
                           "traslado_accidente"
-                        ).style.display = "block";
+                        ).style.display = "flex";
                       } else {
                         document
                           .getElementById("traslado_accidente")
@@ -536,74 +573,120 @@ document
         document
           .getElementById("id_incendio_form-check_agregar_persona")
           .addEventListener("change", function () {
-            
-            if(this.checked){
+
+            if (this.checked) {
               let campo2 = document.getElementById("persona_presente").querySelectorAll("select, input")
               setRequired(campo2, true)
               document.getElementById("persona_presente").style.display = "block"
-            } else{
+            } else {
               let campo2 = document.getElementById("persona_presente").querySelectorAll("select, input")
               requiredExceptions(campo2)
               document.getElementById("persona_presente").style.display = "none"
             }
 
           });
-          document
+        document
           .getElementById("id_incendio_form-check_agregar_vehiculo")
           .addEventListener("change", function () {
 
-            if (this.checked){
+            if (this.checked) {
               let campo2 = document.getElementById("detalles_vehiculo").querySelectorAll("select, input")
               setRequired(campo2, true)
-              document.getElementById("detalles_vehiculo").style.display = "block" 
-            } else{
+              document.getElementById("detalles_vehiculo").style.display = "block"
+            } else {
               let campo2 = document.getElementById("detalles_vehiculo").querySelectorAll("select, input")
               requiredExceptions(campo2)
-              document.getElementById("detalles_vehiculo").style.display = "none" 
+              document.getElementById("detalles_vehiculo").style.display = "none"
             }
 
           });
         document.getElementById("button_submit").style.display = "block";
         break;
       case "12":
+        requiredFalse();
         showElements(["fallecidos"]);
+        campos = document
+          .getElementById("fallecidos")
+          .querySelectorAll("select, input");
+        setRequired(campos, true);
         document.getElementById("button_submit").style.display = "block";
         break;
       case "13":
+        requiredFalse();
         showElements(["mitigacion_riesgo"]);
+        campos = document
+          .getElementById("mitigacion_riesgo")
+          .querySelectorAll("select, input");
+        setRequired(campos, true);
         document.getElementById("button_submit").style.display = "block";
         break;
       case "14":
+        requiredFalse();
         showElements(["evaluacion_riesgo"]);
+        campos = document
+          .getElementById("evaluacion_riesgo")
+          .querySelectorAll("select, input");
+        setRequired(campos, true);
         document.getElementById("button_submit").style.display = "block";
+        let campos2 = document
+          .getElementById("form_persona_presente")
+          .querySelectorAll("select, input");
 
         query = document.getElementById("id_form1-opciones");
         if (query.value === "3") {
           showElements(["evaluacion_riesgo", "form_persona_presente"]);
+          setRequired(campos2, true);
+        } else {
+          requiredExceptions(campos2);
         }
         break;
       case "15":
+        requiredFalse();
         showElements(["puesto_avanzada"]);
+        campos = document
+          .getElementById("puesto_avanzada")
+          .querySelectorAll("select, input");
+        setRequired(campos, true);
         document.getElementById("button_submit").style.display = "block";
         break;
       case "16":
+        requiredFalse();
         showElements(["traslados_prehospitalaria"]);
+        campos = document
+          .getElementById("traslados_prehospitalaria")
+          .querySelectorAll("select, input");
+        setRequired(campos, true);
         document.getElementById("button_submit").style.display = "block";
         break;
       case "17":
+        requiredFalse();
         showElements(["asesoramiento_form"]);
+        campos = document
+          .getElementById("asesoramiento_form")
+          .querySelectorAll("select, input");
+        setRequired(campos, true);
         document.getElementById("button_submit").style.display = "block";
         break;
       case "20":
+        requiredFalse();
         showElements(["reinspeccion_prevencion"]);
+        campos = document
+          .getElementById("reinspeccion_prevencion")
+          .querySelectorAll("select, input");
+        setRequired(campos, true);
         document.getElementById("button_submit").style.display = "block";
         break;
       case "21":
+        requiredFalse();
         showElements(["retencion_preventiva"]);
+        campos = document
+          .getElementById("retencion_preventiva")
+          .querySelectorAll("select, input");
+        setRequired(campos, true);
         document.getElementById("button_submit").style.display = "block";
         break;
       default:
-        elementosOcultar.forEach((id) => {
+        elementsToHide.forEach((id) => {
           document.getElementById(id).style.display = "none";
           campos = document
             .getElementById(id)
@@ -632,10 +715,13 @@ document
   .getElementById("id_form3-municipio")
   .addEventListener("change", function () {
     var select2 = document.getElementById("id_form3-parroquia");
-    if (this.value != "1") {
+
+    if (this.value !== "1") {
       select2.disabled = true;
+      select2.setAttribute("required", "required"); // Agrega el atributo `required`
     } else {
       select2.disabled = false;
+      select2.removeAttribute("required"); // Elimina el atributo `required`
     }
   });
 

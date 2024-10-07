@@ -3,7 +3,7 @@ from.models import *
 
 def Asignar_ops_Personal():
     personal = Personal.objects.all()
-    op = [("", "Seleccione Una Opcion")]
+    op = [("", "Seleccione Una Opcion"),("0", "Solicitante externo")]
     for persona in personal:
         op.append((str(persona.id), f"{persona.jerarquia} {persona.nombres} {persona.apellidos}"))
     return op
@@ -120,6 +120,13 @@ def Asignar_opc_traslados():
        op.append((str(procedimiento.id), procedimiento.tipo_traslado))
    return op
 
+def Asignar_opc_cilindros():
+   procedimientos = Tipo_Cilindro.objects.all()
+   op = [("", "Seleccione Una Opcion")]
+   for procedimiento in procedimientos:
+       op.append((str(procedimiento.id), procedimiento.nombre_cilindro))
+   return op
+
 # Form1
 class SelectorDivision(forms.Form):
     op = [
@@ -144,6 +151,7 @@ class SelectorDivision(forms.Form):
 class SeleccionarInfo(forms.Form):
     solicitante = forms.ChoiceField(choices=Asignar_ops_Personal(), required=True,
         widget=forms.Select(attrs={'class': 'disable-first-option'}))
+    solicitante_externo = forms.CharField()
     unidad = forms.ChoiceField(choices=Asignar_opc_unidades(), required=True,
         widget=forms.Select(attrs={'class': 'disable-first-option'}))
     efectivos_enviados = forms.CharField()
@@ -169,7 +177,8 @@ class Datos_Ubicacion(forms.Form):
         label="Fecha",
         widget=forms.DateInput(attrs={'type': 'date'})
     )
-    hora = forms.TimeField()
+    hora = forms.TimeField(
+        widget=forms.TimeInput(attrs={'type': 'time'}, format='%H:%M'))  # Especificar explícitamente el tipo de input
 
 # Form4
 class Selecc_Tipo_Procedimiento(forms.Form):
@@ -236,7 +245,7 @@ class Formulario_Fallecidos(forms.Form):
     apellido_fallecido = forms.CharField(max_length=40, required=False)
     cedula_fallecido = forms.CharField(max_length=10, required=False)
     edad = forms.CharField(max_length=3, required=False)
-    sexo = forms.CharField(max_length=10, required=False)
+    sexo = forms.ChoiceField(choices=[("", "Seleccione Una Opcion"), ("Masculino", "Masculino"), ("Femenino", "Femenino")], widget=forms.Select(attrs={"class": "disable-first-option"}), required=False)
     descripcion = forms.CharField(max_length=50, required=False)
     material_utilizado = forms.CharField(max_length=50, required=False)
     status = forms.ChoiceField(choices=[("", "Seleccione Una Opcion"), ("Culminado", "Culminado"), ("En Proceso", "En Proceso")], widget=forms.Select(attrs={"class": "disable-first-option"}), required=False)
@@ -252,7 +261,7 @@ class Formulario_Rescate_Persona(forms.Form):
     apellido_persona = forms.CharField(max_length=30, required=False)
     cedula_persona = forms.CharField(max_length=10, required=False)
     edad_persona = forms.CharField(max_length=3, required=False)
-    sexo_persona = forms.CharField(max_length=10, required=False)
+    sexo_persona = forms.ChoiceField(choices=[("", "Seleccione Una Opcion"), ("Masculino", "Masculino"), ("Femenino", "Femenino")], widget=forms.Select(attrs={"class": "disable-first-option"}), required=False)
     descripcion = forms.CharField(max_length=40, required=False)
     
 class Formulario_Rescate_Animal(forms.Form):
@@ -290,7 +299,7 @@ class Formulario_Emergencias_Medicas(forms.Form):
     apellido = forms.CharField(max_length=40, required=False)
     cedula = forms.CharField(max_length=10, required=False)
     edad = forms.CharField(max_length=3, required=False)
-    sexo = forms.CharField(max_length=12, required=False)
+    sexo = forms.ChoiceField(choices=[("", "Seleccione Una Opcion"), ("Masculino", "Masculino"), ("Femenino", "Femenino")], widget=forms.Select(attrs={"class": "disable-first-option"}), required=False)
     idx = forms.CharField(max_length=40, required=False)
     descripcion = forms.CharField(max_length=120, required=False)
     material_utilizado = forms.CharField(max_length=100, required=False)
@@ -339,7 +348,7 @@ class Formulario_Detalles_Lesionados(forms.Form):
     apellido = forms.CharField(max_length=40, required=False)
     cedula = forms.CharField(max_length=10, required=False)
     edad = forms.CharField(max_length=3, required=False)
-    sexo = forms.CharField(max_length=12, required=False)
+    sexo = forms.ChoiceField(choices=[("", "Seleccione Una Opcion"), ("Masculino", "Masculino"), ("Femenino", "Femenino")], widget=forms.Select(attrs={"class": "disable-first-option"}), required=False)
     idx = forms.CharField(max_length=40, required=False)
     descripcion = forms.CharField(max_length=40, required=False)
     trasladado = forms.BooleanField(required=False)
@@ -373,7 +382,7 @@ class Formulario_Traslados_Prehospitalaria(forms.Form):
     apellido = forms.CharField(max_length=40, required=False)
     cedula = forms.CharField(max_length=10, required=False)
     edad = forms.CharField(max_length=3, required=False)
-    sexo = forms.CharField(max_length=12, required=False)
+    sexo = forms.ChoiceField(choices=[("", "Seleccione Una Opcion"), ("Masculino", "Masculino"), ("Femenino", "Femenino")], widget=forms.Select(attrs={"class": "disable-first-option"}), required=False)
     idx = forms.CharField(max_length=40, required=False)
     hospital_trasladado = forms.CharField(max_length=50, required=False)
     medico_receptor = forms.CharField(max_length=50, required=False)
@@ -407,8 +416,7 @@ class Formulario_Reinspeccion_Prevencion(forms.Form):
   status = forms.ChoiceField(choices=[("", "Seleccione Una Opcion"), ("Culminado", "Culminado"), ("En Proceso", "En Proceso")], widget=forms.Select(attrs={"class": "disable-first-option"}), required=False)
 
 class Formulario_Retencion_Preventiva(forms.Form):
-    opc = [("0", "Seleccione Una Opcion"), ("G.L.P.", "G.L.P")]
-    tipo_cilindro = forms.ChoiceField(choices=opc, widget=forms.Select(attrs={"class": "disable-first-option"}), required=False)
+    tipo_cilindro = forms.ChoiceField(choices=Asignar_opc_cilindros, widget=forms.Select(attrs={"class": "disable-first-option"}), required=False)
     capacidad = forms.CharField(max_length=50, required=False)
     serial = forms.CharField(max_length=50, required=False)
     nro_constancia_retencion = forms.CharField(max_length=50, required=False)

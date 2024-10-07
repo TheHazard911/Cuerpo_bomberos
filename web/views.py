@@ -10,6 +10,7 @@ from django.shortcuts import get_object_or_404
 from django.http import JsonResponse
 import json
 from datetime import datetime
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 
@@ -150,7 +151,6 @@ def Dashboard(request):
         "psicologia_hoy": psicologia_hoy,
         "capacitacion_hoy": capacitacion_hoy,
     })
-
 # Vista de archivo para hacer pruebas de backend
 def Prueba(request):
     
@@ -184,6 +184,7 @@ def Prueba(request):
             })
   
 # Vista de archivo para hacer pruebas de backend
+
 def View_Procedimiento(request):
     user = request.session.get('user')    
     if not user:
@@ -253,6 +254,7 @@ def View_Procedimiento(request):
             
             division = form.cleaned_data["opciones"]
             solicitante = form2.cleaned_data["solicitante"]
+            solicitante_externo = form2.cleaned_data["solicitante_externo"]
             unidad = form2.cleaned_data["unidad"]
             efectivos_enviados = form2.cleaned_data["efectivos_enviados"]
             jefe_comision = form2.cleaned_data["jefe_comision"]
@@ -264,16 +266,24 @@ def View_Procedimiento(request):
             parroquia = form3.cleaned_data["parroquia"]
 
             division_instance = Divisiones.objects.get(id=division)
-            solicitante_instance = Personal.objects.get(id=solicitante)
             jefe_comision_instance = Personal.objects.get(id=jefe_comision)
             municipio_instance = Municipios.objects.get(id=municipio)
             tipo_procedimiento_instance = Tipos_Procedimientos.objects.get(id=tipo_procedimiento)
             unidad_instance = Unidades.objects.get(id=unidad)
             
+            
+            if solicitante:
+                solicitante_instance = Personal.objects.get(id=solicitante)
+                
+            
+            if solicitante_externo=="":
+                solicitante_externo = "Solicitante Interno"
+            
             # # Crear una nueva instancia del modelo Procedimientos
             nuevo_procedimiento = Procedimientos(
                id_division=division_instance,
                id_solicitante=solicitante_instance,
+               solicitante_externo=solicitante_externo,
                unidad=unidad_instance,
                efectivos_enviados=efectivos_enviados,
                id_jefe_comision=jefe_comision_instance,
@@ -945,8 +955,8 @@ def View_Procedimiento(request):
         "reinspeccion_prevencion": reinspeccion_prevencion,
         "retencion_preventiva": retencion_preventiva,
     })
-    
-# Vista de la Seccion de Estadisticas
+# Vista de la seccion de Estadisticas
+
 def View_Estadisticas(request):
     user = request.session.get('user')    
     if not user:
@@ -957,9 +967,9 @@ def View_Estadisticas(request):
         "jerarquia": user["jerarquia"],
         "nombres": user["nombres"],
         "apellidos": user["apellidos"],
-    })
-    
+    }) 
 # Vista de la Seccion de Operaciones
+
 def View_Operaciones(request):
     user = request.session.get('user')   
     if not user:
@@ -997,8 +1007,8 @@ def View_Operaciones(request):
         "total": total,
         "hoy": hoy
     })
-
 # Vista de la Seccion de Operaciones
+
 def View_Rescate(request):
     user = request.session.get('user')    
     if not user:
@@ -1308,6 +1318,7 @@ def View_psicologia(request):
         "total": total,
         "hoy": hoy
     })
+
 def tabla_general(request):
     user = request.session.get('user')    
     if not user:

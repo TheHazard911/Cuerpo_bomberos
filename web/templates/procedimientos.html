@@ -53,7 +53,7 @@
 
       <article id="detalles-form">
         <!-- Detalles de Procedimiento (Abastecimiento de Agua) -->
-        <div class="disp-none width" id="abast_agua">
+        <div class="disp-none" id="abast_agua">
           <div class="line"></div>
           <h4>Abastecimiento de Agua</h4>
           <div class="form-style">
@@ -140,13 +140,13 @@
           <h4>Incendio</h4>
           <div class="form-style checkbox-styles">{{ incendio_form.as_div }}
             <!-- Detalles de Procedimiento (persona Presente) -->
-            <div id="persona_presente">
+            <div id="persona_presente" class="display-row">
               <h4>Datos Persona Presente</h4>
               {{ persona_presente_form.as_div }}
             </div>
 
             <!-- Detalles de Procedimiento (Detalles Vehiculos) -->
-            <div id="detalles_vehiculo">
+            <div id="detalles_vehiculo" class="display-row">
               <h4>Datos de Vehiculo</h4>
               {{ detalles_vehiculo_form.as_div }}
             </div>
@@ -169,7 +169,7 @@
           <div class="form-style checkbox-styles">
             {{ emergencias_medicas.as_div }}
             <!-- Detalles de Procedimiento (Detalles Traslado) -->
-            <div id="traslados_emergencias">
+            <div id="traslados_emergencias" class="display-row">
               <h4>Datos del Traslado</h4>
               {{ traslados_emergencias.as_div }}
             </div>
@@ -177,33 +177,33 @@
         </div>
 
         <!-- Detalles de Procedimiento (Accidentes de Transito) -->
-        <div class="data_form disp-none" id="accidentes_transito">
+        <div class="data_form disp-none checkbox-styles" id="accidentes_transito">
           <div class="line"></div>
           <h4>Accidentes de Transito</h4>
           <div class="form-style checkbox-styles">
             {{ formulario_accidentes_transito.as_div }}
             <!-- Detalles de Procedimiento (Detalles Vehiculo) -->
-            <div id="vehiculo_accidente">
+            <div id="vehiculo_accidente" class="display-row">
               <h4>Datos del Vehiculo</h4>
               {{ detalles_vehiculo_accidentes.as_div }}
             </div>
             <!-- Detalles de Procedimiento (Detalles Vehiculo) -->
-            <div id="otro_vehiculo_accidente">
+            <div id="otro_vehiculo_accidente" class="display-row">
               <h4>Otro Vehiculo</h4>
               {{ detalles_vehiculo_accidentes2.as_div }}
             </div>
             <!-- Detalles de Procedimiento (Detalles Vehiculo) -->
-            <div id="otro_vehiculo_accidente2">
+            <div id="otro_vehiculo_accidente2" class="display-row">
               <h4>Ultimo Vehiculo</h4>
               {{ detalles_vehiculo_accidentes3.as_div }}
             </div>
             <!-- Detalles de Procedimiento (Detalles Lesionado) -->
-            <div id="lesionado_accidente">
+            <div id="lesionado_accidente" class="display-row">
               <h4>Datos del Lesionado</h4>
               {{ detalles_lesionados_accidentes.as_div }}
             </div>
             <!-- Detalles de Procedimiento (Detalles Traslado) -->
-            <div id="traslado_accidente">
+            <div id="traslado_accidente" class="display-row">
               <h4>Datos del Traslado</h4>
               {{ traslados_accidentes.as_div }}
             </div>
@@ -216,7 +216,7 @@
           <h4>Evaluacion de Riesgo</h4>
           <div class="form-style">
             {{ evaluacion_riesgo_form.as_div }}
-            <div id="form_persona_presente" class="disp-none">
+            <div id="form_persona_presente" class="disp-none display-row">
               <h4>Persona Presente</h4>
               {{ persona_presente_eval_form.as_div }}
             </div>
