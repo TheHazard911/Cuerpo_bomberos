@@ -1,6 +1,28 @@
 // < !--Script para cambiar el menu desplegable de tipo de procedimiento segun la division-- >
 // Define las opciones por categoría
 
+var inputExterno = document.getElementById("id_form2-solicitante_externo");
+
+// Luego selecciona el div que es el padre del input
+var divContainer = inputExterno.parentElement;
+
+// Ocultar el div
+divContainer.style.display = "none";
+inputExterno.removeAttribute("required")
+
+document
+  .getElementById("id_form2-solicitante")
+  .addEventListener("change", function () {
+
+    if (this.value == "0") {  // Ajusta el valor de "1" según tu lógica
+      divContainer.style.display = "flex";
+      inputExterno.setAttribute("required", "required")
+    } else {
+      divContainer.style.display = "none";   // Ocultar solicitante_externo
+      inputExterno.removeAttribute("required")
+    }
+  });
+
 const opcionesPorCategoria = {
   "": [{ value: "-", text: "Elige Una Division" }],
   1: [
@@ -363,7 +385,7 @@ document
                     document.getElementById(
                       "vehiculo_accidente"
                     ).style.display = "flex";
-                    
+
                     document
                       .getElementById("vehiculo_accidente")
                       .querySelectorAll("select, input")
@@ -488,7 +510,7 @@ document
                         document.getElementById(
                           "traslado_accidente"
                         ).style.display = "none";
-                        }
+                      }
                     });
                 });
             }

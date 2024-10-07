@@ -142,6 +142,7 @@ class Tipo_Incendio(models.Model):
 class Procedimientos(models.Model):
     id_division  = models.ForeignKey(Divisiones, on_delete=models.CASCADE, default=0)
     id_solicitante = models.ForeignKey(Personal, on_delete=models.CASCADE, related_name="personal1")
+    solicitante_externo = models.CharField(max_length=20, default="Interno")
     unidad = models.ForeignKey(Unidades, on_delete=models.CASCADE)
     id_jefe_comision = models.ForeignKey(Personal, on_delete=models.CASCADE, related_name="personal2")
     efectivos_enviados = models.CharField(max_length=40)

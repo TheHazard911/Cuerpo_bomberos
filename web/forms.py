@@ -3,7 +3,7 @@ from.models import *
 
 def Asignar_ops_Personal():
     personal = Personal.objects.all()
-    op = [("", "Seleccione Una Opcion")]
+    op = [("", "Seleccione Una Opcion"),("0", "Solicitante externo")]
     for persona in personal:
         op.append((str(persona.id), f"{persona.jerarquia} {persona.nombres} {persona.apellidos}"))
     return op
@@ -151,6 +151,7 @@ class SelectorDivision(forms.Form):
 class SeleccionarInfo(forms.Form):
     solicitante = forms.ChoiceField(choices=Asignar_ops_Personal(), required=True,
         widget=forms.Select(attrs={'class': 'disable-first-option'}))
+    solicitante_externo = forms.CharField()
     unidad = forms.ChoiceField(choices=Asignar_opc_unidades(), required=True,
         widget=forms.Select(attrs={'class': 'disable-first-option'}))
     efectivos_enviados = forms.CharField()
