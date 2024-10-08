@@ -176,7 +176,11 @@ document
       "otro_vehiculo_accidente",
       "otro_vehiculo_accidente2",
       "lesionado_accidente",
+      "lesionado_accidente2",
+      "lesionado_accidente3",
       "traslado_accidente",
+      "traslado_accidente2",
+      "traslado_accidente3",
       "evaluacion_riesgo",
       "mitigacion_riesgo",
       "puesto_avanzada",
@@ -367,7 +371,27 @@ document
               );
               requiredExceptions(
                 document
+                  .getElementById("lesionado_accidente2")
+                  .querySelectorAll("select, input")
+              );
+              requiredExceptions(
+                document
+                  .getElementById("lesionado_accidente3")
+                  .querySelectorAll("select, input")
+              );
+              requiredExceptions(
+                document
                   .getElementById("traslado_accidente")
+                  .querySelectorAll("select, input")
+              );
+              requiredExceptions(
+                document
+                  .getElementById("traslado_accidente2")
+                  .querySelectorAll("select, input")
+              );
+              requiredExceptions(
+                document
+                  .getElementById("traslado_accidente3")
                   .querySelectorAll("select, input")
               );
               requiredExceptions(
@@ -392,6 +416,8 @@ document
                       .forEach((ele) => {
                         ele.setAttribute("required", true);
                       });
+
+                    requiredExceptions(document.getElementById("accidentes_transito").querySelectorAll("input[type='checkbox']"));
                   } else {
                     document.getElementById("vehiculo_accidente").style.display = "none"
                     document
@@ -417,6 +443,7 @@ document
                         document.getElementById(
                           "otro_vehiculo_accidente"
                         ).style.display = "flex";
+                        requiredExceptions(document.getElementById("accidentes_transito").querySelectorAll("input[type='checkbox']"));
                       } else {
                         document
                           .getElementById("otro_vehiculo_accidente")
@@ -444,6 +471,7 @@ document
                         document.getElementById(
                           "otro_vehiculo_accidente2"
                         ).style.display = "flex";
+                        requiredExceptions(document.getElementById("accidentes_transito").querySelectorAll("input[type='checkbox']"));
                       } else {
                         document
                           .getElementById("otro_vehiculo_accidente2")
@@ -473,6 +501,130 @@ document
                     document.getElementById(
                       "lesionado_accidente"
                     ).style.display = "flex";
+
+                    requiredExceptions(document.getElementById("accidentes_transito").querySelectorAll("input[type='checkbox']"));
+
+                    document
+                      .getElementById(
+                        "id_detalles_lesionados_accidentes-otro_lesionado"
+                      )
+                      .addEventListener("change", function () {
+                        if (this.checked) {
+                          document
+                            .getElementById("lesionado_accidente2")
+                            .querySelectorAll("select, input")
+                            .forEach((ele) => {
+                              ele.setAttribute("required", true);
+                            });
+                          document.getElementById(
+                            "lesionado_accidente2"
+                          ).style.display = "flex";
+
+                          requiredExceptions(document.getElementById("accidentes_transito").querySelectorAll("input[type='checkbox']"));
+
+                          document
+                            .getElementById(
+                              "id_detalles_lesionados_accidentes2-otro_lesionado"
+                            )
+                            .addEventListener("change", function () {
+                              if (this.checked) {
+                                document
+                                  .getElementById("lesionado_accidente3")
+                                  .querySelectorAll("select, input")
+                                  .forEach((ele) => {
+                                    ele.setAttribute("required", true);
+                                  });
+                                document.getElementById(
+                                  "lesionado_accidente3"
+                                ).style.display = "flex";
+                                requiredExceptions(document.getElementById("accidentes_transito").querySelectorAll("input[type='checkbox']"));
+                              } else {
+                                document
+                                  .getElementById("lesionado_accidente3")
+                                  .querySelectorAll("select, input")
+                                  .forEach((ele) => {
+                                    ele.removeAttribute("required");
+                                  });
+                                document.getElementById(
+                                  "lesionado_accidente3"
+                                ).style.display = "none";
+                              }
+                            })
+
+                          document
+                            .getElementById(
+                              "id_detalles_lesionados_accidentes3-trasladado"
+                            )
+                            .addEventListener("change", function () {
+                              if (this.checked) {
+                                document
+                                  .getElementById("traslado_accidente3")
+                                  .querySelectorAll("select, input")
+                                  .forEach((ele) => {
+                                    ele.setAttribute("required", true);
+                                  });
+                                document.getElementById(
+                                  "traslado_accidente3"
+                                ).style.display = "flex";
+                                requiredExceptions(document.getElementById("accidentes_transito").querySelectorAll("input[type='checkbox']"));
+                              } else {
+                                document
+                                  .getElementById("traslado_accidente3")
+                                  .querySelectorAll("select, input")
+                                  .forEach((ele) => {
+                                    ele.removeAttribute("required");
+                                  });
+                                document.getElementById(
+                                  "traslado_accidente3"
+                                ).style.display = "none";
+                              }
+                            });
+
+
+                        } else {
+                          document
+                            .getElementById("lesionado_accidente2")
+                            .querySelectorAll("select, input")
+                            .forEach((ele) => {
+                              ele.removeAttribute("required");
+                            });
+                          document.getElementById(
+                            "lesionado_accidente2"
+                          ).style.display = "none";
+                        }
+                      })
+
+                    document
+                      .getElementById(
+                        "id_detalles_lesionados_accidentes2-trasladado"
+                      )
+                      .addEventListener("change", function () {
+                        if (this.checked) {
+                          document
+                            .getElementById("traslado_accidente2")
+                            .querySelectorAll("select, input")
+                            .forEach((ele) => {
+                              ele.setAttribute("required", true);
+                            });
+                          requiredExceptions(document.getElementById("accidentes_transito").querySelectorAll("input[type='checkbox']"));
+                          document.getElementById(
+                            "traslado_accidente2"
+                          ).style.display = "flex";
+                        } else {
+                          document
+                            .getElementById("traslado_accidente2")
+                            .querySelectorAll("select, input")
+                            .forEach((ele) => {
+                              ele.removeAttribute("required");
+                            });
+                          document.getElementById(
+                            "traslado_accidente2"
+                          ).style.display = "none";
+                        }
+                      });
+
+
+
                   } else {
                     document
                       .getElementById("lesionado_accidente")
@@ -500,6 +652,7 @@ document
                         document.getElementById(
                           "traslado_accidente"
                         ).style.display = "flex";
+                        requiredExceptions(document.getElementById("accidentes_transito").querySelectorAll("input[type='checkbox']"));
                       } else {
                         document
                           .getElementById("traslado_accidente")
