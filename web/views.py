@@ -271,18 +271,16 @@ def View_Procedimiento(request):
             tipo_procedimiento_instance = Tipos_Procedimientos.objects.get(id=tipo_procedimiento)
             unidad_instance = Unidades.objects.get(id=unidad)
             
-            
-            if solicitante:
-                solicitante_instance = Personal.objects.get(id=solicitante)
-                
+           
             
             if solicitante_externo=="":
                 solicitante_externo = "Solicitante Interno"
             
+            
+            print(solicitante_externo)
             # # Crear una nueva instancia del modelo Procedimientos
             nuevo_procedimiento = Procedimientos(
                id_division=division_instance,
-               id_solicitante=solicitante_instance,
                solicitante_externo=solicitante_externo,
                unidad=unidad_instance,
                efectivos_enviados=efectivos_enviados,
@@ -293,6 +291,13 @@ def View_Procedimiento(request):
                hora=hora,
                id_tipo_procedimiento=tipo_procedimiento_instance
             )
+            
+            if solicitante == "0":
+                solicitante_instance = Personal.objects.get(id=solicitante)
+                nuevo_procedimiento.id_solicitante = solicitante_instance
+            else:
+                solicitante_instance = Personal.objects.get(id=solicitante)
+                nuevo_procedimiento.id_solicitante = solicitante_instance
             
             # # Solo asignar parroquia si está presente
             if parroquia:
@@ -1376,6 +1381,7 @@ def obtener_procedimiento(request, id):
         'id': procedimiento.id,
         'division': procedimiento.id_division.division,
         'solicitante': f"{procedimiento.id_solicitante.jerarquia} {procedimiento.id_solicitante.nombres} {procedimiento.id_solicitante.apellidos}",
+        'solicitante_externo': procedimiento.solicitante_externo,
         'jefe_comision': f"{procedimiento.id_jefe_comision.jerarquia} {procedimiento.id_jefe_comision.nombres} {procedimiento.id_jefe_comision.apellidos}",
         'unidad': procedimiento.unidad.nombre_unidad,
         'efectivos': procedimiento.efectivos_enviados,
