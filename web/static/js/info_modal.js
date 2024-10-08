@@ -15,9 +15,9 @@ document.querySelectorAll(".button-info").forEach((button) => {
       })
       .then((data) => {
         let solicitante
-        if(data.solicitante_externo == ""){
+        if (data.solicitante_externo == "") {
           solicitante = data.solicitante
-        } else{
+        } else {
           solicitante = data.solicitante_externo
         }
         const baseInfo = `
@@ -159,30 +159,44 @@ document.querySelectorAll(".button-info").forEach((button) => {
               } else {
               }
 
-              if (data.lesionados) {
-                detalles += `
-                    <section class="detalles_procedimientos">
-                      <h4>Lesionado</h4>
-                      <p><b>Nombre: </b> ${data.nombre}</p>
-                      <p><b>Apellido: </b> ${data.apellidos}</p>
-                      <p><b>Cedula: </b> ${data.cedula}</p>
-                      <p><b>Edad: </b> ${data.edad}</p>
-                      <p><b>Sexo: </b> ${data.sexo}</p>
-                      <p><b>IDX: </b> ${data.idx}</p>
-                      <p><b>Descripcion: </b> ${data.descripcion}</p>
-                    </section>`;
-              }
-              if (data.traslado) {
-                detalles += `
-                    <section class="detalles_procedimientos">
+              // Verificamos si hay lesionados
+              if (data.lesionados && data.lesionados.length > 0) {
+                data.lesionados.forEach((lesionado, index) => {
+                  // Creamos una sección para cada lesionado
+                  detalles += `
+                  <section class="detalles_lesionados">
+                  <div>
+                  <h4>Lesionado ${index + 1}</h4>
+                  <p><b>Nombre:</b> ${lesionado.nombre}</p>
+                  <p><b>Apellidos:</b> ${lesionado.apellidos}</p>
+                  <p><b>Cédula:</b> ${lesionado.cedula}</p>
+                  <p><b>Edad:</b> ${lesionado.edad}</p>
+                  <p><b>Sexo:</b> ${lesionado.sexo}</p>
+                  <p><b>Descripción:</b> ${lesionado.descripcion}</p>
+                  </div>
+                  `;
+                  // Verificamos si el lesionado tiene traslados asociados
+                  if (lesionado.traslados && lesionado.traslados.length > 0) {
+                    lesionado.traslados.forEach((traslado, trasladoIndex) => {
+                      // Añadimos una sub-sección para cada traslado
+                      detalles += `
+                      <div>
                       <h4>Traslado</h4>
-                      <p><b>Hospital: </b> ${data.hospita}</p>
-                      <p><b>Medico: </b> ${data.medico}</p>
-                      <p><b>MPPS CMT: </b> ${data.mpps_cmt}</p>
-                    </section>`;
+                      <p><b>Hospital:</b> ${traslado.hospital}</p>
+                      <p><b>Médico receptor:</b> ${traslado.medico}</p>
+                      <p><b>MPPS CMT:</b> ${traslado.mpps_cmt}</p>
+                      </div>
+                        </section>`;
+                    });
+                  } else {
+                    detalles += `</section>`;
+                  }
+                });
+              } else {
               }
             }
             break;
+
           case "Servicios Especiales":
             detalles = `
                 <section class="detalles_procedimiento">
@@ -194,26 +208,23 @@ document.querySelectorAll(".button-info").forEach((button) => {
             detalles = `
                 <section class="detalles_procedimiento">
                   <h4>Detalles</h4>
-                  <p><b>Tipo de Procedimiento: </b> ${
-                    data.tipo_procedimiento
-                  }</p>
+                  <p><b>Tipo de Procedimiento: </b> ${data.tipo_procedimiento
+              }</p>
                   <p><b>Tipo de Rescate: </b> ${data.tipo_rescate}</p>
                   <p><b>Material Utilizado: </b> ${data.material_utilizado}</p>
                   <p><b>Status: </b> ${data.status}</p>
                 </section>
-                ${
-                  data.tipo_rescate === "Animal"
-                    ? `
+                ${data.tipo_rescate === "Animal"
+                ? `
                   <section class="detalles_rescate_animal">
                     <h4>Animal</h4>
                     <p><b>Especie: </b> ${data.especie}</p>
                     <p><b>Descripcion: </b> ${data.descripcion}</p>
                   </section>`
-                    : ""
-                }
-                ${
-                  data.tipo_rescate === "Persona"
-                    ? `
+                : ""
+              }
+                ${data.tipo_rescate === "Persona"
+                ? `
                   <section class="detalles_rescate_persona">
                     <h4>Persona</h4>
                     <p><b>Nombre: </b> ${data.nombres}</p>
@@ -223,8 +234,8 @@ document.querySelectorAll(".button-info").forEach((button) => {
                     <p><b>Sexo: </b> ${data.sexo}</p>
                     <p><b>Descripcion: </b> ${data.descripcion}</p>
                   </section>`
-                    : ""
-                }`;
+                : ""
+              }`;
             break;
           case "Incendios":
             detalles = `
@@ -232,9 +243,8 @@ document.querySelectorAll(".button-info").forEach((button) => {
                   <h4>Detalles</h4>
                   ${generateCommonDetails(data, "tipo_incendio")}
                 </section>
-                ${
-                  data.persona
-                    ? `
+                ${data.persona
+                ? `
                   <section class="detalles_persona_sitio">
                     <h4>Persona en el Sitio</h4>
                     <p><b>Nombre: </b> ${data.nombre}</p>
@@ -242,11 +252,10 @@ document.querySelectorAll(".button-info").forEach((button) => {
                     <p><b>Cedula: </b> ${data.cedula}</p>
                     <p><b>Edad: </b> ${data.edad}</p>
                   </section>`
-                    : ""
-                }
-                ${
-                  data.vehiculo
-                    ? `
+                : ""
+              }
+                ${data.vehiculo
+                ? `
                   <section class="detalles_vehiculo">
                     <h4>Vehiculo</h4>
                     <p><b>Modelo: </b> ${data.modelo}</p>
@@ -255,8 +264,8 @@ document.querySelectorAll(".button-info").forEach((button) => {
                     <p><b>Año: </b> ${data.año}</p>
                     <p><b>Placas: </b> ${data.placas}</p>
                   </section>`
-                    : ""
-                }`;
+                : ""
+              }`;
             break;
           case "Fallecidos":
             detalles = `
@@ -291,26 +300,23 @@ document.querySelectorAll(".button-info").forEach((button) => {
             detalles = `
                 <section class="detalles_procedimiento">
                   <h4>Detalles</h4>
-                  <p><b>Tipo de Procedimiento: </b> ${
-                    data.tipo_procedimiento
-                  }</p>
+                  <p><b>Tipo de Procedimiento: </b> ${data.tipo_procedimiento
+              }</p>
                   <p><b>Tipo de Rescate: </b> ${data.tipo_rescate}</p>
                   <p><b>Material Utilizado: </b> ${data.material_utilizado}</p>
                   <p><b>Status: </b> ${data.status}</p>
                 </section>
-                ${
-                  data.tipo_rescate === "Animal"
-                    ? `
+                ${data.tipo_rescate === "Animal"
+                ? `
                   <section class="detalles_rescate_animal">
                     <h4>Animal</h4>
                     <p><b>Especie: </b> ${data.especie}</p>
                     <p><b>Descripcion: </b> ${data.descripcion}</p>
                   </section>`
-                    : ""
-                }
-                ${
-                  data.tipo_rescate === "Persona"
-                    ? `
+                : ""
+              }
+                ${data.tipo_rescate === "Persona"
+                ? `
                   <section class="detalles_rescate_persona">
                     <h4>Persona</h4>
                     <p><b>Nombre: </b> ${data.nombres}</p>
@@ -320,8 +326,8 @@ document.querySelectorAll(".button-info").forEach((button) => {
                     <p><b>Sexo: </b> ${data.sexo}</p>
                     <p><b>Descripcion: </b> ${data.descripcion}</p>
                   </section>`
-                    : ""
-                }`;
+                : ""
+              }`;
             break;
           case "Puesto de Avanzada":
             detalles = `
@@ -383,9 +389,8 @@ document.querySelectorAll(".button-info").forEach((button) => {
                   <p><b>Tipo de Cilindro: </b> ${data.tipo_cilindro}</p>
                   <p><b>Capacidad: </b> ${data.capacidad} Kg</p>
                   <p><b>serial: </b> ${data.serial}</p>
-                  <p><b>Numero de Constancia de Retencion: </b>#${
-                    data.nro_constancia
-                  }</p>
+                  <p><b>Numero de Constancia de Retencion: </b>#${data.nro_constancia
+              }</p>
                 </section>`;
             break;
           case "Traslados":
@@ -442,24 +447,20 @@ function generateCommonDetails(
 ) {
   return `
       <p><b>Tipo de Procedimiento: </b> ${data.tipo_procedimiento}</p>
-      ${
-        additionalField
-          ? `<p><b>${additionalField
-              .replace(/_/g, " ")
-              .replace(/\b\w/g, (c) => c.toUpperCase())}: </b> ${
-              data[additionalField]
-            }</p>`
-          : ""
-      }
-      ${
-        additionalField2
-          ? `<p><b>${additionalField2
-              .replace(/_/g, " ")
-              .replace(/\b\w/g, (c) => c.toUpperCase())}: </b> ${
-              data[additionalField2]
-            }</p>`
-          : ""
-      }
+      ${additionalField
+      ? `<p><b>${additionalField
+        .replace(/_/g, " ")
+        .replace(/\b\w/g, (c) => c.toUpperCase())}: </b> ${data[additionalField]
+      }</p>`
+      : ""
+    }
+      ${additionalField2
+      ? `<p><b>${additionalField2
+        .replace(/_/g, " ")
+        .replace(/\b\w/g, (c) => c.toUpperCase())}: </b> ${data[additionalField2]
+      }</p>`
+      : ""
+    }
       <p><b>Descripcion: </b> ${data.descripcion}</p>
       <p><b>Material Utilizado: </b> ${data.material_utilizado}</p>
       <p><b>Status: </b> ${data.status}</p>

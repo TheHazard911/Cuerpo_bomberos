@@ -11,7 +11,7 @@ class Personal(models.Model):
 
   def __str__(self):
     return self.nombres + " -- " + self.apellidos + " -- " + self.jerarquia + " -- " + self.cargo
-
+      
 # Tabla de usuarios que pueden entrar a la pagina
 class Usuarios(models.Model):
     user = models.CharField(max_length=20)
