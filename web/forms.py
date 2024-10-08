@@ -1,6 +1,7 @@
 from django import forms
 from.models import *
 
+
 def Asignar_ops_Personal():
     personal = Personal.objects.all()
     op = [("", "Seleccione Una Opcion")]
@@ -352,8 +353,40 @@ class Formulario_Detalles_Lesionados(forms.Form):
     idx = forms.CharField(max_length=40, required=False)
     descripcion = forms.CharField(max_length=40, required=False)
     trasladado = forms.BooleanField(required=False)
+    otro_lesionado = forms.BooleanField(required=False)
+    
+class Formulario_Detalles_Lesionados2(forms.Form):
+    nombre = forms.CharField(max_length=40, required=False)
+    apellido = forms.CharField(max_length=40, required=False)
+    cedula = forms.CharField(max_length=10, required=False)
+    edad = forms.CharField(max_length=3, required=False)
+    sexo = forms.ChoiceField(choices=[("", "Seleccione Una Opcion"), ("Masculino", "Masculino"), ("Femenino", "Femenino")], widget=forms.Select(attrs={"class": "disable-first-option"}), required=False)
+    idx = forms.CharField(max_length=40, required=False)
+    descripcion = forms.CharField(max_length=40, required=False)
+    trasladado = forms.BooleanField(required=False)
+    otro_lesionado = forms.BooleanField(required=False)
+    
+class Formulario_Detalles_Lesionados3(forms.Form):
+    nombre = forms.CharField(max_length=40, required=False)
+    apellido = forms.CharField(max_length=40, required=False)
+    cedula = forms.CharField(max_length=10, required=False)
+    edad = forms.CharField(max_length=3, required=False)
+    sexo = forms.ChoiceField(choices=[("", "Seleccione Una Opcion"), ("Masculino", "Masculino"), ("Femenino", "Femenino")], widget=forms.Select(attrs={"class": "disable-first-option"}), required=False)
+    idx = forms.CharField(max_length=40, required=False)
+    descripcion = forms.CharField(max_length=40, required=False)
+    trasladado = forms.BooleanField(required=False)
 
 class Formulario_Traslado_Accidente(forms.Form):
+    hospital_trasladado = forms.CharField(max_length=50, required=False)
+    medico_receptor = forms.CharField(max_length=50, required=False)
+    mpps_cmt = forms.CharField(max_length=20, required=False)
+    
+class Formulario_Traslado_Accidente2(forms.Form):
+    hospital_trasladado = forms.CharField(max_length=50, required=False)
+    medico_receptor = forms.CharField(max_length=50, required=False)
+    mpps_cmt = forms.CharField(max_length=20, required=False)
+    
+class Formulario_Traslado_Accidente3(forms.Form):
     hospital_trasladado = forms.CharField(max_length=50, required=False)
     medico_receptor = forms.CharField(max_length=50, required=False)
     mpps_cmt = forms.CharField(max_length=20, required=False)

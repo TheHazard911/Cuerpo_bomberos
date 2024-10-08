@@ -1329,3 +1329,15 @@ summary > * {
     width: 100% !important;
   }
 }
+
+.detalles_lesionados {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start !important;
+  margin: .5rem;
+  width: auto !important;
+  div{
+    width: 19.4rem;
+    margin: .5rem;
+  }
+}

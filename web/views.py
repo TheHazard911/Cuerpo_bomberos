@@ -54,8 +54,19 @@ def obtener_meses(request):
     }
     return JsonResponse(data)
 
+def login_required(view_func):
+    def _wrapped_view(request, *args, **kwargs):
+        if 'user' not in request.session:
+            return redirect('/')  # Redirigir a la página de inicio de sesión
+        return view_func(request, *args, **kwargs)
+    return _wrapped_view
+
+def logout(request):
+    request.session.flush()  # Eliminar todos los datos de la sesión
+    return redirect('/')
+
 # Vista de la Ventana Inicial (Login)
-def Home(request):
+def Home(request): 
     if request.method == "GET":
         return render(request, "index.html")
     else:
@@ -76,6 +87,7 @@ def Home(request):
             messages.error(request, 'Usuario o contraseña incorrectos')
             return render(request, 'index.html', {'error': True})
 
+@login_required
 def Dashboard(request):
     user = request.session.get('user')
     
@@ -151,6 +163,8 @@ def Dashboard(request):
         "psicologia_hoy": psicologia_hoy,
         "capacitacion_hoy": capacitacion_hoy,
     })
+
+@login_required
 # Vista de archivo para hacer pruebas de backend
 def Prueba(request):
     
@@ -217,7 +231,11 @@ def View_Procedimiento(request):
         
         formulario_accidentes_transito = Formulario_Accidentes_Transito(request.POST, prefix='formulario_accidentes_transito')
         detalles_lesionados_accidentes = Formulario_Detalles_Lesionados(request.POST, prefix='detalles_lesionados_accidentes')
+        detalles_lesionados_accidentes2 = Formulario_Detalles_Lesionados2(request.POST, prefix='detalles_lesionados_accidentes2')
+        detalles_lesionados_accidentes3 = Formulario_Detalles_Lesionados3(request.POST, prefix='detalles_lesionados_accidentes3')
         traslados_accidentes = Formulario_Traslado_Accidente(request.POST, prefix='traslados_accidentes')
+        traslados_accidentes2 = Formulario_Traslado_Accidente2(request.POST, prefix='traslados_accidentes2')
+        traslados_accidentes3 = Formulario_Traslado_Accidente3(request.POST, prefix='traslados_accidentes3')
         detalles_vehiculo_accidentes = Formulario_Detalles_Vehiculos(request.POST, prefix='detalles_vehiculos_accidentes')
         detalles_vehiculo_accidentes2 = Formulario_Detalles_Vehiculos2(request.POST, prefix='detalles_vehiculos_accidentes2')
         detalles_vehiculo_accidentes3 = Formulario_Detalles_Vehiculos3(request.POST, prefix='detalles_vehiculos_accidentes3')
@@ -531,6 +549,7 @@ def View_Procedimiento(request):
                         idx = detalles_lesionados_accidentes.cleaned_data["idx"]
                         descripcion = detalles_lesionados_accidentes.cleaned_data["descripcion"]
                         trasladado = detalles_lesionados_accidentes.cleaned_data["trasladado"]
+                        otro_lesionado = detalles_lesionados_accidentes.cleaned_data["otro_lesionado"]
 
                         nuevo_lesionado = Lesionados(
                             id_accidente = nuevo_accidente_transito,
@@ -556,7 +575,78 @@ def View_Procedimiento(request):
                                 mpps_cmt = mpps_cmt
                             )
                             nuevo_traslado_accidente.save()
-                
+                            
+                        if otro_lesionado == True and detalles_lesionados_accidentes2.is_valid():
+                            nombre = detalles_lesionados_accidentes2.cleaned_data["nombre"]
+                            apellido = detalles_lesionados_accidentes2.cleaned_data["apellido"]
+                            cedula = detalles_lesionados_accidentes2.cleaned_data["cedula"]
+                            edad = detalles_lesionados_accidentes2.cleaned_data["edad"]
+                            sexo = detalles_lesionados_accidentes2.cleaned_data["sexo"]
+                            idx = detalles_lesionados_accidentes2.cleaned_data["idx"]
+                            descripcion = detalles_lesionados_accidentes2.cleaned_data["descripcion"]
+                            trasladado = detalles_lesionados_accidentes2.cleaned_data["trasladado"]
+                            otro_lesionado = detalles_lesionados_accidentes2.cleaned_data["otro_lesionado"]
+
+                            nuevo_lesionado = Lesionados(
+                                id_accidente = nuevo_accidente_transito,
+                                nombres = nombre,
+                                apellidos = apellido,
+                                cedula = cedula,
+                                edad = edad,
+                                sexo = sexo,
+                                idx = idx,
+                                descripcion = descripcion,
+                            )
+                            nuevo_lesionado.save()
+                            
+                            if trasladado == True and traslados_accidentes2.is_valid():
+                                hospital = traslados_accidentes2.cleaned_data["hospital_trasladado"]
+                                medico = traslados_accidentes2.cleaned_data["medico_receptor"]
+                                mpps_cmt = traslados_accidentes2.cleaned_data["mpps_cmt"]
+                                
+                                nuevo_traslado_accidente = Traslado_Accidente(
+                                    id_lesionado = nuevo_lesionado,
+                                    hospital_trasladado = hospital,
+                                    medico_receptor = medico,
+                                    mpps_cmt = mpps_cmt
+                                )
+                                nuevo_traslado_accidente.save()
+                                
+                            if otro_lesionado == True and detalles_lesionados_accidentes3.is_valid():
+                                nombre = detalles_lesionados_accidentes3.cleaned_data["nombre"]
+                                apellido = detalles_lesionados_accidentes3.cleaned_data["apellido"]
+                                cedula = detalles_lesionados_accidentes3.cleaned_data["cedula"]
+                                edad = detalles_lesionados_accidentes3.cleaned_data["edad"]
+                                sexo = detalles_lesionados_accidentes3.cleaned_data["sexo"]
+                                idx = detalles_lesionados_accidentes3.cleaned_data["idx"]
+                                descripcion = detalles_lesionados_accidentes3.cleaned_data["descripcion"]
+                                trasladado = detalles_lesionados_accidentes3.cleaned_data["trasladado"]
+
+                                nuevo_lesionado = Lesionados(
+                                    id_accidente = nuevo_accidente_transito,
+                                    nombres = nombre,
+                                    apellidos = apellido,
+                                    cedula = cedula,
+                                    edad = edad,
+                                    sexo = sexo,
+                                    idx = idx,
+                                    descripcion = descripcion,
+                                )
+                                nuevo_lesionado.save()
+                                
+                                if trasladado == True and traslados_accidentes3.is_valid():
+                                    hospital = traslados_accidentes3.cleaned_data["hospital_trasladado"]
+                                    medico = traslados_accidentes3.cleaned_data["medico_receptor"]
+                                    mpps_cmt = traslados_accidentes3.cleaned_data["mpps_cmt"]
+                                    
+                                    nuevo_traslado_accidente = Traslado_Accidente(
+                                        id_lesionado = nuevo_lesionado,
+                                        hospital_trasladado = hospital,
+                                        medico_receptor = medico,
+                                        mpps_cmt = mpps_cmt
+                                    )
+                                    nuevo_traslado_accidente.save()
+                            
             if tipo_procedimiento == "9" and serv_especial.is_valid():          
                 descripcion = serv_especial.cleaned_data["descripcion"]
                 material_utilizado = serv_especial.cleaned_data["material_utilizado"]
@@ -895,7 +985,11 @@ def View_Procedimiento(request):
         formulario_accidentes_transito = Formulario_Accidentes_Transito(prefix='formulario_accidentes_transito')
         detalles_vehiculo_accidentes = Formulario_Detalles_Vehiculos(prefix='detalles_vehiculos_accidentes')
         detalles_lesionados_accidentes = Formulario_Detalles_Lesionados(prefix='detalles_lesionados_accidentes')
+        detalles_lesionados_accidentes2 = Formulario_Detalles_Lesionados2(prefix='detalles_lesionados_accidentes2')
+        detalles_lesionados_accidentes3 = Formulario_Detalles_Lesionados3(prefix='detalles_lesionados_accidentes3')
         traslados_accidentes = Formulario_Traslado_Accidente(prefix='traslados_accidentes')
+        traslados_accidentes2 = Formulario_Traslado_Accidente2(prefix='traslados_accidentes2')
+        traslados_accidentes3 = Formulario_Traslado_Accidente3(prefix='traslados_accidentes3')
         detalles_vehiculo_accidentes2 = Formulario_Detalles_Vehiculos2(prefix='detalles_vehiculos_accidentes2')
         detalles_vehiculo_accidentes3 = Formulario_Detalles_Vehiculos3(prefix='detalles_vehiculos_accidentes3')
         
@@ -944,7 +1038,11 @@ def View_Procedimiento(request):
         "detalles_vehiculo_accidentes2":  detalles_vehiculo_accidentes2,
         "detalles_vehiculo_accidentes3":  detalles_vehiculo_accidentes3,
         "detalles_lesionados_accidentes": detalles_lesionados_accidentes,
+        "detalles_lesionados_accidentes2": detalles_lesionados_accidentes2,
+        "detalles_lesionados_accidentes3": detalles_lesionados_accidentes3,
         "traslados_accidentes": traslados_accidentes,
+        "traslados_accidentes2": traslados_accidentes2,
+        "traslados_accidentes3": traslados_accidentes3,
         "evaluacion_riesgo_form": evaluacion_riesgo_form,
         "mitigacion_riesgo_form": mitigacion_riesgo_form,
         "puesto_avanzada_form": puesto_avanzada_form,
@@ -1513,29 +1611,50 @@ def obtener_procedimiento(request, id):
             else:
                 data['vehiculos'] = []  # O puedes omitir esta línea si prefieres no agregar la clave
             
-            if Lesionados.objects.filter(id_accidente=accidente.id).exists():
-                lesionados = Lesionados.objects.get(id_accidente = accidente.id)
-                
-                data = dict(data, 
-                            lesionados = True,
-                            nombre = lesionados.nombres,
-                            apellidos = lesionados.apellidos,
-                            cedula = lesionados.cedula,
-                            edad = lesionados.edad,
-                            sexo = lesionados.sexo,
-                            idx = lesionados.idx,
-                            descripcion = lesionados.descripcion,
-                        )          
-                
-                if Traslado_Accidente.objects.filter(id_lesionado=lesionados.id).exists():
-                    traslados = Traslado_Accidente.objects.get(id_lesionado = lesionados.id)
-                    
-                    data = dict(data, 
-                                traslado = True,
-                                hospita = traslados.hospital_trasladado,
-                                medico = traslados.medico_receptor,
-                                mpps_cmt = traslados.mpps_cmt,
-                            )          
+            # Filtrar los lesionados asociados al accidente
+            lesionados = Lesionados.objects.filter(id_accidente=accidente.id)
+
+            # Si hay lesionados, recopilarlos en una lista
+            if lesionados:
+                data = dict(data,
+                    lesionado = True
+                )
+                lesionados_list = []
+                for lesionado in lesionados:
+                    lesionado_data = {
+                        'nombre': lesionado.nombres,
+                        'apellidos': lesionado.apellidos,
+                        'cedula': lesionado.cedula,
+                        'edad': lesionado.edad,
+                        'sexo': lesionado.sexo,
+                        'idx': lesionado.idx,
+                        'descripcion': lesionado.descripcion,
+                        # Añade aquí otros campos que necesites
+                    }
+
+                    # Filtrar traslados asociados a cada lesionado
+                    traslados = Traslado_Accidente.objects.filter(id_lesionado=lesionado.id)
+
+                    # Si hay traslados, añadirlos a los datos del lesionado
+                    if traslados:
+                        traslados_list = []
+                        for traslado in traslados:
+                            traslados_list.append({
+                                'hospital': traslado.hospital_trasladado,
+                                'medico': traslado.medico_receptor,
+                                'mpps_cmt': traslado.mpps_cmt,
+                            })
+                        lesionado_data['traslados'] = traslados_list
+                    else:
+                        lesionado_data['traslados'] = []
+
+                    # Añadir cada lesionado a la lista
+                    lesionados_list.append(lesionado_data)
+
+                data['lesionados'] = lesionados_list  # Agregar la lista de lesionados a 'data'
+            else:
+                data['lesionados'] = []  # Si no hay lesionados, agregar una lista vacía
+
             
     if str(procedimiento.id_tipo_procedimiento.id) == "9":
         detalle_procedimiento = get_object_or_404(Servicios_Especiales, id_procedimientos=id)
