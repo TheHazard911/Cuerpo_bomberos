@@ -14,6 +14,12 @@ document.querySelectorAll(".button-info").forEach((button) => {
         return response.json();
       })
       .then((data) => {
+        let solicitante
+        if(data.solicitante_externo == ""){
+          solicitante = data.solicitante
+        } else{
+          solicitante = data.solicitante_externo
+        }
         const baseInfo = `
             <article class="section-left">
               <section class="datos_division">
@@ -23,8 +29,7 @@ document.querySelectorAll(".button-info").forEach((button) => {
               </section>
               <section class="datos_operacion">
                 <h4>Operacion</h4>
-                <p><b>Solicitante: </b> ${data.solicitante}</p>
-                <p><b>Solicitante Externo: </b> ${data.solicitante_externo}</p>
+                <p><b>Solicitante: </b> ${solicitante}</p>
                 <p><b>Jefe de Comision: </b> ${data.jefe_comision}</p>
                 <p><b>Unidad Enviada: </b> ${data.unidad}</p>
                 <p><b>Efectivos Enviados: </b> ${data.efectivos}</p>
