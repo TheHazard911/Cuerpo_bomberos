@@ -541,7 +541,7 @@ summary > * {
   flex-wrap: wrap;
   img {
     margin: 1rem;
-    width: 5rem;
+    width: 4rem;
     height: auto;
     border-radius: 10px;
   }
@@ -549,7 +549,7 @@ summary > * {
 /* .checkbox-styles div:nth-child(5),
 .checkbox-styles div:nth-child(6),
 .checkbox-styles div:nth-child(10) { */
-  .checkbox-styles div *{
+.checkbox-styles div * {
   width: 20rem;
   display: flex;
   flex-direction: row;
@@ -798,6 +798,7 @@ summary > * {
   justify-content: space-between;
   padding: 0.5rem;
   padding-top: 0.8rem;
+  border: thin solid rgba(130, 130, 130, 0.507);
   color: #fff;
   font-weight: bold;
   text-align: center;
@@ -1057,7 +1058,7 @@ summary > * {
   display: flex;
   justify-content: center;
   width: 85%;
-  height: 60vh;
+  height: 80vh;
   background-color: #f0f0f06a;
   border: thin solid #969696db;
   border-radius: 15px;
@@ -1215,8 +1216,7 @@ summary > * {
   height: auto;
   background-color: #f0f0f06a;
   border: thin solid #969696db;
-  border-radius: 50px;
-  margin-bottom: 4rem;
+  border-radius: 30px;
   padding: 2rem;
   display: flex;
   align-items: center;
@@ -1254,16 +1254,17 @@ summary > * {
 } */
 
 .procediments-contain {
-  width: 90%;
+  width: 85%;
+  height: auto;
   margin: 0 auto;
   display: flex;
-  justify-content: space-evenly;
+  justify-content: center;
   flex-wrap: wrap;
   background-color: #f0f0f06a;
-  border: thin solid #969696db;
-  border-radius: 50px;
-  margin-bottom: 5rem;
-
+  border: thin solid #797979db;
+  border-radius: 30px;
+  margin-bottom: 2rem;
+  text-align: center;
   section:nth-child(1) {
     background-color: #73cffa;
   }
@@ -1280,7 +1281,7 @@ summary > * {
     background-color: #5e6dda;
   }
   section:nth-child(6) {
-    background-color: #1ead0b;
+    background-color: #10cc00;
   }
   section:nth-child(7) {
     background-color: #1164b7;
@@ -1314,10 +1315,10 @@ summary > * {
   display: none;
 }
 
-.non-visible{
+.non-visible {
   display: none;
 }
-.visible{
+.visible {
   display: block;
 }
 
@@ -1328,4 +1329,30 @@ summary > * {
   h4 {
     width: 100% !important;
   }
+}
+
+.detalles_lesionados {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start !important;
+  margin: 0.5rem;
+  width: auto !important;
+  div {
+    width: 19.4rem;
+    margin: 0.5rem;
+  }
+}
+.footer { 
+  width: 100%;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.text-reserved {
+  display: flex;
+  flex-direction: row;
+  padding: 0;
+  margin: 0;
 }

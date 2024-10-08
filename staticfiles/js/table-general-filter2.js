@@ -15,9 +15,9 @@
         const rows = document.querySelectorAll("#data-table tbody tr");
 
         rows.forEach((row) => {
-            const textCellTwo = row.querySelector(`td:nth-child(6)`);
-            const textCellThree = row.querySelector(`td:nth-child(11)`);
-            const dateCell = row.querySelector(`td:nth-child(9)`);
+            const textCellTwo = row.querySelector(`td:nth-child(7)`);
+            const textCellThree = row.querySelector(`td:nth-child(12)`);
+            const dateCell = row.querySelector(`td:nth-child(10)`);
             const cellDateValue = dateCell.textContent.trim();
             const cellMonthYear = cellDateValue ? getMonthYearFromDate(cellDateValue.split("-").reverse().join("-")) : null;
 

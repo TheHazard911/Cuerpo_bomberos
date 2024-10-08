@@ -61,8 +61,8 @@
       />
     </section>
     <section class="filter-search">
-      <label for="fechaFiltro"><b>Selecciona una fecha:</b></label>
-      <input id="fechaDesde" type="date" placeholder="Fecha" />
+      <!-- Input para seleccionar el mes -->
+      <input type="month" id="monthInput" />
     </section>
   </div>
   <!-- tabla -->
@@ -91,12 +91,12 @@
           <!-- prettier-ignore -->
           <th scope="row">{{ forloop.counter }}</th>
           {% if row.solicitante_externo == "" %}
-            <!-- prettier-ignore -->
-            <td>{{ row.id_solicitante.jerarquia }} {{ row.id_solicitante.nombres}} {{ row.id_solicitante.apellidos}}</td>
-            {% else %}
-            <!-- prettier-ignore -->
-            <td>{{ row.solicitante_externo }}</td>
-            {% endif %}
+          <!-- prettier-ignore -->
+          <td>{{ row.id_solicitante.jerarquia }} {{ row.id_solicitante.nombres}} {{ row.id_solicitante.apellidos}}</td>
+          {% else %}
+          <!-- prettier-ignore -->
+          <td>{{ row.solicitante_externo }}</td>
+          {% endif %}
           <!-- prettier-ignore -->
           <td>{{ row.id_jefe_comision.jerarquia }} {{ row.id_jefe_comision.nombres}} {{ row.id_jefe_comision.apellidos}}</td>
           <!-- prettier-ignore -->

@@ -1,5 +1,5 @@
-{% extends "layouts/header-main.html" %} {% block content %}
-{% load static %}  <!-- Carga el tag static al inicio del archivo -->
+{% extends "layouts/header-main.html" %} {% block content %} {% load static %}
+<!-- Carga el tag static al inicio del archivo -->
 <div class="general-dashboard">
   <div class="div-user-name">
     <section class="user-name">
@@ -36,7 +36,7 @@
   </div>
   <div class="div-stadist-parroquies">
     <section class="title-stadist-parroquies">
-      <h4>Incidentes Por Parroquia</h4>
+      <h4>Incidentes diarios</h4>
     </section>
     <section class="stadist-parroquies">
       <div class="card-parroquies card-yellow">
@@ -65,13 +65,54 @@
       </div>
     </section>
   </div>
-  <h3 class="title-stadist-parroquies">Grafico de operaciones Anuales</h3>
+  <h3 class="title-stadist-parroquies">Operaciones Anuales</h3>
   <div class="graphic-statistics">
     <canvas id="myChart"></canvas>
   </div>
 </div>
+<!-- resumen de procedimientos por division -->
+<h3 class="title-stadist-parroquies">Procedimientos de Hoy</h3>
+<div class="procediments-contain">
+  <section class="procediments">
+    <p>Operaciones</p>
+    <p id="">{{ op_hoy }}</p>
+  </section>
+  <section class="procediments">
+    <p>PreHospitalaria</p>
+    <p id="">{{ prehospitalaria_hoy }}</p>
+  </section>
+  <section class="procediments">
+    <p>Grumae</p>
+    <p id="">{{ grumae_hoy }}</p>
+  </section>
+  <section class="procediments">
+    <p>Rescate</p>
+    <p id="">{{ rescate }}</p>
+  </section>
+  <section class="procediments">
+    <p>Prevencion</p>
+    <p id="">{{ prevencion_hoy }}</p>
+  </section>
+  <section class="procediments">
+    <p>Servicios Medicos</p>
+    <p id="">{{ servicios_medicos_hoy }}</p>
+  </section>
+  <section class="procediments">
+    <p>Enfermeria</p>
+    <p id="">{{ enfermeria_hoy }}</p>
+  </section>
+  <section class="procediments">
+    <p>Psicologia</p>
+    <p id="">{{ psicologia_hoy }}</p>
+  </section>
+  <section class="procediments">
+    <p>Capacitacion</p>
+    <p id="">{{ capacitacion_hoy }}</p>
+  </section>
+</div>
+
 <!-- Resumen de procedimientos  -->
-<h3 class="title-stadist-parroquies">Resumen de Procedimientos</h3>
+<h4 class="title-stadist-parroquies">Resumen de Procedimientos</h4>
 <div class="div-analytics">
   <section class="progress-bar">
     <p>Operaciones</p>
@@ -165,47 +206,6 @@
   </section>
 </div>
 <!-- fin resumen de procedimientos -->
-<!-- resumen de procedimientos por division -->
-<h3 class="title-stadist-parroquies">Resumen de Divisiones (Hoy)</h3>
-<div class="procediments-contain">
-  <section class="procediments">
-    <p>Operaciones</p>
-    <p id="">{{ op_hoy }}</p>
-  </section>
-  <section class="procediments">
-    <p>PreHospitalaria</p>
-    <p id="">{{ prehospitalaria_hoy }}</p>
-  </section>
-  <section class="procediments">
-    <p>Grumae</p>
-    <p id="">{{ grumae_hoy }}</p>
-  </section>
-  <section class="procediments">
-    <p>Rescate</p>
-    <p id="">{{ rescate }}</p>
-  </section>
-  <section class="procediments">
-    <p>Prevencion</p>
-    <p id="">{{ prevencion_hoy }}</p>
-  </section>
-  <section class="procediments">
-    <p>Servicios Medicos</p>
-    <p id="">{{ servicios_medicos_hoy }}</p>
-  </section>
-  <section class="procediments">
-    <p>Enfermeria</p>
-    <p id="">{{ enfermeria_hoy }}</p>
-  </section>
-  <section class="procediments">
-    <p>Psicologia</p>
-    <p id="">{{ psicologia_hoy }}</p>
-  </section>
-  <section class="procediments">
-    <p>Capacitacion</p>
-    <p id="">{{ capacitacion_hoy }} </p>
-  </section>
-</div>
-
 <script src="../static/js/animate.js"></script>
 <script src="../static/js/graphic.js"></script>
 {% endblock %}
