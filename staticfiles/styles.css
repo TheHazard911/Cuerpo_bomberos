@@ -906,10 +906,11 @@ summary > * {
     flex-wrap: wrap;
     padding-bottom: 1rem;
     font-family: var(--sofia-sans);
-    font-size: 1.1rem;
+    font-size: .9rem;
   }
   label {
     font-weight: 600;
+    font-size: .9rem;
   }
   select {
     width: 20rem;

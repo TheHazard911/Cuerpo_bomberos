@@ -425,8 +425,8 @@ summary > * {
 /* ******************** Utilities ******************** */
 .line {
   width: 100%;
-  height: 2px;
-  border: 2px solid #b6243a;
+  height: 1px;
+  border: 1px solid #b6243a;
   background-color: black;
 }
 
@@ -710,16 +710,15 @@ summary > * {
   flex-direction: column;
   position: relative;
   background-color: var(--color-general-dashboard);
-  width: 100%;
   height: auto;
-  width: auto;
+  width: 95%;
   overflow-y: hidden;
+  margin: 0 auto;
 }
 .div-user-name {
   display: flex;
   justify-content: flex-end;
   align-items: center;
-  padding: 0.5rem;
   padding-right: 2rem;
 }
 .username-space {
@@ -769,9 +768,8 @@ summary > * {
   height: auto;
   background-color: #f0f0f06a;
   border: thin solid #969696db;
-
   border-radius: 50px;
-  padding: 2rem;
+  padding: 1.2rem;
 }
 /****************** componentes reutilizables **************/
 .btn-mod {
@@ -788,7 +786,7 @@ summary > * {
 }
 /****    cards de estadisticas principales  ***/
 .card-parroquies {
-  width: 11rem;
+  width: 10rem;
   height: 7rem;
   margin-top: 2rem;
   border-radius: 10px;
@@ -811,7 +809,7 @@ summary > * {
   span {
     margin: 0;
     padding: 0;
-    font-size: 2.4rem;
+    font-size: 2.2rem;
   }
 }
 .card-blue {
@@ -843,19 +841,16 @@ summary > * {
 }
 .title_procedures_record {
   text-align: center;
-  font-size: 2rem;
+  font-size: 1.8rem;
   margin: 1rem;
 }
 .data_form > form {
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 70%;
+  width: 80%;
   height: auto;
   margin: 0 auto;
-  h4 {
-    text-align: center;
-  }
 }
 
 .data_form form {
@@ -879,23 +874,25 @@ summary > * {
   }
   h4 {
     margin-bottom: 0;
-    font-size: 2rem;
+    font-size: 1.6rem;
   }
 }
 .form-style {
-  border-radius: 15px;
-  background-color: #f0f0f06a;
-  border: 3px solid #969696db;
+  background-color: #eeeeeedc;
+  /* border-top: 3px solid #c5c5c5db;
+  border-bottom: 3px solid #c5c5c5db; */
   width: 90%;
-  height: auto;
+  height: auto ;
   display: flex;
   flex-direction: row;
   align-items: flex-start;
+  border-radius: 2rem;
   flex-wrap: wrap;
   justify-content: space-around;
   align-items: center;
-  margin: 2rem;
-  padding: 0.5rem;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+  padding: .8rem;
   div {
     display: flex;
     width: auto;
@@ -906,7 +903,7 @@ summary > * {
     flex-wrap: wrap;
     padding-bottom: 1rem;
     font-family: var(--sofia-sans);
-    font-size: 1.1rem;
+    font-size: 1rem;
   }
   label {
     font-weight: 600;
@@ -915,14 +912,14 @@ summary > * {
     width: 20rem;
     height: 2.5rem;
     padding: 0.5rem;
-    border-radius: 18px;
+    border-radius: 15px;
     outline: none;
   }
   input {
     width: 20rem;
     height: 2.5rem;
     padding: 1rem;
-    border-radius: 18px;
+    border-radius: 15px;
     outline: none;
     border: thin solid rgb(114, 114, 114);
   }
@@ -985,7 +982,8 @@ summary > * {
 .section-filter {
   width: 95%;
   height: auto;
-  padding: 0.5rem;
+  padding: 1rem;
+  padding-top: 2rem;
   display: flex;
   justify-content: space-evenly;
   align-items: center;
@@ -1057,12 +1055,12 @@ summary > * {
   margin: 0 auto;
   display: flex;
   justify-content: center;
-  width: 85%;
-  height: 80vh;
+  width: 90%;
+  height: 60vh;
   background-color: #f0f0f06a;
   border: thin solid #969696db;
   border-radius: 15px;
-  padding: 2rem;
+  padding: 1.5rem;
 }
 .char {
   width: 100%;
@@ -1212,7 +1210,7 @@ summary > * {
 }
 .div-analytics {
   margin: 0 auto;
-  width: 85%;
+  width: 90%;
   height: auto;
   background-color: #f0f0f06a;
   border: thin solid #969696db;
@@ -1246,12 +1244,7 @@ summary > * {
     transform: translateY(0);
   }
 }
-/* 
-.stadist-parroquies span {
-  display: inline-block;
-  opacity: 0;
-  animation: fadeIn 1s forwards;
-} */
+
 
 .procediments-contain {
   width: 85%;
@@ -1262,7 +1255,7 @@ summary > * {
   flex-wrap: wrap;
   background-color: #f0f0f06a;
   border: thin solid #797979db;
-  border-radius: 30px;
+  border-radius: 20px;
   margin-bottom: 2rem;
   text-align: center;
   section:nth-child(1) {
@@ -1307,6 +1300,7 @@ summary > * {
   color: white;
   font-weight: 700;
   background-color: #7a7b7d;
+
   * {
     margin: 0;
   }
