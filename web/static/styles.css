@@ -1218,7 +1218,7 @@ summary > * {
 }
 
 .procediments-contain {
-  width: 40%;
+  width: 90%;
   height: auto;
   margin: 0 auto;
   display: flex;
@@ -1233,25 +1233,38 @@ summary > * {
 }
 .items-list {
   text-align: center;
-  width: auto;
+  width: 50%;
+  margin: 0 auto;
   height: auto;
   color: #000;
   font-family: var(--sofia-sans);
 }
+
 .items-list ol {
   list-style: none;
   margin: 0;
-  padding: 1.2rem;
+  padding: .5rem;
   font-size: 1.4rem;
+}
+.items-list ol li p{
+  margin: 0;
 }
 .card-new {
   display: flex;
   height: 100%;
   width: 90%;
+  margin: .1rem;
   margin: 0 auto;
+  flex-direction: column;
   justify-content: space-evenly;
   align-items: stretch;
   flex-wrap: wrap;
+}
+.items-row{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
 }
 .disp-none {
   display: none;

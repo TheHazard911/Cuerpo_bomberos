@@ -1,7 +1,7 @@
 {% extends "layouts/header-main.html" %} {% block content %} {% load static %}
 <!-- Carga el tag static al inicio del archivo -->
 <div class="general-dashboard">
-  <div class="div-user-name" >
+  <div class="div-user-name">
     <section class="user-name">
       <p>{{ jerarquia }} {{ nombres }} {{ apellidos }} / {{ user.user }}</p>
       <svg
@@ -37,83 +37,103 @@
   <!-- card-new -->
   <div class="card-new">
     <div class="procediments-contain">
-      <h4 class="title-procediments">Incidentes diarios</h4>
-      <section class="items-list">
-        <ol>
-          <li>
-            <span>La Concordia: </span>
-            <span id="concordia" class="color-green">{{ concordia }}</span>
-          </li>
+      <h4 class="title-procediments">Incidentes Diarios - Parroquias</h4>
+      <div class="items-row">
+        <section class="items-list">
+          <ol>
+            <li>
+              <p>La Concordia:</p>
+              <span id="concordia" class="color-green">{{ concordia }}</span>
+            </li>
 
-          <li>
-            <span>San Sebastian: </span>
-            <span id="san_sebastian " class="color-red">{{ san_sebastian }}</span>
-          </li>
-          <li>
-            <span>San Juan Bautista: </span>
-            <span id="san_juan" class="color-blue">{{ san_juan }}</span>
-          </li>
-          <li>
-            <span>Pedro Maria Morantes: </span>
-            <span id="pedro_m" class="color-violet">{{ pedro_m }}</span>
-          </li>
-          <li>
-            <span>Francisco Romero Lobo: </span>
-            <span id="san_sebastian" class="color-brown">{{ francisco_romero_lobo }}</span>
-          </li>
-          <li>
-            <span>Otros Municipios: </span>
-            <span id="otros_municipios" class="color-blue-light">{{ otros_municipios }}</span>
-          </li>
-        </ol>
-      </section>
+            <li>
+              <p>San Sebastian:</p>
+              <span id="san_sebastian " class="color-red"
+                >{{ san_sebastian }}</span
+              >
+            </li>
+            <li>
+              <p>San Juan Bautista:</p>
+              <span id="san_juan" class="color-blue">{{ san_juan }}</span>
+            </li>
+          </ol>
+        </section>
+        <section class="items-list">
+          <ol>
+            <li>
+              <p>Pedro Maria Morantes:</p>
+              <span id="pedro_m" class="color-violet">{{ pedro_m }}</span>
+            </li>
+            <li>
+              <p>Francisco Romero Lobo:</p>
+              <span id="san_sebastian" class="color-brown"
+                >{{ francisco_romero_lobo }}</span
+              >
+            </li>
+            <li>
+              <p>Otros Municipios:</p>
+              <span id="otros_municipios" class="color-blue-light"
+                >{{ otros_municipios }}</span
+              >
+            </li>
+          </ol>
+        </section>
+      </div>
     </div>
     <!-- resumen de procedimientos por division -->
     <div class="procediments-contain">
-      <h4 class="title-procediments">Procedimientos de Hoy</h4>
-      <section class="items-list">
-        <ol>
-          <li>
-            <span>Grumae: </span>
-            <span id="">{{ grumae_hoy }}</span>
-          </li>
-          <li>
-            <span>Rescate: </span>
-            <span id="">{{ rescate }}</span>
-          </li>
-          <li>
-            <span>Psicologia: </span>
-            <span id="">{{ psicologia_hoy }}</span>
-          </li>
-          <li>
-            <span>Enfermeria: </span>
-            <span id="">{{ enfermeria_hoy }}</span>
-          </li>
-          <li>
-            <span>Prevencion: </span>
-            <span id="">{{ prevencion_hoy }}</span>
-          </li>
-
-          <li>
-            <span>Operaciones: </span>
-            <span id="" class="">{{ op_hoy }}</span>
-          </li>
-
-          <li>
-            <span>Capacitacion: </span>
-            <span id="">{{ capacitacion_hoy }}</span>
-          </li>
-          <li>
-            <span>PreHospitalaria: </span>
-            <span id="">{{ prehospitalaria_hoy }}</span>
-          </li>
-
-          <li>
-            <span>Servicios Medicos: </span>
-            <span id="">{{ servicios_medicos_hoy }}</span>
-          </li>
-        </ol>
-      </section>
+      <h4 class="title-procediments">Procedimientos Diarios - Divisiones</h4>
+      <div class="items-row">
+        <section class="items-list">
+          <ol>
+            <li>
+              <p>Grumae:</p>
+              <span id="">{{ grumae_hoy }}</span>
+            </li>
+            <li>
+              <p>Rescate:</p>
+              <p id="">{{ rescate }}</p>
+            </li>
+            <li>
+              <p>Psicologia:</p>
+              <span id="">{{ psicologia_hoy }}</span>
+            </li>
+ 
+            </li>
+          </ol>
+        </section>
+        <section class="items-list">
+          <ol>
+            <li>
+              <p>Operaciones:</p>
+              <span id="" class="">{{ op_hoy }}</span>
+            </li>
+            <li>
+              <p>Enfermeria:</p>
+              <span id="">{{ enfermeria_hoy }}</span>
+            </li>
+            <li>
+              <p>Prevencion:</p>
+              <span id="">{{ prevencion_hoy }}</span>
+          </ol>
+        </section>
+        <section class="items-list">
+          <ol>
+            <li>
+              <p>Capacitacion:</p>
+              <span id="">{{ capacitacion_hoy }}</span>
+            </li>
+            <li>
+              <p>PreHospitalaria:</p>
+              <span id="">{{ prehospitalaria_hoy }}</span>
+            </li>
+            <li>
+              <p>Servicios Medicos:</p>
+              <span id="">{{ servicios_medicos_hoy }}</span>
+            </li>
+          </ol>
+        </section>
+      </div>
     </div>
   </div>
 
