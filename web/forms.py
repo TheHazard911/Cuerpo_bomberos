@@ -447,6 +447,7 @@ class Formulario_Reinspeccion_Prevencion(forms.Form):
   rif_comercio = forms.CharField(max_length=60, required=False)
   nombre = forms.CharField(max_length=40, required=False)
   apellidos = forms.CharField(max_length=40, required=False)
+  sexo = forms.ChoiceField(choices=[("", "Seleccione Una Opcion"), ("Masculino", "Masculino"), ("Femenino", "Femenino")], widget=forms.Select(attrs={"class": "disable-first-option"}), required=False)
   cedula = forms.CharField(max_length=10, required=False)
   sexo = forms.ChoiceField(choices=[("", "Seleccione Una Opcion"), ("Masculino", "Masculino"), ("Femenino", "Femenino")], widget=forms.Select(attrs={"class": "disable-first-option"}), required=False)
   telefono = forms.CharField(max_length=20, required=False)
