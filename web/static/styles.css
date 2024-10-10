@@ -711,10 +711,7 @@ summary > * {
   position: relative;
   background-color: var(--color-general-dashboard);
   height: auto;
-<<<<<<< HEAD
   width: 95%;
-=======
->>>>>>> 3fa83d8c6ff149a421f9f0611792ec7f691c47c7
   overflow-y: hidden;
   margin: 0 auto;
 }
@@ -776,20 +773,7 @@ summary > * {
   background-color: #f0f0f06a;
   border: thin solid #969696db;
   border-radius: 50px;
-<<<<<<< HEAD
   padding: 1.2rem;
-=======
-  padding: 1rem;
-  margin: 0 auto;
-}
-.card-new {
-  width: auto;
-  height: auto;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-self: center;
->>>>>>> 3fa83d8c6ff149a421f9f0611792ec7f691c47c7
 }
 /****************** componentes reutilizables **************/
 .btn-mod {
@@ -806,13 +790,8 @@ summary > * {
 }
 /****    cards de estadisticas principales  ***/
 .card-parroquies {
-<<<<<<< HEAD
   width: 10rem;
   height: 7rem;
-=======
-  width: 8rem;
-  height: 6rem;
->>>>>>> 3fa83d8c6ff149a421f9f0611792ec7f691c47c7
   margin-top: 2rem;
   border-radius: 8px;
   display: flex;
@@ -835,11 +814,7 @@ summary > * {
   span {
     margin: 0;
     padding: 0;
-<<<<<<< HEAD
     font-size: 2.2rem;
-=======
-    font-size: 2rem;
->>>>>>> 3fa83d8c6ff149a421f9f0611792ec7f691c47c7
   }
 }
 .card-blue {
@@ -912,7 +887,7 @@ summary > * {
   /* border-top: 3px solid #c5c5c5db;
   border-bottom: 3px solid #c5c5c5db; */
   width: 90%;
-  height: auto ;
+  height: auto;
   display: flex;
   flex-direction: row;
   align-items: flex-start;
@@ -922,7 +897,7 @@ summary > * {
   align-items: center;
   margin-top: 2rem;
   margin-bottom: 2rem;
-  padding: .8rem;
+  padding: 0.8rem;
   div {
     display: flex;
     width: auto;
@@ -1086,11 +1061,7 @@ summary > * {
   display: flex;
   justify-content: center;
   width: 90%;
-<<<<<<< HEAD
   height: 60vh;
-=======
-  height: 50vh;
->>>>>>> 3fa83d8c6ff149a421f9f0611792ec7f691c47c7
   background-color: #f0f0f06a;
   border: thin solid #969696db;
   border-radius: 15px;
@@ -1284,14 +1255,10 @@ summary > * {
     transform: translateY(0);
   }
 }
-<<<<<<< HEAD
-
-=======
->>>>>>> 3fa83d8c6ff149a421f9f0611792ec7f691c47c7
 
 .procediments-contain {
-  width: auto;
-  height: auto;
+  width: 100%;
+  height: 90vh;
   margin: 0 auto;
   display: flex;
   flex-direction: column;
@@ -1300,40 +1267,13 @@ summary > * {
   flex-wrap: wrap;
   background-color: #f0f0f06a;
   border: thin solid #797979db;
-<<<<<<< HEAD
   border-radius: 20px;
   margin-bottom: 2rem;
-=======
-  border-radius: 30px;
->>>>>>> 3fa83d8c6ff149a421f9f0611792ec7f691c47c7
   text-align: center;
-  section:nth-child(1) {
-    background-color: #73cffa;
-  }
-  section:nth-child(2) {
-    background-color: #f6c344;
-  }
-  section:nth-child(3) {
-    background-color: #b6243a;
-  }
-  section:nth-child(4) {
-    background-color: #7a7b7d;
-  }
-  section:nth-child(5) {
-    background-color: #5e6dda;
-  }
-  section:nth-child(6) {
-    background-color: #10cc00;
-  }
-  section:nth-child(7) {
-    background-color: #1164b7;
-  }
-  section:nth-child(8) {
-    background-color: #eb8500;
-  }
-  section:nth-child(9) {
-    background-color: #ac4ef4;
-  }
+}
+.items-list {
+  width: 100%;
+  height: 50vh;
 }
 .procediments {
   width: 15%;
