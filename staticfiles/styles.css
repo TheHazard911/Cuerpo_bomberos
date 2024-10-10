@@ -839,15 +839,15 @@ summary > * {
     transition: 0.1s all ease-in-out;
   }
   h4 {
-    margin-bottom: 1.5rem;
-    font-size: 1.6rem;
-    text-align: center;
+    margin-bottom: 0;
+    font-size: 2rem;
   }
 }
 .form-style {
-  background-color: #ffffff;
-  border: thin solid #cbcbcb;
-  width: 80%; 
+  border-radius: 15px;
+  background-color: #f0f0f06a;
+  border: 3px solid #969696db;
+  width: 90%;
   height: auto;
   display: flex;
   flex-direction: row;
@@ -856,10 +856,8 @@ summary > * {
   flex-wrap: wrap;
   justify-content: space-around;
   align-items: center;
-  margin-top: 2rem;
-  margin-bottom: 2rem;
-  padding: 0.8rem;
-  margin: 0 auto;
+  margin: 2rem;
+  padding: 0.5rem;
   div {
     display: flex;
     width: auto;
@@ -915,8 +913,9 @@ summary > * {
 }
 .table {
   width: auto;
-  background-color: #ffffff;
-  border: thin solid #ffffff;
+  background-color: #f0f0f06a;
+  border: thin solid #dcdcdcdb;
+  font-size: 0.5rem;
   td {
     font-family: var(--sofia-sans);
   }
@@ -1236,40 +1235,37 @@ summary > * {
 }
 .items-list {
   text-align: center;
-  width: 50%;
-  margin: 0 auto;
-  height: auto;
-  color: #000;
-  font-family: var(--sofia-sans);
-}
-
-.items-list ol {
-  list-style: none;
-  margin: 0;
-  padding: 0.5rem;
-  font-size: 1.4rem;
-}
-.items-list ol li p {
-  margin: 0;
-}
-.items-list ol li span {
-  font-weight: bold;
-  font-size: 2.5rem;
+  section:nth-child(1) {
+    background-color: #73cffa;
+  }
+  section:nth-child(2) {
+    background-color: #f6c344;
+  }
+  section:nth-child(3) {
+    background-color: #b6243a;
+  }
+  section:nth-child(4) {
+    background-color: #7a7b7d;
+  }
+  section:nth-child(5) {
+    background-color: #5e6dda;
+  }
+  section:nth-child(6) {
+    background-color: #10cc00;
+  }
+  section:nth-child(7) {
+    background-color: #1164b7;
+  }
+  section:nth-child(8) {
+    background-color: #eb8500;
+  }
+  section:nth-child(9) {
+    background-color: #ac4ef4;
+  }
 }
 .card-new {
   display: flex;
-  height: 100%;
-  width: 90%;
-  margin: 0.1rem;
-  margin: 0 auto;
   flex-direction: column;
-  justify-content: space-evenly;
-  align-items: stretch;
-  flex-wrap: wrap;
-}
-.items-row {
-  display: flex;
-  flex-direction: row;
   align-items: center;
   justify-content: center;
 }

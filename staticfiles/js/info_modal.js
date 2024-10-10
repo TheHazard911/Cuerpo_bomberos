@@ -372,9 +372,15 @@ document.querySelectorAll(".button-info").forEach((button) => {
                 </section>
                 <section class="detalles_procedimiento">
                   <h4>Persona Solicitante</h4>
+                  <p><b>Nombre del Comercio: </b> ${data.nombre_comercio}</p>
+                  <p><b>Rif del Comercio: </b> ${data.rif_comercio}</p>
+                </section>
+                <section class="detalles_procedimiento">
+                  <h4>Persona Solicitante</h4>
                   <p><b>Nombre: </b> ${data.nombre}</p>
                   <p><b>Apellido: </b> ${data.apellido}</p>
                   <p><b>Cedula: </b> V-${data.cedula}</p>
+                  <p><b>Sexo: </b> V-${data.sexo}</p>
                   <p><b>Telefono: </b> ${data.telefono}</p>
                 </section>`;
             break;
