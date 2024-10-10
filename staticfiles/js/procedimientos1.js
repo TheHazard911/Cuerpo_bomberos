@@ -218,7 +218,7 @@ document
           .getElementById("abast_agua")
           .querySelectorAll("select, input");
         setRequired(campos, true); // Agregar required a la nueva sección
-        document.getElementById("button_submit").style.display = "block";
+        document.getElementById("button_submit").style.display = "flex";
         break;
       case "2":
         requiredFalse();
@@ -730,7 +730,7 @@ document
             if (this.checked) {
               let campo2 = document.getElementById("persona_presente").querySelectorAll("select, input")
               setRequired(campo2, true)
-              document.getElementById("persona_presente").style.display = "block"
+              document.getElementById("persona_presente").style.display = "flex"
             } else {
               let campo2 = document.getElementById("persona_presente").querySelectorAll("select, input")
               requiredExceptions(campo2)
