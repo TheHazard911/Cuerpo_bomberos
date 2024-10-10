@@ -895,9 +895,12 @@ def View_Procedimiento(request):
                 nuevo_proc_tras.save()
          
             if tipo_procedimiento == "17" and asesoramiento_form.is_valid():  
+                nombre_comercio = asesoramiento_form.cleaned_data["nombre_comercio"]
+                rif_comercio = asesoramiento_form.cleaned_data["rif_comercio"]
                 nombre = asesoramiento_form.cleaned_data["nombres"]
                 apellido = asesoramiento_form.cleaned_data["apellidos"]
                 cedula = asesoramiento_form.cleaned_data["cedula"]
+                sexo = asesoramiento_form.cleaned_data["sexo"]
                 telefono = asesoramiento_form.cleaned_data["telefono"]
                 descripcion = asesoramiento_form.cleaned_data["descripcion"]
                 material_utilizado = asesoramiento_form.cleaned_data["material_utilizado"]
@@ -905,9 +908,12 @@ def View_Procedimiento(request):
                 
                 nuevo_proc_ase = Asesoramiento(
                     id_procedimiento = nuevo_procedimiento,
+                    nombre_comercio = nombre_comercio,
+                    rif_comercio = rif_comercio,
                     nombres = nombre,
                     apellidos = apellido,
                     cedula = cedula,
+                    sexo = sexo,
                     telefono = telefono,
                     descripcion=descripcion,
                     material_utilizado=material_utilizado,
@@ -916,9 +922,12 @@ def View_Procedimiento(request):
                 nuevo_proc_ase.save()
          
             if tipo_procedimiento == "20" and reinspeccion_prevencion.is_valid():  
+                nombre_comercio = reinspeccion_prevencion.cleaned_data["nombre_comercio"]
+                rif_comercio = reinspeccion_prevencion.cleaned_data["rif_comercio"]
                 nombre = reinspeccion_prevencion.cleaned_data["nombre"]
                 apellido = reinspeccion_prevencion.cleaned_data["apellidos"]
                 cedula = reinspeccion_prevencion.cleaned_data["cedula"]
+                sexo = reinspeccion_prevencion.cleaned_data["sexo"]
                 telefono = reinspeccion_prevencion.cleaned_data["telefono"]
                 descripcion = reinspeccion_prevencion.cleaned_data["descripcion"]
                 material_utilizado = reinspeccion_prevencion.cleaned_data["material_utilizado"]
@@ -927,8 +936,11 @@ def View_Procedimiento(request):
                 nuevo_proc_reins = Reinspeccion_Prevencion(
                     id_procedimiento = nuevo_procedimiento,
                     nombre = nombre,
+                    nombre_comercio = nombre_comercio,
+                    rif_comercio = rif_comercio,
                     apellidos = apellido,
                     cedula = cedula,
+                    sexo = sexo,
                     telefono = telefono,
                     descripcion=descripcion,
                     material_utilizado=material_utilizado,
@@ -1799,9 +1811,12 @@ def obtener_procedimiento(request, id):
     if str(procedimiento.id_tipo_procedimiento.id) == "17":
         detalle_procedimiento = get_object_or_404(Asesoramiento, id_procedimiento=id)
         data = dict(data,
+                    nombre_comercio = detalle_procedimiento.nombre_comercio,
+                    rif_comercio = detalle_procedimiento.rif_comercio,
                     nombre = detalle_procedimiento.nombres,
                     apellido = detalle_procedimiento.apellidos,
                     cedula = detalle_procedimiento.cedula,
+                    sexo = detalle_procedimiento.sexo,
                     telefono = detalle_procedimiento.telefono,
                     descripcion = detalle_procedimiento.descripcion, 
                     material_utilizado = detalle_procedimiento.material_utilizado,
@@ -1811,9 +1826,12 @@ def obtener_procedimiento(request, id):
     if str(procedimiento.id_tipo_procedimiento.id) == "20":
         detalle_procedimiento = get_object_or_404(Reinspeccion_Prevencion, id_procedimiento=id)
         data = dict(data,
+                    nombre_comercio = detalle_procedimiento.nombre_comercio,
+                    rif_comercio = detalle_procedimiento.rif_comercio,
                     nombre = detalle_procedimiento.nombre,
                     apellido = detalle_procedimiento.apellidos,
                     cedula = detalle_procedimiento.cedula,
+                    sexo = detalle_procedimiento.sexo,
                     telefono = detalle_procedimiento.telefono,
                     descripcion = detalle_procedimiento.descripcion, 
                     material_utilizado = detalle_procedimiento.material_utilizado,

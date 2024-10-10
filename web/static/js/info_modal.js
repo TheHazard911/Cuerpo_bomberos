@@ -289,46 +289,6 @@ document.querySelectorAll(".button-info").forEach((button) => {
                   ${generateCommonDetails(data, "tipo_servicio")}
                 </section>`;
             break;
-          case "Evaluación de Riesgos":
-            detalles = `
-                <section class="detalles_procedimiento">
-                  <h4>Detalles</h4>
-                  ${generateCommonDetails(data, "tipo_de_evaluacion")}
-                </section>`;
-            break;
-          case "Rescate":
-            detalles = `
-                <section class="detalles_procedimiento">
-                  <h4>Detalles</h4>
-                  <p><b>Tipo de Procedimiento: </b> ${data.tipo_procedimiento
-              }</p>
-                  <p><b>Tipo de Rescate: </b> ${data.tipo_rescate}</p>
-                  <p><b>Material Utilizado: </b> ${data.material_utilizado}</p>
-                  <p><b>Status: </b> ${data.status}</p>
-                </section>
-                ${data.tipo_rescate === "Animal"
-                ? `
-                  <section class="detalles_rescate_animal">
-                    <h4>Animal</h4>
-                    <p><b>Especie: </b> ${data.especie}</p>
-                    <p><b>Descripcion: </b> ${data.descripcion}</p>
-                  </section>`
-                : ""
-              }
-                ${data.tipo_rescate === "Persona"
-                ? `
-                  <section class="detalles_rescate_persona">
-                    <h4>Persona</h4>
-                    <p><b>Nombre: </b> ${data.nombres}</p>
-                    <p><b>Apellido: </b> ${data.apellidos}</p>
-                    <p><b>Cedula: </b> ${data.cedula}</p>
-                    <p><b>Edad: </b> ${data.edad}</p>
-                    <p><b>Sexo: </b> ${data.sexo}</p>
-                    <p><b>Descripcion: </b> ${data.descripcion}</p>
-                  </section>`
-                : ""
-              }`;
-            break;
           case "Puesto de Avanzada":
             detalles = `
                         <section class="detalles_procedimiento">
@@ -337,18 +297,26 @@ document.querySelectorAll(".button-info").forEach((button) => {
                         </section>`;
             break;
           case "Evaluación de Riesgos":
-            detalles = `
-                <section class="detalles_procedimiento">
-                  <h4>Detalles</h4>
-                  ${generateCommonDetails(data, "tipo_de_evaluacion")}
-                </section>
-                <section class="detalles_procedimiento">
-                  <h4>Persona Presente</h4>
-                  <p><b>Nombre: </b> ${data.nombre}</p>
-                  <p><b>Apellido: </b> ${data.apellido}</p>
-                  <p><b>Cedula: </b> V-${data.cedula}</p>
-                  <p><b>Telefono: </b> ${data.telefono}</p>
-                </section>`;
+            if(data.division == "Prevencion"){
+              detalles = `
+                  <section class="detalles_procedimiento">
+                    <h4>Detalles</h4>
+                    ${generateCommonDetails(data, "tipo_de_evaluacion")}
+                  </section>
+                  <section class="detalles_procedimiento">
+                    <h4>Persona Presente</h4>
+                    <p><b>Nombre: </b> ${data.nombre}</p>
+                    <p><b>Apellido: </b> ${data.apellido}</p>
+                    <p><b>Cedula: </b> V-${data.cedula}</p>
+                    <p><b>Telefono: </b> ${data.telefono}</p>
+                  </section>`;
+            } else {
+              detalles = `
+                  <section class="detalles_procedimiento">
+                    <h4>Detalles</h4>
+                    ${generateCommonDetails(data, "tipo_de_evaluacion")}
+                  </section>`;
+            }
             break;
           case "Asesoramiento":
             detalles = `
@@ -358,9 +326,15 @@ document.querySelectorAll(".button-info").forEach((button) => {
                 </section>
                 <section class="detalles_procedimiento">
                   <h4>Persona Solicitante</h4>
+                  <p><b>Nombre del Comercio: </b> ${data.nombre_comercio}</p>
+                  <p><b>RIF del Comercio: </b> ${data.rif_comercio}</p>
+                </section>
+                <section class="detalles_procedimiento">
+                  <h4>Persona Solicitante</h4>
                   <p><b>Nombre: </b> ${data.nombre}</p>
                   <p><b>Apellido: </b> ${data.apellido}</p>
                   <p><b>Cedula: </b> V-${data.cedula}</p>
+                  <p><b>Sexo: </b> ${data.sexo}</p>
                   <p><b>Telefono: </b> ${data.telefono}</p>
                 </section>`;
             break;
@@ -372,9 +346,15 @@ document.querySelectorAll(".button-info").forEach((button) => {
                 </section>
                 <section class="detalles_procedimiento">
                   <h4>Persona Solicitante</h4>
+                  <p><b>Nombre del Comercio: </b> ${data.nombre_comercio}</p>
+                  <p><b>Rif del Comercio: </b> ${data.rif_comercio}</p>
+                </section>
+                <section class="detalles_procedimiento">
+                  <h4>Persona Solicitante</h4>
                   <p><b>Nombre: </b> ${data.nombre}</p>
                   <p><b>Apellido: </b> ${data.apellido}</p>
                   <p><b>Cedula: </b> V-${data.cedula}</p>
+                  <p><b>Sexo: </b> ${data.sexo}</p>
                   <p><b>Telefono: </b> ${data.telefono}</p>
                 </section>`;
             break;
@@ -413,20 +393,6 @@ document.querySelectorAll(".button-info").forEach((button) => {
                   <p><b>Hospital: </b> ${data.hospital}</p>
                   <p><b>Medico Receptor: </b> ${data.medico}</p>
                   <p><b>MPPS CMT: </b> ${data.mpps}</p>
-                </section>`;
-            break;
-          case "Evaluación de Riesgos":
-            detalles = `
-                <section class="detalles_procedimiento">
-                  <h4>Detalles</h4>
-                  ${generateCommonDetails(data, "tipo_de_evaluacion")}
-                </section>
-                <section class="detalles_procedimiento">
-                  <h4>Persona Presente</h4>
-                  <p><b>Nombre: </b> ${data.nombre}</p>
-                  <p><b>Apellido: </b> ${data.apellido}</p>
-                  <p><b>Cedula: </b> V-${data.cedula}</p>
-                  <p><b>Telefono: </b> ${data.telefono}</p>
                 </section>`;
             break;
 

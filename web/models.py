@@ -453,16 +453,19 @@ class Puesto_Avanzada(models.Model):
 # tabla de Emergencias Medicas para procedmiento atenciones paramedicas
 class Asesoramiento(models.Model):
   id_procedimiento = models.ForeignKey(Procedimientos, on_delete=models.CASCADE)
-  nombres = models.CharField(max_length=30)
+  nombre_comercio = models.CharField(max_length=50)
+  rif_comercio = models.CharField(max_length=50)
+  nombres = models.CharField(max_length=50)
   apellidos = models.CharField(max_length=30)
   cedula = models.CharField(max_length=10)
+  sexo = models.CharField(max_length=12)
   telefono = models.CharField(max_length=12)
   descripcion = models.CharField(max_length=40)
   material_utilizado = models.CharField(max_length=30)
   status = models.CharField(max_length=20)
   
   def __str__(self):
-    return self.id_procedimiento.id_tipo_procedimiento.tipo_procedimiento + " -- " + self.nombres + " -- " + self.apellidos + " -- " + self.cedula + " -- " + self.telefono + " -- " + self.descripcion + " -- " +  self.material_utilizado + " -- " + self.status
+    return self.id_procedimiento.id_tipo_procedimiento.tipo_procedimiento + " -- " + self.nombre_comercio + " -- " + self.rif_comercio + " -- " + self.nombres + " -- " + self.apellidos + " -- " + self.cedula + " -- " + self.sexo + " -- " + self.telefono + " -- " + self.descripcion + " -- " +  self.material_utilizado + " -- " + self.status
   
 class Persona_Presente_Eval(models.Model):
   id_persona = models.ForeignKey(Evaluacion_Riesgo, on_delete=models.CASCADE)
@@ -477,16 +480,19 @@ class Persona_Presente_Eval(models.Model):
 # Tabla de Reinspeccion de prevencion
 class Reinspeccion_Prevencion(models.Model):
   id_procedimiento = models.ForeignKey(Procedimientos, on_delete=models.CASCADE)
+  nombre_comercio = models.CharField(max_length=40)
+  rif_comercio = models.CharField(max_length=40)
   nombre = models.CharField(max_length=40)
   apellidos = models.CharField(max_length=40)
   cedula = models.CharField(max_length=10)
+  sexo = models.CharField(max_length=12)
   telefono = models.CharField(max_length=20)
   descripcion = models.CharField(max_length=100)
   material_utilizado = models.CharField(max_length=100)
   status = models.CharField(max_length=20)
   
   def __str__(self):
-    return self.id_procedimiento.id_tipo_procedimiento.tipo_procedimiento + " -- " + self.nombre + " -- " + self.apellidos + " -- " + self.cedula + " -- " + self.telefono + " -- " + self.descripcion + " -- " + self.material_utilizado + " -- " + self.status
+    return self.id_procedimiento.id_tipo_procedimiento.tipo_procedimiento + " -- " + self.nombre_comercio + " -- " + self.rif_comercio + " -- " + self.nombre + " -- " + self.apellidos + " -- " + self.cedula + " -- " + self.sexo + " -- " + self.telefono + " -- " + self.descripcion + " -- " + self.material_utilizado + " -- " + self.status
 
 # Tabla de Retencion Preventiva (GLP)
 class Retencion_Preventiva(models.Model):
