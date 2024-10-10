@@ -551,7 +551,8 @@ summary > * {
 .checkbox-styles div:nth-child(6),
 .checkbox-styles div:nth-child(10) { */
 .checkbox-styles div * {
-  width: 20rem;
+  width: 15rem;
+  height: auto;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -825,6 +826,7 @@ summary > * {
   margin-bottom: 5rem;
   padding: 0;
   button {
+    margin: 1rem;
     background-color: var(--color-button);
     color: #fff;
     padding: 0.5rem;
@@ -838,13 +840,13 @@ summary > * {
   }
   h4 {
     margin-bottom: 0;
-    font-size: 1.6rem;
+    font-size: 2rem;
   }
 }
 .form-style {
-  background-color: #ffffff;
-  border: thin solid #ffffff;
-
+  border-radius: 15px;
+  background-color: #f0f0f06a;
+  border: 3px solid #969696db;
   width: 90%;
   height: auto;
   display: flex;
@@ -854,9 +856,8 @@ summary > * {
   flex-wrap: wrap;
   justify-content: space-around;
   align-items: center;
-  margin-top: 2rem;
-  margin-bottom: 2rem;
-  padding: 0.8rem;
+  margin: 2rem;
+  padding: 0.5rem;
   div {
     display: flex;
     width: auto;
@@ -912,8 +913,9 @@ summary > * {
 }
 .table {
   width: auto;
-  background-color: #FFFFFF;
-  border: thin solid #FFFFFF;
+  background-color: #f0f0f06a;
+  border: thin solid #dcdcdcdb;
+  font-size: 0.5rem;
   td {
     font-family: var(--sofia-sans);
   }
@@ -1233,36 +1235,37 @@ summary > * {
 }
 .items-list {
   text-align: center;
-  width: 50%;
-  margin: 0 auto;
-  height: auto;
-  color: #000;
-  font-family: var(--sofia-sans);
-}
-
-.items-list ol {
-  list-style: none;
-  margin: 0;
-  padding: .5rem;
-  font-size: 1.4rem;
-}
-.items-list ol li p{
-  margin: 0;
+  section:nth-child(1) {
+    background-color: #73cffa;
+  }
+  section:nth-child(2) {
+    background-color: #f6c344;
+  }
+  section:nth-child(3) {
+    background-color: #b6243a;
+  }
+  section:nth-child(4) {
+    background-color: #7a7b7d;
+  }
+  section:nth-child(5) {
+    background-color: #5e6dda;
+  }
+  section:nth-child(6) {
+    background-color: #10cc00;
+  }
+  section:nth-child(7) {
+    background-color: #1164b7;
+  }
+  section:nth-child(8) {
+    background-color: #eb8500;
+  }
+  section:nth-child(9) {
+    background-color: #ac4ef4;
+  }
 }
 .card-new {
   display: flex;
-  height: 100%;
-  width: 90%;
-  margin: .1rem;
-  margin: 0 auto;
   flex-direction: column;
-  justify-content: space-evenly;
-  align-items: stretch;
-  flex-wrap: wrap;
-}
-.items-row{
-  display: flex;
-  flex-direction: row;
   align-items: center;
   justify-content: center;
 }
@@ -1311,3 +1314,80 @@ summary > * {
   padding: 0;
   margin: 0;
 }
+.color-primary {
+  color: var(--color-primary);
+}
+.bs-red {
+  color: var(--bs-primary-text-emphasis);
+}
+.bs-warning {
+  color: var(--bs-warning);
+}
+.bs-green {
+  color: var(--bs-green);
+}
+.bs-primary {
+  color: var(--bs-primary);
+}
+.color-secondary{
+  color: var(--bs-indigo);
+}
+.bs-teal{
+  color: var(--bs-teal);
+}
+.color-light-link{
+  color: var(--color-light-link);
+}
+.bs-cyan{
+  color: var(--bs-cyan);
+}
+/* 
+--bs-indigo: #6610f2;
+--bs-purple: #6f42c1;
+--bs-pink: #d63384;
+--bs-red: #dc3545;
+--bs-orange: #fd7e14;
+--bs-yellow: #ffc107;
+--bs-green: #198754;
+--bs-teal: #20c997;
+--bs-cyan: #0dcaf0;
+--bs-black: #000;
+--bs-white: #fff;
+--bs-gray: #6c757d;
+--bs-gray-dark: #343a40;
+--bs-gray-100: #f8f9fa;
+--bs-gray-200: #e9ecef;
+--bs-gray-300: #dee2e6;
+--bs-gray-400: #ced4da;
+--bs-gray-500: #adb5bd;
+--bs-gray-600: #6c757d;
+--bs-gray-700: #495057;
+--bs-gray-800: #343a40;
+--bs-gray-900: #212529;
+--bs-primary: #0d6efd;
+--bs-secondary: #6c757d;
+--bs-success: #198754;
+--bs-info: #0dcaf0;
+--bs-warning: #ffc107;
+--bs-danger: #dc3545;
+--bs-light: #f8f9fa;
+--bs-dark: #212529;
+--bs-primary-rgb: 13, 110, 253;
+--bs-secondary-rgb: 108, 117, 125;
+--bs-success-rgb: 25, 135, 84;
+--bs-info-rgb: 13, 202, 240;
+--bs-warning-rgb: 255, 193, 7;
+--bs-danger-rgb: 220, 53, 69;
+--bs-light-rgb: 248, 249, 250;
+--bs-dark-rgb: 33, 37, 41;
+--bs-primary-text-emphasis: #052c65;
+--bs-secondary-text-emphasis: #2b2f32;
+--bs-success-text-emphasis: #0a3622;
+--bs-info-text-emphasis: #055160;
+--bs-warning-text-emphasis: #664d03;
+--bs-danger-text-emphasis: #58151c;
+--bs-light-text-emphasis: #495057;
+--bs-dark-text-emphasis: #495057;
+--bs-primary-bg-subtle: #cfe2ff;
+--bs-secondary-bg-subtle: #e2e3e5;
+--bs-success-bg-subtle: #d1e7dd; */

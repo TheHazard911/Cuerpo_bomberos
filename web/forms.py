@@ -275,8 +275,8 @@ class Formulario_Incendio(forms.Form):
     descripcion = forms.CharField(max_length=30, required=False)
     material_utilizado = forms.CharField(max_length=30, required=False)
     status = forms.ChoiceField(choices=[("", "Seleccione Una Opcion"), ("Culminado", "Culminado"), ("En Proceso", "En Proceso")], widget=forms.Select(attrs={"class": "disable-first-option"}), required=False)
-    check_agregar_persona = forms.BooleanField(required=False)
-    check_agregar_vehiculo = forms.BooleanField(required=False)
+    check_agregar_persona = forms.BooleanField(required=False,label="Agregar Persona")
+    check_agregar_vehiculo = forms.BooleanField(required=False,label="Agregar Vehiculo")
     
 class Formulario_Persona_Presente(forms.Form):
     nombre = forms.CharField(max_length=30, required=False)
@@ -318,8 +318,8 @@ class Formulario_Accidentes_Transito(forms.Form):
     cantidad_lesionado = forms.CharField(max_length=4, required=False)
     material_utilizado = forms.CharField(max_length=30, required=False)
     status = forms.ChoiceField(choices=[("", "Seleccione Una Opcion"), ("Culminado", "Culminado"), ("En Proceso", "En Proceso")], widget=forms.Select(attrs={"class": "disable-first-option"}), required=False)
-    agg_vehiculo = forms.BooleanField(required=False)
-    agg_lesionado = forms.BooleanField(required=False)
+    agg_vehiculo = forms.BooleanField(required=False,label="Agregar Vehiculo")
+    agg_lesionado = forms.BooleanField(required=False,label="Agregar Lesionado")
     
 class Formulario_Detalles_Vehiculos(forms.Form):
     modelo = forms.CharField(max_length=30, required=False)
@@ -327,7 +327,7 @@ class Formulario_Detalles_Vehiculos(forms.Form):
     color = forms.CharField(max_length=30, required=False)
     año = forms.CharField(max_length=30, required=False)
     placas = forms.CharField(max_length=30, required=False)
-    agg_vehiculo = forms.BooleanField(required=False)
+    agg_vehiculo = forms.BooleanField(required=False, label="Agregar Segundo Vehiculo")
 
 class Formulario_Detalles_Vehiculos2(forms.Form):
     modelo = forms.CharField(max_length=30, required=False)
@@ -335,7 +335,7 @@ class Formulario_Detalles_Vehiculos2(forms.Form):
     color = forms.CharField(max_length=30, required=False)
     año = forms.CharField(max_length=30, required=False)
     placas = forms.CharField(max_length=30, required=False)
-    agg_vehiculo = forms.BooleanField(required=False)
+    agg_vehiculo = forms.BooleanField(required=False, label="Agregar Tercer Vehiculo")
     
 class Formulario_Detalles_Vehiculos3(forms.Form):
     modelo = forms.CharField(max_length=30, required=False)
@@ -353,7 +353,7 @@ class Formulario_Detalles_Lesionados(forms.Form):
     idx = forms.CharField(max_length=40, required=False)
     descripcion = forms.CharField(max_length=40, required=False)
     trasladado = forms.BooleanField(required=False)
-    otro_lesionado = forms.BooleanField(required=False)
+    otro_lesionado = forms.BooleanField(required=False, label="Agregar Segundo Lesionado")
     
 class Formulario_Detalles_Lesionados2(forms.Form):
     nombre = forms.CharField(max_length=40, required=False)
@@ -364,7 +364,7 @@ class Formulario_Detalles_Lesionados2(forms.Form):
     idx = forms.CharField(max_length=40, required=False)
     descripcion = forms.CharField(max_length=40, required=False)
     trasladado = forms.BooleanField(required=False)
-    otro_lesionado = forms.BooleanField(required=False)
+    otro_lesionado = forms.BooleanField(required=False,label="Agregar Tercer Lesionado")
     
 class Formulario_Detalles_Lesionados3(forms.Form):
     nombre = forms.CharField(max_length=40, required=False)
@@ -447,6 +447,7 @@ class Formulario_Reinspeccion_Prevencion(forms.Form):
   rif_comercio = forms.CharField(max_length=60, required=False)
   nombre = forms.CharField(max_length=40, required=False)
   apellidos = forms.CharField(max_length=40, required=False)
+  sexo = forms.ChoiceField(choices=[("", "Seleccione Una Opcion"), ("Masculino", "Masculino"), ("Femenino", "Femenino")], widget=forms.Select(attrs={"class": "disable-first-option"}), required=False)
   cedula = forms.CharField(max_length=10, required=False)
   sexo = forms.ChoiceField(choices=[("", "Seleccione Una Opcion"), ("Masculino", "Masculino"), ("Femenino", "Femenino")], widget=forms.Select(attrs={"class": "disable-first-option"}), required=False)
   telefono = forms.CharField(max_length=20, required=False)

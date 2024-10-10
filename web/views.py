@@ -926,6 +926,7 @@ def View_Procedimiento(request):
                 rif_comercio = reinspeccion_prevencion.cleaned_data["rif_comercio"]
                 nombre = reinspeccion_prevencion.cleaned_data["nombre"]
                 apellido = reinspeccion_prevencion.cleaned_data["apellidos"]
+                sexo = reinspeccion_prevencion.cleaned_data["sexo"]
                 cedula = reinspeccion_prevencion.cleaned_data["cedula"]
                 sexo = reinspeccion_prevencion.cleaned_data["sexo"]
                 telefono = reinspeccion_prevencion.cleaned_data["telefono"]
@@ -935,6 +936,8 @@ def View_Procedimiento(request):
                 
                 nuevo_proc_reins = Reinspeccion_Prevencion(
                     id_procedimiento = nuevo_procedimiento,
+                    nombre_comercio = nombre_comercio,
+                    rif_comercio = rif_comercio,
                     nombre = nombre,
                     nombre_comercio = nombre_comercio,
                     rif_comercio = rif_comercio,
