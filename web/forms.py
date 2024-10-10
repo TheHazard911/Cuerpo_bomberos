@@ -440,8 +440,11 @@ class Formularia_Persona_Presente_Eval(forms.Form):
   telefono = forms.CharField(max_length=20, required=False)
 
 class Formulario_Reinspeccion_Prevencion(forms.Form):
+  nombre_comercio = forms.CharField(max_length=80, required=False)
+  rif_comercio = forms.CharField(max_length=80, required=False)
   nombre = forms.CharField(max_length=40, required=False)
   apellidos = forms.CharField(max_length=40, required=False)
+  sexo = forms.ChoiceField(choices=[("", "Seleccione Una Opcion"), ("Masculino", "Masculino"), ("Femenino", "Femenino")], widget=forms.Select(attrs={"class": "disable-first-option"}), required=False)
   cedula = forms.CharField(max_length=10, required=False)
   telefono = forms.CharField(max_length=20, required=False)
   descripcion = forms.CharField(max_length=100, required=False)

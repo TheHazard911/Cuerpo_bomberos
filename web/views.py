@@ -916,8 +916,11 @@ def View_Procedimiento(request):
                 nuevo_proc_ase.save()
          
             if tipo_procedimiento == "20" and reinspeccion_prevencion.is_valid():  
+                nombre_comercio = reinspeccion_prevencion.cleaned_data["nombre_comercio"]
+                rif_comercio = reinspeccion_prevencion.cleaned_data["rif_comercio"]
                 nombre = reinspeccion_prevencion.cleaned_data["nombre"]
                 apellido = reinspeccion_prevencion.cleaned_data["apellidos"]
+                sexo = reinspeccion_prevencion.cleaned_data["sexo"]
                 cedula = reinspeccion_prevencion.cleaned_data["cedula"]
                 telefono = reinspeccion_prevencion.cleaned_data["telefono"]
                 descripcion = reinspeccion_prevencion.cleaned_data["descripcion"]
@@ -926,9 +929,12 @@ def View_Procedimiento(request):
                 
                 nuevo_proc_reins = Reinspeccion_Prevencion(
                     id_procedimiento = nuevo_procedimiento,
+                    nombre_comercio = nombre_comercio,
+                    rif_comercio = rif_comercio,
                     nombre = nombre,
                     apellidos = apellido,
                     cedula = cedula,
+                    sexo = sexo,
                     telefono = telefono,
                     descripcion=descripcion,
                     material_utilizado=material_utilizado,

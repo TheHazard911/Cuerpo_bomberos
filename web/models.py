@@ -477,8 +477,11 @@ class Persona_Presente_Eval(models.Model):
 # Tabla de Reinspeccion de prevencion
 class Reinspeccion_Prevencion(models.Model):
   id_procedimiento = models.ForeignKey(Procedimientos, on_delete=models.CASCADE)
+  nombre_comercio = models.CharField(max_length=80)
+  rif_comercio = models.CharField(max_length=40)
   nombre = models.CharField(max_length=40)
   apellidos = models.CharField(max_length=40)
+  sexo = models.CharField(max_length=12)
   cedula = models.CharField(max_length=10)
   telefono = models.CharField(max_length=20)
   descripcion = models.CharField(max_length=100)
@@ -486,7 +489,7 @@ class Reinspeccion_Prevencion(models.Model):
   status = models.CharField(max_length=20)
   
   def __str__(self):
-    return self.id_procedimiento.id_tipo_procedimiento.tipo_procedimiento + " -- " + self.nombre + " -- " + self.apellidos + " -- " + self.cedula + " -- " + self.telefono + " -- " + self.descripcion + " -- " + self.material_utilizado + " -- " + self.status
+    return self.id_procedimiento.id_tipo_procedimiento.tipo_procedimiento + " -- " + self.nombre_comercio + " -- " + self.rif_comercio + " -- " + self + self.nombre + " -- " + self.apellidos + " -- " + self.cedula + " -- " + self.sexo + " -- " + self.telefono + " -- " + self.descripcion + " -- " + self.material_utilizado + " -- " + self.status
 
 # Tabla de Retencion Preventiva (GLP)
 class Retencion_Preventiva(models.Model):
