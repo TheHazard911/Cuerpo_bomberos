@@ -1,7 +1,7 @@
 {% extends "layouts/header-main.html" %} {% block content %} {% load static %}
 <!-- Carga el tag static al inicio del archivo -->
 <div class="general-dashboard">
-  <div class="div-user-name">
+  <div class="div-user-name" >
     <section class="user-name">
       <p>{{ jerarquia }} {{ nombres }} {{ apellidos }} / {{ user.user }}</p>
       <svg
@@ -36,182 +36,186 @@
   </div>
   <!-- card-new -->
   <div class="card-new">
-    <div class="div-stadist-parroquies">
-      <section class="title-stadist-parroquies">
-        <h4>Incidentes diarios</h4>
-      </section>
-      <section class="stadist-parroquies">
-        <div class="card-parroquies card-yellow">
-          <h5>La Concordia</h5>
-          <span id="concordia">{{ concordia }}</span>
-        </div>
-        <div class="card-parroquies card-red">
-          <h5>Pedro Maria Morantes</h5>
-          <span id="pedro_m">{{ pedro_m }}</span>
-        </div>
-        <div class="card-parroquies card-gray">
-          <h5>San Juan Bautista</h5>
-          <span id="san_juan">{{ san_juan }}</span>
-        </div>
-        <div class="card-parroquies card-blue">
-          <h5>San Sebastian</h5>
-          <span id="san_sebastian">{{ san_sebastian }}</span>
-        </div>
-        <div class="card-parroquies card-azul-claro">
-          <h5>Francisco Romero Lobo</h5>
-          <span id="san_sebastian">{{ francisco_romero_lobo }}</span>
-        </div>
-        <div class="card-parroquies card-green">
-          <h5>Otros Municipios</h5>
-          <span id="otros_municipios">{{ otros_municipios }}</span>
-        </div>
+    <div class="procediments-contain">
+      <h4 class="title-procediments">Incidentes diarios</h4>
+      <section class="items-list">
+        <ol>
+          <li>
+            <span>La Concordia: </span>
+            <span id="concordia" class="color-green">{{ concordia }}</span>
+          </li>
+
+          <li>
+            <span>San Sebastian: </span>
+            <span id="san_sebastian " class="color-red">{{ san_sebastian }}</span>
+          </li>
+          <li>
+            <span>San Juan Bautista: </span>
+            <span id="san_juan" class="color-blue">{{ san_juan }}</span>
+          </li>
+          <li>
+            <span>Pedro Maria Morantes: </span>
+            <span id="pedro_m" class="color-violet">{{ pedro_m }}</span>
+          </li>
+          <li>
+            <span>Francisco Romero Lobo: </span>
+            <span id="san_sebastian" class="color-brown">{{ francisco_romero_lobo }}</span>
+          </li>
+          <li>
+            <span>Otros Municipios: </span>
+            <span id="otros_municipios" class="color-blue-light">{{ otros_municipios }}</span>
+          </li>
+        </ol>
       </section>
     </div>
     <!-- resumen de procedimientos por division -->
     <div class="procediments-contain">
-      <h3 class="title-stadist-parroquies">Procedimientos de Hoy</h3>
+      <h4 class="title-procediments">Procedimientos de Hoy</h4>
       <section class="items-list">
-        <ul>
+        <ol>
           <li>
-            <span>Operaciones</span>
-            <p id="">{{ op_hoy }}</p>
-          </li>
-          <li>
-            <span>PreHospitalaria</span>
-            <span id="">{{ prehospitalaria_hoy }}</span>
-          </li>
-          <li>
-            <span>Grumae</span>
+            <span>Grumae: </span>
             <span id="">{{ grumae_hoy }}</span>
           </li>
           <li>
-            <span>Rescate</span>
+            <span>Rescate: </span>
             <span id="">{{ rescate }}</span>
           </li>
           <li>
-            <p>Prevencion</p>
-            <p id="">{{ prevencion_hoy }}</p>
-          </li>
-          <li>
-            <span>Servicios Medicos</span>
-            <span id="">{{ servicios_medicos_hoy }}</span>
-          </li>
-          <li>
-            <span>Enfermeria</span>
-            <span id="">{{ enfermeria_hoy }}</span>
-          </li>
-          <li>
-            <span>Psicologia</span>
+            <span>Psicologia: </span>
             <span id="">{{ psicologia_hoy }}</span>
           </li>
           <li>
-            <span>Capacitacion</span>
+            <span>Enfermeria: </span>
+            <span id="">{{ enfermeria_hoy }}</span>
+          </li>
+          <li>
+            <span>Prevencion: </span>
+            <span id="">{{ prevencion_hoy }}</span>
+          </li>
+
+          <li>
+            <span>Operaciones: </span>
+            <span id="" class="">{{ op_hoy }}</span>
+          </li>
+
+          <li>
+            <span>Capacitacion: </span>
             <span id="">{{ capacitacion_hoy }}</span>
           </li>
-        </ul>
+          <li>
+            <span>PreHospitalaria: </span>
+            <span id="">{{ prehospitalaria_hoy }}</span>
+          </li>
+
+          <li>
+            <span>Servicios Medicos: </span>
+            <span id="">{{ servicios_medicos_hoy }}</span>
+          </li>
+        </ol>
       </section>
     </div>
   </div>
 
   <!-- fin card-new -->
-  <!-- Resumen de procedimientos  -->
-  <h4 class="title-stadist-parroquies">Resumen de Procedimientos</h4>
-  <div class="div-analytics">
-    <section class="progress-bar">
-      <p>Operaciones</p>
-      <p id="progress-text-operaciones">0%</p>
-      <div
-        class="progress"
-        role="progressbar"
-        aria-label="Success example"
-        aria-valuenow="0"
-        aria-valuemin="0"
-        aria-valuemax="100"
-      >
-        <div
-          class="progress-bar bg-success"
-          id="progress-bar-operaciones"
-          style="width: 0%"
-        ></div>
-      </div>
-    </section>
-    <section class="progress-bar">
-      <p>PreHospitalaria</p>
-      <p id="progress-text-prehospitalaria">0%</p>
-      <div
-        class="progress"
-        role="progressbar"
-        aria-label="Success example"
-        aria-valuenow="0"
-        aria-valuemin="0"
-        aria-valuemax="100"
-      >
-        <div
-          class="progress-bar bg-info"
-          id="progress-bar-prehospitalaria"
-          style="width: 0%"
-        ></div>
-      </div>
-    </section>
-    <section class="progress-bar">
-      <p>Rescate</p>
-      <p id="progress-text-rescate">0%</p>
-      <div
-        class="progress"
-        role="progressbar"
-        aria-label="Success example"
-        aria-valuenow="0"
-        aria-valuemin="0"
-        aria-valuemax="100"
-      >
-        <div
-          class="progress-bar bg-warning"
-          id="progress-bar-rescate"
-          style="width: 0%"
-        ></div>
-      </div>
-    </section>
-    <section class="progress-bar">
-      <p>Grumae</p>
-      <p id="progress-text-grumae">0%</p>
-      <div
-        class="progress"
-        role="progressbar"
-        aria-label="Success example"
-        aria-valuenow="0"
-        aria-valuemin="0"
-        aria-valuemax="100"
-      >
-        <div
-          class="progress-bar"
-          id="progress-bar-grumae"
-          style="width: 0%"
-        ></div>
-      </div>
-    </section>
-    <section class="progress-bar">
-      <p>Servicios medicos</p>
-      <p id="progress-text-servicios-medicos">0%</p>
-      <div
-        class="progress"
-        role="progressbar"
-        aria-label="Success example"
-        aria-valuenow="0"
-        aria-valuemin="0"
-        aria-valuemax="100"
-      >
-        <div
-          class="progress-bar bg-danger"
-          id="progress-bar-servicios-medicos"
-          style="width: 0%"
-        ></div>
-      </div>
-    </section>
-  </div>
-  <h3 class="title-stadist-parroquies">Operaciones Anuales</h3>
+  <h4 class="title-stadist-parroquies">Operaciones Anuales</h4>
   <div class="graphic-statistics">
     <canvas id="myChart"></canvas>
   </div>
+</div>
+<!-- Resumen de procedimientos  -->
+<h4 class="title-stadist-parroquies">Resumen de Procedimientos</h4>
+<div class="div-analytics">
+  <section class="progress-bar">
+    <p>Operaciones</p>
+    <p id="progress-text-operaciones">0%</p>
+    <div
+      class="progress"
+      role="progressbar"
+      aria-label="Success example"
+      aria-valuenow="0"
+      aria-valuemin="0"
+      aria-valuemax="100"
+    >
+      <div
+        class="progress-bar bg-success"
+        id="progress-bar-operaciones"
+        style="width: 0%"
+      ></div>
+    </div>
+  </section>
+  <section class="progress-bar">
+    <p>PreHospitalaria</p>
+    <p id="progress-text-prehospitalaria">0%</p>
+    <div
+      class="progress"
+      role="progressbar"
+      aria-label="Success example"
+      aria-valuenow="0"
+      aria-valuemin="0"
+      aria-valuemax="100"
+    >
+      <div
+        class="progress-bar bg-info"
+        id="progress-bar-prehospitalaria"
+        style="width: 0%"
+      ></div>
+    </div>
+  </section>
+  <section class="progress-bar">
+    <p>Rescate</p>
+    <p id="progress-text-rescate">0%</p>
+    <div
+      class="progress"
+      role="progressbar"
+      aria-label="Success example"
+      aria-valuenow="0"
+      aria-valuemin="0"
+      aria-valuemax="100"
+    >
+      <div
+        class="progress-bar bg-warning"
+        id="progress-bar-rescate"
+        style="width: 0%"
+      ></div>
+    </div>
+  </section>
+  <section class="progress-bar">
+    <p>Grumae</p>
+    <p id="progress-text-grumae">0%</p>
+    <div
+      class="progress"
+      role="progressbar"
+      aria-label="Success example"
+      aria-valuenow="0"
+      aria-valuemin="0"
+      aria-valuemax="100"
+    >
+      <div
+        class="progress-bar"
+        id="progress-bar-grumae"
+        style="width: 0%"
+      ></div>
+    </div>
+  </section>
+  <section class="progress-bar">
+    <p>Servicios medicos</p>
+    <p id="progress-text-servicios-medicos">0%</p>
+    <div
+      class="progress"
+      role="progressbar"
+      aria-label="Success example"
+      aria-valuenow="0"
+      aria-valuemin="0"
+      aria-valuemax="100"
+    >
+      <div
+        class="progress-bar bg-danger"
+        id="progress-bar-servicios-medicos"
+        style="width: 0%"
+      ></div>
+    </div>
+  </section>
 </div>
 <!-- fin resumen de procedimientos -->
 <script src="../static/js/animate.js"></script>
