@@ -421,12 +421,13 @@ class Traslado_Accidente(models.Model):
 class Evaluacion_Riesgo(models.Model):
   id_procedimientos = models.ForeignKey(Procedimientos, on_delete=models.CASCADE)
   id_tipo_riesgo = models.ForeignKey(Motivo_Riesgo, on_delete=models.CASCADE)
+  tipo_estructura = models.CharField(max_length=30)
   descripcion = models.CharField(max_length=100)
   material_utilizado = models.CharField(max_length=100)
   status = models.CharField(max_length=100)
   
   def __str__(self):
-    return self.id_procedimientos.id_tipo_procedimiento.tipo_procedimiento + " -- " + self.id_tipo_riesgo.tipo_riesgo + " -- " + self.descripcion + " -- " + self.material_utilizado + " -- " + self.status
+    return self.id_procedimientos.id_tipo_procedimiento.tipo_procedimiento + " -- " + self.id_tipo_riesgo.tipo_riesgo + " -- " + self.tipo_estructura + " -- " + self.descripcion + " -- " + self.material_utilizado + " -- " + self.status
 
 # Tabla Mitigacion de Riesgos
 class Mitigacion_Riesgos(models.Model):

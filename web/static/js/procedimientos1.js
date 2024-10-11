@@ -700,7 +700,11 @@ document
               let campos2 = document.getElementById("rescate_animal").querySelectorAll("select, input");
               setRequired(campos2, true);
               document.getElementById("button_submit").style.display = "block";
-            } else if (this.value == "2") {
+            } else if (this.value != "1") {
+              let rescate_persona = document.getElementById("rescate_persona").querySelector("h4")
+              let titulo = this.options[this.selectedIndex].text
+              // console.log(rescate_persona, titulo)
+              rescate_persona.textContent = titulo
               requiredExceptions(
                 document
                   .getElementById("rescate_animal")
@@ -774,6 +778,9 @@ document
         document.getElementById("button_submit").style.display = "block";
         break;
       case "14":
+        let select_vivienda = document.getElementById("evaluacion_riesgo").querySelector(".form-style > div:nth-of-type(2)")
+        console.log(select_vivienda)
+        select_vivienda.style.display = "none"
         requiredFalse();
         showElements(["evaluacion_riesgo"]);
         campos = document
@@ -785,10 +792,26 @@ document
           .getElementById("form_persona_presente")
           .querySelectorAll("select, input");
 
+        document.getElementById("id_evaluacion_riesgo_form-tipo_riesgo").addEventListener("change", function () {
+        console.log(this.value)
+          if(this.value === "1"){
+            select_vivienda.style.display = 'flex';
+            select_vivienda.querySelector("select").value = ''; // Borra la selección
+            let campos3 = select_vivienda.querySelectorAll("select, input")
+            setRequired(campos3, "true")
+          } else {
+            
+            select_vivienda.style.display = "none";
+            select_vivienda.querySelector("select").value = ''; // Borra la selección
+            requiredExceptions(select_vivienda.querySelectorAll("select, input"))
+          }
+        })
+        
         query = document.getElementById("id_form1-opciones");
         if (query.value === "3") {
-          showElements(["evaluacion_riesgo", "form_persona_presente"]);
+          showElements(["evaluacion_riesgo"]);
           setRequired(campos2, true);
+          document.getElementById("form_persona_presente").style.display = "flex"
         } else {
           requiredExceptions(campos2);
         }

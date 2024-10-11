@@ -14,7 +14,7 @@
 
         const rows = document.querySelectorAll("#data-table tbody tr");
 
-        rows.forEach((row) => {
+        rows.forEach((row, index) => {
             const textCellTwo = row.querySelector(`td:nth-child(7)`);
             const textCellThree = row.querySelector(`td:nth-child(12)`);
             const dateCell = row.querySelector(`td:nth-child(10)`);
@@ -36,7 +36,7 @@
                 if (index === -1) {
                     showRow = false;
                 } else {
-                    const highlightedText = originalTextTwo.substring(index, index + searchFilterTwo.length);
+                    const highlightedText = originalTextTwo.toString(index, index + searchFilterTwo.length);
                     textCellTwo.innerHTML = originalTextTwo.replace(highlightedText, `<span style="background-color: yellow;">${highlightedText}</span>`);
                 }
             }

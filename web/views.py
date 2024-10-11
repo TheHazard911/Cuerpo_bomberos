@@ -693,7 +693,8 @@ def View_Procedimiento(request):
                     
                     return redirect('/dashboard/')
                 
-                if id_tipo_rescate == "2" and rescate_form_persona.is_valid():
+                else:
+                    rescate_form_persona.is_valid()
                     nombre_persona = rescate_form_persona.cleaned_data["nombre_persona"]
                     apellido_persona = rescate_form_persona.cleaned_data["apellido_persona"]
                     cedula_persona = rescate_form_persona.cleaned_data["cedula_persona"]
@@ -812,6 +813,7 @@ def View_Procedimiento(request):
             
             if tipo_procedimiento == "14" and evaluacion_riesgo_form.is_valid():  
                 tipo_riesgo = evaluacion_riesgo_form.cleaned_data["tipo_riesgo"]       
+                tipo_estructura = evaluacion_riesgo_form.cleaned_data["tipo_etructura"]       
                 descripcion = evaluacion_riesgo_form.cleaned_data["descripcion"]
                 material_utilizado = evaluacion_riesgo_form.cleaned_data["material_utilizado"]
                 status = evaluacion_riesgo_form.cleaned_data["status"]
@@ -821,10 +823,12 @@ def View_Procedimiento(request):
                 nuevo_proc_eval = Evaluacion_Riesgo(
                     id_procedimientos = nuevo_procedimiento,
                     id_tipo_riesgo = tipo_riesgo_instance,
+                    tipo_estructura = tipo_estructura,
                     descripcion=descripcion,
                     material_utilizado=material_utilizado,
                     status=status
                 )
+
                 nuevo_proc_eval.save()
          
                 if division == "3" and tipo_procedimiento == "14" and persona_presente_eval_form.is_valid():  
@@ -1693,7 +1697,7 @@ def obtener_procedimiento(request, id):
                         descripcion = detalle_tipo_rescate.descripcion,
                         )
             
-        if detalle_procedimiento.tipo_rescate.tipo_rescate == "Persona":
+        else:
             detalle_tipo_rescate = get_object_or_404(Rescate_Persona, id_rescate=detalle_procedimiento.id)
             data = dict(data,
                         nombres = detalle_tipo_rescate.nombre, 
