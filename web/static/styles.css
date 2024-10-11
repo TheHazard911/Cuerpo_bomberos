@@ -1461,3 +1461,39 @@ summary > * {
 .bs-cyan {
   color: var(--bs-cyan);
 }
+.contain-dates {
+  width: 95%;
+  height: auto;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+  background-color: #ffffff;
+  border: thin solid #ffffff;
+  padding: 1rem;
+  border-radius: 20px;
+  margin: 0 auto;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+.buttons-items {
+  display: flex;
+  button{
+    display: flex;
+    align-items: center;
+    align-content: center;
+    justify-content: center;
+    border: none;
+    padding: .5rem;
+    border-radius: 20px;
+    width: 12rem;
+    height: auto;
+    font-size: 1rem;
+    background-color: var(--color-button);
+    color: #fff;
+    font-family: var(--kanit-regular);
+  }
+  button:hover{
+    background-color :rgb(151, 0, 0);
+  }
+}
