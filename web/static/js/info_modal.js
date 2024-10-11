@@ -214,28 +214,28 @@ document.querySelectorAll(".button-info").forEach((button) => {
                   <p><b>Material Utilizado: </b> ${data.material_utilizado}</p>
                   <p><b>Status: </b> ${data.status}</p>
                 </section>
-                ${data.tipo_rescate === "Animal"
-                ? `
-                  <section class="detalles_rescate_animal">
-                    <h4>Animal</h4>
-                    <p><b>Especie: </b> ${data.especie}</p>
-                    <p><b>Descripcion: </b> ${data.descripcion}</p>
-                  </section>`
-                : ""
-              }
-                ${data.tipo_rescate === "Persona"
-                ? `
-                  <section class="detalles_rescate_persona">
-                    <h4>Persona</h4>
-                    <p><b>Nombre: </b> ${data.nombres}</p>
-                    <p><b>Apellido: </b> ${data.apellidos}</p>
-                    <p><b>Cedula: </b> ${data.cedula}</p>
-                    <p><b>Edad: </b> ${data.edad}</p>
-                    <p><b>Sexo: </b> ${data.sexo}</p>
-                    <p><b>Descripcion: </b> ${data.descripcion}</p>
-                  </section>`
-                : ""
-              }`;
+                 `
+                 if (data.tipo_rescate === "Animal"){
+                   detalles += `
+                   <section class="detalles_rescate_animal">
+                     <h4>Animal</h4>
+                     <p><b>Especie: </b> ${data.especie}</p>
+                     <p><b>Descripcion: </b> ${data.descripcion}</p>
+                   </section>
+                   `
+                 } else {
+                   detalles += `
+                   <section class="detalles_rescate_persona">
+                     <h4>Persona</h4>
+                     <p><b>Nombre: </b> ${data.nombres}</p>
+                     <p><b>Apellido: </b> ${data.apellidos}</p>
+                     <p><b>Cedula: </b> ${data.cedula}</p>
+                     <p><b>Edad: </b> ${data.edad}</p>
+                     <p><b>Sexo: </b> ${data.sexo}</p>
+                     <p><b>Descripcion: </b> ${data.descripcion}</p>
+                   </section>`
+                 }
+                 
             break;
           case "Incendios":
             detalles = `
@@ -299,7 +299,7 @@ document.querySelectorAll(".button-info").forEach((button) => {
           case "Evaluación de Riesgos":
             if(data.division == "Prevencion"){
               detalles = `
-                  <section class="detalles_procedimiento">
+                <section class="detalles_procedimiento">
                     <h4>Detalles</h4>
                     ${generateCommonDetails(data, "tipo_de_evaluacion")}
                   </section>
@@ -325,7 +325,7 @@ document.querySelectorAll(".button-info").forEach((button) => {
                   ${generateCommonDetails(data)}
                 </section>
                 <section class="detalles_procedimiento">
-                  <h4>Persona Solicitante</h4>
+                  <h4>Informacion del Comercio</h4>
                   <p><b>Nombre del Comercio: </b> ${data.nombre_comercio}</p>
                   <p><b>RIF del Comercio: </b> ${data.rif_comercio}</p>
                 </section>
@@ -345,7 +345,7 @@ document.querySelectorAll(".button-info").forEach((button) => {
                   ${generateCommonDetails(data)}
                 </section>
                 <section class="detalles_procedimiento">
-                  <h4>Persona Solicitante</h4>
+                  <h4>Informacion del Comercio</h4>
                   <p><b>Nombre del Comercio: </b> ${data.nombre_comercio}</p>
                   <p><b>Rif del Comercio: </b> ${data.rif_comercio}</p>
                 </section>

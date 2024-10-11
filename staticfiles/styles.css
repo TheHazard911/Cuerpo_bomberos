@@ -908,15 +908,23 @@ summary > * {
   overflow-y: scroll;
   width: auto;
   padding: 0.5rem;
+<<<<<<< HEAD
+  height: 100vh;
+=======
   height: 60vh;
+>>>>>>> 9825602523053bbd7382d25cebba9b28d6a33a63
   margin: 2rem;
   margin-top: 0.5rem;
   margin-bottom: 0.5rem;
   margin: 0 auto;
 }
 .table {
+<<<<<<< HEAD
+  width: auto;
+=======
   margin: 0 auto;
   width: 97%;
+>>>>>>> 9825602523053bbd7382d25cebba9b28d6a33a63
   background-color: #ffffff;
   border: thin solid #ffffff;
   td {
@@ -950,7 +958,11 @@ summary > * {
 .section-filter {
   width: 95%;
   height: auto;
+<<<<<<< HEAD
+  padding: 0.5rem;
+=======
   padding: 0.4rem;
+>>>>>>> 9825602523053bbd7382d25cebba9b28d6a33a63
   padding-top: 2rem;
   display: flex;
   justify-content: space-evenly;
@@ -960,7 +972,7 @@ summary > * {
   margin: 0 auto;
   border-radius: 10px;
   flex-wrap: wrap;
-  font-size: 1.2rem;
+  font-size: 1.1rem;
 }
 .filter-search {
   display: flex;
@@ -1245,7 +1257,11 @@ summary > * {
 }
 .items-list {
   text-align: center;
+<<<<<<< HEAD
+  width: 20%;
+=======
   width: auto;
+>>>>>>> 9825602523053bbd7382d25cebba9b28d6a33a63
   height: auto;
   margin: 0 auto;
   height: auto;
@@ -1266,6 +1282,11 @@ summary > * {
   font-size: 2.5rem;
 }
 .items-list li {
+<<<<<<< HEAD
+  background-color: #f8f8f8;
+  margin: 1rem;
+  border-radius: 10px;
+=======
   /* background-color: #f8f8f8; */
   margin: 1rem;
   width: 14rem;
@@ -1308,6 +1329,7 @@ summary > * {
 .card-background-red {
   background-color: #d40d3e;
   color: #fff;
+>>>>>>> 9825602523053bbd7382d25cebba9b28d6a33a63
 }
 .items-cards {
   display: flex;
@@ -1365,7 +1387,11 @@ summary > * {
   }
 }
 .color-pink {
+<<<<<<< HEAD
+  background-color: #fc4971;
+=======
   background-color: #b6243a;
+>>>>>>> 9825602523053bbd7382d25cebba9b28d6a33a63
 }
 .color-blue {
   background-color: #2d8fe6;

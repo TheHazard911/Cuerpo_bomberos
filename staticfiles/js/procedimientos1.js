@@ -700,7 +700,8 @@ document
               let campos2 = document.getElementById("rescate_animal").querySelectorAll("select, input");
               setRequired(campos2, true);
               document.getElementById("button_submit").style.display = "block";
-            } else if (this.value == "2") {
+            } else if (this.value != "1") {
+              console.log("hola")
               requiredExceptions(
                 document
                   .getElementById("rescate_animal")
@@ -745,7 +746,7 @@ document
             if (this.checked) {
               let campo2 = document.getElementById("detalles_vehiculo").querySelectorAll("select, input")
               setRequired(campo2, true)
-              document.getElementById("detalles_vehiculo").style.display = "block"
+              document.getElementById("detalles_vehiculo").style.display = "flex"
             } else {
               let campo2 = document.getElementById("detalles_vehiculo").querySelectorAll("select, input")
               requiredExceptions(campo2)

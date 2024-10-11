@@ -392,7 +392,10 @@ class Formulario_Traslado_Accidente3(forms.Form):
     mpps_cmt = forms.CharField(max_length=20, required=False)
     
 class Forulario_Evaluacion_Riesgo(forms.Form):
+    opc = [("", "Seleccione Una Opcion"), ("Vivienda Unifamiliar", "Vivienda Unifamiliar"), ("Vivienda Multifamiliar", "Vivienda Multifamiliar"), ("Vivienda Improvisada", "Vivienda Improvisada")]
+
     tipo_riesgo = forms.ChoiceField(choices=Asignar_opc_motivos_riesgo, widget=forms.Select(attrs={"class": "disable-first-option"}), required=False)
+    tipo_etructura = forms.ChoiceField(choices=opc, widget=forms.Select(attrs={"class": "disable-first-option"}), required=False)
     descripcion = forms.CharField(max_length=100, required=False)
     material_utilizado = forms.CharField(max_length=100, required=False)
     status = forms.ChoiceField(choices=[("-", "Seleccione Una Opcion"), ("Culminado", "Culminado"), ("En Proceso", "En Proceso")], widget=forms.Select(attrs={"class": "disable-first-option"}), required=False)
