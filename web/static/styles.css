@@ -715,6 +715,7 @@ summary > * {
   height: auto;
   width: 100%;
   overflow-y: hidden;
+  margin: 2rem;
   margin: 0 auto;
 }
 .div-user-name {
@@ -948,7 +949,7 @@ summary > * {
 .section-filter {
   width: 95%;
   height: auto;
-  padding: .5rem;
+  padding: 0.5rem;
   padding-top: 2rem;
   display: flex;
   justify-content: space-evenly;
@@ -1025,8 +1026,8 @@ summary > * {
   display: flex;
   justify-content: center;
   flex-direction: column;
-  width: 90%;
-  height: 80vh;
+  width: 80%;
+  height: 50vh;
   background-color: #ffffff;
   border: thin solid #ffffff;
   border-radius: 15px;
@@ -1159,7 +1160,7 @@ summary > * {
   border-radius: 10px;
   width: auto;
   height: auto;
-  padding: .5rem;
+  padding: 0.5rem;
   margin-left: 2rem;
 }
 .config-modal-delete {
@@ -1243,7 +1244,8 @@ summary > * {
 }
 .items-list {
   text-align: center;
-  width: 30%;
+  width: 20%;
+  height: auto;
   margin: 0 auto;
   height: auto;
   color: #000;
@@ -1262,16 +1264,25 @@ summary > * {
   font-weight: bold;
   font-size: 2.5rem;
 }
-.items-list li{
+.items-list li {
   background-color: #f8f8f8;
   margin: 1rem;
   border-radius: 10px;
 }
+.items-cards {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: auto;
+  margin: 0 auto;
+  margin-top: 1.5rem;
+  margin-bottom: 2.5rem;
+}
 .card-new {
   display: flex;
-  height: 100%;
-  width: 90%;
-  margin: 0.1rem;
+  width: 100%;
+  height: auto;
   margin: 0 auto;
   flex-direction: column;
   justify-content: space-evenly;
@@ -1283,8 +1294,55 @@ summary > * {
   flex-direction: row;
   align-items: start;
   justify-content: center;
+  flex-wrap: wrap;
+  height: auto;
 }
-.style-two{
+.card-parroquies {
+  display: flex;
+  align-items: center;
+  align-content: center;
+  flex-direction: column;
+  justify-content: center;
+  flex-wrap: wrap;
+  padding: 0;
+  margin: 0;
+  width: 11rem;
+  height: auto;
+  border-radius: 20px;
+  font-family: var(--sofia-sans);
+  p {
+    font-size: 1.4rem;
+    margin: 0.5rem;
+    width: 100%;
+  }
+  span {
+    font-weight: bold;
+    border-radius: 100%;
+    color: #fff;
+    font-size: 2rem;
+    width: 30%;
+    height: auto;
+  }
+}
+.color-pink {
+  background-color: #fc4971;
+}
+.color-blue {
+  background-color: #2d8fe6;
+}
+.color-cyan {
+  background-color: #40b4b3;
+}
+.color-orange {
+  background-color: #fd8d32;
+}
+.color-violet {
+  background-color: #8547ff;
+}
+.color-yellow {
+  background-color: #fec545;
+}
+.style-two {
   width: 14rem;
 }
 .disp-none {
@@ -1297,7 +1355,7 @@ summary > * {
 .visible {
   display: block;
 }
-.items-parroquies ol{
+.items-parroquies ol {
   list-style: none;
 }
 .display-row {
@@ -1350,7 +1408,6 @@ summary > * {
 .bs-primary {
   color: var(--bs-primary);
   color: #000;
-
 }
 .color-secondary {
   color: var(--bs-indigo);
