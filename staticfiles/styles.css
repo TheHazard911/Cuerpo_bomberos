@@ -905,17 +905,26 @@ summary > * {
 /**************** estilos de tablas ********************/
 
 .table-responsive-sm {
-  margin: 0 auto;
   overflow-y: scroll;
   width: auto;
   padding: 0.5rem;
+<<<<<<< HEAD
   height: 100vh;
+=======
+  height: 60vh;
+>>>>>>> 9825602523053bbd7382d25cebba9b28d6a33a63
   margin: 2rem;
   margin-top: 0.5rem;
   margin-bottom: 0.5rem;
+  margin: 0 auto;
 }
 .table {
+<<<<<<< HEAD
   width: auto;
+=======
+  margin: 0 auto;
+  width: 97%;
+>>>>>>> 9825602523053bbd7382d25cebba9b28d6a33a63
   background-color: #ffffff;
   border: thin solid #ffffff;
   td {
@@ -949,7 +958,11 @@ summary > * {
 .section-filter {
   width: 95%;
   height: auto;
+<<<<<<< HEAD
   padding: 0.5rem;
+=======
+  padding: 0.4rem;
+>>>>>>> 9825602523053bbd7382d25cebba9b28d6a33a63
   padding-top: 2rem;
   display: flex;
   justify-content: space-evenly;
@@ -1244,7 +1257,11 @@ summary > * {
 }
 .items-list {
   text-align: center;
+<<<<<<< HEAD
   width: 20%;
+=======
+  width: auto;
+>>>>>>> 9825602523053bbd7382d25cebba9b28d6a33a63
   height: auto;
   margin: 0 auto;
   height: auto;
@@ -1265,9 +1282,54 @@ summary > * {
   font-size: 2.5rem;
 }
 .items-list li {
+<<<<<<< HEAD
   background-color: #f8f8f8;
   margin: 1rem;
   border-radius: 10px;
+=======
+  /* background-color: #f8f8f8; */
+  margin: 1rem;
+  width: 14rem;
+  height: auto;
+  border-radius: 10px;
+  font-size: 1.5rem;
+}
+.card-background-blue {
+  background-color: #3379b4;
+  color: #fff;
+}
+.card-background-green {
+  background-color: #49bb8a;
+  color: #fff;
+}
+.card-background-violet {
+  background-color: #8867d2;
+  color: #fff;
+}
+.card-background-red-light {
+  background-color: #f96a66;
+  color: #fff;
+}
+.card-background-orange {
+  background-color: #f09c17;
+  color: #fff;
+}
+.card-background-blue-black {
+  background-color: #47b0f4;
+  color: #fff;
+}
+.card-background-cyan {
+  background-color: #00a5ab;
+  color: #fff;
+}
+.card-background-purple {
+  background-color: #9a31cb;
+  color: #fff;
+}
+.card-background-red {
+  background-color: #d40d3e;
+  color: #fff;
+>>>>>>> 9825602523053bbd7382d25cebba9b28d6a33a63
 }
 .items-cards {
   display: flex;
@@ -1325,7 +1387,11 @@ summary > * {
   }
 }
 .color-pink {
+<<<<<<< HEAD
   background-color: #fc4971;
+=======
+  background-color: #b6243a;
+>>>>>>> 9825602523053bbd7382d25cebba9b28d6a33a63
 }
 .color-blue {
   background-color: #2d8fe6;
