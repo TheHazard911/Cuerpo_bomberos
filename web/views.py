@@ -939,8 +939,6 @@ def View_Procedimiento(request):
                     nombre_comercio = nombre_comercio,
                     rif_comercio = rif_comercio,
                     nombre = nombre,
-                    nombre_comercio = nombre_comercio,
-                    rif_comercio = rif_comercio,
                     apellidos = apellido,
                     cedula = cedula,
                     sexo = sexo,
