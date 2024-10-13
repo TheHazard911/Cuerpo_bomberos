@@ -54,6 +54,48 @@ def obtener_meses(request):
     }
     return JsonResponse(data)
 
+def obtener_porcentajes(request):
+    # Obtener el conteo de procedimientos por división
+    rescate = Procedimientos.objects.filter(id_division=1).count()
+    operaciones = Procedimientos.objects.filter(id_division=2).count()
+    prevencion = Procedimientos.objects.filter(id_division=3).count()
+    grumae = Procedimientos.objects.filter(id_division=4).count()
+    prehospitalaria = Procedimientos.objects.filter(id_division=5).count()
+    enfermeria = Procedimientos.objects.filter(id_division=6).count()
+    servicios_medicos = Procedimientos.objects.filter(id_division=7).count()
+    psicologia = Procedimientos.objects.filter(id_division=8).count()
+    capacitacion = Procedimientos.objects.filter(id_division=9).count()
+
+    # Total de procedimientos
+    procedimientos_totales = Procedimientos.objects.all().count()
+
+    # Calcular los porcentajes
+    porcentajes = {
+        'rescate': (rescate / procedimientos_totales) * 100,
+        'operaciones': (operaciones / procedimientos_totales) * 100,
+        'prevencion': (prevencion / procedimientos_totales) * 100,
+        'grumae': (grumae / procedimientos_totales) * 100,
+        'prehospitalaria': (prehospitalaria / procedimientos_totales) * 100,
+        'enfermeria': (enfermeria / procedimientos_totales) * 100,
+        'servicios_medicos': (servicios_medicos / procedimientos_totales) * 100,
+        'psicologia': (psicologia / procedimientos_totales) * 100,
+        'capacitacion': (capacitacion / procedimientos_totales) * 100,
+    }
+
+    # Ajustar los porcentajes para asegurarnos de que sumen 100%
+    total_porcentajes = sum(porcentajes.values())
+    
+    # Reajuste proporcional
+    for key in porcentajes:
+        porcentajes[key] = (porcentajes[key] * 100) / total_porcentajes
+
+    # Redondear los porcentajes a dos decimales
+    for key in porcentajes:
+        porcentajes[key] = round(porcentajes[key], 2)
+
+    # Puedes devolver los porcentajes si es necesario, por ejemplo:
+    return JsonResponse(porcentajes)
+
 def login_required(view_func):
     def _wrapped_view(request, *args, **kwargs):
         if 'user' not in request.session:
@@ -1671,8 +1713,7 @@ def obtener_procedimiento(request, id):
                 data['lesionados'] = lesionados_list  # Agregar la lista de lesionados a 'data'
             else:
                 data['lesionados'] = []  # Si no hay lesionados, agregar una lista vacía
-
-            
+          
     if str(procedimiento.id_tipo_procedimiento.id) == "9":
         detalle_procedimiento = get_object_or_404(Servicios_Especiales, id_procedimientos=id)
         data = dict(data,
