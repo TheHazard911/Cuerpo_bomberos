@@ -38,5 +38,6 @@ urlpatterns = [
     path('psicologia/', View_psicologia),
     path('api/procedimientos/<int:id>/', obtener_procedimiento, name='obtener_procedimiento'),
     path('api/meses/', obtener_meses, name='obtener_meses'),
+    path('api/porcentajes/', obtener_porcentajes, name='obtener_porcentajes'),
     path('logout/', logout, name='logout'),
 ]
