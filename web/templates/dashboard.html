@@ -129,10 +129,17 @@
     <canvas id="myChart"></canvas>
   </div>
 </div>
+
 <!-- Resumen de procedimientos  -->
 <h4 class="title-stadist-parroquies">Resumen - Procedimientos</h4>
+<!-- Botones para elegir el período -->
+<div>
+  <button onclick="fetchPorcentajes('general')">Mostrar Porcentajes Generales</button>
+  <button onclick="fetchPorcentajes('mes')">Mostrar Porcentajes del Mes</button>
+</div>
+
 <div class="div-analytics">
-  <section class="progress-bar">
+ <section class="progress-bar">
     <p>Operaciones</p>
     <p id="progress-text-operaciones">0%</p>
     <div
@@ -241,6 +248,7 @@
     </div>
   </section>
 </div>
+
 <!-- fin resumen de procedimientos -->
 <script src="../static/js/animate.js"></script>
 <script src="../static/js/graphic.js"></script>

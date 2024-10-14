@@ -11,6 +11,7 @@ from django.http import JsonResponse
 import json
 from datetime import datetime
 from django.contrib.auth.decorators import login_required
+from django.utils import timezone
 
 # Create your views here.
 
@@ -54,46 +55,78 @@ def obtener_meses(request):
     }
     return JsonResponse(data)
 
-def obtener_porcentajes(request):
-    # Obtener el conteo de procedimientos por división
-    rescate = Procedimientos.objects.filter(id_division=1).count()
-    operaciones = Procedimientos.objects.filter(id_division=2).count()
-    prevencion = Procedimientos.objects.filter(id_division=3).count()
-    grumae = Procedimientos.objects.filter(id_division=4).count()
-    prehospitalaria = Procedimientos.objects.filter(id_division=5).count()
-    enfermeria = Procedimientos.objects.filter(id_division=6).count()
-    servicios_medicos = Procedimientos.objects.filter(id_division=7).count()
-    psicologia = Procedimientos.objects.filter(id_division=8).count()
-    capacitacion = Procedimientos.objects.filter(id_division=9).count()
+def obtener_porcentajes(request, periodo="general"):
+    # Si el periodo es "mes", calcular para el mes actual
+    if periodo == "mes":
+        # Obtener la fecha actual y calcular la del inicio del mes
+        now = timezone.now()
+        start_of_month = now.replace(day=1)
+        procedimientos_queryset = Procedimientos.objects.filter(fecha__gte=start_of_month)  # Asegúrate de que tienes un campo `fecha`
+    else:
+        # Si es "general", simplemente obtener todos los procedimientos
+        procedimientos_queryset = Procedimientos.objects.all()
+
+    # Calcular el conteo de procedimientos por división
+    rescate = procedimientos_queryset.filter(id_division=1).count()
+    operaciones = procedimientos_queryset.filter(id_division=2).count()
+    prevencion = procedimientos_queryset.filter(id_division=3).count()
+    grumae = procedimientos_queryset.filter(id_division=4).count()
+    prehospitalaria = procedimientos_queryset.filter(id_division=5).count()
+    enfermeria = procedimientos_queryset.filter(id_division=6).count()
+    servicios_medicos = procedimientos_queryset.filter(id_division=7).count()
+    psicologia = procedimientos_queryset.filter(id_division=8).count()
+    capacitacion = procedimientos_queryset.filter(id_division=9).count()
 
     # Total de procedimientos
-    procedimientos_totales = Procedimientos.objects.all().count()
+    procedimientos_totales = procedimientos_queryset.count()
 
     # Calcular los porcentajes
-    porcentajes = {
-        'rescate': (rescate / procedimientos_totales) * 100,
-        'operaciones': (operaciones / procedimientos_totales) * 100,
-        'prevencion': (prevencion / procedimientos_totales) * 100,
-        'grumae': (grumae / procedimientos_totales) * 100,
-        'prehospitalaria': (prehospitalaria / procedimientos_totales) * 100,
-        'enfermeria': (enfermeria / procedimientos_totales) * 100,
-        'servicios_medicos': (servicios_medicos / procedimientos_totales) * 100,
-        'psicologia': (psicologia / procedimientos_totales) * 100,
-        'capacitacion': (capacitacion / procedimientos_totales) * 100,
-    }
+    if procedimientos_totales > 0:
+        porcentajes = {
+            'rescate': (rescate / procedimientos_totales) * 100,
+            'operaciones': (operaciones / procedimientos_totales) * 100,
+            'prevencion': (prevencion / procedimientos_totales) * 100,
+            'grumae': (grumae / procedimientos_totales) * 100,
+            'prehospitalaria': (prehospitalaria / procedimientos_totales) * 100,
+            'enfermeria': (enfermeria / procedimientos_totales) * 100,
+            'servicios_medicos': (servicios_medicos / procedimientos_totales) * 100,
+            'psicologia': (psicologia / procedimientos_totales) * 100,
+            'capacitacion': (capacitacion / procedimientos_totales) * 100,
+        }
 
-    # Ajustar los porcentajes para asegurarnos de que sumen 100%
-    total_porcentajes = sum(porcentajes.values())
-    
-    # Reajuste proporcional
-    for key in porcentajes:
-        porcentajes[key] = (porcentajes[key] * 100) / total_porcentajes
+        # Ajustar los porcentajes para asegurarnos de que sumen 100%
+        total_porcentajes = sum(porcentajes.values())
+        for key in porcentajes:
+            porcentajes[key] = (porcentajes[key] * 100) / total_porcentajes
 
-    # Redondear los porcentajes a dos decimales
-    for key in porcentajes:
-        porcentajes[key] = round(porcentajes[key], 2)
+        # Redondear los porcentajes a dos decimales
+        for key in porcentajes:
+            porcentajes[key] = round(porcentajes[key], 2)
+    else:
+        porcentajes = {
+            'rescate': 0,
+            'operaciones': 0,
+            'prevencion': 0,
+            'grumae': 0,
+            'prehospitalaria': 0,
+            'enfermeria': 0,
+            'servicios_medicos': 0,
+            'psicologia': 0,
+            'capacitacion': 0,
+        }
+        
+    # data = {
+    #     "rescate": rescate,
+    #     "operaciones": operaciones,
+    #     "prevencion": prevencion,
+    #     "grumae": grumae,
+    #     "prehospitalaria": prehospitalaria,
+    #     "enfermeria": enfermeria,
+    #     "servicios_medicos": servicios_medicos,
+    #     "psicologia": psicologia,
+    #     "capacitacion": capacitacion,
+    #   }
 
-    # Puedes devolver los porcentajes si es necesario, por ejemplo:
     return JsonResponse(porcentajes)
 
 def login_required(view_func):
