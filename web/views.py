@@ -214,7 +214,7 @@ def login_required(view_func):
 
 def logout(request):
     request.session.flush()  # Eliminar todos los datos de la sesión
-    return redirect('/')
+    return redirect('/login/')
 
 # Vista de la Ventana Inicial (Login)
 def Home(request): 
