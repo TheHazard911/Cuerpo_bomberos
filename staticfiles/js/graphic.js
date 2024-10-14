@@ -142,6 +142,13 @@ function fetchPorcentajes(periodo) {
           }
         }, 10); // Ajusta la velocidad de la animación aquí
       }
+      if (periodo == "mes") {
+        document.getElementById("porcentajes").textContent = " Mensuales";
+      }
+      else{
+      document.getElementById("porcentajes").textContent = "Totales";
+      }
+
 
       // Valores fijos para cada barra de progreso
       const progressValues = {
@@ -185,6 +192,7 @@ async function fetchProcedimientos(condicion) {
       document.getElementById(
         "francisco_romero"
       ).textContent = `${data.francisco_romero_lobo.total}`;
+      document.getElementById("parroquias").textContent = "Totales";
     }
 
     if (condicion === "Mes") {
@@ -206,6 +214,7 @@ async function fetchProcedimientos(condicion) {
       document.getElementById(
         "francisco_romero"
       ).textContent = `${data.francisco_romero_lobo.del_mes}`;
+      document.getElementById("parroquias").textContent = "Mensuales";
     }
 
     if (condicion === "Hoy") {
@@ -223,6 +232,7 @@ async function fetchProcedimientos(condicion) {
       document.getElementById(
         "francisco_romero"
       ).textContent = `${data.francisco_romero_lobo.hoy}`;
+      document.getElementById("parroquias").textContent = "Diarios";
     }
 
     // Aquí puedes manipular el DOM o hacer lo que necesites con los datos
@@ -257,12 +267,15 @@ function updateCards(data, type) {
     switch (type) {
       case "total":
         count = detalles.total;
+        document.getElementById("divisiones").textContent = "Totales";
         break;
       case "del_mes":
         count = detalles.del_mes;
+        document.getElementById("divisiones").textContent = "Mensuales";
         break;
       case "hoy":
         count = detalles.hoy;
+        document.getElementById("divisiones").textContent = "Diarios";
         break;
       default:
         count = 0;
@@ -294,5 +307,5 @@ document.getElementById("btn-total").addEventListener("click", async () => {
 // Llama a fetchDivisiones al cargar la página para mostrar los datos de hoy
 window.onload = async () => {
   const data = await fetchDivisiones();
-  updateCards(data, 'hoy');
+  updateCards(data, "hoy");
 };
