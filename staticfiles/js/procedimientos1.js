@@ -36,6 +36,7 @@ const opcionesPorCategoria = {
     { value: "13", text: "Mitigación de Riesgos" },
     { value: "14", text: "Evaluación de Riesgos" },
     { value: "15", text: "Puesto de Avanzada" },
+    { value: "22", text: "Artificios Piroctenicos" },
   ],
   2: [
     { value: "1", text: "Abastecimiento de agua" },
@@ -51,6 +52,7 @@ const opcionesPorCategoria = {
     { value: "12", text: "Fallecidos" },
     { value: "13", text: "Mitigación de Riesgos" },
     { value: "14", text: "Evaluación de Riesgos" },
+    { value: "22", text: "Artificios Piroctenicos" },
   ],
   3: [
     { value: "14", text: "Evaluacion de Riesgos" },
@@ -58,7 +60,8 @@ const opcionesPorCategoria = {
     { value: "18", text: "Inspeccion" },
     { value: "19", text: "Investigacion" },
     { value: "20", text: "Reinspeccion de Prevencion" },
-    { value: "21", text: "Retencion Preventiva" }
+    { value: "21", text: "Retencion Preventiva" },
+    { value: "22", text: "Artificios Piroctenicos" },
   ],
   4: [
     { value: "1", text: "Abastecimiento de agua" },
@@ -74,6 +77,7 @@ const opcionesPorCategoria = {
     { value: "13", text: "Mitigación de Riesgos" },
     { value: "14", text: "Evaluación de Riesgos" },
     { value: "15", text: "Puesto de Avanzada" },
+    { value: "22", text: "Artificios Piroctenicos" },
   ],
   5: [
     { value: "3", text: "Guardia de Prevención" },
@@ -142,6 +146,7 @@ function requiredFalse() {
     campo.removeAttribute("required");
   });
 }
+
 function requiredExceptions(elements) {
   const campos = elements;
   campos.forEach((campo) => {
@@ -189,6 +194,8 @@ document
       "form_persona_presente",
       "reinspeccion_prevencion",
       "retencion_preventiva",
+      "artificios_pirotecnico",
+      "lesionados",
     ];
 
     const showElements = (elementsToShow) => {
@@ -701,7 +708,10 @@ document
               setRequired(campos2, true);
               document.getElementById("button_submit").style.display = "block";
             } else if (this.value != "1") {
-              console.log("hola")
+              let rescate_persona = document.getElementById("rescate_persona").querySelector("h4")
+              let titulo = this.options[this.selectedIndex].text
+              // console.log(rescate_persona, titulo)
+              rescate_persona.textContent = titulo
               requiredExceptions(
                 document
                   .getElementById("rescate_animal")
@@ -740,10 +750,10 @@ document
 
           });
         document
-          .getElementById("id_incendio_form-check_agregar_vehiculo")
+          .getElementById("id_incendio_form-tipo_incendio")
           .addEventListener("change", function () {
 
-            if (this.checked) {
+            if (this.value == "2") {
               let campo2 = document.getElementById("detalles_vehiculo").querySelectorAll("select, input")
               setRequired(campo2, true)
               document.getElementById("detalles_vehiculo").style.display = "flex"
@@ -775,6 +785,9 @@ document
         document.getElementById("button_submit").style.display = "block";
         break;
       case "14":
+        let select_vivienda = document.getElementById("evaluacion_riesgo").querySelector(".form-style > div:nth-of-type(2)")
+        console.log(select_vivienda)
+        select_vivienda.style.display = "none"
         requiredFalse();
         showElements(["evaluacion_riesgo"]);
         campos = document
@@ -786,10 +799,25 @@ document
           .getElementById("form_persona_presente")
           .querySelectorAll("select, input");
 
+        document.getElementById("id_evaluacion_riesgo_form-tipo_riesgo").addEventListener("change", function () {
+          if(this.value === "1"){
+            select_vivienda.style.display = 'flex';
+            select_vivienda.querySelector("select").value = ''; // Borra la selección
+            let campos3 = select_vivienda.querySelectorAll("select, input")
+            setRequired(campos3, "true")
+          } else {
+            
+            select_vivienda.style.display = "none";
+            select_vivienda.querySelector("select").value = ''; // Borra la selección
+            requiredExceptions(select_vivienda.querySelectorAll("select, input"))
+          }
+        })
+        
         query = document.getElementById("id_form1-opciones");
         if (query.value === "3") {
-          showElements(["evaluacion_riesgo", "form_persona_presente"]);
+          showElements(["evaluacion_riesgo"]);
           setRequired(campos2, true);
+          document.getElementById("form_persona_presente").style.display = "flex"
         } else {
           requiredExceptions(campos2);
         }
@@ -838,6 +866,27 @@ document
           .querySelectorAll("select, input");
         setRequired(campos, true);
         document.getElementById("button_submit").style.display = "block";
+        break;
+      case "22":
+        requiredFalse()
+        showElements(["artificios_pirotecnico"]);
+
+        document.getElementById("id_artificios_pirotecnico-tipo_procedimiento").addEventListener("change", function () {
+
+          switch (this.value){
+            case "1":
+              showElements(["artificios_pirotecnico", "incendio_form"]);
+            break
+            case "2":
+              showElements(["artificios_pirotecnico", "lesionados"]);
+            break
+            case "3":
+              showElements(["artificios_pirotecnico", "fallecidos"]);
+            break
+          }
+
+        })
+
         break;
       default:
         elementsToHide.forEach((id) => {
@@ -888,3 +937,4 @@ document.addEventListener("DOMContentLoaded", function () {
     select.options[0].disabled = true;
   });
 });
+

@@ -56,83 +56,159 @@ def obtener_meses(request):
     return JsonResponse(data)
 
 def obtener_porcentajes(request, periodo="general"):
-    # Si el periodo es "mes", calcular para el mes actual
     if periodo == "mes":
-        # Obtener la fecha actual y calcular la del inicio del mes
         now = timezone.now()
         start_of_month = now.replace(day=1)
-        procedimientos_queryset = Procedimientos.objects.filter(fecha__gte=start_of_month)  # Asegúrate de que tienes un campo `fecha`
+        procedimientos_queryset = Procedimientos.objects.filter(fecha__gte=start_of_month)
     else:
-        # Si es "general", simplemente obtener todos los procedimientos
         procedimientos_queryset = Procedimientos.objects.all()
 
-    # Calcular el conteo de procedimientos por división
-    rescate = procedimientos_queryset.filter(id_division=1).count()
-    operaciones = procedimientos_queryset.filter(id_division=2).count()
-    prevencion = procedimientos_queryset.filter(id_division=3).count()
-    grumae = procedimientos_queryset.filter(id_division=4).count()
-    prehospitalaria = procedimientos_queryset.filter(id_division=5).count()
-    enfermeria = procedimientos_queryset.filter(id_division=6).count()
-    servicios_medicos = procedimientos_queryset.filter(id_division=7).count()
-    psicologia = procedimientos_queryset.filter(id_division=8).count()
-    capacitacion = procedimientos_queryset.filter(id_division=9).count()
+    # Contar procedimientos por división
+    divisiones = {
+        'rescate': procedimientos_queryset.filter(id_division=1).count(),
+        'operaciones': procedimientos_queryset.filter(id_division=2).count(),
+        'prevencion': procedimientos_queryset.filter(id_division=3).count(),
+        'grumae': procedimientos_queryset.filter(id_division=4).count(),
+        'prehospitalaria': procedimientos_queryset.filter(id_division=5).count(),
+        'enfermeria': procedimientos_queryset.filter(id_division=6).count(),
+        'servicios_medicos': procedimientos_queryset.filter(id_division=7).count(),
+        'psicologia': procedimientos_queryset.filter(id_division=8).count(),
+        'capacitacion': procedimientos_queryset.filter(id_division=9).count(),
+    }
 
     # Total de procedimientos
-    procedimientos_totales = procedimientos_queryset.count()
+    procedimientos_totales = sum(divisiones.values())
 
-    # Calcular los porcentajes
+
+    # Inicializar porcentajes
+    porcentajes = {key: 0.0 for key in divisiones.keys()}
+
+    # Calcular y ajustar los porcentajes
     if procedimientos_totales > 0:
-        porcentajes = {
-            'rescate': (rescate / procedimientos_totales) * 100,
-            'operaciones': (operaciones / procedimientos_totales) * 100,
-            'prevencion': (prevencion / procedimientos_totales) * 100,
-            'grumae': (grumae / procedimientos_totales) * 100,
-            'prehospitalaria': (prehospitalaria / procedimientos_totales) * 100,
-            'enfermeria': (enfermeria / procedimientos_totales) * 100,
-            'servicios_medicos': (servicios_medicos / procedimientos_totales) * 100,
-            'psicologia': (psicologia / procedimientos_totales) * 100,
-            'capacitacion': (capacitacion / procedimientos_totales) * 100,
-        }
+        total_ajustado = 0.0
 
-        # Ajustar los porcentajes para asegurarnos de que sumen 100%
-        total_porcentajes = sum(porcentajes.values())
-        for key in porcentajes:
-            porcentajes[key] = (porcentajes[key] * 100) / total_porcentajes
+        for key, count in divisiones.items():
+            porcentaje = (count / procedimientos_totales) * 100
+            porcentaje_redondeado = round(porcentaje, 1)
+            porcentajes[key] = porcentaje_redondeado
+            total_ajustado += porcentaje_redondeado
 
-        # Redondear los porcentajes a dos decimales
-        for key in porcentajes:
-            porcentajes[key] = round(porcentajes[key], 2)
-    else:
-        porcentajes = {
-            'rescate': 0,
-            'operaciones': 0,
-            'prevencion': 0,
-            'grumae': 0,
-            'prehospitalaria': 0,
-            'enfermeria': 0,
-            'servicios_medicos': 0,
-            'psicologia': 0,
-            'capacitacion': 0,
-        }
-        
-    # data = {
-    #     "rescate": rescate,
-    #     "operaciones": operaciones,
-    #     "prevencion": prevencion,
-    #     "grumae": grumae,
-    #     "prehospitalaria": prehospitalaria,
-    #     "enfermeria": enfermeria,
-    #     "servicios_medicos": servicios_medicos,
-    #     "psicologia": psicologia,
-    #     "capacitacion": capacitacion,
-    #   }
+        # Calcular el ajuste necesario
+        ajuste = 100 - total_ajustado
+
+
+        if ajuste != 0:
+            # Ajustar el último porcentaje
+            last_key = list(porcentajes.keys())[-1]
+            porcentajes[last_key] += ajuste
+
+            # Asegurarse de que el último porcentaje no exceda 100
+            if porcentajes[last_key] > 100:
+                porcentajes[last_key] = 100
 
     return JsonResponse(porcentajes)
+
+def obtener_procedimientos_parroquias(request):
+
+    # Obtener la fecha de hoy y el primer día del mes
+    hoy = datetime.now().date()
+    primer_dia_mes = hoy.replace(day=1)
+
+    procedimientos = {
+        "otros_municipios": {
+            "total": Procedimientos.objects.filter(id_parroquia=0).count(),
+            "del_mes": Procedimientos.objects.filter(id_parroquia=0, fecha__gte=primer_dia_mes).count(),
+            "hoy": Procedimientos.objects.filter(id_parroquia=0, fecha=hoy).count(),
+        },
+        "concordia": {
+            "total": Procedimientos.objects.filter(id_parroquia=1).count(),
+            "del_mes": Procedimientos.objects.filter(id_parroquia=1, fecha__gte=primer_dia_mes).count(),
+            "hoy": Procedimientos.objects.filter(id_parroquia=1, fecha=hoy).count(),
+        },
+        "pedro_m": {
+            "total": Procedimientos.objects.filter(id_parroquia=2).count(),
+            "del_mes": Procedimientos.objects.filter(id_parroquia=2, fecha__gte=primer_dia_mes).count(),
+            "hoy": Procedimientos.objects.filter(id_parroquia=2, fecha=hoy).count(),
+        },
+        "san_juan": {
+            "total": Procedimientos.objects.filter(id_parroquia=3).count(),
+            "del_mes": Procedimientos.objects.filter(id_parroquia=3, fecha__gte=primer_dia_mes).count(),
+            "hoy": Procedimientos.objects.filter(id_parroquia=3, fecha=hoy).count(),
+        },
+        "san_sebastian": {
+            "total": Procedimientos.objects.filter(id_parroquia=4).count(),
+            "del_mes": Procedimientos.objects.filter(id_parroquia=4, fecha__gte=primer_dia_mes).count(),
+            "hoy": Procedimientos.objects.filter(id_parroquia=4, fecha=hoy).count(),
+        },
+        "francisco_romero_lobo": {
+            "total": Procedimientos.objects.filter(id_parroquia=6).count(),
+            "del_mes": Procedimientos.objects.filter(id_parroquia=6, fecha__gte=primer_dia_mes).count(),
+            "hoy": Procedimientos.objects.filter(id_parroquia=6, fecha=hoy).count(),
+        },
+    }
+
+    # print(procedimientos)
+    return JsonResponse(procedimientos)
+
+def obtener_divisiones(request):
+    hoy = datetime.now().date()
+    primer_dia_mes = hoy.replace(day=1)
+
+    # Filtrado de procedimientos por división
+    divisiones = {
+        "rescate": {
+            "total": Procedimientos.objects.filter(id_division=1).count(),
+            "del_mes": Procedimientos.objects.filter(id_division=1, fecha__gte=primer_dia_mes).count(),
+            "hoy": Procedimientos.objects.filter(id_division=1, fecha=hoy).count(),
+        },
+        "operaciones": {
+            "total": Procedimientos.objects.filter(id_division=2).count(),
+            "del_mes": Procedimientos.objects.filter(id_division=2, fecha__gte=primer_dia_mes).count(),
+            "hoy": Procedimientos.objects.filter(id_division=2, fecha=hoy).count(),
+        },
+        "prevencion": {
+            "total": Procedimientos.objects.filter(id_division=3).count(),
+            "del_mes": Procedimientos.objects.filter(id_division=3, fecha__gte=primer_dia_mes).count(),
+            "hoy": Procedimientos.objects.filter(id_division=3, fecha=hoy).count(),
+        },
+        "grumae": {
+            "total": Procedimientos.objects.filter(id_division=4).count(),
+            "del_mes": Procedimientos.objects.filter(id_division=4, fecha__gte=primer_dia_mes).count(),
+            "hoy": Procedimientos.objects.filter(id_division=4, fecha=hoy).count(),
+        },
+        "prehospitalaria": {
+            "total": Procedimientos.objects.filter(id_division=5).count(),
+            "del_mes": Procedimientos.objects.filter(id_division=5, fecha__gte=primer_dia_mes).count(),
+            "hoy": Procedimientos.objects.filter(id_division=5, fecha=hoy).count(),
+        },
+        "enfermeria": {
+            "total": Procedimientos.objects.filter(id_division=6).count(),
+            "del_mes": Procedimientos.objects.filter(id_division=6, fecha__gte=primer_dia_mes).count(),
+            "hoy": Procedimientos.objects.filter(id_division=6, fecha=hoy).count(),
+        },
+        "servicios_medicos": {
+            "total": Procedimientos.objects.filter(id_division=7).count(),
+            "del_mes": Procedimientos.objects.filter(id_division=7, fecha__gte=primer_dia_mes).count(),
+            "hoy": Procedimientos.objects.filter(id_division=7, fecha=hoy).count(),
+        },
+        "psicologia": {
+            "total": Procedimientos.objects.filter(id_division=8).count(),
+            "del_mes": Procedimientos.objects.filter(id_division=8, fecha__gte=primer_dia_mes).count(),
+            "hoy": Procedimientos.objects.filter(id_division=8, fecha=hoy).count(),
+        },
+        "capacitacion": {
+            "total": Procedimientos.objects.filter(id_division=9).count(),
+            "del_mes": Procedimientos.objects.filter(id_division=9, fecha__gte=primer_dia_mes).count(),
+            "hoy": Procedimientos.objects.filter(id_division=9, fecha=hoy).count(),
+        },
+    }
+
+    return JsonResponse(divisiones)
 
 def login_required(view_func):
     def _wrapped_view(request, *args, **kwargs):
         if 'user' not in request.session:
-            return redirect('/')  # Redirigir a la página de inicio de sesión
+            return redirect('/login/')  # Redirigir a la página de inicio de sesión
         return view_func(request, *args, **kwargs)
     return _wrapped_view
 
@@ -162,81 +238,21 @@ def Home(request):
             messages.error(request, 'Usuario o contraseña incorrectos')
             return render(request, 'index.html', {'error': True})
 
+def Blog(request):
+    return render(request, 'blog.html')
+
 @login_required
 def Dashboard(request):
     user = request.session.get('user')
     
     if not user:
         return redirect('/')
-    
-    # Obtener la fecha de hoy
-    hoy = datetime.now().date()
-
-    # Consultas de procedimientos para cada parroquia
-    otros_municipios = Procedimientos.objects.filter(id_parroquia=0)
-    concordia = Procedimientos.objects.filter(id_parroquia=1)
-    pedro_m = Procedimientos.objects.filter(id_parroquia=2)
-    san_juan = Procedimientos.objects.filter(id_parroquia=3)
-    san_sebastian = Procedimientos.objects.filter(id_parroquia=4)
-    francisco_romero_lobo = Procedimientos.objects.filter(id_parroquia=6)
-
-    # Filtrar procedimientos por la fecha de hoy para cada parroquia
-    otros_municipios_hoy = otros_municipios.filter(fecha=hoy).count()
-    concordia_hoy = concordia.filter(fecha=hoy).count()
-    pedro_m_hoy = pedro_m.filter(fecha=hoy).count()
-    san_juan_hoy = san_juan.filter(fecha=hoy).count()
-    san_sebastian_hoy = san_sebastian.filter(fecha=hoy).count()
-    francisco_romero_lobo_hoy = francisco_romero_lobo.filter(fecha=hoy).count()
-    
-    # Filtrado de procedimientos por division a la fecha de hoy
-    rescate = Procedimientos.objects.filter(id_division=1)
-    rescate_hoy = rescate.filter(fecha=hoy).count()
-    
-    operaciones = Procedimientos.objects.filter(id_division=2)
-    op_hoy = operaciones.filter(fecha=hoy).count()
-    
-    prevencion = Procedimientos.objects.filter(id_division=3)
-    prevencion_hoy = prevencion.filter(fecha=hoy).count()
-    
-    grumae = Procedimientos.objects.filter(id_division=4)
-    grumae_hoy = grumae.filter(fecha=hoy).count()
-    
-    prehospitalaria = Procedimientos.objects.filter(id_division=5)
-    prehospitalaria_hoy = prehospitalaria.filter(fecha=hoy).count()
-    
-    enfermeria = Procedimientos.objects.filter(id_division=6)
-    enfermeria_hoy = enfermeria.filter(fecha=hoy).count()
-    
-    servicios_medicos = Procedimientos.objects.filter(id_division=7)
-    servicios_medicos_hoy = servicios_medicos.filter(fecha=hoy).count()
-    
-    psicologia = Procedimientos.objects.filter(id_division=8)
-    psicologia_hoy = psicologia.filter(fecha=hoy).count()
-    
-    capacitacion = Procedimientos.objects.filter(id_division=9)
-    capacitacion_hoy = capacitacion.filter(fecha=hoy).count()
-    
     # Renderizar la página con los datos
     return render(request, "dashboard.html", {
         "user": user,
         "jerarquia": user["jerarquia"],
         "nombres": user["nombres"],
         "apellidos": user["apellidos"],
-        "concordia": concordia_hoy,
-        "pedro_m": pedro_m_hoy,
-        "san_juan": san_juan_hoy,
-        "san_sebastian": san_sebastian_hoy,
-        "francisco_romero_lobo": francisco_romero_lobo_hoy,
-        "otros_municipios": otros_municipios_hoy,
-        "rescate": rescate_hoy,
-        "op_hoy": op_hoy,
-        "prevencion_hoy": prevencion_hoy,
-        "grumae_hoy": grumae_hoy,
-        "prehospitalaria_hoy": prehospitalaria_hoy,
-        "enfermeria_hoy": enfermeria_hoy,
-        "servicios_medicos_hoy": servicios_medicos_hoy,
-        "psicologia_hoy": psicologia_hoy,
-        "capacitacion_hoy": capacitacion_hoy,
     })
 
 @login_required
@@ -326,7 +342,9 @@ def View_Procedimiento(request):
         persona_presente_eval_form = Formularia_Persona_Presente_Eval(request.POST, prefix='persona_presente_eval_form')
         reinspeccion_prevencion = Formulario_Reinspeccion_Prevencion(request.POST, prefix='reinspeccion_prevencion')
         retencion_preventiva = Formulario_Retencion_Preventiva(request.POST, prefix='retencion_preventiva')
-        
+        artificios_pirotecnico = Formulario_Artificios_Pirotecnicos(request.POST, prefix='artificios_pirotecnico')
+        lesionados = Formulario_Lesionado(request.POST, prefix='lesionado')
+
         # Imprimir request.POST para depuración
 
         if not form.is_valid():
@@ -824,10 +842,7 @@ def View_Procedimiento(request):
                     )
                     new_persona_presente.save()
                     
-                    
-                check_agregar_vehiculos = incendio_form.cleaned_data["check_agregar_vehiculo"]
-                
-                if check_agregar_vehiculos == True and detalles_vehiculo_form.is_valid():
+                if id_tipo_incendio == "2" and detalles_vehiculo_form.is_valid():
                     modelo = detalles_vehiculo_form.cleaned_data["modelo"]
                     marca = detalles_vehiculo_form.cleaned_data["marca"]
                     color = detalles_vehiculo_form.cleaned_data["color"]
@@ -1097,7 +1112,9 @@ def View_Procedimiento(request):
         persona_presente_eval_form = Formularia_Persona_Presente_Eval(prefix='persona_presente_eval_form')
         reinspeccion_prevencion = Formulario_Reinspeccion_Prevencion(prefix='reinspeccion_prevencion')
         retencion_preventiva = Formulario_Retencion_Preventiva(prefix='retencion_preventiva')
-        
+        artificios_pirotecnico = Formulario_Artificios_Pirotecnicos(prefix='artificios_pirotecnico')
+        lesionados = Formulario_Lesionado(prefix='lesionado')
+
     return render(request, "procedimientos.html", {
         "user": user,
         "jerarquia": user["jerarquia"],
@@ -1143,6 +1160,8 @@ def View_Procedimiento(request):
         "persona_presente_eval_form": persona_presente_eval_form,
         "reinspeccion_prevencion": reinspeccion_prevencion,
         "retencion_preventiva": retencion_preventiva,
+        "artificios_pirotecnico": artificios_pirotecnico,
+        "lesionados": lesionados,
     })
 # Vista de la seccion de Estadisticas
 
@@ -1577,7 +1596,6 @@ def obtener_procedimiento(request, id):
         'tipo_procedimiento': procedimiento.id_tipo_procedimiento.tipo_procedimiento,
     }
     
-    
     if str(procedimiento.id_tipo_procedimiento.id) == "1":
         detalle_procedimiento = get_object_or_404(Abastecimiento_agua, id_procedimiento=id)
         
@@ -1859,7 +1877,14 @@ def obtener_procedimiento(request, id):
                         cedula = detalle_persona.cedula,
                         telefono = detalle_persona.telefono,
                         )
-    
+        if detalle_procedimiento.tipo_estructura:
+            data = dict(data,
+                        tipo_estructura = detalle_procedimiento.tipo_estructura)
+        
+        else: 
+            data = dict(data,
+                        tipo_estructura = "")
+        
     if str(procedimiento.id_tipo_procedimiento.id) == "15":
         detalle_procedimiento = get_object_or_404(Puesto_Avanzada, id_procedimientos=id)
         data = dict(data,

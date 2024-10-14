@@ -137,7 +137,14 @@ class Tipo_Incendio(models.Model):
 
   def __str__(self):
     return self.tipo_incendio
-    
+
+# Tipos de procedimiento por artificio pirotecnico
+class Tipos_Artificios(models.Model):
+  tipo = models.CharField(max_length=50)
+
+  def __str__(self):
+    return self.tipo
+
 # Modelo Proncipal para todos los Procedimientos
 class Procedimientos(models.Model):
     id_division  = models.ForeignKey(Divisiones, on_delete=models.CASCADE, default=0)
@@ -511,3 +518,18 @@ class Retencion_Preventiva(models.Model):
   
   def __str__(self):
     return self.id_procedimiento.id_tipo_procedimiento.tipo_procedimiento + " -- " + self.tipo_cilindro + " -- " + self.capacidad + " -- " + self.serial + " -- " + self.nro_constancia_retencion + " -- " + self.descripcion + " -- " + self.material_utilizado + " -- " + self.status
+
+# Tabla de Artificios Pirotecnicos
+class Artificios_Pirotecnicos(models.Model):
+   id_procedimiento = models.ForeignKey(Procedimientos, on_delete=models.CASCADE)
+   nombre_comercio = models.CharField(max_length=60)
+   rif_comerciante = models.CharField(max_length=60)
+   tipo_procedimiento = models.ForeignKey(Tipos_Artificios, on_delete=models.CASCADE)
+
+   # Relaciones que eliminan registros relacionados
+   id_incendio = models.ForeignKey(Incendios, null=True, blank=True, on_delete=models.CASCADE)
+   id_lesionado = models.ForeignKey(Lesionados, null=True, blank=True, on_delete=models.CASCADE)
+   id_fallecido = models.ForeignKey(Fallecidos, null=True, blank=True, on_delete=models.CASCADE)
+
+   def __str__(self):
+     return self.id_procedimiento.id_tipo_procedimiento.tipo_procedimiento + " -- " + self.nombre_comercio + " -- " + self.rif_comerciante + " -- " + self.tipo_procedimiento

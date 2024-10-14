@@ -21,7 +21,8 @@ from web.views import *
 #Se crean las rutas que se podran visitar en la aplicacion web.
 urlpatterns = [
     path('alpha04/', admin.site.urls),
-    path('', Home,name="home"),
+    path('login/', Home, name="home"),
+    path('', Blog, name="blog"),
     path('dashboard/', Dashboard,name='dashboard') ,
     path('prueba/', Prueba),
     path('tablageneral/', tabla_general),
@@ -40,4 +41,6 @@ urlpatterns = [
     path('api/meses/', obtener_meses, name='obtener_meses'),
     path('api/porcentajes/<str:periodo>/', obtener_porcentajes, name='api_porcentajes'),
     path('logout/', logout, name='logout'),
+    path('api/parroquias/', obtener_procedimientos_parroquias, name='obtener_parroquias'),
+    path('api/divisiones/', obtener_divisiones, name='obtener_divisiones'),
 ]
