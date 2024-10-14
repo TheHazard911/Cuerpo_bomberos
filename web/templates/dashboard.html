@@ -38,30 +38,37 @@
   <div class="card-new">
     <div class="procediments-contain">
       <h4 class="title-procediments">Incidentes Diarios - Parroquias</h4>
+      <div class="position-end">
+        <div class="btn-group" role="group" aria-label="Basic mixed styles example">
+          <button class="btn btn-outline-danger" onclick="fetchProcedimientos('Total')">Total</button>
+          <button class="btn btn-outline-danger" onclick="fetchProcedimientos('Mes')">Mes</button>
+          <button class="btn btn-outline-danger" onclick="fetchProcedimientos('Hoy')">Hoy</button>
+        </div>
+      </div>
         <section class="items-cards">
          <article class="card-parroquies">
           <p>La <br>concordia</p>
-           <span id="concordia" class="color-pink">{{ concordia }}</span>
+           <span id="concordia" class="color-pink">0</span>
           </article>
           <article class="card-parroquies">
             <p>San <br> sebastian</p>
-            <span id="san_sebastian" class="color-blue">{{ san_sebastian }}</span>
+            <span id="san_sebastian" class="color-blue">0</span>
           </article>
           <article class="card-parroquies">
             <p>Pedro <br>Maria Morantes</p>
-            <span id="pedro_m" class="color-cyan">{{ pedro_m }}</span>
+            <span id="pedro_m" class="color-cyan">0</span>
           </article>
           <article class="card-parroquies">
             <p>San Juan <br> Bautista</p>
-            <span id="san_juan" class="color-orange">{{ san_juan }}</span>
+            <span id="san_juan" class="color-orange">0</span>
           </article>
           <article class="card-parroquies">
             <p>Francisco <br> Romero Lobo</p>
-            <span id="san_sebastian" class="color-violet">{{ francisco_romero_lobo }}</span>
+            <span id="francisco_romero" class="color-violet">0</span>
           </article>
           <article class="card-parroquies">
             <p>Otros <br> Municipios</p>
-            <span id="otros_municipios" class="color-yellow">{{ otros_municipios }}</span>
+            <span id="otros_municipios" class="color-yellow">0</span>
           </article>
         </section>
       </div>
@@ -69,57 +76,63 @@
     <!-- resumen de procedimientos por division -->
     <div class="procediments-contain">
       <h4 class="title-procediments">Procedimientos Diarios - Divisiones</h4>
+      <div class="position-end">
+        <div class="btn-group" role="group" aria-label="Basic mixed styles example">
+          <button class="btn btn-outline-danger" id="btn-total">Total</button>
+          <button class="btn btn-outline-danger" id="btn-month">Mes</button>
+          <button class="btn btn-outline-danger" id="btn-today">Hoy</button>
+        </div>
+      </div>
       <div class="items-row">
         <section class="items-list style-two">
-          <ol>
-            <li class="card-background-blue">
-              <p>Grumae</p>
-              <span>{{ grumae_hoy }}</span>
-            </li>
-            <li class="card-background-green">
-              <p>Rescate</p>
-              <span>{{ rescate }}</span>
-            </li>
-            <li class="card-background-violet">
-              <p>Psicologia</p>
-              <span>{{ psicologia_hoy }}</span>
-            </li>
- 
-            </li>
-          </ol>
+            <ol>
+                <li class="card-background-blue" data-division="grumae">
+                    <p>Grumae</p>
+                    <span class="count">0</span>
+                </li>
+                <li class="card-background-green" data-division="rescate">
+                    <p>Rescate</p>
+                    <span class="count">0</span>
+                </li>
+                <li class="card-background-violet" data-division="psicologia">
+                    <p>Psicologia</p>
+                    <span class="count">0</span>
+                </li>
+            </ol>
         </section>
         <section class="items-list style-two">
-          <ol>
-            <li class="card-background-red-light">
-              <p>Operaciones</p>
-              <span>{{ op_hoy }}</span>
-            </li>
-            <li class="card-background-orange">
-              <p>Enfermeria</p>
-              <span>{{ enfermeria_hoy }}</span>
-            </li>
-            <li class="card-background-blue-black">
-              <p>Prevencion</p>
-              <span>{{ prevencion_hoy }}</span>
-          </ol>
+            <ol>
+                <li class="card-background-red-light" data-division="operaciones">
+                    <p>Operaciones</p>
+                    <span class="count">0</span>
+                </li>
+                <li class="card-background-orange" data-division="enfermeria">
+                    <p>Enfermeria</p>
+                    <span class="count">0</span>
+                </li>
+                <li class="card-background-blue-black" data-division="prevencion">
+                    <p>Prevencion</p>
+                    <span class="count">0</span>
+                </li>
+            </ol>
         </section>
         <section class="items-list style-two">
-          <ol>
-            <li class="card-background-cyan">
-              <p>Capacitacion</p>
-              <span>{{ capacitacion_hoy }}</span>
-            </li>
-            <li class="card-background-purple">
-              <p>PreHospitalaria</p>
-              <span>{{ prehospitalaria_hoy }}</span>
-            </li>
-            <li class="card-background-red">
-              <p>Servicios Medicos</p>
-              <span>{{ servicios_medicos_hoy }}</span>
-            </li>
-          </ol>
+            <ol>
+                <li class="card-background-cyan" data-division="capacitacion">
+                    <p>Capacitacion</p>
+                    <span class="count">0</span>
+                </li>
+                <li class="card-background-purple" data-division="prehospitalaria">
+                    <p>PreHospitalaria</p>
+                    <span class="count">0</span>
+                </li>
+                <li class="card-background-red" data-division="servicios_medicos">
+                    <p>Servicios Medicos</p>
+                    <span class="count">0</span>
+                </li>
+            </ol>
         </section>
-      </div>
+    </div>
     </div>
   </div>
 
@@ -129,16 +142,17 @@
     <canvas id="myChart"></canvas>
   </div>
 </div>
-
 <!-- Resumen de procedimientos  -->
-<h4 class="title-stadist-parroquies">Resumen - Procedimientos</h4>
-<!-- Botones para elegir el período -->
-<div>
-  <button onclick="fetchPorcentajes('general')">Mostrar Porcentajes Generales</button>
-  <button onclick="fetchPorcentajes('mes')">Mostrar Porcentajes del Mes</button>
-</div>
-
+<h4 class="title-stadist-parroquies">Porcentajes - Divisiones</h4>
+<div class="analitics-filters">
+  <div class="position-end">
+    <div class="btn-group" role="group" aria-label="Basic mixed styles example">
+      <button class="btn btn-outline-danger" onclick="fetchPorcentajes('general')">Total</button>
+      <button class="btn btn-outline-danger" onclick="fetchPorcentajes('mes')">Mes</button>
+    </div>
+  </div>
 <div class="div-analytics">
+  <!-- Botones para elegir el período -->
  <section class="progress-bar">
     <p>Operaciones</p>
     <p id="progress-text-operaciones">0%</p>
@@ -248,6 +262,8 @@
     </div>
   </section>
 </div>
+</div>
+
 
 <!-- fin resumen de procedimientos -->
 <script src="../static/js/animate.js"></script>

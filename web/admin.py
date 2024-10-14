@@ -50,5 +50,7 @@ admin.site.register(Traslado_Prehospitalaria)
 admin.site.register(Asesoramiento)
 admin.site.register(Tipo_Cilindro)
 admin.site.register(Reinspeccion_Prevencion)
+admin.site.register(Artificios_Pirotecnicos)
+admin.site.register(Tipos_Artificios)
 
 

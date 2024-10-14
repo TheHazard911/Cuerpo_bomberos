@@ -1,7 +1,6 @@
 from django import forms
 from.models import *
 
-
 def Asignar_ops_Personal():
     personal = Personal.objects.all()
     op = [("", "Seleccione Una Opcion")]
@@ -110,6 +109,7 @@ def Asignar_opc_unidades():
 def Asignar_opc_avanzada():
    procedimientos = Motivo_Avanzada.objects.all()
    op = [("", "Seleccione Una Opcion")]
+
    for procedimiento in procedimientos:
        op.append((str(procedimiento.id), procedimiento.tipo_servicio))
    return op
@@ -126,6 +126,13 @@ def Asignar_opc_cilindros():
    op = [("", "Seleccione Una Opcion")]
    for procedimiento in procedimientos:
        op.append((str(procedimiento.id), procedimiento.nombre_cilindro))
+   return op
+
+def Asignar_op_Artificios():
+   procedimientos = Tipos_Artificios.objects.all()
+   op = [("", "Seleccione Una Opcion")]
+   for procedimiento in procedimientos:
+       op.append((str(procedimiento.id), procedimiento.tipo))
    return op
 
 # Form1
@@ -276,7 +283,6 @@ class Formulario_Incendio(forms.Form):
     material_utilizado = forms.CharField(max_length=30, required=False)
     status = forms.ChoiceField(choices=[("", "Seleccione Una Opcion"), ("Culminado", "Culminado"), ("En Proceso", "En Proceso")], widget=forms.Select(attrs={"class": "disable-first-option"}), required=False)
     check_agregar_persona = forms.BooleanField(required=False,label="Agregar Persona")
-    check_agregar_vehiculo = forms.BooleanField(required=False,label="Agregar Vehiculo")
     
 class Formulario_Persona_Presente(forms.Form):
     nombre = forms.CharField(max_length=30, required=False)
@@ -466,3 +472,18 @@ class Formulario_Retencion_Preventiva(forms.Form):
     descripcion = forms.CharField(max_length=100, required=False)
     material_utilizado = forms.CharField(max_length=100, required=False)
     status = forms.ChoiceField(choices=[("", "Seleccione Una Opcion"), ("Culminado", "Culminado"), ("En Proceso", "En Proceso")], widget=forms.Select(attrs={"class": "disable-first-option"}), required=False)
+
+class Formulario_Artificios_Pirotecnicos(forms.Form):
+    nombre_comercio = forms.CharField(max_length=60, required=False)
+    rif_comercio = forms.CharField(max_length=60, required=False)
+    tipo_procedimiento = forms.ChoiceField(choices=Asignar_op_Artificios, widget=forms.Select(attrs={"class": "disable-first-option"}), required=False)
+
+class Formulario_Lesionado(forms.Form):
+    nombre = forms.CharField(max_length=40, required=False)
+    apellido = forms.CharField(max_length=40, required=False)
+    cedula = forms.CharField(max_length=10, required=False)
+    edad = forms.CharField(max_length=3, required=False)
+    sexo = forms.ChoiceField(choices=[("", "Seleccione Una Opcion"), ("Masculino", "Masculino"), ("Femenino", "Femenino")], widget=forms.Select(attrs={"class": "disable-first-option"}), required=False)
+    idx = forms.CharField(max_length=40, required=False)
+    descripcion = forms.CharField(max_length=40, required=False)
+    trasladado = forms.BooleanField(required=False)

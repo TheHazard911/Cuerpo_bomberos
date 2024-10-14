@@ -769,7 +769,8 @@ summary > * {
   width: auto;
   height: auto;
   padding: 0;
-  margin: 1rem;
+  margin: 0;
+  margin-top: 2rem;
 }
 .stadist-parroquies {
   display: flex;
@@ -1194,17 +1195,40 @@ summary > * {
 }
 .div-analytics {
   margin: 0 auto;
-  width: 90%;
+  width: auto;
   height: auto;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  padding-bottom: 2rem;
+  padding-top: .1rem;
+}
+.analitics-filters {
+  width: 90%;
+  margin: 0 auto;
   background-color: #ffffff;
   border: thin solid #ffffff;
   border-radius: 30px;
-  padding: 2rem;
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
-  flex-wrap: wrap;
 }
+.position-end {
+  height: auto;
+  width: auto;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  align-content: center;
+  margin: 0;
+  padding: 0;
+  div{
+    padding: 1rem;
+
+  }
+  span{
+    font-weight: 700;
+  }
+}
+
 .progress-bar {
   width: auto;
   height: auto;
@@ -1316,7 +1340,6 @@ summary > * {
   width: 100%;
   height: auto;
   margin: 0 auto;
-  margin-top: 1.5rem;
   margin-bottom: 2.5rem;
 }
 .card-new {
@@ -1478,13 +1501,13 @@ summary > * {
 }
 .buttons-items {
   display: flex;
-  button{
+  button {
     display: flex;
     align-items: center;
     align-content: center;
     justify-content: center;
     border: none;
-    padding: .5rem;
+    padding: 0.5rem;
     border-radius: 20px;
     width: 12rem;
     height: auto;
@@ -1493,7 +1516,7 @@ summary > * {
     color: #fff;
     font-family: var(--kanit-regular);
   }
-  button:hover{
-    background-color :rgb(151, 0, 0);
+  button:hover {
+    background-color: rgb(151, 0, 0);
   }
 }

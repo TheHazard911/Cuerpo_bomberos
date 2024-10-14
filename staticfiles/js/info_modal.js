@@ -196,7 +196,6 @@ document.querySelectorAll(".button-info").forEach((button) => {
               }
             }
             break;
-
           case "Servicios Especiales":
             detalles = `
                 <section class="detalles_procedimiento">
@@ -297,25 +296,49 @@ document.querySelectorAll(".button-info").forEach((button) => {
                         </section>`;
             break;
           case "Evaluación de Riesgos":
-            if(data.division == "Prevencion"){
-              detalles = `
+
+            if(data.tipo_estructura){
+              if(data.division == "Prevencion"){
+                detalles = `
+                <section class="detalles_procedimiento">
+                <h4>Detalles</h4>
+                ${generateCommonDetails(data, "tipo_de_evaluacion", "tipo_estructura")}
+                </section>
+                <section class="detalles_procedimiento">
+                <h4>Persona Presente</h4>
+                <p><b>Nombre: </b> ${data.nombre}</p>
+                <p><b>Apellido: </b> ${data.apellido}</p>
+                <p><b>Cedula: </b> V-${data.cedula}</p>
+                <p><b>Telefono: </b> ${data.telefono}</p>
+                </section>`;
+              } else {
+                detalles = `
+                <section class="detalles_procedimiento">
+                <h4>Detalles</h4>
+                ${generateCommonDetails(data, "tipo_de_evaluacion", "tipo_estructura")}
+                </section>`;
+              }
+            } else {
+                if(data.division == "Prevencion"){
+                  detalles = `
                   <section class="detalles_procedimiento">
-                    <h4>Detalles</h4>
-                    ${generateCommonDetails(data, "tipo_de_evaluacion")}
+                  <h4>Detalles</h4>
+                  ${generateCommonDetails(data, "tipo_de_evaluacion")}
                   </section>
                   <section class="detalles_procedimiento">
-                    <h4>Persona Presente</h4>
-                    <p><b>Nombre: </b> ${data.nombre}</p>
-                    <p><b>Apellido: </b> ${data.apellido}</p>
-                    <p><b>Cedula: </b> V-${data.cedula}</p>
-                    <p><b>Telefono: </b> ${data.telefono}</p>
+                  <h4>Persona Presente</h4>
+                  <p><b>Nombre: </b> ${data.nombre}</p>
+                  <p><b>Apellido: </b> ${data.apellido}</p>
+                  <p><b>Cedula: </b> V-${data.cedula}</p>
+                  <p><b>Telefono: </b> ${data.telefono}</p>
                   </section>`;
-            } else {
-              detalles = `
+                } else {
+                  detalles = `
                   <section class="detalles_procedimiento">
-                    <h4>Detalles</h4>
-                    ${generateCommonDetails(data, "tipo_de_evaluacion")}
+                  <h4>Detalles</h4>
+                  ${generateCommonDetails(data, "tipo_de_evaluacion")}
                   </section>`;
+                }
             }
             break;
           case "Asesoramiento":
