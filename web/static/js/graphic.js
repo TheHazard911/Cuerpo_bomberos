@@ -109,37 +109,65 @@ function updateProgressBar(id, progressValue) {
   progressText.textContent = progressValue + "%";
 }
 
-// Consumir la API usando fetch
-fetch("/api/porcentajes/")
-  .then((response) => response.json())
-  .then((porcentajes) => {
-    // Aquí puedes manejar los datos y mostrarlos en el frontend
+// Función para restablecer todas las barras de progreso y textos a 0%
+function resetProgressBars() {
+  const progressBars = document.querySelectorAll(".progress-bar");
+  const progressTexts = document.querySelectorAll('[id^="progress-text-"]');
 
-    function animateProgress(id, targetValue) {
-      let progress = 0;
-      const interval = setInterval(() => {
-        if (progress >= targetValue) {
-          clearInterval(interval);
-        } else {
-          progress++;
-          updateProgressBar(id, progress);
-        }
-      }, 10); // Ajusta la velocidad de la animación aquí
-    }
+  // Reiniciar todas las barras de progreso a 0%
+  progressBars.forEach((bar) => {
+    bar.style.width = "0%";
+  });
 
-    // Valores fijos para cada barra de progreso
-    var progressValues = {
-      operaciones: porcentajes.operaciones,
-      prehospitalaria: porcentajes.prehospitalaria,
-      rescate: porcentajes.rescate,
-      grumae: porcentajes.grumae,
-      servicios_medicos: porcentajes.servicios_medicos,
-      prevencion: porcentajes.prevencion,
-    };
+  // Reiniciar todos los textos de progreso a 0%
+  progressTexts.forEach((text) => {
+    text.textContent = "0%";
+  });
+}
 
-    // Inicia la animación para cada barra con los valores fijos
-    for (const id in progressValues) {
-      animateProgress(id, progressValues[id]);
-    }
-  })
-  .catch((error) => console.error("Error al consumir la API:", error));
+// Función para llamar a la API según el periodo
+function fetchPorcentajes(periodo) {
+  // Antes de actualizar, reiniciamos las barras de progreso
+  resetProgressBars();
+
+  fetch(`/api/porcentajes/${periodo}/`)
+    .then((response) => response.json())
+    .then((porcentajes) => {
+      // Función para animar las barras de progreso
+      function animateProgress(id, targetValue) {
+        let progress = 0;
+        const interval = setInterval(() => {
+          if (progress >= targetValue) {
+            clearInterval(interval);
+          } else {
+            progress++;
+            updateProgressBar(id, progress);
+          }
+        }, 10); // Ajusta la velocidad de la animación aquí
+      }
+
+      // Valores fijos para cada barra de progreso
+      var progressValues = {
+        operaciones: porcentajes.operaciones,
+        prehospitalaria: porcentajes.prehospitalaria,
+        rescate: porcentajes.rescate,
+        grumae: porcentajes.grumae,
+        servicios_medicos: porcentajes.servicios_medicos,
+        prevencion: porcentajes.prevencion,
+      };
+
+      // Inicia la animación para cada barra con los valores actualizados
+      for (const id in progressValues) {
+        animateProgress(id, progressValues[id]);
+      }
+    })
+    .catch((error) => console.error("Error al consumir la API:", error));
+}
+
+// Función para actualizar la barra de progreso en el DOM
+function updateProgressBar(id, value) {
+  const progressBar = document.getElementById(`progress-bar-${id}`);
+  const progressText = document.getElementById(`progress-text-${id}`);
+  progressBar.style.width = `${value}%`;
+  progressText.textContent = `${value}%`;
+}
