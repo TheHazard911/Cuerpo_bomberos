@@ -1174,24 +1174,10 @@ summary > * {
   width: 320px !important;
 }
 /*------------------------ estadisticas -----------------------------------*/
-.position-cards-stadists {
-  width: 100%;
-  height: auto;
-  padding: 2rem;
-}
 .column-one {
   display: flex;
   flex-direction: row;
   justify-content: center;
-}
-.cards-stadists {
-  width: 500px;
-  height: auto;
-  border-radius: 20px;
-  align-items: center;
-  margin: 1.5rem;
-  background-color: #f0f0f06a;
-  border: thin solid #dcdcdcdb;
 }
 .div-analytics {
   margin: 0 auto;
@@ -1202,7 +1188,7 @@ summary > * {
   flex-wrap: wrap;
   justify-content: space-evenly;
   padding-bottom: 2rem;
-  padding-top: .1rem;
+  padding-top: 0.1rem;
 }
 .analitics-filters {
   width: 90%;
@@ -1220,11 +1206,10 @@ summary > * {
   align-content: center;
   margin: 0;
   padding: 0;
-  div{
+  div {
     padding: 1rem;
-
   }
-  span{
+  span {
     font-weight: 700;
   }
 }
@@ -1519,4 +1504,74 @@ summary > * {
   button:hover {
     background-color: rgb(151, 0, 0);
   }
+}
+/*--------------------------- estilos de estadisticas -------------------------------------*/
+
+.cards-stadists {
+  width: 100%;
+  height: auto;
+  border: thin solid #ffffff;
+  background-color: #fff;
+  margin: 0.5rem;
+  border-radius: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  canvas {
+    width: 30rem;
+  }
+}
+.content-stadist {
+  width: 95%;
+  height: auto;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+.stadist-rows {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  height: auto;
+  padding: 2rem;
+  flex-wrap: wrap;
+}
+.cards-stadist-rows {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  width: auto;
+  height: auto;
+}
+.stadist-column {
+  display: flex;
+  width: 40%;
+  height: 120vh;
+}
+.cards-stadist-column {
+  width: 100%;
+  height: 100%;
+  border: thin solid #ffffff;
+  background-color: #fff;
+  border-radius: 20px;
+  padding: 2rem;
+}
+.graphic-bar {
+  margin: 0 auto;
+  width: 100%;
+  height: auto;
+  padding: 2rem;
+}
+.barts {
+  margin: 0 auto;
+  width: 95%;
+  height: auto;
+}
+.bar-graphic {
+  background-color: #fff;
+  border: thin solid #ffffff;
+  border-radius: 20px;
+  padding: 2rem;
 }

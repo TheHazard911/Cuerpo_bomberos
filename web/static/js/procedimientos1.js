@@ -1,6 +1,5 @@
 // < !--Script para cambiar el menu desplegable de tipo de procedimiento segun la division-- >
 // Define las opciones por categoría
-
 var inputExterno = document.getElementById("id_form2-solicitante_externo");
 
 // Luego selecciona el div que es el padre del input
@@ -890,6 +889,9 @@ document
               requiredExceptions(document.getElementById("persona_presente_art").querySelectorAll("select, input"))
               requiredExceptions(document.getElementById("incendio_art").querySelectorAll("input[type='checkbox']"))
 
+              requiredExceptions(document.getElementById("lesionados").querySelector("select, input"))
+              requiredExceptions(document.getElementById("fallecidos_art").querySelector("select, input"))
+
               document
                 .getElementById("id_incendio_art-check_agregar_persona")
                 .addEventListener("change", function () {
@@ -924,9 +926,20 @@ document
             break
             case "2":
               showElements(["artificios_pirotecnico", "lesionados"]);
+              campos = document.getElementById("lesionados").querySelectorAll("select, input")
+              setRequired(campos, true)
+              requiredExceptions(document.getElementById("fallecidos_art").querySelectorAll("select, input"))
+              requiredExceptions(document.getElementById("incendio_art").querySelectorAll("select, input"))
+              console.log("Holaaa")
+              document.getElementById("button_submit").style.display = "block";
             break
             case "3":
               showElements(["artificios_pirotecnico", "fallecidos_art"]);
+              campos = document.getElementById("fallecidos_art").querySelectorAll("select, input")
+              setRequired(campos, true)
+              requiredExceptions(document.getElementById("lesionados").querySelectorAll("select, input"))
+              requiredExceptions(document.getElementById("incendio_art").querySelectorAll("select, input"))
+              document.getElementById("button_submit").style.display = "block";
             break
           }
 
@@ -982,4 +995,3 @@ document.addEventListener("DOMContentLoaded", function () {
     select.options[0].disabled = true;
   });
 });
-

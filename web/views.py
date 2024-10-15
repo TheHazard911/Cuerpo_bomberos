@@ -1136,6 +1136,56 @@ def View_Procedimiento(request):
                         )
                         new_agregar_vehiculo.save()
 
+                if tipo_procedimiento_art == "2" and lesionados.is_valid():
+                    nombre = lesionados.cleaned_data["nombre"]
+                    apellido = lesionados.cleaned_data["apellido"]
+                    cedula = lesionados.cleaned_data["cedula"]
+                    edad = lesionados.cleaned_data["edad"]
+                    sexo = lesionados.cleaned_data["sexo"]
+                    idx = lesionados.cleaned_data["idx"]
+                    descripcion = lesionados.cleaned_data["descripcion"]
+                    status = lesionados.cleaned_data["status"]
+
+
+                    nuevo_lesionado_art = Lesionados_Art(
+                        id_accidente = nuevo_proc_artificio_pir,
+                        nombres = nombre,
+                        apellidos = apellido,
+                        cedula = cedula,
+                        edad = edad,
+                        sexo = sexo,
+                        idx = idx,
+                        descripcion = descripcion,
+                        status = status
+                    )
+
+                    nuevo_lesionado_art.save()
+
+                if tipo_procedimiento_art == "3" and fallecidos_art.is_valid():
+                    motivo_fallecimiento = fallecidos_art.cleaned_data["motivo_fallecimiento"]       
+                    nom_fallecido = fallecidos_art.cleaned_data["nom_fallecido"]
+                    apellido_fallecido = fallecidos_art.cleaned_data["apellido_fallecido"]
+                    cedula_fallecido = fallecidos_art.cleaned_data["cedula_fallecido"]
+                    edad = fallecidos_art.cleaned_data["edad"]
+                    sexo = fallecidos_art.cleaned_data["sexo"]
+                    descripcion = fallecidos_art.cleaned_data["descripcion"]
+                    material_utilizado = fallecidos_art.cleaned_data["material_utilizado"]
+                    status = fallecidos_art.cleaned_data["status"]
+
+                    nuevo_proc_fallecido_art = Fallecidos_Art(
+                        id_procedimiento = nuevo_proc_artificio_pir,
+                        motivo_fallecimiento = motivo_fallecimiento,
+                        nombres = nom_fallecido,
+                        apellidos = apellido_fallecido,
+                        cedula = cedula_fallecido,
+                        edad = edad,
+                        sexo = sexo,
+                        descripcion=descripcion,
+                        material_utilizado=material_utilizado,
+                        status=status
+                    )
+                    nuevo_proc_fallecido_art.save()
+
             # Redirige a /dashboard/ después de guardar los datos
             return redirect('/dashboard/')
     else:
@@ -2035,5 +2085,41 @@ def obtener_procedimiento(request, id):
                     material_utilizado = detalle_procedimiento.material_utilizado,
                     status = detalle_procedimiento.status,
                     )
+    
+    if str(procedimiento.id_tipo_procedimiento.id) == "22":
+        detalle_procedimiento = get_object_or_404(Artificios_Pirotecnicos, id_procedimiento=id)
+        data = dict(data,
+                    nombre_comercio = detalle_procedimiento.nombre_comercio,
+                    rif_comercio = detalle_procedimiento.rif_comerciante,
+                    tipo_procedimiento = detalle_procedimiento.tipo_procedimiento.tipo
+                    )
+        
+        if detalle_procedimiento.tipo_procedimiento == "1":
+            incendio = get_object_or_404(Incendios_Art, id_procedimientos=detalle_procedimiento.id)
+            data = dict(data,
+                        tipo_incendio = incendio.id_tipo_incendio.tipo_incendio,
+                        descripcion = incendio.descripcion,
+                        material_utilizado = incendio.material_utilizado,
+                        status = incendio.status,
+                        )
+            
+            if get_object_or_404(Persona_Presente_Art, id_incendio=incendio.id):
+                persona = get_object_or_404(Persona_Presente_Art, id_incendio=incendio.id)
+                data = dict(data, 
+                            nombre = persona.nombre,
+                            apellidos = persona.apellidos,
+                            cedula = persona.cedula,
+                            edad = persona.edad,
+                            )
+
+            if incendio.id_tipo_incendio.tipo_incendio == "Incendio de Vehiculo":
+                vehiculo = get_object_or_404(Detalles_Vehiculos_Art, id_vehiculo=incendio.id)
+                data = dict(data, 
+                            modelo = vehiculo.modelo,
+                            marca = vehiculo.marca,
+                            color = vehiculo.color,
+                            año = vehiculo.año,
+                            placas = vehiculo.placas,
+                            )
     
     return JsonResponse(data)

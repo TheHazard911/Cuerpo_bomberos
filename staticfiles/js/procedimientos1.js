@@ -1,6 +1,5 @@
 // < !--Script para cambiar el menu desplegable de tipo de procedimiento segun la division-- >
 // Define las opciones por categoría
-
 var inputExterno = document.getElementById("id_form2-solicitante_externo");
 
 // Luego selecciona el div que es el padre del input
@@ -196,6 +195,10 @@ document
       "retencion_preventiva",
       "artificios_pirotecnico",
       "lesionados",
+      "incendio_art",
+      "fallecidos_art",
+      "detalles_vehiculo_art",
+      "persona_presente_art",
     ];
 
     const showElements = (elementsToShow) => {
@@ -733,6 +736,7 @@ document
         setRequired(campos, true)
         requiredExceptions(document.getElementById("detalles_vehiculo").querySelectorAll("select, input"))
         requiredExceptions(document.getElementById("persona_presente").querySelectorAll("select, input"))
+        requiredExceptions(document.getElementById("incendio_form").querySelectorAll("input[type='checkbox']"))
 
         document
           .getElementById("id_incendio_form-check_agregar_persona")
@@ -870,18 +874,72 @@ document
       case "22":
         requiredFalse()
         showElements(["artificios_pirotecnico"]);
-
+        campos = document.getElementById("artificios_pirotecnico").querySelectorAll("select, input")
+        setRequired(campos, true)
+        requiredExceptions(document.getElementById("detalles_vehiculo_art").querySelectorAll("select, input"))
+        requiredExceptions(document.getElementById("persona_presente_art").querySelectorAll("select, input"))
         document.getElementById("id_artificios_pirotecnico-tipo_procedimiento").addEventListener("change", function () {
 
           switch (this.value){
             case "1":
-              showElements(["artificios_pirotecnico", "incendio_form"]);
+              showElements(["artificios_pirotecnico", "incendio_art"]);
+              campos = document.getElementById("incendio_art").querySelectorAll("select, input")
+              setRequired(campos, true)
+              requiredExceptions(document.getElementById("detalles_vehiculo_art").querySelectorAll("select, input"))
+              requiredExceptions(document.getElementById("persona_presente_art").querySelectorAll("select, input"))
+              requiredExceptions(document.getElementById("incendio_art").querySelectorAll("input[type='checkbox']"))
+
+              requiredExceptions(document.getElementById("lesionados").querySelector("select, input"))
+              requiredExceptions(document.getElementById("fallecidos_art").querySelector("select, input"))
+
+              document
+                .getElementById("id_incendio_art-check_agregar_persona")
+                .addEventListener("change", function () {
+
+                  if (this.checked) {
+                    let campo2 = document.getElementById("persona_presente_art").querySelectorAll("select, input")
+                    setRequired(campo2, true)
+                    document.getElementById("persona_presente_art").style.display = "flex"
+                  } else {
+                    let campo2 = document.getElementById("persona_presente_art").querySelectorAll("select, input")
+                    requiredExceptions(campo2)
+                    document.getElementById("persona_presente_art").style.display = "none"
+                  }
+
+                });
+              document
+                .getElementById("id_incendio_art-tipo_incendio")
+                .addEventListener("change", function () {
+
+                  if (this.value == "2") {
+                    let campo2 = document.getElementById("detalles_vehiculo_art").querySelectorAll("select, input")
+                    setRequired(campo2, true)
+                    document.getElementById("detalles_vehiculo_art").style.display = "flex"
+                  } else {
+                    let campo2 = document.getElementById("detalles_vehiculo_art").querySelectorAll("select, input")
+                    requiredExceptions(campo2)
+                    document.getElementById("detalles_vehiculo_art").style.display = "none"
+                  }
+
+                });
+              document.getElementById("button_submit").style.display = "block";
             break
             case "2":
               showElements(["artificios_pirotecnico", "lesionados"]);
+              campos = document.getElementById("lesionados").querySelectorAll("select, input")
+              setRequired(campos, true)
+              requiredExceptions(document.getElementById("fallecidos_art").querySelectorAll("select, input"))
+              requiredExceptions(document.getElementById("incendio_art").querySelectorAll("select, input"))
+              console.log("Holaaa")
+              document.getElementById("button_submit").style.display = "block";
             break
             case "3":
-              showElements(["artificios_pirotecnico", "fallecidos"]);
+              showElements(["artificios_pirotecnico", "fallecidos_art"]);
+              campos = document.getElementById("fallecidos_art").querySelectorAll("select, input")
+              setRequired(campos, true)
+              requiredExceptions(document.getElementById("lesionados").querySelectorAll("select, input"))
+              requiredExceptions(document.getElementById("incendio_art").querySelectorAll("select, input"))
+              document.getElementById("button_submit").style.display = "block";
             break
           }
 
@@ -937,4 +995,3 @@ document.addEventListener("DOMContentLoaded", function () {
     select.options[0].disabled = true;
   });
 });
-
