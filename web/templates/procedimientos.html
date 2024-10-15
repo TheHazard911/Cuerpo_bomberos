@@ -72,18 +72,6 @@
           <div class="form-style">{{ form_atendido_no_efectuado.as_div }}</div>
         </div>
 
-        <!-- Detalles de Procedimiento (Arificios Pirotecnicos) -->
-        <div class="data_form disp-none" id="artificios_pirotecnico">
-          <h4>Artificios Pirotecnicos</h4>
-          <div class="form-style">{{ artificios_pirotecnico.as_div }}</div>
-        </div>
-
-        <!-- Detalles de Procedimiento (Lesionados) -->
-        <div class="data_form disp-none" id="lesionados">
-          <h4>Lesionados</h4>
-          <div class="form-style">{{ lesionados.as_div }}</div>
-        </div>
-
         <!-- Detalles de Procedimiento (Despliegue de seguridad) -->
         <div class="data_form disp-none" id="desp_seguridad">
           <h4>Despliegue de Seguridad</h4>
@@ -274,6 +262,42 @@
           <div class="form-style">{{ retencion_preventiva.as_div }}</div>
         </div>
 
+         <!-- Detalles de Procedimiento (Arificios Pirotecnicos) -->
+         <div class="data_form disp-none" id="artificios_pirotecnico">
+          <h4>Artificios Pirotecnicos</h4>
+          <div class="form-style">{{ artificios_pirotecnico.as_div }}</div>
+        </div>
+
+        <!-- Detalles de Procedimiento (Lesionados) -->
+        <div class="data_form disp-none" id="lesionados">
+          <h4>Lesionado por Artificio Pirotecnico</h4>
+          <div class="form-style">{{ lesionados.as_div }}</div>
+        </div>
+
+        <!-- Detalles de Procedimiento (Incendio) -->
+        <div class="data_form disp-none" id="incendio_art">
+          <h4>Incendio Por Artificios Pirotecnicos</h4>
+          <div class="form-style checkbox-styles">
+            {{ incendio_art.as_div }}
+            <!-- Detalles de Procedimiento (persona Presente) -->
+            <div id="persona_presente_art" class="display-row">
+              <h4>Datos Persona Presente</h4>
+              {{ persona_presente_art.as_div }}
+            </div>
+
+            <!-- Detalles de Procedimiento (Detalles Vehiculos) -->
+            <div id="detalles_vehiculo_art" class="display-row">
+              <h4>Datos de Vehiculo</h4>
+              {{ detalles_vehiculo_art.as_div }}
+            </div>
+          </div>
+        </div>
+
+        <!-- Detalles de Procedimiento (Fallecidos) -->
+        <div class="data_form disp-none" id="fallecidos_art">
+          <h4>Fallecido por Artificio Pirotecnico</h4>
+          <div class="form-style">{{ fallecidos_art.as_div }}</div>
+        </div>
         
       </article>
 
