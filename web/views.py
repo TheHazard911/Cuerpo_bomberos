@@ -342,8 +342,13 @@ def View_Procedimiento(request):
         persona_presente_eval_form = Formularia_Persona_Presente_Eval(request.POST, prefix='persona_presente_eval_form')
         reinspeccion_prevencion = Formulario_Reinspeccion_Prevencion(request.POST, prefix='reinspeccion_prevencion')
         retencion_preventiva = Formulario_Retencion_Preventiva(request.POST, prefix='retencion_preventiva')
+
         artificios_pirotecnico = Formulario_Artificios_Pirotecnicos(request.POST, prefix='artificios_pirotecnico')
-        lesionados = Formulario_Lesionado(request.POST, prefix='lesionado')
+        lesionados = Formulario_Lesionado(request.POST, prefix='lesionados')
+        incendio_art = Formulario_Incendio_Art(request.POST, prefix='incendio_art')
+        persona_presente_art = Formulario_Persona_Presente_Art(request.POST, prefix='persona_presente_art')
+        detalles_vehiculo_art = Formulario_Detalles_Vehiculos_Incendio_Art(request.POST, prefix='detalles_vehiculo_art')
+        fallecidos_art = Formulario_Fallecidos_Art(request.POST, prefix='fallecidos_art')
 
         # Imprimir request.POST para depuración
 
@@ -1064,6 +1069,73 @@ def View_Procedimiento(request):
                 )
                 nuevo_proc_reten.save()
             
+            if tipo_procedimiento == "22" and artificios_pirotecnico.is_valid():
+                nombre_comercio = artificios_pirotecnico.cleaned_data["nombre_comercio"]
+                rif_comercio = artificios_pirotecnico.cleaned_data["rif_comercio"]
+                tipo_procedimiento_art = artificios_pirotecnico.cleaned_data["tipo_procedimiento"]
+
+                tipo_procedimiento_art_instance = Tipos_Artificios.objects.get(id=tipo_procedimiento_art)
+
+                nuevo_proc_artificio_pir = Artificios_Pirotecnicos(
+                    id_procedimiento = nuevo_procedimiento,
+                    nombre_comercio = nombre_comercio,
+                    rif_comerciante = rif_comercio,
+                    tipo_procedimiento = tipo_procedimiento_art_instance
+                )
+
+                nuevo_proc_artificio_pir.save()
+
+                if tipo_procedimiento_art == "1" and incendio_art.is_valid():
+                    id_tipo_incendio = incendio_art.cleaned_data["tipo_incendio"]
+                    descripcion = incendio_art.cleaned_data["descripcion"]
+                    material_utilizado = incendio_art.cleaned_data["material_utilizado"]
+                    status = incendio_art.cleaned_data["status"]
+                    
+                    tipo_incendio_instance = Tipo_Incendio.objects.get(id=id_tipo_incendio)
+                    
+                    nuevo_proc_incendio_art = Incendios_Art(
+                        id_procedimientos = nuevo_proc_artificio_pir,
+                        id_tipo_incendio = tipo_incendio_instance,
+                        descripcion=descripcion,
+                        material_utilizado=material_utilizado,
+                        status=status
+                    )
+                    nuevo_proc_incendio_art.save()
+                    
+                    check_agregar_persona = incendio_art.cleaned_data["check_agregar_persona"]
+                    
+                    if check_agregar_persona == True and persona_presente_form.is_valid():
+                        nombre = persona_presente_form.cleaned_data["nombre"]
+                        apellido = persona_presente_form.cleaned_data["apellido"]
+                        cedula = persona_presente_form.cleaned_data["cedula"]
+                        edad = persona_presente_form.cleaned_data["edad"]
+
+                        new_persona_presente = Persona_Presente_Art(
+                            id_incendio = nuevo_proc_incendio_art,
+                            nombre = nombre,
+                            apellidos = apellido,
+                            cedula = cedula,
+                            edad = edad,
+                        )
+                        new_persona_presente.save()
+                        
+                    if id_tipo_incendio == "2" and detalles_vehiculo_form.is_valid():
+                        modelo = detalles_vehiculo_form.cleaned_data["modelo"]
+                        marca = detalles_vehiculo_form.cleaned_data["marca"]
+                        color = detalles_vehiculo_form.cleaned_data["color"]
+                        año = detalles_vehiculo_form.cleaned_data["año"]
+                        placas = detalles_vehiculo_form.cleaned_data["placas"]
+
+                        new_agregar_vehiculo = Detalles_Vehiculos_Art(
+                            id_vehiculo = nuevo_proc_incendio_art,
+                            modelo = modelo,
+                            marca = marca,
+                            color = color,
+                            año = año,
+                            placas = placas,
+                        )
+                        new_agregar_vehiculo.save()
+
             # Redirige a /dashboard/ después de guardar los datos
             return redirect('/dashboard/')
     else:
@@ -1112,8 +1184,13 @@ def View_Procedimiento(request):
         persona_presente_eval_form = Formularia_Persona_Presente_Eval(prefix='persona_presente_eval_form')
         reinspeccion_prevencion = Formulario_Reinspeccion_Prevencion(prefix='reinspeccion_prevencion')
         retencion_preventiva = Formulario_Retencion_Preventiva(prefix='retencion_preventiva')
+
         artificios_pirotecnico = Formulario_Artificios_Pirotecnicos(prefix='artificios_pirotecnico')
-        lesionados = Formulario_Lesionado(prefix='lesionado')
+        lesionados = Formulario_Lesionado(prefix='lesionados')
+        incendio_art = Formulario_Incendio_Art(prefix='incendio_art')
+        persona_presente_art = Formulario_Persona_Presente_Art(prefix='persona_presente_art')
+        detalles_vehiculo_art = Formulario_Detalles_Vehiculos_Incendio_Art(prefix='detalles_vehiculo_art')
+        fallecidos_art = Formulario_Fallecidos_Art(prefix='fallecidos_art')
 
     return render(request, "procedimientos.html", {
         "user": user,
@@ -1162,6 +1239,10 @@ def View_Procedimiento(request):
         "retencion_preventiva": retencion_preventiva,
         "artificios_pirotecnico": artificios_pirotecnico,
         "lesionados": lesionados,
+        "incendio_art": incendio_art,
+        "persona_presente_art": persona_presente_art,
+        "detalles_vehiculo_art": detalles_vehiculo_art,
+        "fallecidos_art": fallecidos_art,
     })
 # Vista de la seccion de Estadisticas
 

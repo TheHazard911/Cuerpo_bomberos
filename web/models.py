@@ -526,10 +526,65 @@ class Artificios_Pirotecnicos(models.Model):
    rif_comerciante = models.CharField(max_length=60)
    tipo_procedimiento = models.ForeignKey(Tipos_Artificios, on_delete=models.CASCADE)
 
-   # Relaciones que eliminan registros relacionados
-   id_incendio = models.ForeignKey(Incendios, null=True, blank=True, on_delete=models.CASCADE)
-   id_lesionado = models.ForeignKey(Lesionados, null=True, blank=True, on_delete=models.CASCADE)
-   id_fallecido = models.ForeignKey(Fallecidos, null=True, blank=True, on_delete=models.CASCADE)
-
    def __str__(self):
-     return self.id_procedimiento.id_tipo_procedimiento.tipo_procedimiento + " -- " + self.nombre_comercio + " -- " + self.rif_comerciante + " -- " + self.tipo_procedimiento
+     return self.id_procedimiento.id_tipo_procedimiento.tipo_procedimiento + " -- " + self.nombre_comercio + " -- " + self.rif_comerciante + " -- " + self.tipo_procedimiento.tipo
+   
+class Incendios_Art(models.Model): 
+  id_procedimientos = models.ForeignKey(Artificios_Pirotecnicos, on_delete=models.CASCADE)
+  id_tipo_incendio = models.ForeignKey(Tipo_Incendio, on_delete=models.CASCADE)
+  descripcion = models.CharField(max_length=40)
+  material_utilizado = models.CharField(max_length=40)
+  status = models.CharField(max_length=40)
+  
+  def __str__(self):
+    return self.id_procedimientos.tipo_procedimiento.tipo + " -- " + self.id_tipo_incendio.tipo_incendio + " -- " + self.descripcion + " -- " + self.material_utilizado + " -- " + self.status
+  
+class Persona_Presente_Art(models.Model):
+  id_incendio = models.ForeignKey(Incendios_Art, on_delete=models.CASCADE)
+  nombre = models.CharField(max_length=40)
+  apellidos = models.CharField(max_length=40)
+  cedula = models.CharField(max_length=10)
+  edad = models.CharField(max_length=3)
+  
+  def __str__(self):
+    return self.id_incendio.id_procedimientos.tipo_procedimiento.tipo + " -- " + self.nombre + " -- " + self.apellidos + " -- " + self.cedula + " -- " + self.edad
+  
+class Detalles_Vehiculos_Art(models.Model):
+  id_vehiculo = models.ForeignKey(Incendios_Art, on_delete=models.CASCADE)
+  modelo = models.CharField(max_length=40)
+  marca = models.CharField(max_length=40)
+  color = models.CharField(max_length=40)
+  año = models.CharField(max_length=40)
+  placas = models.CharField(max_length=40)
+  
+  def __str__(self):
+    return self.id_vehiculo.id_procedimientos.tipo_procedimiento.tipo + " -- " + self.modelo + " -- " + self.marca + " -- " + self.color + " -- " + self.año + " -- " + self.placas
+
+class Lesionados_Art(models.Model):
+    id_accidente = models.ForeignKey(Artificios_Pirotecnicos, on_delete=models.CASCADE)
+    nombres = models.CharField(max_length=30)
+    apellidos = models.CharField(max_length=30)
+    cedula = models.CharField(max_length=10)
+    edad = models.CharField(max_length=3)
+    sexo = models.CharField(max_length=12)
+    idx = models.CharField(max_length=40)
+    descripcion = models.CharField(max_length=40)
+    
+    def __str__(self):
+      return self.id_accidente.tipo_procedimiento.tipo + " -- " + self.nombres + " -- " + self.apellidos + " -- " + self.cedula + " -- " + self.edad + " -- " + self.sexo + " -- " + self.idx + " -- " + self.descripcion
+ 
+class Fallecidos_Art(models.Model):
+  id_procedimiento = models.ForeignKey(Artificios_Pirotecnicos, on_delete=models.CASCADE)
+  motivo_fallecimiento = models.CharField(max_length=50)
+  nombres = models.CharField(max_length=50)
+  apellidos = models.CharField(max_length=50)
+  cedula = models.CharField(max_length=12)
+  edad = models.CharField(max_length=4)
+  sexo = models.CharField(max_length=10)
+  descripcion = models.CharField(max_length=50)
+  material_utilizado = models.CharField(max_length=50)
+  status = models.CharField(max_length=20)
+  
+  def __str__(self):
+   return self.id_procedimiento.tipo_procedimiento.tipo + " -- " + self.motivo_fallecimiento + " -- " + self.nombres + " -- " + self.apellidos + " -- " + self.cedula + " -- " + self.edad + " -- " + self.sexo + " -- " + self.descripcion + " -- " + self.material_utilizado + " -- " + self.status
+

@@ -487,3 +487,35 @@ class Formulario_Lesionado(forms.Form):
     idx = forms.CharField(max_length=40, required=False)
     descripcion = forms.CharField(max_length=40, required=False)
     trasladado = forms.BooleanField(required=False)
+
+class Formulario_Incendio_Art(forms.Form):
+    tipo_incendio = forms.ChoiceField(choices=Asignar_opc_tipo_incendio, widget=forms.Select(attrs={"class": "disable-first-option"}), required=False)
+    descripcion = forms.CharField(max_length=30, required=False)
+    material_utilizado = forms.CharField(max_length=30, required=False)
+    status = forms.ChoiceField(choices=[("", "Seleccione Una Opcion"), ("Culminado", "Culminado"), ("En Proceso", "En Proceso")], widget=forms.Select(attrs={"class": "disable-first-option"}), required=False)
+    check_agregar_persona = forms.BooleanField(required=False,label="Agregar Persona")
+    
+class Formulario_Persona_Presente_Art(forms.Form):
+    nombre = forms.CharField(max_length=30, required=False)
+    apellido = forms.CharField(max_length=30, required=False)
+    cedula = forms.CharField(max_length=10, required=False)
+    edad = forms.CharField(max_length=3, required=False)
+
+class Formulario_Detalles_Vehiculos_Incendio_Art(forms.Form):
+    modelo = forms.CharField(max_length=40, required=False)
+    marca = forms.CharField(max_length=40, required=False)
+    color = forms.CharField(max_length=40, required=False)
+    año = forms.CharField(max_length=40, required=False)
+    placas = forms.CharField(max_length=40, required=False)
+
+class Formulario_Fallecidos_Art(forms.Form):
+    motivo_fallecimiento = forms.CharField(max_length=50, required=False)
+    nom_fallecido = forms.CharField(max_length=40, required=False)
+    apellido_fallecido = forms.CharField(max_length=40, required=False)
+    cedula_fallecido = forms.CharField(max_length=10, required=False)
+    edad = forms.CharField(max_length=3, required=False)
+    sexo = forms.ChoiceField(choices=[("", "Seleccione Una Opcion"), ("Masculino", "Masculino"), ("Femenino", "Femenino")], widget=forms.Select(attrs={"class": "disable-first-option"}), required=False)
+    descripcion = forms.CharField(max_length=50, required=False)
+    material_utilizado = forms.CharField(max_length=50, required=False)
+    status = forms.ChoiceField(choices=[("", "Seleccione Una Opcion"), ("Culminado", "Culminado"), ("En Proceso", "En Proceso")], widget=forms.Select(attrs={"class": "disable-first-option"}), required=False)
+
