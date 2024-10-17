@@ -804,19 +804,19 @@ document
           .querySelectorAll("select, input");
 
         document.getElementById("id_evaluacion_riesgo_form-tipo_riesgo").addEventListener("change", function () {
-          if(this.value === "1"){
+          if (this.value === "1") {
             select_vivienda.style.display = 'flex';
             select_vivienda.querySelector("select").value = ''; // Borra la selección
             let campos3 = select_vivienda.querySelectorAll("select, input")
             setRequired(campos3, "true")
           } else {
-            
+
             select_vivienda.style.display = "none";
             select_vivienda.querySelector("select").value = ''; // Borra la selección
             requiredExceptions(select_vivienda.querySelectorAll("select, input"))
           }
         })
-        
+
         query = document.getElementById("id_form1-opciones");
         if (query.value === "3") {
           showElements(["evaluacion_riesgo"]);
@@ -880,7 +880,7 @@ document
         requiredExceptions(document.getElementById("persona_presente_art").querySelectorAll("select, input"))
         document.getElementById("id_artificios_pirotecnico-tipo_procedimiento").addEventListener("change", function () {
 
-          switch (this.value){
+          switch (this.value) {
             case "1":
               showElements(["artificios_pirotecnico", "incendio_art"]);
               campos = document.getElementById("incendio_art").querySelectorAll("select, input")
@@ -889,8 +889,8 @@ document
               requiredExceptions(document.getElementById("persona_presente_art").querySelectorAll("select, input"))
               requiredExceptions(document.getElementById("incendio_art").querySelectorAll("input[type='checkbox']"))
 
-              requiredExceptions(document.getElementById("lesionados").querySelector("select, input"))
-              requiredExceptions(document.getElementById("fallecidos_art").querySelector("select, input"))
+              requiredExceptions(document.getElementById("lesionados").querySelectorAll("select, input"))
+              requiredExceptions(document.getElementById("fallecidos_art").querySelectorAll("select, input"))
 
               document
                 .getElementById("id_incendio_art-check_agregar_persona")
@@ -923,7 +923,7 @@ document
 
                 });
               document.getElementById("button_submit").style.display = "block";
-            break
+              break
             case "2":
               showElements(["artificios_pirotecnico", "lesionados"]);
               campos = document.getElementById("lesionados").querySelectorAll("select, input")
@@ -932,7 +932,7 @@ document
               requiredExceptions(document.getElementById("incendio_art").querySelectorAll("select, input"))
               console.log("Holaaa")
               document.getElementById("button_submit").style.display = "block";
-            break
+              break
             case "3":
               showElements(["artificios_pirotecnico", "fallecidos_art"]);
               campos = document.getElementById("fallecidos_art").querySelectorAll("select, input")
@@ -940,7 +940,7 @@ document
               requiredExceptions(document.getElementById("lesionados").querySelectorAll("select, input"))
               requiredExceptions(document.getElementById("incendio_art").querySelectorAll("select, input"))
               document.getElementById("button_submit").style.display = "block";
-            break
+              break
           }
 
         })
@@ -994,4 +994,17 @@ document.addEventListener("DOMContentLoaded", function () {
   selects.forEach((select) => {
     select.options[0].disabled = true;
   });
+});
+
+
+// Selecciona todos los inputs de tipo checkbox
+const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+
+// Agrega la clase 'checkbox-styles' a cada uno de ellos
+checkboxes.forEach((checkbox) => {
+  checkbox.classList.add('checkbox-styles');
+
+  // Selecciona el contenedor padre del checkbox
+  const parent = checkbox.parentElement; // Cambia esto si el contenedor no es el padre directo
+  parent.classList.add('flex-row'); // Agrega la clase para aplicar los estilos deseados
 });
