@@ -349,6 +349,7 @@ def View_Procedimiento(request):
         persona_presente_art = Formulario_Persona_Presente_Art(request.POST, prefix='persona_presente_art')
         detalles_vehiculo_art = Formulario_Detalles_Vehiculos_Incendio_Art(request.POST, prefix='detalles_vehiculo_art')
         fallecidos_art = Formulario_Fallecidos_Art(request.POST, prefix='fallecidos_art')
+        inspeccion_artificios_pir = Formulario_Inspeccion_Establecimiento_Art(request.POST, prefix='inspeccion_artificios_pir')
 
         # Imprimir request.POST para depuración
 
@@ -1186,6 +1187,32 @@ def View_Procedimiento(request):
                     )
                     nuevo_proc_fallecido_art.save()
 
+            if tipo_procedimiento == "23" and inspeccion_artificios_pir.is_valid():
+                nombre_comercio = inspeccion_artificios_pir.cleaned_data["nombre_comercio"]
+                rif_comercio = inspeccion_artificios_pir.cleaned_data["rif_comercio"]
+                nombre_encargado = inspeccion_artificios_pir.cleaned_data["nombre_encargado"]
+                apellido_encargado = inspeccion_artificios_pir.cleaned_data["apellido_encargado"]
+                cedula_encargado = inspeccion_artificios_pir.cleaned_data["cedula_encargado"]
+                sexo = inspeccion_artificios_pir.cleaned_data["sexo"]
+                descripcion = inspeccion_artificios_pir.cleaned_data["descripcion"]
+                material_utilizado = inspeccion_artificios_pir.cleaned_data["material_utilizado"]
+                status = inspeccion_artificios_pir.cleaned_data["status"]
+
+                nueva_inspeccion_art = Inspeccion_Establecimiento_Art(
+                    id_proc_artificio = nuevo_procedimiento,
+                    nombre_comercio = nombre_comercio,
+                    rif_comercio = rif_comercio,
+                    encargado_nombre = nombre_encargado,
+                    encargado_apellidos = apellido_encargado,
+                    encargado_cedula = cedula_encargado,
+                    encargado_sexo = sexo,
+                    descripcion = descripcion,
+                    material_utilizado = material_utilizado,
+                    status = status
+                )
+
+                nueva_inspeccion_art.save()
+
             # Redirige a /dashboard/ después de guardar los datos
             return redirect('/dashboard/')
     else:
@@ -1241,6 +1268,7 @@ def View_Procedimiento(request):
         persona_presente_art = Formulario_Persona_Presente_Art(prefix='persona_presente_art')
         detalles_vehiculo_art = Formulario_Detalles_Vehiculos_Incendio_Art(prefix='detalles_vehiculo_art')
         fallecidos_art = Formulario_Fallecidos_Art(prefix='fallecidos_art')
+        inspeccion_artificios_pir = Formulario_Inspeccion_Establecimiento_Art(prefix='inspeccion_artificios_pir')
 
     return render(request, "procedimientos.html", {
         "user": user,
@@ -1293,6 +1321,7 @@ def View_Procedimiento(request):
         "persona_presente_art": persona_presente_art,
         "detalles_vehiculo_art": detalles_vehiculo_art,
         "fallecidos_art": fallecidos_art,
+        "inspeccion_artificios_pir": inspeccion_artificios_pir,
     })
 # Vista de la seccion de Estadisticas
 
@@ -2137,8 +2166,37 @@ def obtener_procedimiento(request, id):
                 'cedula': lesionado.cedula,
                 'edad': lesionado.edad,
                 'sexo': lesionado.sexo,
+                'idx': lesionado.idx,
+                'descripcion': lesionado.descripcion,
+                'status': lesionado.status,
             })
-            print(lesionado)
-        
+
+        if detalle_procedimiento.tipo_procedimiento.id == 3:
+            fallecido = get_object_or_404(Fallecidos_Art, id_procedimiento=detalle_procedimiento.id)
+            data.update({
+                'motivo_fallecimiento': fallecido.motivo_fallecimiento,
+                'nombres': fallecido.nombres,
+                'apellidos': fallecido.apellidos,
+                'cedula': fallecido.cedula,
+                'edad': fallecido.edad,
+                'sexo': fallecido.sexo,
+                'descripcion': fallecido.descripcion,
+                'material_utilizado': fallecido.material_utilizado,
+                'status': fallecido.status,
+            })
+
+    if str(procedimiento.id_tipo_procedimiento.id) == "23":
+        detalle_procedimiento = get_object_or_404(Inspeccion_Establecimiento_Art, id_proc_artificio=id)
+        data = dict(data,
+                    nombre_comercio = detalle_procedimiento.nombre_comercio,
+                    rif_comercio = detalle_procedimiento.rif_comercio,
+                    encargado_nombre = detalle_procedimiento.encargado_nombre,
+                    encargado_apellidos = detalle_procedimiento.encargado_apellidos,
+                    encargado_cedula = detalle_procedimiento.encargado_cedula,
+                    encargado_sexo = detalle_procedimiento.encargado_sexo,
+                    descripcion = detalle_procedimiento.descripcion,
+                    material_utilizado = detalle_procedimiento.material_utilizado,
+                    status = detalle_procedimiento.status,
+                    )
 
     return JsonResponse(data)

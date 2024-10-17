@@ -71,7 +71,7 @@ class Tipo_apoyo(models.Model):
 
 # tabla de tipos de procedimientos
 class Tipos_Procedimientos(models.Model):
-    tipo_procedimiento = models.CharField(max_length=40)
+    tipo_procedimiento = models.CharField(max_length=60)
     
     def __str__(self):
       return self.tipo_procedimiento
@@ -589,3 +589,17 @@ class Fallecidos_Art(models.Model):
   def __str__(self):
    return self.id_procedimiento.tipo_procedimiento.tipo + " -- " + self.motivo_fallecimiento + " -- " + self.nombres + " -- " + self.apellidos + " -- " + self.cedula + " -- " + self.edad + " -- " + self.sexo + " -- " + self.descripcion + " -- " + self.material_utilizado + " -- " + self.status
 
+class Inspeccion_Establecimiento_Art(models.Model):
+  id_proc_artificio = models.ForeignKey(Procedimientos, on_delete=models.CASCADE)
+  nombre_comercio = models.CharField(max_length=60)
+  rif_comercio = models.CharField(max_length=60)
+  encargado_nombre = models.CharField(max_length=60)
+  encargado_apellidos = models.CharField(max_length=60)
+  encargado_cedula = models.CharField(max_length=60)
+  encargado_sexo = models.CharField(max_length=60)
+  descripcion = models.CharField(max_length=60)
+  material_utilizado = models.CharField(max_length=60)
+  status = models.CharField(max_length=60)
+
+  def __str__(self):
+    return self.id_proc_artificio.id_tipo_procedimiento.tipo_procedimiento + " -- " + self.nombre_comercio + " -- " + self.rif_comercio + " -- " + self.encargado_nombre + " -- " + self.encargado_apellidos + " -- " + self.encargado_cedula + " -- " + self.encargado_sexo + " -- " + self.descripcion + " -- " + self.material_utilizado + " -- " + self.status

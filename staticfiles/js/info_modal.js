@@ -424,6 +424,94 @@ document.querySelectorAll(".button-info").forEach((button) => {
               <h4>Detalles</h4>
               <p><b>Tipo De Procedimiento: </b> ${data.tipo_procedimiento}</p>
               <p><b>Tipo de Procedimiento Por Artificio: </b> ${data.tipo_procedimiento_art}</p>
+              <p><b>Nombre del Distribuidor: </b> ${data.nombre_comercio}</p>
+              <p><b>RIF Del Distribuidor: </b> ${data.rif_comercio}</p>
+            </section>`
+
+            if (data.tipo_procedimiento_art === "Incendio por Artificio Pirotecnico"){
+              detalles += `
+              <section class="detalles_procedimiento">
+                <h4>Informacion del Incendio</h4>
+                <p><b>Tipo De Incendio: </b> ${data.tipo_incendio}</p>
+                <p><b>Descripcion: </b> ${data.descripcion}</p>
+                <p><b>Material Utilizado: </b> ${data.material_utilizado}</p>
+                <p><b>Status: </b> ${data.status}</p>
+              </section>`
+              if (data.person == true) {
+                detalles += `
+                <section class="detalles_procedimiento">
+                  <h4>Persona Presente</h4>
+                  <p><b>Nombre: </b> ${data.nombre}</p>
+                  <p><b>Apellido: </b> ${data.apellidos}</p>
+                  <p><b>Cedula: </b> ${data.cedula}</p>
+                  <p><b>Edad: </b> ${data.edad}</p>
+                </section>`
+              }
+              if (data.carro == true) {
+                detalles += `
+                <section class="detalles_procedimiento">
+                  <h4>Datos del Vehiculo</h4>
+                  <p><b>Modelo: </b> ${data.modelo}</p>
+                  <p><b>Marca: </b> ${data.marca}</p>
+                  <p><b>Color: </b> ${data.color}</p>
+                  <p><b>Año: </b> ${data.año}</p>
+                  <p><b>Placas: </b> ${data.placas}</p>
+                </section>`
+              }
+            }
+            if (data.tipo_procedimiento_art === "Lesionado por Artificio Pirotecnico"){
+              detalles += `
+              <section class="detalles_procedimiento">
+                <h4>Informacion del Lesionado</h4>
+                <p><b>Nombre: </b> ${data.nombres}</p>
+                <p><b>Apellido: </b> ${data.apellidos}</p>
+                <p><b>Cedula: </b> ${data.cedula}</p>
+                <p><b>Edad: </b> ${data.edad}</p>
+                <p><b>Sexo: </b> ${data.sexo}</p>
+              </section>
+              <section class="detalles_procedimiento">
+                <h4>Detalles Incidente</h4>
+                <p><b>IDX: </b> ${data.idx}</p>
+                <p><b>Descripcion: </b> ${data.descripcion}</p>
+                <p><b>Status: </b> ${data.status}</p>
+              </section>`
+            }
+            if (data.tipo_procedimiento_art === "Fallecido por Artificio Pirotecnico"){
+              detalles += `
+              <section class="detalles_procedimiento">
+                <h4>Informacion del Fallecido</h4>
+                <p><b>Motivo Fallcimiento: </b> ${data.motivo_fallecimiento}</p>
+                <p><b>Nombre: </b> ${data.nombres}</p>
+                <p><b>Apellido: </b> ${data.apellidos}</p>
+                <p><b>Cedula: </b> ${data.cedula}</p>
+                <p><b>Edad: </b> ${data.edad}</p>
+                <p><b>Sexo: </b> ${data.sexo}</p>
+              </section>
+              <section class="detalles_procedimiento">
+                <h4>Detalles Incidente</h4>
+                <p><b>Descripcion: </b> ${data.descripcion}</p>
+                <p><b>Material Utilizado: </b> ${data.material_utilizado}</p>
+                <p><b>Status: </b> ${data.status}</p>
+              </section>`
+            }
+            break;
+          case "Inspeccion Establecimiento por Artificios Pirotecnicos":
+            detalles = `
+            <section class="detalles_procedimiento">
+              <h4>Detalles</h4>
+              ${generateCommonDetails(data)}
+            </section>
+            <section class="detalles_procedimiento">
+              <h4>Informacion del Comercio</h4>
+              <p><b>Nombre del Comercio: </b> ${data.nombre_comercio}</p>
+              <p><b>RIF del Comercio: </b> ${data.rif_comercio}</p>
+            </section>
+            <section class="detalles_procedimiento">
+              <h4>Informacion del Encargado</h4>
+              <p><b>Nombres: </b> ${data.encargado_nombre}</p>
+              <p><b>Apellidos: </b> ${data.encargado_apellidos}</p>
+              <p><b>Cedula: </b> ${data.encargado_cedula}</p>
+              <p><b>Sexo: </b> ${data.encargado_sexo}</p>
             </section>`
             break;
           default:
