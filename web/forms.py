@@ -192,6 +192,30 @@ class Datos_Ubicacion(forms.Form):
 class Selecc_Tipo_Procedimiento(forms.Form):
     tipo_procedimiento = forms.ChoiceField(choices=Asignar_op_Tipos_Procedimientos(), required=True, widget=forms.Select(attrs={"class": "disable-first-option"}))
 
+# Formulario Principal de Enfermeria
+class Formulario_Enfermeria(forms.Form):
+    opc = [("", "Seleccione Una Opcion"),("Cuartel Central", "Cuartel Central"), ("Estacion 1", "Estacion 1"), ("Estacion 2", "Estacion 2"), ("Estacion 3", "Estacion 3")]
+
+    dependencia = forms.ChoiceField(choices=opc, widget=forms.Select(attrs={"class": "disable-first-option"}), required=False)
+    encargado_area = forms.CharField(max_length=100, required=False)
+
+class Formulario_Servicios_medicos(forms.Form):
+    opc = [("", "Seleccione Una Opcion"),("Consultas Medicas", "Consultas Medicas"), ("Consultas Psicologicas", "Consultas Psicologicas"), ("Servicios Medicos", "Servicios Medicos")]
+
+    tipo_servicio = forms.ChoiceField(choices=opc, widget=forms.Select(attrs={"class": "disable-first-option"}), required=False)
+    jefe_area = forms.CharField(max_length=100, required=False, label="Jefe de Area")
+     
+class Formulario_psicologia(forms.Form):
+    jefe_area = forms.CharField(max_length=100, required=False)
+    
+class Formulario_capacitacion(forms.Form):
+    dependencia = forms.CharField(max_length=100, required=False, label="Dependencia")
+    instructor = forms.CharField(max_length=100, required=False, label="Instructor")
+    solicitante = forms.ChoiceField(choices=Asignar_ops_Personal(), required=True ,
+    widget=forms.Select(attrs={'class':'disable-first-option'}))
+    solicitante_externo = forms.CharField(required=False)
+
+
 # Formulario Abastecimiento de Agua -- :D
 class formulario_abastecimiento_agua(forms.Form):
      tipo_servicio = forms.ChoiceField(choices=Asignar_opc_tipos_suministros(), widget=forms.Select(attrs={'class': 'disable-first-option'}), required=False)

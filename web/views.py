@@ -350,6 +350,11 @@ def View_Procedimiento(request):
         detalles_vehiculo_art = Formulario_Detalles_Vehiculos_Incendio_Art(request.POST, prefix='detalles_vehiculo_art')
         fallecidos_art = Formulario_Fallecidos_Art(request.POST, prefix='fallecidos_art')
         inspeccion_artificios_pir = Formulario_Inspeccion_Establecimiento_Art(request.POST, prefix='inspeccion_artificios_pir')
+        form_enfermeria = Formulario_Enfermeria(request.POST, prefix='form_enfermeria')
+        servicios_medicos = Formulario_Servicios_medicos(request.POST, prefix='form_servicios_medicos')
+        psicologia = Formulario_psicologia(request.POST,prefix='form_psicologia')
+        capacitacion = Formulario_capacitacion(request.POST,prefix='form_capacitacion')
+
 
         # Imprimir request.POST para depuración
 
@@ -1269,6 +1274,10 @@ def View_Procedimiento(request):
         detalles_vehiculo_art = Formulario_Detalles_Vehiculos_Incendio_Art(prefix='detalles_vehiculo_art')
         fallecidos_art = Formulario_Fallecidos_Art(prefix='fallecidos_art')
         inspeccion_artificios_pir = Formulario_Inspeccion_Establecimiento_Art(prefix='inspeccion_artificios_pir')
+        form_enfermeria = Formulario_Enfermeria(prefix='form_enfermeria')
+        servicios_medicos = Formulario_Servicios_medicos(prefix='form_servicios_medicos')
+        psicologia = Formulario_psicologia(prefix='form_psicologia')
+        capacitacion = Formulario_capacitacion(prefix='form_capacitacion')
 
     return render(request, "procedimientos.html", {
         "user": user,
@@ -1322,6 +1331,10 @@ def View_Procedimiento(request):
         "detalles_vehiculo_art": detalles_vehiculo_art,
         "fallecidos_art": fallecidos_art,
         "inspeccion_artificios_pir": inspeccion_artificios_pir,
+        "form_enfermeria": form_enfermeria,
+        "servicios_medicos" : servicios_medicos,
+        "psicologia" : psicologia,
+        "capacitacion" : capacitacion,
     })
 # Vista de la seccion de Estadisticas
 
