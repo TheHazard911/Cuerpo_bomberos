@@ -1,4 +1,5 @@
-{% extends "layouts/header-main.html" %} {% block content %}
+{% extends "layouts/header-main.html" %} {% load static %}
+{% block content %}
 <div class="general-dashboard">
   <div class="div-user-name  username-space">
     <h3 class="division-title">Tabla General</h3>
@@ -67,7 +68,7 @@
   </div>
   <!-- tabla -->
   <div class="table-responsive-sm">
-    <table class="table" id="data-table">
+    <table class="table table-hover" id="data-table">
       <thead>
         <tr>
           <th scope="col">ID</th>
@@ -278,7 +279,8 @@
 
 <!-- Script final  -->
 <script src="../static/js/operaciones.js"></script>
-<script src="../static/js/info_modal.js"></script>
+<!-- <script src="../static/js/info_modal.js"></script> -->
+<script src="{% static 'js/info_modal.js' %}"></script>
 <script src="../../static/js/table-general-filter2.js"></script>
 <script src="../static/js/export-table.js"></script>
 

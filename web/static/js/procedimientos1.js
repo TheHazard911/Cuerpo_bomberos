@@ -889,8 +889,8 @@ document
               requiredExceptions(document.getElementById("persona_presente_art").querySelectorAll("select, input"))
               requiredExceptions(document.getElementById("incendio_art").querySelectorAll("input[type='checkbox']"))
 
-              requiredExceptions(document.getElementById("lesionados").querySelector("select, input"))
-              requiredExceptions(document.getElementById("fallecidos_art").querySelector("select, input"))
+              requiredExceptions(document.getElementById("lesionados").querySelectorAll("select, input"))
+              requiredExceptions(document.getElementById("fallecidos_art").querySelectorAll("select, input"))
 
               document
                 .getElementById("id_incendio_art-check_agregar_persona")

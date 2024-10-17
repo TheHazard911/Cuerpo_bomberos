@@ -423,6 +423,7 @@ document.querySelectorAll(".button-info").forEach((button) => {
             <section class="detalles_procedimiento">
               <h4>Detalles</h4>
               <p><b>Tipo De Procedimiento: </b> ${data.tipo_procedimiento}</p>
+              <p><b>Tipo de Procedimiento Por Artificio: </b> ${data.tipo_procedimiento_art}</p>
             </section>`
             break;
           default:
