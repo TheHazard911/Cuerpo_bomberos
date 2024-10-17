@@ -41,7 +41,11 @@
       {% csrf_token %}
       <div class="form-style">{{ form.as_div }}</div>
       <h4>Datos de la Operacion</h4>
-      <div class="form-style">{{ form2.as_div }}</div>
+      <div class="form-style" id="form_general">{{ form2.as_div }}</div>
+      <div class="form-style" id="form_enfermeria" style="display: none;">{{ form_enfermeria.as_div }}</div>
+      <div class="form-style" id="servicios_medicos" style="display: none;">{{ servicios_medicos.as_div }}</div>
+      <div class="form-style" id="psicologia" style="display: none;">{{ psicologia.as_div }}</div>
+      <div class="form-style" id="capacitacion" style="display: none;">{{ capacitacion.as_div }}</div>
       <h4>Datos de la Ubicacion</h4>
       <div class="form-style">{{ form3.as_div }}</div>
       <h4>Tipo de Procedimientos</h4>
