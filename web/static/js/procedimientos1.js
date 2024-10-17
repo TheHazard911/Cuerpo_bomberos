@@ -60,7 +60,7 @@ const opcionesPorCategoria = {
     { value: "19", text: "Investigacion" },
     { value: "20", text: "Reinspeccion de Prevencion" },
     { value: "21", text: "Retencion Preventiva" },
-    { value: "22", text: "Artificios Piroctenicos" },
+    { value: "23", text: "Inspeccion Establecimiento por Artificios Piroctenicos" },
   ],
   4: [
     { value: "1", text: "Abastecimiento de agua" },
@@ -199,6 +199,7 @@ document
       "fallecidos_art",
       "detalles_vehiculo_art",
       "persona_presente_art",
+      "inspeccion_art_pir",
     ];
 
     const showElements = (elementsToShow) => {
@@ -946,6 +947,16 @@ document
         })
 
         break;
+      case "23":
+          requiredFalse()
+          showElements(["inspeccion_art_pir"]);
+          campos = document.getElementById("inspeccion_art_pir").querySelectorAll("select, input")
+          setRequired(campos, true)
+          document.getElementById("button_submit").style.display = "block";
+          // requiredExceptions(document.getElementById("detalles_vehiculo_art").querySelectorAll("select, input"))
+          // requiredExceptions(document.getElementById("persona_presente_art").querySelectorAll("select, input"))
+          break;
+
       default:
         elementsToHide.forEach((id) => {
           document.getElementById(id).style.display = "none";

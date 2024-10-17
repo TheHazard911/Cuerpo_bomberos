@@ -474,8 +474,8 @@ class Formulario_Retencion_Preventiva(forms.Form):
     status = forms.ChoiceField(choices=[("", "Seleccione Una Opcion"), ("Culminado", "Culminado"), ("En Proceso", "En Proceso")], widget=forms.Select(attrs={"class": "disable-first-option"}), required=False)
 
 class Formulario_Artificios_Pirotecnicos(forms.Form):
-    nombre_comercio = forms.CharField(max_length=60, required=False)
-    rif_comercio = forms.CharField(max_length=60, required=False)
+    nombre_comercio = forms.CharField(label="Nombre Distribuidor", max_length=60, required=False)
+    rif_comercio = forms.CharField(label="RIF Distribuidor",max_length=60, required=False)
     tipo_procedimiento = forms.ChoiceField(choices=Asignar_op_Artificios, widget=forms.Select(attrs={"class": "disable-first-option"}), required=False)
 
 class Formulario_Lesionado(forms.Form):
@@ -519,3 +519,13 @@ class Formulario_Fallecidos_Art(forms.Form):
     material_utilizado = forms.CharField(max_length=50, required=False)
     status = forms.ChoiceField(choices=[("", "Seleccione Una Opcion"), ("Culminado", "Culminado"), ("En Proceso", "En Proceso")], widget=forms.Select(attrs={"class": "disable-first-option"}), required=False)
 
+class Formulario_Inspeccion_Establecimiento_Art(forms.Form):
+    nombre_comercio = forms.CharField(max_length=60, required=False)
+    rif_comercio = forms.CharField(max_length=60, required=False)
+    nombre_encargado = forms.CharField(max_length=60, required=False)
+    apellido_encargado = forms.CharField(max_length=60, required=False)
+    cedula_encargado = forms.CharField(max_length=10, required=False)
+    sexo = forms.ChoiceField(choices=[("", "Seleccione Una Opcion"), ("Masculino", "Masculino"), ("Femenino", "Femenino")], widget=forms.Select(attrs={"class": "disable-first-option"}), required=False)
+    descripcion = forms.CharField(max_length=100, required=False)
+    material_utilizado = forms.CharField(max_length=100, required=False)
+    status = forms.ChoiceField(choices=[("", "Seleccione Una Opcion"), ("Culminado", "Culminado"), ("En Proceso", "En Proceso")], widget=forms.Select(attrs={"class": "disable-first-option"}), required=False)
