@@ -418,7 +418,14 @@ document.querySelectorAll(".button-info").forEach((button) => {
                   <p><b>MPPS CMT: </b> ${data.mpps}</p>
                 </section>`;
             break;
-
+          case "Artificios Pirotécnicos":
+            detalles = `
+            <section class="detalles_procedimiento">
+              <h4>Detalles</h4>
+              <p><b>Tipo De Procedimiento: </b> ${data.tipo_procedimiento}</p>
+              <p><b>Tipo de Procedimiento Por Artificio: </b> ${data.tipo_procedimiento_art}</p>
+            </section>`
+            break;
           default:
             detalles = "<h2>Error: Tipo de Procedimiento no válido</h2>";
         }

@@ -569,6 +569,7 @@ class Lesionados_Art(models.Model):
     sexo = models.CharField(max_length=12)
     idx = models.CharField(max_length=40)
     descripcion = models.CharField(max_length=40)
+    status = models.CharField(max_length=40)
     
     def __str__(self):
       return self.id_accidente.tipo_procedimiento.tipo + " -- " + self.nombres + " -- " + self.apellidos + " -- " + self.cedula + " -- " + self.edad + " -- " + self.sexo + " -- " + self.idx + " -- " + self.descripcion

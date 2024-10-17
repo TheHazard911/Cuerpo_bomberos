@@ -486,7 +486,7 @@ class Formulario_Lesionado(forms.Form):
     sexo = forms.ChoiceField(choices=[("", "Seleccione Una Opcion"), ("Masculino", "Masculino"), ("Femenino", "Femenino")], widget=forms.Select(attrs={"class": "disable-first-option"}), required=False)
     idx = forms.CharField(max_length=40, required=False)
     descripcion = forms.CharField(max_length=40, required=False)
-    trasladado = forms.BooleanField(required=False)
+    status = forms.ChoiceField(choices=[("", "Seleccione Una Opcion"), ("Culminado", "Culminado"), ("En Proceso", "En Proceso")], widget=forms.Select(attrs={"class": "disable-first-option"}), required=False)
 
 class Formulario_Incendio_Art(forms.Form):
     tipo_incendio = forms.ChoiceField(choices=Asignar_opc_tipo_incendio, widget=forms.Select(attrs={"class": "disable-first-option"}), required=False)
