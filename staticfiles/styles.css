@@ -549,16 +549,16 @@ summary > * {
 }
 
 .checkbox-styles {
-  width: 20rem;
+  width: 2rem !important;
   height: auto;
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
 
   input[type="checkbox"] {
     margin-left: 1rem;
-    width: 1.5rem;
+    width: 1rem;
     height: 1.5rem;
     border: 2px solid #6c7385; /* Color vinotinto */
     background-color: #fff;
@@ -598,11 +598,13 @@ summary > * {
   }
 }
 .flex-row {
-  width: 20rem;
-  height: 9rem;
+  width: 20rem !important;
+  padding: 1rem;
+  margin: 0;
   display: flex;
   flex-direction: row;
-  align-items: center; /* Alineación vertical centrada si lo deseas */
+  align-items: center !important; /* Alineación vertical centrada */
+  justify-content: space-around !important; /* Alineación horizontal centrada */
 }
 
 /********************** Diseño dashboard *****************/
@@ -874,8 +876,8 @@ summary > * {
     height: auto;
     flex-direction: column;
     align-items: flex-start;
-    margin: 1rem;
     flex-wrap: wrap;
+    margin: 1.2rem;
     padding-bottom: 1rem;
     font-family: var(--sofia-sans);
     font-size: 1rem;

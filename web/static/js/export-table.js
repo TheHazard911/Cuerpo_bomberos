@@ -102,3 +102,5 @@ function isFecha(texto) {
 function formatearFecha(fecha) {
     return fecha.replace(/-/g, "/");
 }
+
+// cambios aca para el push
