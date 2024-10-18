@@ -98,6 +98,20 @@ document
         ocultElement("servicios_medicos")
         ocultElement("psicologia")
         mostrarElement("capacitacion")
+        let input_solicitante = document.getElementById("id_form_capacitacion-solicitante")
+        document.getElementById("id_form_capacitacion-solicitante_externo").parentElement.style.display = "none"
+         document.getElementById("id_form_capacitacion-solicitante_externo").removeAttribute("required")
+
+        input_solicitante.addEventListener("change", function () {
+          if (this.value === "0"){
+            document.getElementById("id_form_capacitacion-solicitante_externo").parentElement.style.display = "flex"
+            document.getElementById("id_form_capacitacion-solicitante_externo").setAttribute("required", "true")
+          } else{
+            document.getElementById("id_form_capacitacion-solicitante_externo").parentElement.style.display = "none"
+            document.getElementById("id_form_capacitacion-solicitante_externo").removeAttribute("required")
+          }
+        })
+
         break;
     }
   });

@@ -371,56 +371,72 @@ def View_Procedimiento(request):
             print("Errores en form4:", form4.errors)
             result = True
 
-        if form.is_valid() and form2.is_valid() and form3.is_valid() and form4.is_valid():
+        if form.is_valid():
             result = False
 
             division = form.cleaned_data["opciones"]
-            solicitante = form2.cleaned_data["solicitante"]
-            solicitante_externo = form2.cleaned_data["solicitante_externo"]
-            unidad = form2.cleaned_data["unidad"]
-            efectivos_enviados = form2.cleaned_data["efectivos_enviados"]
-            jefe_comision = form2.cleaned_data["jefe_comision"]
-            municipio = form3.cleaned_data["municipio"]
-            direccion = form3.cleaned_data["direccion"]
-            fecha = form3.cleaned_data["fecha"]
-            hora = form3.cleaned_data["hora"]
-            tipo_procedimiento = form4.cleaned_data["tipo_procedimiento"]
-            parroquia = form3.cleaned_data["parroquia"]
+            tipo_procedimiento = ""
 
-            division_instance = Divisiones.objects.get(id=division)
-            jefe_comision_instance = Personal.objects.get(id=jefe_comision)
-            municipio_instance = Municipios.objects.get(id=municipio)
-            tipo_procedimiento_instance = Tipos_Procedimientos.objects.get(id=tipo_procedimiento)
-            unidad_instance = Unidades.objects.get(id=unidad)
+            if (division == "1" or division == "2" or division == "3" or division == "4" or division == "5") and (form2.is_valid() and form3.is_valid() and form4.is_valid()):
+                print("Entro Aqui")
+                solicitante = form2.cleaned_data["solicitante"]
+                solicitante_externo = form2.cleaned_data["solicitante_externo"]
+                unidad = form2.cleaned_data["unidad"]
+                efectivos_enviados = form2.cleaned_data["efectivos_enviados"]
+                jefe_comision = form2.cleaned_data["jefe_comision"]
+                municipio = form3.cleaned_data["municipio"]
+                direccion = form3.cleaned_data["direccion"]
+                fecha = form3.cleaned_data["fecha"]
+                hora = form3.cleaned_data["hora"]
+                tipo_procedimiento = form4.cleaned_data["tipo_procedimiento"]
+                parroquia = form3.cleaned_data["parroquia"]
 
-            if solicitante:
-                solicitante_instance = Personal.objects.get(id=solicitante)
+                division_instance = Divisiones.objects.get(id=division)
+                jefe_comision_instance = Personal.objects.get(id=jefe_comision)
+                municipio_instance = Municipios.objects.get(id=municipio)
+                tipo_procedimiento_instance = Tipos_Procedimientos.objects.get(id=tipo_procedimiento)
+                unidad_instance = Unidades.objects.get(id=unidad)
+
+                if solicitante:
+                    solicitante_instance = Personal.objects.get(id=solicitante)
 
 
-            if solicitante_externo=="":
-                solicitante_externo = ""
+                if solicitante_externo=="":
+                    solicitante_externo = ""
 
-            # # Crear una nueva instancia del modelo Procedimientos
-            nuevo_procedimiento = Procedimientos(
-               id_division=division_instance,
-               id_solicitante=solicitante_instance,
-               solicitante_externo=solicitante_externo,
-               unidad=unidad_instance,
-               efectivos_enviados=efectivos_enviados,
-               id_jefe_comision=jefe_comision_instance,
-               id_municipio=municipio_instance,
-               direccion=direccion,
-               fecha=fecha,
-               hora=hora,
-               id_tipo_procedimiento=tipo_procedimiento_instance
-            )
+                # # Crear una nueva instancia del modelo Procedimientos
+                nuevo_procedimiento = Procedimientos(
+                    id_division=division_instance,
+                    id_solicitante=solicitante_instance,
+                    solicitante_externo=solicitante_externo,
+                    unidad=unidad_instance,
+                    efectivos_enviados=efectivos_enviados,
+                    id_jefe_comision=jefe_comision_instance,
+                    id_municipio=municipio_instance,
+                    direccion=direccion,
+                    fecha=fecha,
+                    hora=hora,
+                    id_tipo_procedimiento=tipo_procedimiento_instance
+                )
 
-            # # Solo asignar parroquia si está presente
-            if parroquia:
-               parroquia_instance = Parroquias.objects.get(id=parroquia)
-               nuevo_procedimiento.id_parroquia = parroquia_instance
+                # # Solo asignar parroquia si está presente
+                if parroquia:
+                    parroquia_instance = Parroquias.objects.get(id=parroquia)
+                    nuevo_procedimiento.id_parroquia = parroquia_instance
 
-            nuevo_procedimiento.save()
+                nuevo_procedimiento.save()
+
+            if (division == "6"):
+                pass
+            
+            if (division == "7"):
+                pass
+
+            if (division == "8"):
+                pass
+
+            if (division == "9"):
+                pass
 
             # Ahora dependiendo del tipo de procedimiento, verifica el formulario correspondiente y guarda la instancia
             if tipo_procedimiento == "1" and abast_agua.is_valid():
@@ -1368,7 +1384,6 @@ def View_Operaciones(request):
 
     hoy = len(procedimientos_hoy)
 
-
     if request.method == 'POST':
         data = json.loads(request.body)
         id = data.get('id')
@@ -1378,6 +1393,8 @@ def View_Operaciones(request):
             return JsonResponse({'success': True})
         except Exception as e:
             return JsonResponse({'success': False, 'error': str(e)})
+
+    datos = list(datos)[::-1]
 
     return render(request, "Divisiones/operaciones.html", {
         "user": user,
@@ -1408,8 +1425,6 @@ def View_Rescate(request):
 
     hoy = len(procedimientos_hoy)
 
-
-
     if request.method == 'POST':
         data = json.loads(request.body)
         id = data.get('id')
@@ -1419,6 +1434,8 @@ def View_Rescate(request):
             return JsonResponse({'success': True})
         except Exception as e:
             return JsonResponse({'success': False, 'error': str(e)})
+
+    datos = list(datos)[::-1]
 
     return render(request, "Divisiones/rescate.html", {
         "user": user,
@@ -1456,6 +1473,8 @@ def View_Prevencion(request):
             return JsonResponse({'success': True})
         except Exception as e:
             return JsonResponse({'success': False, 'error': str(e)})
+        
+    datos = list(datos)[::-1]
 
     return render(request, "Divisiones/prevencion.html", {
         "user": user,
@@ -1485,8 +1504,6 @@ def View_grumae(request):
 
     hoy = len(procedimientos_hoy)
 
-
-
     if request.method == 'POST':
         data = json.loads(request.body)
         id = data.get('id')
@@ -1496,6 +1513,8 @@ def View_grumae(request):
             return JsonResponse({'success': True})
         except Exception as e:
             return JsonResponse({'success': False, 'error': str(e)})
+        
+    datos = list(datos)[::-1]
 
     return render(request, "Divisiones/grumae.html", {
         "user": user,
@@ -1535,6 +1554,8 @@ def View_prehospitalaria(request):
             return JsonResponse({'success': True})
         except Exception as e:
             return JsonResponse({'success': False, 'error': str(e)})
+        
+    datos = list(datos)[::-1]
 
     return render(request, "Divisiones/prehospitalaria.html", {
         "user": user,
@@ -1573,6 +1594,8 @@ def View_capacitacion(request):
             return JsonResponse({'success': True})
         except Exception as e:
             return JsonResponse({'success': False, 'error': str(e)})
+        
+    datos = list(datos)[::-1]
 
     return render(request, "Divisiones/capacitacion.html", {
         "user": user,
@@ -1611,6 +1634,8 @@ def View_enfermeria(request):
             return JsonResponse({'success': True})
         except Exception as e:
             return JsonResponse({'success': False, 'error': str(e)})
+        
+    datos = list(datos)[::-1]
 
     return render(request, "Divisiones/enfermeria.html", {
         "user": user,
@@ -1650,6 +1675,8 @@ def View_serviciosmedicos(request):
             return JsonResponse({'success': True})
         except Exception as e:
             return JsonResponse({'success': False, 'error': str(e)})
+        
+    datos = list(datos)[::-1]
 
     return render(request, "Divisiones/serviciosmedicos.html", {
         "user": user,
@@ -1689,6 +1716,8 @@ def View_psicologia(request):
             return JsonResponse({'success': True})
         except Exception as e:
             return JsonResponse({'success': False, 'error': str(e)})
+        
+    datos = list(datos)[::-1]
 
     return render(request, "Divisiones/psicologia.html", {
         "user": user,
@@ -1718,7 +1747,6 @@ def tabla_general(request):
 
     hoy = len(procedimientos_hoy)
 
-
     if request.method == 'POST':
         data = json.loads(request.body)
         id = data.get('id')
@@ -1728,6 +1756,8 @@ def tabla_general(request):
             return JsonResponse({'success': True})
         except Exception as e:
             return JsonResponse({'success': False, 'error': str(e)})
+
+    datos = list(datos)[::-1]
 
     return render(request, "tablageneral.html", {
         "user": user,
@@ -1955,7 +1985,7 @@ def obtener_procedimiento(request, id):
                     tipo_rescate = detalle_procedimiento.tipo_rescate.tipo_rescate,
                     )
 
-        if detalle_procedimiento.tipo_rescate.tipo_rescate == "Animal":
+        if detalle_procedimiento.tipo_rescate.tipo_rescate == "Rescate de Animal":
             detalle_tipo_rescate = get_object_or_404(Rescate_Animal, id_rescate=detalle_procedimiento.id)
             data = dict(data,
                         especie = detalle_tipo_rescate.especie,
