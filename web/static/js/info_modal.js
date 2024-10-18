@@ -214,7 +214,7 @@ document.querySelectorAll(".button-info").forEach((button) => {
                   <p><b>Status: </b> ${data.status}</p>
                 </section>
                  `
-                 if (data.tipo_rescate === "Animal"){
+                 if (data.tipo_rescate === "Rescate de Animal"){
                    detalles += `
                    <section class="detalles_rescate_animal">
                      <h4>Animal</h4>

@@ -211,7 +211,7 @@ class Formulario_psicologia(forms.Form):
 class Formulario_capacitacion(forms.Form):
     dependencia = forms.CharField(max_length=100, required=False, label="Dependencia")
     instructor = forms.CharField(max_length=100, required=False, label="Instructor")
-    solicitante = forms.ChoiceField(choices=Asignar_ops_Personal(), required=True ,
+    solicitante = forms.ChoiceField(choices=Asignar_ops_Personal(), required=False,
     widget=forms.Select(attrs={'class':'disable-first-option'}))
     solicitante_externo = forms.CharField(required=False)
 
