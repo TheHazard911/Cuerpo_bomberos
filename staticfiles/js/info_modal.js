@@ -14,35 +14,100 @@ document.querySelectorAll(".button-info").forEach((button) => {
         return response.json();
       })
       .then((data) => {
+        let baseInfo = ""
         let solicitante
         if (data.solicitante_externo == "") {
           solicitante = data.solicitante
         } else {
           solicitante = data.solicitante_externo
         }
-        const baseInfo = `
-            <article class="section-left">
-              <section class="datos_division">
-                <h4>Division</h4>
-                <p><b>Division: </b> ${data.division}</p>
-                <p><b>ID Procedimiento: </b> #${data.id}</p>
-              </section>
-              <section class="datos_operacion">
-                <h4>Operacion</h4>
-                <p><b>Solicitante: </b> ${solicitante}</p>
-                <p><b>Jefe de Comision: </b> ${data.jefe_comision}</p>
-                <p><b>Unidad Enviada: </b> ${data.unidad}</p>
-                <p><b>Efectivos Enviados: </b> ${data.efectivos}</p>
-              </section>
-              <section class="datos_ubicacion">
-                <h4>Ubicacion</h4>
-                <p><b>Parroquia: </b> ${data.parroquia}</p>
-                <p><b>Municipio: </b> ${data.municipio}</p>
-                <p><b>Direccion: </b> ${data.direccion}</p>
-                <p><b>Fecha: </b> ${data.fecha}</p>
-                <p><b>Hora: </b> ${data.hora}</p>
-              </section>`;
-
+        let division = data.division
+        if (division == "Rescate" || division == "Operaciones" || division == "Prevencion" || division == "GRUMAE" || division == "PreHospitalaria") {
+          baseInfo = ` 
+              <article class="section-left">
+                <section class="datos_division">
+                  <h4>Division</h4>
+                  <p><b>Division: </b> ${data.division}</p>
+                  <p><b>ID Procedimiento: </b> #${data.id}</p>
+                </section>
+                <section class="datos_operacion">
+                  <h4>Operacion</h4>
+                  <p><b>Solicitante: </b> ${solicitante}</p>
+                  <p><b>Jefe de Comision: </b> ${data.jefe_comision}</p>
+                  <p><b>Unidad Enviada: </b> ${data.unidad}</p>
+                  <p><b>Efectivos Enviados: </b> ${data.efectivos}</p>
+                </section>
+                <section class="datos_ubicacion">
+                  <h4>Ubicacion</h4>
+                  <p><b>Parroquia: </b> ${data.parroquia}</p>
+                  <p><b>Municipio: </b> ${data.municipio}</p>
+                  <p><b>Direccion: </b> ${data.direccion}</p>
+                  <p><b>Fecha: </b> ${data.fecha}</p>
+                  <p><b>Hora: </b> ${data.hora}</p>
+                </section>`;
+        }
+        if (division == "Enfermeria") {
+          baseInfo = ` 
+              <article class="section-left">
+                <section class="datos_division">
+                  <h4>Division</h4>
+                  <p><b>Division: </b> ${data.division}</p>
+                  <p><b>ID Procedimiento: </b> #${data.id}</p>
+                </section>
+                <section class="datos_operacion">
+                  <h4>Operacion</h4>
+                  <p><b>Dependencia: </b> ${data.dependencia}</p>
+                  <p><b>Jefe de Area: </b> ${solicitante}</p>
+                </section>
+                <section class="datos_ubicacion">
+                  <h4>Ubicacion</h4>
+                  <p><b>Parroquia: </b> ${data.parroquia}</p>
+                  <p><b>Municipio: </b> ${data.municipio}</p>
+                  <p><b>Direccion: </b> ${data.direccion}</p>
+                  <p><b>Fecha: </b> ${data.fecha}</p>
+                  <p><b>Hora: </b> ${data.hora}</p>
+                </section>`;
+        }
+        if (division == "Servicios Medicos") {
+          baseInfo = ` 
+              <article class="section-left">
+                <section class="datos_division">
+                  <h4>Division</h4>
+                  <p><b>Division: </b> ${data.division}</p>
+                  <p><b>ID Procedimiento: </b> #${data.id}</p>
+                </section>
+                <section class="datos_operacion">
+                  <h4>Operacion</h4>
+                  <p><b>Tipo de Servicio: </b> ${data.tipo_servicio}</p>
+                  <p><b>Jefe de Area: </b> ${solicitante}</p>
+                </section>
+                <section class="datos_ubicacion">
+                  <h4>Ubicacion</h4>
+                  <p><b>Parroquia: </b> ${data.parroquia}</p>
+                  <p><b>Municipio: </b> ${data.municipio}</p>
+                  <p><b>Direccion: </b> ${data.direccion}</p>
+                  <p><b>Fecha: </b> ${data.fecha}</p>
+                  <p><b>Hora: </b> ${data.hora}</p>
+                </section>`;
+        }
+        if (division == "Psicologia") {
+          baseInfo = ` 
+              <article class="section-left">
+                <section class="datos_division">
+                  <h4>Division</h4>
+                  <p><b>Division: </b> ${data.division}</p>
+                  <p><b>ID Procedimiento: </b> #${data.id}</p>
+                  <p><b>Jefe de Area: </b> ${solicitante}</p>
+                </section>
+                <section class="datos_ubicacion">
+                  <h4>Ubicacion</h4>
+                  <p><b>Parroquia: </b> ${data.parroquia}</p>
+                  <p><b>Municipio: </b> ${data.municipio}</p>
+                  <p><b>Direccion: </b> ${data.direccion}</p>
+                  <p><b>Fecha: </b> ${data.fecha}</p>
+                  <p><b>Hora: </b> ${data.hora}</p>
+                </section>`;
+        }
         let detalles = "";
 
         // Estructura if-else para manejar cada tipo de procedimiento
@@ -214,7 +279,7 @@ document.querySelectorAll(".button-info").forEach((button) => {
                   <p><b>Status: </b> ${data.status}</p>
                 </section>
                  `
-                 if (data.tipo_rescate === "Animal"){
+                 if (data.tipo_rescate === "Rescate de Animal"){
                    detalles += `
                    <section class="detalles_rescate_animal">
                      <h4>Animal</h4>
@@ -514,7 +579,273 @@ document.querySelectorAll(".button-info").forEach((button) => {
               <p><b>Sexo: </b> ${data.encargado_sexo}</p>
             </section>`
             break;
-          default:
+          case "Valoración Medica":
+            detalles = `
+            <section class="detalles_procedimiento">
+              <h4>Detalles</h4>
+              ${generateCommonDetails(data)}
+            </section>
+            <section class="detalles_procedimiento">
+              <h4>Atendido</h4>
+              <p><b>Nombres: </b> ${data.nombres}</p>
+              <p><b>Apellidos: </b> ${data.apellidos}</p>
+              <p><b>Cedula: </b> ${data.cedula}</p>
+              <p><b>Edad: </b> ${data.edad}</p>
+              <p><b>Sexo: </b> ${data.sexo}</p>
+              <p><b>Telefono: </b> ${data.telefono}</p>
+            </section>`
+            break;
+          case "Administración de Tratamiento":
+            detalles = `
+              <section class="detalles_procedimiento">
+                <h4>Detalles</h4>
+                ${generateCommonDetails(data)}
+              </section>
+              <section class="detalles_procedimiento">
+                <h4>Atendido</h4>
+                <p><b>Nombres: </b> ${data.nombres}</p>
+                <p><b>Apellidos: </b> ${data.apellidos}</p>
+                <p><b>Cédula: </b> ${data.cedula}</p>
+                <p><b>Edad: </b> ${data.edad}</p>
+                <p><b>Sexo: </b> ${data.sexo}</p>
+                <p><b>Teléfono: </b> ${data.telefono}</p>
+              </section>`;
+            break;
+          case "Administración de Medicamentos":
+              detalles = `
+              <section class="detalles_procedimiento">
+                <h4>Detalles</h4>
+                ${generateCommonDetails(data)}
+              </section>
+              <section class="detalles_procedimiento">
+                <h4>Atendido</h4>
+                <p><b>Nombres: </b> ${data.nombres}</p>
+                <p><b>Apellidos: </b> ${data.apellidos}</p>
+                <p><b>Cédula: </b> ${data.cedula}</p>
+                <p><b>Edad: </b> ${data.edad}</p>
+                <p><b>Sexo: </b> ${data.sexo}</p>
+                <p><b>Teléfono: </b> ${data.telefono}</p>
+              </section>`;
+              break;
+          case "Aerosolterapia":
+              detalles = `
+              <section class="detalles_procedimiento">
+                <h4>Detalles</h4>
+                ${generateCommonDetails(data)}
+              </section>
+              <section class="detalles_procedimiento">
+                <h4>Atendido</h4>
+                <p><b>Nombres: </b> ${data.nombres}</p>
+                <p><b>Apellidos: </b> ${data.apellidos}</p>
+                <p><b>Cédula: </b> ${data.cedula}</p>
+                <p><b>Edad: </b> ${data.edad}</p>
+                <p><b>Sexo: </b> ${data.sexo}</p>
+                <p><b>Teléfono: </b> ${data.telefono}</p>
+              </section>`;
+              break;
+          case "Atención Local":
+              detalles = `
+              <section class="detalles_procedimiento">
+                <h4>Detalles</h4>
+                ${generateCommonDetails(data)}
+              </section>
+              <section class="detalles_procedimiento">
+                <h4>Atendido</h4>
+                <p><b>Nombres: </b> ${data.nombres}</p>
+                <p><b>Apellidos: </b> ${data.apellidos}</p>
+                <p><b>Cédula: </b> ${data.cedula}</p>
+                <p><b>Edad: </b> ${data.edad}</p>
+                <p><b>Sexo: </b> ${data.sexo}</p>
+                <p><b>Teléfono: </b> ${data.telefono}</p>
+              </section>`;
+              break;
+          case "Atención Prehospitalaria":
+              detalles = `
+              <section class="detalles_procedimiento">
+                <h4>Detalles</h4>
+                ${generateCommonDetails(data)}
+              </section>
+              <section class="detalles_procedimiento">
+                <h4>Atendido</h4>
+                <p><b>Nombres: </b> ${data.nombres}</p>
+                <p><b>Apellidos: </b> ${data.apellidos}</p>
+                <p><b>Cédula: </b> ${data.cedula}</p>
+                <p><b>Edad: </b> ${data.edad}</p>
+                <p><b>Sexo: </b> ${data.sexo}</p>
+                <p><b>Teléfono: </b> ${data.telefono}</p>
+              </section>`;
+              break;   
+          case "Cuantificación de Presión Arterial":
+              detalles = `
+              <section class="detalles_procedimiento">
+                <h4>Detalles</h4>
+                ${generateCommonDetails(data)}
+              </section>
+              <section class="detalles_procedimiento">
+                <h4>Atendido</h4>
+                <p><b>Nombres: </b> ${data.nombres}</p>
+                <p><b>Apellidos: </b> ${data.apellidos}</p>
+                <p><b>Cédula: </b> ${data.cedula}</p>
+                <p><b>Edad: </b> ${data.edad}</p>
+                <p><b>Sexo: </b> ${data.sexo}</p>
+                <p><b>Teléfono: </b> ${data.telefono}</p>
+              </section>`;
+              break;     
+          case "Cuantificación de Signos Vitales":
+              detalles = `
+              <section class="detalles_procedimiento">
+                <h4>Detalles</h4>
+                ${generateCommonDetails(data)}
+              </section>
+              <section class="detalles_procedimiento">
+                <h4>Atendido</h4>
+                <p><b>Nombres: </b> ${data.nombres}</p>
+                <p><b>Apellidos: </b> ${data.apellidos}</p>
+                <p><b>Cédula: </b> ${data.cedula}</p>
+                <p><b>Edad: </b> ${data.edad}</p>
+                <p><b>Sexo: </b> ${data.sexo}</p>
+                <p><b>Teléfono: </b> ${data.telefono}</p>
+              </section>`;
+              break;
+          case "Cura":
+              detalles = `
+              <section class="detalles_procedimiento">
+                <h4>Detalles</h4>
+                ${generateCommonDetails(data)}
+              </section>
+              <section class="detalles_procedimiento">
+                <h4>Atendido</h4>
+                <p><b>Nombres: </b> ${data.nombres}</p>
+                <p><b>Apellidos: </b> ${data.apellidos}</p>
+                <p><b>Cédula: </b> ${data.cedula}</p>
+                <p><b>Edad: </b> ${data.edad}</p>
+                <p><b>Sexo: </b> ${data.sexo}</p>
+                <p><b>Teléfono: </b> ${data.telefono}</p>
+              </section>`;
+              break;
+          case "Otro":
+              detalles = `
+              <section class="detalles_procedimiento">
+                <h4>Detalles</h4>
+                ${generateCommonDetails(data)}
+              </section>
+              <section class="detalles_procedimiento">
+                <h4>Atendido</h4>
+                <p><b>Nombres: </b> ${data.nombres}</p>
+                <p><b>Apellidos: </b> ${data.apellidos}</p>
+                <p><b>Cédula: </b> ${data.cedula}</p>
+                <p><b>Edad: </b> ${data.edad}</p>
+                <p><b>Sexo: </b> ${data.sexo}</p>
+                <p><b>Teléfono: </b> ${data.telefono}</p>
+              </section>`;
+              break;
+          case "Certificado de Salud Mental":
+            detalles = `
+               <section class="detalles_procedimiento">
+               <h4>Detalles</h4>
+                ${generateCommonDetails(data)}
+               </section>
+               <section class="detalles_procedimiento">
+                <h4>Atendido</h4>
+                <p><b>Nombres: </b> ${data.nombres}</p>
+                <p><b>Apellidos: </b> ${data.apellidos}</p>
+                <p><b>Cédula: </b> ${data.cedula}</p>
+                <p><b>Edad: </b> ${data.edad}</p>
+                <p><b>Sexo: </b> ${data.sexo}</p>
+               </section>`;
+               break;
+          case "Consulta Bombero Activo":
+            detalles = `
+               <section class="detalles_procedimiento">
+               <h4>Detalles</h4>
+                ${generateCommonDetails(data)}
+               </section>
+               <section class="detalles_procedimiento">
+                <h4>Atendido</h4>
+                <p><b>Nombres: </b> ${data.nombres}</p>
+                <p><b>Apellidos: </b> ${data.apellidos}</p>
+                <p><b>Cédula: </b> ${data.cedula}</p>
+                <p><b>Edad: </b> ${data.edad}</p>
+                <p><b>Sexo: </b> ${data.sexo}</p>
+               </section>`;
+               break;
+          case "Consulta Integrante Brigada Juvenil":
+            detalles = `
+               <section class="detalles_procedimiento">
+               <h4>Detalles</h4>
+                ${generateCommonDetails(data)}
+               </section>
+               <section class="detalles_procedimiento">
+                <h4>Atendido</h4>
+                <p><b>Nombres: </b> ${data.nombres}</p>
+                <p><b>Apellidos: </b> ${data.apellidos}</p>
+                <p><b>Cédula: </b> ${data.cedula}</p>
+                <p><b>Edad: </b> ${data.edad}</p>
+                <p><b>Sexo: </b> ${data.sexo}</p>
+               </section>`;
+               break;
+          case "Consulta Paciente Externo":
+            detalles = `
+               <section class="detalles_procedimiento">
+               <h4>Detalles</h4>
+                ${generateCommonDetails(data)}
+               </section>
+               <section class="detalles_procedimiento">
+                <h4>Atendido</h4>
+                <p><b>Nombres: </b> ${data.nombres}</p>
+                <p><b>Apellidos: </b> ${data.apellidos}</p>
+                <p><b>Cédula: </b> ${data.cedula}</p>
+                <p><b>Edad: </b> ${data.edad}</p>
+                <p><b>Sexo: </b> ${data.sexo}</p>
+               </section>`;
+               break;
+          case "Evaluación Psicológica Postvacacional":
+            detalles = `
+               <section class="detalles_procedimiento">
+               <h4>Detalles</h4>
+                ${generateCommonDetails(data)}
+               </section>
+               <section class="detalles_procedimiento">
+                <h4>Atendido</h4>
+                <p><b>Nombres: </b> ${data.nombres}</p>
+                <p><b>Apellidos: </b> ${data.apellidos}</p>
+                <p><b>Cédula: </b> ${data.cedula}</p>
+                <p><b>Edad: </b> ${data.edad}</p>
+                <p><b>Sexo: </b> ${data.sexo}</p>
+               </section>`;
+               break;
+          case "Evaluación Psicológica Prevacacional":
+            detalles = `
+               <section class="detalles_procedimiento">
+               <h4>Detalles</h4>
+                ${generateCommonDetails(data)}
+               </section>
+               <section class="detalles_procedimiento">
+                <h4>Atendido</h4>
+                <p><b>Nombres: </b> ${data.nombres}</p>
+                <p><b>Apellidos: </b> ${data.apellidos}</p>
+                <p><b>Cédula: </b> ${data.cedula}</p>
+                <p><b>Edad: </b> ${data.edad}</p>
+                <p><b>Sexo: </b> ${data.sexo}</p>
+               </section>`;
+               break; 
+          case "Evaluación Personal Nuevo Ingreso":
+            detalles = `
+               <section class="detalles_procedimiento">
+               <h4>Detalles</h4>
+                ${generateCommonDetails(data)}
+               </section>
+               <section class="detalles_procedimiento">
+                <h4>Atendido</h4>
+                <p><b>Nombres: </b> ${data.nombres}</p>
+                <p><b>Apellidos: </b> ${data.apellidos}</p>
+                <p><b>Cédula: </b> ${data.cedula}</p>
+                <p><b>Edad: </b> ${data.edad}</p>
+                <p><b>Sexo: </b> ${data.sexo}</p>
+               </section>`;
+               break;
+            
+            default:
             detalles = "<h2>Error: Tipo de Procedimiento no válido</h2>";
         }
 
