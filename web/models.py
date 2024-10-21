@@ -2,6 +2,24 @@ from django.db import models
 
 # Modelos Para Agregar Datos Aparte
 
+class Doctores(models.Model):
+  doctor = models.CharField(max_length=80)
+
+  def __str__(self):
+    return self.doctor
+
+class Enfermeros(models.Model):
+  enfermeros = models.CharField(max_length=80)
+
+  def __str__(self):
+    return self.enfermeros
+
+class Psicologa(models.Model):
+  psicologa = models.CharField(max_length=80)
+
+  def __str__(self):
+    return self.psicologa
+
 # Tabla personal cuerpo de bomberos
 class Personal(models.Model):
   nombres = models.CharField(max_length=50)
@@ -147,14 +165,16 @@ class Tipos_Artificios(models.Model):
 
 # Modelo Proncipal para todos los Procedimientos
 class Procedimientos(models.Model):
-    id_division  = models.ForeignKey(Divisiones, on_delete=models.CASCADE, default=0)
-    id_solicitante = models.ForeignKey(Personal, on_delete=models.CASCADE, related_name="personal1")
-    solicitante_externo = models.CharField(max_length=20, default="Interno")
-    unidad = models.ForeignKey(Unidades, on_delete=models.CASCADE)
-    id_jefe_comision = models.ForeignKey(Personal, on_delete=models.CASCADE, related_name="personal2")
-    efectivos_enviados = models.CharField(max_length=40)
+    id_division  = models.ForeignKey(Divisiones, on_delete=models.CASCADE, default=0, blank=True)
+    tipo_servicio = models.CharField(max_length=50, blank=True)
+    id_solicitante = models.ForeignKey(Personal, on_delete=models.CASCADE, related_name="personal1", default=0)
+    solicitante_externo = models.CharField(max_length=20, default="Interno", blank=True)
+    unidad = models.ForeignKey(Unidades, on_delete=models.CASCADE, default=1)
+    id_jefe_comision = models.ForeignKey(Personal, on_delete=models.CASCADE, related_name="personal2", default=0)
+    dependencia = models.CharField(max_length=80, blank=True)
+    efectivos_enviados = models.CharField(max_length=40, blank=True)
     id_municipio = models.ForeignKey(Municipios, on_delete=models.CASCADE)
-    id_parroquia = models.ForeignKey(Parroquias, on_delete=models.CASCADE, default="0")
+    id_parroquia = models.ForeignKey(Parroquias, on_delete=models.CASCADE, default="1")
     fecha = models.DateField(default="1999-01-01")
     hora = models.TimeField(default="00:00")
     direccion = models.CharField(max_length=50)
@@ -603,3 +623,47 @@ class Inspeccion_Establecimiento_Art(models.Model):
 
   def __str__(self):
     return self.id_proc_artificio.id_tipo_procedimiento.tipo_procedimiento + " -- " + self.nombre_comercio + " -- " + self.rif_comercio + " -- " + self.encargado_nombre + " -- " + self.encargado_apellidos + " -- " + self.encargado_cedula + " -- " + self.encargado_sexo + " -- " + self.descripcion + " -- " + self.material_utilizado + " -- " + self.status
+
+class Valoracion_Medica(models.Model):
+  id_procedimientos = models.ForeignKey(Procedimientos, on_delete=models.CASCADE)
+  nombre = models.CharField(max_length=80)
+  apellido = models.CharField(max_length=80)
+  cedula = models.CharField(max_length=12)
+  edad = models.CharField(max_length=3)
+  sexo = models.CharField(max_length=20)
+  telefono = models.CharField(max_length=40)
+  descripcion = models.CharField(max_length=120)
+  material_utilizado = models.CharField(max_length=60)
+  status = models.CharField(max_length=15)
+
+  def __str__(self):
+    return self.id_procedimientos.id_tipo_procedimiento.tipo_procedimiento + " -- " + self.nombre + " -- " + self.apellido + " -- " + self.cedula + " -- " + self.edad + " -- " + self.sexo + " -- " + self.telefono + " -- " + self.descripcion + " -- " + self.material_utilizado + " -- " + self.status
+  
+class Detalles_Enfermeria(models.Model):
+  id_procedimientos = models.ForeignKey(Procedimientos, on_delete=models.CASCADE)
+  nombre = models.CharField(max_length=80)
+  apellido = models.CharField(max_length=80)
+  cedula = models.CharField(max_length=12)
+  edad = models.CharField(max_length=3)
+  sexo = models.CharField(max_length=20)
+  telefono = models.CharField(max_length=40)
+  descripcion = models.CharField(max_length=120)
+  material_utilizado = models.CharField(max_length=60)
+  status = models.CharField(max_length=15)
+
+  def __str__(self):
+    return self.id_procedimientos.id_tipo_procedimiento.tipo_procedimiento + " -- " + self.nombre + " -- " + self.apellido + " -- " + self.cedula + " -- " + self.edad + " -- " + self.sexo + " -- " + self.telefono + " -- " + self.descripcion + " -- " + self.material_utilizado + " -- " + self.status
+  
+class Procedimientos_Psicologia(models.Model):
+  id_procedimientos = models.ForeignKey(Procedimientos, on_delete=models.CASCADE)
+  nombre = models.CharField(max_length=80)
+  apellido = models.CharField(max_length=80)
+  cedula = models.CharField(max_length=12)
+  edad = models.CharField(max_length=3)
+  sexo = models.CharField(max_length=20)
+  descripcion = models.CharField(max_length=120)
+  material_utilizado = models.CharField(max_length=60)
+  status = models.CharField(max_length=15)
+
+  def __str__(self):
+    return self.id_procedimientos.id_tipo_procedimiento.tipo_procedimiento + " -- " + self.nombre + " -- " + self.apellido + " -- " + self.cedula + " -- " + self.edad + " -- " + self.sexo + " -- "  + self.descripcion + " -- " + self.material_utilizado + " -- " + self.status

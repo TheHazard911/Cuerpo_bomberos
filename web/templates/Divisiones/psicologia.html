@@ -73,9 +73,6 @@
         <tr>
           <th scope="col">#</th>
           <th scope="col">Solicitante</th>
-          <th scope="col">Jefe de comision</th>
-          <th scope="col">Unidad</th>
-          <th scope="col">Efectivos Enviados</th>
           <th scope="col">Parroquia</th>
           <th scope="col">Municipio</th>
           <th scope="col">Direccion</th>
@@ -99,11 +96,6 @@
           <td>{{ row.solicitante_externo }}</td>
           {% endif %}
           <!-- prettier-ignore -->
-          <td>{{ row.id_jefe_comision.jerarquia }} {{ row.id_jefe_comision.nombres}} {{ row.id_jefe_comision.apellidos}}</td>
-          <!-- prettier-ignore -->
-          <td>{{ row.unidad }}</td>
-          <!-- prettier-ignore -->
-          <td>{{ row.efectivos_enviados}}</td>
           {% if row.id_parroquia.parroquia != "Sin Registro" %}
           <td>{{ row.id_parroquia.parroquia }}</td>
           {% else %}

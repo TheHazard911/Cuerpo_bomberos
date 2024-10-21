@@ -1,3 +1,121 @@
+function ocultElement(element) {
+  document.getElementById(`${element}`).style.display = "none";
+  document
+    .getElementById(`${element}`)
+    .querySelectorAll("input, select")
+    .forEach((ele) => {
+      ele.removeAttribute("required");
+    });
+}
+function mostrarElement(element) {
+  document.getElementById(`${element}`).style.display = "flex";
+  document
+    .getElementById(`${element}`)
+    .querySelectorAll("input, select")
+    .forEach((ele) => {
+      ele.setAttribute("required", "true");
+    });
+}
+
+document
+  .getElementById("id_form1-opciones")
+  .addEventListener("change", function () {
+    switch (this.value) {
+      case "1":
+        // rescate
+        ocultElement("capacitacion")
+        ocultElement("form_enfermeria");
+        mostrarElement("form_general");
+        ocultElement("servicios_medicos");
+        ocultElement("psicologia")
+
+        break;
+      case "2":
+        // operaciones
+        ocultElement("form_enfermeria");
+        mostrarElement("form_general");
+        ocultElement("servicios_medicos");
+        ocultElement("psicologia")
+
+
+        break;
+      case "3":
+        // Prevencion
+        ocultElement("capacitacion")
+        ocultElement("form_enfermeria");
+        mostrarElement("form_general");
+        ocultElement("servicios_medicos");
+        ocultElement("psicologia")
+
+        break;
+      case "4":
+        // Grumae
+        ocultElement("capacitacion")
+        ocultElement("form_enfermeria");
+        mostrarElement("form_general");
+        ocultElement("servicios_medicos");
+        ocultElement("psicologia")
+
+        break;
+      case "5":
+        // prehospitalaria
+        ocultElement("capacitacion")
+        ocultElement("form_enfermeria");
+        ocultElement("servicios_medicos");
+        ocultElement("psicologia")
+        mostrarElement("form_general");
+
+        break;
+      case "6":
+        // enfermeria
+        ocultElement("capacitacion")
+        ocultElement("form_general");
+        ocultElement("servicios_medicos");
+        mostrarElement("form_enfermeria");
+        ocultElement("psicologia")
+        document.getElementById("id_form4-tipo_procedimiento").parentElement.querySelector("label").textContent = "Tipo de Atencion"
+        break;
+      case "7":
+        // servicios Medicos
+        ocultElement("form_general");
+        ocultElement("form_enfermeria");
+        mostrarElement("servicios_medicos")
+        ocultElement("capacitacion")
+        ocultElement("psicologia")
+        break;
+      case "8":
+        // psicologia
+        ocultElement("form_general");
+        ocultElement("form_enfermeria");
+        ocultElement("servicios_medicos")
+        ocultElement("capacitacion")
+        mostrarElement("psicologia")
+        break;
+      case "9":
+        // capacitacion
+        ocultElement("form_general");
+        ocultElement("form_enfermeria");
+        ocultElement("servicios_medicos")
+        ocultElement("psicologia")
+        mostrarElement("capacitacion")
+        let input_solicitante = document.getElementById("id_form_capacitacion-solicitante")
+        document.getElementById("id_form_capacitacion-solicitante_externo").parentElement.style.display = "none"
+         document.getElementById("id_form_capacitacion-solicitante_externo").removeAttribute("required")
+
+        input_solicitante.addEventListener("change", function () {
+          if (this.value === "0"){
+            document.getElementById("id_form_capacitacion-solicitante_externo").parentElement.style.display = "flex"
+            document.getElementById("id_form_capacitacion-solicitante_externo").setAttribute("required", "true")
+          } else{
+            document.getElementById("id_form_capacitacion-solicitante_externo").parentElement.style.display = "none"
+            document.getElementById("id_form_capacitacion-solicitante_externo").removeAttribute("required")
+          }
+        })
+
+        break;
+    }
+  });
+
 // < !--Script para cambiar el menu desplegable de tipo de procedimiento segun la division-- >
 // Define las opciones por categoría
 var inputExterno = document.getElementById("id_form2-solicitante_externo");
@@ -7,18 +125,18 @@ var divContainer = inputExterno.parentElement;
 
 // Ocultar el div
 divContainer.style.display = "none";
-inputExterno.removeAttribute("required")
+inputExterno.removeAttribute("required");
 
 document
   .getElementById("id_form2-solicitante")
   .addEventListener("change", function () {
-
-    if (this.value == "0") {  // Ajusta el valor de "1" según tu lógica
+    if (this.value == "0") {
+      // Ajusta el valor de "1" según tu lógica
       divContainer.style.display = "flex";
-      inputExterno.setAttribute("required", "required")
+      inputExterno.setAttribute("required", "required");
     } else {
-      divContainer.style.display = "none";   // Ocultar solicitante_externo
-      inputExterno.removeAttribute("required")
+      divContainer.style.display = "none"; // Ocultar solicitante_externo
+      inputExterno.removeAttribute("required");
     }
   });
 
@@ -60,7 +178,10 @@ const opcionesPorCategoria = {
     { value: "19", text: "Investigacion" },
     { value: "20", text: "Reinspeccion de Prevencion" },
     { value: "21", text: "Retencion Preventiva" },
-    { value: "22", text: "Artificios Piroctenicos" },
+    {
+      value: "23",
+      text: "Inspeccion Establecimiento por Artificios Piroctenicos",
+    },
   ],
   4: [
     { value: "1", text: "Abastecimiento de agua" },
@@ -88,8 +209,29 @@ const opcionesPorCategoria = {
     { value: "15", text: "Puesto de Avanzada" },
     { value: "16", text: "Traslados" },
   ],
-
-  8: [{ value: "00", text: "Terapia Psicológica" }],
+  6: [
+    { value: "29", text: "Atencion Local" },
+    { value: "26", text: "Administración de Medicamentos" },
+    { value: "30", text: "Atención Prehospitalaria" },
+    { value: "31", text: "Cuantificación de Presion Arterial" },
+    { value: "32", text: "Cuantificación de Signos Vitales" },
+    { value: "33", text: "Cura" },
+    { value: "27", text: "Administración de Tratamiento" },
+    { value: "28", text: "Aerosolterapia" },
+    { value: "34", text: "Otro" },
+  ],
+  7: [
+    { value: "24", text: "Valoración Medica" },
+    { value: "", text: "Jornada Medica" },
+  ],
+  8: [{ value: "35", text: "Certificado de Salud Mental" },
+      { value: "36", text: "Consulta Bombero Activo" },
+      { value: "37", text: "Consulta Integrante Brigada Juvenil" },
+      { value: "38", text: "Consulta Paciente Externo" },
+      { value: "39", text: "Evaluacion Psicológica Postvacacional" },
+      { value: "40", text: "Evaluacion Psicológica Prevacacional" },
+      { value: "41", text: "Evaluacion Personal Nuevo Ingreso" },
+  ],
   // Puedes agregar más categorías según sea necesario
 };
 
@@ -100,7 +242,7 @@ const selectTipoProcedimiento = document.getElementById(
 
 // Función para actualizar las opciones del segundo select
 function actualizarOpciones() {
-  hideAllForms()
+  hideAllForms();
   const selectedValue = selectOpciones.value;
 
   // Limpia las opciones actuales del segundo select
@@ -132,7 +274,7 @@ selectOpciones.addEventListener("change", actualizarOpciones);
 
 function hideAllForms() {
   const forms = document.querySelectorAll(".disp-none");
-  forms.forEach(form => {
+  forms.forEach((form) => {
     form.style.display = "none";
   });
 }
@@ -199,11 +341,15 @@ document
       "fallecidos_art",
       "detalles_vehiculo_art",
       "persona_presente_art",
+      "inspeccion_art_pir",
+      "valoracion_medica",
+      "detalles_enfermeria",
+      "detalles_psicologia"
     ];
 
     const showElements = (elementsToShow) => {
       // Primero ocultamos todos los elementos, usando la clase 'non-visible'
-      elementsToHide.forEach(id => {
+      elementsToHide.forEach((id) => {
         const element = document.getElementById(id);
         if (element) {
           element.style.display = "none";
@@ -211,7 +357,7 @@ document
       });
 
       // Luego mostramos los elementos específicos, usando la clase 'visible'
-      elementsToShow.forEach(id => {
+      elementsToShow.forEach((id) => {
         const element = document.getElementById(id);
         if (element) {
           element.style.display = "block";
@@ -427,9 +573,15 @@ document
                         ele.setAttribute("required", true);
                       });
 
-                    requiredExceptions(document.getElementById("accidentes_transito").querySelectorAll("input[type='checkbox']"));
+                    requiredExceptions(
+                      document
+                        .getElementById("accidentes_transito")
+                        .querySelectorAll("input[type='checkbox']")
+                    );
                   } else {
-                    document.getElementById("vehiculo_accidente").style.display = "none"
+                    document.getElementById(
+                      "vehiculo_accidente"
+                    ).style.display = "none";
                     document
                       .getElementById("vehiculo_accidente")
                       .querySelectorAll("select, input")
@@ -453,7 +605,11 @@ document
                         document.getElementById(
                           "otro_vehiculo_accidente"
                         ).style.display = "flex";
-                        requiredExceptions(document.getElementById("accidentes_transito").querySelectorAll("input[type='checkbox']"));
+                        requiredExceptions(
+                          document
+                            .getElementById("accidentes_transito")
+                            .querySelectorAll("input[type='checkbox']")
+                        );
                       } else {
                         document
                           .getElementById("otro_vehiculo_accidente")
@@ -481,7 +637,11 @@ document
                         document.getElementById(
                           "otro_vehiculo_accidente2"
                         ).style.display = "flex";
-                        requiredExceptions(document.getElementById("accidentes_transito").querySelectorAll("input[type='checkbox']"));
+                        requiredExceptions(
+                          document
+                            .getElementById("accidentes_transito")
+                            .querySelectorAll("input[type='checkbox']")
+                        );
                       } else {
                         document
                           .getElementById("otro_vehiculo_accidente2")
@@ -512,7 +672,11 @@ document
                       "lesionado_accidente"
                     ).style.display = "flex";
 
-                    requiredExceptions(document.getElementById("accidentes_transito").querySelectorAll("input[type='checkbox']"));
+                    requiredExceptions(
+                      document
+                        .getElementById("accidentes_transito")
+                        .querySelectorAll("input[type='checkbox']")
+                    );
 
                     document
                       .getElementById(
@@ -530,7 +694,11 @@ document
                             "lesionado_accidente2"
                           ).style.display = "flex";
 
-                          requiredExceptions(document.getElementById("accidentes_transito").querySelectorAll("input[type='checkbox']"));
+                          requiredExceptions(
+                            document
+                              .getElementById("accidentes_transito")
+                              .querySelectorAll("input[type='checkbox']")
+                          );
 
                           document
                             .getElementById(
@@ -547,7 +715,11 @@ document
                                 document.getElementById(
                                   "lesionado_accidente3"
                                 ).style.display = "flex";
-                                requiredExceptions(document.getElementById("accidentes_transito").querySelectorAll("input[type='checkbox']"));
+                                requiredExceptions(
+                                  document
+                                    .getElementById("accidentes_transito")
+                                    .querySelectorAll("input[type='checkbox']")
+                                );
                               } else {
                                 document
                                   .getElementById("lesionado_accidente3")
@@ -559,7 +731,7 @@ document
                                   "lesionado_accidente3"
                                 ).style.display = "none";
                               }
-                            })
+                            });
 
                           document
                             .getElementById(
@@ -576,7 +748,11 @@ document
                                 document.getElementById(
                                   "traslado_accidente3"
                                 ).style.display = "flex";
-                                requiredExceptions(document.getElementById("accidentes_transito").querySelectorAll("input[type='checkbox']"));
+                                requiredExceptions(
+                                  document
+                                    .getElementById("accidentes_transito")
+                                    .querySelectorAll("input[type='checkbox']")
+                                );
                               } else {
                                 document
                                   .getElementById("traslado_accidente3")
@@ -589,8 +765,6 @@ document
                                 ).style.display = "none";
                               }
                             });
-
-
                         } else {
                           document
                             .getElementById("lesionado_accidente2")
@@ -602,7 +776,7 @@ document
                             "lesionado_accidente2"
                           ).style.display = "none";
                         }
-                      })
+                      });
 
                     document
                       .getElementById(
@@ -616,7 +790,11 @@ document
                             .forEach((ele) => {
                               ele.setAttribute("required", true);
                             });
-                          requiredExceptions(document.getElementById("accidentes_transito").querySelectorAll("input[type='checkbox']"));
+                          requiredExceptions(
+                            document
+                              .getElementById("accidentes_transito")
+                              .querySelectorAll("input[type='checkbox']")
+                          );
                           document.getElementById(
                             "traslado_accidente2"
                           ).style.display = "flex";
@@ -632,9 +810,6 @@ document
                           ).style.display = "none";
                         }
                       });
-
-
-
                   } else {
                     document
                       .getElementById("lesionado_accidente")
@@ -662,7 +837,11 @@ document
                         document.getElementById(
                           "traslado_accidente"
                         ).style.display = "flex";
-                        requiredExceptions(document.getElementById("accidentes_transito").querySelectorAll("input[type='checkbox']"));
+                        requiredExceptions(
+                          document
+                            .getElementById("accidentes_transito")
+                            .querySelectorAll("input[type='checkbox']")
+                        );
                       } else {
                         document
                           .getElementById("traslado_accidente")
@@ -695,26 +874,34 @@ document
       case "10":
         requiredFalse();
         showElements(["rescate"]);
-        campos = document.getElementById("rescate").querySelectorAll("select, input");
-        console.log(campos)
+        campos = document
+          .getElementById("rescate")
+          .querySelectorAll("select, input");
+        console.log(campos);
         setRequired(campos, true);
         document.getElementById("button_submit").style.display = "none";
-        document.
-          getElementById("id_rescate_form-tipo_rescate")
+        document
+          .getElementById("id_rescate_form-tipo_rescate")
           .addEventListener("change", function () {
             if (this.value == "1") {
               requiredExceptions(
-                document.getElementById("rescate_persona").querySelectorAll("select, input")
+                document
+                  .getElementById("rescate_persona")
+                  .querySelectorAll("select, input")
               );
               showElements(["rescate", "rescate_animal"]);
-              let campos2 = document.getElementById("rescate_animal").querySelectorAll("select, input");
+              let campos2 = document
+                .getElementById("rescate_animal")
+                .querySelectorAll("select, input");
               setRequired(campos2, true);
               document.getElementById("button_submit").style.display = "block";
             } else if (this.value != "1") {
-              let rescate_persona = document.getElementById("rescate_persona").querySelector("h4")
-              let titulo = this.options[this.selectedIndex].text
+              let rescate_persona = document
+                .getElementById("rescate_persona")
+                .querySelector("h4");
+              let titulo = this.options[this.selectedIndex].text;
               // console.log(rescate_persona, titulo)
-              rescate_persona.textContent = titulo
+              rescate_persona.textContent = titulo;
               requiredExceptions(
                 document
                   .getElementById("rescate_animal")
@@ -730,43 +917,65 @@ document
           });
         break;
       case "11":
-        requiredFalse()
+        requiredFalse();
         showElements(["incendio_form"]);
-        campos = document.getElementById("incendio_form").querySelectorAll("select, input")
-        setRequired(campos, true)
-        requiredExceptions(document.getElementById("detalles_vehiculo").querySelectorAll("select, input"))
-        requiredExceptions(document.getElementById("persona_presente").querySelectorAll("select, input"))
-        requiredExceptions(document.getElementById("incendio_form").querySelectorAll("input[type='checkbox']"))
+        campos = document
+          .getElementById("incendio_form")
+          .querySelectorAll("select, input");
+        setRequired(campos, true);
+        requiredExceptions(
+          document
+            .getElementById("detalles_vehiculo")
+            .querySelectorAll("select, input")
+        );
+        requiredExceptions(
+          document
+            .getElementById("persona_presente")
+            .querySelectorAll("select, input")
+        );
+        requiredExceptions(
+          document
+            .getElementById("incendio_form")
+            .querySelectorAll("input[type='checkbox']")
+        );
 
         document
           .getElementById("id_incendio_form-check_agregar_persona")
           .addEventListener("change", function () {
-
             if (this.checked) {
-              let campo2 = document.getElementById("persona_presente").querySelectorAll("select, input")
-              setRequired(campo2, true)
-              document.getElementById("persona_presente").style.display = "flex"
+              let campo2 = document
+                .getElementById("persona_presente")
+                .querySelectorAll("select, input");
+              setRequired(campo2, true);
+              document.getElementById("persona_presente").style.display =
+                "flex";
             } else {
-              let campo2 = document.getElementById("persona_presente").querySelectorAll("select, input")
-              requiredExceptions(campo2)
-              document.getElementById("persona_presente").style.display = "none"
+              let campo2 = document
+                .getElementById("persona_presente")
+                .querySelectorAll("select, input");
+              requiredExceptions(campo2);
+              document.getElementById("persona_presente").style.display =
+                "none";
             }
-
           });
         document
           .getElementById("id_incendio_form-tipo_incendio")
           .addEventListener("change", function () {
-
             if (this.value == "2") {
-              let campo2 = document.getElementById("detalles_vehiculo").querySelectorAll("select, input")
-              setRequired(campo2, true)
-              document.getElementById("detalles_vehiculo").style.display = "flex"
+              let campo2 = document
+                .getElementById("detalles_vehiculo")
+                .querySelectorAll("select, input");
+              setRequired(campo2, true);
+              document.getElementById("detalles_vehiculo").style.display =
+                "flex";
             } else {
-              let campo2 = document.getElementById("detalles_vehiculo").querySelectorAll("select, input")
-              requiredExceptions(campo2)
-              document.getElementById("detalles_vehiculo").style.display = "none"
+              let campo2 = document
+                .getElementById("detalles_vehiculo")
+                .querySelectorAll("select, input");
+              requiredExceptions(campo2);
+              document.getElementById("detalles_vehiculo").style.display =
+                "none";
             }
-
           });
         document.getElementById("button_submit").style.display = "block";
         break;
@@ -789,9 +998,11 @@ document
         document.getElementById("button_submit").style.display = "block";
         break;
       case "14":
-        let select_vivienda = document.getElementById("evaluacion_riesgo").querySelector(".form-style > div:nth-of-type(2)")
-        console.log(select_vivienda)
-        select_vivienda.style.display = "none"
+        let select_vivienda = document
+          .getElementById("evaluacion_riesgo")
+          .querySelector(".form-style > div:nth-of-type(2)");
+        console.log(select_vivienda);
+        select_vivienda.style.display = "none";
         requiredFalse();
         showElements(["evaluacion_riesgo"]);
         campos = document
@@ -803,25 +1014,29 @@ document
           .getElementById("form_persona_presente")
           .querySelectorAll("select, input");
 
-        document.getElementById("id_evaluacion_riesgo_form-tipo_riesgo").addEventListener("change", function () {
-          if (this.value === "1") {
-            select_vivienda.style.display = 'flex';
-            select_vivienda.querySelector("select").value = ''; // Borra la selección
-            let campos3 = select_vivienda.querySelectorAll("select, input")
-            setRequired(campos3, "true")
-          } else {
-
-            select_vivienda.style.display = "none";
-            select_vivienda.querySelector("select").value = ''; // Borra la selección
-            requiredExceptions(select_vivienda.querySelectorAll("select, input"))
-          }
-        })
+        document
+          .getElementById("id_evaluacion_riesgo_form-tipo_riesgo")
+          .addEventListener("change", function () {
+            if (this.value === "1") {
+              select_vivienda.style.display = "flex";
+              select_vivienda.querySelector("select").value = ""; // Borra la selección
+              let campos3 = select_vivienda.querySelectorAll("select, input");
+              setRequired(campos3, "true");
+            } else {
+              select_vivienda.style.display = "none";
+              select_vivienda.querySelector("select").value = ""; // Borra la selección
+              requiredExceptions(
+                select_vivienda.querySelectorAll("select, input")
+              );
+            }
+          });
 
         query = document.getElementById("id_form1-opciones");
         if (query.value === "3") {
           showElements(["evaluacion_riesgo"]);
           setRequired(campos2, true);
-          document.getElementById("form_persona_presente").style.display = "flex"
+          document.getElementById("form_persona_presente").style.display =
+            "flex";
         } else {
           requiredExceptions(campos2);
         }
@@ -872,79 +1087,326 @@ document
         document.getElementById("button_submit").style.display = "block";
         break;
       case "22":
-        requiredFalse()
+        requiredFalse();
         showElements(["artificios_pirotecnico"]);
-        campos = document.getElementById("artificios_pirotecnico").querySelectorAll("select, input")
-        setRequired(campos, true)
-        requiredExceptions(document.getElementById("detalles_vehiculo_art").querySelectorAll("select, input"))
-        requiredExceptions(document.getElementById("persona_presente_art").querySelectorAll("select, input"))
-        document.getElementById("id_artificios_pirotecnico-tipo_procedimiento").addEventListener("change", function () {
+        campos = document
+          .getElementById("artificios_pirotecnico")
+          .querySelectorAll("select, input");
+        setRequired(campos, true);
+        requiredExceptions(
+          document
+            .getElementById("detalles_vehiculo_art")
+            .querySelectorAll("select, input")
+        );
+        requiredExceptions(
+          document
+            .getElementById("persona_presente_art")
+            .querySelectorAll("select, input")
+        );
+        document
+          .getElementById("id_artificios_pirotecnico-tipo_procedimiento")
+          .addEventListener("change", function () {
+            switch (this.value) {
+              case "1":
+                showElements(["artificios_pirotecnico", "incendio_art"]);
+                campos = document
+                  .getElementById("incendio_art")
+                  .querySelectorAll("select, input");
+                setRequired(campos, true);
+                requiredExceptions(
+                  document
+                    .getElementById("detalles_vehiculo_art")
+                    .querySelectorAll("select, input")
+                );
+                requiredExceptions(
+                  document
+                    .getElementById("persona_presente_art")
+                    .querySelectorAll("select, input")
+                );
+                requiredExceptions(
+                  document
+                    .getElementById("incendio_art")
+                    .querySelectorAll("input[type='checkbox']")
+                );
 
-          switch (this.value) {
-            case "1":
-              showElements(["artificios_pirotecnico", "incendio_art"]);
-              campos = document.getElementById("incendio_art").querySelectorAll("select, input")
-              setRequired(campos, true)
-              requiredExceptions(document.getElementById("detalles_vehiculo_art").querySelectorAll("select, input"))
-              requiredExceptions(document.getElementById("persona_presente_art").querySelectorAll("select, input"))
-              requiredExceptions(document.getElementById("incendio_art").querySelectorAll("input[type='checkbox']"))
+                requiredExceptions(
+                  document
+                    .getElementById("lesionados")
+                    .querySelectorAll("select, input")
+                );
+                requiredExceptions(
+                  document
+                    .getElementById("fallecidos_art")
+                    .querySelectorAll("select, input")
+                );
 
-              requiredExceptions(document.getElementById("lesionados").querySelectorAll("select, input"))
-              requiredExceptions(document.getElementById("fallecidos_art").querySelectorAll("select, input"))
+                document
+                  .getElementById("id_incendio_art-check_agregar_persona")
+                  .addEventListener("change", function () {
+                    if (this.checked) {
+                      let campo2 = document
+                        .getElementById("persona_presente_art")
+                        .querySelectorAll("select, input");
+                      setRequired(campo2, true);
+                      document.getElementById(
+                        "persona_presente_art"
+                      ).style.display = "flex";
+                    } else {
+                      let campo2 = document
+                        .getElementById("persona_presente_art")
+                        .querySelectorAll("select, input");
+                      requiredExceptions(campo2);
+                      document.getElementById(
+                        "persona_presente_art"
+                      ).style.display = "none";
+                    }
+                  });
+                document
+                  .getElementById("id_incendio_art-tipo_incendio")
+                  .addEventListener("change", function () {
+                    if (this.value == "2") {
+                      let campo2 = document
+                        .getElementById("detalles_vehiculo_art")
+                        .querySelectorAll("select, input");
+                      setRequired(campo2, true);
+                      document.getElementById(
+                        "detalles_vehiculo_art"
+                      ).style.display = "flex";
+                    } else {
+                      let campo2 = document
+                        .getElementById("detalles_vehiculo_art")
+                        .querySelectorAll("select, input");
+                      requiredExceptions(campo2);
+                      document.getElementById(
+                        "detalles_vehiculo_art"
+                      ).style.display = "none";
+                    }
+                  });
+                document.getElementById("button_submit").style.display =
+                  "block";
+                break;
+              case "2":
+                showElements(["artificios_pirotecnico", "lesionados"]);
+                campos = document
+                  .getElementById("lesionados")
+                  .querySelectorAll("select, input");
+                setRequired(campos, true);
+                requiredExceptions(
+                  document
+                    .getElementById("fallecidos_art")
+                    .querySelectorAll("select, input")
+                );
+                requiredExceptions(
+                  document
+                    .getElementById("incendio_art")
+                    .querySelectorAll("select, input")
+                );
+                console.log("Holaaa");
+                document.getElementById("button_submit").style.display =
+                  "block";
+                break;
+              case "3":
+                showElements(["artificios_pirotecnico", "fallecidos_art"]);
+                campos = document
+                  .getElementById("fallecidos_art")
+                  .querySelectorAll("select, input");
+                setRequired(campos, true);
+                requiredExceptions(
+                  document
+                    .getElementById("lesionados")
+                    .querySelectorAll("select, input")
+                );
+                requiredExceptions(
+                  document
+                    .getElementById("incendio_art")
+                    .querySelectorAll("select, input")
+                );
+                document.getElementById("button_submit").style.display =
+                  "block";
+                break;
+            }
+          });
 
-              document
-                .getElementById("id_incendio_art-check_agregar_persona")
-                .addEventListener("change", function () {
-
-                  if (this.checked) {
-                    let campo2 = document.getElementById("persona_presente_art").querySelectorAll("select, input")
-                    setRequired(campo2, true)
-                    document.getElementById("persona_presente_art").style.display = "flex"
-                  } else {
-                    let campo2 = document.getElementById("persona_presente_art").querySelectorAll("select, input")
-                    requiredExceptions(campo2)
-                    document.getElementById("persona_presente_art").style.display = "none"
-                  }
-
-                });
-              document
-                .getElementById("id_incendio_art-tipo_incendio")
-                .addEventListener("change", function () {
-
-                  if (this.value == "2") {
-                    let campo2 = document.getElementById("detalles_vehiculo_art").querySelectorAll("select, input")
-                    setRequired(campo2, true)
-                    document.getElementById("detalles_vehiculo_art").style.display = "flex"
-                  } else {
-                    let campo2 = document.getElementById("detalles_vehiculo_art").querySelectorAll("select, input")
-                    requiredExceptions(campo2)
-                    document.getElementById("detalles_vehiculo_art").style.display = "none"
-                  }
-
-                });
-              document.getElementById("button_submit").style.display = "block";
-              break
-            case "2":
-              showElements(["artificios_pirotecnico", "lesionados"]);
-              campos = document.getElementById("lesionados").querySelectorAll("select, input")
-              setRequired(campos, true)
-              requiredExceptions(document.getElementById("fallecidos_art").querySelectorAll("select, input"))
-              requiredExceptions(document.getElementById("incendio_art").querySelectorAll("select, input"))
-              console.log("Holaaa")
-              document.getElementById("button_submit").style.display = "block";
-              break
-            case "3":
-              showElements(["artificios_pirotecnico", "fallecidos_art"]);
-              campos = document.getElementById("fallecidos_art").querySelectorAll("select, input")
-              setRequired(campos, true)
-              requiredExceptions(document.getElementById("lesionados").querySelectorAll("select, input"))
-              requiredExceptions(document.getElementById("incendio_art").querySelectorAll("select, input"))
-              document.getElementById("button_submit").style.display = "block";
-              break
-          }
-
-        })
-
+        break;
+      case "23":
+        requiredFalse();
+        showElements(["inspeccion_art_pir"]);
+        campos = document
+          .getElementById("inspeccion_art_pir")
+          .querySelectorAll("select, input");
+        setRequired(campos, true);
+        document.getElementById("button_submit").style.display = "block";
+        // requiredExceptions(document.getElementById("detalles_vehiculo_art").querySelectorAll("select, input"))
+        // requiredExceptions(document.getElementById("persona_presente_art").querySelectorAll("select, input"))
+        break;
+      case "24":
+        requiredFalse();
+        showElements(["valoracion_medica"]);
+        campos = document
+          .getElementById("valoracion_medica")
+          .querySelectorAll("select, input");
+        setRequired(campos, true);
+        document.getElementById("button_submit").style.display = "block";
+        break;
+      case "26":
+        requiredFalse();
+        showElements(["detalles_enfermeria"]);
+        campos = document
+          .getElementById("detalles_enfermeria")
+          .querySelectorAll("select, input");
+        setRequired(campos, true);
+        document.getElementById("detalles_enfermeria").querySelector("h4").textContent = "Administración de Medicamentos"
+        document.getElementById("button_submit").style.display = "block";
+        break;
+      case "27":
+        requiredFalse();
+        showElements(["detalles_enfermeria"]);
+        campos = document
+          .getElementById("detalles_enfermeria")
+          .querySelectorAll("select, input");
+        setRequired(campos, true);
+         document.getElementById("detalles_enfermeria").querySelector("h4").textContent = "Administración de Tratamientos"
+        document.getElementById("button_submit").style.display = "block";
+        break;
+      case "28":
+        requiredFalse();
+        showElements(["detalles_enfermeria"]);
+        campos = document
+          .getElementById("detalles_enfermeria")
+          .querySelectorAll("select, input");
+        setRequired(campos, true);
+        document.getElementById("detalles_enfermeria").querySelector("h4").textContent = "Aerosolterapia"
+        document.getElementById("button_submit").style.display = "block";
+        break;
+      case "29":
+        requiredFalse();
+        showElements(["detalles_enfermeria"]);
+        campos = document
+          .getElementById("detalles_enfermeria")
+          .querySelectorAll("select, input");
+        setRequired(campos, true);
+        document.getElementById("detalles_enfermeria").querySelector("h4").textContent = "Atención Local"
+        document.getElementById("button_submit").style.display = "block";
+        break;
+      case "30":
+        requiredFalse();
+        showElements(["detalles_enfermeria"]);
+        campos = document
+          .getElementById("detalles_enfermeria")
+          .querySelectorAll("select, input");
+        setRequired(campos, true);
+        document.getElementById("detalles_enfermeria").querySelector("h4").textContent = "Atención Prehospitalaria"
+        document.getElementById("button_submit").style.display = "block";
+        break;
+      case "31":
+        requiredFalse();
+        showElements(["detalles_enfermeria"]);
+        campos = document
+          .getElementById("detalles_enfermeria")
+          .querySelectorAll("select, input");
+        setRequired(campos, true);
+        document.getElementById("detalles_enfermeria").querySelector("h4").textContent = "Cuantificación de Presión Arterial"
+        document.getElementById("button_submit").style.display = "block";
+        break;
+      case "32":
+        requiredFalse();
+        showElements(["detalles_enfermeria"]);
+        campos = document
+          .getElementById("detalles_enfermeria")
+          .querySelectorAll("select, input");
+        setRequired(campos, true);
+        document.getElementById("detalles_enfermeria").querySelector("h4").textContent = "Cuantificación de Signos Vitales"
+        document.getElementById("button_submit").style.display = "block";
+        break;
+      case "33":
+        requiredFalse();
+        showElements(["detalles_enfermeria"]);
+        campos = document
+          .getElementById("detalles_enfermeria")
+          .querySelectorAll("select, input");
+        setRequired(campos, true);
+        document.getElementById("detalles_enfermeria").querySelector("h4").textContent = "Cura"
+        document.getElementById("button_submit").style.display = "block";
+        break;
+      case "34":
+        requiredFalse();
+        showElements(["detalles_enfermeria"]);
+        campos = document
+          .getElementById("detalles_enfermeria")
+          .querySelectorAll("select, input");
+        setRequired(campos, true);
+        document.getElementById("detalles_enfermeria").querySelector("h4").textContent = "Otro"
+        document.getElementById("button_submit").style.display = "block";
+        break;
+      case "35":
+        requiredFalse();
+        showElements(["detalles_psicologia"]);
+        campos = document
+          .getElementById("detalles_psicologia")
+          .querySelectorAll("select, input");
+        setRequired(campos, true);
+        document.getElementById("detalles_psicologia").querySelector("h4").textContent = "Certificado de Salud Mental"
+        document.getElementById("button_submit").style.display = "block";
+        break;
+      case "36":
+        requiredFalse();
+        showElements(["detalles_psicologia"]);
+        campos = document
+          .getElementById("detalles_psicologia")
+          .querySelectorAll("select, input");
+        setRequired(campos, true);
+        document.getElementById("detalles_psicologia").querySelector("h4").textContent = "Consulta Bombero Activo"
+        document.getElementById("button_submit").style.display = "block";
+        break;
+      case "37":
+        requiredFalse();
+        showElements(["detalles_psicologia"]);
+        campos = document
+          .getElementById("detalles_psicologia")
+          .querySelectorAll("select, input");
+        setRequired(campos, true);
+        document.getElementById("detalles_psicologia").querySelector("h4").textContent = "Consulta Integrante Brigada Juvenil"
+        document.getElementById("button_submit").style.display = "block";
+        break;
+      case "38":
+        requiredFalse();
+        showElements(["detalles_psicologia"]);
+        campos = document
+          .getElementById("detalles_psicologia")
+          .querySelectorAll("select, input");
+        setRequired(campos, true);
+        document.getElementById("detalles_psicologia").querySelector("h4").textContent = "Consulta Paciente Externo"
+        document.getElementById("button_submit").style.display = "block";
+        break;
+      case "39":
+        requiredFalse();
+        showElements(["detalles_psicologia"]);
+        campos = document
+          .getElementById("detalles_psicologia")
+          .querySelectorAll("select, input");
+        setRequired(campos, true);
+        document.getElementById("detalles_psicologia").querySelector("h4").textContent = "Evaluacion Psicologica Postvacacional"
+        document.getElementById("button_submit").style.display = "block";
+        break;
+      case "40":
+        requiredFalse();
+        showElements(["detalles_psicologia"]);
+        campos = document
+          .getElementById("detalles_psicologia")
+          .querySelectorAll("select, input");
+        setRequired(campos, true);
+        document.getElementById("detalles_psicologia").querySelector("h4").textContent = "Evaluacion Psicologica Prevacacional"
+        document.getElementById("button_submit").style.display = "block";
+        break;
+      case "41":
+        requiredFalse();
+        showElements(["detalles_psicologia"]);
+        campos = document
+          .getElementById("detalles_psicologia")
+          .querySelectorAll("select, input");
+        setRequired(campos, true);
+        document.getElementById("detalles_psicologia").querySelector("h4").textContent = "Evaluacion Personal Nuevo Ingreso"
+        document.getElementById("button_submit").style.display = "block";
         break;
       default:
         elementsToHide.forEach((id) => {
@@ -989,6 +1451,7 @@ document
 {
   /* <!--desactivar primera casilla de select-- > */
 }
+
 document.addEventListener("DOMContentLoaded", function () {
   const selects = document.querySelectorAll(".disable-first-option");
   selects.forEach((select) => {
@@ -996,15 +1459,14 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 });
 
-
 // Selecciona todos los inputs de tipo checkbox
 const checkboxes = document.querySelectorAll('input[type="checkbox"]');
 
 // Agrega la clase 'checkbox-styles' a cada uno de ellos
 checkboxes.forEach((checkbox) => {
-  checkbox.classList.add('checkbox-styles');
+  checkbox.classList.add("checkbox-styles");
 
   // Selecciona el contenedor padre del checkbox
   const parent = checkbox.parentElement; // Cambia esto si el contenedor no es el padre directo
-  parent.classList.add('flex-row'); // Agrega la clase para aplicar los estilos deseados
+  parent.classList.add("flex-row"); // Agrega la clase para aplicar los estilos deseados
 });

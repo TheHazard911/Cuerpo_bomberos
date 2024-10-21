@@ -8,6 +8,27 @@ def Asignar_ops_Personal():
         op.append((str(persona.id), f"{persona.jerarquia} {persona.nombres} {persona.apellidos}"))
     return op
 
+def Asignar_op_Doctores():
+    personal = Doctores.objects.all()
+    op = [("", "Seleccione Una Opcion")]
+    for persona in personal:
+        op.append((f"{persona.doctor}", f"{persona.doctor}"))
+    return op
+
+def Asignar_op_Enfermeros():
+    personal = Enfermeros.objects.all()
+    op = [("", "Seleccione Una Opcion")]
+    for persona in personal:
+        op.append((f"{persona.enfermeros}", f"{persona.enfermeros}"))
+    return op
+
+def Asignar_op_Psicologa():
+    personal = Psicologa.objects.all()
+    op = [("", "Seleccione Una Opcion")]
+    for persona in personal:
+        op.append((f"{persona.psicologa}", f"{persona.psicologa}"))
+    return op
+
 def Asignar_op_Municipios():
     municipios = Municipios.objects.all()
     op = [("", "Seleccione Una Opcion")]
@@ -157,13 +178,13 @@ class SelectorDivision(forms.Form):
 
 # Form2 
 class SeleccionarInfo(forms.Form):
-    solicitante = forms.ChoiceField(choices=Asignar_ops_Personal(), required=True,
+    solicitante = forms.ChoiceField(choices=Asignar_ops_Personal(), required=False,
         widget=forms.Select(attrs={'class': 'disable-first-option'}))
     solicitante_externo = forms.CharField(required=False)
-    unidad = forms.ChoiceField(choices=Asignar_opc_unidades(), required=True,
+    unidad = forms.ChoiceField(choices=Asignar_opc_unidades(), required=False,
         widget=forms.Select(attrs={'class': 'disable-first-option'}))
-    efectivos_enviados = forms.CharField()
-    jefe_comision = forms.ChoiceField(choices=Asignar_ops_Personal(), required=True,
+    efectivos_enviados = forms.CharField(required=False)
+    jefe_comision = forms.ChoiceField(choices=Asignar_ops_Personal(), required=False,
         widget=forms.Select(attrs={'class': 'disable-first-option'}))
 
 # Form3
@@ -197,16 +218,16 @@ class Formulario_Enfermeria(forms.Form):
     opc = [("", "Seleccione Una Opcion"),("Cuartel Central", "Cuartel Central"), ("Estacion 1", "Estacion 1"), ("Estacion 2", "Estacion 2"), ("Estacion 3", "Estacion 3")]
 
     dependencia = forms.ChoiceField(choices=opc, widget=forms.Select(attrs={"class": "disable-first-option"}), required=False)
-    encargado_area = forms.CharField(max_length=100, required=False)
+    encargado_area = forms.ChoiceField(choices=Asignar_op_Enfermeros, widget=forms.Select(attrs={"class": "disable-first-option"}), required=False)
 
 class Formulario_Servicios_medicos(forms.Form):
     opc = [("", "Seleccione Una Opcion"),("Consultas Medicas", "Consultas Medicas"), ("Consultas Psicologicas", "Consultas Psicologicas"), ("Servicios Medicos", "Servicios Medicos")]
 
     tipo_servicio = forms.ChoiceField(choices=opc, widget=forms.Select(attrs={"class": "disable-first-option"}), required=False)
-    jefe_area = forms.CharField(max_length=100, required=False, label="Jefe de Area")
+    jefe_area = forms.ChoiceField(choices=Asignar_op_Doctores(), widget=forms.Select(attrs={"class": "disable-first-option"}), required=False, label="Jefe de Area")
      
 class Formulario_psicologia(forms.Form):
-    jefe_area = forms.CharField(max_length=100, required=False)
+    jefe_area = forms.ChoiceField(choices=Asignar_op_Psicologa(), widget=forms.Select(attrs={"class": "disable-first-option"}), required=False)
     
 class Formulario_capacitacion(forms.Form):
     dependencia = forms.CharField(max_length=100, required=False, label="Dependencia")
@@ -552,4 +573,36 @@ class Formulario_Inspeccion_Establecimiento_Art(forms.Form):
     sexo = forms.ChoiceField(choices=[("", "Seleccione Una Opcion"), ("Masculino", "Masculino"), ("Femenino", "Femenino")], widget=forms.Select(attrs={"class": "disable-first-option"}), required=False)
     descripcion = forms.CharField(max_length=100, required=False)
     material_utilizado = forms.CharField(max_length=100, required=False)
+    status = forms.ChoiceField(choices=[("", "Seleccione Una Opcion"), ("Culminado", "Culminado"), ("En Proceso", "En Proceso")], widget=forms.Select(attrs={"class": "disable-first-option"}), required=False)
+
+class Formulario_Valoracion_Medica(forms.Form):
+    nombre = forms.CharField(max_length=80, required=False)
+    apellido = forms.CharField(max_length=80, required=False)
+    cedula = forms.CharField(max_length=12, required=False)
+    edad = forms.CharField(max_length=3, required=False)
+    sexo = forms.ChoiceField(choices=[("", "Seleccione Una Opcion"), ("Masculino", "Masculino"), ("Femenino", "Femenino")], widget=forms.Select(attrs={"class": "disable-first-option"}), required=False)
+    telefono = forms.CharField(max_length=40, required=False)
+    descripcion = forms.CharField(max_length=120, required=False)
+    material_utilizado = forms.CharField(max_length=60, required=False)
+    status = forms.ChoiceField(choices=[("", "Seleccione Una Opcion"), ("Culminado", "Culminado"), ("En Proceso", "En Proceso")], widget=forms.Select(attrs={"class": "disable-first-option"}), required=False)
+
+class Formulario_Detalles_Enfermeria(forms.Form):
+    nombre = forms.CharField(max_length=80, required=False)
+    apellido = forms.CharField(max_length=80, required=False)
+    cedula = forms.CharField(max_length=12, required=False)
+    edad = forms.CharField(max_length=3, required=False)
+    sexo = forms.ChoiceField(choices=[("", "Seleccione Una Opcion"), ("Masculino", "Masculino"), ("Femenino", "Femenino")], widget=forms.Select(attrs={"class": "disable-first-option"}), required=False)
+    telefono = forms.CharField(max_length=40, required=False)
+    descripcion = forms.CharField(max_length=120, required=False)
+    material_utilizado = forms.CharField(max_length=60, required=False)
+    status = forms.ChoiceField(choices=[("", "Seleccione Una Opcion"), ("Culminado", "Culminado"), ("En Proceso", "En Proceso")], widget=forms.Select(attrs={"class": "disable-first-option"}), required=False)
+
+class Formulario_Procedimientos_Psicologia(forms.Form):
+    nombre = forms.CharField(max_length=80, required=False)
+    apellido = forms.CharField(max_length=80, required=False)
+    cedula = forms.CharField(max_length=12, required=False)
+    edad = forms.CharField(max_length=3, required=False)
+    sexo = forms.ChoiceField(choices=[("", "Seleccione Una Opcion"), ("Masculino", "Masculino"), ("Femenino", "Femenino")], widget=forms.Select(attrs={"class": "disable-first-option"}), required=False)
+    descripcion = forms.CharField(max_length=120, required=False)
+    material_utilizado = forms.CharField(max_length=60, required=False)
     status = forms.ChoiceField(choices=[("", "Seleccione Una Opcion"), ("Culminado", "Culminado"), ("En Proceso", "En Proceso")], widget=forms.Select(attrs={"class": "disable-first-option"}), required=False)
