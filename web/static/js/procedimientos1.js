@@ -73,7 +73,7 @@ document
         ocultElement("servicios_medicos");
         mostrarElement("form_enfermeria");
         ocultElement("psicologia")
-        
+        document.getElementById("id_form4-tipo_procedimiento").parentElement.querySelector("label").textContent = "Tipo de Atencion"
         break;
       case "7":
         // servicios Medicos
@@ -115,16 +115,6 @@ document
         break;
     }
   });
-
-// document.getElementById("id_form1-opciones").addEventListener("change", function () {
-//   switch(this.value){
-//     case "6":
-//       ocultElement("id_form2-solicitante")
-//       ocultElement("id_form2-unidad")
-//       ocultElement("id_form2-efectivos_enviados")
-//       document.getElementById("id_form2-jefe_comision").parentElement.querySelector("label").textContent = "Jefe de Area"
-//   }
-// })
 
 // < !--Script para cambiar el menu desplegable de tipo de procedimiento segun la division-- >
 // Define las opciones por categoría
@@ -219,8 +209,29 @@ const opcionesPorCategoria = {
     { value: "15", text: "Puesto de Avanzada" },
     { value: "16", text: "Traslados" },
   ],
-
-  8: [{ value: "00", text: "Terapia Psicológica" }],
+  6: [
+    { value: "29", text: "Atencion Local" },
+    { value: "26", text: "Administración de Medicamentos" },
+    { value: "30", text: "Atención Prehospitalaria" },
+    { value: "31", text: "Cuantificación de Presion Arterial" },
+    { value: "32", text: "Cuantificación de Signos Vitales" },
+    { value: "33", text: "Cura" },
+    { value: "27", text: "Administración de Tratamiento" },
+    { value: "28", text: "Aerosolterapia" },
+    { value: "34", text: "Otro" },
+  ],
+  7: [
+    { value: "24", text: "Valoración Medica" },
+    { value: "", text: "Jornada Medica" },
+  ],
+  8: [{ value: "35", text: "Certificado de Salud Mental" },
+      { value: "36", text: "Consulta Bombero Activo" },
+      { value: "37", text: "Consulta Integrante Brigada Juvenil" },
+      { value: "38", text: "Consulta Paciente Externo" },
+      { value: "39", text: "Evaluacion Psicológica Postvacacional" },
+      { value: "40", text: "Evaluacion Psicológica Prevacacional" },
+      { value: "41", text: "Evaluacion Personal Nuevo Ingreso" },
+  ],
   // Puedes agregar más categorías según sea necesario
 };
 
@@ -331,6 +342,9 @@ document
       "detalles_vehiculo_art",
       "persona_presente_art",
       "inspeccion_art_pir",
+      "valoracion_medica",
+      "detalles_enfermeria",
+      "detalles_psicologia"
     ];
 
     const showElements = (elementsToShow) => {
@@ -1225,7 +1239,175 @@ document
         // requiredExceptions(document.getElementById("detalles_vehiculo_art").querySelectorAll("select, input"))
         // requiredExceptions(document.getElementById("persona_presente_art").querySelectorAll("select, input"))
         break;
-
+      case "24":
+        requiredFalse();
+        showElements(["valoracion_medica"]);
+        campos = document
+          .getElementById("valoracion_medica")
+          .querySelectorAll("select, input");
+        setRequired(campos, true);
+        document.getElementById("button_submit").style.display = "block";
+        break;
+      case "26":
+        requiredFalse();
+        showElements(["detalles_enfermeria"]);
+        campos = document
+          .getElementById("detalles_enfermeria")
+          .querySelectorAll("select, input");
+        setRequired(campos, true);
+        document.getElementById("detalles_enfermeria").querySelector("h4").textContent = "Administración de Medicamentos"
+        document.getElementById("button_submit").style.display = "block";
+        break;
+      case "27":
+        requiredFalse();
+        showElements(["detalles_enfermeria"]);
+        campos = document
+          .getElementById("detalles_enfermeria")
+          .querySelectorAll("select, input");
+        setRequired(campos, true);
+         document.getElementById("detalles_enfermeria").querySelector("h4").textContent = "Administración de Tratamientos"
+        document.getElementById("button_submit").style.display = "block";
+        break;
+      case "28":
+        requiredFalse();
+        showElements(["detalles_enfermeria"]);
+        campos = document
+          .getElementById("detalles_enfermeria")
+          .querySelectorAll("select, input");
+        setRequired(campos, true);
+        document.getElementById("detalles_enfermeria").querySelector("h4").textContent = "Aerosolterapia"
+        document.getElementById("button_submit").style.display = "block";
+        break;
+      case "29":
+        requiredFalse();
+        showElements(["detalles_enfermeria"]);
+        campos = document
+          .getElementById("detalles_enfermeria")
+          .querySelectorAll("select, input");
+        setRequired(campos, true);
+        document.getElementById("detalles_enfermeria").querySelector("h4").textContent = "Atención Local"
+        document.getElementById("button_submit").style.display = "block";
+        break;
+      case "30":
+        requiredFalse();
+        showElements(["detalles_enfermeria"]);
+        campos = document
+          .getElementById("detalles_enfermeria")
+          .querySelectorAll("select, input");
+        setRequired(campos, true);
+        document.getElementById("detalles_enfermeria").querySelector("h4").textContent = "Atención Prehospitalaria"
+        document.getElementById("button_submit").style.display = "block";
+        break;
+      case "31":
+        requiredFalse();
+        showElements(["detalles_enfermeria"]);
+        campos = document
+          .getElementById("detalles_enfermeria")
+          .querySelectorAll("select, input");
+        setRequired(campos, true);
+        document.getElementById("detalles_enfermeria").querySelector("h4").textContent = "Cuantificación de Presión Arterial"
+        document.getElementById("button_submit").style.display = "block";
+        break;
+      case "32":
+        requiredFalse();
+        showElements(["detalles_enfermeria"]);
+        campos = document
+          .getElementById("detalles_enfermeria")
+          .querySelectorAll("select, input");
+        setRequired(campos, true);
+        document.getElementById("detalles_enfermeria").querySelector("h4").textContent = "Cuantificación de Signos Vitales"
+        document.getElementById("button_submit").style.display = "block";
+        break;
+      case "33":
+        requiredFalse();
+        showElements(["detalles_enfermeria"]);
+        campos = document
+          .getElementById("detalles_enfermeria")
+          .querySelectorAll("select, input");
+        setRequired(campos, true);
+        document.getElementById("detalles_enfermeria").querySelector("h4").textContent = "Cura"
+        document.getElementById("button_submit").style.display = "block";
+        break;
+      case "34":
+        requiredFalse();
+        showElements(["detalles_enfermeria"]);
+        campos = document
+          .getElementById("detalles_enfermeria")
+          .querySelectorAll("select, input");
+        setRequired(campos, true);
+        document.getElementById("detalles_enfermeria").querySelector("h4").textContent = "Otro"
+        document.getElementById("button_submit").style.display = "block";
+        break;
+      case "35":
+        requiredFalse();
+        showElements(["detalles_psicologia"]);
+        campos = document
+          .getElementById("detalles_psicologia")
+          .querySelectorAll("select, input");
+        setRequired(campos, true);
+        document.getElementById("detalles_psicologia").querySelector("h4").textContent = "Certificado de Salud Mental"
+        document.getElementById("button_submit").style.display = "block";
+        break;
+      case "36":
+        requiredFalse();
+        showElements(["detalles_psicologia"]);
+        campos = document
+          .getElementById("detalles_psicologia")
+          .querySelectorAll("select, input");
+        setRequired(campos, true);
+        document.getElementById("detalles_psicologia").querySelector("h4").textContent = "Consulta Bombero Activo"
+        document.getElementById("button_submit").style.display = "block";
+        break;
+      case "37":
+        requiredFalse();
+        showElements(["detalles_psicologia"]);
+        campos = document
+          .getElementById("detalles_psicologia")
+          .querySelectorAll("select, input");
+        setRequired(campos, true);
+        document.getElementById("detalles_psicologia").querySelector("h4").textContent = "Consulta Integrante Brigada Juvenil"
+        document.getElementById("button_submit").style.display = "block";
+        break;
+      case "38":
+        requiredFalse();
+        showElements(["detalles_psicologia"]);
+        campos = document
+          .getElementById("detalles_psicologia")
+          .querySelectorAll("select, input");
+        setRequired(campos, true);
+        document.getElementById("detalles_psicologia").querySelector("h4").textContent = "Consulta Paciente Externo"
+        document.getElementById("button_submit").style.display = "block";
+        break;
+      case "39":
+        requiredFalse();
+        showElements(["detalles_psicologia"]);
+        campos = document
+          .getElementById("detalles_psicologia")
+          .querySelectorAll("select, input");
+        setRequired(campos, true);
+        document.getElementById("detalles_psicologia").querySelector("h4").textContent = "Evaluacion Psicologica Postvacacional"
+        document.getElementById("button_submit").style.display = "block";
+        break;
+      case "40":
+        requiredFalse();
+        showElements(["detalles_psicologia"]);
+        campos = document
+          .getElementById("detalles_psicologia")
+          .querySelectorAll("select, input");
+        setRequired(campos, true);
+        document.getElementById("detalles_psicologia").querySelector("h4").textContent = "Evaluacion Psicologica Prevacacional"
+        document.getElementById("button_submit").style.display = "block";
+        break;
+      case "41":
+        requiredFalse();
+        showElements(["detalles_psicologia"]);
+        campos = document
+          .getElementById("detalles_psicologia")
+          .querySelectorAll("select, input");
+        setRequired(campos, true);
+        document.getElementById("detalles_psicologia").querySelector("h4").textContent = "Evaluacion Personal Nuevo Ingreso"
+        document.getElementById("button_submit").style.display = "block";
+        break;
       default:
         elementsToHide.forEach((id) => {
           document.getElementById(id).style.display = "none";
@@ -1269,6 +1451,7 @@ document
 {
   /* <!--desactivar primera casilla de select-- > */
 }
+
 document.addEventListener("DOMContentLoaded", function () {
   const selects = document.querySelectorAll(".disable-first-option");
   selects.forEach((select) => {

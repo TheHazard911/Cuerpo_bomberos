@@ -915,7 +915,7 @@ summary > * {
 
 .table-responsive-sm {
   overflow-y: scroll;
-  width: auto;
+  width: 95%;
   padding: 0.5rem;
   height: 60vh;
   margin: 2rem;
@@ -925,7 +925,7 @@ summary > * {
 }
 .table {
   margin: 0 auto;
-  width: 97%;
+  width: 100%;
   background-color: #ffffff;
   border: thin solid #ffffff;
   td {
@@ -942,7 +942,7 @@ summary > * {
   tbody td {
     text-align: center;
     border-bottom: 0.1px solid rgb(156, 156, 156);
-    font-size: 0.75rem;
+    font-size: 0.9rem;
   }
 }
 .icons-accion {
@@ -1582,4 +1582,7 @@ summary > * {
   border: thin solid #ffffff;
   border-radius: 20px;
   padding: 2rem;
+}
+.table_100width{
+  width: 100%;
 }

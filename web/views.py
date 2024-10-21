@@ -12,6 +12,7 @@ import json
 from datetime import datetime
 from django.contrib.auth.decorators import login_required
 from django.utils import timezone
+from itertools import chain
 
 # Create your views here.
 
@@ -354,6 +355,9 @@ def View_Procedimiento(request):
         servicios_medicos = Formulario_Servicios_medicos(request.POST, prefix='form_servicios_medicos')
         psicologia = Formulario_psicologia(request.POST,prefix='form_psicologia')
         capacitacion = Formulario_capacitacion(request.POST,prefix='form_capacitacion')
+        form_valoracion_medica = Formulario_Valoracion_Medica(request.POST, prefix='form_valoracion_medica')
+        form_detalles_enfermeria = Formulario_Detalles_Enfermeria(request.POST, prefix='form_detalles_enfermeria')
+        form_detalles_psicologia = Formulario_Procedimientos_Psicologia(request.POST, prefix='form_detalles_psicologia')
 
 
         # Imprimir request.POST para depuración
@@ -426,14 +430,102 @@ def View_Procedimiento(request):
 
                 nuevo_procedimiento.save()
 
-            if (division == "6"):
-                pass
-            
-            if (division == "7"):
-                pass
+            if division == "6" and form_enfermeria.is_valid():
+                dependencia = form_enfermeria.cleaned_data["dependencia"]
+                encargado_area = form_enfermeria.cleaned_data["encargado_area"]
+                municipio = form3.cleaned_data["municipio"]
+                direccion = form3.cleaned_data["direccion"]
+                fecha = form3.cleaned_data["fecha"]
+                hora = form3.cleaned_data["hora"]
+                tipo_procedimiento = form4.cleaned_data["tipo_procedimiento"]
+                parroquia = form3.cleaned_data["parroquia"]
 
-            if (division == "8"):
-                pass
+                division_instance = Divisiones.objects.get(id=division)
+                municipio_instance = Municipios.objects.get(id=municipio)
+                tipo_procedimiento_instance = Tipos_Procedimientos.objects.get(id=tipo_procedimiento)
+
+                # # Crear una nueva instancia del modelo Procedimientos
+                nuevo_procedimiento = Procedimientos(
+                    id_division=division_instance,
+                    dependencia=dependencia,
+                    solicitante_externo=encargado_area,
+                    id_municipio=municipio_instance,
+                    direccion=direccion,
+                    fecha=fecha,
+                    hora=hora,
+                    id_tipo_procedimiento=tipo_procedimiento_instance
+                )
+
+                # # Solo asignar parroquia si está presente
+                if parroquia:
+                    parroquia_instance = Parroquias.objects.get(id=parroquia)
+                    nuevo_procedimiento.id_parroquia = parroquia_instance
+
+                nuevo_procedimiento.save()
+            
+            if division == "7" and servicios_medicos.is_valid():
+                tipo_servicio = servicios_medicos.cleaned_data["tipo_servicio"]
+                jefe_area = servicios_medicos.cleaned_data["jefe_area"]
+                municipio = form3.cleaned_data["municipio"]
+                direccion = form3.cleaned_data["direccion"]
+                fecha = form3.cleaned_data["fecha"]
+                hora = form3.cleaned_data["hora"]
+                tipo_procedimiento = form4.cleaned_data["tipo_procedimiento"]
+                parroquia = form3.cleaned_data["parroquia"]
+
+                division_instance = Divisiones.objects.get(id=division)
+                municipio_instance = Municipios.objects.get(id=municipio)
+                tipo_procedimiento_instance = Tipos_Procedimientos.objects.get(id=tipo_procedimiento)
+
+                # # Crear una nueva instancia del modelo Procedimientos
+                nuevo_procedimiento = Procedimientos(
+                    id_division=division_instance,
+                    tipo_servicio=tipo_servicio,
+                    solicitante_externo=jefe_area,
+                    id_municipio=municipio_instance,
+                    direccion=direccion,
+                    fecha=fecha,
+                    hora=hora,
+                    id_tipo_procedimiento=tipo_procedimiento_instance
+                )
+
+                # # Solo asignar parroquia si está presente
+                if parroquia:
+                    parroquia_instance = Parroquias.objects.get(id=parroquia)
+                    nuevo_procedimiento.id_parroquia = parroquia_instance
+
+                nuevo_procedimiento.save()
+
+            if division == "8" and psicologia.is_valid():
+                jefe_area = psicologia.cleaned_data["jefe_area"]
+                municipio = form3.cleaned_data["municipio"]
+                direccion = form3.cleaned_data["direccion"]
+                fecha = form3.cleaned_data["fecha"]
+                hora = form3.cleaned_data["hora"]
+                tipo_procedimiento = form4.cleaned_data["tipo_procedimiento"]
+                parroquia = form3.cleaned_data["parroquia"]
+
+                division_instance = Divisiones.objects.get(id=division)
+                municipio_instance = Municipios.objects.get(id=municipio)
+                tipo_procedimiento_instance = Tipos_Procedimientos.objects.get(id=tipo_procedimiento)
+
+                # # Crear una nueva instancia del modelo Procedimientos
+                nuevo_procedimiento = Procedimientos(
+                    id_division=division_instance,
+                    solicitante_externo=jefe_area,
+                    id_municipio=municipio_instance,
+                    direccion=direccion,
+                    fecha=fecha,
+                    hora=hora,
+                    id_tipo_procedimiento=tipo_procedimiento_instance
+                )
+
+                # # Solo asignar parroquia si está presente
+                if parroquia:
+                    parroquia_instance = Parroquias.objects.get(id=parroquia)
+                    nuevo_procedimiento.id_parroquia = parroquia_instance
+
+                nuevo_procedimiento.save()
 
             if (division == "9"):
                 pass
@@ -1234,6 +1326,79 @@ def View_Procedimiento(request):
 
                 nueva_inspeccion_art.save()
 
+            if tipo_procedimiento == "24" and form_valoracion_medica.is_valid():
+                nombre = form_valoracion_medica.cleaned_data["nombre"]
+                apellido = form_valoracion_medica.cleaned_data["apellido"]
+                cedula = form_valoracion_medica.cleaned_data["cedula"]
+                edad = form_valoracion_medica.cleaned_data["edad"]
+                sexo = form_valoracion_medica.cleaned_data["sexo"]
+                telefono = form_valoracion_medica.cleaned_data["telefono"]
+                descripcion = form_valoracion_medica.cleaned_data["descripcion"]
+                material_utilizado = form_valoracion_medica.cleaned_data["material_utilizado"]
+                status = form_valoracion_medica.cleaned_data["status"]
+
+                new_valoracion_medica = Valoracion_Medica(
+                    id_procedimientos = nuevo_procedimiento,
+                    nombre = nombre,
+                    apellido = apellido,
+                    cedula = cedula,
+                    edad = edad,
+                    sexo = sexo,
+                    telefono = telefono,
+                    descripcion = descripcion,
+                    material_utilizado = material_utilizado,
+                    status = status
+                )
+                new_valoracion_medica.save()
+
+            if (tipo_procedimiento == "26" or tipo_procedimiento == "27" or tipo_procedimiento == "28" or tipo_procedimiento == "29" or tipo_procedimiento == "30" or tipo_procedimiento == "31" or tipo_procedimiento == "32" or tipo_procedimiento == "33" or tipo_procedimiento == "34") and form_detalles_enfermeria.is_valid():
+                nombre = form_detalles_enfermeria.cleaned_data["nombre"]
+                apellido = form_detalles_enfermeria.cleaned_data["apellido"]
+                cedula = form_detalles_enfermeria.cleaned_data["cedula"]
+                edad = form_detalles_enfermeria.cleaned_data["edad"]
+                sexo = form_detalles_enfermeria.cleaned_data["sexo"]
+                telefono = form_detalles_enfermeria.cleaned_data["telefono"]
+                descripcion = form_detalles_enfermeria.cleaned_data["descripcion"]
+                material_utilizado = form_detalles_enfermeria.cleaned_data["material_utilizado"]
+                status = form_detalles_enfermeria.cleaned_data["status"]
+
+                new_detalles_enfermeria = Detalles_Enfermeria(
+                    id_procedimientos = nuevo_procedimiento,
+                    nombre = nombre,
+                    apellido = apellido,
+                    cedula = cedula,
+                    edad = edad,
+                    sexo = sexo,
+                    telefono = telefono,
+                    descripcion = descripcion,
+                    material_utilizado = material_utilizado,
+                    status = status
+                )
+                new_detalles_enfermeria.save()
+
+            if (tipo_procedimiento == "35" or tipo_procedimiento == "36" or tipo_procedimiento == "37" or tipo_procedimiento == "38" or tipo_procedimiento == "39" or tipo_procedimiento == "40" or tipo_procedimiento == "41") and form_detalles_psicologia.is_valid():
+                nombre = form_detalles_psicologia.cleaned_data["nombre"]
+                apellido = form_detalles_psicologia.cleaned_data["apellido"]
+                cedula = form_detalles_psicologia.cleaned_data["cedula"]
+                edad = form_detalles_psicologia.cleaned_data["edad"]
+                sexo = form_detalles_psicologia.cleaned_data["sexo"]
+                descripcion = form_detalles_psicologia.cleaned_data["descripcion"]
+                material_utilizado = form_detalles_psicologia.cleaned_data["material_utilizado"]
+                status = form_detalles_psicologia.cleaned_data["status"]
+
+                new_detalles_psicologia = Procedimientos_Psicologia(
+                    id_procedimientos = nuevo_procedimiento,
+                    nombre = nombre,
+                    apellido = apellido,
+                    cedula = cedula,
+                    edad = edad,
+                    sexo = sexo,
+                    descripcion = descripcion,
+                    material_utilizado = material_utilizado,
+                    status = status
+                )
+                new_detalles_psicologia.save()
+
             # Redirige a /dashboard/ después de guardar los datos
             return redirect('/dashboard/')
     else:
@@ -1294,6 +1459,9 @@ def View_Procedimiento(request):
         servicios_medicos = Formulario_Servicios_medicos(prefix='form_servicios_medicos')
         psicologia = Formulario_psicologia(prefix='form_psicologia')
         capacitacion = Formulario_capacitacion(prefix='form_capacitacion')
+        form_valoracion_medica = Formulario_Valoracion_Medica(prefix='form_valoracion_medica')
+        form_detalles_enfermeria = Formulario_Detalles_Enfermeria(prefix='form_detalles_enfermeria')
+        form_detalles_psicologia = Formulario_Procedimientos_Psicologia(prefix='form_detalles_psicologia')
 
     return render(request, "procedimientos.html", {
         "user": user,
@@ -1351,6 +1519,9 @@ def View_Procedimiento(request):
         "servicios_medicos" : servicios_medicos,
         "psicologia" : psicologia,
         "capacitacion" : capacitacion,
+        "valoracion_medica": form_valoracion_medica,
+        "form_detalles_enfermeria": form_detalles_enfermeria,
+        "form_detalles_psicologia": form_detalles_psicologia,
     })
 # Vista de la seccion de Estadisticas
 
@@ -1732,20 +1903,28 @@ def View_psicologia(request):
 def tabla_general(request):
     user = request.session.get('user')
     if not user:
-            return redirect('/')
+        return redirect('/')
 
-    datos = Procedimientos.objects.filter()
+    # Filtra los procedimientos de las divisiones 1 a 5
+    divisiones = range(1, 6)
+    datos_combined = []
 
-    total = datos.count()
+    for division in divisiones:
+        datos_combined.extend(Procedimientos.objects.filter(id_division=division))
+
+    # Ordena los datos combinados por la fecha
+    combined_data = sorted(datos_combined, key=lambda x: x.fecha, reverse=True)
+
+    # Corrige el conteo
+    total = len(combined_data)
 
     # Obtener la fecha de hoy
     hoy = datetime.now().date()
 
     # Filtrar procedimientos con la fecha de hoy
-    fechas = datos.values_list("fecha", flat=True)
-    procedimientos_hoy = [fecha for fecha in fechas if fecha == hoy]
+    procedimientos_hoy = [procedimiento for procedimiento in combined_data if procedimiento.fecha == hoy]
 
-    hoy = len(procedimientos_hoy)
+    hoy_count = len(procedimientos_hoy)
 
     if request.method == 'POST':
         data = json.loads(request.body)
@@ -1757,17 +1936,16 @@ def tabla_general(request):
         except Exception as e:
             return JsonResponse({'success': False, 'error': str(e)})
 
-    datos = list(datos)[::-1]
-
     return render(request, "tablageneral.html", {
         "user": user,
         "jerarquia": user["jerarquia"],
         "nombres": user["nombres"],
         "apellidos": user["apellidos"],
-        "datos": datos,
+        "datos": combined_data,
         "total": total,
-        "hoy": hoy
+        "hoy": hoy_count  # Cambié 'hoy' a 'hoy_count' para evitar confusiones
     })
+
 
 # Funcion para eliminar (NO TOCAR)
 # def eliminar_procedimiento(request):
@@ -1783,22 +1961,68 @@ def tabla_general(request):
 
 def obtener_procedimiento(request, id):
     procedimiento = get_object_or_404(Procedimientos, pk=id)
-    data = {
-        'id': procedimiento.id,
-        'division': procedimiento.id_division.division,
-        'solicitante': f"{procedimiento.id_solicitante.jerarquia} {procedimiento.id_solicitante.nombres} {procedimiento.id_solicitante.apellidos}",
-        'solicitante_externo': procedimiento.solicitante_externo,
-        'jefe_comision': f"{procedimiento.id_jefe_comision.jerarquia} {procedimiento.id_jefe_comision.nombres} {procedimiento.id_jefe_comision.apellidos}",
-        'unidad': procedimiento.unidad.nombre_unidad,
-        'efectivos': procedimiento.efectivos_enviados,
-        'parroquia': procedimiento.id_parroquia.parroquia,
-        'municipio': procedimiento.id_municipio.municipio,
-        'direccion': procedimiento.direccion,
-        'fecha': procedimiento.fecha,
-        'hora': procedimiento.hora,
-        'tipo_procedimiento': procedimiento.id_tipo_procedimiento.tipo_procedimiento,
-    }
 
+    division = procedimiento.id_division.division
+
+    if division == "Rescate" or division == "Operaciones" or division == "Prevencion" or division == "GRUMAE" or division == "PreHospitalaria":
+        data = {
+            'id': procedimiento.id,
+            'division': procedimiento.id_division.division,
+            'solicitante': f"{procedimiento.id_solicitante.jerarquia} {procedimiento.id_solicitante.nombres} {procedimiento.id_solicitante.apellidos}",
+            'solicitante_externo': procedimiento.solicitante_externo,
+            'jefe_comision': f"{procedimiento.id_jefe_comision.jerarquia} {procedimiento.id_jefe_comision.nombres} {procedimiento.id_jefe_comision.apellidos}",
+            'unidad': procedimiento.unidad.nombre_unidad,
+            'efectivos': procedimiento.efectivos_enviados,
+            'parroquia': procedimiento.id_parroquia.parroquia,
+            'municipio': procedimiento.id_municipio.municipio,
+            'direccion': procedimiento.direccion,
+            'fecha': procedimiento.fecha,
+            'hora': procedimiento.hora,
+            'tipo_procedimiento': procedimiento.id_tipo_procedimiento.tipo_procedimiento,
+        }
+    
+    if division == "Enfermeria":
+        data = {
+            'id': procedimiento.id,
+            'division': procedimiento.id_division.division,
+            'dependencia': procedimiento.dependencia,
+            'solicitante_externo': procedimiento.solicitante_externo,
+            'parroquia': procedimiento.id_parroquia.parroquia,
+            'municipio': procedimiento.id_municipio.municipio,
+            'direccion': procedimiento.direccion,
+            'fecha': procedimiento.fecha,
+            'hora': procedimiento.hora,
+            'tipo_procedimiento': procedimiento.id_tipo_procedimiento.tipo_procedimiento,
+        }
+
+    if division == "Servicios Medicos":
+        data = {
+            'id': procedimiento.id,
+            'division': procedimiento.id_division.division,
+            'tipo_servicio': procedimiento.tipo_servicio,
+            'solicitante_externo': procedimiento.solicitante_externo,
+            'efectivos': procedimiento.efectivos_enviados,
+            'parroquia': procedimiento.id_parroquia.parroquia,
+            'municipio': procedimiento.id_municipio.municipio,
+            'direccion': procedimiento.direccion,
+            'fecha': procedimiento.fecha,
+            'hora': procedimiento.hora,
+            'tipo_procedimiento': procedimiento.id_tipo_procedimiento.tipo_procedimiento,
+        }
+
+    if division == "Psicologia":
+            data = {
+                'id': procedimiento.id,
+                'division': procedimiento.id_division.division,
+                'solicitante_externo': procedimiento.solicitante_externo,
+                'parroquia': procedimiento.id_parroquia.parroquia,
+                'municipio': procedimiento.id_municipio.municipio,
+                'direccion': procedimiento.direccion,
+                'fecha': procedimiento.fecha,
+                'hora': procedimiento.hora,
+                'tipo_procedimiento': procedimiento.id_tipo_procedimiento.tipo_procedimiento,
+            }
+    
     if str(procedimiento.id_tipo_procedimiento.id) == "1":
         detalle_procedimiento = get_object_or_404(Abastecimiento_agua, id_procedimiento=id)
 
@@ -2242,4 +2466,49 @@ def obtener_procedimiento(request, id):
                     status = detalle_procedimiento.status,
                     )
 
+    if str(procedimiento.id_tipo_procedimiento.id) == "24":
+        detalles = get_object_or_404(Valoracion_Medica, id_procedimientos = id)
+
+        data = dict(data,
+                    nombres = detalles.nombre,
+                    apellidos = detalles.apellido,
+                    cedula = detalles.cedula,
+                    edad = detalles.edad,
+                    sexo = detalles.sexo,
+                    telefono = detalles.telefono,
+                    descripcion = detalles.descripcion,
+                    material_utilizado = detalles.material_utilizado,
+                    status = detalles.status,
+                    )
+
+    if str(procedimiento.id_tipo_procedimiento.id) == "26" or str(procedimiento.id_tipo_procedimiento.id) == "27" or str(procedimiento.id_tipo_procedimiento.id) == "28" or str(procedimiento.id_tipo_procedimiento.id) == "29" or str(procedimiento.id_tipo_procedimiento.id) == "30" or str(procedimiento.id_tipo_procedimiento.id) == "31" or str(procedimiento.id_tipo_procedimiento.id) == "32" or str(procedimiento.id_tipo_procedimiento.id) == "33" or str(procedimiento.id_tipo_procedimiento.id) == "34":
+        detalles = get_object_or_404(Detalles_Enfermeria, id_procedimientos = id)
+
+        data = dict(data,
+                    nombres = detalles.nombre,
+                    apellidos = detalles.apellido,
+                    cedula = detalles.cedula,
+                    edad = detalles.edad,
+                    sexo = detalles.sexo,
+                    telefono = detalles.telefono,
+                    descripcion = detalles.descripcion,
+                    material_utilizado = detalles.material_utilizado,
+                    status = detalles.status,
+                    )
+        
+    if str(procedimiento.id_tipo_procedimiento.id) == "35" or str(procedimiento.id_tipo_procedimiento.id) == "36" or str(procedimiento.id_tipo_procedimiento.id) == "37" or str(procedimiento.id_tipo_procedimiento.id) == "38" or str(procedimiento.id_tipo_procedimiento.id) == "39" or str(procedimiento.id_tipo_procedimiento.id) == "40" or str(procedimiento.id_tipo_procedimiento.id) == "41":
+        detalles = get_object_or_404(Procedimientos_Psicologia, id_procedimientos = id)
+
+        data = dict(data,
+                    nombres = detalles.nombre,
+                    apellidos = detalles.apellido,
+                    cedula = detalles.cedula,
+                    edad = detalles.edad,
+                    sexo = detalles.sexo,
+                    descripcion = detalles.descripcion,
+                    material_utilizado = detalles.material_utilizado,
+                    status = detalles.status,
+                    )
+        
+    
     return JsonResponse(data)
