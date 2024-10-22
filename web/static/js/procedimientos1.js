@@ -16,6 +16,15 @@ function mostrarElement(element) {
       ele.setAttribute("required", "true");
     });
 }
+function mostrarElementBlock(element) {
+  document.getElementById(`${element}`).style.display = "block";
+  document
+    .getElementById(`${element}`)
+    .querySelectorAll("input, select")
+    .forEach((ele) => {
+      ele.setAttribute("required", "true");
+    });
+}
 
 document
   .getElementById("id_form1-opciones")
@@ -28,7 +37,9 @@ document
         mostrarElement("form_general");
         ocultElement("servicios_medicos");
         ocultElement("psicologia")
-
+        mostrarElement("tipos_procedimientos_title")
+        mostrarElement("tipos_procedimientos")
+        requiredFalse()
         break;
       case "2":
         // operaciones
@@ -36,8 +47,9 @@ document
         mostrarElement("form_general");
         ocultElement("servicios_medicos");
         ocultElement("psicologia")
-
-
+        mostrarElement("tipos_procedimientos_title")
+        mostrarElement("tipos_procedimientos")
+        requiredFalse()
         break;
       case "3":
         // Prevencion
@@ -46,7 +58,9 @@ document
         mostrarElement("form_general");
         ocultElement("servicios_medicos");
         ocultElement("psicologia")
-
+        mostrarElement("tipos_procedimientos_title")
+        mostrarElement("tipos_procedimientos")
+        requiredFalse()
         break;
       case "4":
         // Grumae
@@ -55,7 +69,9 @@ document
         mostrarElement("form_general");
         ocultElement("servicios_medicos");
         ocultElement("psicologia")
-
+        mostrarElement("tipos_procedimientos_title")
+        mostrarElement("tipos_procedimientos")
+        requiredFalse()
         break;
       case "5":
         // prehospitalaria
@@ -64,7 +80,9 @@ document
         ocultElement("servicios_medicos");
         ocultElement("psicologia")
         mostrarElement("form_general");
-
+        mostrarElement("tipos_procedimientos_title")
+        mostrarElement("tipos_procedimientos")
+        requiredFalse()
         break;
       case "6":
         // enfermeria
@@ -73,7 +91,10 @@ document
         ocultElement("servicios_medicos");
         mostrarElement("form_enfermeria");
         ocultElement("psicologia")
+        mostrarElement("tipos_procedimientos")
+        mostrarElement("tipos_procedimientos_title")
         document.getElementById("id_form4-tipo_procedimiento").parentElement.querySelector("label").textContent = "Tipo de Atencion"
+        requiredFalse()
         break;
       case "7":
         // servicios Medicos
@@ -82,6 +103,9 @@ document
         mostrarElement("servicios_medicos")
         ocultElement("capacitacion")
         ocultElement("psicologia")
+        mostrarElement("tipos_procedimientos")
+        mostrarElement("tipos_procedimientos_title")
+        requiredFalse()
         break;
       case "8":
         // psicologia
@@ -90,6 +114,9 @@ document
         ocultElement("servicios_medicos")
         ocultElement("capacitacion")
         mostrarElement("psicologia")
+        mostrarElement("tipos_procedimientos")
+        mostrarElement("tipos_procedimientos_title")
+        requiredFalse()
         break;
       case "9":
         // capacitacion
@@ -97,10 +124,15 @@ document
         ocultElement("form_enfermeria");
         ocultElement("servicios_medicos")
         ocultElement("psicologia")
+        ocultElement("tipos_procedimientos")
+        ocultElement("tipos_procedimientos_title")
         mostrarElement("capacitacion")
+        requiredFalse()
         let input_solicitante = document.getElementById("id_form_capacitacion-solicitante")
+        let seleccion = document.getElementById("id_form_capacitacion-dependencia")
+        
         document.getElementById("id_form_capacitacion-solicitante_externo").parentElement.style.display = "none"
-         document.getElementById("id_form_capacitacion-solicitante_externo").removeAttribute("required")
+        document.getElementById("id_form_capacitacion-solicitante_externo").removeAttribute("required")
 
         input_solicitante.addEventListener("change", function () {
           if (this.value === "0"){
@@ -109,6 +141,19 @@ document
           } else{
             document.getElementById("id_form_capacitacion-solicitante_externo").parentElement.style.display = "none"
             document.getElementById("id_form_capacitacion-solicitante_externo").removeAttribute("required")
+          }
+        })
+
+        seleccion.addEventListener("change", function () {
+          if (this.value === "Capacitacion") {
+            mostrarElementBlock("detalles_capacitacion")
+            ocultElement("detalles_frente_preventivo")
+            document.getElementById("button_submit").style.display = "block";
+            
+          } else {
+            mostrarElementBlock("detalles_frente_preventivo")
+            ocultElement("detalles_capacitacion")
+            document.getElementById("button_submit").style.display = "block";
           }
         })
 
@@ -344,7 +389,9 @@ document
       "inspeccion_art_pir",
       "valoracion_medica",
       "detalles_enfermeria",
-      "detalles_psicologia"
+      "detalles_psicologia",
+      "detalles_capacitacion",
+      "detalles_frente_preventivo",
     ];
 
     const showElements = (elementsToShow) => {

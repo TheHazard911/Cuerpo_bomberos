@@ -358,7 +358,9 @@ def View_Procedimiento(request):
         form_valoracion_medica = Formulario_Valoracion_Medica(request.POST, prefix='form_valoracion_medica')
         form_detalles_enfermeria = Formulario_Detalles_Enfermeria(request.POST, prefix='form_detalles_enfermeria')
         form_detalles_psicologia = Formulario_Procedimientos_Psicologia(request.POST, prefix='form_detalles_psicologia')
-
+        
+        form_capacitacion = Formulario_Capacitacion_Proc(request.POST,prefix='form_capacitacion')
+        form_frente_preventivo = Formulario_Frente_Preventivo(request.POST,prefix='form_frente_preventivo')
 
         # Imprimir request.POST para depuración
 
@@ -382,7 +384,6 @@ def View_Procedimiento(request):
             tipo_procedimiento = ""
 
             if (division == "1" or division == "2" or division == "3" or division == "4" or division == "5") and (form2.is_valid() and form3.is_valid() and form4.is_valid()):
-                print("Entro Aqui")
                 solicitante = form2.cleaned_data["solicitante"]
                 solicitante_externo = form2.cleaned_data["solicitante_externo"]
                 unidad = form2.cleaned_data["unidad"]
@@ -527,8 +528,91 @@ def View_Procedimiento(request):
 
                 nuevo_procedimiento.save()
 
-            if (division == "9"):
-                pass
+            if division == "9" and capacitacion.is_valid():
+                dependencia = capacitacion.cleaned_data["dependencia"]
+                instructor = capacitacion.cleaned_data["instructor"]
+                solicitante = capacitacion.cleaned_data["solicitante"]
+                solicitante_externo = capacitacion.cleaned_data["solicitante_externo"]
+                municipio = form3.cleaned_data["municipio"]
+                direccion = form3.cleaned_data["direccion"]
+                fecha = form3.cleaned_data["fecha"]
+                hora = form3.cleaned_data["hora"]
+
+                parroquia = form3.cleaned_data["parroquia"]
+                tipo_procedimiento = 45
+
+                division_instance = Divisiones.objects.get(id=division)
+                municipio_instance = Municipios.objects.get(id=municipio)
+                tipo_procedimiento_instance = Tipos_Procedimientos.objects.get(id=tipo_procedimiento)
+                jefe_comision_instance = Personal.objects.get(id=instructor)
+
+                if solicitante:
+                    solicitante_instance = Personal.objects.get(id=solicitante)
+
+                if solicitante_externo=="":
+                    solicitante_externo = ""
+
+
+                # # Crear una nueva instancia del modelo Procedimientos
+                nuevo_procedimiento = Procedimientos(
+                    id_division=division_instance,
+                    dependencia=dependencia,
+                    id_jefe_comision=jefe_comision_instance,
+                    id_solicitante=solicitante_instance,
+                    solicitante_externo=solicitante_externo,
+                    id_municipio=municipio_instance,
+                    direccion=direccion,
+                    fecha=fecha,
+                    hora=hora,
+                    id_tipo_procedimiento=tipo_procedimiento_instance
+                )
+
+                # # Solo asignar parroquia si está presente
+                if parroquia:
+                    parroquia_instance = Parroquias.objects.get(id=parroquia)
+                    nuevo_procedimiento.id_parroquia = parroquia_instance
+
+                nuevo_procedimiento.save()
+
+                if dependencia == "Capacitacion" and form_capacitacion.is_valid():
+                    tipo_capacitacion = form_capacitacion.cleaned_data["tipo_capacitacion"]
+                    tipo_clasificacion = form_capacitacion.cleaned_data["tipo_clasificacion"]
+                    personas_beneficiadas = form_capacitacion.cleaned_data["personas_beneficiadas"]
+                    descripcion = form_capacitacion.cleaned_data["descripcion"]
+                    material_utilizado = form_capacitacion.cleaned_data["material_utilizado"]
+                    status = form_capacitacion.cleaned_data["status"]
+
+                    new_detalles_capacitacion = Procedimientos_Capacitacion(
+                        id_procedimientos = nuevo_procedimiento,
+                        tipo_capacitacion = tipo_capacitacion,
+                        tipo_clasificacion = tipo_clasificacion,
+                        personas_beneficiadas = personas_beneficiadas,
+                        descripcion = descripcion,
+                        material_utilizado = material_utilizado,
+                        status = status
+                    )
+
+                    new_detalles_capacitacion.save()
+
+                if dependencia == "Frente Preventivo" and form_frente_preventivo.is_valid():
+                    nombre_actividad = form_frente_preventivo.cleaned_data["nombre_actividad"]
+                    estrategia = form_frente_preventivo.cleaned_data["estrategia"]
+                    personas_beneficiadas = form_frente_preventivo.cleaned_data["personas_beneficiadas"]
+                    descripcion = form_frente_preventivo.cleaned_data["descripcion"]
+                    material_utilizado = form_frente_preventivo.cleaned_data["material_utilizado"]
+                    status = form_frente_preventivo.cleaned_data["status"]
+
+                    new_detalles_frente_preventivo = Procedimientos_Frente_Preventivo(
+                        id_procedimientos = nuevo_procedimiento,
+                        nombre_actividad = nombre_actividad,
+                        estrategia = estrategia,
+                        personas_beneficiadas = personas_beneficiadas,
+                        descripcion = descripcion,
+                        material_utilizado = material_utilizado,
+                        status = status
+                    )
+
+                    new_detalles_frente_preventivo.save()
 
             # Ahora dependiendo del tipo de procedimiento, verifica el formulario correspondiente y guarda la instancia
             if tipo_procedimiento == "1" and abast_agua.is_valid():
@@ -1463,6 +1547,10 @@ def View_Procedimiento(request):
         form_detalles_enfermeria = Formulario_Detalles_Enfermeria(prefix='form_detalles_enfermeria')
         form_detalles_psicologia = Formulario_Procedimientos_Psicologia(prefix='form_detalles_psicologia')
 
+        form_capacitacion = Formulario_Capacitacion_Proc(prefix='form_capacitacion')
+        form_frente_preventivo = Formulario_Frente_Preventivo(prefix='form_frente_preventivo')
+
+
     return render(request, "procedimientos.html", {
         "user": user,
         "jerarquia": user["jerarquia"],
@@ -1522,6 +1610,8 @@ def View_Procedimiento(request):
         "valoracion_medica": form_valoracion_medica,
         "form_detalles_enfermeria": form_detalles_enfermeria,
         "form_detalles_psicologia": form_detalles_psicologia,
+        "form_capacitacion": form_capacitacion,
+        "form_frente_preventivo": form_frente_preventivo,
     })
 # Vista de la seccion de Estadisticas
 
@@ -2023,6 +2113,22 @@ def obtener_procedimiento(request, id):
                 'tipo_procedimiento': procedimiento.id_tipo_procedimiento.tipo_procedimiento,
             }
     
+    if division == "Capacitacion":
+        data = {
+            'id': procedimiento.id,
+            'division': procedimiento.id_division.division,
+            'solicitante': f"{procedimiento.id_solicitante.jerarquia} {procedimiento.id_solicitante.nombres} {procedimiento.id_solicitante.apellidos}",
+            'solicitante_externo': procedimiento.solicitante_externo,
+            'jefe_comision': f"{procedimiento.id_jefe_comision.jerarquia} {procedimiento.id_jefe_comision.nombres} {procedimiento.id_jefe_comision.apellidos}",
+            'dependencia': procedimiento.dependencia,
+            'parroquia': procedimiento.id_parroquia.parroquia,
+            'municipio': procedimiento.id_municipio.municipio,
+            'direccion': procedimiento.direccion,
+            'fecha': procedimiento.fecha,
+            'hora': procedimiento.hora,
+            'tipo_procedimiento': procedimiento.id_tipo_procedimiento.tipo_procedimiento,
+        }
+    
     if str(procedimiento.id_tipo_procedimiento.id) == "1":
         detalle_procedimiento = get_object_or_404(Abastecimiento_agua, id_procedimiento=id)
 
@@ -2403,7 +2509,6 @@ def obtener_procedimiento(request, id):
             try:
                 if get_object_or_404(Persona_Presente_Art, id_incendio=incendio.id):
                     persona = get_object_or_404(Persona_Presente_Art, id_incendio=incendio.id)
-                    print("Entro Aqui Tambien", persona)
                     data = dict(data,
                                 person = True,
                                 nombre = persona.nombre,
@@ -2510,5 +2615,29 @@ def obtener_procedimiento(request, id):
                     status = detalles.status,
                     )
         
-    
+    if str(procedimiento.id_tipo_procedimiento.id) == "45":
+        if procedimiento.dependencia == "Capacitacion":
+            detalles = get_object_or_404(Procedimientos_Capacitacion, id_procedimientos = id)
+
+            data = dict(data,
+                    tipo_capacitacion = detalles.tipo_capacitacion,
+                    tipo_clasificacion = detalles.tipo_clasificacion,
+                    personas_beneficiadas = detalles.personas_beneficiadas,
+                    descripcion = detalles.descripcion,
+                    material_utilizado = detalles.material_utilizado,
+                    status = detalles.status
+                    )
+        
+        if procedimiento.dependencia == "Frente Preventivo":
+            detalles = get_object_or_404(Procedimientos_Frente_Preventivo, id_procedimientos = id)
+
+            data = dict(data,
+                    nombre_actividad = detalles.nombre_actividad,
+                    estrategia = detalles.estrategia,
+                    personas_beneficiadas = detalles.personas_beneficiadas,
+                    descripcion = detalles.descripcion,
+                    material_utilizado = detalles.material_utilizado,
+                    status = detalles.status
+                    )
+        
     return JsonResponse(data)

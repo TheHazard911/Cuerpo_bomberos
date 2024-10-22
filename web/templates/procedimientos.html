@@ -48,8 +48,8 @@
       <div class="form-style" id="capacitacion" style="display: none;">{{ capacitacion.as_div }}</div>
       <h4>Datos de la Ubicacion</h4>
       <div class="form-style">{{ form3.as_div }}</div>
-      <h4>Tipo de Procedimientos</h4>
-      <div class="form-style">{{ form4.as_div }}</div>
+      <h4 id="tipos_procedimientos_title">Tipo de Procedimientos</h4>
+      <div class="form-style" id="tipos_procedimientos">{{ form4.as_div }}</div>
 
       <article id="detalles-form">
         <!-- Detalles de Procedimiento (Abastecimiento de Agua) -->
@@ -325,6 +325,18 @@
         <div class="data_form disp-none" id="detalles_psicologia">
           <h4>Detalles Psicologia</h4>
           <div class="form-style">{{ form_detalles_psicologia.as_div }}</div>
+        </div>
+        
+        <!-- Detalles de Procedimiento (Inspeccion Artificios Pirotecnicos) -->
+        <div class="data_form disp-none" id="detalles_capacitacion">
+          <h4>Detalles Capacitacion</h4>
+          <div class="form-style">{{ form_capacitacion.as_div }}</div>
+        </div>
+
+        <!-- Detalles de Procedimiento (Inspeccion Artificios Pirotecnicos) -->
+        <div class="data_form disp-none" id="detalles_frente_preventivo">
+          <h4>Detalles Frente Preventivo</h4>
+          <div class="form-style">{{ form_frente_preventivo.as_div }}</div>
         </div>
         
       </article>

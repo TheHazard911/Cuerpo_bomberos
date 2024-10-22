@@ -174,7 +174,7 @@ class Procedimientos(models.Model):
     dependencia = models.CharField(max_length=80, blank=True)
     efectivos_enviados = models.CharField(max_length=40, blank=True)
     id_municipio = models.ForeignKey(Municipios, on_delete=models.CASCADE)
-    id_parroquia = models.ForeignKey(Parroquias, on_delete=models.CASCADE, default="1")
+    id_parroquia = models.ForeignKey(Parroquias, on_delete=models.CASCADE, default="0")
     fecha = models.DateField(default="1999-01-01")
     hora = models.TimeField(default="00:00")
     direccion = models.CharField(max_length=50)
@@ -667,3 +667,44 @@ class Procedimientos_Psicologia(models.Model):
 
   def __str__(self):
     return self.id_procedimientos.id_tipo_procedimiento.tipo_procedimiento + " -- " + self.nombre + " -- " + self.apellido + " -- " + self.cedula + " -- " + self.edad + " -- " + self.sexo + " -- "  + self.descripcion + " -- " + self.material_utilizado + " -- " + self.status
+  
+class Procedimientos_Capacitacion(models.Model):
+  id_procedimientos = models.ForeignKey(Procedimientos, on_delete=models.CASCADE)
+  tipo_capacitacion = models.CharField(max_length=40)
+  tipo_clasificacion = models.CharField(max_length=40)
+  personas_beneficiadas = models.CharField(max_length=4)
+  descripcion = models.CharField(max_length=100)
+  material_utilizado = models.CharField(max_length=100)
+  status = models.CharField(max_length=50)
+
+  def __str__(self):
+        return (
+            self.id_procedimientos.id_tipo_procedimiento.tipo_procedimiento + " -- " +
+            self.tipo_capacitacion + " -- " +
+            self.tipo_clasificacion + " -- " +
+            self.personas_beneficiadas + " -- " +
+            self.descripcion + " -- " +
+            self.material_utilizado + " -- " +
+            self.status
+        )
+
+class Procedimientos_Frente_Preventivo(models.Model):
+  id_procedimientos = models.ForeignKey(Procedimientos, on_delete=models.CASCADE)
+  nombre_actividad = models.CharField(max_length=80)
+  estrategia = models.CharField(max_length=100)
+  personas_beneficiadas = models.CharField(max_length=4)
+  descripcion = models.CharField(max_length=100)
+  material_utilizado = models.CharField(max_length=100)
+  status = models.CharField(max_length=50)
+
+  def __str__(self):
+        return (
+            self.id_procedimientos.id_tipo_procedimiento.tipo_procedimiento + " -- " +
+            self.nombre_actividad + " -- " +
+            self.estrategia + " -- " +
+            self.personas_beneficiadas + " -- " +
+            self.descripcion + " -- " +
+            self.material_utilizado + " -- " +
+            self.status
+        )
+
