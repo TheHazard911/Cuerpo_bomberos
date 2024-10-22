@@ -52,7 +52,7 @@
       />
     </section>
     <section class="filter-search">
-      <label for="search-input-three"><b>Procedimientos:</b></label>
+      <label for="search-input-three"><b>Dependencia:</b></label>
       <input
         type="search"
         name="Buscar"
@@ -61,9 +61,15 @@
       />
     </section>
     <section class="filter-search">
-      <!-- Input para seleccionar el mes -->
-       <label for="monthInput"><b>Mes </b></label>
-      <input type="month" id="monthInput">
+      <!-- Input para seleccionar el trimestre -->
+      <label for="quarterInput"><b>Trimestre: </b></label>
+      <select id="quarterInput">
+        <option value="">Selecciona un trimestre</option>
+        <option value="1">(Ene - Mar)</option>
+        <option value="2">(Abr - Jun)</option>
+        <option value="3">(Jul - Sep)</option>
+        <option value="4">(Oct - Dic)</option>
+      </select>
     </section>
   </div>
   <!-- tabla -->
@@ -90,12 +96,12 @@
           <!-- prettier-ignore -->
           <th scope="row">{{ forloop.counter }}</th>
           {% if row.solicitante_externo == "" %}
-            <!-- prettier-ignore -->
-            <td>{{ row.id_solicitante.jerarquia }} {{ row.id_solicitante.nombres}} {{ row.id_solicitante.apellidos}}</td>
-            {% else %}
-            <!-- prettier-ignore -->
-            <td>{{ row.solicitante_externo }}</td>
-            {% endif %}
+          <!-- prettier-ignore -->
+          <td>{{ row.id_solicitante.jerarquia }} {{ row.id_solicitante.nombres}} {{ row.id_solicitante.apellidos}}</td>
+          {% else %}
+          <!-- prettier-ignore -->
+          <td>{{ row.solicitante_externo }}</td>
+          {% endif %}
           <!-- prettier-ignore -->
           <td>{{ row.id_jefe_comision.jerarquia }} {{ row.id_jefe_comision.nombres}} {{ row.id_jefe_comision.apellidos}}</td>
           {% if row.id_parroquia.parroquia != "Sin Registro" %}
@@ -260,6 +266,7 @@
 </div>
 
 <!-- Script final definitivo para Mostrar detalles procedmientos -->
+<script src="../../static/js/filter-capacitacion.js"></script>
 <script src="../../static/js/capacitacion.js"></script>
 <script src="../../static/js/info_modal.js"></script>
 <script src="../../static/js/filters.js"></script>

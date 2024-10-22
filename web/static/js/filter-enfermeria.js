@@ -1,3 +1,4 @@
+
 (function () {
     // Función para formatear la fecha de DD-MM-YYYY a un objeto Date
     function parseDate(dateString) {
@@ -15,9 +16,9 @@
         const rows = document.querySelectorAll("#data-table tbody tr");
 
         rows.forEach((row) => {
-            const textCellTwo = row.querySelector(`td:nth-child(7)`);
-            const textCellThree = row.querySelector(`td:nth-child(12)`);
-            const dateCell = row.querySelector(`td:nth-child(10)`);
+            const textCellTwo = row.querySelector(`td:nth-child(4)`);
+            const textCellThree = row.querySelector(`td:nth-child(9)`);
+            const dateCell = row.querySelector(`td:nth-child(7)`);
             const cellDateValue = dateCell.textContent.trim();
             const cellDate = parseDate(cellDateValue.split("-").reverse().join("-"));
             const cellMonth = cellDate.getMonth() + 1; // Obtener solo el mes
@@ -56,10 +57,10 @@
             // Aplicar filtro de trimestre
             if (selectedQuarter) {
                 const isInQuarter = (selectedQuarter === 1 && [1, 2, 3].includes(cellMonth)) ||
-                    (selectedQuarter === 2 && [4, 5, 6].includes(cellMonth)) ||
-                    (selectedQuarter === 3 && [7, 8, 9].includes(cellMonth)) ||
-                    (selectedQuarter === 4 && [10, 11, 12].includes(cellMonth));
-
+                                    (selectedQuarter === 2 && [4, 5, 6].includes(cellMonth)) ||
+                                    (selectedQuarter === 3 && [7, 8, 9].includes(cellMonth)) ||
+                                    (selectedQuarter === 4 && [10, 11, 12].includes(cellMonth));
+                
                 if (!isInQuarter) {
                     showRow = false; // Solo mostrar filas que coincidan con el trimestre seleccionado
                 } else {

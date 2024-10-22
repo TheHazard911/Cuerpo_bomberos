@@ -985,6 +985,14 @@ summary > * {
     height: 1.8rem;
     margin: 0.5rem;
   }
+  select {
+    border-radius: 5px;
+    outline: none;
+    border: thin solid #b7b7b7;
+    width: 18rem;
+    height: 1.8rem;
+    margin: 0.5rem;
+  }
   svg {
     width: 25px;
     height: 25px;
