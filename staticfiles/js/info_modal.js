@@ -108,6 +108,29 @@ document.querySelectorAll(".button-info").forEach((button) => {
                   <p><b>Hora: </b> ${data.hora}</p>
                 </section>`;
         }
+        if (division == "Capacitacion") {
+          baseInfo = ` 
+              <article class="section-left">
+                <section class="datos_division">
+                  <h4>Division</h4>
+                  <p><b>Division: </b> ${data.division}</p>
+                  <p><b>ID Procedimiento: </b> #${data.id}</p>
+                </section>
+                <section class="datos_operacion">
+                  <h4>Operacion</h4>
+                  <p><b>Solicitante: </b> ${solicitante}</p>
+                  <p><b>Instructor: </b> ${data.jefe_comision}</p>
+                  <p><b>Dependencia: </b> ${data.dependencia}</p>
+                </section>
+                <section class="datos_ubicacion">
+                  <h4>Ubicacion</h4>
+                  <p><b>Parroquia: </b> ${data.parroquia}</p>
+                  <p><b>Municipio: </b> ${data.municipio}</p>
+                  <p><b>Direccion: </b> ${data.direccion}</p>
+                  <p><b>Fecha: </b> ${data.fecha}</p>
+                  <p><b>Hora: </b> ${data.hora}</p>
+                </section>`;
+        }
         let detalles = "";
 
         // Estructura if-else para manejar cada tipo de procedimiento
@@ -844,7 +867,38 @@ document.querySelectorAll(".button-info").forEach((button) => {
                 <p><b>Sexo: </b> ${data.sexo}</p>
                </section>`;
                break;
-            
+          case "Capacitación":
+            if (data.dependencia === "Capacitacion"){
+              detalles = `
+              <section class="detalles_procedimiento">
+              <h4>Capacitacion</h4>
+              <p><b>Tipo de Capacitacion: </b> ${data.tipo_capacitacion}</p>
+              <p><b>Clasificacion: </b> ${data.tipo_clasificacion}</p>
+              <p><b>Personas Beneficiadas: </b> ${data.personas_beneficiadas}</p>
+              </section>
+              <section class="detalles_procedimiento">
+              <h4>Detalles</h4>
+              <p><b>Descripcion: </b> ${data.descripcion}</p>
+              <p><b>Material Utilizado: </b> ${data.material_utilizado}</p>
+              <p><b>Status: </b> ${data.status}</p>
+              </section>`;
+            }
+            if (data.dependencia === "Frente Preventivo"){
+              detalles = `
+              <section class="detalles_procedimiento">
+              <h4>Capacitacion</h4>
+              <p><b>Nombre de la Actividad: </b> ${data.nombre_actividad}</p>
+              <p><b>Estrategia: </b> ${data.estrategia}</p>
+              <p><b>Personas Beneficiadas: </b> ${data.personas_beneficiadas}</p>
+              </section>
+              <section class="detalles_procedimiento">
+              <h4>Detalles</h4>
+              <p><b>Descripcion: </b> ${data.descripcion}</p>
+              <p><b>Material Utilizado: </b> ${data.material_utilizado}</p>
+              <p><b>Status: </b> ${data.status}</p>
+              </section>`;
+            }
+            break;
             default:
             detalles = "<h2>Error: Tipo de Procedimiento no válido</h2>";
         }

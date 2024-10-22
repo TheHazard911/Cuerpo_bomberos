@@ -61,10 +61,20 @@
         placeholder="Tipo"
       />
     </section>
-    <section class="filter-search">
-      <!-- Input para seleccionar el mes -->
+    <!-- <section class="filter-search">
        <label for="monthInput"><b>Mes </b></label>
       <input type="month" id="monthInput">
+    </section> -->
+    <section class="filter-search">
+      <!-- Input para seleccionar el trimestre -->
+      <label for="quarterInput"><b>Trimestre:  </b></label>
+      <select id="quarterInput">
+        <option value="">Selecciona un trimestre</option>
+        <option value="1">(Ene - Mar)</option>
+        <option value="2">(Abr - Jun)</option>
+        <option value="3">(Jul - Sep)</option>
+        <option value="4">(Oct - Dic)</option>
+      </select>
     </section>
   </div>
   <!-- tabla -->
