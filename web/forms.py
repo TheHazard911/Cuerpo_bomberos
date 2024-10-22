@@ -211,7 +211,7 @@ class Datos_Ubicacion(forms.Form):
 
 # Form4
 class Selecc_Tipo_Procedimiento(forms.Form):
-    tipo_procedimiento = forms.ChoiceField(choices=Asignar_op_Tipos_Procedimientos(), required=True, widget=forms.Select(attrs={"class": "disable-first-option"}))
+    tipo_procedimiento = forms.ChoiceField(choices=Asignar_op_Tipos_Procedimientos(), required=False, widget=forms.Select(attrs={"class": "disable-first-option"}))
 
 # Formulario Principal de Enfermeria
 class Formulario_Enfermeria(forms.Form):
@@ -230,12 +230,13 @@ class Formulario_psicologia(forms.Form):
     jefe_area = forms.ChoiceField(choices=Asignar_op_Psicologa(), widget=forms.Select(attrs={"class": "disable-first-option"}), required=False)
     
 class Formulario_capacitacion(forms.Form):
-    dependencia = forms.CharField(max_length=100, required=False, label="Dependencia")
-    instructor = forms.CharField(max_length=100, required=False, label="Instructor")
+    opc = [("", "Seleccione Una Opcion"),("Capacitacion", "Capacitacion"), ("Frente Preventivo", "Frente Preventivo")]
+
+    dependencia = forms.ChoiceField(choices=opc ,required=False, label="Dependencia")
+    instructor = forms.ChoiceField(choices=Asignar_ops_Personal(), required=False, label="Instructor")
     solicitante = forms.ChoiceField(choices=Asignar_ops_Personal(), required=False,
     widget=forms.Select(attrs={'class':'disable-first-option'}))
     solicitante_externo = forms.CharField(required=False)
-
 
 # Formulario Abastecimiento de Agua -- :D
 class formulario_abastecimiento_agua(forms.Form):
@@ -606,3 +607,25 @@ class Formulario_Procedimientos_Psicologia(forms.Form):
     descripcion = forms.CharField(max_length=120, required=False)
     material_utilizado = forms.CharField(max_length=60, required=False)
     status = forms.ChoiceField(choices=[("", "Seleccione Una Opcion"), ("Culminado", "Culminado"), ("En Proceso", "En Proceso")], widget=forms.Select(attrs={"class": "disable-first-option"}), required=False)
+
+class Formulario_Capacitacion_Proc(forms.Form):
+    opc = [("", "Seleccione Una Opcion"), ("Charla", "Charla"), ("Taller", "Taller"), ("Curso", "Curso")]
+    opc2 = [("", "Seleccione Una Opcion"), ("Publica", "Publica"), ("Privada", "Privada")]
+
+    tipo_capacitacion = forms.ChoiceField(choices=opc, widget=forms.Select(attrs={"class": "disable-first-option"}), required=False)
+    tipo_clasificacion = forms.ChoiceField(choices=opc2, widget=forms.Select(attrs={"class": "disable-first-option"}), required=False)
+    personas_beneficiadas = forms.CharField(max_length=4, required=False)
+    descripcion = forms.CharField(max_length=120, required=False)
+    material_utilizado = forms.CharField(max_length=60, required=False)
+    status = forms.ChoiceField(choices=[("", "Seleccione Una Opcion"), ("Culminado", "Culminado"), ("En Proceso", "En Proceso")], widget=forms.Select(attrs={"class": "disable-first-option"}), required=False)
+
+class Formulario_Frente_Preventivo(forms.Form):
+    nombre_actividad = forms.CharField(max_length=100, required=False)
+    estrategia = forms.CharField(max_length=80, required=False)
+    personas_beneficiadas = forms.CharField(max_length=4, required=False)
+    descripcion = forms.CharField(max_length=120, required=False)
+    material_utilizado = forms.CharField(max_length=60, required=False)
+    status = forms.ChoiceField(choices=[("", "Seleccione Una Opcion"), ("Culminado", "Culminado"), ("En Proceso", "En Proceso")], widget=forms.Select(attrs={"class": "disable-first-option"}), required=False)
+
+
+    

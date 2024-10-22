@@ -73,15 +73,13 @@
         <tr>
           <th scope="col">#</th>
           <th scope="col">Solicitante</th>
-          <th scope="col">Jefe de comision</th>
-          <th scope="col">Unidad</th>
-          <th scope="col">Efectivos Enviados</th>
+          <th scope="col">Instructor</th>
           <th scope="col">Parroquia</th>
           <th scope="col">Municipio</th>
           <th scope="col">Direccion</th>
           <th scope="col">Fecha</th>
           <th scope="col">Hora</th>
-          <th scope="col">Tipo de procedimiento</th>
+          <th scope="col">Dependencia</th>
           <th scope="col">Acciones</th>
         </tr>
       </thead>
@@ -100,10 +98,6 @@
             {% endif %}
           <!-- prettier-ignore -->
           <td>{{ row.id_jefe_comision.jerarquia }} {{ row.id_jefe_comision.nombres}} {{ row.id_jefe_comision.apellidos}}</td>
-          <!-- prettier-ignore -->
-          <td>{{ row.unidad }}</td>
-          <!-- prettier-ignore -->
-          <td>{{ row.efectivos_enviados}}</td>
           {% if row.id_parroquia.parroquia != "Sin Registro" %}
           <td>{{ row.id_parroquia.parroquia }}</td>
           {% else %}
@@ -114,7 +108,7 @@
           <td>{{ row.direccion }}</td>
           <td>{{ row.fecha|date:"d-m-Y" }}</td>
           <td>{{ row.hora }}</td>
-          <td>{{ row.id_tipo_procedimiento.tipo_procedimiento }}</td>
+          <td>{{ row.dependencia }}</td>
           <td class="icons-accion">
             <!-- NO TOCAR BOTON ELIMINAR-->
             <button
