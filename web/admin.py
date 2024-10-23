@@ -56,5 +56,7 @@ admin.site.register(Valoracion_Medica)
 admin.site.register(Doctores)
 admin.site.register(Enfermeros)
 admin.site.register(Psicologa)
+admin.site.register(Procedimientos_Capacitacion)
+admin.site.register(Procedimientos_Frente_Preventivo)
 
 
