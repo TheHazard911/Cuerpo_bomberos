@@ -58,5 +58,11 @@ admin.site.register(Enfermeros)
 admin.site.register(Psicologa)
 admin.site.register(Procedimientos_Capacitacion)
 admin.site.register(Procedimientos_Frente_Preventivo)
+admin.site.register(Jornada_Medica)
+admin.site.register(Inspeccion_Prevencion_Asesorias_Tecnicas)
+admin.site.register(Inspeccion_Habitabilidad)
+admin.site.register(Inspeccion_Arbol)
+admin.site.register(Inspeccion_Otros)
+admin.site.register(Tipos_Investigacion)
 
 

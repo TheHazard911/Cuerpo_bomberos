@@ -267,7 +267,7 @@ const opcionesPorCategoria = {
   ],
   7: [
     { value: "24", text: "Valoración Medica" },
-    { value: "", text: "Jornada Medica" },
+    { value: "25", text: "Jornada Medica" },
   ],
   8: [{ value: "35", text: "Certificado de Salud Mental" },
       { value: "36", text: "Consulta Bombero Activo" },
@@ -392,6 +392,16 @@ document
       "detalles_psicologia",
       "detalles_capacitacion",
       "detalles_frente_preventivo",
+      "jornada_medica",
+      "form_inpecciones",
+      "form_inspecciones_prevencion",
+      "form_inspecciones_habitabilidad",
+      "form_inspecciones_arbol",
+      "form_inspecciones_otros",
+      "form_investigacion",
+      "form_inv_vehiculo",
+      "form_inv_comercio",
+      "form_inv_estructura",
     ];
 
     const showElements = (elementsToShow) => {
@@ -1115,6 +1125,110 @@ document
         setRequired(campos, true);
         document.getElementById("button_submit").style.display = "block";
         break;
+      case "18":
+        requiredFalse();
+        showElements(["form_inpecciones"]);
+        campos = document
+          .getElementById("form_inpecciones")
+          .querySelectorAll("select, input");
+        setRequired(campos, true);
+
+        document.getElementById("id_form_inspecciones-tipo_inspeccion").addEventListener("change", function () {
+          switch (this.value){
+            case "Prevención":
+              ocultElement("form_inspecciones_arbol")
+              ocultElement("form_inspecciones_habitabilidad")
+              ocultElement("form_inspecciones_otros")
+              mostrarElementBlock("form_inspecciones_prevencion")
+              document.getElementById("form_inspecciones_prevencion").querySelector("h4").textContent = "Inspeccion de Prevencion"
+              document.getElementById("button_submit").style.display = "block";
+              break;
+
+            case "Árbol":
+              ocultElement("form_inspecciones_prevencion")
+              ocultElement("form_inspecciones_habitabilidad")
+              ocultElement("form_inspecciones_otros")
+              mostrarElementBlock("form_inspecciones_arbol")
+              document.getElementById("form_inspecciones_arbol").querySelector("h4").textContent = "Inspeccion de Árbol"
+              document.getElementById("button_submit").style.display = "block";
+              break;
+
+            case "Asesorias Tecnicas":
+              ocultElement("form_inspecciones_arbol")
+              ocultElement("form_inspecciones_habitabilidad")
+              ocultElement("form_inspecciones_otros")
+              mostrarElementBlock("form_inspecciones_prevencion")
+              document.getElementById("form_inspecciones_prevencion").querySelector("h4").textContent = "Asesorias Tecnicas"
+              document.getElementById("button_submit").style.display = "block";
+              break;
+
+            case "Habitabilidad":
+              ocultElement("form_inspecciones_arbol")
+              ocultElement("form_inspecciones_prevencion")
+              ocultElement("form_inspecciones_otros")
+              mostrarElementBlock("form_inspecciones_habitabilidad")
+              document.getElementById("form_inspecciones_habitabilidad").querySelector("h4").textContent = "Inspeccion de Habitabilidad"
+              document.getElementById("button_submit").style.display = "block";
+              break;
+
+            case "Otros":
+              ocultElement("form_inspecciones_arbol")
+              ocultElement("form_inspecciones_prevencion")
+              ocultElement("form_inspecciones_habitabilidad")
+              mostrarElementBlock("form_inspecciones_otros")
+              document.getElementById("form_inspecciones_otros").querySelector("h4").textContent = "Inspecciones (Otros)"
+              document.getElementById("button_submit").style.display = "block";
+              break;
+
+          }
+        })
+        
+        break;
+      case "19":
+        requiredFalse();
+        showElements(["form_investigacion"]);
+        campos = document
+          .getElementById("form_investigacion")
+          .querySelectorAll("select, input");
+        setRequired(campos, true);
+
+        document.getElementById("id_form_investigacion-tipo_siniestro").addEventListener("change", function () {
+          switch (this.value){
+            case "Comercio":
+              ocultElement("form_inv_vehiculo")
+              ocultElement("form_inv_estructura")
+              mostrarElementBlock("form_inv_comercio")
+              document.getElementById("form_inv_comercio").querySelector("h4").textContent = "Investigacion Comercio"
+              document.getElementById("button_submit").style.display = "block";
+              break;
+
+            case "Estructura":
+              ocultElement("form_inv_vehiculo")
+              ocultElement("form_inv_comercio")
+              mostrarElementBlock("form_inv_estructura")
+              document.getElementById("form_inv_estructura").querySelector("h4").textContent = "Investigacion de Estructura"
+              document.getElementById("button_submit").style.display = "block";
+              break;
+
+            case "Vehiculo":
+              ocultElement("form_inv_estructura")
+              ocultElement("form_inv_comercio")
+              mostrarElementBlock("form_inv_vehiculo")
+              document.getElementById("form_inv_vehiculo").querySelector("h4").textContent = "Investigacion Vehiculo"
+              document.getElementById("button_submit").style.display = "block";
+              break;
+
+            case "Vivienda":
+              ocultElement("form_inv_vehiculo")
+              ocultElement("form_inv_comercio")
+              mostrarElementBlock("form_inv_estructura")
+              document.getElementById("form_inv_estructura").querySelector("h4").textContent = "Investigacion de Vivienda"
+              document.getElementById("button_submit").style.display = "block";
+              break;
+          }
+        })
+        
+        break;
       case "20":
         requiredFalse();
         showElements(["reinspeccion_prevencion"]);
@@ -1291,6 +1405,15 @@ document
         showElements(["valoracion_medica"]);
         campos = document
           .getElementById("valoracion_medica")
+          .querySelectorAll("select, input");
+        setRequired(campos, true);
+        document.getElementById("button_submit").style.display = "block";
+        break;
+      case "25":
+        requiredFalse();
+        showElements(["jornada_medica"]);
+        campos = document
+          .getElementById("jornada_medica")
           .querySelectorAll("select, input");
         setRequired(campos, true);
         document.getElementById("button_submit").style.display = "block";

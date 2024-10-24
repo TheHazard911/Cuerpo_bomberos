@@ -42,10 +42,18 @@
       <div class="form-style">{{ form.as_div }}</div>
       <h4>Datos de la Operacion</h4>
       <div class="form-style" id="form_general">{{ form2.as_div }}</div>
-      <div class="form-style" id="form_enfermeria" style="display: none;">{{ form_enfermeria.as_div }}</div>
-      <div class="form-style" id="servicios_medicos" style="display: none;">{{ servicios_medicos.as_div }}</div>
-      <div class="form-style" id="psicologia" style="display: none;">{{ psicologia.as_div }}</div>
-      <div class="form-style" id="capacitacion" style="display: none;">{{ capacitacion.as_div }}</div>
+      <div class="form-style" id="form_enfermeria" style="display: none">
+        {{ form_enfermeria.as_div }}
+      </div>
+      <div class="form-style" id="servicios_medicos" style="display: none">
+        {{ servicios_medicos.as_div }}
+      </div>
+      <div class="form-style" id="psicologia" style="display: none">
+        {{ psicologia.as_div }}
+      </div>
+      <div class="form-style" id="capacitacion" style="display: none">
+        {{ capacitacion.as_div }}
+      </div>
       <h4>Datos de la Ubicacion</h4>
       <div class="form-style">{{ form3.as_div }}</div>
       <h4 id="tipos_procedimientos_title">Tipo de Procedimientos</h4>
@@ -140,9 +148,7 @@
         <!-- Detalles de Procedimiento (Atenciones Paramedicas) -->
         <div class="data_form disp-none" id="atenciones_paramedicas">
           <h4 class="mod-title-width">Atenciones Paramedicas</h4>
-          <div class="form-style">
-            {{ atenciones_paramedicas.as_div }}
-          </div>
+          <div class="form-style">{{ atenciones_paramedicas.as_div }}</div>
         </div>
 
         <!-- Detalles de Procedimiento (Emergencias Medicas) -->
@@ -159,10 +165,7 @@
         </div>
 
         <!-- Detalles de Procedimiento (Accidentes de Transito) -->
-        <div
-          class="data_form disp-none"
-          id="accidentes_transito"
-        >
+        <div class="data_form disp-none" id="accidentes_transito">
           <h4>Accidentes de Transito</h4>
           <div class="form-style">
             {{ formulario_accidentes_transito.as_div }}
@@ -266,8 +269,8 @@
           <div class="form-style">{{ retencion_preventiva.as_div }}</div>
         </div>
 
-         <!-- Detalles de Procedimiento (Arificios Pirotecnicos) -->
-         <div class="data_form disp-none" id="artificios_pirotecnico">
+        <!-- Detalles de Procedimiento (Arificios Pirotecnicos) -->
+        <div class="data_form disp-none" id="artificios_pirotecnico">
           <h4>Artificios Pirotecnicos</h4>
           <div class="form-style">{{ artificios_pirotecnico.as_div }}</div>
         </div>
@@ -281,7 +284,7 @@
         <!-- Detalles de Procedimiento (Incendio) -->
         <div class="data_form disp-none" id="incendio_art">
           <h4>Incendio Por Artificios Pirotecnicos</h4>
-          <div class="form-style ">
+          <div class="form-style">
             {{ incendio_art.as_div }}
             <!-- Detalles de Procedimiento (persona Presente) -->
             <div id="persona_presente_art" class="display-row">
@@ -308,25 +311,31 @@
           <h4>Inspeccion Establecimiento Por Artificios Pirotecnicos</h4>
           <div class="form-style">{{ inspeccion_artificios_pir.as_div }}</div>
         </div>
-        
+
         <!-- Detalles de Procedimiento (Inspeccion Artificios Pirotecnicos) -->
         <div class="data_form disp-none" id="valoracion_medica">
           <h4>Valoracion Medica</h4>
           <div class="form-style">{{ valoracion_medica.as_div }}</div>
         </div>
-        
+
+        <!-- Detalles de Procedimiento (Jornada Medica) -->
+        <div class="data_form disp-none" id="jornada_medica">
+          <h4>Jornada Medica</h4>
+          <div class="form-style">{{ jornada_medica.as_div }}</div>
+        </div>
+
         <!-- Detalles de Procedimiento (Inspeccion Artificios Pirotecnicos) -->
         <div class="data_form disp-none" id="detalles_enfermeria">
           <h4>Detalles Atencion</h4>
           <div class="form-style">{{ form_detalles_enfermeria.as_div }}</div>
         </div>
-        
+
         <!-- Detalles de Procedimiento (Inspeccion Artificios Pirotecnicos) -->
         <div class="data_form disp-none" id="detalles_psicologia">
           <h4>Detalles Psicologia</h4>
           <div class="form-style">{{ form_detalles_psicologia.as_div }}</div>
         </div>
-        
+
         <!-- Detalles de Procedimiento (Inspeccion Artificios Pirotecnicos) -->
         <div class="data_form disp-none" id="detalles_capacitacion">
           <h4>Detalles Capacitacion</h4>
@@ -338,7 +347,83 @@
           <h4>Detalles Frente Preventivo</h4>
           <div class="form-style">{{ form_frente_preventivo.as_div }}</div>
         </div>
-        
+
+        <!-- ===================================================================================== -->
+
+        <!-- Detalles de Procedimiento (Inspecciones) -->
+        <div class="data_form disp-none" id="form_inpecciones">
+          <h4 class="mod-title-width">Detalles Inspeccion</h4>
+          <div class="form-style">
+            {{ form_inspecciones.as_div }}
+          </div>
+        </div>
+
+        <!-- Detalles de Procedimiento (Inspecciones - Prevencion y Asesorias) -->
+        <div class="data_form disp-none" id="form_inspecciones_prevencion">
+          <h4>Detalles Inspeccion de Prevencion</h4>
+          <div class="form-style">
+            {{ form_inspecciones_prevencion.as_div }}
+          </div>
+        </div>
+
+        <!-- Detalles de Procedimiento (Inspecciones - Habitabilidad) -->
+        <div class="data_form disp-none" id="form_inspecciones_habitabilidad">
+          <h4>Detalles Inspeccion de Habitabilidad</h4>
+          <div class="form-style">
+            {{ form_inspecciones_habitabilidad.as_div }}
+          </div>
+        </div>
+
+        <!-- Detalles de Procedimiento (Inspecciones - Arbol) -->
+        <div class="data_form disp-none" id="form_inspecciones_arbol">
+          <h4>Detalles Inspeccion de Árbol</h4>
+          <div class="form-style">
+            {{ form_inspecciones_arbol.as_div }}
+          </div>
+        </div>
+
+        <!-- Detalles de Procedimiento (Inspecciones - Otros) -->
+        <div class="data_form disp-none" id="form_inspecciones_otros">
+          <h4>Detalles Inspeccion (Otros)</h4>
+          <div class="form-style">
+            {{ form_inspecciones_otros.as_div }}
+          </div>
+        </div>
+
+<!-- ========================================================================================================== -->
+
+        <!-- Detalles de Procedimiento (Investigacion) -->
+        <div class="data_form disp-none" id="form_investigacion">
+          <h4 class="mod-title-width">Detalles Investigacion</h4>
+          <div class="form-style">
+            {{ form_investigacion.as_div }}
+          </div>
+        </div>
+
+        <!-- Detalles de Procedimiento (Investigacion Vehiculo) -->
+        <div class="data_form disp-none" id="form_inv_vehiculo">
+          <h4>Investigacion (Vehiculos)</h4>
+          <div class="form-style">
+            {{ form_inv_vehiculo.as_div }}
+          </div>
+        </div>
+
+        <!-- Detalles de Procedimiento (Investigacion Comercio) -->
+        <div class="data_form disp-none" id="form_inv_comercio">
+          <h4>Investigacion (Comercio)</h4>
+          <div class="form-style">
+            {{ form_inv_comercio.as_div }}
+          </div>
+        </div>
+
+        <!-- Detalles de Procedimiento (Investigacion Estructura) -->
+        <div class="data_form disp-none" id="form_inv_estructura">
+          <h4></h4>
+          <div class="form-style">
+            {{ form_inv_estructura.as_div }}
+          </div>
+        </div>
+
       </article>
 
       <!-- Boton Enviar -->
