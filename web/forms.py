@@ -156,6 +156,13 @@ def Asignar_op_Artificios():
        op.append((str(procedimiento.id), procedimiento.tipo))
    return op
 
+def Asignar_op_Investigacion():
+   procedimientos = Tipos_Investigacion.objects.all()
+   op = [("", "Seleccione Una Opcion")]
+   for procedimiento in procedimientos:
+       op.append((str(procedimiento.id), procedimiento.tipo_investigacion))
+   return op
+
 # Form1
 class SelectorDivision(forms.Form):
     op = [
@@ -627,5 +634,99 @@ class Formulario_Frente_Preventivo(forms.Form):
     material_utilizado = forms.CharField(max_length=60, required=False)
     status = forms.ChoiceField(choices=[("", "Seleccione Una Opcion"), ("Culminado", "Culminado"), ("En Proceso", "En Proceso")], widget=forms.Select(attrs={"class": "disable-first-option"}), required=False)
 
+class Formulario_Jornada_Medica(forms.Form):
+    nombre_jornada = forms.CharField(max_length=100, required=False)
+    cant_personas_aten = forms.CharField(max_length=4, required=False)
+    descripcion = forms.CharField(max_length=120, required=False)
+    material_utilizado = forms.CharField(max_length=60, required=False)
+    status = forms.ChoiceField(choices=[("", "Seleccione Una Opcion"), ("Culminado", "Culminado"), ("En Proceso", "En Proceso")], widget=forms.Select(attrs={"class": "disable-first-option"}), required=False)
 
-    
+# =================================================================================================================
+
+class Formulario_Inspecciones(forms.Form):
+    opc = [("", "Selecciones Una Opcion"), ("Prevención", "Prevención"), ("Árbol", "Árbol"), ("Asesorias Tecnicas", "Asesorias Tecnicas"), ("Habitabilidad", "Habitabilidad"), ("Otros", "Otros")]
+
+    tipo_inspeccion = forms.ChoiceField(choices=opc, widget=forms.Select(attrs={"class": "disable-first-option"}), required=False)
+
+class Formulario_Inspeccion_Prevencion_Asesorias_Tecnicas(forms.Form):
+  nombre_comercio = forms.CharField(max_length=80, required=False)
+  propietario = forms.CharField(max_length=100, required=False)
+  cedula_propietario = forms.CharField(max_length=12, required=False)
+  descripcion = forms.CharField(max_length=200, required=False)
+  persona_sitio_nombre = forms.CharField(max_length=40, required=False)
+  persona_sitio_apellido = forms.CharField(max_length=40, required=False)
+  persona_sitio_cedula = forms.CharField(max_length=12, required=False)
+  persona_sitio_telefono = forms.CharField(max_length=20, required=False)
+  material_utilizado = forms.CharField(max_length=100, required=False)
+  status = forms.ChoiceField(choices=[("", "Seleccione Una Opcion"), ("Culminado", "Culminado"), ("En Proceso", "En Proceso")], widget=forms.Select(attrs={"class": "disable-first-option"}), required=False)
+
+class Formulario_Inspeccion_Habitabilidad(forms.Form):
+  descripcion = forms.CharField(max_length=200, required=False)
+  persona_sitio_nombre = forms.CharField(max_length=40, required=False)
+  persona_sitio_apellido = forms.CharField(max_length=40, required=False)
+  persona_sitio_cedula = forms.CharField(max_length=12, required=False)
+  persona_sitio_telefono = forms.CharField(max_length=20, required=False)
+  material_utilizado = forms.CharField(max_length=100, required=False)
+  status = forms.ChoiceField(choices=[("", "Seleccione Una Opcion"), ("Culminado", "Culminado"), ("En Proceso", "En Proceso")], widget=forms.Select(attrs={"class": "disable-first-option"}), required=False)
+
+class Formulario_Inspeccion_Otros(forms.Form):
+  especifique = forms.CharField(max_length=80, required=False)
+  descripcion = forms.CharField(max_length=200, required=False)
+  persona_sitio_nombre = forms.CharField(max_length=40, required=False)
+  persona_sitio_apellido = forms.CharField(max_length=40, required=False)
+  persona_sitio_cedula = forms.CharField(max_length=12, required=False)
+  persona_sitio_telefono = forms.CharField(max_length=20, required=False)
+  material_utilizado = forms.CharField(max_length=100, required=False)
+  status = forms.ChoiceField(choices=[("", "Seleccione Una Opcion"), ("Culminado", "Culminado"), ("En Proceso", "En Proceso")], widget=forms.Select(attrs={"class": "disable-first-option"}), required=False)
+  
+class Formulario_Inspeccion_Arbol(forms.Form):
+  especie = forms.CharField(max_length=100, required=False)
+  altura_aprox = forms.CharField(max_length=40, required=False)
+  ubicacion_arbol = forms.CharField(max_length=100, required=False)
+  persona_sitio_nombre = forms.CharField(max_length=40, required=False)
+  persona_sitio_apellido = forms.CharField(max_length=40, required=False)
+  persona_sitio_cedula = forms.CharField(max_length=12, required=False)
+  persona_sitio_telefono = forms.CharField(max_length=20, required=False)
+  descripcion = forms.CharField(max_length=200, required=False)
+  material_utilizado = forms.CharField(max_length=100, required=False)
+  status = forms.ChoiceField(choices=[("", "Seleccione Una Opcion"), ("Culminado", "Culminado"), ("En Proceso", "En Proceso")], widget=forms.Select(attrs={"class": "disable-first-option"}), required=False)
+
+# ==================================================================================================================
+
+class Formulario_Investigacion(forms.Form):
+  opc = [("", "Selecciones Una Opcion"), ("Comercio", "Comercio"), ("Estructura", "Estructura"), ("Vehiculo", "Vehiculo"), ("Vivienda", "Vivienda")]
+
+  tipo_investigacion = forms.ChoiceField(choices=Asignar_op_Investigacion(), widget=forms.Select(attrs={"class": "disable-first-option"}), required=False)
+  tipo_siniestro = forms.ChoiceField(choices=opc, widget=forms.Select(attrs={"class": "disable-first-option"}), required=False)
+  
+class Formulario_Investigacion_Vehiculo(forms.Form):
+  marca = forms.CharField(max_length=40)
+  modelo = forms.CharField(max_length=25)
+  color = forms.CharField(max_length=20)
+  placas = forms.CharField(max_length=20)
+  año = forms.CharField(max_length=4)
+  nombre_propietario = forms.CharField(max_length=50)
+  apellido_propietario = forms.CharField(max_length=50)
+  cedula_propietario = forms.CharField(max_length=20)
+  descripcion = forms.CharField(max_length=100)
+  material_utilizado = forms.CharField(max_length=100)
+  status = forms.ChoiceField(choices=[("", "Seleccione Una Opcion"), ("Culminado", "Culminado"), ("En Proceso", "En Proceso")], widget=forms.Select(attrs={"class": "disable-first-option"}), required=False)
+
+class Formulario_Investigacion_Comercio(forms.Form):
+  nombre_comercio = forms.CharField(max_length=100)
+  rif_comercio = forms.CharField(max_length=50)
+  nombre_propietario = forms.CharField(max_length=50)
+  apellido_propietario = forms.CharField(max_length=50)
+  cedula_propietario = forms.CharField(max_length=20)
+  descripcion = forms.CharField(max_length=100)
+  material_utilizado = forms.CharField(max_length=100)
+  status = forms.ChoiceField(choices=[("", "Seleccione Una Opcion"), ("Culminado", "Culminado"), ("En Proceso", "En Proceso")], widget=forms.Select(attrs={"class": "disable-first-option"}), required=False)
+
+class Formulario_Investigacion_Estructura_Vivienda(forms.Form):
+  tipo_estructura = forms.CharField(max_length=80)
+  nombre = forms.CharField(max_length=50)
+  apellido = forms.CharField(max_length=50)
+  cedula = forms.CharField(max_length=20)
+  descripcion = forms.CharField(max_length=100)
+  material_utilizado = forms.CharField(max_length=100)
+  status = forms.ChoiceField(choices=[("", "Seleccione Una Opcion"), ("Culminado", "Culminado"), ("En Proceso", "En Proceso")], widget=forms.Select(attrs={"class": "disable-first-option"}), required=False)
