@@ -361,7 +361,18 @@ def View_Procedimiento(request):
         
         form_capacitacion = Formulario_Capacitacion_Proc(request.POST,prefix='form_capacitacion')
         form_frente_preventivo = Formulario_Frente_Preventivo(request.POST,prefix='form_frente_preventivo')
+        form_jornada_medica = Formulario_Jornada_Medica(request.POST, prefix='form_jornada_medica')
 
+        form_inspecciones = Formulario_Inspecciones(request.POST, prefix='form_inspecciones')
+        form_inspecciones_prevencion = Formulario_Inspeccion_Prevencion_Asesorias_Tecnicas(request.POST, prefix='form_inspecciones_prevencion')
+        form_inspecciones_habitabilidad = Formulario_Inspeccion_Habitabilidad(request.POST, prefix='form_inspecciones_habitabilidad')
+        form_inspecciones_arbol = Formulario_Inspeccion_Arbol(request.POST, prefix='form_inspecciones_arbol')
+        form_inspecciones_otros = Formulario_Inspeccion_Otros(request.POST, prefix='form_inspecciones_otros')
+
+        form_investigacion = Formulario_Investigacion(request.POST, prefix='form_investigacion')
+        form_inv_vehiculo = Formulario_Investigacion_Vehiculo(request.POST, prefix='form_inv_vehiculo')
+        form_inv_comercio = Formulario_Investigacion_Comercio(request.POST, prefix='form_inv_comercio')
+        form_inv_estructura = Formulario_Investigacion_Estructura_Vivienda(request.POST, prefix='form_inv_estructura')
         # Imprimir request.POST para depuración
 
         if not form.is_valid():
@@ -1217,6 +1228,230 @@ def View_Procedimiento(request):
                     status=status
                 )
                 nuevo_proc_ase.save()
+                
+            if tipo_procedimiento == "18" and form_inspecciones.is_valid():
+                tipo_inspeccion = form_inspecciones.cleaned_data["tipo_inspeccion"]
+
+                if tipo_inspeccion == "Prevención" and form_inspecciones_prevencion.is_valid():
+                    nombre_comercio = form_inspecciones_prevencion.cleaned_data["nombre_comercio"]
+                    propietario = form_inspecciones_prevencion.cleaned_data["propietario"]
+                    cedula_propietario = form_inspecciones_prevencion.cleaned_data["cedula_propietario"]
+                    descripcion = form_inspecciones_prevencion.cleaned_data["descripcion"]
+                    persona_sitio_nombre = form_inspecciones_prevencion.cleaned_data["persona_sitio_nombre"]
+                    persona_sitio_apellido = form_inspecciones_prevencion.cleaned_data["persona_sitio_apellido"]
+                    persona_sitio_cedula = form_inspecciones_prevencion.cleaned_data["persona_sitio_cedula"]
+                    persona_sitio_telefono = form_inspecciones_prevencion.cleaned_data["persona_sitio_telefono"]
+                    material_utilizado = form_inspecciones_prevencion.cleaned_data["material_utilizado"]
+                    status = form_inspecciones_prevencion.cleaned_data["status"]
+
+                    nueva_inspeccion = Inspeccion_Prevencion_Asesorias_Tecnicas (
+                        id_procedimientos = nuevo_procedimiento,
+                        tipo_inspeccion = tipo_inspeccion,
+                        nombre_comercio = nombre_comercio,
+                        propietario = propietario,
+                        cedula_propietario = cedula_propietario,
+                        descripcion = descripcion,
+                        persona_sitio_nombre = persona_sitio_nombre,
+                        persona_sitio_apellido = persona_sitio_apellido,
+                        persona_sitio_cedula = persona_sitio_cedula,
+                        persona_sitio_telefono = persona_sitio_telefono,
+                        material_utilizado = material_utilizado,
+                        status = status
+                    )
+                
+                    nueva_inspeccion.save()
+
+                if tipo_inspeccion == "Árbol" and form_inspecciones_arbol.is_valid():
+                    especie = form_inspecciones_arbol.cleaned_data["especie"]
+                    altura_aprox = form_inspecciones_arbol.cleaned_data["altura_aprox"]
+                    ubicacion_arbol = form_inspecciones_arbol.cleaned_data["ubicacion_arbol"]
+                    persona_sitio_nombre = form_inspecciones_arbol.cleaned_data["persona_sitio_nombre"]
+                    persona_sitio_apellido = form_inspecciones_arbol.cleaned_data["persona_sitio_apellido"]
+                    persona_sitio_cedula = form_inspecciones_arbol.cleaned_data["persona_sitio_cedula"]
+                    persona_sitio_telefono = form_inspecciones_arbol.cleaned_data["persona_sitio_telefono"]
+                    descripcion = form_inspecciones_arbol.cleaned_data["descripcion"]
+                    material_utilizado = form_inspecciones_arbol.cleaned_data["material_utilizado"]
+                    status = form_inspecciones_arbol.cleaned_data["status"]
+
+                    nueva_inspeccion = Inspeccion_Arbol (
+                        id_procedimientos = nuevo_procedimiento,
+                        tipo_inspeccion = tipo_inspeccion,
+                        especie = especie,
+                        altura_aprox = altura_aprox,
+                        ubicacion_arbol = ubicacion_arbol,
+                        persona_sitio_nombre = persona_sitio_nombre,
+                        persona_sitio_apellido = persona_sitio_apellido,
+                        persona_sitio_cedula = persona_sitio_cedula,
+                        persona_sitio_telefono = persona_sitio_telefono,
+                        descripcion = descripcion,
+                        material_utilizado = material_utilizado,
+                        status = status
+                    )
+                
+                    nueva_inspeccion.save()
+
+                if tipo_inspeccion == "Asesorias Tecnicas" and form_inspecciones_prevencion.is_valid():
+                    nombre_comercio = form_inspecciones_prevencion.cleaned_data["nombre_comercio"]
+                    propietario = form_inspecciones_prevencion.cleaned_data["propietario"]
+                    cedula_propietario = form_inspecciones_prevencion.cleaned_data["cedula_propietario"]
+                    descripcion = form_inspecciones_prevencion.cleaned_data["descripcion"]
+                    persona_sitio_nombre = form_inspecciones_prevencion.cleaned_data["persona_sitio_nombre"]
+                    persona_sitio_apellido = form_inspecciones_prevencion.cleaned_data["persona_sitio_apellido"]
+                    persona_sitio_cedula = form_inspecciones_prevencion.cleaned_data["persona_sitio_cedula"]
+                    persona_sitio_telefono = form_inspecciones_prevencion.cleaned_data["persona_sitio_telefono"]
+                    material_utilizado = form_inspecciones_prevencion.cleaned_data["material_utilizado"]
+                    status = form_inspecciones_prevencion.cleaned_data["status"]
+
+                    nueva_inspeccion = Inspeccion_Prevencion_Asesorias_Tecnicas (
+                        id_procedimientos = nuevo_procedimiento,
+                        tipo_inspeccion = tipo_inspeccion,
+                        nombre_comercio = nombre_comercio,
+                        propietario = propietario,
+                        cedula_propietario = cedula_propietario,
+                        descripcion = descripcion,
+                        persona_sitio_nombre = persona_sitio_nombre,
+                        persona_sitio_apellido = persona_sitio_apellido,
+                        persona_sitio_cedula = persona_sitio_cedula,
+                        persona_sitio_telefono = persona_sitio_telefono,
+                        material_utilizado = material_utilizado,
+                        status = status
+                    )
+                
+                    nueva_inspeccion.save()
+
+                if tipo_inspeccion == "Habitabilidad" and form_inspecciones_habitabilidad.is_valid():
+                    descripcion = form_inspecciones_habitabilidad.cleaned_data["descripcion"]
+                    persona_sitio_nombre = form_inspecciones_habitabilidad.cleaned_data["persona_sitio_nombre"]
+                    persona_sitio_apellido = form_inspecciones_habitabilidad.cleaned_data["persona_sitio_apellido"]
+                    persona_sitio_cedula = form_inspecciones_habitabilidad.cleaned_data["persona_sitio_cedula"]
+                    persona_sitio_telefono = form_inspecciones_habitabilidad.cleaned_data["persona_sitio_telefono"]
+                    material_utilizado = form_inspecciones_habitabilidad.cleaned_data["material_utilizado"]
+                    status = form_inspecciones_habitabilidad.cleaned_data["status"]
+
+                    nueva_inspeccion = Inspeccion_Habitabilidad (
+                        id_procedimientos = nuevo_procedimiento,
+                        tipo_inspeccion = tipo_inspeccion,
+                        descripcion = descripcion,
+                        persona_sitio_nombre = persona_sitio_nombre,
+                        persona_sitio_apellido = persona_sitio_apellido,
+                        persona_sitio_cedula = persona_sitio_cedula,
+                        persona_sitio_telefono = persona_sitio_telefono,
+                        material_utilizado = material_utilizado,
+                        status = status
+                    )
+                
+                    nueva_inspeccion.save()
+
+                if tipo_inspeccion == "Otros" and form_inspecciones_otros.is_valid():
+                    especifique = form_inspecciones_otros.cleaned_data["especifique"]
+                    descripcion = form_inspecciones_otros.cleaned_data["descripcion"]
+                    persona_sitio_nombre = form_inspecciones_otros.cleaned_data["persona_sitio_nombre"]
+                    persona_sitio_apellido = form_inspecciones_otros.cleaned_data["persona_sitio_apellido"]
+                    persona_sitio_cedula = form_inspecciones_otros.cleaned_data["persona_sitio_cedula"]
+                    persona_sitio_telefono = form_inspecciones_otros.cleaned_data["persona_sitio_telefono"]
+                    material_utilizado = form_inspecciones_otros.cleaned_data["material_utilizado"]
+                    status = form_inspecciones_otros.cleaned_data["status"]
+
+                    nueva_inspeccion = Inspeccion_Otros (
+                        id_procedimientos = nuevo_procedimiento,
+                        tipo_inspeccion = tipo_inspeccion,
+                        especifique = especifique,
+                        descripcion = descripcion,
+                        persona_sitio_nombre = persona_sitio_nombre,
+                        persona_sitio_apellido = persona_sitio_apellido,
+                        persona_sitio_cedula = persona_sitio_cedula,
+                        persona_sitio_telefono = persona_sitio_telefono,
+                        material_utilizado = material_utilizado,
+                        status = status
+                    )
+                
+                    nueva_inspeccion.save()
+
+            if tipo_procedimiento == "19" and form_investigacion.is_valid():
+                tipo_investigacion = form_investigacion.cleaned_data["tipo_investigacion"]
+                tipo_siniestro = form_investigacion.cleaned_data["tipo_siniestro"]
+
+                tipo_investigacion_instance = Tipos_Investigacion.objects.get(id=tipo_investigacion)
+
+                new_investigacion = Investigacion(
+                    id_procedimientos = nuevo_procedimiento,
+                    id_tipo_investigacion = tipo_investigacion_instance,
+                    tipo_siniestro = tipo_siniestro
+                )
+                new_investigacion.save()
+
+                if tipo_siniestro == "Comercio" and form_inv_comercio.is_valid():
+                    nombre_comercio = form_inv_comercio.cleaned_data["nombre_comercio"]
+                    rif_comercio = form_inv_comercio.cleaned_data["rif_comercio"]
+                    nombre_propietario = form_inv_comercio.cleaned_data["nombre_propietario"]
+                    apellido_propietario = form_inv_comercio.cleaned_data["apellido_propietario"]
+                    cedula_propietario = form_inv_comercio.cleaned_data["cedula_propietario"]
+                    descripcion = form_inv_comercio.cleaned_data["descripcion"]
+                    material_utilizado = form_inv_comercio.cleaned_data["material_utilizado"]
+                    status = form_inv_comercio.cleaned_data["status"]
+
+                    new_inv_comercio = Investigacion_Comercio (
+                        id_investigacion = new_investigacion,
+                        nombre_comercio = nombre_comercio,
+                        rif_comercio = rif_comercio,
+                        nombre_propietario = nombre_propietario,
+                        apellido_propietario = apellido_propietario,
+                        cedula_propietario = cedula_propietario,
+                        descripcion = descripcion,
+                        material_utilizado = material_utilizado,
+                        status = status
+                    )
+                    new_inv_comercio.save()
+
+                if (tipo_siniestro == "Estructura" or tipo_siniestro == "Vivienda") and form_inv_estructura.is_valid():
+                    tipo_estructura = form_inv_estructura.cleaned_data["tipo_estructura"]
+                    nombre = form_inv_estructura.cleaned_data["nombre"]
+                    apellido = form_inv_estructura.cleaned_data["apellido"]
+                    cedula = form_inv_estructura.cleaned_data["cedula"]
+                    descripcion = form_inv_estructura.cleaned_data["descripcion"]
+                    material_utilizado = form_inv_estructura.cleaned_data["material_utilizado"]
+                    status = form_inv_estructura.cleaned_data["status"]
+
+                    new_inv_estructura = Investigacion_Estructura_Vivienda (
+                        id_investigacion = new_investigacion,
+                        tipo_estructura = tipo_estructura,
+                        nombre = nombre,
+                        apellido = apellido,
+                        cedula = cedula,
+                        descripcion = descripcion,
+                        material_utilizado = material_utilizado,
+                        status = status
+                    )
+                    new_inv_estructura.save()
+
+                if tipo_siniestro == "Vehiculo" and form_inv_vehiculo.is_valid():
+                    marca = form_inv_vehiculo.cleaned_data["marca"]
+                    modelo = form_inv_vehiculo.cleaned_data["modelo"]
+                    color = form_inv_vehiculo.cleaned_data["color"]
+                    placas = form_inv_vehiculo.cleaned_data["placas"]
+                    año = form_inv_vehiculo.cleaned_data["año"]
+                    nombre_propietario = form_inv_vehiculo.cleaned_data["nombre_propietario"]
+                    apellido_propietario = form_inv_vehiculo.cleaned_data["apellido_propietario"]
+                    cedula_propietario = form_inv_vehiculo.cleaned_data["cedula_propietario"]
+                    descripcion = form_inv_vehiculo.cleaned_data["descripcion"]
+                    material_utilizado = form_inv_vehiculo.cleaned_data["material_utilizado"]
+                    status = form_inv_vehiculo.cleaned_data["status"]
+
+                    new_inv_vehiculo = Investigacion_Vehiculo(
+                        id_investigacion = new_investigacion,
+                        marca = marca,
+                        modelo = modelo,
+                        color = color,
+                        placas = placas,
+                        año = año,
+                        nombre_propietario = nombre_propietario,
+                        apellido_propietario = apellido_propietario,
+                        cedula_propietario = cedula_propietario,
+                        descripcion = descripcion,
+                        material_utilizado = material_utilizado,
+                        status = status,
+                    )
+                    new_inv_vehiculo.save()
 
             if tipo_procedimiento == "20" and reinspeccion_prevencion.is_valid():
                 nombre_comercio = reinspeccion_prevencion.cleaned_data["nombre_comercio"]
@@ -1435,6 +1670,23 @@ def View_Procedimiento(request):
                 )
                 new_valoracion_medica.save()
 
+            if tipo_procedimiento == "25" and form_jornada_medica.is_valid():
+                nombre_jornada = form_jornada_medica.cleaned_data["nombre_jornada"]
+                cantidad_personas_atendidas = form_jornada_medica.cleaned_data["cant_personas_aten"]
+                descripcion = form_jornada_medica.cleaned_data["descripcion"]
+                material_utilizado = form_jornada_medica.cleaned_data["material_utilizado"]
+                status = form_jornada_medica.cleaned_data["status"]
+
+                new_jornada_medica = Jornada_Medica(
+                    id_procedimientos = nuevo_procedimiento,
+                    nombre_jornada = nombre_jornada,
+                    cant_personas_aten = cantidad_personas_atendidas,
+                    descripcion = descripcion,
+                    material_utilizado = material_utilizado,
+                    status = status
+                )
+                new_jornada_medica.save()
+
             if (tipo_procedimiento == "26" or tipo_procedimiento == "27" or tipo_procedimiento == "28" or tipo_procedimiento == "29" or tipo_procedimiento == "30" or tipo_procedimiento == "31" or tipo_procedimiento == "32" or tipo_procedimiento == "33" or tipo_procedimiento == "34") and form_detalles_enfermeria.is_valid():
                 nombre = form_detalles_enfermeria.cleaned_data["nombre"]
                 apellido = form_detalles_enfermeria.cleaned_data["apellido"]
@@ -1544,12 +1796,23 @@ def View_Procedimiento(request):
         psicologia = Formulario_psicologia(prefix='form_psicologia')
         capacitacion = Formulario_capacitacion(prefix='form_capacitacion')
         form_valoracion_medica = Formulario_Valoracion_Medica(prefix='form_valoracion_medica')
+        form_jornada_medica = Formulario_Jornada_Medica(prefix='form_jornada_medica')
         form_detalles_enfermeria = Formulario_Detalles_Enfermeria(prefix='form_detalles_enfermeria')
         form_detalles_psicologia = Formulario_Procedimientos_Psicologia(prefix='form_detalles_psicologia')
 
         form_capacitacion = Formulario_Capacitacion_Proc(prefix='form_capacitacion')
         form_frente_preventivo = Formulario_Frente_Preventivo(prefix='form_frente_preventivo')
 
+        form_inspecciones = Formulario_Inspecciones(prefix='form_inspecciones')
+        form_inspecciones_prevencion = Formulario_Inspeccion_Prevencion_Asesorias_Tecnicas(prefix='form_inspecciones_prevencion')
+        form_inspecciones_habitabilidad = Formulario_Inspeccion_Habitabilidad(prefix='form_inspecciones_habitabilidad')
+        form_inspecciones_arbol = Formulario_Inspeccion_Arbol(prefix='form_inspecciones_arbol')
+        form_inspecciones_otros = Formulario_Inspeccion_Otros(prefix='form_inspecciones_otros')
+
+        form_investigacion = Formulario_Investigacion(prefix='form_investigacion')
+        form_inv_vehiculo = Formulario_Investigacion_Vehiculo(prefix='form_inv_vehiculo')
+        form_inv_comercio = Formulario_Investigacion_Comercio(prefix='form_inv_comercio')
+        form_inv_estructura = Formulario_Investigacion_Estructura_Vivienda(prefix='form_inv_estructura')
 
     return render(request, "procedimientos.html", {
         "user": user,
@@ -1612,9 +1875,19 @@ def View_Procedimiento(request):
         "form_detalles_psicologia": form_detalles_psicologia,
         "form_capacitacion": form_capacitacion,
         "form_frente_preventivo": form_frente_preventivo,
-    })
-# Vista de la seccion de Estadisticas
+        "jornada_medica": form_jornada_medica,
+        "form_inspecciones": form_inspecciones,
+        "form_inspecciones_prevencion": form_inspecciones_prevencion,
+        "form_inspecciones_habitabilidad": form_inspecciones_habitabilidad,
+        "form_inspecciones_arbol": form_inspecciones_arbol,
+        "form_inspecciones_otros": form_inspecciones_otros,
+        "form_investigacion": form_investigacion,
+        "form_inv_vehiculo": form_inv_vehiculo,
+        "form_inv_comercio": form_inv_comercio,
+        "form_inv_estructura": form_inv_estructura,
+        })
 
+# Vista de la seccion de Estadisticas
 def View_Estadisticas(request):
     user = request.session.get('user')
     if not user:
@@ -2460,6 +2733,115 @@ def obtener_procedimiento(request, id):
                     status = detalle_procedimiento.status,
                     )
 
+    if str(procedimiento.id_tipo_procedimiento.id) == "18":  # Supongamos que 18 es el ID de Procedimiento
+        # Diccionario para mapear tipos de inspección a sus modelos
+        inspection_models = {
+            "Prevención": Inspeccion_Prevencion_Asesorias_Tecnicas,
+            "Habitabilidad": Inspeccion_Habitabilidad,
+            "Otros": Inspeccion_Otros,
+            "Arbol": Inspeccion_Arbol
+        }
+
+        # Intentar obtener la instancia de inspección
+        for tipo_inspeccion, model_class in inspection_models.items():
+            try:
+                detalle_procedimiento = model_class.objects.get(id_procedimientos=id)
+                print(f"Entro Aqui - {tipo_inspeccion}")
+
+                # Actualizar datos en función del tipo de inspección
+                data.update({
+                    "tipo_inspeccion": detalle_procedimiento.tipo_inspeccion,
+                    "persona_sitio_nombre": detalle_procedimiento.persona_sitio_nombre,
+                    "persona_sitio_apellido": detalle_procedimiento.persona_sitio_apellido,
+                    "persona_sitio_cedula": detalle_procedimiento.persona_sitio_cedula,
+                    "persona_sitio_telefono": detalle_procedimiento.persona_sitio_telefono,
+                    "material_utilizado": detalle_procedimiento.material_utilizado,
+                    "status": detalle_procedimiento.status,
+                })
+
+                # Actualizar campos específicos según el tipo de inspección
+                if tipo_inspeccion == "Prevención":
+                    data.update({
+                        "nombre_comercio": detalle_procedimiento.nombre_comercio,
+                        "propietario": detalle_procedimiento.propietario,
+                        "cedula_propietario": detalle_procedimiento.cedula_propietario,
+                        "descripcion": detalle_procedimiento.descripcion,
+                    })
+                elif tipo_inspeccion == "Habitabilidad":
+                    data.update({
+                        "descripcion": detalle_procedimiento.descripcion,
+                    })
+                elif tipo_inspeccion == "Otros":
+                    data.update({
+                        "especifique": detalle_procedimiento.especifique,
+                        "descripcion": detalle_procedimiento.descripcion,
+                    })
+                elif tipo_inspeccion == "Arbol":
+                    data.update({
+                        "especie": detalle_procedimiento.especie,
+                        "altura_aprox": detalle_procedimiento.altura_aprox,
+                        "ubicacion_arbol": detalle_procedimiento.ubicacion_arbol,
+                        "descripcion": detalle_procedimiento.descripcion,
+                    })
+
+                # Salir del ciclo una vez que se haya encontrado y procesado la inspección
+                break
+
+            except model_class.DoesNotExist:
+                # Si no se encuentra la inspección, continuar con el siguiente tipo
+                continue
+
+    if str(procedimiento.id_tipo_procedimiento.id) == "19":
+        investigacion = get_object_or_404(Investigacion, id_procedimientos=id)
+        data.update({
+            "tipo_investigacion": investigacion.id_tipo_investigacion.tipo_investigacion,
+            "tipo_siniestro": investigacion.tipo_siniestro,
+        })
+        
+        if investigacion.tipo_siniestro == "Vehiculo":
+            vehiculo = Investigacion_Vehiculo.objects.filter(id_investigacion=investigacion).first()
+            if vehiculo:
+                data.update({
+                    "marca": vehiculo.marca,
+                    "modelo": vehiculo.modelo,
+                    "color": vehiculo.color,
+                    "placas": vehiculo.placas,
+                    "año": vehiculo.año,
+                    "nombre_propietario": vehiculo.nombre_propietario,
+                    "apellido_propietario": vehiculo.apellido_propietario,
+                    "cedula_propietario": vehiculo.cedula_propietario,
+                    "descripcion": vehiculo.descripcion,
+                    "material_utilizado": vehiculo.material_utilizado,
+                    "status": vehiculo.status,
+                })
+
+        elif investigacion.tipo_siniestro == "Comercio":
+            comercio = Investigacion_Comercio.objects.filter(id_investigacion=investigacion).first()
+            if comercio:
+                data.update({
+                    "nombre_comercio_investigacion": comercio.nombre_comercio,
+                    "rif_comercio_investigacion": comercio.rif_comercio,
+                    "nombre_propietario_comercio": comercio.nombre_propietario,
+                    "apellido_propietario_comercio": comercio.apellido_propietario,
+                    "cedula_propietario_comercio": comercio.cedula_propietario,
+                    "descripcion_comercio": comercio.descripcion,
+                    "material_utilizado_comercio": comercio.material_utilizado,
+                    "status_comercio": comercio.status,
+                })
+
+        elif investigacion.tipo_siniestro == "Estructura" or investigacion.tipo_siniestro == "Vivienda":
+            estructura = Investigacion_Estructura_Vivienda.objects.filter(id_investigacion=investigacion).first()
+            if estructura:
+                data.update({
+                    "tipo_estructura": estructura.tipo_estructura,
+                    "nombre_propietario_estructura": estructura.nombre,
+                    "apellido_propietario_estructura": estructura.apellido,
+                    "cedula_propietario_estructura": estructura.cedula,
+                    "descripcion_estructura": estructura.descripcion,
+                    "material_utilizado_estructura": estructura.material_utilizado,
+                    "status_estructura": estructura.status,
+                })
+
     if str(procedimiento.id_tipo_procedimiento.id) == "20":
         detalle_procedimiento = get_object_or_404(Reinspeccion_Prevencion, id_procedimiento=id)
         data = dict(data,
@@ -2581,6 +2963,17 @@ def obtener_procedimiento(request, id):
                     edad = detalles.edad,
                     sexo = detalles.sexo,
                     telefono = detalles.telefono,
+                    descripcion = detalles.descripcion,
+                    material_utilizado = detalles.material_utilizado,
+                    status = detalles.status,
+                    )
+        
+    if str(procedimiento.id_tipo_procedimiento.id) == "25":
+        detalles = get_object_or_404(Jornada_Medica, id_procedimientos = id)
+
+        data = dict(data,
+                    nombre_jornada = detalles.nombre_jornada,
+                    cant_personas = detalles.cant_personas_aten,
                     descripcion = detalles.descripcion,
                     material_utilizado = detalles.material_utilizado,
                     status = detalles.status,

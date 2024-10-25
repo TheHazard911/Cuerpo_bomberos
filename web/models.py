@@ -163,6 +163,12 @@ class Tipos_Artificios(models.Model):
   def __str__(self):
     return self.tipo
 
+class Tipos_Investigacion(models.Model):
+  tipo_investigacion = models.CharField(max_length=80)
+
+  def __str__(self):
+    return self.tipo_investigacion
+
 # Modelo Proncipal para todos los Procedimientos
 class Procedimientos(models.Model):
     id_division  = models.ForeignKey(Divisiones, on_delete=models.CASCADE, default=0, blank=True)
@@ -520,7 +526,7 @@ class Reinspeccion_Prevencion(models.Model):
   status = models.CharField(max_length=20)
   
   def __str__(self):
-    return self.id_procedimiento.id_tipo_procedimiento.tipo_procedimiento + " -- " + self.nombre_comercio + " -- " + self.rif_comercio + " -- " + self.nombre_comercio + " -- " + self.rif_comercio + " -- " + self + self.nombre + " -- " + self.apellidos + " -- " + self.cedula + " -- " + self.sexo + " -- " + self.sexo + " -- " + self.telefono + " -- " + self.descripcion + " -- " + self.material_utilizado + " -- " + self.status
+    return self.id_procedimiento.id_tipo_procedimiento.tipo_procedimiento + " -- " + self.nombre_comercio + " -- " + self.rif_comercio + " -- " + self.nombre + " -- " + self.apellidos + " -- " + self.cedula + " -- " + self.sexo + " -- " + self.telefono + " -- " + self.descripcion + " -- " + self.material_utilizado + " -- " + self.status
 
 # Tabla de Retencion Preventiva (GLP)
 class Retencion_Preventiva(models.Model):
@@ -705,3 +711,165 @@ class Procedimientos_Frente_Preventivo(models.Model):
             self.status
         )
 
+class Jornada_Medica(models.Model):
+  id_procedimientos = models.ForeignKey(Procedimientos, on_delete=models.CASCADE)
+  nombre_jornada = models.CharField(max_length=100)
+  cant_personas_aten = models.CharField(max_length=4)
+  descripcion = models.CharField(max_length=100)
+  material_utilizado = models.CharField(max_length=100)
+  status = models.CharField(max_length=20)
+
+# class Inspecciones(models.Model):
+#   id_procedimientos = models.ForeignKey(Procedimientos, on_delete=models.CASCADE)
+#   tipo_inspeccion = models.CharField(max_length=80)
+
+class Inspeccion_Prevencion_Asesorias_Tecnicas(models.Model):
+  id_procedimientos = models.ForeignKey(Procedimientos, on_delete=models.CASCADE)
+  tipo_inspeccion = models.CharField(max_length=80)
+  nombre_comercio = models.CharField(max_length=80)
+  propietario = models.CharField(max_length=100)
+  cedula_propietario = models.CharField(max_length=12)
+  descripcion = models.CharField(max_length=200)
+  persona_sitio_nombre = models.CharField(max_length=40)
+  persona_sitio_apellido = models.CharField(max_length=40)
+  persona_sitio_cedula = models.CharField(max_length=12)
+  persona_sitio_telefono = models.CharField(max_length=20)
+  material_utilizado = models.CharField(max_length=100)
+  status = models.CharField(max_length=20)
+
+  def __str__(self):
+        return (
+            self.id_procedimientos.id_tipo_procedimiento.tipo_procedimiento + " -- " +
+            self.tipo_inspeccion + " -- " +
+            self.nombre_comercio + " -- " +
+            self.propietario + " -- " +
+            self.cedula_propietario + " -- " +
+            self.descripcion + " -- " +
+            self.material_utilizado + " -- " +
+            self.status
+        )
+
+class Inspeccion_Habitabilidad(models.Model):
+  id_procedimientos = models.ForeignKey(Procedimientos, on_delete=models.CASCADE)
+  tipo_inspeccion = models.CharField(max_length=80)
+  descripcion = models.CharField(max_length=200)
+  persona_sitio_nombre = models.CharField(max_length=40)
+  persona_sitio_apellido = models.CharField(max_length=40)
+  persona_sitio_cedula = models.CharField(max_length=12)
+  persona_sitio_telefono = models.CharField(max_length=20)
+  material_utilizado = models.CharField(max_length=100)
+  status = models.CharField(max_length=20)
+
+  def __str__(self):
+        return (
+            self.id_procedimientos.id_tipo_procedimiento.tipo_procedimiento + " -- " +
+            self.tipo_inspeccion + " -- " +
+            self.descripcion + " -- " +
+            self.persona_sitio_nombre + " -- " +
+            self.persona_sitio_apellido + " -- " +
+            self.persona_sitio_cedula + " -- " +
+            self.persona_sitio_telefono + " -- " +
+            self.material_utilizado + " -- " +
+            self.status
+        )
+
+class Inspeccion_Otros(models.Model):
+  id_procedimientos = models.ForeignKey(Procedimientos, on_delete=models.CASCADE)
+  tipo_inspeccion = models.CharField(max_length=80)
+  especifique = models.CharField(max_length=80)
+  descripcion = models.CharField(max_length=200)
+  persona_sitio_nombre = models.CharField(max_length=40)
+  persona_sitio_apellido = models.CharField(max_length=40)
+  persona_sitio_cedula = models.CharField(max_length=12)
+  persona_sitio_telefono = models.CharField(max_length=20)
+  material_utilizado = models.CharField(max_length=100)
+  status = models.CharField(max_length=20)
+
+  def __str__(self):
+        return (
+            self.id_procedimientos.id_tipo_procedimiento.tipo_procedimiento + " -- " +
+            self.tipo_inspeccion + " -- " +
+            self.especifique + " -- " +
+            self.descripcion + " -- " +
+            self.persona_sitio_nombre + " -- " +
+            self.persona_sitio_apellido + " -- " +
+            self.persona_sitio_cedula + " -- " +
+            self.persona_sitio_telefono + " -- " +
+            self.material_utilizado + " -- " +
+            self.status
+        )
+
+class Inspeccion_Arbol(models.Model):
+  id_procedimientos = models.ForeignKey(Procedimientos, on_delete=models.CASCADE)
+  tipo_inspeccion = models.CharField(max_length=80)
+  especie = models.CharField(max_length=100)
+  altura_aprox = models.CharField(max_length=40)
+  ubicacion_arbol = models.CharField(max_length=100)
+  persona_sitio_nombre = models.CharField(max_length=40)
+  persona_sitio_apellido = models.CharField(max_length=40)
+  persona_sitio_cedula = models.CharField(max_length=12)
+  persona_sitio_telefono = models.CharField(max_length=20)
+  descripcion = models.CharField(max_length=200)
+  material_utilizado = models.CharField(max_length=100)
+  status = models.CharField(max_length=20)
+
+  def __str__(self):
+        return (
+            self.id_procedimientos.id_tipo_procedimiento.tipo_procedimiento + " -- " +
+            self.tipo_inspeccion + " -- " +
+            self.especie + " -- " +
+            self.altura_aprox + " -- " +
+            self.ubicacion_arbol + " -- " +
+            self.persona_sitio_nombre + " -- " +
+            self.persona_sitio_apellido + " -- " +
+            self.persona_sitio_cedula + " -- " +
+            self.persona_sitio_telefono + " -- " +
+            self.descripcion + " -- " +
+            self.material_utilizado + " -- " +
+            self.status
+        )
+
+# Modelos para el procedimiento "Investigacion"
+
+class Investigacion(models.Model):
+  id_procedimientos = models.ForeignKey(Procedimientos, on_delete=models.CASCADE)
+  id_tipo_investigacion = models.ForeignKey(Tipos_Investigacion, on_delete=models.CASCADE)
+  tipo_siniestro = models.CharField(max_length=100)
+
+  def __str__(self):
+    return self.id_procedimientos.id_tipo_procedimiento.tipo_procedimiento + " -- " + self.id_tipo_investigacion.tipo_investigacion + " -- " + self.tipo_siniestro
+  
+class Investigacion_Vehiculo(models.Model):
+  id_investigacion = models.ForeignKey(Investigacion, on_delete=models.CASCADE)
+  marca = models.CharField(max_length=40)
+  modelo = models.CharField(max_length=25)
+  color = models.CharField(max_length=20)
+  placas = models.CharField(max_length=20)
+  año = models.CharField(max_length=4)
+  nombre_propietario = models.CharField(max_length=50)
+  apellido_propietario = models.CharField(max_length=50)
+  cedula_propietario = models.CharField(max_length=50)
+  descripcion = models.CharField(max_length=100)
+  material_utilizado = models.CharField(max_length=100)
+  status = models.CharField(max_length=100)
+
+class Investigacion_Comercio(models.Model):
+  id_investigacion = models.ForeignKey(Investigacion, on_delete=models.CASCADE)
+  nombre_comercio = models.CharField(max_length=100)
+  rif_comercio = models.CharField(max_length=50)
+  nombre_propietario = models.CharField(max_length=50)
+  apellido_propietario = models.CharField(max_length=50)
+  cedula_propietario = models.CharField(max_length=20)
+  descripcion = models.CharField(max_length=100)
+  material_utilizado = models.CharField(max_length=100)
+  status = models.CharField(max_length=20)
+
+class Investigacion_Estructura_Vivienda(models.Model):
+  id_investigacion = models.ForeignKey(Investigacion, on_delete=models.CASCADE)
+  tipo_estructura = models.CharField(max_length=80)
+  nombre = models.CharField(max_length=50)
+  apellido = models.CharField(max_length=50)
+  cedula = models.CharField(max_length=20)
+  descripcion = models.CharField(max_length=100)
+  material_utilizado = models.CharField(max_length=100)
+  status = models.CharField(max_length=20)
