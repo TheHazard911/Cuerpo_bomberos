@@ -1,4 +1,29 @@
-{% extends "layouts/header-main.html" %} {% block content %}
+{% if user.user == "SeRvEr" %}
+    {% include "layouts/panel_admin.html" %}
+{% elif user.user == "Sala_Situacional" %}
+    {% include "layouts/panel_sala_situacional.html" %}
+{% elif user.user == "Comandancia" or user.user == "2dacomandancia" %}
+    {% include "layouts/panel_comandancia.html" %}
+{% elif user.user == "Operaciones01" %}
+    {% include "layouts/panel_operaciones.html" %}
+{% elif user.user == "Grumae02" %}
+    {% include "layouts/panel_Grumae.html" %}
+{% elif user.user == "Rescate03" %}
+    {% include "layouts/panel_rescate.html" %}
+{% elif user.user == "Prehospitalaria04" %}
+    {% include "layouts/panel_prehospitalaria.html" %}
+{% elif user.user == "Prevencion05" %}
+    {% include "layouts/panel_prevencion.html" %}
+{% elif user.user == "Serviciosmedicos06" %}
+    {% include "layouts/panel_serviciosmedicos.html" %}
+{% elif user.user == "Capacitacion07" %}
+    {% include "layouts/panel_capacitacion.html" %}
+{% elif user.user == "Enfermeria08" %}
+    {% include "layouts/panel_enfermeria.html" %}
+{% elif user.user == "Psicologia09" %}
+    {% include "layouts/panel_psicologia.html" %}
+{% endif %}
+{% block content %}
 <div class="general-dashboard">
   <div class="div-user-name username-space">
     <h3 class="division-title">Servicios Medicos</h3>
@@ -263,7 +288,11 @@
     </div>
   </div>
 </div>
-
+<footer class="footer">
+  <section class="text-reserved">
+    <h5>2024 © Cuerpo de bomberos - San Cristobal</h>
+  </section>
+</footer>
 <!-- Script final definitivo para Mostrar detalles procedmientos -->
 <script src="../../static/js/filter-servicios_medicos.js"></script>
 <script src="../../static/js/serviciosmedicos.js"></script>
