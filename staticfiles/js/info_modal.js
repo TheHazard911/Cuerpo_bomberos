@@ -152,8 +152,8 @@ document.querySelectorAll(".button-info").forEach((button) => {
                   <p><b>Personas Atendidas: </b> ${data.personas_atendidas}</p>
                   <p><b>Nombre Persona Presente: </b> ${data.nombres}</p>
                   <p><b>Apellidos Persona Presente: </b> ${data.apellidos}</p>
-                  <p><b>Cedula Persona Presente: </b> V-${data.cedula}</p>
-                  <p><b>Litros de Agua Suministrada: </b> ${data.ltrs_agua}</p>
+                  <p><b>Cedula Persona Presente: </b> ${data.cedula}</p>
+                  <p><b>Litros de Agua Suministrada: </b> ${data.ltrs_agua} L</p>
                 </section>`;
             break;
           case "Apoyo a Otras Unidades":
@@ -263,7 +263,7 @@ document.querySelectorAll(".button-info").forEach((button) => {
                   <h4>Lesionado ${index + 1}</h4>
                   <p><b>Nombre:</b> ${lesionado.nombre}</p>
                   <p><b>Apellidos:</b> ${lesionado.apellidos}</p>
-                  <p><b>Cédula:</b> ${lesionado.cedula}</p>
+                  <p><b>Cedula:</b> ${lesionado.cedula}</p>
                   <p><b>Edad:</b> ${lesionado.edad}</p>
                   <p><b>Sexo:</b> ${lesionado.sexo}</p>
                   <p><b>Descripción:</b> ${lesionado.descripcion}</p>
@@ -406,7 +406,7 @@ document.querySelectorAll(".button-info").forEach((button) => {
                 <h4>Persona Presente</h4>
                 <p><b>Nombre: </b> ${data.nombre}</p>
                 <p><b>Apellido: </b> ${data.apellido}</p>
-                <p><b>Cedula: </b> V-${data.cedula}</p>
+                <p><b>Cedula: </b> ${data.cedula}</p>
                 <p><b>Telefono: </b> ${data.telefono}</p>
                 </section>`;
               } else {
@@ -431,7 +431,7 @@ document.querySelectorAll(".button-info").forEach((button) => {
                   <h4>Persona Presente</h4>
                   <p><b>Nombre: </b> ${data.nombre}</p>
                   <p><b>Apellido: </b> ${data.apellido}</p>
-                  <p><b>Cedula: </b> V-${data.cedula}</p>
+                  <p><b>Cedula: </b> ${data.cedula}</p>
                   <p><b>Telefono: </b> ${data.telefono}</p>
                   </section>`;
               } else {
@@ -458,7 +458,7 @@ document.querySelectorAll(".button-info").forEach((button) => {
                   <h4>Persona Solicitante</h4>
                   <p><b>Nombre: </b> ${data.nombre}</p>
                   <p><b>Apellido: </b> ${data.apellido}</p>
-                  <p><b>Cedula: </b> V-${data.cedula}</p>
+                  <p><b>Cedula: </b> ${data.cedula}</p>
                   <p><b>Sexo: </b> ${data.sexo}</p>
                   <p><b>Telefono: </b> ${data.telefono}</p>
                 </section>`;
@@ -679,7 +679,7 @@ document.querySelectorAll(".button-info").forEach((button) => {
                   <h4>Persona Solicitante</h4>
                   <p><b>Nombre: </b> ${data.nombre}</p>
                   <p><b>Apellido: </b> ${data.apellido}</p>
-                  <p><b>Cedula: </b> V-${data.cedula}</p>
+                  <p><b>Cedula: </b> ${data.cedula}</p>
                   <p><b>Sexo: </b> ${data.sexo}</p>
                   <p><b>Telefono: </b> ${data.telefono}</p>
                 </section>`;
