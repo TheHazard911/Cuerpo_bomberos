@@ -13,6 +13,8 @@ from datetime import datetime
 from django.contrib.auth.decorators import login_required
 from django.utils import timezone
 from itertools import chain
+from django.views.decorators.cache import never_cache
+
 
 # Create your views here.
 
@@ -218,6 +220,7 @@ def logout(request):
     return redirect('/login/')
 
 # Vista de la Ventana Inicial (Login)
+@never_cache
 def Home(request):
     if request.method == "GET":
         return render(request, "index.html")
