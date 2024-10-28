@@ -245,6 +245,86 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.24/jspdf.plugin.autotable.min.js"></script>
     <script src="../../static/js/ping.js"></script>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        // Seleccionar todos los elementos <li>
+        const items = document.querySelectorAll(".items-row li");
+        const filters = document.querySelectorAll(".filter-search");
+        const analiticFilters = document.querySelectorAll(".analitics-filters");
+        const titleStadist = document.querySelectorAll(
+          ".title-stadist-parroquies"
+        );
+        const selectOptions = document.querySelectorAll(
+          "#id_form1-opciones option"
+        );
+
+        // Ocultar todos los elementos de filtro
+        titleStadist.forEach((title) => {
+          title.style.display = "none";
+        });
+
+        analiticFilters.forEach((analitic) => {
+          analitic.style.display = "none";
+        });
+
+        filters.forEach((filter) => {
+          filter.style.display = "none";
+        });
+
+        // Iterar sobre cada <li>
+        items.forEach((item) => {
+          // Si el data-division no es 'capacitacion', eliminarlo
+          if (item.getAttribute("data-division") !== "psicologia") {
+            item.remove(); // Elimina el elemento del DOM
+          }
+        });
+
+        // Ocultar opciones del select excepto la opción con value '9' (Capacitación)
+        selectOptions.forEach((option) => {
+          if (option.value !== "8" && option.value !== "") {
+            option.remove(); // Elimina la opción del select
+          }
+        });
+
+        // Ocultar botones "Total" y "Mes"
+        const btnTotalTwo = document.getElementById("btn-total-one");
+        const btnMonthTwo = document.getElementById("btn-month-one");
+        const btnTotal = document.getElementById("btn-total");
+        const btnMonth = document.getElementById("btn-month");
+
+        if (btnTotalTwo) {
+          btnTotalTwo.style.display = "none";
+        }
+
+        if (btnMonthTwo) {
+          btnMonthTwo.style.display = "none";
+        }
+        if (btnTotal) {
+          btnTotal.style.display = "none";
+        }
+        if (btnMonth) {
+          btnMonth.style.display = "none";
+        }
+
+        // Ocultar botones de eliminación
+        const btnDelete = document.querySelectorAll(".button_delete");
+        btnDelete.forEach((button) => {
+          button.style.display = "none";
+        });
+
+        // Eliminar los contenedores con ID colum-1 y colum-2
+        const colum2 = document.getElementById("colum-2");
+        const colum3 = document.getElementById("colum-3");
+
+        if (colum2) {
+          colum2.remove(); // Elimina el contenedor del DOM
+        }
+
+        if (colum3) {
+          colum3.remove(); // Elimina el contenedor del DOM
+        }
+      });
+    </script>
 
     {% block content %} {% endblock %}
   </body>

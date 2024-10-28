@@ -245,71 +245,74 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.16.9/xlsx.full.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.24/jspdf.plugin.autotable.min.js"></script>
-    <script src="../../static/js/ping.js"></script>
+    <script src="../../static/js/page.js"></script>
     <script>
       document.addEventListener("DOMContentLoaded", function () {
         // Seleccionar todos los elementos <li>
         const items = document.querySelectorAll(".items-row li");
-        const filters = document.querySelectorAll(".filter-search"); // Asegúrate de usar el selector correcto
-        const analiticFilters = document.querySelectorAll(".analitics-filters"); // Asegúrate de usar el selector correcto
-        const titleStadist = document.querySelectorAll(".title-stadist-parroquies"); // Asegúrate de usar el selector correcto
+        const filters = document.querySelectorAll(".filter-search");
+        const analiticFilters = document.querySelectorAll(".analitics-filters");
+        const titleStadist = document.querySelectorAll(
+          ".title-stadist-parroquies"
+        );
         const selectOptions = document.querySelectorAll(
           "#id_form1-opciones option"
         );
 
         // Ocultar todos los elementos de filtro
         titleStadist.forEach((title) => {
-          title.style.display = "none"; // Oculta cada elemento
+          title.style.display = "none";
         });
 
-        // Ocultar todos los elementos de filtro
         analiticFilters.forEach((analitic) => {
-          analitic.style.display = "none"; // Oculta cada elemento
+          analitic.style.display = "none";
         });
 
-        // Ocultar todos los elementos de filtro
         filters.forEach((filter) => {
-          filter.style.display = "none"; // Oculta cada elemento
+          filter.style.display = "none";
         });
 
         // Iterar sobre cada <li>
         items.forEach((item) => {
-          // Si el data-division no es 'enfermeria', ocultarlo
+          // Si el data-division no es 'enfermeria', eliminarlo
           if (item.getAttribute("data-division") !== "enfermeria") {
-            item.style.display = "none"; // Oculta el elemento
+            item.remove(); // Elimina el elemento del DOM
           }
         });
 
         // Ocultar opciones del select excepto la opción con value '6' (Enfermería)
         selectOptions.forEach((option) => {
           if (option.value !== "6" && option.value !== "") {
-            option.style.display = "none"; // Oculta la opción
+            option.remove(); // Elimina la opción del select
           }
         });
 
         // Ocultar botones "Total" y "Mes"
-        const btnTotalOne = document.getElementById("btn-total-one");
-        const btnMonthOne = document.getElementById("btn-month-one");
-        
-        const btnTotalTwo = document.getElementById("btn-total-two");
-        const btnMonthTwo = document.getElementById("btn-month-two");
-
-
-        if (btnTotalOne) {
-          btnTotalOne.style.display = "none"; // Oculta el botón Total
-        }
-
-        if (btnMonthOne) {
-          btnMonthOne.style.display = "none"; // Oculta el botón Mes
-        }
+        const btnTotalTwo = document.getElementById("btn-total-one");
+        const btnMonthTwo = document.getElementById("btn-month-one");
+        const btnTotal = document.getElementById("btn-total");
+        const btnMonth = document.getElementById("btn-month");
 
         if (btnTotalTwo) {
-          btnTotalTwo.style.display = "none"; // Oculta el botón Total
+          btnTotalTwo.style.display = "none";
         }
 
         if (btnMonthTwo) {
-          btnMonthTwo.style.display = "none"; // Oculta el botón Mes
+          btnMonthTwo.style.display = "none";
         }
+        if (btnTotal) {
+          btnTotal.style.display = "none";
+        }
+
+        if (btnMonth) {
+          btnMonth.style.display = "none";
+        }
+
+        // Ocultar botones de eliminación
+        const btnDelete = document.querySelectorAll(".button_delete");
+        btnDelete.forEach((button) => {
+          button.style.display = "none";
+        });
       });
     </script>
 

@@ -314,7 +314,16 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.24/jspdf.plugin.autotable.min.js"></script>
     <script src="../../static/js/ping.js"></script>
-    
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        // Ocultar botones de eliminación
+        const btnDelete = document.querySelectorAll(".button_delete");
+        btnDelete.forEach((button) => {
+          button.style.display = "none";
+        });
+        
+      });
+    </script>
     {% block content %} {% endblock %}
   </body>
 </html>
