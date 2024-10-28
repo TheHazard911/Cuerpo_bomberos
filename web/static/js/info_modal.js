@@ -475,7 +475,7 @@ document.querySelectorAll(".button-info").forEach((button) => {
                       <h4>Información del Comercio</h4>
                       <p><b>Nombre del Comercio: </b> ${data.nombre_comercio}</p>
                       <p><b>Propietario: </b> ${data.propietario}</p>
-                      <p><b>Cédula del Propietario: </b> V-${
+                      <p><b>Cédula del Propietario: </b> ${
                         data.cedula_propietario
                       }</p>
                   </section>
@@ -483,7 +483,7 @@ document.querySelectorAll(".button-info").forEach((button) => {
                       <h4>Persona en el Sitio</h4>
                       <p><b>Nombre: </b> ${data.persona_sitio_nombre}</p>
                       <p><b>Apellido: </b> ${data.persona_sitio_apellido}</p>
-                      <p><b>Cédula: </b> V-${data.persona_sitio_cedula}</p>
+                      <p><b>Cédula: </b> ${data.persona_sitio_cedula}</p>
                       <p><b>Teléfono: </b> ${data.persona_sitio_telefono}</p>
                   </section>`;
                 break;
@@ -498,7 +498,7 @@ document.querySelectorAll(".button-info").forEach((button) => {
                       <h4>Información del Comercio</h4>
                       <p><b>Nombre del Comercio: </b> ${data.nombre_comercio}</p>
                       <p><b>Propietario: </b> ${data.propietario}</p>
-                      <p><b>Cédula del Propietario: </b> V-${
+                      <p><b>Cédula del Propietario: </b> ${
                         data.cedula_propietario
                       }</p>
                   </section>
@@ -506,7 +506,7 @@ document.querySelectorAll(".button-info").forEach((button) => {
                       <h4>Persona en el Sitio</h4>
                       <p><b>Nombre: </b> ${data.persona_sitio_nombre}</p>
                       <p><b>Apellido: </b> ${data.persona_sitio_apellido}</p>
-                      <p><b>Cédula: </b> V-${data.persona_sitio_cedula}</p>
+                      <p><b>Cédula: </b> ${data.persona_sitio_cedula}</p>
                       <p><b>Teléfono: </b> ${data.persona_sitio_telefono}</p>
                   </section>`;
                 break;
@@ -521,7 +521,7 @@ document.querySelectorAll(".button-info").forEach((button) => {
                       <h4>Persona en el Sitio</h4>
                       <p><b>Nombre: </b> ${data.persona_sitio_nombre}</p>
                       <p><b>Apellido: </b> ${data.persona_sitio_apellido}</p>
-                      <p><b>Cédula: </b> V-${data.persona_sitio_cedula}</p>
+                      <p><b>Cédula: </b> ${data.persona_sitio_cedula}</p>
                       <p><b>Teléfono: </b> ${data.persona_sitio_telefono}</p>
                   </section>`;
                 break;
@@ -544,7 +544,7 @@ document.querySelectorAll(".button-info").forEach((button) => {
                       <h4>Persona en el Sitio</h4>
                       <p><b>Nombre: </b> ${data.persona_sitio_nombre}</p>
                       <p><b>Apellido: </b> ${data.persona_sitio_apellido}</p>
-                      <p><b>Cédula: </b> V-${data.persona_sitio_cedula}</p>
+                      <p><b>Cédula: </b> ${data.persona_sitio_cedula}</p>
                       <p><b>Teléfono: </b> ${data.persona_sitio_telefono}</p>
                   </section>`;
                 break;
@@ -565,7 +565,7 @@ document.querySelectorAll(".button-info").forEach((button) => {
                       <h4>Persona en el Sitio</h4>
                       <p><b>Nombre: </b> ${data.persona_sitio_nombre}</p>
                       <p><b>Apellido: </b> ${data.persona_sitio_apellido}</p>
-                      <p><b>Cédula: </b> V-${data.persona_sitio_cedula}</p>
+                      <p><b>Cédula: </b> ${data.persona_sitio_cedula}</p>
                       <p><b>Teléfono: </b> ${data.persona_sitio_telefono}</p>
                   </section>`;
                 break;
