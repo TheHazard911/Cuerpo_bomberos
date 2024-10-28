@@ -1,3 +1,4 @@
+# middleware.py
 from django.shortcuts import redirect
 from django.contrib.auth import logout
 from django.urls import reverse
@@ -7,9 +8,10 @@ class LogoutIfAuthenticatedMiddleware:
         self.get_response = get_response
 
     def __call__(self, request):
+        # Cambia 'home' por la vista correcta si es necesario
         if request.path_info == reverse('home') and request.user.is_authenticated:
             logout(request)
-            return redirect('home')
+            return redirect('home')  # Asegúrate de que esto sea correcto
         return self.get_response(request)
 
 class NoCacheMiddleware:

@@ -15,10 +15,9 @@ from django.utils import timezone
 from itertools import chain
 from django.views.decorators.cache import never_cache
 import openpyxl
+from openpyxl.utils import get_column_letter
 from django.http import HttpResponse
 
-
-# Create your views here.
 
 def generar_excel(request):
     # Crear un libro de trabajo y una hoja
@@ -28,20 +27,15 @@ def generar_excel(request):
 
     # Agregar encabezados a la primera fila
     encabezados = [
-        "ID División", 
-        "Tipo Servicio", 
-        "ID Solicitante", 
-        "Solicitante Externo", 
-        "Unidad", 
-        "ID Jefe Comisión", 
-        "Dependencia", 
-        "Efectivos Enviados", 
-        "ID Municipio", 
-        "ID Parroquia", 
+        "División", 
+        "Solicitante", 
+        "Jefe Comisión",  
+        "Municipio", 
+        "Parroquia", 
         "Fecha", 
         "Hora", 
-        "Dirección", 
-        "ID Tipo Procedimiento"
+        "Dirección",
+        "Tipo de Procedimiento"
     ]
     hoja.append(encabezados)
 
@@ -50,22 +44,42 @@ def generar_excel(request):
 
     # Agregar datos a la hoja
     for procedimiento in procedimientos:
+        # Verificar si el solicitante es externo
+        if procedimiento.id_solicitante.id == 0:
+            solicitante = procedimiento.solicitante_externo
+        else:
+            solicitante = f"{procedimiento.id_solicitante.jerarquia} {procedimiento.id_solicitante.nombres} {procedimiento.id_solicitante.apellidos}"
+        
+        # Verificar si el jefe de comisión es externo
+        if procedimiento.id_jefe_comision.id == 0:
+            jefe_comision = ""
+        else:
+            jefe_comision = f"{procedimiento.id_jefe_comision.jerarquia} {procedimiento.id_jefe_comision.nombres} {procedimiento.id_jefe_comision.apellidos}"
+        
         hoja.append([
-            procedimiento.id_division.id if procedimiento.id_division else None,
-            procedimiento.tipo_servicio,
-            procedimiento.id_solicitante.id if procedimiento.id_solicitante else None,
-            procedimiento.solicitante_externo,
-            procedimiento.unidad.id if procedimiento.unidad else None,
-            procedimiento.id_jefe_comision.id if procedimiento.id_jefe_comision else None,
-            procedimiento.dependencia,
-            procedimiento.efectivos_enviados,
-            procedimiento.id_municipio.id if procedimiento.id_municipio else None,
-            procedimiento.id_parroquia.id if procedimiento.id_parroquia else None,
+            procedimiento.id_division.division,
+            solicitante,
+            jefe_comision,
+            procedimiento.id_municipio.municipio,
+            procedimiento.id_parroquia.parroquia,
             procedimiento.fecha,
             procedimiento.hora,
             procedimiento.direccion,
-            procedimiento.id_tipo_procedimiento.id if procedimiento.id_tipo_procedimiento else None,
+            procedimiento.id_tipo_procedimiento.tipo_procedimiento,
         ])
+
+    # Ajustar el ancho de las columnas
+    for column in hoja.columns:
+        max_length = 0
+        column_letter = get_column_letter(column[0].column)  # Obtener la letra de la columna
+        for cell in column:
+            try:
+                if len(str(cell.value)) > max_length:
+                    max_length = len(str(cell.value))
+            except Exception as e:
+                pass
+        adjusted_width = (max_length + 2)  # Agregar algo de espacio
+        hoja.column_dimensions[column_letter].width = adjusted_width
 
     # Configurar la respuesta HTTP para descargar el archivo
     response = HttpResponse(content_type="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")
