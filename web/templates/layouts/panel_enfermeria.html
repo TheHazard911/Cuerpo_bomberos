@@ -246,7 +246,73 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.24/jspdf.plugin.autotable.min.js"></script>
     <script src="../../static/js/ping.js"></script>
-    
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        // Seleccionar todos los elementos <li>
+        const items = document.querySelectorAll(".items-row li");
+        const filters = document.querySelectorAll(".filter-search"); // Asegúrate de usar el selector correcto
+        const analiticFilters = document.querySelectorAll(".analitics-filters"); // Asegúrate de usar el selector correcto
+        const titleStadist = document.querySelectorAll(".title-stadist-parroquies"); // Asegúrate de usar el selector correcto
+        const selectOptions = document.querySelectorAll(
+          "#id_form1-opciones option"
+        );
+
+        // Ocultar todos los elementos de filtro
+        titleStadist.forEach((title) => {
+          title.style.display = "none"; // Oculta cada elemento
+        });
+
+        // Ocultar todos los elementos de filtro
+        analiticFilters.forEach((analitic) => {
+          analitic.style.display = "none"; // Oculta cada elemento
+        });
+
+        // Ocultar todos los elementos de filtro
+        filters.forEach((filter) => {
+          filter.style.display = "none"; // Oculta cada elemento
+        });
+
+        // Iterar sobre cada <li>
+        items.forEach((item) => {
+          // Si el data-division no es 'enfermeria', ocultarlo
+          if (item.getAttribute("data-division") !== "enfermeria") {
+            item.style.display = "none"; // Oculta el elemento
+          }
+        });
+
+        // Ocultar opciones del select excepto la opción con value '6' (Enfermería)
+        selectOptions.forEach((option) => {
+          if (option.value !== "6" && option.value !== "") {
+            option.style.display = "none"; // Oculta la opción
+          }
+        });
+
+        // Ocultar botones "Total" y "Mes"
+        const btnTotalOne = document.getElementById("btn-total-one");
+        const btnMonthOne = document.getElementById("btn-month-one");
+        
+        const btnTotalTwo = document.getElementById("btn-total-two");
+        const btnMonthTwo = document.getElementById("btn-month-two");
+
+
+        if (btnTotalOne) {
+          btnTotalOne.style.display = "none"; // Oculta el botón Total
+        }
+
+        if (btnMonthOne) {
+          btnMonthOne.style.display = "none"; // Oculta el botón Mes
+        }
+
+        if (btnTotalTwo) {
+          btnTotalTwo.style.display = "none"; // Oculta el botón Total
+        }
+
+        if (btnMonthTwo) {
+          btnMonthTwo.style.display = "none"; // Oculta el botón Mes
+        }
+      });
+    </script>
+
     {% block content %} {% endblock %}
   </body>
 </html>
