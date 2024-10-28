@@ -397,7 +397,6 @@ def View_Procedimiento(request):
             if (division == "1" or division == "2" or division == "3" or division == "4" or division == "5") and (form2.is_valid() and form3.is_valid() and form4.is_valid()):
                 solicitante = form2.cleaned_data["solicitante"]
                 solicitante_externo = form2.cleaned_data["solicitante_externo"]
-                unidad = form2.cleaned_data["unidad"]
                 efectivos_enviados = form2.cleaned_data["efectivos_enviados"]
                 jefe_comision = form2.cleaned_data["jefe_comision"]
                 municipio = form3.cleaned_data["municipio"]
@@ -411,7 +410,6 @@ def View_Procedimiento(request):
                 jefe_comision_instance = Personal.objects.get(id=jefe_comision)
                 municipio_instance = Municipios.objects.get(id=municipio)
                 tipo_procedimiento_instance = Tipos_Procedimientos.objects.get(id=tipo_procedimiento)
-                unidad_instance = Unidades.objects.get(id=unidad)
 
                 if solicitante:
                     solicitante_instance = Personal.objects.get(id=solicitante)
@@ -425,7 +423,6 @@ def View_Procedimiento(request):
                     id_division=division_instance,
                     id_solicitante=solicitante_instance,
                     solicitante_externo=solicitante_externo,
-                    unidad=unidad_instance,
                     efectivos_enviados=efectivos_enviados,
                     id_jefe_comision=jefe_comision_instance,
                     id_municipio=municipio_instance,
@@ -439,6 +436,11 @@ def View_Procedimiento(request):
                 if parroquia:
                     parroquia_instance = Parroquias.objects.get(id=parroquia)
                     nuevo_procedimiento.id_parroquia = parroquia_instance
+
+                if division != "3":
+                    unidad = form2.cleaned_data["unidad"]
+                    unidad_instance = Unidades.objects.get(id=unidad)
+                    nuevo_procedimiento.unidad=unidad_instance
 
                 nuevo_procedimiento.save()
 
@@ -628,12 +630,15 @@ def View_Procedimiento(request):
             # Ahora dependiendo del tipo de procedimiento, verifica el formulario correspondiente y guarda la instancia
             if tipo_procedimiento == "1" and abast_agua.is_valid():
                 # Abastecimiento de Agua
+                nacionalidad=abast_agua.cleaned_data["nacionalidad"]
+                cedula=abast_agua.cleaned_data["cedula"]
+
                 nuevo_abast_agua = Abastecimiento_agua(
                     id_procedimiento=nuevo_procedimiento,
                     id_tipo_servicio=Tipo_Institucion.objects.get(id=abast_agua.cleaned_data["tipo_servicio"]),
                     nombres=abast_agua.cleaned_data["nombres"],
                     apellidos=abast_agua.cleaned_data["apellidos"],
-                    cedula=abast_agua.cleaned_data["cedula"],
+                    cedula=f"{nacionalidad}-{cedula}",
                     ltrs_agua=abast_agua.cleaned_data["ltrs_agua"],
                     personas_atendidas=abast_agua.cleaned_data["personas_atendidas"],
                     descripcion=abast_agua.cleaned_data["descripcion"],
@@ -738,6 +743,7 @@ def View_Procedimiento(request):
                 if tipo_atencion == "Emergencias Medicas" and emergencias_medicas.is_valid():
                     nombre = emergencias_medicas.cleaned_data["nombre"]
                     apellido = emergencias_medicas.cleaned_data["apellido"]
+                    nacionalidad = emergencias_medicas.cleaned_data["nacionalidad"]
                     cedula = emergencias_medicas.cleaned_data["cedula"]
                     edad = emergencias_medicas.cleaned_data["edad"]
                     sexo = emergencias_medicas.cleaned_data["sexo"]
@@ -751,7 +757,7 @@ def View_Procedimiento(request):
                        id_atencion = nueva_atencion_paramedica,
                        nombres = nombre,
                        apellidos = apellido,
-                       cedula = cedula,
+                       cedula = f"{nacionalidad}-{cedula}",
                        edad = edad,
                        sexo = sexo,
                        idx = idx,
@@ -850,6 +856,7 @@ def View_Procedimiento(request):
                     if agg_lesionado == True and detalles_lesionados_accidentes.is_valid():
                         nombre = detalles_lesionados_accidentes.cleaned_data["nombre"]
                         apellido = detalles_lesionados_accidentes.cleaned_data["apellido"]
+                        nacionalidad = detalles_lesionados_accidentes.cleaned_data["nacionalidad"]
                         cedula = detalles_lesionados_accidentes.cleaned_data["cedula"]
                         edad = detalles_lesionados_accidentes.cleaned_data["edad"]
                         sexo = detalles_lesionados_accidentes.cleaned_data["sexo"]
@@ -862,7 +869,7 @@ def View_Procedimiento(request):
                             id_accidente = nuevo_accidente_transito,
                             nombres = nombre,
                             apellidos = apellido,
-                            cedula = cedula,
+                            cedula = f"{nacionalidad}-{cedula}",
                             edad = edad,
                             sexo = sexo,
                             idx = idx,
@@ -886,6 +893,7 @@ def View_Procedimiento(request):
                         if otro_lesionado == True and detalles_lesionados_accidentes2.is_valid():
                             nombre = detalles_lesionados_accidentes2.cleaned_data["nombre"]
                             apellido = detalles_lesionados_accidentes2.cleaned_data["apellido"]
+                            nacionalidad = detalles_lesionados_accidentes2.cleaned_data["nacionalidad"]
                             cedula = detalles_lesionados_accidentes2.cleaned_data["cedula"]
                             edad = detalles_lesionados_accidentes2.cleaned_data["edad"]
                             sexo = detalles_lesionados_accidentes2.cleaned_data["sexo"]
@@ -898,7 +906,7 @@ def View_Procedimiento(request):
                                 id_accidente = nuevo_accidente_transito,
                                 nombres = nombre,
                                 apellidos = apellido,
-                                cedula = cedula,
+                                cedula = f"{nacionalidad}-{cedula}",
                                 edad = edad,
                                 sexo = sexo,
                                 idx = idx,
@@ -922,6 +930,7 @@ def View_Procedimiento(request):
                             if otro_lesionado == True and detalles_lesionados_accidentes3.is_valid():
                                 nombre = detalles_lesionados_accidentes3.cleaned_data["nombre"]
                                 apellido = detalles_lesionados_accidentes3.cleaned_data["apellido"]
+                                nacionalidad = detalles_lesionados_accidentes3.cleaned_data["nacionalidad"]
                                 cedula = detalles_lesionados_accidentes3.cleaned_data["cedula"]
                                 edad = detalles_lesionados_accidentes3.cleaned_data["edad"]
                                 sexo = detalles_lesionados_accidentes3.cleaned_data["sexo"]
@@ -933,7 +942,7 @@ def View_Procedimiento(request):
                                     id_accidente = nuevo_accidente_transito,
                                     nombres = nombre,
                                     apellidos = apellido,
-                                    cedula = cedula,
+                                    cedula = f"{nacionalidad}-{cedula}",
                                     edad = edad,
                                     sexo = sexo,
                                     idx = idx,
@@ -1004,6 +1013,7 @@ def View_Procedimiento(request):
                     rescate_form_persona.is_valid()
                     nombre_persona = rescate_form_persona.cleaned_data["nombre_persona"]
                     apellido_persona = rescate_form_persona.cleaned_data["apellido_persona"]
+                    nacionalidad = rescate_form_persona.cleaned_data["nacionalidad"]
                     cedula_persona = rescate_form_persona.cleaned_data["cedula_persona"]
                     edad_persona = rescate_form_persona.cleaned_data["edad_persona"]
                     sexo_persona = rescate_form_persona.cleaned_data["sexo_persona"]
@@ -1013,7 +1023,7 @@ def View_Procedimiento(request):
                         id_rescate = nuevo_proc_rescate,
                         nombre = nombre_persona,
                         apellidos = apellido_persona,
-                        cedula = cedula_persona,
+                        cedula = f"{nacionalidad}-{cedula_persona}",
                         edad = edad_persona,
                         sexo = sexo_persona,
                         descripcion = descripcion,
@@ -1044,6 +1054,7 @@ def View_Procedimiento(request):
                 if check_agregar_persona == True and persona_presente_form.is_valid():
                     nombre = persona_presente_form.cleaned_data["nombre"]
                     apellido = persona_presente_form.cleaned_data["apellido"]
+                    nacionalidad = persona_presente_form.cleaned_data["nacionalidad"]
                     cedula = persona_presente_form.cleaned_data["cedula"]
                     edad = persona_presente_form.cleaned_data["edad"]
 
@@ -1051,7 +1062,7 @@ def View_Procedimiento(request):
                         id_incendio = nuevo_proc_incendio,
                         nombre = nombre,
                         apellidos = apellido,
-                        cedula = cedula,
+                        cedula = f"{nacionalidad}-{cedula}",
                         edad = edad,
                     )
                     new_persona_presente.save()
@@ -1077,6 +1088,7 @@ def View_Procedimiento(request):
                 motivo_fallecimiento = form_fallecido.cleaned_data["motivo_fallecimiento"]
                 nom_fallecido = form_fallecido.cleaned_data["nom_fallecido"]
                 apellido_fallecido = form_fallecido.cleaned_data["apellido_fallecido"]
+                nacionalidad = form_fallecido.cleaned_data["nacionalidad"]
                 cedula_fallecido = form_fallecido.cleaned_data["cedula_fallecido"]
                 edad = form_fallecido.cleaned_data["edad"]
                 sexo = form_fallecido.cleaned_data["sexo"]
@@ -1089,7 +1101,7 @@ def View_Procedimiento(request):
                     motivo_fallecimiento = motivo_fallecimiento,
                     nombres = nom_fallecido,
                     apellidos = apellido_fallecido,
-                    cedula = cedula_fallecido,
+                    cedula = f"{nacionalidad}-{cedula_fallecido}",
                     edad = edad,
                     sexo = sexo,
                     descripcion=descripcion,
@@ -1138,6 +1150,7 @@ def View_Procedimiento(request):
                 if division == "3" and tipo_procedimiento == "14" and persona_presente_eval_form.is_valid():
                     nombre = persona_presente_eval_form.cleaned_data["nombre"]
                     apellido = persona_presente_eval_form.cleaned_data["apellidos"]
+                    nacionalidad = persona_presente_eval_form.cleaned_data["nacionalidad"]
                     cedula = persona_presente_eval_form.cleaned_data["cedula"]
                     telefono = persona_presente_eval_form.cleaned_data["telefono"]
 
@@ -1145,7 +1158,7 @@ def View_Procedimiento(request):
                         id_persona = nuevo_proc_eval,
                         nombre = nombre,
                         apellidos = apellido,
-                        cedula = cedula,
+                        cedula = f"{nacionalidad}-{cedula}",
                         telefono = telefono,
                     )
                     nuevo_per_presente.save()
@@ -1171,6 +1184,7 @@ def View_Procedimiento(request):
                 tipo_traslado = traslados_prehospitalaria_form.cleaned_data["tipo_traslado"]
                 nombre = traslados_prehospitalaria_form.cleaned_data["nombre"]
                 apellido = traslados_prehospitalaria_form.cleaned_data["apellido"]
+                nacionalidad = traslados_prehospitalaria_form.cleaned_data["nacionalidad"]
                 cedula = traslados_prehospitalaria_form.cleaned_data["cedula"]
                 edad = traslados_prehospitalaria_form.cleaned_data["edad"]
                 sexo = traslados_prehospitalaria_form.cleaned_data["sexo"]
@@ -1189,7 +1203,7 @@ def View_Procedimiento(request):
                     id_tipo_traslado = tipo_traslado_instance,
                     nombre = nombre,
                     apellido = apellido,
-                    cedula = cedula,
+                    cedula = f"{nacionalidad}-{cedula}",
                     edad = edad,
                     sexo = sexo,
                     idx = idx,
@@ -1207,6 +1221,7 @@ def View_Procedimiento(request):
                 rif_comercio = asesoramiento_form.cleaned_data["rif_comercio"]
                 nombre = asesoramiento_form.cleaned_data["nombres"]
                 apellido = asesoramiento_form.cleaned_data["apellidos"]
+                nacionalidad = asesoramiento_form.cleaned_data["nacionalidad"]
                 cedula = asesoramiento_form.cleaned_data["cedula"]
                 sexo = asesoramiento_form.cleaned_data["sexo"]
                 telefono = asesoramiento_form.cleaned_data["telefono"]
@@ -1220,7 +1235,7 @@ def View_Procedimiento(request):
                     rif_comercio = rif_comercio,
                     nombres = nombre,
                     apellidos = apellido,
-                    cedula = cedula,
+                    cedula = f"{nacionalidad}-{cedula}",
                     sexo = sexo,
                     telefono = telefono,
                     descripcion=descripcion,
@@ -1459,6 +1474,7 @@ def View_Procedimiento(request):
                 nombre = reinspeccion_prevencion.cleaned_data["nombre"]
                 apellido = reinspeccion_prevencion.cleaned_data["apellidos"]
                 sexo = reinspeccion_prevencion.cleaned_data["sexo"]
+                nacionalidad = reinspeccion_prevencion.cleaned_data["nacionalidad"]
                 cedula = reinspeccion_prevencion.cleaned_data["cedula"]
                 sexo = reinspeccion_prevencion.cleaned_data["sexo"]
                 telefono = reinspeccion_prevencion.cleaned_data["telefono"]
@@ -1472,7 +1488,7 @@ def View_Procedimiento(request):
                     rif_comercio = rif_comercio,
                     nombre = nombre,
                     apellidos = apellido,
-                    cedula = cedula,
+                    cedula = f"{nacionalidad}-{cedula}",
                     sexo = sexo,
                     telefono = telefono,
                     descripcion=descripcion,
@@ -1540,6 +1556,7 @@ def View_Procedimiento(request):
                     if check_agregar_persona == True and persona_presente_art.is_valid():
                         nombre = persona_presente_art.cleaned_data["nombre"]
                         apellido = persona_presente_art.cleaned_data["apellido"]
+                        nacionalidad = persona_presente_art.cleaned_data["nacionalidad"]
                         cedula = persona_presente_art.cleaned_data["cedula"]
                         edad = persona_presente_art.cleaned_data["edad"]
 
@@ -1547,7 +1564,7 @@ def View_Procedimiento(request):
                             id_incendio = nuevo_proc_incendio_art,
                             nombre = nombre,
                             apellidos = apellido,
-                            cedula = cedula,
+                            cedula = f"{nacionalidad}-{cedula}",
                             edad = edad,
                         )
                         new_persona_presente.save()
@@ -1572,6 +1589,7 @@ def View_Procedimiento(request):
                 if tipo_procedimiento_art == "2" and lesionados.is_valid():
                     nombre = lesionados.cleaned_data["nombre"]
                     apellido = lesionados.cleaned_data["apellido"]
+                    nacionalidad = lesionados.cleaned_data["nacionalidad"]
                     cedula = lesionados.cleaned_data["cedula"]
                     edad = lesionados.cleaned_data["edad"]
                     sexo = lesionados.cleaned_data["sexo"]
@@ -1584,7 +1602,7 @@ def View_Procedimiento(request):
                         id_accidente = nuevo_proc_artificio_pir,
                         nombres = nombre,
                         apellidos = apellido,
-                        cedula = cedula,
+                        cedula = f"{nacionalidad}-{cedula}",
                         edad = edad,
                         sexo = sexo,
                         idx = idx,
@@ -1598,6 +1616,7 @@ def View_Procedimiento(request):
                     motivo_fallecimiento = fallecidos_art.cleaned_data["motivo_fallecimiento"]
                     nom_fallecido = fallecidos_art.cleaned_data["nom_fallecido"]
                     apellido_fallecido = fallecidos_art.cleaned_data["apellido_fallecido"]
+                    nacionalidad = fallecidos_art.cleaned_data["nacionalidad"]
                     cedula_fallecido = fallecidos_art.cleaned_data["cedula_fallecido"]
                     edad = fallecidos_art.cleaned_data["edad"]
                     sexo = fallecidos_art.cleaned_data["sexo"]
@@ -1610,7 +1629,7 @@ def View_Procedimiento(request):
                         motivo_fallecimiento = motivo_fallecimiento,
                         nombres = nom_fallecido,
                         apellidos = apellido_fallecido,
-                        cedula = cedula_fallecido,
+                        cedula = f"{nacionalidad}-{cedula_fallecido}",
                         edad = edad,
                         sexo = sexo,
                         descripcion=descripcion,
@@ -1624,6 +1643,7 @@ def View_Procedimiento(request):
                 rif_comercio = inspeccion_artificios_pir.cleaned_data["rif_comercio"]
                 nombre_encargado = inspeccion_artificios_pir.cleaned_data["nombre_encargado"]
                 apellido_encargado = inspeccion_artificios_pir.cleaned_data["apellido_encargado"]
+                nacionalidad = inspeccion_artificios_pir.cleaned_data["nacionalidad"]
                 cedula_encargado = inspeccion_artificios_pir.cleaned_data["cedula_encargado"]
                 sexo = inspeccion_artificios_pir.cleaned_data["sexo"]
                 descripcion = inspeccion_artificios_pir.cleaned_data["descripcion"]
@@ -1636,7 +1656,7 @@ def View_Procedimiento(request):
                     rif_comercio = rif_comercio,
                     encargado_nombre = nombre_encargado,
                     encargado_apellidos = apellido_encargado,
-                    encargado_cedula = cedula_encargado,
+                    encargado_cedula = f"{nacionalidad}-{cedula_encargado}",
                     encargado_sexo = sexo,
                     descripcion = descripcion,
                     material_utilizado = material_utilizado,
@@ -1648,6 +1668,7 @@ def View_Procedimiento(request):
             if tipo_procedimiento == "24" and form_valoracion_medica.is_valid():
                 nombre = form_valoracion_medica.cleaned_data["nombre"]
                 apellido = form_valoracion_medica.cleaned_data["apellido"]
+                nacionalidad = form_valoracion_medica.cleaned_data["nacionalidad"]
                 cedula = form_valoracion_medica.cleaned_data["cedula"]
                 edad = form_valoracion_medica.cleaned_data["edad"]
                 sexo = form_valoracion_medica.cleaned_data["sexo"]
@@ -1660,7 +1681,7 @@ def View_Procedimiento(request):
                     id_procedimientos = nuevo_procedimiento,
                     nombre = nombre,
                     apellido = apellido,
-                    cedula = cedula,
+                    cedula = f"{nacionalidad}-{cedula}",
                     edad = edad,
                     sexo = sexo,
                     telefono = telefono,
@@ -2746,7 +2767,6 @@ def obtener_procedimiento(request, id):
         for tipo_inspeccion, model_class in inspection_models.items():
             try:
                 detalle_procedimiento = model_class.objects.get(id_procedimientos=id)
-                print(f"Entro Aqui - {tipo_inspeccion}")
 
                 # Actualizar datos en función del tipo de inspección
                 data.update({
