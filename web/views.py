@@ -14,9 +14,65 @@ from django.contrib.auth.decorators import login_required
 from django.utils import timezone
 from itertools import chain
 from django.views.decorators.cache import never_cache
+import openpyxl
+from django.http import HttpResponse
 
 
 # Create your views here.
+
+def generar_excel(request):
+    # Crear un libro de trabajo y una hoja
+    workbook = openpyxl.Workbook()
+    hoja = workbook.active
+    hoja.title = "Procedimientos"
+
+    # Agregar encabezados a la primera fila
+    encabezados = [
+        "ID División", 
+        "Tipo Servicio", 
+        "ID Solicitante", 
+        "Solicitante Externo", 
+        "Unidad", 
+        "ID Jefe Comisión", 
+        "Dependencia", 
+        "Efectivos Enviados", 
+        "ID Municipio", 
+        "ID Parroquia", 
+        "Fecha", 
+        "Hora", 
+        "Dirección", 
+        "ID Tipo Procedimiento"
+    ]
+    hoja.append(encabezados)
+
+    # Obtener datos de los procedimientos
+    procedimientos = Procedimientos.objects.all()
+
+    # Agregar datos a la hoja
+    for procedimiento in procedimientos:
+        hoja.append([
+            procedimiento.id_division.id if procedimiento.id_division else None,
+            procedimiento.tipo_servicio,
+            procedimiento.id_solicitante.id if procedimiento.id_solicitante else None,
+            procedimiento.solicitante_externo,
+            procedimiento.unidad.id if procedimiento.unidad else None,
+            procedimiento.id_jefe_comision.id if procedimiento.id_jefe_comision else None,
+            procedimiento.dependencia,
+            procedimiento.efectivos_enviados,
+            procedimiento.id_municipio.id if procedimiento.id_municipio else None,
+            procedimiento.id_parroquia.id if procedimiento.id_parroquia else None,
+            procedimiento.fecha,
+            procedimiento.hora,
+            procedimiento.direccion,
+            procedimiento.id_tipo_procedimiento.id if procedimiento.id_tipo_procedimiento else None,
+        ])
+
+    # Configurar la respuesta HTTP para descargar el archivo
+    response = HttpResponse(content_type="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")
+    response["Content-Disposition"] = "attachment; filename=procedimientos.xlsx"
+    workbook.save(response)
+    return response
+
 
 def filtrado_mes(mes):
     año_actual = datetime.now().year

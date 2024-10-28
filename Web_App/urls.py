@@ -43,4 +43,5 @@ urlpatterns = [
     path('logout/', logout, name='logout'),
     path('api/parroquias/', obtener_procedimientos_parroquias, name='obtener_parroquias'),
     path('api/divisiones/', obtener_divisiones, name='obtener_divisiones'),
+    path('descargar-excel/', generar_excel, name='descargar_excel'),
 ]
