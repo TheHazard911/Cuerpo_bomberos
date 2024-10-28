@@ -1407,6 +1407,7 @@ def View_Procedimiento(request):
                     rif_comercio = form_inv_comercio.cleaned_data["rif_comercio"]
                     nombre_propietario = form_inv_comercio.cleaned_data["nombre_propietario"]
                     apellido_propietario = form_inv_comercio.cleaned_data["apellido_propietario"]
+                    nacionalidad = form_inv_comercio.cleaned_data["nacionalidad"]
                     cedula_propietario = form_inv_comercio.cleaned_data["cedula_propietario"]
                     descripcion = form_inv_comercio.cleaned_data["descripcion"]
                     material_utilizado = form_inv_comercio.cleaned_data["material_utilizado"]
@@ -1418,7 +1419,7 @@ def View_Procedimiento(request):
                         rif_comercio = rif_comercio,
                         nombre_propietario = nombre_propietario,
                         apellido_propietario = apellido_propietario,
-                        cedula_propietario = cedula_propietario,
+                        cedula_propietario = f"{nacionalidad}-{cedula_propietario}",
                         descripcion = descripcion,
                         material_utilizado = material_utilizado,
                         status = status
@@ -1429,6 +1430,7 @@ def View_Procedimiento(request):
                     tipo_estructura = form_inv_estructura.cleaned_data["tipo_estructura"]
                     nombre = form_inv_estructura.cleaned_data["nombre"]
                     apellido = form_inv_estructura.cleaned_data["apellido"]
+                    nacionalidad = form_inv_estructura.cleaned_data["nacionalidad"]
                     cedula = form_inv_estructura.cleaned_data["cedula"]
                     descripcion = form_inv_estructura.cleaned_data["descripcion"]
                     material_utilizado = form_inv_estructura.cleaned_data["material_utilizado"]
@@ -1439,7 +1441,7 @@ def View_Procedimiento(request):
                         tipo_estructura = tipo_estructura,
                         nombre = nombre,
                         apellido = apellido,
-                        cedula = cedula,
+                        cedula = f"{nacionalidad}-{cedula}",
                         descripcion = descripcion,
                         material_utilizado = material_utilizado,
                         status = status
@@ -1454,6 +1456,7 @@ def View_Procedimiento(request):
                     año = form_inv_vehiculo.cleaned_data["año"]
                     nombre_propietario = form_inv_vehiculo.cleaned_data["nombre_propietario"]
                     apellido_propietario = form_inv_vehiculo.cleaned_data["apellido_propietario"]
+                    nacionalidad = form_inv_vehiculo.cleaned_data["nacionalidad"]
                     cedula_propietario = form_inv_vehiculo.cleaned_data["cedula_propietario"]
                     descripcion = form_inv_vehiculo.cleaned_data["descripcion"]
                     material_utilizado = form_inv_vehiculo.cleaned_data["material_utilizado"]
@@ -1468,7 +1471,7 @@ def View_Procedimiento(request):
                         año = año,
                         nombre_propietario = nombre_propietario,
                         apellido_propietario = apellido_propietario,
-                        cedula_propietario = cedula_propietario,
+                        cedula_propietario = f"{nacionalidad}-{cedula_propietario}",
                         descripcion = descripcion,
                         material_utilizado = material_utilizado,
                         status = status,
