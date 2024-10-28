@@ -1,3 +1,96 @@
+function eliminarOpciones(select_id, opc) {
+  const select = document.getElementById(`${select_id}`);
+  const opcionesAEliminar = [`${opc}`]; // Valores de las opciones a eliminar
+
+  for (let i = select.options.length - 1; i >= 0; i--) {
+      if (opcionesAEliminar.includes(select.options[i].value)) {
+          select.remove(i);
+      }
+  }
+}
+
+eliminarOpciones("id_form2-solicitante", "4")
+eliminarOpciones("id_form2-jefe_comision", "4")
+eliminarOpciones("id_form2-jefe_comision", "0")
+
+const opcionesPorCategoriaUnidad = {
+  "": [{ value: "-", text: "Elige Una Division" }],
+  // Rescate
+  1: [
+    { value: "16", text: "R-1 (Elevación)" },
+  ],
+  // Operaciones
+  2: [
+    { value: "5", text: "Supresión 01" },
+    { value: "6", text: "Supresión 02" },
+    { value: "7", text: "Supresión 03" },
+    { value: "8", text: "Supresión 04" },
+    { value: "9", text: "Cisterna 01" },
+    { value: "10", text: "Cisterna 02" },
+    { value: "11", text: "Cisterna 03" },
+    { value: "12", text: "Moto 45" },
+    { value: "13", text: "Moto 47" },
+    { value: "14", text: "Logistica 31" },
+    { value: "15", text: "Logistica 36" },
+  ],
+  // Grumae
+  4: [
+    { value: "17", text: "Lince 01" },
+    { value: "18", text: "Lince 02" },
+    { value: "19", text: "Lince 03" },
+    { value: "20", text: "Lince 04" },
+    { value: "21", text: "Lince 05" },
+    { value: "22", text: "Lince 06" },
+    { value: "23", text: "Lince 07" },
+    { value: "24", text: "Lince 08" },
+    { value: "25", text: "Lince 09" },
+  ],
+  // PreHospitalaria
+  5: [
+    { value: "2", text: "Alfa 1" },
+    { value: "3", text: "Alfa 2" },
+    { value: "4", text: "Alfa 3" },
+    { value: "1", text: "Alfa 4" },
+  ],
+};
+
+const selectOpciones_Unidad = document.getElementById("id_form1-opciones");
+const selectUnidad = document.getElementById("id_form2-unidad");
+
+// Función para actualizar las opciones del segundo select
+function actualizarOpcionesUnidad() {
+  hideAllForms();
+  const selectedValueUnidad = selectOpciones_Unidad.value;
+
+  // Limpia las opciones actuales del segundo select
+  selectUnidad.innerHTML = "";
+
+  // Si hay opciones para la categoría seleccionada, agrégalas
+  if (opcionesPorCategoriaUnidad[selectedValueUnidad]) {
+    // Agrega una opción predeterminada
+    const defaultOption = document.createElement("option");
+    defaultOption.value = "";
+    defaultOption.textContent = "Seleccione una Opción";
+    defaultOption.disabled = true;
+    defaultOption.selected = true;
+    selectUnidad.appendChild(defaultOption);
+
+    // Agrega las opciones correspondientes
+    opcionesPorCategoriaUnidad[selectedValueUnidad].forEach((optionData) => {
+      const optionElement = document.createElement("option");
+      optionElement.value = optionData.value;
+      optionElement.textContent = optionData.text;
+      selectUnidad.appendChild(optionElement);
+    });
+  }
+}
+
+actualizarOpcionesUnidad();
+// Evento cuando cambia el primer select
+selectOpciones_Unidad.addEventListener("change", actualizarOpcionesUnidad);
+
+
+
 function ocultElement(element) {
   document.getElementById(`${element}`).style.display = "none";
   document
@@ -39,6 +132,8 @@ document
         ocultElement("psicologia")
         mostrarElement("tipos_procedimientos_title")
         mostrarElement("tipos_procedimientos")
+        document.getElementById("id_form2-unidad").parentElement.style.display = "flex"
+        document.getElementById("id_form2-unidad").setAttribute("required", true)
         requiredFalse()
         break;
       case "2":
@@ -50,6 +145,8 @@ document
         mostrarElement("tipos_procedimientos_title")
         mostrarElement("tipos_procedimientos")
         requiredFalse()
+        document.getElementById("id_form2-unidad").parentElement.style.display = "flex"
+        document.getElementById("id_form2-unidad").setAttribute("required", true)
         break;
       case "3":
         // Prevencion
@@ -60,6 +157,8 @@ document
         ocultElement("psicologia")
         mostrarElement("tipos_procedimientos_title")
         mostrarElement("tipos_procedimientos")
+        document.getElementById("id_form2-unidad").parentElement.style.display = "none"
+        document.getElementById("id_form2-unidad").removeAttribute("required")
         requiredFalse()
         break;
       case "4":
@@ -71,6 +170,8 @@ document
         ocultElement("psicologia")
         mostrarElement("tipos_procedimientos_title")
         mostrarElement("tipos_procedimientos")
+        document.getElementById("id_form2-unidad").parentElement.style.display = "flex"
+        document.getElementById("id_form2-unidad").setAttribute("required", true)
         requiredFalse()
         break;
       case "5":
@@ -82,6 +183,8 @@ document
         mostrarElement("form_general");
         mostrarElement("tipos_procedimientos_title")
         mostrarElement("tipos_procedimientos")
+        document.getElementById("id_form2-unidad").parentElement.style.display = "flex"
+        document.getElementById("id_form2-unidad").setAttribute("required", true)
         requiredFalse()
         break;
       case "6":
