@@ -1253,10 +1253,12 @@ def View_Procedimiento(request):
                 if tipo_inspeccion == "Prevención" and form_inspecciones_prevencion.is_valid():
                     nombre_comercio = form_inspecciones_prevencion.cleaned_data["nombre_comercio"]
                     propietario = form_inspecciones_prevencion.cleaned_data["propietario"]
+                    nacionalidad = form_inspecciones_prevencion.cleaned_data["nacionalidad"]
                     cedula_propietario = form_inspecciones_prevencion.cleaned_data["cedula_propietario"]
                     descripcion = form_inspecciones_prevencion.cleaned_data["descripcion"]
                     persona_sitio_nombre = form_inspecciones_prevencion.cleaned_data["persona_sitio_nombre"]
                     persona_sitio_apellido = form_inspecciones_prevencion.cleaned_data["persona_sitio_apellido"]
+                    nacionalidad2 = form_inspecciones_prevencion.cleaned_data["nacionalidad2"]
                     persona_sitio_cedula = form_inspecciones_prevencion.cleaned_data["persona_sitio_cedula"]
                     persona_sitio_telefono = form_inspecciones_prevencion.cleaned_data["persona_sitio_telefono"]
                     material_utilizado = form_inspecciones_prevencion.cleaned_data["material_utilizado"]
@@ -1267,11 +1269,11 @@ def View_Procedimiento(request):
                         tipo_inspeccion = tipo_inspeccion,
                         nombre_comercio = nombre_comercio,
                         propietario = propietario,
-                        cedula_propietario = cedula_propietario,
+                        cedula_propietario = f"{nacionalidad}-{cedula_propietario}",
                         descripcion = descripcion,
                         persona_sitio_nombre = persona_sitio_nombre,
                         persona_sitio_apellido = persona_sitio_apellido,
-                        persona_sitio_cedula = persona_sitio_cedula,
+                        persona_sitio_cedula = f"{nacionalidad2}-{persona_sitio_cedula}",
                         persona_sitio_telefono = persona_sitio_telefono,
                         material_utilizado = material_utilizado,
                         status = status
@@ -1285,6 +1287,7 @@ def View_Procedimiento(request):
                     ubicacion_arbol = form_inspecciones_arbol.cleaned_data["ubicacion_arbol"]
                     persona_sitio_nombre = form_inspecciones_arbol.cleaned_data["persona_sitio_nombre"]
                     persona_sitio_apellido = form_inspecciones_arbol.cleaned_data["persona_sitio_apellido"]
+                    nacionalidad = form_inspecciones_arbol.cleaned_data["nacionalidad"]
                     persona_sitio_cedula = form_inspecciones_arbol.cleaned_data["persona_sitio_cedula"]
                     persona_sitio_telefono = form_inspecciones_arbol.cleaned_data["persona_sitio_telefono"]
                     descripcion = form_inspecciones_arbol.cleaned_data["descripcion"]
@@ -1299,7 +1302,7 @@ def View_Procedimiento(request):
                         ubicacion_arbol = ubicacion_arbol,
                         persona_sitio_nombre = persona_sitio_nombre,
                         persona_sitio_apellido = persona_sitio_apellido,
-                        persona_sitio_cedula = persona_sitio_cedula,
+                        persona_sitio_cedula = f"{nacionalidad}-{persona_sitio_cedula}",
                         persona_sitio_telefono = persona_sitio_telefono,
                         descripcion = descripcion,
                         material_utilizado = material_utilizado,
@@ -1311,10 +1314,12 @@ def View_Procedimiento(request):
                 if tipo_inspeccion == "Asesorias Tecnicas" and form_inspecciones_prevencion.is_valid():
                     nombre_comercio = form_inspecciones_prevencion.cleaned_data["nombre_comercio"]
                     propietario = form_inspecciones_prevencion.cleaned_data["propietario"]
+                    nacionalidad = form_inspecciones_prevencion.cleaned_data["nacionalidad"]
                     cedula_propietario = form_inspecciones_prevencion.cleaned_data["cedula_propietario"]
                     descripcion = form_inspecciones_prevencion.cleaned_data["descripcion"]
                     persona_sitio_nombre = form_inspecciones_prevencion.cleaned_data["persona_sitio_nombre"]
                     persona_sitio_apellido = form_inspecciones_prevencion.cleaned_data["persona_sitio_apellido"]
+                    nacionalidad2 = form_inspecciones_prevencion.cleaned_data["nacionalidad2"]
                     persona_sitio_cedula = form_inspecciones_prevencion.cleaned_data["persona_sitio_cedula"]
                     persona_sitio_telefono = form_inspecciones_prevencion.cleaned_data["persona_sitio_telefono"]
                     material_utilizado = form_inspecciones_prevencion.cleaned_data["material_utilizado"]
@@ -1325,11 +1330,11 @@ def View_Procedimiento(request):
                         tipo_inspeccion = tipo_inspeccion,
                         nombre_comercio = nombre_comercio,
                         propietario = propietario,
-                        cedula_propietario = cedula_propietario,
+                        cedula_propietario = f"{nacionalidad}-{cedula_propietario}",
                         descripcion = descripcion,
                         persona_sitio_nombre = persona_sitio_nombre,
                         persona_sitio_apellido = persona_sitio_apellido,
-                        persona_sitio_cedula = persona_sitio_cedula,
+                        persona_sitio_cedula = f"{nacionalidad2}-{persona_sitio_cedula}",
                         persona_sitio_telefono = persona_sitio_telefono,
                         material_utilizado = material_utilizado,
                         status = status
@@ -1341,6 +1346,7 @@ def View_Procedimiento(request):
                     descripcion = form_inspecciones_habitabilidad.cleaned_data["descripcion"]
                     persona_sitio_nombre = form_inspecciones_habitabilidad.cleaned_data["persona_sitio_nombre"]
                     persona_sitio_apellido = form_inspecciones_habitabilidad.cleaned_data["persona_sitio_apellido"]
+                    nacionalidad = form_inspecciones_habitabilidad.cleaned_data["nacionalidad"]
                     persona_sitio_cedula = form_inspecciones_habitabilidad.cleaned_data["persona_sitio_cedula"]
                     persona_sitio_telefono = form_inspecciones_habitabilidad.cleaned_data["persona_sitio_telefono"]
                     material_utilizado = form_inspecciones_habitabilidad.cleaned_data["material_utilizado"]
@@ -1352,7 +1358,7 @@ def View_Procedimiento(request):
                         descripcion = descripcion,
                         persona_sitio_nombre = persona_sitio_nombre,
                         persona_sitio_apellido = persona_sitio_apellido,
-                        persona_sitio_cedula = persona_sitio_cedula,
+                        persona_sitio_cedula = f"{nacionalidad}-{persona_sitio_cedula}",
                         persona_sitio_telefono = persona_sitio_telefono,
                         material_utilizado = material_utilizado,
                         status = status
@@ -1365,6 +1371,7 @@ def View_Procedimiento(request):
                     descripcion = form_inspecciones_otros.cleaned_data["descripcion"]
                     persona_sitio_nombre = form_inspecciones_otros.cleaned_data["persona_sitio_nombre"]
                     persona_sitio_apellido = form_inspecciones_otros.cleaned_data["persona_sitio_apellido"]
+                    nacionalidad = form_inspecciones_otros.cleaned_data["nacionalidad"]
                     persona_sitio_cedula = form_inspecciones_otros.cleaned_data["persona_sitio_cedula"]
                     persona_sitio_telefono = form_inspecciones_otros.cleaned_data["persona_sitio_telefono"]
                     material_utilizado = form_inspecciones_otros.cleaned_data["material_utilizado"]
@@ -1377,7 +1384,7 @@ def View_Procedimiento(request):
                         descripcion = descripcion,
                         persona_sitio_nombre = persona_sitio_nombre,
                         persona_sitio_apellido = persona_sitio_apellido,
-                        persona_sitio_cedula = persona_sitio_cedula,
+                        persona_sitio_cedula = f"{nacionalidad}-{persona_sitio_cedula}",
                         persona_sitio_telefono = persona_sitio_telefono,
                         material_utilizado = material_utilizado,
                         status = status
@@ -1403,6 +1410,7 @@ def View_Procedimiento(request):
                     rif_comercio = form_inv_comercio.cleaned_data["rif_comercio"]
                     nombre_propietario = form_inv_comercio.cleaned_data["nombre_propietario"]
                     apellido_propietario = form_inv_comercio.cleaned_data["apellido_propietario"]
+                    nacionalidad = form_inv_comercio.cleaned_data["nacionalidad"]
                     cedula_propietario = form_inv_comercio.cleaned_data["cedula_propietario"]
                     descripcion = form_inv_comercio.cleaned_data["descripcion"]
                     material_utilizado = form_inv_comercio.cleaned_data["material_utilizado"]
@@ -1414,7 +1422,7 @@ def View_Procedimiento(request):
                         rif_comercio = rif_comercio,
                         nombre_propietario = nombre_propietario,
                         apellido_propietario = apellido_propietario,
-                        cedula_propietario = cedula_propietario,
+                        cedula_propietario = f"{nacionalidad}-{cedula_propietario}",
                         descripcion = descripcion,
                         material_utilizado = material_utilizado,
                         status = status
@@ -1425,6 +1433,7 @@ def View_Procedimiento(request):
                     tipo_estructura = form_inv_estructura.cleaned_data["tipo_estructura"]
                     nombre = form_inv_estructura.cleaned_data["nombre"]
                     apellido = form_inv_estructura.cleaned_data["apellido"]
+                    nacionalidad = form_inv_estructura.cleaned_data["nacionalidad"]
                     cedula = form_inv_estructura.cleaned_data["cedula"]
                     descripcion = form_inv_estructura.cleaned_data["descripcion"]
                     material_utilizado = form_inv_estructura.cleaned_data["material_utilizado"]
@@ -1435,7 +1444,7 @@ def View_Procedimiento(request):
                         tipo_estructura = tipo_estructura,
                         nombre = nombre,
                         apellido = apellido,
-                        cedula = cedula,
+                        cedula = f"{nacionalidad}-{cedula}",
                         descripcion = descripcion,
                         material_utilizado = material_utilizado,
                         status = status
@@ -1450,6 +1459,7 @@ def View_Procedimiento(request):
                     año = form_inv_vehiculo.cleaned_data["año"]
                     nombre_propietario = form_inv_vehiculo.cleaned_data["nombre_propietario"]
                     apellido_propietario = form_inv_vehiculo.cleaned_data["apellido_propietario"]
+                    nacionalidad = form_inv_vehiculo.cleaned_data["nacionalidad"]
                     cedula_propietario = form_inv_vehiculo.cleaned_data["cedula_propietario"]
                     descripcion = form_inv_vehiculo.cleaned_data["descripcion"]
                     material_utilizado = form_inv_vehiculo.cleaned_data["material_utilizado"]
@@ -1464,7 +1474,7 @@ def View_Procedimiento(request):
                         año = año,
                         nombre_propietario = nombre_propietario,
                         apellido_propietario = apellido_propietario,
-                        cedula_propietario = cedula_propietario,
+                        cedula_propietario = f"{nacionalidad}-{cedula_propietario}",
                         descripcion = descripcion,
                         material_utilizado = material_utilizado,
                         status = status,
@@ -1714,6 +1724,7 @@ def View_Procedimiento(request):
             if (tipo_procedimiento == "26" or tipo_procedimiento == "27" or tipo_procedimiento == "28" or tipo_procedimiento == "29" or tipo_procedimiento == "30" or tipo_procedimiento == "31" or tipo_procedimiento == "32" or tipo_procedimiento == "33" or tipo_procedimiento == "34") and form_detalles_enfermeria.is_valid():
                 nombre = form_detalles_enfermeria.cleaned_data["nombre"]
                 apellido = form_detalles_enfermeria.cleaned_data["apellido"]
+                nacionalidad = form_detalles_enfermeria.cleaned_data["nacionalidad"]
                 cedula = form_detalles_enfermeria.cleaned_data["cedula"]
                 edad = form_detalles_enfermeria.cleaned_data["edad"]
                 sexo = form_detalles_enfermeria.cleaned_data["sexo"]
@@ -1726,7 +1737,7 @@ def View_Procedimiento(request):
                     id_procedimientos = nuevo_procedimiento,
                     nombre = nombre,
                     apellido = apellido,
-                    cedula = cedula,
+                    cedula = f"{nacionalidad}-{cedula}",
                     edad = edad,
                     sexo = sexo,
                     telefono = telefono,
@@ -1739,6 +1750,7 @@ def View_Procedimiento(request):
             if (tipo_procedimiento == "35" or tipo_procedimiento == "36" or tipo_procedimiento == "37" or tipo_procedimiento == "38" or tipo_procedimiento == "39" or tipo_procedimiento == "40" or tipo_procedimiento == "41") and form_detalles_psicologia.is_valid():
                 nombre = form_detalles_psicologia.cleaned_data["nombre"]
                 apellido = form_detalles_psicologia.cleaned_data["apellido"]
+                nacionalidad = form_detalles_psicologia.cleaned_data["nacionalidad"]
                 cedula = form_detalles_psicologia.cleaned_data["cedula"]
                 edad = form_detalles_psicologia.cleaned_data["edad"]
                 sexo = form_detalles_psicologia.cleaned_data["sexo"]
@@ -1750,7 +1762,7 @@ def View_Procedimiento(request):
                     id_procedimientos = nuevo_procedimiento,
                     nombre = nombre,
                     apellido = apellido,
-                    cedula = cedula,
+                    cedula = f"{nacionalidad}-{cedula}",
                     edad = edad,
                     sexo = sexo,
                     descripcion = descripcion,
