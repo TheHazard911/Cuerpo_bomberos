@@ -243,7 +243,109 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.24/jspdf.plugin.autotable.min.js"></script>
     <script src="../../static/js/ping.js"></script>
-    
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        // Seleccionar todos los elementos <li>
+        const items = document.querySelectorAll(".items-row li");
+        const filters = document.querySelectorAll(".filter-search");
+        const selectOptions = document.querySelectorAll(
+          "#id_form1-opciones option"
+        );
+
+        filters.forEach((filter) => {
+          filter.style.display = "none";
+        });
+
+        // Iterar sobre cada <li>
+        items.forEach((item) => {
+          if (item.getAttribute("data-division") !== "rescate") {
+            item.remove(); // Elimina el elemento del DOM
+          }
+        });
+
+        // Ocultar opciones del select excepto la opción con value '7' (Capacitación)
+        selectOptions.forEach((option) => {
+          if (option.value !== "1" && option.value !== "") {
+            option.remove(); // Elimina la opción del select
+          }
+        });
+
+        // Ocultar botones "Total" y "Mes"
+        const btnTotalTwo = document.getElementById("btn-total-one");
+        const btnMonthTwo = document.getElementById("btn-month-one");
+        const btnTotal = document.getElementById("btn-total");
+        const btnMonth = document.getElementById("btn-month");
+
+        if (btnTotalTwo) {
+          btnTotalTwo.style.display = "none";
+        }
+
+        if (btnMonthTwo) {
+          btnMonthTwo.style.display = "none";
+        }
+        if (btnTotal) {
+          btnTotal.style.display = "none";
+        }
+        if (btnMonth) {
+          btnMonth.style.display = "none";
+        }
+
+        // Eliminar los contenedores con ID colum-1 y colum-2
+        const colum1 = document.getElementById("colum-2");
+        const colum2 = document.getElementById("colum-3");
+
+        if (colum1) {
+          colum1.remove(); // Elimina el contenedor del DOM
+        }
+
+        if (colum2) {
+          colum2.remove(); // Elimina el contenedor del DOM
+        }
+        // Eliminar los contenedores con ID de porcentajes
+        const row1 = document.getElementById("operaciones");
+        const row2 = document.getElementById("grumae");
+        const row3 = document.getElementById("prevencion");
+        const row4 = document.getElementById("prehospitalaria");
+        const row5 = document.getElementById("serviciosmedicos");
+
+        if (row1) {
+          row1.remove(); // Elimina el contenedor del DOM
+        }
+
+        if (row2) {
+          row2.remove(); // Elimina el contenedor del DOM
+        }
+
+        if (row3) {
+          row3.remove(); // Elimina el contenedor del DOM
+        }
+
+        if (row4) {
+          row4.remove(); // Elimina el contenedor del DOM
+        }
+
+        if (row5) {
+          row5.remove(); // Elimina el contenedor del DOM
+        }
+
+        // Ocultar botones de eliminación
+        const btnDelete = document.querySelectorAll(".button_delete");
+        btnDelete.forEach((button) => {
+          button.style.display = "none";
+        });
+        // Mantener solo la sección de "Servicios médicos" y ocultar el resto
+        const analyticsSections = document.querySelectorAll(
+          ".div-analytics .progress-bar"
+        );
+        analyticsSections.forEach((section) => {
+          if (section.id !== "rescate") {
+            section.querySelectorAll("p, .progress").forEach((child) => {
+              child.style.display = "none"; // Oculta el contenido de los otros elementos
+            });
+          }
+        });
+      });
+    </script>
     {% block content %} {% endblock %}
   </body>
 </html>

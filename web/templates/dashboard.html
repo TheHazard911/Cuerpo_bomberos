@@ -68,7 +68,7 @@
         <div class="btn-group" role="group" aria-label="Basic mixed styles example">
           <button class="btn btn-outline-danger" id="btn-total-one" onclick="fetchProcedimientos('Total')">Total</button>
           <button class="btn btn-outline-danger" id="btn-month-one" onclick="fetchProcedimientos('Mes')">Mes</button>
-          <button class="btn btn-outline-danger" id="bton-today-one" onclick="fetchProcedimientos('Hoy')">Hoy</button>
+          <button class="btn btn-outline-danger" id="btn-today-one" onclick="fetchProcedimientos('Hoy')">Hoy</button>
         </div>
       </div>
         <section class="items-cards">
@@ -104,13 +104,13 @@
       <h4 class="title-procediments">Procedimientos <span id="divisiones"></span> - Divisiones</h4>
       <div class="position-end">
         <div class="btn-group" role="group" aria-label="Basic mixed styles example">
-          <button class="btn btn-outline-danger" id="btn-total-two">Total</button>
-          <button class="btn btn-outline-danger" id="btn-month-two">Mes</button>
-          <button class="btn btn-outline-danger" id="btn-today-two">Hoy</button>
+          <button class="btn btn-outline-danger" id="btn-total">Total</button>
+          <button class="btn btn-outline-danger" id="btn-month">Mes</button>
+          <button class="btn btn-outline-danger" id="btn-today">Hoy</button>
         </div>
       </div>
       <div class="items-row">
-        <section class="items-list style-two">
+        <section class="items-list style-two" id="colum-1">
             <ol>
                 <li class="card-background-blue" data-division="grumae">
                     <p>Grumae</p>
@@ -126,7 +126,7 @@
                 </li>
             </ol>
         </section>
-        <section class="items-list style-two">
+        <section class="items-list style-two" id="colum-2">
             <ol>
                 <li class="card-background-red-light" data-division="operaciones">
                     <p>Operaciones</p>
@@ -142,7 +142,7 @@
                 </li>
             </ol>
         </section>
-        <section class="items-list style-two">
+        <section class="items-list style-two" id="colum-3">
             <ol>
                 <li class="card-background-cyan" data-division="capacitacion">
                     <p>Capacitacion</p>
@@ -179,7 +179,7 @@
   </div>
 <div class="div-analytics">
   <!-- Botones para elegir el período -->
- <section class="progress-bar">
+ <section class="progress-bar" id="operaciones">
     <p>Operaciones</p>
     <p id="progress-text-operaciones">0%</p>
     <div
@@ -197,7 +197,7 @@
       ></div>
     </div>
   </section>
-  <section class="progress-bar">
+  <section class="progress-bar" id="prehospitalaria">
     <p>PreHospitalaria</p>
     <p id="progress-text-prehospitalaria">0%</p>
     <div
@@ -215,7 +215,7 @@
       ></div>
     </div>
   </section>
-  <section class="progress-bar">
+  <section class="progress-bar" id="rescate">
     <p>Rescate</p>
     <p id="progress-text-rescate">0%</p>
     <div
@@ -233,7 +233,7 @@
       ></div>
     </div>
   </section>
-  <section class="progress-bar">
+  <section class="progress-bar" id="grumae">
     <p>Grumae</p>
     <p id="progress-text-grumae">0%</p>
     <div
@@ -251,7 +251,7 @@
       ></div>
     </div>
   </section>
-  <section class="progress-bar">
+  <section class="progress-bar" id="serviciosmedicos">
     <p>Servicios medicos</p>
     <p id="progress-text-servicios_medicos">0%</p>
     <div
@@ -269,7 +269,7 @@
       ></div>
     </div>
   </section>
-  <section class="progress-bar">
+  <section class="progress-bar" id="prevencion">
     <p>Prevencion</p>
     <p id="progress-text-prevencion">0%</p>
     <div
