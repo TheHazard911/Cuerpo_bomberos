@@ -93,7 +93,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 document.addEventListener("DOMContentLoaded", function () {
   // Tu código de Chart.js aquí
-  const ctx1 = document.getElementById("pie");
+  const ctx1 = document.getElementById("pie").getContext('2d');
   new Chart(ctx1, {
     type: "pie",
     data: {
@@ -140,105 +140,6 @@ document.addEventListener("DOMContentLoaded", function () {
             font: {
               size: 16, // Ajusta el tamaño de la fuente aquí
             },
-          },
-        },
-      },
-    },
-  });
-  const ctx3 = document.getElementById("radar");
-  new Chart(ctx3, {
-    type: "radar",
-    data: {
-      labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"], // Modifica los nombres de las secciones aquí
-      datasets: [
-        {
-          label: "# of Votes", // Modifica el título de la serie de datos aquí
-          data: [12, 19, 3, 5, 2, 3], // Cambia los valores de los datos aquí
-          borderWidth: 2, // Cambia el grosor de las líneas aquí
-          backgroundColor: "rgba(75, 192, 192, .5)", // Cambia el color de fondo
-          borderColor: "rgba(75, 192, 192, 1)", // Cambia el color de los bordes
-        },
-      ],
-    },
-    options: {
-      responsive: true, // Hace que la gráfica sea fluida
-      plugins: {
-        datalabels: {
-          anchor: "end",
-          align: "end",
-          font: {
-            size: 20, // Aumenta el tamaño de las etiquetas de datos aquí
-          },
-          formatter: (value) => value, // Muestra el valor de los datos
-        },
-      },
-      scales: {
-        r: {
-          beginAtZero: true,
-          ticks: {
-            font: {
-              size: 24, // Tamaño de las etiquetas en 24px
-            },
-          },
-          grid: {
-            display: false, // Eliminar líneas de la cuadrícula
-          },
-        },
-      },
-    },
-  });
-
-  const ctx4 = document.getElementById("polarArea");
-  new Chart(ctx4, {
-    type: "polarArea",
-    data: {
-      labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"], // Modifica los nombres de las secciones aquí
-      datasets: [
-        {
-          label: "# of Votes", // Modifica el título de la serie de datos aquí
-          data: [12, 19, 3, 5, 2, 3], // Cambia los valores de los datos aquí
-          borderWidth: 2, // Cambia el grosor de las líneas aquí
-          backgroundColor: [
-            "rgba(255, 99, 132, 0.1)",
-            "rgba(54, 162, 235, 0.5)",
-            "rgba(255, 206, 86, 0.5)",
-            "rgba(75, 192, 192, 0.5)",
-            "rgba(153, 102, 255, 0.5)",
-            "rgba(255, 159, 64, 0.5)",
-          ], // Cambia los colores de fondo aquí
-          borderColor: [
-            "rgba(255, 99, 132, 1)",
-            "rgba(54, 162, 235, 1)",
-            "rgba(255, 206, 86, 1)",
-            "rgba(75, 192, 192, 1)",
-            "rgba(153, 102, 255, 1)",
-            "rgba(255, 159, 64, 1)",
-          ], // Cambia los colores de los bordes aquí
-        },
-      ],
-    },
-    options: {
-      responsive: true, // Hace que la gráfica sea fluida
-      plugins: {
-        datalabels: {
-          anchor: "end",
-          align: "end",
-          font: {
-            size: 28, // Aumenta el tamaño de las etiquetas de datos aquí
-          },
-          formatter: (value) => value, // Muestra el valor de los datos
-        },
-      },
-      scales: {
-        r: {
-          beginAtZero: true,
-          ticks: {
-            font: {
-              size: 24, // Tamaño de las etiquetas en 24px
-            },
-          },
-          grid: {
-            display: false, // Eliminar líneas de la cuadrícula
           },
         },
       },
@@ -347,3 +248,5 @@ document.addEventListener("DOMContentLoaded", function () {
 
   window.onload = init;
 });
+
+
