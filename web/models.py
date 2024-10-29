@@ -719,10 +719,6 @@ class Jornada_Medica(models.Model):
   material_utilizado = models.CharField(max_length=100)
   status = models.CharField(max_length=20)
 
-# class Inspecciones(models.Model):
-#   id_procedimientos = models.ForeignKey(Procedimientos, on_delete=models.CASCADE)
-#   tipo_inspeccion = models.CharField(max_length=80)
-
 class Inspeccion_Prevencion_Asesorias_Tecnicas(models.Model):
   id_procedimientos = models.ForeignKey(Procedimientos, on_delete=models.CASCADE)
   tipo_inspeccion = models.CharField(max_length=80)
