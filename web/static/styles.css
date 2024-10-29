@@ -1541,17 +1541,18 @@ summary > * {
   justify-content: center;
   align-items: center;
   canvas {
-    width: 30rem;
+    width: 35rem;
   }
 }
 .content-stadist {
-  margin: 0 auto;
   width: 90%;
   height: auto;
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: stretch;
+  margin: 0;
+  margin: 0 auto;
 }
 .stadist-rows {
   display: flex;
@@ -1559,6 +1560,7 @@ summary > * {
   width: 100%;
   height: auto;
   flex-wrap: wrap;
+  margin: 0 auto;
 }
 .cards-stadist-rows {
   display: flex;
@@ -1583,15 +1585,18 @@ summary > * {
 }
 .graphic-bar {
   width: 100%;
+  margin: 0 auto;
   height: auto;
   padding: .5rem;
-  margin: 0;
-  margin: 0 auto;
+  display: flex;
+  justify-content: center;
 }
 .barts {
-  margin: 0 auto;
-  width: 95%;
+  width: 100%;
   height: auto;
+  display: flex;
+  justify-content: center;
+  margin: 0 auto;
 }
 .bar-graphic {
   background-color: #fff;
@@ -1620,3 +1625,10 @@ summary > * {
     transform: scale(1.1);
   }
 }
+.items-list-procediments{
+  list-style: disc;
+  li{
+    font-size: 1rem;
+    text-align: start;
+    }
+  }
