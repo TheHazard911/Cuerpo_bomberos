@@ -211,11 +211,11 @@ document.addEventListener("DOMContentLoaded", function () {
         labels: labels,
         datasets: [
           {
-            label: "# Divisiones",
+            label: "Procedimientos", 
             data: values,
             borderWidth: 1,
             backgroundColor: [
-              "rgba(255, 99, 132, 1)", // Color 1
+              "rgba(19, 141, 117, 1)", // Color 1
               "rgba(54, 162, 235, 1)", // Color 2
               "rgba(255, 206, 86, 1)", // Color 3
               "rgba(75, 192, 192, 1)", // Color 4
@@ -226,7 +226,7 @@ document.addEventListener("DOMContentLoaded", function () {
               "rgba(255, 206, 86, 1)", // Color 9
             ],
             borderColor: [
-              "rgba(255, 99, 132, 2)", // Color de borde 1
+              "rgba(19, 141, 117, 1)", // Color de borde 1
               "rgba(54, 162, 235, 2)", // Color de borde 2
               "rgba(255, 206, 86, 2)", // Color de borde 3
               "rgba(75, 192, 192, 2)", // Color de borde 4
@@ -242,7 +242,7 @@ document.addEventListener("DOMContentLoaded", function () {
       options: {
         responsive: true,
         plugins: {
-          legend: { display: true },
+          legend: { display: false },
         },
         scales: {
           x: { ticks: { font: { size: 15 } } },
