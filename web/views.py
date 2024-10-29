@@ -14,9 +14,79 @@ from django.contrib.auth.decorators import login_required
 from django.utils import timezone
 from itertools import chain
 from django.views.decorators.cache import never_cache
+import openpyxl
+from openpyxl.utils import get_column_letter
+from django.http import HttpResponse
 
 
-# Create your views here.
+def generar_excel(request):
+    # Crear un libro de trabajo y una hoja
+    workbook = openpyxl.Workbook()
+    hoja = workbook.active
+    hoja.title = "Procedimientos"
+
+    # Agregar encabezados a la primera fila
+    encabezados = [
+        "División", 
+        "Solicitante", 
+        "Jefe Comisión",  
+        "Municipio", 
+        "Parroquia", 
+        "Fecha", 
+        "Hora", 
+        "Dirección",
+        "Tipo de Procedimiento"
+    ]
+    hoja.append(encabezados)
+
+    # Obtener datos de los procedimientos
+    procedimientos = Procedimientos.objects.all()
+
+    # Agregar datos a la hoja
+    for procedimiento in procedimientos:
+        # Verificar si el solicitante es externo
+        if procedimiento.id_solicitante.id == 0:
+            solicitante = procedimiento.solicitante_externo
+        else:
+            solicitante = f"{procedimiento.id_solicitante.jerarquia} {procedimiento.id_solicitante.nombres} {procedimiento.id_solicitante.apellidos}"
+        
+        # Verificar si el jefe de comisión es externo
+        if procedimiento.id_jefe_comision.id == 0:
+            jefe_comision = ""
+        else:
+            jefe_comision = f"{procedimiento.id_jefe_comision.jerarquia} {procedimiento.id_jefe_comision.nombres} {procedimiento.id_jefe_comision.apellidos}"
+        
+        hoja.append([
+            procedimiento.id_division.division,
+            solicitante,
+            jefe_comision,
+            procedimiento.id_municipio.municipio,
+            procedimiento.id_parroquia.parroquia,
+            procedimiento.fecha,
+            procedimiento.hora,
+            procedimiento.direccion,
+            procedimiento.id_tipo_procedimiento.tipo_procedimiento,
+        ])
+
+    # Ajustar el ancho de las columnas
+    for column in hoja.columns:
+        max_length = 0
+        column_letter = get_column_letter(column[0].column)  # Obtener la letra de la columna
+        for cell in column:
+            try:
+                if len(str(cell.value)) > max_length:
+                    max_length = len(str(cell.value))
+            except Exception as e:
+                pass
+        adjusted_width = (max_length + 2)  # Agregar algo de espacio
+        hoja.column_dimensions[column_letter].width = adjusted_width
+
+    # Configurar la respuesta HTTP para descargar el archivo
+    response = HttpResponse(content_type="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")
+    response["Content-Disposition"] = "attachment; filename=procedimientos.xlsx"
+    workbook.save(response)
+    return response
+
 
 def filtrado_mes(mes):
     año_actual = datetime.now().year
