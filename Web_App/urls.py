@@ -44,4 +44,5 @@ urlpatterns = [
     path('api/parroquias/', obtener_procedimientos_parroquias, name='obtener_parroquias'),
     path('api/divisiones/', obtener_divisiones, name='obtener_divisiones'),
     path('descargar-excel/', generar_excel, name='descargar_excel'),
+    path('api/generar_estadistica/', generar_resultados, name='generar_estadistica'),
 ]

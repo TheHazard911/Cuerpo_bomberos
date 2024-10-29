@@ -112,6 +112,7 @@
     <!-- ------------------------------------------------------------------------------------------------------ -->
     <div class="stadist-column">
       <section class="cards-stadist-column">
+        <input type="month" id="monthSelector" />
         <div class="accordion accordion-flush" id="accordionFlushExample">
           <!-- Operaciones -->
           <div class="accordion-item">
@@ -133,21 +134,7 @@
               data-bs-parent="#accordionFlushExample"
             >
               <div class="accordion-body">
-                <ol class="items-list-procediments">
-                  <li>Rescate:</li>
-                  <li>Incendios:</li>
-                  <li>Fallecidos:</li>
-                  <li>Falsa Alarma:</li>
-                  <li>Servicios Especiales:</li>
-                  <li>Mitigacion de Riesgos:</li>
-                  <li>Evaluacion de Riesgos:</li>
-                  <li>Artificios Pirotecnicos:</li>
-                  <li>Guardia de Prevencion:</li>
-                  <li>Atendido No Efectuado:</li>
-                  <li>Abastecimiendo de Agua: </li>
-                  <li>Apoyo a Otras Unidades:</li>
-                  <li>Despligue de seguridad:</li>
-                  <li>Atenciones Paramedicas:</li>
+                <ol class="items-list-procediments" id="list_operaciones">
                 </ol>
               </div>
             </div>
@@ -172,15 +159,8 @@
               data-bs-parent="#accordionFlushExample"
             >
               <div class="accordion-body">
-                <ol class="items-list-procediments">
-                  <li>Traslados:</li>
-                  <li>Fallecidos:</li>
-                  <li>Falsa Alarma:</li>
-                  <li>Puesto de Avanzada:</li>
-                  <li>Servicios Especiales:</li>
-                  <li>Guardia de Prevencion:</li>
-                  <li>Atendido No Efectuado:</li>
-                  <li>Atenciones Paramedicas:</li>
+                <ol class="items-list-procediments" id="list_prehospitalaria">
+                  
                 </ol>
               </div>
             </div>
@@ -205,9 +185,7 @@
               data-bs-parent="#accordionFlushExample"
             >
               <div class="accordion-body">
-                <ol class="items-list-procediments">
-                  <li>Jornada Medica:</li>
-                  <li>Valoracion Medica:</li>
+                <ol class="items-list-procediments" id="list_medicos">
                 </ol>
               </div>
             </div>
@@ -232,21 +210,7 @@
               data-bs-parent="#accordionFlushExample"
             >
               <div class="accordion-body">
-               <ol class="items-list-procediments">
-                <li>Rescate:</li>
-                <li>Incendios:</li>
-                <li>Fallecidos:</li>
-                <li>Falsa Alarma:</li>
-                <li>Servicios Especiales:</li>
-                <li>Mitigacion de Riesgos:</li>
-                <li>Evaluacion de Riesgos:</li>
-                <li>Artificios Pirotecnicos:</li>
-                <li>Guardia de Prevencion:</li>
-                <li>Atendido No Efectuado:</li>
-                <li>Abastecimiendo de Agua: </li>
-                <li>Apoyo a Otras Unidades:</li>
-                <li>Despligue de seguridad:</li>
-                <li>Atenciones Paramedicas:</li>
+               <ol class="items-list-procediments" id="list_grumae">
                </ol>
               </div>
             </div>
@@ -271,18 +235,7 @@
               data-bs-parent="#accordionFlushExample"
             >
               <div class="accordion-body">
-                <ol class="items-list-procediments">
-                  <li>Rescate:</li>
-                  <li>Incendios:</li>
-                  <li>Falsa Alarma:</li>
-                  <li>Puesto de Avanzada:</li>
-                  <li>Servicios Especiales:</li>
-                  <li>Mitigacion de Riesgos:</li>
-                  <li>Evaluacion de Riesgos:</li>
-                  <li>Guardia de Prevencion:</li>
-                  <li>Apoyo a Otras Unidades:</li>
-                  <li>Atenciones Paramedicas:</li>
-                  <li>Artificios Pirotecnicos:</li>
+                <ol class="items-list-procediments" id="list_rescate">
                  </ol>
               </div>
             </div>
@@ -307,14 +260,7 @@
               data-bs-parent="#accordionFlushExample"
             >
               <div class="accordion-body">
-                <ol class="items-list-procediments">
-                  <li>Inspeccion:</li>
-                  <li>Investigacion:</li>
-                  <li>Asesoramiento:</li>
-                  <li>Retencion Preventiva:</li>
-                  <li>Evaluacion de Riesgos:</li>
-                  <li>Reinspeccion de Prevencion:</li>
-                  <li>Inspeccion Establecimiento (Artificios Pirotecnicos):</li>
+                <ol class="items-list-procediments" id="list_prevencion">
                  </ol>
               </div>
             </div>
@@ -339,9 +285,7 @@
               data-bs-parent="#accordionFlushExample"
             >
               <div class="accordion-body">
-                <ol class="items-list-procediments">
-                  <li>Capacitacion:</li>
-                  <li>Frente Preventivo:</li>
+                <ol class="items-list-procediments" id="list_capacitacion">
                  </ol>
               </div>
             </div>
@@ -366,16 +310,7 @@
               data-bs-parent="#accordionFlushExample"
             >
               <div class="accordion-body">
-                <ol class="items-list-procediments">
-                  <li>Cura:</li>
-                  <li>Otros:</li>
-                  <li>Atencion Local:</li>
-                  <li>Aerosol Terapia:</li>
-                  <li>Atencion PreHospitalaria:</li>
-                  <li>Administracion de Tratamientos:</li>
-                  <li>Administracion de Medicamentos:</li>
-                  <li>Cuantificacion de Signos Vitales:</li>
-                  <li>Cuantificacion de Presion Arterial:</li>
+                <ol class="items-list-procediments" id="list_enfermeria">
                  </ol>
               </div>
             </div>
@@ -400,14 +335,7 @@
               data-bs-parent="#accordionFlushExample"
             >
               <div class="accordion-body">
-                <ol class="items-list-procediments">
-                  <li>Consulta Bombero Activo:</li>
-                  <li>Certificado de Salud Mental:</li>
-                  <li>Consulta Integrante Brigada Juvenil:</li>
-                  <li>Consulta Paciente Externo:</li>
-                  <li>Evaluacion Psicologica PostVacacional:</li>
-                  <li>Evaluacion Psicologica PreVacacional:</li>
-                  <li>Evaluacion Personal Nuevo Ingreso:</li>
+                <ol class="items-list-procediments" id="list_psicologia">
                  </ol>
               </div>
             </div>
