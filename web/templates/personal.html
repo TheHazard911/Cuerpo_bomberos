@@ -63,7 +63,8 @@
   <div class="tool-personal">
     <section class="accion-personal">
         Personas Totales: 0  
-        <button type="button" class="btn">
+        <button type="button" class="btn" data-bs-toggle="modal"
+        data-bs-target="#modal-info">
 <svg width="50px" height="50px" viewBox="0 0 32 32" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns" fill="#000000"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <title>plus-circle</title> <desc>Created with Sketch Beta.</desc> <defs> </defs> <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage"> <g id="Icon-Set" sketch:type="MSLayerGroup" transform="translate(-464.000000, -1087.000000)" fill="#000"> <path d="M480,1117 C472.268,1117 466,1110.73 466,1103 C466,1095.27 472.268,1089 480,1089 C487.732,1089 494,1095.27 494,1103 C494,1110.73 487.732,1117 480,1117 L480,1117 Z M480,1087 C471.163,1087 464,1094.16 464,1103 C464,1111.84 471.163,1119 480,1119 C488.837,1119 496,1111.84 496,1103 C496,1094.16 488.837,1087 480,1087 L480,1087 Z M486,1102 L481,1102 L481,1097 C481,1096.45 480.553,1096 480,1096 C479.447,1096 479,1096.45 479,1097 L479,1102 L474,1102 C473.447,1102 473,1102.45 473,1103 C473,1103.55 473.447,1104 474,1104 L479,1104 L479,1109 C479,1109.55 479.447,1110 480,1110 C480.553,1110 481,1109.55 481,1109 L481,1104 L486,1104 C486.553,1104 487,1103.55 487,1103 C487,1102.45 486.553,1102 486,1102 L486,1102 Z" id="plus-circle" sketch:type="MSShapeGroup"> </path> </g> </g> </g></svg>
         </button>
     </section>
@@ -76,75 +77,71 @@
           <th scope="col">#</th>
           <th scope="col">Nombres</th>
           <th scope="col">Apellidos</th>
-          <th scope="col">Cedula</th>
           <th scope="col">Jerarquia</th>
           <th scope="col">Cargo</th>
+          <th scope="col">Cedula</th>
           <th scope="col">Sexo</th>
-          <th scope="col">Acciones</th>
+          <th scope="col">rol</th>
         </tr>
       </thead>
       <tbody class="table-group-divider">
-        <!-- prettier-ignore -->
+        {% for personal in personal %}
         <tr>
           <!-- prettier-ignore -->
-          <th scope="row"> 1</th>
+          <th scope="row">{{ forloop.counter }}</th>
           <!-- prettier-ignore -->
-          <td> Antonio</td>
-          <td> Briceño</td>
-          <td> V-3000000 </td>
-          <td> Coronel </td>
-          <td> General </td>
-          <td> Masculino </td>
+          <td>{{ personal.nombres }}</td>
+          <!-- prettier-ignore -->
+          <td>{{ personal.apellidos }}</td>
+          <!-- prettier-ignore -->
+          <td>{{ personal.jerarquia }}</td>
+          <td>{{ personal.cargo }}</td>
+          <td>{{ personal.cedula }}</td>
+          <td>{{ personal.sexo }}</td>
+          <td>{{ personal.rol }}</td>
 
-          <td class="icons-accion">
-            <!-- NO TOCAR BOTON ELIMINAR-->
-            <button
-              type="button"
-              class="button_delete"
-              data-id="{{ row.id }}"
-              data-id_mostrar="{{ forloop.counter }}"
-              data-solicitante="{{ row.id_solicitante.jerarquia }} {{ row.id_solicitante.nombres}} {{ row.id_solicitante.apellidos}}"
-              data-jefeComision="{{ row.id_jefe_comision.jerarquia }} {{ row.id_jefe_comision.nombres}} {{ row.id_jefe_comision.apellidos}}"
-              data-fecha="{{ row.fecha|date:'d-m-Y'}}"
-              data-tipoProcedimiento="{{ row.id_tipo_procedimiento.tipo_procedimiento }}"
-              data-bs-toggle="modal"
-              data-bs-target="#staticBackdrop"
-              disabled
-            >
-              <svg
-                width="35px"
-                height="35px"
-                viewBox="0 0 1024 1024"
-                class="icon"
-                version="1.1"
-                xmlns="http://www.w3.org/2000/svg"
-                fill="#000000"
-              >
-                <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
-                <g
-                  id="SVGRepo_tracerCarrier"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                ></g>
-                <g id="SVGRepo_iconCarrier">
-                  <path
-                    d="M779.5 1002.7h-535c-64.3 0-116.5-52.3-116.5-116.5V170.7h768v715.5c0 64.2-52.3 116.5-116.5 116.5zM213.3 256v630.1c0 17.2 14 31.2 31.2 31.2h534.9c17.2 0 31.2-14 31.2-31.2V256H213.3z"
-                    fill="#3688FF"
-                  ></path>
-                  <path
-                    d="M917.3 256H106.7C83.1 256 64 236.9 64 213.3s19.1-42.7 42.7-42.7h810.7c23.6 0 42.7 19.1 42.7 42.7S940.9 256 917.3 256zM618.7 128H405.3c-23.6 0-42.7-19.1-42.7-42.7s19.1-42.7 42.7-42.7h213.3c23.6 0 42.7 19.1 42.7 42.7S642.2 128 618.7 128zM405.3 725.3c-23.6 0-42.7-19.1-42.7-42.7v-256c0-23.6 19.1-42.7 42.7-42.7S448 403 448 426.6v256c0 23.6-19.1 42.7-42.7 42.7zM618.7 725.3c-23.6 0-42.7-19.1-42.7-42.7v-256c0-23.6 19.1-42.7 42.7-42.7s42.7 19.1 42.7 42.7v256c-0.1 23.6-19.2 42.7-42.7 42.7z"
-                    fill="#5F6379"
-                  ></path>
-                </g>
-              </svg>
-            </button>
-          </td>
+          <!-- prettier-ignore -->
+        {% endfor %}
         </tr>
       </tbody>
     </table>
   </div>     
 </div>  
 <!-- div general-dashboard fin -->
+<div class="modal fade" tabindex="-1" id="modal-info">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content modal-content-two">
+      <div class="modal-header header-dashboard-two">
+        <section class="title-icon">
+          <img
+            src="../static/assets/logo bomberos 2.svg"
+            alt="Logo de bomberos"
+          />
+          <h1>Cuerpo de Bomberos</h1>
+        </section>
+      </div>
+      <div class="modal-body modal-body-two modal-body-three">
+        <section class="info-modal" id="info_modal">
+          <h4>Registrar Personal</h4>
+          <br><br>
+            <form action="" method="post">
+              {% csrf_token %}
+              <div class="form-style" id="form_general">{{ form_personal.as_div }}</div>
+              <!-- Boton Enviar -->
+              <button type="submit" id="button_submit">
+                Aceptar
+              </button>
+            </form>
+        </section>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">
+          Cerrar
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
 <footer class="footer">
   <section class="text-reserved">
     <h5>2024 © Cuerpo de bomberos - San Cristobal</h>

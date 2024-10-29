@@ -608,6 +608,9 @@ def logout(request):
     request.session.flush()  # Eliminar todos los datos de la sesión
     return redirect('/login/')
 
+def Blog(request):
+    return render(request, 'blog.html')
+
 # Vista de la Ventana Inicial (Login)
 @never_cache
 def Home(request):
@@ -631,21 +634,45 @@ def Home(request):
             messages.error(request, 'Usuario o contraseña incorrectos')
             return render(request, 'index.html', {'error': True})
 
-def Blog(request):
-    return render(request, 'blog.html')
-
-@login_required
+@login_required 
 def View_personal(request):
     user = request.session.get('user')
 
     if not user:
         return redirect('/')
+    
+    personal = Personal.objects.all()
+    personal = Personal.objects.exclude(id__in=[0, 4])
+
+    if request.method == 'POST':
+        formulario = FormularioRegistroPersonal(request.POST, prefix='formulario')
+
+        if formulario.is_valid():
+            
+            new_personal = Personal(
+                nombres = formulario.cleaned_data["nombres"],
+                apellidos = formulario.cleaned_data["apellidos"],
+                jerarquia = formulario.cleaned_data["jerarquia"],
+                cargo = formulario.cleaned_data["cargo"],
+                cedula = formulario.cleaned_data["cedula"],
+                sexo = formulario.cleaned_data["sexo"],
+                rol = formulario.cleaned_data["rol"],
+            )
+
+            new_personal.save()
+    
+    else:
+        formulario = FormularioRegistroPersonal(prefix='formulario')
+    
+
     # Renderizar la página con los datos
     return render(request, "personal.html", {
         "user": user,
         "jerarquia": user["jerarquia"],
         "nombres": user["nombres"],
         "apellidos": user["apellidos"],
+        "form_personal": formulario,
+        "personal": personal
     })
 
 @login_required
