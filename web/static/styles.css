@@ -1551,7 +1551,11 @@ summary > * {
     margin: 0;
   }
   select {
+    width: 15rem;
+    border-radius: 10px;
+    font-size: 1.2rem;
     font-family: var(--sofia-sans);
+    border-color: #b4b4b4;
   }
 }
 .content-stadist {
@@ -1575,9 +1579,9 @@ summary > * {
 .cards-stadist-rows {
   display: flex;
   justify-content: center;
-  align-items: stretch;
+  align-items: flex-start;
   align-content: center;
-  width: 22rem;
+  width: 25rem;
   height: auto;
 }
 .stadist-column {
@@ -1635,11 +1639,30 @@ summary > * {
     transform: scale(1.1);
   }
 }
+.section-month{
+  width: 100%;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+}
+.month-style{
+  margin-top: 1rem;
+  width: 15rem;
+  padding: .2rem;
+  border-radius: 20px;
+}
+.accordion-button{
+  font-size: 1.2rem;
+}
 .items-list-procediments {
   list-style: disc;
   li {
-    font-size: 1rem;
+    font-size: 1.2rem;
     text-align: start;
+    padding: .3rem;
+    li{
+      list-style: circle;
+    }
   }
 }
 .btn-graphic {
