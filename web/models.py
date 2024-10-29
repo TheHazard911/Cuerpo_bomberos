@@ -28,6 +28,7 @@ class Personal(models.Model):
   cargo = models.CharField(max_length=50)
   cedula = models.CharField(max_length=50)
   sexo = models.CharField(max_length=50)
+  rol = models.CharField(max_length=50)
 
   def __str__(self):
     return self.nombres + " -- " + self.apellidos + " -- " + self.jerarquia + " -- " + self.cargo + " -- " + self.cedula + " -- " + self.sexo

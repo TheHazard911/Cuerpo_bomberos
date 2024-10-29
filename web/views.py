@@ -656,6 +656,7 @@ def View_personal(request):
                 cargo = formulario.cleaned_data["cargo"],
                 cedula = formulario.cleaned_data["cedula"],
                 sexo = formulario.cleaned_data["sexo"],
+                rol = formulario.cleaned_data["rol"],
             )
 
             new_personal.save()
