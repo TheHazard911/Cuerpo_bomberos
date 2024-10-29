@@ -163,6 +163,15 @@ def Asignar_op_Investigacion():
        op.append((str(procedimiento.id), procedimiento.tipo_investigacion))
    return op
 
+
+class FormularioRegistroPersonal(forms.Form):
+    nombres = forms.CharField(max_length=50)
+    apellidos = forms.CharField(max_length=50)
+    cedula = forms.IntegerField()
+    jerarquia = forms.CharField(max_length=50)
+    cargo = forms.CharField(max_length=50)
+    sexo = forms.ChoiceField(choices=[("", "Seleccione Una Opcion"), ("Masculino", "Masculino"), ("Femenino", "Femenino")], widget=forms.Select(attrs={"class": "disable-first-option"}))
+
 # Form1
 class SelectorDivision(forms.Form):
     op = [

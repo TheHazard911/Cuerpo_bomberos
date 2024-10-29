@@ -26,9 +26,11 @@ class Personal(models.Model):
   apellidos = models.CharField(max_length=50)
   jerarquia = models.CharField(max_length=50)
   cargo = models.CharField(max_length=50)
+  cedula = models.CharField(max_length=50)
+  sexo = models.CharField(max_length=50)
 
   def __str__(self):
-    return self.nombres + " -- " + self.apellidos + " -- " + self.jerarquia + " -- " + self.cargo
+    return self.nombres + " -- " + self.apellidos + " -- " + self.jerarquia + " -- " + self.cargo + " -- " + self.cedula + " -- " + self.sexo
       
 # Tabla de usuarios que pueden entrar a la pagina
 class Usuarios(models.Model):
@@ -171,12 +173,12 @@ class Tipos_Investigacion(models.Model):
 
 # Modelo Proncipal para todos los Procedimientos
 class Procedimientos(models.Model):
-    id_division  = models.ForeignKey(Divisiones, on_delete=models.CASCADE, default=0, blank=True)
+    id_division = models.ForeignKey(Divisiones, on_delete=models.CASCADE, default=0, blank=True)
     tipo_servicio = models.CharField(max_length=50, blank=True)
-    id_solicitante = models.ForeignKey(Personal, on_delete=models.CASCADE, related_name="personal1", default=0)
+    id_solicitante = models.ForeignKey(Personal, on_delete=models.CASCADE, related_name="personal1", null=True, blank=True)
     solicitante_externo = models.CharField(max_length=20, default="Interno", blank=True)
     unidad = models.ForeignKey(Unidades, on_delete=models.CASCADE, default=1)
-    id_jefe_comision = models.ForeignKey(Personal, on_delete=models.CASCADE, related_name="personal2", default=0)
+    id_jefe_comision = models.ForeignKey(Personal, on_delete=models.CASCADE, related_name="personal2", null=True, blank=True)
     dependencia = models.CharField(max_length=80, blank=True)
     efectivos_enviados = models.CharField(max_length=40, blank=True)
     id_municipio = models.ForeignKey(Municipios, on_delete=models.CASCADE)
@@ -185,7 +187,8 @@ class Procedimientos(models.Model):
     hora = models.TimeField(default="00:00")
     direccion = models.CharField(max_length=50)
     id_tipo_procedimiento = models.ForeignKey(Tipos_Procedimientos, on_delete=models.CASCADE)
- 
+
+  
     def __str__(self):
       return self.id_division.division + " -- " + self.id_solicitante.jerarquia + " " + self.id_solicitante.nombres + " " + self.id_solicitante.apellidos + " -- " + self.unidad.nombre_unidad + " -- " + self.id_jefe_comision.jerarquia + " " + self.id_jefe_comision.nombres + " " + self.id_jefe_comision.apellidos + " -- " + self.efectivos_enviados + " -- " + self.id_municipio.municipio + " -- " + self.id_parroquia.parroquia + " -- " + str(self.fecha) + " " + str(self.hora) + " -- " + self.direccion + " -- " + self.id_tipo_procedimiento.tipo_procedimiento
 
