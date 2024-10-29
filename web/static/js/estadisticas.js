@@ -1,3 +1,96 @@
+
+document
+  .getElementById("monthSelector")
+  .addEventListener("change", function () {
+    const selectedMonth = this.value; // Captura el valor del selector de mes
+    obtenerResultados(selectedMonth);
+  });
+
+function obtenerResultados(selectedMonth) {
+  // Determinar el endpoint: si `selectedMonth` está vacío, no enviamos el parámetro `month`
+  const url = selectedMonth
+    ? `/api/generar_estadistica/?month=${selectedMonth}`
+    : `/api/generar_estadistica/`; // Solicitud sin el parámetro `month` para obtener todo el año
+
+  fetch(url)
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error("Error en la solicitud");
+      }
+      return response.json();
+    })
+    .then((data) => {
+            // Elementos de lista para cada división
+      const listaOperaciones = document.getElementById("list_operaciones");
+      const listaPrehospitalaria = document.getElementById("list_prehospitalaria");
+      const listaMedicos = document.getElementById("list_medicos");
+      const listaGrumae = document.getElementById("list_grumae");
+      const listaRescate = document.getElementById("list_rescate");
+      const listaPrevencion = document.getElementById("list_prevencion");
+      const listaEnfermeria = document.getElementById("list_enfermeria");
+      const listaCapacitacion = document.getElementById("list_capacitacion");
+      const listaPsicologia = document.getElementById("list_psicologia");
+
+      // Limpiar las listas antes de agregar nuevos datos
+      listaOperaciones.innerHTML = "";
+      listaPrehospitalaria.innerHTML = "";
+      listaMedicos.innerHTML = "";
+      listaGrumae.innerHTML = "";
+      listaRescate.innerHTML = "";
+      listaPrevencion.innerHTML = "";
+      listaEnfermeria.innerHTML = "";
+      listaCapacitacion.innerHTML = "";
+      listaPsicologia.innerHTML = "";
+
+      // Función para procesar y añadir datos a cada lista
+      function procesarDivision(dataDivision, listaElemento) {
+        if (dataDivision) {
+          for (const tipoProcedimiento in dataDivision.detalles) {
+            // Crear elemento <li> para el tipo de procedimiento
+            const li = document.createElement("li");
+            li.textContent = `${tipoProcedimiento}: ${dataDivision.total_por_tipo[tipoProcedimiento]}`;
+
+            // Crear lista interna de parroquias y cantidades
+            const ulParroquias = document.createElement("ol");
+
+            // Añadir cada parroquia y su cantidad a la lista interna
+            for (const parroquia in dataDivision.detalles[tipoProcedimiento]) {
+              const cantidad = dataDivision.detalles[tipoProcedimiento][parroquia];
+              const liParroquia = document.createElement("li");
+              liParroquia.textContent = `${parroquia}: ${cantidad}`;
+              ulParroquias.appendChild(liParroquia);
+            }
+
+            // Añadir lista de parroquias al elemento <li> del tipo de procedimiento
+            li.appendChild(ulParroquias);
+
+            // Añadir el <li> del tipo de procedimiento a la lista principal
+            listaElemento.appendChild(li);
+          }
+        }
+      }
+
+      // Llamar a la función para cada división con sus respectivos elementos
+      procesarDivision(data.Operaciones, listaOperaciones);
+      procesarDivision(data.Prehospitalaria, listaPrehospitalaria);
+      procesarDivision(data.ServiciosMédicos, listaMedicos);
+      procesarDivision(data.Grumae, listaGrumae);
+      procesarDivision(data.Rescate, listaRescate);
+      procesarDivision(data.Prevención, listaPrevencion);
+      procesarDivision(data.Enfermería, listaEnfermeria);
+      procesarDivision(data.Capacitación, listaCapacitacion);
+      procesarDivision(data.Psicología, listaPsicologia);
+    })
+    .catch((error) => {
+      console.error("Error al obtener datos:", error);
+    });
+}
+
+// Llamada inicial para cargar los datos de todo el año al cargar la página
+document.addEventListener("DOMContentLoaded", () => {
+  obtenerResultados(""); // Llama a `obtenerResultados` sin ningún mes seleccionado para obtener datos del año
+});
+
 document.addEventListener("DOMContentLoaded", function () {
   // Tu código de Chart.js aquí
   const ctx1 = document.getElementById("pie");
@@ -211,7 +304,7 @@ document.addEventListener("DOMContentLoaded", function () {
         labels: labels,
         datasets: [
           {
-            label: "Procedimientos", 
+            label: "Procedimientos",
             data: values,
             borderWidth: 1,
             backgroundColor: [
