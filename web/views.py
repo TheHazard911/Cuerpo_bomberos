@@ -635,6 +635,20 @@ def Blog(request):
     return render(request, 'blog.html')
 
 @login_required
+def View_personal(request):
+    user = request.session.get('user')
+
+    if not user:
+        return redirect('/')
+    # Renderizar la página con los datos
+    return render(request, "personal.html", {
+        "user": user,
+        "jerarquia": user["jerarquia"],
+        "nombres": user["nombres"],
+        "apellidos": user["apellidos"],
+    })
+
+@login_required
 def Dashboard(request):
     user = request.session.get('user')
 

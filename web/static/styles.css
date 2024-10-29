@@ -528,9 +528,9 @@ summary > * {
     cursor: pointer;
     font-size: 1rem;
   }
-  button:hover{
+  button:hover {
     background-color: #6c7385;
-    transition: all .2s ease-in-out;
+    transition: all 0.2s ease-in-out;
   }
 }
 .icons-footer {
@@ -1544,16 +1544,15 @@ summary > * {
   canvas {
     width: 35rem;
   }
-  p{
+  p {
     font-family: var(--kanit-regular);
     font-size: 1.2rem;
-    padding: .5rem;
+    padding: 0.5rem;
     margin: 0;
   }
-  select{
+  select {
     font-family: var(--sofia-sans);
   }
-
 }
 .content-stadist {
   width: 90%;
@@ -1592,13 +1591,13 @@ summary > * {
   border: thin solid #ffffff;
   background-color: #fff;
   border-radius: 20px;
-  padding: .5rem;
+  padding: 0.5rem;
 }
 .graphic-bar {
   width: 100%;
   margin: 0 auto;
   height: auto;
-  padding: .5rem;
+  padding: 0.5rem;
   display: flex;
   justify-content: center;
 }
@@ -1615,34 +1614,69 @@ summary > * {
   border-radius: 20px;
   padding: 2rem;
 }
-.table_100width{
+.table_100width {
   width: 100%;
 }
-.link-to-back{
+.link-to-back {
   z-index: 1000;
   display: flex;
   width: 100%;
   height: auto;
   color: white;
   font-family: var(--kanit-regular);
-  padding: .5rem;
+  padding: 0.5rem;
   align-items: center;
   align-content: center;
   justify-content: flex-start;
-  a{
+  a {
     padding-left: 2rem;
   }
-  a:hover{
+  a:hover {
     transform: scale(1.1);
   }
 }
-.items-list-procediments{
+.items-list-procediments {
   list-style: disc;
-  li{
+  li {
     font-size: 1rem;
     text-align: start;
-    }
   }
-  .btn-graphic{
-    margin-top: 1.5rem;
+}
+.btn-graphic {
+  margin-top: 1.5rem;
+}
+
+.tool-personal {
+  width: 95%;
+  height: auto;
+  padding: 0.4rem;
+  padding-top: 2rem;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  align-content: center;
+  background-color: #ffffff;
+  border: thin solid #ffffff;
+  margin: 0 auto;
+  border-radius: 10px;
+  flex-wrap: wrap;
+  font-size: 1.2rem;
+}
+.accion-personal {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  align-content: center;
+  justify-content: flex-end;
+  p{
+    margin: 0;
   }
+  button{
+    margin-right: 2rem;
+    transform: scale(.8);
+  }
+  button:hover{
+    transform: scale(.9);
+    transition: .1s ease-in-out all;
+  }
+}
