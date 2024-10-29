@@ -17,6 +17,10 @@ from django.views.decorators.cache import never_cache
 import openpyxl
 from openpyxl.utils import get_column_letter
 from django.http import HttpResponse
+from django.db.models import Count
+import json
+from datetime import datetime
+from dateutil.relativedelta import relativedelta
 
 
 def generar_excel(request):
@@ -334,6 +338,74 @@ def generar_excel(request):
     workbook.save(response)
     return response
 
+def generar_resultados(request):
+    try:
+        month = request.GET.get("month")
+    
+        # Filtrar procedimientos del año actual si no se especifica mes
+        if month:
+            year, month = map(int, month.split("-"))
+            procedimientos = Procedimientos.objects.filter(fecha__year=year, fecha__month=month)
+        else:
+            current_year = datetime.now().year
+            procedimientos = Procedimientos.objects.filter(fecha__year=current_year)
+
+        # Diccionario para almacenar los resultados por división
+        resultados_divisiones = {}
+
+        # Definir los nombres de las divisiones
+        nombres_divisiones = {
+            1: 'Rescate',
+            2: 'Operaciones',
+            3: 'Prevención',
+            4: 'Grumae',
+            5: 'Prehospitalaria',
+            6: 'Enfermería',
+            7: 'ServiciosMédicos',
+            8: 'Psicología',
+            9: 'Capacitación'
+        }
+
+        for division_id, division_nombre in nombres_divisiones.items():
+            # Filtrar procedimientos por división
+            division_procedimientos = procedimientos.filter(id_division=division_id)
+
+            # Agrupar y contar procedimientos por tipo y parroquia
+            tipos_procedimientos_parroquias = (
+                division_procedimientos
+                .values('id_tipo_procedimiento__tipo_procedimiento', 'id_parroquia__parroquia')
+                .annotate(cantidad=Count('id'))
+                .order_by('id_tipo_procedimiento__tipo_procedimiento', 'id_parroquia__parroquia')
+            )
+
+            # Estructura de resultados por división, tipo de procedimiento y parroquia
+            resultados_divisiones[division_nombre] = {
+                'total_por_tipo': {},  # Añadir un diccionario para los totales por tipo
+                'detalles': {}  # Añadir un diccionario para los detalles
+            }
+
+            for item in tipos_procedimientos_parroquias:
+                tipo_procedimiento = item['id_tipo_procedimiento__tipo_procedimiento']
+                parroquia = item['id_parroquia__parroquia']
+                cantidad = item['cantidad']
+
+                # Añadir al diccionario de detalles
+                if tipo_procedimiento not in resultados_divisiones[division_nombre]['detalles']:
+                    resultados_divisiones[division_nombre]['detalles'][tipo_procedimiento] = {}
+
+                resultados_divisiones[division_nombre]['detalles'][tipo_procedimiento][parroquia] = cantidad
+
+                # Sumar al total por tipo
+                if tipo_procedimiento not in resultados_divisiones[division_nombre]['total_por_tipo']:
+                    resultados_divisiones[division_nombre]['total_por_tipo'][tipo_procedimiento] = 0
+
+                resultados_divisiones[division_nombre]['total_por_tipo'][tipo_procedimiento] += cantidad
+
+        # Convertir a JSON y devolver como respuesta
+        return JsonResponse(resultados_divisiones, json_dumps_params={'ensure_ascii': False, 'indent': 4})
+    
+    except Exception as e:
+        return JsonResponse({'error': str(e)}, status=500)
 
 def filtrado_mes(mes):
     año_actual = datetime.now().year
