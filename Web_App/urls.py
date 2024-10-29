@@ -24,6 +24,7 @@ urlpatterns = [
     path('login/', Home, name="home"),
     path('', Blog, name="blog"),
     path('dashboard/', Dashboard,name='dashboard') ,
+    path('personal/', View_personal) ,
     path('prueba/', Prueba),
     path('tablageneral/', tabla_general),
     path('procedimientos/', View_Procedimiento, name='view_procedimiento'),
