@@ -61,8 +61,11 @@
   <div class="content-stadist">
     <div class="stadist-rows">
       <section class="cards-stadist-rows">
-        <section class="cards-stadists">
-          <p>Procedimientos - Divisiones</p>
+        <div class="cards-stadists">
+          <div id="graphic-one" class="cards-stadists">
+            <p>Procedimientos - Divisiones</p>
+            <canvas id="pie"></canvas>
+          </div>
           <select class="form-select-sm" aria-label="Default select example">
             <option selected disabled>Seleccionar Division</option>
             <option value="1">Grumae</option>
@@ -75,13 +78,15 @@
             <option value="7">PreHospitalaria</option>
             <option value="5">Servicios Medicos</option>
           </select>
-          <canvas id="pie"></canvas>
-          <button type="button" class="btn btn-primary btn-graphic" id="export">Exportar</button>
-        </section>
+          <button type="button" class="btn btn-primary btn-graphic" onclick="exportarAPowerPoint()">Exportar</button>
+        </div>
       </section>
       <section class="cards-stadist-rows">
         <section class="cards-stadists">
+        <div class="cards-stadists" id="graphic-two">
           <p>Procedimientos - Grumae</p>
+          <canvas id="donuts"></canvas>
+        </div>
           <select class="form-select-sm" aria-label="Default select example">
             <option selected disabled>Seleccionar Division</option>
             <option value="1">Grumae</option>
@@ -94,8 +99,7 @@
             <option value="7">PreHospitalaria</option>
             <option value="5">Servicios Medicos</option>
           </select>
-          <canvas id="donuts"></canvas>
-          <button type="button" class="btn btn-primary btn-graphic">Exportar</button>
+          <button type="button" class="btn btn-primary btn-graphic" onclick="exportarAPowerPointTwo()">Exportar</button>
         </section>
       </section>
     </div>
@@ -337,9 +341,12 @@
     </div>
   </div>
   <div class="graphic-bar">
-    <section class="barts">
+    <section class="barts" id="graphic-three">
       <canvas id="bar" class="bar-graphic"></canvas>
     </section>
+  </div>
+  <div class="bartwo">
+    <button type="button" class="btn btn-primary btn-graphic" onclick="exportarAPowerPointThree()">Exportar</button>
   </div>
       <footer class="footer">
       <section class="text-reserved">
@@ -353,4 +360,3 @@
 
   {% endblock %}
 </div>
-<
