@@ -641,8 +641,8 @@ def View_personal(request):
     if not user:
         return redirect('/')
     
-    personal = Personal.objects.all()
     personal = Personal.objects.exclude(id__in=[0, 4])
+    personal_count = personal.count()
 
     if request.method == 'POST':
         formulario = FormularioRegistroPersonal(request.POST, prefix='formulario')
@@ -654,13 +654,16 @@ def View_personal(request):
                 apellidos = formulario.cleaned_data["apellidos"],
                 jerarquia = formulario.cleaned_data["jerarquia"],
                 cargo = formulario.cleaned_data["cargo"],
-                cedula = formulario.cleaned_data["cedula"],
+                cedula = f"{formulario.cleaned_data["nacionalidad"]}- {formulario.cleaned_data["cedula"]}",
                 sexo = formulario.cleaned_data["sexo"],
                 rol = formulario.cleaned_data["rol"],
+                status = formulario.cleaned_data["status"],
             )
 
             new_personal.save()
-    
+
+            return redirect("/personal/")
+
     else:
         formulario = FormularioRegistroPersonal(prefix='formulario')
     
@@ -672,7 +675,8 @@ def View_personal(request):
         "nombres": user["nombres"],
         "apellidos": user["apellidos"],
         "form_personal": formulario,
-        "personal": personal
+        "personal": personal,
+        "total": personal_count
     })
 
 @login_required
@@ -723,7 +727,6 @@ def Prueba(request):
             })
 
 # Vista de archivo para hacer pruebas de backend
-
 def View_Procedimiento(request):
     user = request.session.get('user')
     if not user:
