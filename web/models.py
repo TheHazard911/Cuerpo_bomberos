@@ -29,9 +29,10 @@ class Personal(models.Model):
   cedula = models.CharField(max_length=50)
   sexo = models.CharField(max_length=50)
   rol = models.CharField(max_length=50)
+  status = models.CharField(max_length=50)
 
   def __str__(self):
-    return self.nombres + " -- " + self.apellidos + " -- " + self.jerarquia + " -- " + self.cargo + " -- " + self.cedula + " -- " + self.sexo
+    return self.nombres + " -- " + self.apellidos + " -- " + self.jerarquia + " -- " + self.cargo + " -- " + self.cedula + " -- " + self.sexo + " -- " + self.rol + " -- " + self.status
       
 # Tabla de usuarios que pueden entrar a la pagina
 class Usuarios(models.Model):

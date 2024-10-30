@@ -165,13 +165,33 @@ def Asignar_op_Investigacion():
 
 
 class FormularioRegistroPersonal(forms.Form):
+    opc = [
+        ("", "Seleccione Una Opcion"),
+        ("General", "General"),
+        ("Coronel", "Coronel"),
+        ("Teniente Coronel", "Teniente Coronel"),
+        ("Mayor", "Mayor"),
+        ("Capitán", "Capitán"),
+        ("Primer Teniente", "Primer Teniente"),
+        ("Teniente", "Teniente"),
+        ("Sargento Mayor", "Sargento Mayor"),
+        ("Sargento Primero", "Sargento Primero"),
+        ("Sargento segundo", "Sargento segundo"),
+        ("Cabo Primero", "Cabo Primero"),
+        ("Cabo Segundo", "Cabo Segundo"),
+        ("Distinguido", "Distinguido"),
+        ("Bombero", "Bombero"),
+    ]
+
     nombres = forms.CharField(max_length=50)
     apellidos = forms.CharField(max_length=50)
+    nacionalidad = forms.ChoiceField(choices=[("V", "V"), ("E", "E")])
     cedula = forms.IntegerField()
-    jerarquia = forms.CharField(max_length=50)
+    jerarquia = forms.ChoiceField(choices=opc, widget=forms.Select(attrs={"class": "disable-first-option"}))
     cargo = forms.CharField(max_length=50)
     sexo = forms.ChoiceField(choices=[("", "Seleccione Una Opcion"), ("Masculino", "Masculino"), ("Femenino", "Femenino")], widget=forms.Select(attrs={"class": "disable-first-option"}))
     rol = forms.ChoiceField(choices=[("", "Seleccione Una Opcion"), ("Administrativo", "Administrativo"), ("Bombero", "Bombero")], widget=forms.Select(attrs={"class": "disable-first-option"}))
+    status = forms.ChoiceField(choices=[("", "Seleccione Una Opcion"), ("Activo", "Activo"), ("Jubilado", "Jubilado"), ("Incapacitado", "Incapacitado")], widget=forms.Select(attrs={"class": "disable-first-option"}))
 
 # Form1
 class SelectorDivision(forms.Form):
