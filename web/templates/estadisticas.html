@@ -76,7 +76,7 @@
             <option value="5">Servicios Medicos</option>
           </select>
           <canvas id="pie"></canvas>
-          <button type="button" class="btn btn-primary btn-graphic">Exportar</button>
+          <button type="button" class="btn btn-primary btn-graphic" id="export">Exportar</button>
         </section>
       </section>
       <section class="cards-stadist-rows">
@@ -98,21 +98,13 @@
           <button type="button" class="btn btn-primary btn-graphic">Exportar</button>
         </section>
       </section>
-      <section class="cards-stadist-rows">
-        <section class="cards-stadists">
-          <canvas id="radar"></canvas>
-        </section>
-      </section>
-      <section class="cards-stadist-rows">
-        <section class="cards-stadists">
-          <canvas id="polarArea"></canvas>
-        </section>
-      </section>
     </div>
     <!-- ------------------------------------------------------------------------------------------------------ -->
     <div class="stadist-column">
       <section class="cards-stadist-column">
-        <input type="month" id="monthSelector" />
+        <section class="section-month">
+          <input type="month" id="monthSelector" class="month-style" />
+        </section>
         <div class="accordion accordion-flush" id="accordionFlushExample">
           <!-- Operaciones -->
           <div class="accordion-item">
@@ -125,7 +117,7 @@
                 aria-expanded="false"
                 aria-controls="flush-collapseOne"
               >
-                Operaciones
+              - Operaciones
               </button>
             </h2>
             <div
@@ -150,7 +142,7 @@
                 aria-expanded="false"
                 aria-controls="flush-collapseTwo"
               >
-                PreHospitalaria
+                - PreHospitalaria
               </button>
             </h2>
             <div
@@ -176,7 +168,7 @@
                 aria-expanded="false"
                 aria-controls="flush-collapseThree"
               >
-                Servicios Medicos
+                - Servicios Medicos
               </button>
             </h2>
             <div
@@ -201,7 +193,7 @@
                 aria-expanded="false"
                 aria-controls="flush-collapseFour"
               >
-                Grumae
+                - Grumae
               </button>
             </h2>
             <div
@@ -226,7 +218,7 @@
                 aria-expanded="false"
                 aria-controls="flush-collapseFive"
               >
-                Rescate
+                - Rescate
               </button>
             </h2>
             <div
@@ -251,7 +243,7 @@
                 aria-expanded="false"
                 aria-controls="flush-collapseSix"
               >
-                Prevencion
+                - Prevencion
               </button>
             </h2>
             <div
@@ -276,7 +268,7 @@
                 aria-expanded="false"
                 aria-controls="flush-collapseSeven"
               >
-                Capacitacion
+                 - Capacitacion
               </button>
             </h2>
             <div
@@ -301,7 +293,7 @@
                 aria-expanded="false"
                 aria-controls="flush-collapseNine"
               >
-                Enfermeria
+                - Enfermeria
               </button>
             </h2>
             <div
@@ -326,7 +318,7 @@
                 aria-expanded="false"
                 aria-controls="flush-collapseEight"
               >
-                Psicologia
+                - Psicologia
               </button>
             </h2>
             <div
@@ -357,6 +349,7 @@
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2"></script>
   <script src="../static/js/estadisticas.js"></script>
+  <script src="../static/js/export.js"></script>
 
   {% endblock %}
 </div>
