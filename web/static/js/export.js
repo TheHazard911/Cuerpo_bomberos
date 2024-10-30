@@ -159,3 +159,54 @@ function exportarAPowerPointThree() {
     pptx.writeFile({ fileName: "grafica barras.pptx" });
   });
 }
+function exportarAWord() {
+  // Obtener el contenido visible del div, sin etiquetas HTML
+  const contenidoDiv = document.getElementById("accordionFlushExample");
+
+  // Crear un contenido limpio eliminando espacios innecesarios
+  let contenidoLimpiado = contenidoDiv.innerHTML
+    .replace(/^\s+|\s+$/g, "") // Eliminar espacios al principio y al final
+    .replace(/(\r\n|\n|\r)/gm, "") // Eliminar líneas en blanco
+    .replace(/<p>\s*<\/p>/g, ""); // Eliminar párrafos vacíos
+
+  // Crear el contenido del archivo Word
+  const blob = new Blob(
+    [
+      `
+          <html>
+            <head>
+              <meta charset="utf-8">
+              <title>Documento Word</title>
+              <style>
+                body {
+                  font-family: Arial, sans-serif; /* Tipo de fuente normal */
+                  line-height: 1.5; /* Altura de línea */
+                  margin: 0; /* Sin márgenes */
+                  padding: 0; /* Sin padding */
+                  }
+                  ol{
+                    list-style: circle;
+                  }
+              </style>
+            </head>
+            <body>
+              ${contenidoLimpiado} <!-- Mantener el formato original de HTML -->
+            </body>
+          </html>
+        `,
+    ],
+    {
+      type: "application/msword",
+    }
+  );
+
+  // Crear un enlace para descargar el archivo
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = "documento.doc"; // Nombre del archivo a descargar
+  document.body.appendChild(a);
+  a.click(); // Simular clic para descargar
+  document.body.removeChild(a); // Limpiar el DOM
+  URL.revokeObjectURL(url); // Liberar la URL
+}
