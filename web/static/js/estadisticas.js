@@ -1,4 +1,3 @@
-
 document
   .getElementById("monthSelector")
   .addEventListener("change", function () {
@@ -20,9 +19,11 @@ function obtenerResultados(selectedMonth) {
       return response.json();
     })
     .then((data) => {
-            // Elementos de lista para cada división
+      // Elementos de lista para cada división
       const listaOperaciones = document.getElementById("list_operaciones");
-      const listaPrehospitalaria = document.getElementById("list_prehospitalaria");
+      const listaPrehospitalaria = document.getElementById(
+        "list_prehospitalaria"
+      );
       const listaMedicos = document.getElementById("list_medicos");
       const listaGrumae = document.getElementById("list_grumae");
       const listaRescate = document.getElementById("list_rescate");
@@ -55,7 +56,8 @@ function obtenerResultados(selectedMonth) {
 
             // Añadir cada parroquia y su cantidad a la lista interna
             for (const parroquia in dataDivision.detalles[tipoProcedimiento]) {
-              const cantidad = dataDivision.detalles[tipoProcedimiento][parroquia];
+              const cantidad =
+                dataDivision.detalles[tipoProcedimiento][parroquia];
               const liParroquia = document.createElement("li");
               liParroquia.textContent = `${parroquia}: ${cantidad}`;
               ulParroquias.appendChild(liParroquia);
@@ -85,122 +87,96 @@ function obtenerResultados(selectedMonth) {
       console.error("Error al obtener datos:", error);
     });
 }
-
 // Llamada inicial para cargar los datos de todo el año al cargar la página
 document.addEventListener("DOMContentLoaded", () => {
   obtenerResultados(""); // Llama a `obtenerResultados` sin ningún mes seleccionado para obtener datos del año
 });
 
+// Grafica de Pie, Procedimientos por Division
 document.addEventListener("DOMContentLoaded", function () {
-  // Tu código de Chart.js aquí
-  const ctx1 = document.getElementById("pie").getContext('2d');
-  new Chart(ctx1, {
-    type: "pie",
-    data: {
-      labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
-      datasets: [
-        {
-          label: "# of Votes",
-          data: [12, 19, 3, 5, 2, 3],
-          borderWidth: 1,
-        },
-      ],
-    },
-    options: {
-      plugins: {
-        legend: {
-          display: true, // Para mostrar la leyenda
-          labels: {
-            font: {
-              size: 16, // Ajusta el tamaño de la fuente aquí
-            },
-          },
-        },
-      },
-    },
-  });
-  const ctx2 = document.getElementById("donuts");
-  new Chart(ctx2, {
-    type: "doughnut",
-    data: {
-      labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
-      datasets: [
-        {
-          label: "# of Votes",
-          data: [12, 19, 3, 5, 2, 3],
-          borderWidth: 1,
-        },
-      ],
-    },
-    options: {
-      plugins: {
-        legend: {
-          display: true, // Para mostrar la leyenda
-          labels: {
-            font: {
-              size: 16, // Ajusta el tamaño de la fuente aquí
-            },
-          },
-        },
-      },
-    },
-  });
-  async function fetchDivisiones() {
+  const selectDivision = document.querySelector(".form-select-sm");
+  const monthPicker = document.getElementById("month-picker2");
+  let chart;
+
+  // Establecer una división por defecto (por ejemplo, la primera opción)
+  selectDivision.value = selectDivision.options[6].value; // Cambia el índice según la división que quieras por defecto
+
+  async function fetchProcedimientos(divisionId, mes) {
     try {
-      const response = await fetch("/api/divisiones/");
+      const response = await fetch(
+        `/api/procedimientos_division/?division_id=${divisionId}&mes=${mes}`
+      );
       if (!response.ok) {
-        throw new Error("Network response was not ok");
+        const errorData = await response.json();
+        throw new Error(errorData.error || "Error fetching data");
       }
       return await response.json();
     } catch (error) {
-      console.error("Error fetching divisiones:", error);
-      return {};
+      return null; // Retorna null si hay un error
     }
   }
 
-  function updateCards(data) {
-    for (const [division, detalles] of Object.entries(data)) {
-      const count = detalles.total || 0; // Solo total
+  async function updateChart() {
+    const divisionId = selectDivision.value;
+    const mesSeleccionado = monthPicker.value;
 
-      const card = document.querySelector(
-        `li[data-division="${division}"] .count`
-      );
-      if (card) {
-        card.textContent = count;
+    const data = await fetchProcedimientos(divisionId, mesSeleccionado);
+
+    // Verifica si se recibieron datos válidos
+    if (!data || data.length === 0) {
+
+      // Cargar gráfica vacía
+      const ctx1 = document.getElementById("pie").getContext("2d");
+
+      // Destruir el gráfico existente si ya está creado
+      if (chart) {
+        chart.destroy();
       }
+
+      // Crear un nuevo gráfico de pie con datos vacíos
+      chart = new Chart(ctx1, {
+        type: "pie",
+        data: {
+          labels: ["Ninguno"], // No hay etiquetas
+          datasets: [
+            {
+              label: "Procedimientos",
+              data: [0], // No hay datos
+              borderWidth: 1,
+            },
+          ],
+        },
+        options: {
+          plugins: {
+            legend: {
+              display: true,
+              labels: {
+                font: {
+                  size: 16,
+                },
+              },
+            },
+          },
+        },
+      });
+      return; // Termina la función para evitar crear una gráfica con datos
     }
-  }
 
-  function obtenerDivisiones(data) {
-    const divisionesList = [];
-    for (const [division, detalles] of Object.entries(data)) {
-      // Solo tomar el total
-      divisionesList.push({ division, count: detalles.total || 0 });
-    }
-    return divisionesList;
-  }
+    const labels = data.map(
+      (proc) => proc.id_tipo_procedimiento__tipo_procedimiento // Asegúrate de que este campo existe
+    );
+    const values = data.map((proc) => proc.count);
 
-  let chart;
+    const ctx1 = document.getElementById("pie").getContext("2d");
 
-  async function init() {
-    const data = await fetchDivisiones();
-    updateCards(data); // Solo datos totales
-    actualizarGrafica(data);
-  }
-
-  function actualizarGrafica(data) {
-    const divisiones = obtenerDivisiones(data);
-    const labels = divisiones.map((item) => item.division);
-    const values = divisiones.map((item) => item.count);
-
-    const ctx6 = document.getElementById("bar");
-
+    // Destruir el gráfico existente si ya está creado
     if (chart) {
       chart.destroy();
     }
 
-    chart = new Chart(ctx6, {
-      type: "bar",
+    // Crear un nuevo gráfico de pie
+    chart = new Chart(ctx1, {
+      type: "pie",
       data: {
         labels: labels,
         datasets: [
@@ -208,45 +184,174 @@ document.addEventListener("DOMContentLoaded", function () {
             label: "Procedimientos",
             data: values,
             borderWidth: 1,
-            backgroundColor: [
-              "rgba(19, 141, 117, 1)", // Color 1
-              "rgba(54, 162, 235, 1)", // Color 2
-              "rgba(255, 206, 86, 1)", // Color 3
-              "rgba(75, 192, 192, 1)", // Color 4
-              "rgba(153, 102, 255, 1)", // Color 5
-              "rgba(255, 159, 64, 1)", // Color 6
-              "rgba(255, 99, 132, 1)", // Color 7
-              "rgba(54, 162, 235, 1)", // Color 8
-              "rgba(255, 206, 86, 1)", // Color 9
-            ],
-            borderColor: [
-              "rgba(19, 141, 117, 1)", // Color de borde 1
-              "rgba(54, 162, 235, 2)", // Color de borde 2
-              "rgba(255, 206, 86, 2)", // Color de borde 3
-              "rgba(75, 192, 192, 2)", // Color de borde 4
-              "rgba(153, 102, 255, 2)", // Color de borde 5
-              "rgba(255, 159, 64, 2)", // Color de borde 6
-              "rgba(255, 99, 132, 2)", // Color de borde 7
-              "rgba(54, 162, 235, 2)", // Color de borde 8
-              "rgba(255, 206, 86, 2)", // Color de borde 9
-            ],
           },
         ],
       },
       options: {
-        responsive: true,
         plugins: {
-          legend: { display: false },
-        },
-        scales: {
-          x: { ticks: { font: { size: 15 } } },
-          y: { ticks: { font: { size: 18 } } },
+          legend: {
+            display: true,
+            labels: {
+              font: {
+                size: 16,
+              },
+            },
+          },
         },
       },
     });
   }
 
-  window.onload = init;
+  // Añadir event listeners
+  selectDivision.addEventListener("change", updateChart);
+  monthPicker.addEventListener("change", updateChart);
+
+  // Llamar a updateChart para cargar la gráfica por defecto
+  updateChart();
 });
 
+const ctx2 = document.getElementById("donuts");
+new Chart(ctx2, {
+  type: "doughnut",
+  data: {
+    labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
+    datasets: [
+      {
+        label: "# of Votes",
+        data: [12, 19, 3, 5, 2, 3],
+        borderWidth: 1,
+      },
+    ],
+  },
+  options: {
+    plugins: {
+      legend: {
+        display: true, // Para mostrar la leyenda
+        labels: {
+          font: {
+            size: 16, // Ajusta el tamaño de la fuente aquí
+          },
+        },
+      },
+    },
+  },
+});
 
+// Actualizar grafico de barras
+document.addEventListener("DOMContentLoaded", function() {
+
+  let chart; // Declarar chart fuera de las funciones para que sea accesible
+  
+  async function fetchDivisiones(mes = "") {
+    try {
+      const response = await fetch(`/api/divisiones_estadisticas/?mes=${mes}`);
+    if (!response.ok) {
+      throw new Error("Network response was not ok");
+    }
+    return await response.json();
+  } catch (error) {
+    console.error("Error fetching divisiones:", error);
+    return {};
+  }
+}
+
+function updateCards(data) {
+  for (const [division, detalles] of Object.entries(data)) {
+    const count = detalles.total || 0; // Solo total
+    
+    const card = document.querySelector(
+      `li[data-division="${division}"] .count`
+    );
+    if (card) {
+      card.textContent = count;
+    }
+  }
+}
+
+function obtenerDivisiones(data) {
+  const divisionesList = [];
+  for (const [division, detalles] of Object.entries(data)) {
+    // Solo tomar el total
+    divisionesList.push({ division, count: detalles.total || 0 });
+  }
+  return divisionesList;
+}
+
+async function init() {
+  const data = await fetchDivisiones(); // Sin mes seleccionado
+  updateCards(data); // Solo datos totales
+  actualizarGrafica(data);
+}
+
+function actualizarGrafica(data) {
+  const divisiones = obtenerDivisiones(data);
+  const labels = divisiones.map((item) => item.division);
+  const values = divisiones.map((item) => item.count);
+  
+  const ctx6 = document.getElementById("bar").getContext("2d");
+  
+  // Destruir el gráfico existente si ya está creado
+  if (chart) {
+    chart.destroy();
+  }
+  
+  // Crear un nuevo gráfico de barras
+  chart = new Chart(ctx6, {
+    type: "bar",
+    data: {
+      labels: labels,
+      datasets: [
+        {
+          label: "Procedimientos",
+          data: values,
+          borderWidth: 1,
+          backgroundColor: [
+            "rgba(19, 141, 117, 1)",
+            "rgba(54, 162, 235, 1)",
+            "rgba(255, 206, 86, 1)",
+            "rgba(75, 192, 192, 1)",
+            "rgba(153, 102, 255, 1)",
+            "rgba(255, 159, 64, 1)",
+            "rgba(255, 99, 132, 1)",
+            "rgba(54, 162, 235, 1)",
+            "rgba(255, 206, 86, 1)",
+          ],
+          borderColor: [
+            "rgba(19, 141, 117, 1)",
+            "rgba(54, 162, 235, 2)",
+            "rgba(255, 206, 86, 2)",
+            "rgba(75, 192, 192, 2)",
+            "rgba(153, 102, 255, 2)",
+            "rgba(255, 159, 64, 2)",
+            "rgba(255, 99, 132, 2)",
+            "rgba(54, 162, 235, 2)",
+            "rgba(255, 206, 86, 2)",
+          ],
+        },
+      ],
+    },
+    options: {
+      responsive: true,
+      plugins: {
+        legend: { display: false },
+      },
+      scales: {
+        x: { ticks: { font: { size: 15 } } },
+        y: { ticks: { font: { size: 18 } } },
+      },
+    },
+  });
+}
+
+// Manejar el evento de cambio del input de mes
+document
+.getElementById("month-picker")
+.addEventListener("change", async (event) => {
+  const mesSeleccionado = event.target.value; // Obtener el valor del mes seleccionado
+  const data = await fetchDivisiones(mesSeleccionado); // Llamar a la API con el mes seleccionado
+  updateCards(data); // Actualizar las tarjetas
+  actualizarGrafica(data); // Actualizar la gráfica
+});
+
+window.onload = init;
+})
