@@ -1737,3 +1737,6 @@ summary > * {
 .modal-footer-personal{
   justify-content: center;
 }
+.highlight {
+  background-color: yellow;
+}
