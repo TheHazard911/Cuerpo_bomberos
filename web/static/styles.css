@@ -643,6 +643,12 @@ summary > * {
     color: #fff;
     margin: 0;
   }
+  h2{
+    font-size: 2rem;
+    font-family: var(--secular-one);
+    color: #fff;
+    margin: 0;
+  }
 }
 .tools-exit-help {
   display: flex;
@@ -989,7 +995,7 @@ summary > * {
     outline: none;
     border: thin solid #b7b7b7;
     width: 18rem;
-    height: 1.8rem;
+    height: 2.5rem;
     margin: 0.5rem;
   }
   select {
@@ -997,7 +1003,7 @@ summary > * {
     outline: none;
     border: thin solid #b7b7b7;
     width: 18rem;
-    height: 1.8rem;
+    height: 2.5rem;
     margin: 0.5rem;
   }
   svg {
@@ -1673,7 +1679,7 @@ summary > * {
   width: 95%;
   height: auto;
   padding: 0.4rem;
-  padding-top: 2rem;
+  padding-top: 1rem;
   display: flex;
   justify-content: space-around;
   align-items: center;
@@ -1685,8 +1691,18 @@ summary > * {
   flex-wrap: wrap;
   font-size: 1.2rem;
 }
+.accion-filter{
+  width: 50%;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+  div{
+    margin: 1rem;
+  }
+}
 .accion-personal {
-  width: 100%;
+  width: 50%;
   display: flex;
   align-items: center;
   align-content: center;
@@ -1710,4 +1726,14 @@ summary > * {
   justify-content: center;
   padding: 0;
   margin: 0 auto;
+}
+.personal-register{
+  h2{
+    margin: 0;
+    padding: 1.5rem;
+    text-align: center;
+  }
+}
+.modal-footer-personal{
+  justify-content: center;
 }
