@@ -61,6 +61,21 @@
     </section>
   </div>
   <div class="tool-personal">
+    <section class="accion-filter">
+      <div class="input-group mb-3">
+        <span class="input-group-text" id="basic-addon1">Jerarquia:</span>
+        <input type="text" class="form-control" placeholder="Buscar Jerarquia">
+      </div>
+      <div class="input-group mb-3">
+        <span class="input-group-text" id="basic-addon1">Status</span>
+        <select class="form-select form-select-sm" aria-label="Small select example">
+          <option selected>Estado</option>
+          <option value="1">Activo</option>
+          <option value="2">Jubilado</option>
+          <option value="3">Incapacitado</option>
+        </select>
+      </div>
+    </section>
     <section class="accion-personal">
         Personas Totales: {{ total }}
         <button type="button" class="btn" data-bs-toggle="modal"
@@ -119,27 +134,26 @@
             src="../static/assets/logo bomberos 2.svg"
             alt="Logo de bomberos"
           />
-          <h1>Cuerpo de Bomberos</h1>
+          <h2>Cuerpo de Bomberos</h2>
         </section>
       </div>
       <div class="modal-body modal-body-two modal-body-three">
-        <section class="info-modal" id="info_modal">
-          <h4>Registrar Personal</h4>
-          <br><br>
+        <section class="info-modal personal-register" id="info_modal">
+          <h2>Registrar Personal</h2>
             <form action="" method="post">
               {% csrf_token %}
               <div class="form-style" id="form_general">{{ form_personal.as_div }}</div>
               <!-- Boton Enviar -->
-              <button type="submit" id="button_submit">
-                Aceptar
-              </button>
+              <div class="modal-footer modal-footer-personal">
+                <button type="submit" id="button_submit" class="btn btn-danger btn-center">
+                  Aceptar
+                </button>
+                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">
+                  Cerrar
+                </button>
+              </div>
             </form>
         </section>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">
-          Cerrar
-        </button>
       </div>
     </div>
   </div>

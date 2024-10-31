@@ -18,7 +18,7 @@
         rows.forEach((row) => {
             const textCellTwo = row.querySelector(`td:nth-child(3)`);
             const textCellThree = row.querySelector(`td:nth-child(8)`);
-            const dateCell = row.querySelector(`td:nth-child(6s)`);
+            const dateCell = row.querySelector(`td:nth-child(6)`);
             const cellDateValue = dateCell.textContent.trim();
             const cellDate = parseDate(cellDateValue.split("-").reverse().join("-"));
             const cellMonth = cellDate.getMonth() + 1; // Obtener solo el mes

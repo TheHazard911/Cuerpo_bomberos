@@ -68,18 +68,20 @@
       <b>Registros de Hoy: </b><span>{{ hoy }}</span>
     </section>
     <section class="filter-search">
-      <label for="search-input-two"><b>Parroquia:</b></label>
+      <span class="input-group-text" id="basic-addon1"><b> Parroquia: </b> </span>
       <input
         type="search"
+        class="form-control"
         name="Buscar"
         id="search-input-two"
         placeholder="Ubicacion"
       />
     </section>
     <section class="filter-search">
-      <label for="search-input-three"><b>Procedimientos:</b></label>
+      <span class="input-group-text" id="basic-addon1"><b> Procedimientos: </b> </span>
       <input
         type="search"
+        class="form-control"
         name="Buscar"
         id="search-input-three"
         placeholder="Tipo"
@@ -87,9 +89,9 @@
     </section>
     <section class="filter-search">
       <!-- Input para seleccionar el trimestre -->
-      <label for="quarterInput"><b>Trimestre: </b></label>
-      <select id="quarterInput">
-        <option value="">Selecciona un trimestre</option>
+      <span class="input-group-text" id="basic-addon1"><b> Trimestre: </b> </span>
+      <select id="quarterInput" class="form-select">
+        <option value="">Seleccionar Trimestre</option>
         <option value="1">(Ene - Mar)</option>
         <option value="2">(Abr - Jun)</option>
         <option value="3">(Jul - Sep)</option>
@@ -281,7 +283,7 @@
             src="../static/assets/logo bomberos 2.svg"
             alt="Logo de bomberos"
           />
-          <h1>Cuerpo de Bomberos</h1>
+          <h2>Cuerpo de Bomberos</h2>
         </section>
       </div>
       <div class="modal-body modal-body-two modal-body-three">
