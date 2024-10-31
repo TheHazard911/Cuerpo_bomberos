@@ -23,7 +23,7 @@ from datetime import datetime
 from dateutil.relativedelta import relativedelta
 from datetime import timedelta
 
-
+# Api para crear el excel de exportacion de la tabla
 def generar_excel(request):
     # Crear un libro de trabajo y una hoja
     workbook = openpyxl.Workbook()
@@ -339,6 +339,7 @@ def generar_excel(request):
     workbook.save(response)
     return response
 
+# Api para crear seccion de lista de procedimientos por cada division, por tipo y parroquia en la seccion de Estadistica
 def generar_resultados(request):
     try:
         month = request.GET.get("month")
@@ -408,6 +409,7 @@ def generar_resultados(request):
     except Exception as e:
         return JsonResponse({'error': str(e)}, status=500)
 
+# Api para crear seccion de grafica anual de meses en el dashboard
 def filtrado_mes(mes):
     año_actual = datetime.now().year
 
@@ -448,6 +450,7 @@ def obtener_meses(request):
     }
     return JsonResponse(data)
 
+# Api para obtener porcentajes para las cards de la seccion del dashboard
 def obtener_porcentajes(request, periodo="general"):
     if periodo == "mes":
         now = timezone.now()
@@ -501,6 +504,7 @@ def obtener_porcentajes(request, periodo="general"):
 
     return JsonResponse(porcentajes)
 
+# Api para obtener los valores de las cards por parroquias de la seccion del Dashboard
 def obtener_procedimientos_parroquias(request):
 
     # Obtener la fecha de hoy y el primer día del mes
@@ -543,8 +547,7 @@ def obtener_procedimientos_parroquias(request):
     # print(procedimientos)
     return JsonResponse(procedimientos)
 
-
-
+# Api para generar valores para la primera grafica de la seccion de estadistica
 def api_procedimientos_division(request):
     division_id = request.GET.get('division_id')
     mes = request.GET.get('mes')
@@ -564,7 +567,7 @@ def api_procedimientos_division(request):
 
     return JsonResponse(list(conteo_procedimientos), safe=False)
 
-
+# Api para generar los valores para la grafica de barras de la seccion de estadistica
 def obtener_divisiones_estadistica(request):
     # Obtener el parámetro 'mes' (en formato 'YYYY-MM')
     mes = request.GET.get('mes', None)
@@ -616,6 +619,7 @@ def obtener_divisiones_estadistica(request):
 
     return JsonResponse(divisiones)
 
+# Api para obtener valores para las cards de divisones de la seccion del dashboard
 def obtener_divisiones(request):
     hoy = datetime.now().date()
     primer_dia_mes = hoy.replace(day=1)
@@ -671,6 +675,7 @@ def obtener_divisiones(request):
 
     return JsonResponse(divisiones)
 
+# Login required
 def login_required(view_func):
     def _wrapped_view(request, *args, **kwargs):
         if 'user' not in request.session:
@@ -678,6 +683,7 @@ def login_required(view_func):
         return view_func(request, *args, **kwargs)
     return _wrapped_view
 
+# Cierrre de sesion
 def logout(request):
     request.session.flush()  # Eliminar todos los datos de la sesión
     return redirect('/login/')
