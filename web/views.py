@@ -21,6 +21,7 @@ from django.db.models import Count
 import json
 from datetime import datetime
 from dateutil.relativedelta import relativedelta
+from datetime import timedelta
 
 
 def generar_excel(request):
@@ -541,6 +542,79 @@ def obtener_procedimientos_parroquias(request):
 
     # print(procedimientos)
     return JsonResponse(procedimientos)
+
+
+
+def api_procedimientos_division(request):
+    division_id = request.GET.get('division_id')
+    mes = request.GET.get('mes')
+
+    # Filtrar por división
+    procedimientos = Procedimientos.objects.filter(id_division=division_id)
+
+    # Filtrar por mes si se proporciona
+    if mes:
+        # Convertir 'mes' a un rango de fechas
+        fecha_inicio = datetime.strptime(mes, '%Y-%m').date()
+        fecha_fin = fecha_inicio.replace(day=1) + relativedelta(months=1)  # Primer día del siguiente mes
+        procedimientos = procedimientos.filter(fecha__gte=fecha_inicio, fecha__lt=fecha_fin)
+
+    # Agrupar por tipo de procedimiento
+    conteo_procedimientos = procedimientos.values('id_tipo_procedimiento__tipo_procedimiento').annotate(count=Count('id')).order_by('id_tipo_procedimiento__tipo_procedimiento')
+
+    return JsonResponse(list(conteo_procedimientos), safe=False)
+
+
+def obtener_divisiones_estadistica(request):
+    # Obtener el parámetro 'mes' (en formato 'YYYY-MM')
+    mes = request.GET.get('mes', None)
+    
+    # Obtener el mes o el año actual si 'mes' no se proporciona
+    hoy = datetime.now()
+    if mes:
+        try:
+            # Si se proporciona el mes, obtenemos el primer día del mes
+            primer_dia_mes = datetime.strptime(mes, '%Y-%m').date()
+        except ValueError:
+            return JsonResponse({"error": "Formato de mes inválido. Debe ser 'YYYY-MM'."}, status=400)
+        ultimo_dia_mes = primer_dia_mes.replace(day=1).replace(month=primer_dia_mes.month % 12 + 1) - timedelta(days=1)
+    else:
+        # Si no se selecciona ningún mes, usar el año actual
+        primer_dia_mes = hoy.replace(month=1, day=1).date()
+        ultimo_dia_mes = hoy.replace(month=12, day=31).date()
+
+    # Filtrar procedimientos por división en el rango de fechas determinado
+    divisiones = {
+        "rescate": {
+            "total": Procedimientos.objects.filter(id_division=1, fecha__range=(primer_dia_mes, ultimo_dia_mes)).count(),
+        },
+        "operaciones": {
+            "total": Procedimientos.objects.filter(id_division=2, fecha__range=(primer_dia_mes, ultimo_dia_mes)).count(),
+        },
+        "prevencion": {
+            "total": Procedimientos.objects.filter(id_division=3, fecha__range=(primer_dia_mes, ultimo_dia_mes)).count(),
+        },
+        "grumae": {
+            "total": Procedimientos.objects.filter(id_division=4, fecha__range=(primer_dia_mes, ultimo_dia_mes)).count(),
+        },
+        "prehospitalaria": {
+            "total": Procedimientos.objects.filter(id_division=5, fecha__range=(primer_dia_mes, ultimo_dia_mes)).count(),
+        },
+        "enfermeria": {
+            "total": Procedimientos.objects.filter(id_division=6, fecha__range=(primer_dia_mes, ultimo_dia_mes)).count(),
+        },
+        "servicios_medicos": {
+            "total": Procedimientos.objects.filter(id_division=7, fecha__range=(primer_dia_mes, ultimo_dia_mes)).count(),
+        },
+        "psicologia": {
+            "total": Procedimientos.objects.filter(id_division=8, fecha__range=(primer_dia_mes, ultimo_dia_mes)).count(),
+        },
+        "capacitacion": {
+            "total": Procedimientos.objects.filter(id_division=9, fecha__range=(primer_dia_mes, ultimo_dia_mes)).count(),
+        },
+    }
+
+    return JsonResponse(divisiones)
 
 def obtener_divisiones(request):
     hoy = datetime.now().date()
