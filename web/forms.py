@@ -1,5 +1,6 @@
 from django import forms
 from.models import *
+from django.db.models import Q
 
 def Asignar_ops_Personal():
     personal = Personal.objects.all()
@@ -7,6 +8,20 @@ def Asignar_ops_Personal():
     for persona in personal:
         op.append((str(persona.id), f"{persona.jerarquia} {persona.nombres} {persona.apellidos}"))
     return op
+
+def Asignar_ops_Solicitante():
+    personal = Personal.objects.filter(
+        Q(jerarquia="General") | 
+        Q(jerarquia="Coronel") | 
+        Q(jerarquia="Teniente Coronel") | 
+        Q(jerarquia__isnull=True) | 
+        Q(jerarquia="")
+    )
+    op = [("", "Seleccione Una Opcion")]
+    for persona in personal:
+        op.append((str(persona.id), f"{persona.jerarquia} {persona.nombres} {persona.apellidos}"))
+    return op
+
 
 def Asignar_op_Doctores():
     personal = Doctores.objects.all()
@@ -215,7 +230,7 @@ class SelectorDivision(forms.Form):
 
 # Form2 
 class SeleccionarInfo(forms.Form):
-    solicitante = forms.ChoiceField(choices=Asignar_ops_Personal(), required=False,
+    solicitante = forms.ChoiceField(choices=Asignar_ops_Solicitante(), required=False,
         widget=forms.Select(attrs={'class': 'disable-first-option'}))
     solicitante_externo = forms.CharField(required=False)
     unidad = forms.ChoiceField(choices=Asignar_opc_unidades(), required=False,
