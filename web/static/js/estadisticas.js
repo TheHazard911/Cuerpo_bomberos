@@ -173,6 +173,7 @@ document.addEventListener("DOMContentLoaded", function () {
     if (chart) {
       chart.destroy();
     }
+// ------------------------------------------------------------------------------------------------------------------
 
     // Crear un nuevo gráfico de pie
     chart = new Chart(ctx1, {
@@ -209,6 +210,7 @@ document.addEventListener("DOMContentLoaded", function () {
   // Llamar a updateChart para cargar la gráfica por defecto
   updateChart();
 });
+// ------------------------------------------------------------------------------------------------------------------
 
 const ctx2 = document.getElementById("donuts");
 new Chart(ctx2, {
@@ -236,7 +238,68 @@ new Chart(ctx2, {
     },
   },
 });
+// ------------------------------------------------------------------------------------------------------------------
 
+const ctx3 = document.getElementById("donuts_two");
+new Chart(ctx3, {
+  type: "doughnut",
+  data: {
+    labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
+    datasets: [
+      {
+        label: "# of Votes",
+        data: [12, 19, 3, 5, 2, 3],
+        borderWidth: 1,
+      },
+    ],
+  },
+  options: {
+    plugins: {
+      legend: {
+        display: true, // Para mostrar la leyenda
+        labels: {
+          font: {
+            size: 16, // Ajusta el tamaño de la fuente aquí
+          },
+        },
+      },
+    },
+  },
+});
+
+
+// ------------------------------------------------------------------------------------------------------------------
+
+const ctx4 = document.getElementById("pie_two");
+new Chart(ctx4, {
+  type: "pie",
+  data: {
+    labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
+    datasets: [
+      {
+        label: "# of Votes",
+        data: [12, 19, 3, 5, 2, 3],
+        borderWidth: 1,
+      },
+    ],
+  },
+  options: {
+    plugins: {
+      legend: {
+        display: true, // Para mostrar la leyenda
+        labels: {
+          font: {
+            size: 16, // Ajusta el tamaño de la fuente aquí
+          },
+        },
+      },
+    },
+  },
+});
+
+
+
+// ------------------------------------------------------------------------------------------------------------------
 // Actualizar grafico de barras
 document.addEventListener("DOMContentLoaded", function() {
 
