@@ -1,8 +1,6 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from .models import Usuarios, Divisiones, Procedimientos
-# from django.utils import timezone
-# from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from .forms import *
 from .models import *
@@ -22,6 +20,55 @@ import json
 from datetime import datetime
 from dateutil.relativedelta import relativedelta
 from datetime import timedelta
+import os
+from django.conf import settings
+import subprocess
+
+# Vista para descargar la base de datos
+def descargar_base_datos(request):
+    # Crear un nombre de archivo basado en la fecha actual
+    fecha_actual = timezone.now().strftime('%Y-%m-%d_%H-%M-%S')
+
+    # Comprobamos el tipo de base de datos
+    db_engine = settings.DATABASES['default']['ENGINE']
+    
+    if 'sqlite3' in db_engine:
+        # Para SQLite, usamos el archivo .sqlite3 directamente
+        db_path = settings.DATABASES['default']['NAME']
+        filename = f"backup_{fecha_actual}.sqlite3"
+        
+        # Abrimos el archivo y lo enviamos como respuesta
+        with open(db_path, 'rb') as f:
+            response = HttpResponse(f.read(), content_type="application/x-sqlite3")
+            response['Content-Disposition'] = f'attachment; filename="{filename}"'
+            return response
+    
+    elif 'postgresql' in db_engine:
+        # Para PostgreSQL, generamos un archivo .sql con pg_dump
+        db_name = settings.DATABASES['default']['NAME']
+        db_user = settings.DATABASES['default']['USER']
+        db_password = settings.DATABASES['default']['PASSWORD']
+        filename = f"backup_{fecha_actual}.sql"
+
+        # Configuramos el comando pg_dump
+        dump_cmd = [
+            "pg_dump", 
+            "-U", db_user, 
+            "-d", db_name, 
+            "-F", "c"
+        ]
+
+        # Ejecutamos el comando y capturamos el resultado
+        os.environ['PGPASSWORD'] = db_password
+        with subprocess.Popen(dump_cmd, stdout=subprocess.PIPE) as proc:
+            response = HttpResponse(proc.stdout, content_type="application/sql")
+            response['Content-Disposition'] = f'attachment; filename="{filename}"'
+            return response
+    
+    else:
+        # Otros motores de base de datos
+        return HttpResponse("Motor de base de datos no compatible", status=400)
+
 
 # Api para crear el excel de exportacion de la tabla
 def generar_excel(request):
@@ -507,42 +554,246 @@ def obtener_porcentajes(request, periodo="general"):
 # Api para obtener los valores de las cards por parroquias de la seccion del Dashboard
 def obtener_procedimientos_parroquias(request):
 
+    username = request.headers.get("X-User-Name")
+
+    print(username)
+    
     # Obtener la fecha de hoy y el primer día del mes
     hoy = datetime.now().date()
     primer_dia_mes = hoy.replace(day=1)
 
-    procedimientos = {
-        "otros_municipios": {
-            "total": Procedimientos.objects.filter(id_parroquia=0).count(),
-            "del_mes": Procedimientos.objects.filter(id_parroquia=0, fecha__gte=primer_dia_mes).count(),
-            "hoy": Procedimientos.objects.filter(id_parroquia=0, fecha=hoy).count(),
-        },
-        "concordia": {
-            "total": Procedimientos.objects.filter(id_parroquia=1).count(),
-            "del_mes": Procedimientos.objects.filter(id_parroquia=1, fecha__gte=primer_dia_mes).count(),
-            "hoy": Procedimientos.objects.filter(id_parroquia=1, fecha=hoy).count(),
-        },
-        "pedro_m": {
-            "total": Procedimientos.objects.filter(id_parroquia=2).count(),
-            "del_mes": Procedimientos.objects.filter(id_parroquia=2, fecha__gte=primer_dia_mes).count(),
-            "hoy": Procedimientos.objects.filter(id_parroquia=2, fecha=hoy).count(),
-        },
-        "san_juan": {
-            "total": Procedimientos.objects.filter(id_parroquia=3).count(),
-            "del_mes": Procedimientos.objects.filter(id_parroquia=3, fecha__gte=primer_dia_mes).count(),
-            "hoy": Procedimientos.objects.filter(id_parroquia=3, fecha=hoy).count(),
-        },
-        "san_sebastian": {
-            "total": Procedimientos.objects.filter(id_parroquia=4).count(),
-            "del_mes": Procedimientos.objects.filter(id_parroquia=4, fecha__gte=primer_dia_mes).count(),
-            "hoy": Procedimientos.objects.filter(id_parroquia=4, fecha=hoy).count(),
-        },
-        "francisco_romero_lobo": {
-            "total": Procedimientos.objects.filter(id_parroquia=6).count(),
-            "del_mes": Procedimientos.objects.filter(id_parroquia=6, fecha__gte=primer_dia_mes).count(),
-            "hoy": Procedimientos.objects.filter(id_parroquia=6, fecha=hoy).count(),
-        },
-    }
+    if username == "Sala_Situacional" or username == "Comandancia" or username == "2dacomandancia" or username == "SeRvEr":
+
+        procedimientos = {
+            "otros_municipios": {
+                "total": Procedimientos.objects.filter(id_parroquia=0).count(),
+                "del_mes": Procedimientos.objects.filter(id_parroquia=0, fecha__gte=primer_dia_mes).count(),
+                "hoy": Procedimientos.objects.filter(id_parroquia=0, fecha=hoy).count(),
+            },
+            "concordia": {
+                "total": Procedimientos.objects.filter(id_parroquia=1).count(),
+                "del_mes": Procedimientos.objects.filter(id_parroquia=1, fecha__gte=primer_dia_mes).count(),
+                "hoy": Procedimientos.objects.filter(id_parroquia=1, fecha=hoy).count(),
+            },
+            "pedro_m": {
+                "total": Procedimientos.objects.filter(id_parroquia=2).count(),
+                "del_mes": Procedimientos.objects.filter(id_parroquia=2, fecha__gte=primer_dia_mes).count(),
+                "hoy": Procedimientos.objects.filter(id_parroquia=2, fecha=hoy).count(),
+            },
+            "san_juan": {
+                "total": Procedimientos.objects.filter(id_parroquia=3).count(),
+                "del_mes": Procedimientos.objects.filter(id_parroquia=3, fecha__gte=primer_dia_mes).count(),
+                "hoy": Procedimientos.objects.filter(id_parroquia=3, fecha=hoy).count(),
+            },
+            "san_sebastian": {
+                "total": Procedimientos.objects.filter(id_parroquia=4).count(),
+                "del_mes": Procedimientos.objects.filter(id_parroquia=4, fecha__gte=primer_dia_mes).count(),
+                "hoy": Procedimientos.objects.filter(id_parroquia=4, fecha=hoy).count(),
+            },
+            "francisco_romero_lobo": {
+                "total": Procedimientos.objects.filter(id_parroquia=6).count(),
+                "del_mes": Procedimientos.objects.filter(id_parroquia=6, fecha__gte=primer_dia_mes).count(),
+                "hoy": Procedimientos.objects.filter(id_parroquia=6, fecha=hoy).count(),
+            },
+        }
+    
+    if username == "Operaciones01":
+        procedimientos = {
+            "otros_municipios": {
+                "hoy": Procedimientos.objects.filter(id_parroquia=0, fecha=hoy, id_division=2).count(),
+            },
+            "concordia": {
+                "hoy": Procedimientos.objects.filter(id_parroquia=1, fecha=hoy, id_division=2).count(),
+            },
+            "pedro_m": {
+                "hoy": Procedimientos.objects.filter(id_parroquia=2, fecha=hoy, id_division=2).count(),
+            },
+            "san_juan": {
+                "hoy": Procedimientos.objects.filter(id_parroquia=3, fecha=hoy, id_division=2).count(),
+            },
+            "san_sebastian": {
+                "hoy": Procedimientos.objects.filter(id_parroquia=4, fecha=hoy, id_division=2).count(),
+            },
+            "francisco_romero_lobo": {
+                "hoy": Procedimientos.objects.filter(id_parroquia=6, fecha=hoy, id_division=2).count(),
+            },
+        }
+    
+    if username == "Grumae02":
+        procedimientos = {
+            "otros_municipios": {
+                "hoy": Procedimientos.objects.filter(id_parroquia=0, fecha=hoy, id_division=4).count(),
+            },
+            "concordia": {
+                "hoy": Procedimientos.objects.filter(id_parroquia=1, fecha=hoy, id_division=4).count(),
+            },
+            "pedro_m": {
+                "hoy": Procedimientos.objects.filter(id_parroquia=2, fecha=hoy, id_division=4).count(),
+            },
+            "san_juan": {
+                "hoy": Procedimientos.objects.filter(id_parroquia=3, fecha=hoy, id_division=4).count(),
+            },
+            "san_sebastian": {
+                "hoy": Procedimientos.objects.filter(id_parroquia=4, fecha=hoy, id_division=4).count(),
+            },
+            "francisco_romero_lobo": {
+                "hoy": Procedimientos.objects.filter(id_parroquia=6, fecha=hoy, id_division=4).count(),
+            },
+        }
+
+    if username == "Rescate03":
+        procedimientos = {
+            "otros_municipios": {
+                "hoy": Procedimientos.objects.filter(id_parroquia=0, fecha=hoy, id_division=1).count(),
+            },
+            "concordia": {
+                "hoy": Procedimientos.objects.filter(id_parroquia=1, fecha=hoy, id_division=1).count(),
+            },
+            "pedro_m": {
+                "hoy": Procedimientos.objects.filter(id_parroquia=2, fecha=hoy, id_division=1).count(),
+            },
+            "san_juan": {
+                "hoy": Procedimientos.objects.filter(id_parroquia=3, fecha=hoy, id_division=1).count(),
+            },
+            "san_sebastian": {
+                "hoy": Procedimientos.objects.filter(id_parroquia=4, fecha=hoy, id_division=1).count(),
+            },
+            "francisco_romero_lobo": {
+                "hoy": Procedimientos.objects.filter(id_parroquia=6, fecha=hoy, id_division=1).count(),
+            },
+        }
+
+    if username == "Prehospitalaria04":
+        procedimientos = {
+            "otros_municipios": {
+                "hoy": Procedimientos.objects.filter(id_parroquia=0, fecha=hoy, id_division=5).count(),
+            },
+            "concordia": {
+                "hoy": Procedimientos.objects.filter(id_parroquia=1, fecha=hoy, id_division=5).count(),
+            },
+            "pedro_m": {
+                "hoy": Procedimientos.objects.filter(id_parroquia=2, fecha=hoy, id_division=5).count(),
+            },
+            "san_juan": {
+                "hoy": Procedimientos.objects.filter(id_parroquia=3, fecha=hoy, id_division=5).count(),
+            },
+            "san_sebastian": {
+                "hoy": Procedimientos.objects.filter(id_parroquia=4, fecha=hoy, id_division=5).count(),
+            },
+            "francisco_romero_lobo": {
+                "hoy": Procedimientos.objects.filter(id_parroquia=6, fecha=hoy, id_division=5).count(),
+            },
+        }
+
+    if username == "Prevencion05":
+        procedimientos = {
+            "otros_municipios": {
+                "hoy": Procedimientos.objects.filter(id_parroquia=0, fecha=hoy, id_division=3).count(),
+            },
+            "concordia": {
+                "hoy": Procedimientos.objects.filter(id_parroquia=1, fecha=hoy, id_division=3).count(),
+            },
+            "pedro_m": {
+                "hoy": Procedimientos.objects.filter(id_parroquia=2, fecha=hoy, id_division=3).count(),
+            },
+            "san_juan": {
+                "hoy": Procedimientos.objects.filter(id_parroquia=3, fecha=hoy, id_division=3).count(),
+            },
+            "san_sebastian": {
+                "hoy": Procedimientos.objects.filter(id_parroquia=4, fecha=hoy, id_division=3).count(),
+            },
+            "francisco_romero_lobo": {
+                "hoy": Procedimientos.objects.filter(id_parroquia=6, fecha=hoy, id_division=3).count(),
+            },
+        }
+
+    if username == "Serviciosmedicos06":
+        procedimientos = {
+            "otros_municipios": {
+                "hoy": Procedimientos.objects.filter(id_parroquia=0, fecha=hoy, id_division=7).count(),
+            },
+            "concordia": {
+                "hoy": Procedimientos.objects.filter(id_parroquia=1, fecha=hoy, id_division=7).count(),
+            },
+            "pedro_m": {
+                "hoy": Procedimientos.objects.filter(id_parroquia=2, fecha=hoy, id_division=7).count(),
+            },
+            "san_juan": {
+                "hoy": Procedimientos.objects.filter(id_parroquia=3, fecha=hoy, id_division=7).count(),
+            },
+            "san_sebastian": {
+                "hoy": Procedimientos.objects.filter(id_parroquia=4, fecha=hoy, id_division=7).count(),
+            },
+            "francisco_romero_lobo": {
+                "hoy": Procedimientos.objects.filter(id_parroquia=6, fecha=hoy, id_division=7).count(),
+            },
+        }
+
+    if username == "Capacitacion07":
+        procedimientos = {
+            "otros_municipios": {
+                "hoy": Procedimientos.objects.filter(id_parroquia=0, fecha=hoy, id_division=9).count(),
+            },
+            "concordia": {
+                "hoy": Procedimientos.objects.filter(id_parroquia=1, fecha=hoy, id_division=9).count(),
+            },
+            "pedro_m": {
+                "hoy": Procedimientos.objects.filter(id_parroquia=2, fecha=hoy, id_division=9).count(),
+            },
+            "san_juan": {
+                "hoy": Procedimientos.objects.filter(id_parroquia=3, fecha=hoy, id_division=9).count(),
+            },
+            "san_sebastian": {
+                "hoy": Procedimientos.objects.filter(id_parroquia=4, fecha=hoy, id_division=9).count(),
+            },
+            "francisco_romero_lobo": {
+                "hoy": Procedimientos.objects.filter(id_parroquia=6, fecha=hoy, id_division=9).count(),
+            },
+        }
+
+    if username == "Enfermeria08":
+        procedimientos = {
+            "otros_municipios": {
+                "hoy": Procedimientos.objects.filter(id_parroquia=0, fecha=hoy, id_division=6).count(),
+            },
+            "concordia": {
+                "hoy": Procedimientos.objects.filter(id_parroquia=1, fecha=hoy, id_division=6).count(),
+            },
+            "pedro_m": {
+                "hoy": Procedimientos.objects.filter(id_parroquia=2, fecha=hoy, id_division=6).count(),
+            },
+            "san_juan": {
+                "hoy": Procedimientos.objects.filter(id_parroquia=3, fecha=hoy, id_division=6).count(),
+            },
+            "san_sebastian": {
+                "hoy": Procedimientos.objects.filter(id_parroquia=4, fecha=hoy, id_division=6).count(),
+            },
+            "francisco_romero_lobo": {
+                "hoy": Procedimientos.objects.filter(id_parroquia=6, fecha=hoy, id_division=6).count(),
+            },
+        }
+
+    if username == "Psicologia09":
+        procedimientos = {
+            "otros_municipios": {
+                "hoy": Procedimientos.objects.filter(id_parroquia=0, fecha=hoy, id_division=8).count(),
+            },
+            "concordia": {
+                "hoy": Procedimientos.objects.filter(id_parroquia=1, fecha=hoy, id_division=8).count(),
+            },
+            "pedro_m": {
+                "hoy": Procedimientos.objects.filter(id_parroquia=2, fecha=hoy, id_division=8).count(),
+            },
+            "san_juan": {
+                "hoy": Procedimientos.objects.filter(id_parroquia=3, fecha=hoy, id_division=8).count(),
+            },
+            "san_sebastian": {
+                "hoy": Procedimientos.objects.filter(id_parroquia=4, fecha=hoy, id_division=8).count(),
+            },
+            "francisco_romero_lobo": {
+                "hoy": Procedimientos.objects.filter(id_parroquia=6, fecha=hoy, id_division=8).count(),
+            },
+        }
 
     # print(procedimientos)
     return JsonResponse(procedimientos)

@@ -6,7 +6,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // Verifica que todos los elementos existen antes de continuar
   if (!inputJerarquia || !selectStatus || !table) {
-    console.error("Uno o más elementos no fueron encontrados en el DOM.");
     return;
   }
 

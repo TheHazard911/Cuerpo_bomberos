@@ -42,10 +42,12 @@ urlpatterns = [
     path('api/meses/', obtener_meses, name='obtener_meses'),
     path('api/porcentajes/<str:periodo>/', obtener_porcentajes, name='api_porcentajes'),
     path('logout/', logout, name='logout'),
+    # path('api/parroquias/', obtener_procedimientos_parroquias, name='obtener_parroquias'),
     path('api/parroquias/', obtener_procedimientos_parroquias, name='obtener_parroquias'),
     path('api/divisiones/', obtener_divisiones, name='obtener_divisiones'),
     path('api/divisiones_estadisticas/', obtener_divisiones_estadistica, name='obtener_divisiones_estadistica'),
     path('descargar-excel/', generar_excel, name='descargar_excel'),
     path('api/generar_estadistica/', generar_resultados, name='generar_estadistica'),
     path('api/procedimientos_division/', api_procedimientos_division, name='procedimientos_division'),
+    path('descargar-base-datos/', descargar_base_datos, name='descargar_base_datos'),
 ]
