@@ -67,7 +67,7 @@
             <canvas id="pie"></canvas>
           </div>
           <select class="form-select-sm" aria-label="Default select example">
-            <option selected disabled>Seleccionar Division</option>
+            <option selected disabled class="form-select">Seleccionar Division</option>
             <option value="4">Grumae</option>
             <option value="1">Rescate</option>
             <option value="8">Psicologia</option>
@@ -78,7 +78,9 @@
             <option value="5">PreHospitalaria</option>
             <option value="7">Servicios Medicos</option>
           </select>
-          <input type="month" id="month-picker2">
+          <div class="card-month">
+            <input type="month" id="month-picker2" class="form-select">
+          </div>
           <button type="button" class="btn btn-primary btn-graphic" onclick="exportarAPowerPoint()">Exportar</button>
         </div>
       </section>
@@ -89,7 +91,7 @@
           <canvas id="donuts"></canvas>
         </div>
           <select class="form-select-sm" aria-label="Default select example">
-            <option selected disabled>Seleccionar Division</option>
+            <option selected disabled class="form-select">Seleccionar Division</option>
             <option value="4">Grumae</option>
             <option value="1">Rescate</option>
             <option value="8">Psicologia</option>
@@ -100,7 +102,57 @@
             <option value="5">PreHospitalaria</option>
             <option value="7">Servicios Medicos</option>
           </select>
-          
+          <div class="card-month">
+            <input type="month" id="" class="form-select">
+          </div>
+          <button type="button" class="btn btn-primary btn-graphic" onclick="exportarAPowerPointTwo()">Exportar</button>
+        </section>
+      </section>
+      <section class="cards-stadist-rows">
+        <div class="cards-stadists">
+          <div id="graphic-one" class="cards-stadists">
+            <p>Procedimientos - Divisiones</p>
+            <canvas id="pie_two"></canvas>
+          </div>
+          <select class="form-select-sm" aria-label="Default select example">
+            <option selected disabled class="form-select">Seleccionar Division</option>
+            <option value="4">Grumae</option>
+            <option value="1">Rescate</option>
+            <option value="8">Psicologia</option>
+            <option value="3">Prevencion</option>
+            <option value="6">Enfermeria</option>
+            <option value="2">Operaciones</option>
+            <option value="9">Capactiacion</option>
+            <option value="5">PreHospitalaria</option>
+            <option value="7">Servicios Medicos</option>
+          </select>
+          <div class="card-month">
+            <input type="month" id="month-picker2" class="form-select">
+          </div>
+          <button type="button" class="btn btn-primary btn-graphic" onclick="exportarAPowerPoint()">Exportar</button>
+        </div>
+      </section>
+      <section class="cards-stadist-rows">
+        <section class="cards-stadists">
+        <div class="cards-stadists" id="graphic-two">
+          <p>Procedimientos - Grumae</p>
+          <canvas id="donuts_two"></canvas>
+        </div>
+          <select class="form-select-sm" aria-label="Default select example">
+            <option selected disabled class="form-select">Seleccionar Division</option>
+            <option value="4">Grumae</option>
+            <option value="1">Rescate</option>
+            <option value="8">Psicologia</option>
+            <option value="3">Prevencion</option>
+            <option value="6">Enfermeria</option>
+            <option value="2">Operaciones</option>
+            <option value="9">Capactiacion</option>
+            <option value="5">PreHospitalaria</option>
+            <option value="7">Servicios Medicos</option>
+          </select>
+          <div class="card-month">
+            <input type="month" id="" class="form-select">
+          </div>
           <button type="button" class="btn btn-primary btn-graphic" onclick="exportarAPowerPointTwo()">Exportar</button>
         </section>
       </section>
@@ -109,7 +161,7 @@
     <div class="stadist-column">
       <section class="cards-stadist-column">
         <section class="section-month">
-          <input type="month" id="monthSelector" class="month-style" />
+          <input type="month" class="form-select month-style" id="monthSelector"/>
         </section>
         <div class="accordion accordion-flush" id="accordionFlushExample">
           <!-- Operaciones -->
@@ -345,16 +397,21 @@
       </section>
     </div>
   </div>
-  
+<div class="title-bar"><h4>Grafica de barras / Divisiones</h4></div>
   <div class="graphic-bar">
     <section class="barts" id="graphic-three">
       <canvas id="bar" class="bar-graphic"></canvas>
     </section>
   </div>
   <div class="bartwo">
-    <input type="month" id="month-picker">
-    <button type="button" class="btn btn-primary btn-graphic" onclick="exportarAPowerPointThree()">Exportar</button>
+    <div class="select-bar">
+      <input type="month" id="month-picker" class="form-select ">
+    </div>
+    <div class="btn-bar">
+      <button type="button" class="btn btn-primary btn-graphic" onclick="exportarAPowerPointThree()">Exportar</button>
+    </div>
   </div>
+
       <footer class="footer">
       <section class="text-reserved">
         <h5>2024 © Cuerpo de bomberos - San Cristobal</h>

@@ -643,7 +643,7 @@ summary > * {
     color: #fff;
     margin: 0;
   }
-  h2{
+  h2 {
     font-size: 2rem;
     font-family: var(--secular-one);
     color: #fff;
@@ -1062,7 +1062,7 @@ summary > * {
   background-color: #ffffff;
   border: thin solid #ffffff;
   border-radius: 15px;
-  padding: 1.5rem;
+  padding: 0;
 }
 .char {
   width: 100%;
@@ -1547,6 +1547,7 @@ summary > * {
   border-radius: 20px;
   justify-content: center;
   align-items: center;
+  padding-bottom: 1rem;
   canvas {
     width: 35rem;
   }
@@ -1604,10 +1605,9 @@ summary > * {
   padding: 0.5rem;
 }
 .graphic-bar {
-  width: 100%;
+  width: 80%;
   margin: 0 auto;
   height: auto;
-  padding: 0.5rem;
   display: flex;
   justify-content: center;
 }
@@ -1645,19 +1645,22 @@ summary > * {
     transform: scale(1.1);
   }
 }
-.section-month{
-  width: 100%;
+.section-month {
+  width: 70%;
   margin: 0 auto;
   display: flex;
   justify-content: center;
 }
-.month-style{
+.month-style {
   margin-top: 1rem;
-  width: 15rem;
-  padding: .2rem;
+  padding: 0.2rem;
   border-radius: 20px;
 }
-.accordion-button{
+.card-month {
+  margin-top: 1rem;
+  width: 65%;
+}
+.accordion-button {
   font-size: 1.2rem;
 }
 .items-list-procediments {
@@ -1665,8 +1668,8 @@ summary > * {
   li {
     font-size: 1.2rem;
     text-align: start;
-    padding: .3rem;
-    li{
+    padding: 0.3rem;
+    li {
       list-style: circle;
     }
   }
@@ -1691,13 +1694,13 @@ summary > * {
   flex-wrap: wrap;
   font-size: 1.2rem;
 }
-.accion-filter{
+.accion-filter {
   width: 50%;
   display: flex;
   justify-content: center;
   align-content: center;
   align-items: center;
-  div{
+  div {
     margin: 1rem;
   }
 }
@@ -1707,36 +1710,67 @@ summary > * {
   align-items: center;
   align-content: center;
   justify-content: flex-end;
-  p{
+  p {
     margin: 0;
   }
-  button{
+  button {
     margin-right: 2rem;
-    transform: scale(.8);
+    transform: scale(0.8);
   }
-  button:hover{
-    transform: scale(.9);
-    transition: .1s ease-in-out all;
+  button:hover {
+    transform: scale(0.9);
+    transition: 0.1s ease-in-out all;
   }
 }
-.bartwo{
-  width: 90%;
+.bartwo {
+  width: 60%;
   height: auto;
   display: flex;
-  justify-content: center;
-  padding: 0;
+  flex-direction: column;
   margin: 0 auto;
+  border: thin solid #ffffff;
+  background-color: #fff;
+  border-radius: 0px 0px 20px 20px;
+  align-items: center;
+  align-content: center;
+  button {
+    margin: 0;
+  }
 }
-.personal-register{
-  h2{
+.select-bar {
+  padding: 1rem;
+  width: auto;
+  select {
+    margin: 0;
+  }
+}
+.btn-bar {
+  padding: 1rem;
+}
+.personal-register {
+  h2 {
     margin: 0;
     padding: 1.5rem;
     text-align: center;
   }
 }
-.modal-footer-personal{
+.modal-footer-personal {
   justify-content: center;
 }
 .highlight {
   background-color: yellow;
+}
+.title-bar {
+  width: 40%;
+  height: auto;
+  margin: 0 auto;
+  border: thin solid #ffffff;
+  background-color: #fff;
+  text-align: center;
+  border-radius: 50px 50px 0 0;
+  h3 {
+    height: auto;
+    padding: 0;
+    margin: 0;
+  }
 }
