@@ -528,9 +528,9 @@ summary > * {
     cursor: pointer;
     font-size: 1rem;
   }
-  button:hover{
+  button:hover {
     background-color: #6c7385;
-    transition: all .2s ease-in-out;
+    transition: all 0.2s ease-in-out;
   }
 }
 .icons-footer {
@@ -638,6 +638,12 @@ summary > * {
     margin-left: 2rem;
   }
   h1 {
+    font-size: 2rem;
+    font-family: var(--secular-one);
+    color: #fff;
+    margin: 0;
+  }
+  h2 {
     font-size: 2rem;
     font-family: var(--secular-one);
     color: #fff;
@@ -989,7 +995,7 @@ summary > * {
     outline: none;
     border: thin solid #b7b7b7;
     width: 18rem;
-    height: 1.8rem;
+    height: 2.5rem;
     margin: 0.5rem;
   }
   select {
@@ -997,7 +1003,7 @@ summary > * {
     outline: none;
     border: thin solid #b7b7b7;
     width: 18rem;
-    height: 1.8rem;
+    height: 2.5rem;
     margin: 0.5rem;
   }
   svg {
@@ -1056,7 +1062,7 @@ summary > * {
   background-color: #ffffff;
   border: thin solid #ffffff;
   border-radius: 15px;
-  padding: 1.5rem;
+  padding: 0;
 }
 .char {
   width: 100%;
@@ -1531,27 +1537,43 @@ summary > * {
 /*--------------------------- estilos de estadisticas -------------------------------------*/
 
 .cards-stadists {
+  display: flex;
+  flex-direction: column;
   width: 100%;
   height: auto;
   border: thin solid #ffffff;
   background-color: #fff;
   margin: 0.5rem;
   border-radius: 20px;
-  display: flex;
   justify-content: center;
   align-items: center;
+  padding-bottom: 1rem;
   canvas {
-    width: 30rem;
+    width: 35rem;
+  }
+  p {
+    font-family: var(--kanit-regular);
+    font-size: 1.2rem;
+    padding: 0.5rem;
+    margin: 0;
+  }
+  select {
+    width: 15rem;
+    border-radius: 10px;
+    font-size: 1.2rem;
+    font-family: var(--sofia-sans);
+    border-color: #b4b4b4;
   }
 }
 .content-stadist {
-  margin: 0 auto;
   width: 90%;
   height: auto;
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: stretch;
+  margin: 0;
+  margin: 0 auto;
 }
 .stadist-rows {
   display: flex;
@@ -1559,13 +1581,14 @@ summary > * {
   width: 100%;
   height: auto;
   flex-wrap: wrap;
+  margin: 0 auto;
 }
 .cards-stadist-rows {
   display: flex;
   justify-content: center;
-  align-items: stretch;
+  align-items: flex-start;
   align-content: center;
-  width: 22rem;
+  width: 25rem;
   height: auto;
 }
 .stadist-column {
@@ -1579,19 +1602,21 @@ summary > * {
   border: thin solid #ffffff;
   background-color: #fff;
   border-radius: 20px;
-  padding: .5rem;
+  padding: 0.5rem;
 }
 .graphic-bar {
-  width: 100%;
-  height: auto;
-  padding: .5rem;
-  margin: 0;
+  width: 80%;
   margin: 0 auto;
+  height: auto;
+  display: flex;
+  justify-content: center;
 }
 .barts {
-  margin: 0 auto;
-  width: 95%;
+  width: 100%;
   height: auto;
+  display: flex;
+  justify-content: center;
+  margin: 0 auto;
 }
 .bar-graphic {
   background-color: #fff;
@@ -1599,24 +1624,153 @@ summary > * {
   border-radius: 20px;
   padding: 2rem;
 }
-.table_100width{
+.table_100width {
   width: 100%;
 }
-.link-to-back{
+.link-to-back {
   z-index: 1000;
   display: flex;
   width: 100%;
   height: auto;
   color: white;
   font-family: var(--kanit-regular);
-  padding: .5rem;
+  padding: 0.5rem;
   align-items: center;
   align-content: center;
   justify-content: flex-start;
-  a{
+  a {
     padding-left: 2rem;
   }
-  a:hover{
+  a:hover {
     transform: scale(1.1);
+  }
+}
+.section-month {
+  width: 70%;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+}
+.month-style {
+  margin-top: 1rem;
+  padding: 0.2rem;
+  border-radius: 20px;
+}
+.card-month {
+  margin-top: 1rem;
+  width: 65%;
+}
+.accordion-button {
+  font-size: 1.2rem;
+}
+.items-list-procediments {
+  list-style: disc;
+  li {
+    font-size: 1.2rem;
+    text-align: start;
+    padding: 0.3rem;
+    li {
+      list-style: circle;
+    }
+  }
+}
+.btn-graphic {
+  margin-top: 1.5rem;
+}
+
+.tool-personal {
+  width: 95%;
+  height: auto;
+  padding: 0.4rem;
+  padding-top: 1rem;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  align-content: center;
+  background-color: #ffffff;
+  border: thin solid #ffffff;
+  margin: 0 auto;
+  border-radius: 10px;
+  flex-wrap: wrap;
+  font-size: 1.2rem;
+}
+.accion-filter {
+  width: 50%;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+  div {
+    margin: 1rem;
+  }
+}
+.accion-personal {
+  width: 50%;
+  display: flex;
+  align-items: center;
+  align-content: center;
+  justify-content: flex-end;
+  p {
+    margin: 0;
+  }
+  button {
+    margin-right: 2rem;
+    transform: scale(0.8);
+  }
+  button:hover {
+    transform: scale(0.9);
+    transition: 0.1s ease-in-out all;
+  }
+}
+.bartwo {
+  width: 60%;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+  border: thin solid #ffffff;
+  background-color: #fff;
+  border-radius: 0px 0px 20px 20px;
+  align-items: center;
+  align-content: center;
+  button {
+    margin: 0;
+  }
+}
+.select-bar {
+  padding: 1rem;
+  width: auto;
+  select {
+    margin: 0;
+  }
+}
+.btn-bar {
+  padding: 1rem;
+}
+.personal-register {
+  h2 {
+    margin: 0;
+    padding: 1.5rem;
+    text-align: center;
+  }
+}
+.modal-footer-personal {
+  justify-content: center;
+}
+.highlight {
+  background-color: yellow;
+}
+.title-bar {
+  width: 40%;
+  height: auto;
+  margin: 0 auto;
+  border: thin solid #ffffff;
+  background-color: #fff;
+  text-align: center;
+  border-radius: 50px 50px 0 0;
+  h3 {
+    height: auto;
+    padding: 0;
+    margin: 0;
   }
 }
