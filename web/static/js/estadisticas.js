@@ -210,93 +210,363 @@ document.addEventListener("DOMContentLoaded", function () {
   // Llamar a updateChart para cargar la gráfica por defecto
   updateChart();
 });
+
+// Grafica de Pie 2, Procedimientos por Division
+document.addEventListener("DOMContentLoaded", function () {
+  const selectDivision = document.querySelector(".form-select-sm2");
+  const monthPicker = document.getElementById("month-picker3");
+  let chart;
+
+  // Establecer una división por defecto (por ejemplo, la primera opción)
+  selectDivision.value = selectDivision.options[4].value; // Cambia el índice según la división que quieras por defecto
+
+  async function fetchProcedimientos(divisionId, mes) {
+    try {
+      const response = await fetch(
+        `/api/procedimientos_division/?division_id=${divisionId}&mes=${mes}`
+      );
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.error || "Error fetching data");
+      }
+      return await response.json();
+    } catch (error) {
+      return null; // Retorna null si hay un error
+    }
+  }
+
+  async function updateChart() {
+    const divisionId = selectDivision.value;
+    const mesSeleccionado = monthPicker.value;
+
+    const data = await fetchProcedimientos(divisionId, mesSeleccionado);
+
+    // Verifica si se recibieron datos válidos
+    if (!data || data.length === 0) {
+
+      // Cargar gráfica vacía
+      const ctx4 = document.getElementById("pie_two").getContext("2d");
+
+      // Destruir el gráfico existente si ya está creado
+      if (chart) {
+        chart.destroy();
+      }
+
+      // Crear un nuevo gráfico de pie con datos vacíos
+      chart = new Chart(ctx4, {
+        type: "pie",
+        data: {
+          labels: ["Ninguno"], // No hay etiquetas
+          datasets: [
+            {
+              label: "Procedimientos",
+              data: [0], // No hay datos
+              borderWidth: 1,
+            },
+          ],
+        },
+        options: {
+          plugins: {
+            legend: {
+              display: true,
+              labels: {
+                font: {
+                  size: 16,
+                },
+              },
+            },
+          },
+        },
+      });
+      return; // Termina la función para evitar crear una gráfica con datos
+    }
+
+    const labels = data.map(
+      (proc) => proc.id_tipo_procedimiento__tipo_procedimiento // Asegúrate de que este campo existe
+    );
+    const values = data.map((proc) => proc.count);
+
+    const ctx4 = document.getElementById("pie_two").getContext("2d");
+
+    // Destruir el gráfico existente si ya está creado
+    if (chart) {
+      chart.destroy();
+    }
 // ------------------------------------------------------------------------------------------------------------------
 
-const ctx2 = document.getElementById("donuts");
-new Chart(ctx2, {
-  type: "doughnut",
-  data: {
-    labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
-    datasets: [
-      {
-        label: "# of Votes",
-        data: [12, 19, 3, 5, 2, 3],
-        borderWidth: 1,
+    // Crear un nuevo gráfico de pie
+    chart = new Chart(ctx4, {
+      type: "pie",
+      data: {
+        labels: labels,
+        datasets: [
+          {
+            label: "Procedimientos",
+            data: values,
+            borderWidth: 1,
+          },
+        ],
       },
-    ],
-  },
-  options: {
-    plugins: {
-      legend: {
-        display: true, // Para mostrar la leyenda
-        labels: {
-          font: {
-            size: 16, // Ajusta el tamaño de la fuente aquí
+      options: {
+        plugins: {
+          legend: {
+            display: true,
+            labels: {
+              font: {
+                size: 16,
+              },
+            },
           },
         },
       },
-    },
-  },
+    });
+  }
+
+  // Añadir event listeners
+  selectDivision.addEventListener("change", updateChart);
+  monthPicker.addEventListener("change", updateChart);
+
+  // Llamar a updateChart para cargar la gráfica por defecto
+  updateChart();
 });
+
+// Grafica de Donut, Procedimientos por Division-Parroquias
+document.addEventListener("DOMContentLoaded", function () {
+  const selectDivision = document.querySelector(".form-select-sm3");
+  const monthPicker = document.getElementById("month-picker4");
+  let chart;
+
+  // Establecer una división por defecto (por ejemplo, la primera opción)
+  selectDivision.value = selectDivision.options[1].value; // Cambia el índice según la división que quieras por defecto
+
+  async function fetchProcedimientos(divisionId, mes) {
+    try {
+      const response = await fetch(
+        `/api/procedimientos_division_parroquia/?division_id=${divisionId}&mes=${mes}`
+      );
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.error || "Error fetching data");
+      }
+      return await response.json();
+    } catch (error) {
+      return null; // Retorna null si hay un error
+    }
+  }
+
+  async function updateChart() {
+    const divisionId = selectDivision.value;
+    const mesSeleccionado = monthPicker.value;
+
+    const data = await fetchProcedimientos(divisionId, mesSeleccionado);
+
+    // Verifica si se recibieron datos válidos
+    if (!data || data.length === 0) {
+
+      // Cargar gráfica vacía
+      const ctx2 = document.getElementById("donuts").getContext("2d");
+
+      // Destruir el gráfico existente si ya está creado
+      if (chart) {
+        chart.destroy();
+      }
+
+      // Crear un nuevo gráfico de pie con datos vacíos
+      chart = new Chart(ctx2, {
+        type: "doughnut",
+        data: {
+          labels: ["Ninguno"], // No hay etiquetas
+          datasets: [
+            {
+              label: "Procedimientos",
+              data: [0], // No hay datos
+              borderWidth: 1,
+            },
+          ],
+        },
+        options: {
+          plugins: {
+            legend: {
+              display: true,
+              labels: {
+                font: {
+                  size: 16,
+                },
+              },
+            },
+          },
+        },
+      });
+      return; // Termina la función para evitar crear una gráfica con datos
+    }
+
+    const labels = data.map(
+      (proc) => proc.id_parroquia__parroquia // Asegúrate de que este campo existe
+    );
+    const values = data.map((proc) => proc.count);
+
+    const ctx2 = document.getElementById("donuts").getContext("2d");
+
+    // Destruir el gráfico existente si ya está creado
+    if (chart) {
+      chart.destroy();
+    }
 // ------------------------------------------------------------------------------------------------------------------
 
-const ctx3 = document.getElementById("donuts_two");
-new Chart(ctx3, {
-  type: "doughnut",
-  data: {
-    labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
-    datasets: [
-      {
-        label: "# of Votes",
-        data: [12, 19, 3, 5, 2, 3],
-        borderWidth: 1,
+    // Crear un nuevo gráfico de pie
+    chart = new Chart(ctx2, {
+      type: "doughnut",
+      data: {
+        labels: labels,
+        datasets: [
+          {
+            label: "Procedimientos",
+            data: values,
+            borderWidth: 1,
+          },
+        ],
       },
-    ],
-  },
-  options: {
-    plugins: {
-      legend: {
-        display: true, // Para mostrar la leyenda
-        labels: {
-          font: {
-            size: 16, // Ajusta el tamaño de la fuente aquí
+      options: {
+        plugins: {
+          legend: {
+            display: true,
+            labels: {
+              font: {
+                size: 16,
+              },
+            },
           },
         },
       },
-    },
-  },
+    });
+  }
+
+  // Añadir event listeners
+  selectDivision.addEventListener("change", updateChart);
+  monthPicker.addEventListener("change", updateChart);
+
+  // Llamar a updateChart para cargar la gráfica por defecto
+  updateChart();
 });
 
+// Grafica de Donut2, Procedimientos por Division-Parroquias
+document.addEventListener("DOMContentLoaded", function () {
+  const selectDivision = document.querySelector(".form-select-sm4");
+  const monthPicker = document.getElementById("month-picker5");
+  let chart;
 
+  // Establecer una división por defecto (por ejemplo, la primera opción)
+  selectDivision.value = selectDivision.options[2].value; // Cambia el índice según la división que quieras por defecto
+
+  async function fetchProcedimientos(divisionId, mes) {
+    try {
+      const response = await fetch(
+        `/api/procedimientos_division_parroquia/?division_id=${divisionId}&mes=${mes}`
+      );
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.error || "Error fetching data");
+      }
+      return await response.json();
+    } catch (error) {
+      return null; // Retorna null si hay un error
+    }
+  }
+
+  async function updateChart() {
+    const divisionId = selectDivision.value;
+    const mesSeleccionado = monthPicker.value;
+
+    const data = await fetchProcedimientos(divisionId, mesSeleccionado);
+
+    // Verifica si se recibieron datos válidos
+    if (!data || data.length === 0) {
+
+      // Cargar gráfica vacía
+      const ctx3 = document.getElementById("donuts_two").getContext("2d");
+
+      // Destruir el gráfico existente si ya está creado
+      if (chart) {
+        chart.destroy();
+      }
+
+      // Crear un nuevo gráfico de pie con datos vacíos
+      chart = new Chart(ctx3, {
+        type: "doughnut",
+        data: {
+          labels: ["Ninguno"], // No hay etiquetas
+          datasets: [
+            {
+              label: "Procedimientos",
+              data: [0], // No hay datos
+              borderWidth: 1,
+            },
+          ],
+        },
+        options: {
+          plugins: {
+            legend: {
+              display: true,
+              labels: {
+                font: {
+                  size: 16,
+                },
+              },
+            },
+          },
+        },
+      });
+      return; // Termina la función para evitar crear una gráfica con datos
+    }
+
+    const labels = data.map(
+      (proc) => proc.id_parroquia__parroquia // Asegúrate de que este campo existe
+    );
+    const values = data.map((proc) => proc.count);
+
+    const ctx3 = document.getElementById("donuts_two").getContext("2d");
+
+    // Destruir el gráfico existente si ya está creado
+    if (chart) {
+      chart.destroy();
+    }
 // ------------------------------------------------------------------------------------------------------------------
 
-const ctx4 = document.getElementById("pie_two");
-new Chart(ctx4, {
-  type: "pie",
-  data: {
-    labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
-    datasets: [
-      {
-        label: "# of Votes",
-        data: [12, 19, 3, 5, 2, 3],
-        borderWidth: 1,
+    // Crear un nuevo gráfico de pie
+    chart = new Chart(ctx3, {
+      type: "doughnut",
+      data: {
+        labels: labels,
+        datasets: [
+          {
+            label: "Procedimientos",
+            data: values,
+            borderWidth: 1,
+          },
+        ],
       },
-    ],
-  },
-  options: {
-    plugins: {
-      legend: {
-        display: true, // Para mostrar la leyenda
-        labels: {
-          font: {
-            size: 16, // Ajusta el tamaño de la fuente aquí
+      options: {
+        plugins: {
+          legend: {
+            display: true,
+            labels: {
+              font: {
+                size: 16,
+              },
+            },
           },
         },
       },
-    },
-  },
-});
+    });
+  }
 
+  // Añadir event listeners
+  selectDivision.addEventListener("change", updateChart);
+  monthPicker.addEventListener("change", updateChart);
+
+  // Llamar a updateChart para cargar la gráfica por defecto
+  updateChart();
+});
 
 
 // ------------------------------------------------------------------------------------------------------------------

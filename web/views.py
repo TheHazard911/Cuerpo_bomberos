@@ -555,8 +555,6 @@ def obtener_porcentajes(request, periodo="general"):
 def obtener_procedimientos_parroquias(request):
 
     username = request.headers.get("X-User-Name")
-
-    print(username)
     
     # Obtener la fecha de hoy y el primer día del mes
     hoy = datetime.now().date()
@@ -816,6 +814,29 @@ def api_procedimientos_division(request):
     # Agrupar por tipo de procedimiento
     conteo_procedimientos = procedimientos.values('id_tipo_procedimiento__tipo_procedimiento').annotate(count=Count('id')).order_by('id_tipo_procedimiento__tipo_procedimiento')
 
+    return JsonResponse(list(conteo_procedimientos), safe=False)
+
+# Api para generar valores para la primera grafica de la seccion de estadistica
+def api_procedimientos_division_parroquias(request):
+    division_id = request.GET.get('division_id')
+    mes = request.GET.get('mes')
+
+    # Filtrar por división
+    procedimientos = Procedimientos.objects.filter(id_division=division_id)
+
+    # Filtrar por mes si se proporciona
+    if mes:
+        # Convertir 'mes' a un rango de fechas
+        fecha_inicio = datetime.strptime(mes, '%Y-%m').date()
+        fecha_fin = fecha_inicio.replace(day=1) + relativedelta(months=1)  # Primer día del siguiente mes
+        procedimientos = procedimientos.filter(fecha__gte=fecha_inicio, fecha__lt=fecha_fin)
+
+    # Agrupar por parroquia y contar
+    conteo_procedimientos = procedimientos.values(
+        'id_parroquia__parroquia'  # Agrupar por el campo de la parroquia
+    ).annotate(count=Count('id')).order_by('id_parroquia__parroquia')
+
+    # Convertir a lista y retornar
     return JsonResponse(list(conteo_procedimientos), safe=False)
 
 # Api para generar los valores para la grafica de barras de la seccion de estadistica

@@ -48,6 +48,7 @@ urlpatterns = [
     path('api/divisiones_estadisticas/', obtener_divisiones_estadistica, name='obtener_divisiones_estadistica'),
     path('descargar-excel/', generar_excel, name='descargar_excel'),
     path('api/generar_estadistica/', generar_resultados, name='generar_estadistica'),
-    path('api/procedimientos_division/', api_procedimientos_division, name='procedimientos_division'),
     path('descargar-base-datos/', descargar_base_datos, name='descargar_base_datos'),
+    path('api/procedimientos_division/', api_procedimientos_division, name='procedimientos_division'),
+    path('api/procedimientos_division_parroquia/', api_procedimientos_division_parroquias, name='procedimientos_division_parroquia'),
 ]
