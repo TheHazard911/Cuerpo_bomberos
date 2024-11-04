@@ -170,8 +170,13 @@ function fetchPorcentajes(periodo) {
 fetchPorcentajes("mes");
 
 async function fetchProcedimientos(condicion) {
+  let usuario = document.getElementById("usuario")
   try {
-    const response = await fetch("/api/parroquias/");
+    const response = await fetch("/api/parroquias/", {
+      headers: {
+        "X-User-Name": usuario.textContent,  // Sustituye con el nombre de usuario real
+      },
+    });
 
     const data = await response.json();
 
