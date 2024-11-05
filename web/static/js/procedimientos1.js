@@ -1037,7 +1037,6 @@ document
         campos = document
           .getElementById("rescate")
           .querySelectorAll("select, input");
-        console.log(campos);
         setRequired(campos, true);
         document.getElementById("button_submit").style.display = "none";
         document
