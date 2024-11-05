@@ -122,7 +122,7 @@ WSGI_APPLICATION = 'Web_App.wsgi.application'
 # }
 
 DATABASES = {
-    'default': dj_database_url.config(default='postgresql://data_rad4_user:Akjqm5bt9mEcBcxEhx9JsikkQ5RwMnDu@dpg-cskgpc3tq21c73dohb3g-a/data_rad4')
+    'default': dj_database_url.config(default='DATABASE_URL')
 }
 
 # Password validation
