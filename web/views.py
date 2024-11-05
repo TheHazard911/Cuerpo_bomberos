@@ -3137,24 +3137,19 @@ def tabla_general(request):
 
     # Filtra los procedimientos de las divisiones 1 a 5
     divisiones = range(1, 6)
-    datos_combined = []
-
-    for division in divisiones:
-        datos_combined.extend(Procedimientos.objects.filter(id_division=division))
-
-    # Ordena los datos combinados por la fecha
-    combined_data = sorted(datos_combined, key=lambda x: x.fecha, reverse=True)
+    datos_combined = Procedimientos.objects.filter(id_division__in=divisiones).order_by('-fecha' and '-hora')  # Orden descendente
 
     # Corrige el conteo
-    total = len(combined_data)
+    total = datos_combined.count()
 
     # Obtener la fecha de hoy
-    hoy = datetime.now().date()
+    hoy_inicio = datetime.now().replace(hour=0, minute=0, second=0, microsecond=0)
+    hoy_fin = hoy_inicio + timedelta(days=1)
+
 
     # Filtrar procedimientos con la fecha de hoy
-    procedimientos_hoy = [procedimiento for procedimiento in combined_data if procedimiento.fecha == hoy]
-
-    hoy_count = len(procedimientos_hoy)
+    procedimientos_hoy = datos_combined.filter(fecha__gte=hoy_inicio, fecha__lt=hoy_fin)
+    hoy_count = procedimientos_hoy.count()
 
     if request.method == 'POST':
         data = json.loads(request.body)
@@ -3171,11 +3166,10 @@ def tabla_general(request):
         "jerarquia": user["jerarquia"],
         "nombres": user["nombres"],
         "apellidos": user["apellidos"],
-        "datos": combined_data,
+        "datos": datos_combined,  # Ya en orden descendente
         "total": total,
-        "hoy": hoy_count  # Cambié 'hoy' a 'hoy_count' para evitar confusiones
+        "hoy": hoy_count
     })
-
 
 # Funcion para eliminar (NO TOCAR)
 # def eliminar_procedimiento(request):
