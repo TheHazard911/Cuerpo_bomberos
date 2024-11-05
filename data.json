@@ -1,0 +1,2472 @@
+[
+{
+    "model": "auth.user",
+    "pk": 1,
+    "fields": {
+        "password": "pbkdf2_sha256$870000$biwTghPB4oH1NEofna64GR$1gNuxOQ0wgBRjUrhN5BCDiPWZ1qwKju6bif+VKQznGE=",
+        "last_login": "2024-11-04T15:49:56.585Z",
+        "is_superuser": true,
+        "username": "Sala_situacional",
+        "first_name": "",
+        "last_name": "",
+        "email": "salasituacional@gmail.com",
+        "is_staff": true,
+        "is_active": true,
+        "date_joined": "2024-09-03T18:58:35.961Z",
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "contenttypes.contenttype",
+    "pk": 1,
+    "fields": {
+        "app_label": "admin",
+        "model": "logentry"
+    }
+},
+{
+    "model": "sessions.session",
+    "pk": "0bggb3zqq5gc790fzoss1war6g1yfvhn",
+    "fields": {
+        "session_data": ".eJxVzDEOgzAMBdC7eEaIQBqgW7tzBuTEpoRC0gYYKsTdSyQWJkvvf_8N1pkD3LfzAtJkHSQwcMDwXS0e9jjN-UkHnqO4pffudxh-eBwt-aiNDwh7Ai2uS9_GwdbS4QIuptG82cWABnQvnxrvlmB1Givpmc5p44nH59m9DPQ498d3xSorK9kZzBAVmaIoRVkYU5gb5qLWMicpa5VT1QnRqSojSZxxZ0oplGaC_Q_XS1Ow:1sqHRP:21nhCjBGLVBZi4F7PEHHUfbtoDXEuTLbP9dc70uWoCE",
+        "expire_date": "2024-09-30T19:31:19.208Z"
+    }
+},
+{
+    "model": "sessions.session",
+    "pk": "2rt91qkljx8rhwo765bhg3grdga67yeb",
+    "fields": {
+        "session_data": ".eJxVjUFqwzAQRa8StA7GslXZ6a6F0lWhtAcw45lxrdSR3JFcKCF3rwTeZDXw3_t_rmqLLOrxul_1yR-_L6KO6swC8rM5yOErxxTkQHxYJfwxppAFHy6jcMz4iS7Ou5gEKJQqrLwsjkJh7-I8uhUWdTuqAbY0D-XT4ChDre6yEfCbfQF0Bv8VKgw-iRurolQ7jdVbIF6ed_duYIY453bPtu56MyHUAJawbTvdtYgtPkCjT6NpyJiTbaiftJ5sX5MhrnnCzmg7MqnbP6W4XWo:1t5tQR:nn_2-mWwiY5McB2EMDWZ-64L3mgkfKTsWTazAVtVyrU",
+        "expire_date": "2024-10-30T02:06:51.640Z"
+    }
+},
+{
+    "model": "sessions.session",
+    "pk": "4mnnp6ddel7eq0k2h23ea8smujfnxow0",
+    "fields": {
+        "session_data": ".eJyrViotTi1SsqqG0kqJKbmZeUo6SlmpRYlFhaWZiUAxR6hYXn5uUlFqMUgkryQjP68SKJZYkJqTk5mSDxL1zS9KVKqtBQCs3BxS:1sybg8:bkrHyjszv-3d4KAANqk7bZu6FGMCwhbVhlCiQgGWs5I",
+        "expire_date": "2024-10-23T18:44:56.944Z"
+    }
+},
+{
+    "model": "sessions.session",
+    "pk": "4u87d9iizusgmqr6g9u1tqq3d2tz4pxw",
+    "fields": {
+        "session_data": ".eJxVzEEOgyAQBdC7sG6MKAV11-49gxmYsWIVWtRFY7x7JWHRriZ5_8_fWQfbOnTbQqGzyBrG2eXXNJgnuRjgCO7hM-PdGqzOYiVL6ZK1Hmm6p-7fwADLcH5XJHNVid5ADiDRlKXiqjSmNFcoeK1FgULUssCq57yXVY4CKafeKMGlpjga51izp8sAZ-tOHilAeG8WTrslc37WgZYobh28-5wGL5omiz5q6wOw4_gChHNTsA:1t00kO:pEmCuo8UYsx-FC7JBl1_jnX_gvtyvE7Msh5_viegvLc",
+        "expire_date": "2024-10-27T15:43:08.695Z"
+    }
+},
+{
+    "model": "sessions.session",
+    "pk": "7nrxjj7jw3b921e2kjvb9wkcqpzbbkfe",
+    "fields": {
+        "session_data": ".eJyrViotTi1SsqqG0kqJKbmZeUo6SlmpRYlFhaWZiUAxR6hYXn5uUlFqMUgkryQjP68SKJZYkJqTk5mSDxL1zS9KVKqtBQCs3BxS:1syHaq:eIk63Wagru62IApKFixjWMdPj2tRIutFe0qBJ1NslJA",
+        "expire_date": "2024-10-22T21:18:08.674Z"
+    }
+},
+{
+    "model": "sessions.session",
+    "pk": "7qfd6om1cgzgy8z52t27i60yik5m6sd2",
+    "fields": {
+        "session_data": ".eJyrViotTi1SsqqG0kqJKbmZeUo6SlmpRYlFhaWZiUAxR6hYXn5uUlFqMUgkryQjP68SKJZYkJqTk5mSDxL1zS9KVKqtBQCs3BxS:1sxfnr:hIbPb-T-dMdBIxWQ4uTtptOOU9RUnTwTEB75tOac1jQ",
+        "expire_date": "2024-10-21T04:57:03.702Z"
+    }
+},
+{
+    "model": "sessions.session",
+    "pk": "7tasca063guujbv2jsoazroz73lz3wxm",
+    "fields": {
+        "session_data": ".eJxVjDsOwjAQBe_iGln-YTuU9DmDtd5d4wBypDipEHeHSCmgfTPzXiLBtta0dV7SROIitDj9bhnwwW0HdId2myXObV2mLHdFHrTLcSZ-Xg_376BCr986slchuoKgADyhtUEHi2jxDEYP2RlybvCGYtG6-KjIESsuGJz2mUm8P-PNOCs:1slYkC:wOR9jaet3YhyGybkrp2emB6qbyzH2MFNQ4_gjP4iVeo",
+        "expire_date": "2024-09-17T18:59:12.147Z"
+    }
+},
+{
+    "model": "sessions.session",
+    "pk": "86qk5y8luqmg62e5rjs5a1mpdnjc3y4a",
+    "fields": {
+        "session_data": ".eJyrViotTi1SsqqG0kqJKbmZeUo6SlmpRYlFhaWZiUAxR6hYXn5uUlFqMUgkryQjP68SKJZYkJqTk5mSDxL1zS9KVKqtBQCs3BxS:1sz5qy:HNHvaaBiDFd0HUDG2S8ObtMuaRsKyaDrswI-kE-X6dM",
+        "expire_date": "2024-10-25T02:58:08.264Z"
+    }
+},
+{
+    "model": "sessions.session",
+    "pk": "8q5zd0spew6o3ps1l032l6cn6pzynquc",
+    "fields": {
+        "session_data": ".eJxVzDEOgzAMBdC7eEaIQBqgW7tzBuTEpoRC0gYYKsTdSyQWJkvvf_8N1pkD3LfzAtJkHSQwcMDwXS0e9jjN-UkHnqO4pffudxh-eBwt-aiNDwh7Ai2uS9_GwdbS4QIuptG82cWABnQvnxrvlmB1Givpmc5p44nH59m9DPQ498d3xSorK9kZzBAVmaIoRVkYU5gb5qLWMicpa5VT1QnRqSojSZxxZ0oplGaC_Q_XS1Ow:1so4Yw:xkbKsIO2Q7Nzf6bDt93626soBVD646t5xxN7gYo7ESE",
+        "expire_date": "2024-09-24T17:21:58.342Z"
+    }
+},
+{
+    "model": "sessions.session",
+    "pk": "99sm2f2ky2olaq8hrwlsdydxlwl0t2me",
+    "fields": {
+        "session_data": ".eJyrViotTi1SsqqG0kqJKbmZeUo6SlmpRYlFhaWZiUAxR6hYXn5uUlFqMUgkryQjP68SKJZYkJqTk5mSDxL1zS9KVKqtBQCs3BxS:1so6SY:rwJXO9m4P-EteQGW8XDjFPwNCveImNvuO-Gw5kXcafU",
+        "expire_date": "2024-09-24T19:23:30.327Z"
+    }
+},
+{
+    "model": "sessions.session",
+    "pk": "aeesv64grj8j10oam8ctnatwze4x5h36",
+    "fields": {
+        "session_data": ".eJxVzDEOgzAMBdC7eEaIQBqgW7tzBuTEpoRC0gYYKsTdSyQWJkvvf_8N1pkD3LfzAtJkHSQwcMDwXS0e9jjN-UkHnqO4pffudxh-eBwt-aiNDwh7Ai2uS9_GwdbS4QIuptG82cWABnQvnxrvlmB1Givpmc5p44nH59m9DPQ498d3xSorK9kZzBAVmaIoRVkYU5gb5qLWMicpa5VT1QnRqSojSZxxZ0oplGaC_Q_XS1Ow:1syG6K:flPdM8kwrOAXWhUqwy8Vjv42qXQ0z7XwQsmhyjNznDY",
+        "expire_date": "2024-10-22T19:42:32.538Z"
+    }
+},
+{
+    "model": "sessions.session",
+    "pk": "as9krq6uq3h1cu0974pceu1xfr5h5tc3",
+    "fields": {
+        "session_data": ".eJyrViotTi1SsqqG0kqJKbmZeUo6SlmpRYlFhaWZiUAxR6hYXn5uUlFqMUgkryQjP68SKJZYkJqTk5mSDxL1zS9KVKqtBQCs3BxS:1sw52A:oy_YJunmSzp5stCUF2fv2U0gQF5k_-zQ_A-sszb5o7A",
+        "expire_date": "2024-10-16T19:29:14.740Z"
+    }
+},
+{
+    "model": "sessions.session",
+    "pk": "bj9o60pczdxkqlcr4x4zdshtsqd75wu4",
+    "fields": {
+        "session_data": ".eJxVzDEOgzAMBdC7eEaIQBqgW7tzBuTEpoRC0gYYKsTdSyQWJkvvf_8N1pkD3LfzAtJkHSQwcMDwXS0e9jjN-UkHnqO4pffudxh-eBwt-aiNDwh7Ai2uS9_GwdbS4QIuptG82cWABnQvnxrvlmB1Givpmc5p44nH59m9DPQ498d3xSorK9kZzBAVmaIoRVkYU5gb5qLWMicpa5VT1QnRqSojSZxxZ0oplGaC_Q_XS1Ow:1snhrg:GXwN_OMJ9r7VJ50vq0pFPnGS56oZ9WietRdyZwEhs1g",
+        "expire_date": "2024-09-23T17:07:48.867Z"
+    }
+},
+{
+    "model": "sessions.session",
+    "pk": "c4rgd5xguqeqqadsx1g6meargn4q6bjs",
+    "fields": {
+        "session_data": ".eJxVzDEOgzAMBdC7eEaIQBqgW7tzBuTEpoRC0gYYKsTdSyQWJkvvf_8N1pkD3LfzAtJkHSQwcMDwXS0e9jjN-UkHnqO4pffudxh-eBwt-aiNDwh7Ai2uS9_GwdbS4QIuptG82cWABnQvnxrvlmB1Givpmc5p44nH59m9DPQ498d3xSorK9kZzBAVmaIoRVkYU5gb5qLWMicpa5VT1QnRqSojSZxxZ0oplGaC_Q_XS1Ow:1svLLP:t1c3dPU-V_i2YD8OxtIP_YVOAAy32HHIOcCcD3eiZSI",
+        "expire_date": "2024-10-14T18:42:03.858Z"
+    }
+},
+{
+    "model": "sessions.session",
+    "pk": "cekq4m84rlo5xek3pvp76umvlgvsh4rb",
+    "fields": {
+        "session_data": ".eJxVjUFqwzAQRa8StA7GslXZ6a6F0lWhtAcw45lxrdSR3JFcKCF3rwTeZDXw3_t_rmqLLOrxul_1yR-_L6KO6swC8rM5yOErxxTkQHxYJfwxppAFHy6jcMz4iS7Ou5gEKJQqrLwsjkJh7-I8uhUWdTuqAbY0D-XT4ChDre6yEfCbfQF0Bv8VKgw-iRurolQ7jdVbIF6ed_duYIY453bPtu56MyHUAJawbTvdtYgtPkCjT6NpyJiTbaiftJ5sX5MhrnnCzmg7MqnbP6W4XWo:1t5ren:URmtKqTq0_g4h6_PHrvpdY1O_rRxl0lqDfrWjslI8JI",
+        "expire_date": "2024-10-30T00:13:33.855Z"
+    }
+},
+{
+    "model": "sessions.session",
+    "pk": "cgk1g4l96ch7a9u24wwrltm7e4rir1k8",
+    "fields": {
+        "session_data": ".eJwtizEKgDAQBL8iV_sCOwuxFX3Baa44ibm4iYKIfzeC1cDOzk1HElBz_6RJxrMD1bQKGPuhXMZeUjZUTqoIu2TJVg7BthmSim7dpkFTBjv7Uo7ivTr73AANi0b29DwvBWsmDA:1t6rz9:vGDVy-UCYpR3OEWHvDiE9FMThezrxzHrbhITVOqyjow",
+        "expire_date": "2024-11-01T18:46:43.794Z"
+    }
+},
+{
+    "model": "sessions.session",
+    "pk": "cuat4of7b89qcjet9nny7k38hyz89gd5",
+    "fields": {
+        "session_data": ".eJxVzDEOgzAMBdC7eEaIQBqgW7tzBuTEpoRC0gYYKsTdSyQWJkvvf_8N1pkD3LfzAtJkHSQwcMDwXS0e9jjN-UkHnqO4pffudxh-eBwt-aiNDwh7Ai2uS9_GwdbS4QIuptG82cWABnQvnxrvlmB1Givpmc5p44nH59m9DPQ498d3xSorK9kZzBAVmaIoRVkYU5gb5qLWMicpa5VT1QnRqSojSZxxZ0oplGaC_Q_XS1Ow:1so13j:L8HTYUI5n6qy8A81ZZQRR_d4cwAICeNibsYTNkq8a0E",
+        "expire_date": "2024-09-24T13:37:31.556Z"
+    }
+},
+{
+    "model": "sessions.session",
+    "pk": "er0o5z3birziq73hbaquhgjzk6hvrqrj",
+    "fields": {
+        "session_data": ".eJwtizEKgDAQBL8iV_sCOwuxFX3Baa44ibm4iYKIfzeC1cDOzk1HElBz_6RJxrMD1bQKGPuhXMZeUjZUTqoIu2TJVg7BthmSim7dpkFTBjv7Uo7ivTr73AANi0b29DwvBWsmDA:1t8ISp:zJ74lIaFPbvLkBv9yv9CcsPLzK2mv-Z9yjMhutRfYvA",
+        "expire_date": "2024-11-05T17:15:15.588Z"
+    }
+},
+{
+    "model": "sessions.session",
+    "pk": "f3lysd2oanj1gxutw0hfbxenvuy3yza3",
+    "fields": {
+        "session_data": ".eJxVzDEOgzAMBdC7eEaIQBqgW7tzBuTEpoRC0gYYKsTdSyQWJkvvf_8N1pkD3LfzAtJkHSQwcMDwXS0e9jjN-UkHnqO4pffudxh-eBwt-aiNDwh7Ai2uS9_GwdbS4QIuptG82cWABnQvnxrvlmB1Givpmc5p44nH59m9DPQ498d3xSorK9kZzBAVmaIoRVkYU5gb5qLWMicpa5VT1QnRqSojSZxxZ0oplGaC_Q_XS1Ow:1svcmR:NvcJ4z4NOKJqrDf5IR1G1SXYVHNsyLqyyHuKhLae3ZU",
+        "expire_date": "2024-10-15T13:19:07.008Z"
+    }
+},
+{
+    "model": "sessions.session",
+    "pk": "fq9hl47o8tnym0u0qcvp400b4ej10xb6",
+    "fields": {
+        "session_data": ".eJyrViotTi1SsqqG0kqJKbmZeUo6SlmpRYlFhaWZiUAxR6hYXn5uUlFqMUgkryQjP68SKJZYkJqTk5mSDxL1zS9KVKqtBQCs3BxS:1sqX2r:CiDFmne_KlZmHYsRtGYoLKuSYQyfanpCPp1vS3J5hIY",
+        "expire_date": "2024-10-01T12:11:01.222Z"
+    }
+},
+{
+    "model": "sessions.session",
+    "pk": "giy0w1thp21xalwt4ajaq927rq54v2la",
+    "fields": {
+        "session_data": ".eJxVjUFqwzAQRa8StA7GslXZ6a6F0lWhtAcw45lxrdSR3JFcKCF3rwTeZDXw3_t_rmqLLOrxul_1yR-_L6KO6swC8rM5yOErxxTkQHxYJfwxppAFHy6jcMz4iS7Ou5gEKJQqrLwsjkJh7-I8uhUWdTuqAbY0D-XT4ChDre6yEfCbfQF0Bv8VKgw-iRurolQ7jdVbIF6ed_duYIY453bPtu56MyHUAJawbTvdtYgtPkCjT6NpyJiTbaiftJ5sX5MhrnnCzmg7MqnbP6W4XWo:1t6Clb:_nhVSazrRCwQYCGvaSo_ZBoSnrPHqTW_83BJTXBZdKo",
+        "expire_date": "2024-10-30T22:45:59.516Z"
+    }
+},
+{
+    "model": "sessions.session",
+    "pk": "guik76ybm2befeipj5g0oev6z649de4f",
+    "fields": {
+        "session_data": ".eJwtizEKgDAQBL8iV_sCOwuxFX3Baa44ibm4iYKIfzeC1cDOzk1HElBz_6RJxrMD1bQKGPuhXMZeUjZUTqoIu2TJVg7BthmSim7dpkFTBjv7Uo7ivTr73AANi0b29DwvBWsmDA:1t6XPy:aNkZb23EDSb2hUJ6S5oyZL9ugDTrX9-RdYGQ97qvW0k",
+        "expire_date": "2024-10-31T20:49:02.626Z"
+    }
+},
+{
+    "model": "sessions.session",
+    "pk": "h544bb5poubfmgkdrsalq44ai424nz6e",
+    "fields": {
+        "session_data": ".eJxVzDEOgzAMBdC7eEaIQBqgW7tzBuTEpoRC0gYYKsTdSyQWJkvvf_8N1pkD3LfzAtJkHSQwcMDwXS0e9jjN-UkHnqO4pffudxh-eBwt-aiNDwh7Ai2uS9_GwdbS4QIuptG82cWABnQvnxrvlmB1Givpmc5p44nH59m9DPQ498d3xSorK9kZzBAVmaIoRVkYU5gb5qLWMicpa5VT1QnRqSojSZxxZ0oplGaC_Q_XS1Ow:1sve9Y:t_le1iF-rgvKs6G4zsMMBbwtVwqkAKT8YceIIMi6dq0",
+        "expire_date": "2024-10-15T14:47:04.687Z"
+    }
+},
+{
+    "model": "sessions.session",
+    "pk": "hsmt7xu15zglflo0ryumzakw2yi9hipx",
+    "fields": {
+        "session_data": ".eJxVzDEOgzAMBdC7eEaIQBqgW7tzBuTEpoRC0gYYKsTdSyQWJkvvf_8N1pkD3LfzAtJkHSQwcMDwXS0e9jjN-UkHnqO4pffudxh-eBwt-aiNDwh7Ai2uS9_GwdbS4QIuptG82cWABnQvnxrvlmB1Givpmc5p44nH59m9DPQ498d3xSorK9kZzBAVmaIoRVkYU5gb5qLWMicpa5VT1QnRqSojSZxxZ0oplGaC_Q_XS1Ow:1sqCeM:s3HzqZ_8lhNqtILGFrG0Vxh7HSR8MX5pCtfyld5fOwQ",
+        "expire_date": "2024-09-30T14:24:22.412Z"
+    }
+},
+{
+    "model": "sessions.session",
+    "pk": "jgs7qm91eenib62mrns6mq94azg3j827",
+    "fields": {
+        "session_data": ".eJyrViotTi1SsqqG0kqJKbmZeUo6SlmpRYlFhaWZiUAxR6hYXn5uUlFqMUgkryQjP68SKJZYkJqTk5mSDxL1zS9KVKqtBQCs3BxS:1sxfqi:HIYneNRCCmnbeRfhl7l1g3wfwMd6_zgdVx4MMRJNa-4",
+        "expire_date": "2024-10-21T05:00:00.641Z"
+    }
+},
+{
+    "model": "sessions.session",
+    "pk": "kada9ggeqtv9n07wdobkcy9qy8ubg82w",
+    "fields": {
+        "session_data": ".eJyrViotTi1SsqqG0kqJKbmZeUo6SlmpRYlFhaWZiUAxR6hYXn5uUlFqMUgkryQjP68SKJZYkJqTk5mSDxL1zS9KVKqtBQCs3BxS:1sytif:YIOuIKx5qY77Ilk9VCSR-bX58XGmM1-CviBGjo672yY",
+        "expire_date": "2024-10-24T14:00:45.124Z"
+    }
+},
+{
+    "model": "sessions.session",
+    "pk": "plnepsmhwd68aszdz0hs2nzkmg7gb5xa",
+    "fields": {
+        "session_data": ".eJxVzDEOgzAMBdC7eEaIQBqgW7tzBuTEpoRC0gYYKsTdSyQWJkvvf_8N1pkD3LfzAtJkHSQwcMDwXS0e9jjN-UkHnqO4pffudxh-eBwt-aiNDwh7Ai2uS9_GwdbS4QIuptG82cWABnQvnxrvlmB1Givpmc5p44nH59m9DPQ498d3xSorK9kZzBAVmaIoRVkYU5gb5qLWMicpa5VT1QnRqSojSZxxZ0oplGaC_Q_XS1Ow:1sqaf1:1lBaL1iaNR3ye4mjidEAYMCIwyVUpbHjW9zgweJrezE",
+        "expire_date": "2024-10-01T16:02:39.322Z"
+    }
+},
+{
+    "model": "sessions.session",
+    "pk": "pqgbwpnfaa95b3b5scb3rhk5l6ortujt",
+    "fields": {
+        "session_data": ".eJxVjUFqwzAQRa8StA7GslXZ6a6F0lWhtAcw45lxrdSR3JFcKCF3rwTeZDXw3_t_rmqLLOrxul_1yR-_L6KO6swC8rM5yOErxxTkQHxYJfwxppAFHy6jcMz4iS7Ou5gEKJQqrLwsjkJh7-I8uhUWdTuqAbY0D-XT4ChDre6yEfCbfQF0Bv8VKgw-iRurolQ7jdVbIF6ed_duYIY453bPtu56MyHUAJawbTvdtYgtPkCjT6NpyJiTbaiftJ5sX5MhrnnCzmg7MqnbP6W4XWo:1t7zL2:L-_Ki7gXcHc13Uzeh_ZdKgtPOx8p3FqGmAHQTt6uLXE",
+        "expire_date": "2024-11-04T20:49:56.594Z"
+    }
+},
+{
+    "model": "sessions.session",
+    "pk": "uligv00luima878yryibt68ymima9rk1",
+    "fields": {
+        "session_data": ".eJxVjEEOgjAQRa9iujaEQi3oTveuPACZzgxSLa0WWBjj3W0TFrqa5P037y06WOahWyaOnSVxEFJsf5kBvLPPA93AX0OBwc_RmiIrxbpOxTkQu9Pq_gUGmIb03bIum1b1CCWAJqzrRjY1Yo07qOTeqIqU2uuK2l7KXrclKeKSe2yU1IZzNOfE4b1ecQEHm4udF0AbPLhk3DhCfC4W0nyk0frEfBhN5CkTPw_BvxKDBztnKWR6DhHE5_MFS7tXxA:1snfu3:bsF09WtzxBBBHw_MmTKVaJnfSE0ZHgKrEGaKvpHVeec",
+        "expire_date": "2024-09-23T15:02:07.517Z"
+    }
+},
+{
+    "model": "sessions.session",
+    "pk": "wgekv2tmlx62ujjpf7o7ldjx3wgwlc1q",
+    "fields": {
+        "session_data": ".eJyrViotTi1SsqqG0kqJKbmZeUo6SlmpRYlFhaWZiUAxR6hYXn5uUlFqMUgkryQjP68SKJZYkJqTk5mSDxL1zS9KVKqtBQCs3BxS:1suDUw:5O1Zf8rL7FWEhP9X0hFw8j4YTibL0VRTg8av3HaPSCs",
+        "expire_date": "2024-10-11T16:07:14.441Z"
+    }
+},
+{
+    "model": "sessions.session",
+    "pk": "x60xyxaqpcnse85e8th28p1igtbe758s",
+    "fields": {
+        "session_data": ".eJyrViotTi1SsqqG0kqJKbmZeUo6SlmpRYlFhaWZiUAxR6hYXn5uUlFqMUgkryQjP68SKJZYkJqTk5mSDxL1zS9KVKqtBQCs3BxS:1svMRJ:zo5QijRlEAoTjN7FdCjN03keJJXCdWi24XOv0Q4vkIA",
+        "expire_date": "2024-10-14T19:52:13.730Z"
+    }
+},
+{
+    "model": "sessions.session",
+    "pk": "xa90phx63h76fvng0irfr8jwh7l0iajb",
+    "fields": {
+        "session_data": ".eJyrViotTi1SsqqG0kqJKbmZeUo6SlmpRYlFhaWZiUAxR6hYXn5uUlFqMUgkryQjP68SKJZYkJqTk5mSDxL1zS9KVKqtBQCs3BxS:1snhq9:yNiLFz2XRFfwKZ3raeRVN5LfAcK3rYmXy4y6FbN-rqY",
+        "expire_date": "2024-09-23T17:06:13.752Z"
+    }
+},
+{
+    "model": "sessions.session",
+    "pk": "yyjwf1wwyg3pj62md38s923sb163ts4w",
+    "fields": {
+        "session_data": ".eJyrViotTi1SsqqG0kqJKbmZeUo6SlmpRYlFhaWZiUAxR6hYXn5uUlFqMUgkryQjP68SKJZYkJqTk5mSDxL1zS9KVKqtBQCs3BxS:1sxrzm:35uzdc09M8o5BwQkoPgqmW8Yo8QQe6kDNFqZcCbtnt8",
+        "expire_date": "2024-10-21T17:58:10.678Z"
+    }
+},
+{
+    "model": "sessions.session",
+    "pk": "zad9lwwzpgpx6goz8fpeab4siu63xpgk",
+    "fields": {
+        "session_data": ".eJyrViotTi1SsqqG0kqJKbmZeUo6SlmpRYlFhaWZiUAxR6hYXn5uUlFqMUgkryQjP68SKJZYkJqTk5mSDxL1zS9KVKqtBQCs3BxS:1svLUY:yQdo1cfZKaCOmL8rMXqsaTRjBTpwpM2D6z0h_85j2fg",
+        "expire_date": "2024-10-14T18:51:30.823Z"
+    }
+},
+{
+    "model": "web.doctores",
+    "pk": 1,
+    "fields": {
+        "doctor": "Dr. Julio Campos (MPPS 46017)"
+    }
+},
+{
+    "model": "web.doctores",
+    "pk": 2,
+    "fields": {
+        "doctor": "Dr. Jesus Casanova (MPPS 151642)"
+    }
+},
+{
+    "model": "web.doctores",
+    "pk": 3,
+    "fields": {
+        "doctor": "Dr. Juan Morera (MPPS 116969)"
+    }
+},
+{
+    "model": "web.doctores",
+    "pk": 4,
+    "fields": {
+        "doctor": "Dr. Gerardo Sánchez (MPPS 145718)"
+    }
+},
+{
+    "model": "web.doctores",
+    "pk": 5,
+    "fields": {
+        "doctor": "Dr. Jonathan Martínez (MPPS 151554)"
+    }
+},
+{
+    "model": "web.doctores",
+    "pk": 6,
+    "fields": {
+        "doctor": "Dr. Julio Rodríguez (MPPS 151696)"
+    }
+},
+{
+    "model": "web.enfermeros",
+    "pk": 1,
+    "fields": {
+        "enfermeros": "Lcda Evanny Contreras"
+    }
+},
+{
+    "model": "web.enfermeros",
+    "pk": 2,
+    "fields": {
+        "enfermeros": "Lcdo Manuel Carrero"
+    }
+},
+{
+    "model": "web.enfermeros",
+    "pk": 3,
+    "fields": {
+        "enfermeros": "Lcdo Alejandro Andrade"
+    }
+},
+{
+    "model": "web.enfermeros",
+    "pk": 4,
+    "fields": {
+        "enfermeros": "Lcdo Jower Torres"
+    }
+},
+{
+    "model": "web.enfermeros",
+    "pk": 5,
+    "fields": {
+        "enfermeros": "Lcdo Roger Rodriguez"
+    }
+},
+{
+    "model": "web.psicologa",
+    "pk": 1,
+    "fields": {
+        "psicologa": "Lcda. Jhonnyrai Peñuela (FVP 15.697)"
+    }
+},
+{
+    "model": "web.personal",
+    "pk": 0,
+    "fields": {
+        "nombres": "",
+        "apellidos": "Externo",
+        "jerarquia": "",
+        "cargo": "",
+        "cedula": "1",
+        "sexo": "1",
+        "rol": "1",
+        "status": "1"
+    }
+},
+{
+    "model": "web.personal",
+    "pk": 1,
+    "fields": {
+        "nombres": "Antonio José",
+        "apellidos": "Briceño Angulo",
+        "jerarquia": "General",
+        "cargo": "Primer Comandante",
+        "cedula": "V- 12235511",
+        "sexo": "Masculino",
+        "rol": "Bombero",
+        "status": "Activo"
+    }
+},
+{
+    "model": "web.personal",
+    "pk": 2,
+    "fields": {
+        "nombres": "Eduard Yulian",
+        "apellidos": "Casas",
+        "jerarquia": "Coronel",
+        "cargo": "Segundo Comandante",
+        "cedula": "V- 15857039",
+        "sexo": "Masculino",
+        "rol": "Bombero",
+        "status": "Activo"
+    }
+},
+{
+    "model": "web.personal",
+    "pk": 3,
+    "fields": {
+        "nombres": "José Elías",
+        "apellidos": "Hernández",
+        "jerarquia": "Coronel",
+        "cargo": "Inspector General",
+        "cedula": "V- 13365533",
+        "sexo": "Masculino",
+        "rol": "Bombero",
+        "status": "Activo"
+    }
+},
+{
+    "model": "web.personal",
+    "pk": 4,
+    "fields": {
+        "nombres": "Administrador",
+        "apellidos": "Principal",
+        "jerarquia": "Gestor de proyecto",
+        "cargo": "Sala Situacional",
+        "cedula": "1",
+        "sexo": "Masculino",
+        "rol": "Administrativo",
+        "status": "Activo"
+    }
+},
+{
+    "model": "web.personal",
+    "pk": 5,
+    "fields": {
+        "nombres": "Daniel Antonio",
+        "apellidos": "Alarcón Fuentes",
+        "jerarquia": "Teniente",
+        "cargo": "Sala Situacional",
+        "cedula": "V- 16122482",
+        "sexo": "Masculino",
+        "rol": "Bombero",
+        "status": "Activo"
+    }
+},
+{
+    "model": "web.personal",
+    "pk": 7,
+    "fields": {
+        "nombres": "Anderson Teodoro",
+        "apellidos": "Vivas Rico",
+        "jerarquia": "Teniente Coronel",
+        "cargo": "Jefe del Área Seguridad Y Prevención",
+        "cedula": "V- 11502310",
+        "sexo": "Masculino",
+        "rol": "Bombero",
+        "status": "Activo"
+    }
+},
+{
+    "model": "web.personal",
+    "pk": 12,
+    "fields": {
+        "nombres": "Jhoan Enrique",
+        "apellidos": "Adrianza Ibarra",
+        "jerarquia": "Teniente Coronel",
+        "cargo": "Jefe de Operaciones",
+        "cedula": "V- 12235673",
+        "sexo": "Masculino",
+        "rol": "Bombero",
+        "status": "Activo"
+    }
+},
+{
+    "model": "web.personal",
+    "pk": 15,
+    "fields": {
+        "nombres": "Javier Noé",
+        "apellidos": "Daza Murillo",
+        "jerarquia": "Teniente Coronel",
+        "cargo": "Jefe de Bienes Muebles e Inmuebles",
+        "cedula": "V- 10157868",
+        "sexo": "Masculino",
+        "rol": "Bombero",
+        "status": "Activo"
+    }
+},
+{
+    "model": "web.personal",
+    "pk": 16,
+    "fields": {
+        "nombres": "Edisson Enrique",
+        "apellidos": "Colmenares",
+        "jerarquia": "Teniente Coronel",
+        "cargo": "Jefe Área de Incendios",
+        "cedula": "V- 10174691",
+        "sexo": "Masculino",
+        "rol": "Bombero",
+        "status": "Activo"
+    }
+},
+{
+    "model": "web.personal",
+    "pk": 17,
+    "fields": {
+        "nombres": "Ángel Edecio",
+        "apellidos": "Escalante Angulo",
+        "jerarquia": "Teniente Coronel",
+        "cargo": "Jefe Área Rescate y Operaciones Especiales",
+        "cedula": "V- 15233210",
+        "sexo": "Masculino",
+        "rol": "Bombero",
+        "status": "Activo"
+    }
+},
+{
+    "model": "web.personal",
+    "pk": 18,
+    "fields": {
+        "nombres": "Jaime Antonio",
+        "apellidos": "Contreras",
+        "jerarquia": "Teniente Coronel",
+        "cargo": "Capacitación Comunal y Escolar",
+        "cedula": "V- 7661555",
+        "sexo": "Masculino",
+        "rol": "Bombero",
+        "status": "Activo"
+    }
+},
+{
+    "model": "web.personal",
+    "pk": 19,
+    "fields": {
+        "nombres": "Jesús Esteves",
+        "apellidos": "Casanova Montoya",
+        "jerarquia": "Teniente Coronel",
+        "cargo": "Servicios Médicos",
+        "cedula": "V- 13688837",
+        "sexo": "Masculino",
+        "rol": "Bombero",
+        "status": "Activo"
+    }
+},
+{
+    "model": "web.personal",
+    "pk": 20,
+    "fields": {
+        "nombres": "Ernesto José",
+        "apellidos": "Ramones Ascanio",
+        "jerarquia": "Teniente Coronel",
+        "cargo": "Capacitación en Seguridad Industrial",
+        "cedula": "V- 11043819",
+        "sexo": "Masculino",
+        "rol": "Bombero",
+        "status": "Activo"
+    }
+},
+{
+    "model": "web.personal",
+    "pk": 21,
+    "fields": {
+        "nombres": "Julio Arnulfo",
+        "apellidos": "Campos Melgarejo",
+        "jerarquia": "Teniente Coronel",
+        "cargo": "Jefe Servicios Médicos",
+        "cedula": "V- 8096405",
+        "sexo": "Masculino",
+        "rol": "Bombero",
+        "status": "Activo"
+    }
+},
+{
+    "model": "web.personal",
+    "pk": 22,
+    "fields": {
+        "nombres": "Jorban Alexander",
+        "apellidos": "Contreras Urbina",
+        "jerarquia": "Mayor",
+        "cargo": "Condicion Retiro",
+        "cedula": "V- 13973978",
+        "sexo": "Masculino",
+        "rol": "Bombero",
+        "status": "Jubilado"
+    }
+},
+{
+    "model": "web.personal",
+    "pk": 23,
+    "fields": {
+        "nombres": "Miguel Andrés",
+        "apellidos": "Corredor Carrero",
+        "jerarquia": "Mayor",
+        "cargo": "Área Especializada en la Extinción de Incendios",
+        "cedula": "V- 10165993",
+        "sexo": "Masculino",
+        "rol": "Bombero",
+        "status": "Activo"
+    }
+},
+{
+    "model": "web.personal",
+    "pk": 24,
+    "fields": {
+        "nombres": "Gerson Alirio",
+        "apellidos": "Rosales Ramírez",
+        "jerarquia": "Mayor",
+        "cargo": "Área Especializada en la Extinción de Incendios",
+        "cedula": "V- 9345750",
+        "sexo": "Masculino",
+        "rol": "Bombero",
+        "status": "Activo"
+    }
+},
+{
+    "model": "web.personal",
+    "pk": 25,
+    "fields": {
+        "nombres": "Victor",
+        "apellidos": "Bastos Fuentes",
+        "jerarquia": "Mayor",
+        "cargo": "Condicion Retiro",
+        "cedula": "V- 12634639",
+        "sexo": "Masculino",
+        "rol": "Bombero",
+        "status": "Activo"
+    }
+},
+{
+    "model": "web.personal",
+    "pk": 26,
+    "fields": {
+        "nombres": "José Guillermo",
+        "apellidos": "Alarcón Pacheco",
+        "jerarquia": "Mayor",
+        "cargo": "Área Rescate y Operaciones Especiales",
+        "cedula": "V- 13506844",
+        "sexo": "Masculino",
+        "rol": "Bombero",
+        "status": "Activo"
+    }
+},
+{
+    "model": "web.personal",
+    "pk": 27,
+    "fields": {
+        "nombres": "Reyes Ali",
+        "apellidos": "Pacheco Berbesi",
+        "jerarquia": "Mayor",
+        "cargo": "Área Especializada en la Extinción de Incendios",
+        "cedula": "V- 9228866",
+        "sexo": "Masculino",
+        "rol": "Bombero",
+        "status": "Activo"
+    }
+},
+{
+    "model": "web.personal",
+    "pk": 28,
+    "fields": {
+        "nombres": "Leopoldo",
+        "apellidos": "Hernández Hernández",
+        "jerarquia": "Mayor",
+        "cargo": "Área Especializada en la Extinción de Incendios",
+        "cedula": "V- 14504426",
+        "sexo": "Masculino",
+        "rol": "Bombero",
+        "status": "Activo"
+    }
+},
+{
+    "model": "web.personal",
+    "pk": 29,
+    "fields": {
+        "nombres": "Raúl Antonio",
+        "apellidos": "Zambrano Jaimes",
+        "jerarquia": "Mayor",
+        "cargo": "Condicion Retiro",
+        "cedula": "V- 14503372",
+        "sexo": "Masculino",
+        "rol": "Bombero",
+        "status": "Activo"
+    }
+},
+{
+    "model": "web.personal",
+    "pk": 30,
+    "fields": {
+        "nombres": "Bladimir Alexis",
+        "apellidos": "Pérez Méndez",
+        "jerarquia": "Mayor",
+        "cargo": "Jefe Despacho VEN-911",
+        "cedula": "V- 10161275",
+        "sexo": "Masculino",
+        "rol": "Bombero",
+        "status": "Activo"
+    }
+},
+{
+    "model": "web.personal",
+    "pk": 31,
+    "fields": {
+        "nombres": "Ángel Augusto",
+        "apellidos": "Herdenez Zambrano",
+        "jerarquia": "Mayor",
+        "cargo": "Área Rescate y Operaciones Especiales",
+        "cedula": "V- 12814041",
+        "sexo": "Masculino",
+        "rol": "Bombero",
+        "status": "Activo"
+    }
+},
+{
+    "model": "web.personal",
+    "pk": 32,
+    "fields": {
+        "nombres": "Marcos",
+        "apellidos": "Morales Rosales",
+        "jerarquia": "Mayor",
+        "cargo": "Área Especializada en la Extinción de Incendios",
+        "cedula": "V- 14100087",
+        "sexo": "Masculino",
+        "rol": "Bombero",
+        "status": "Activo"
+    }
+},
+{
+    "model": "web.personal",
+    "pk": 33,
+    "fields": {
+        "nombres": "Jackson Jair",
+        "apellidos": "Ramírez Moreno",
+        "jerarquia": "Capitán",
+        "cargo": "Área Especializada en la Extinción de Incendios",
+        "cedula": "V- 13973825",
+        "sexo": "Masculino",
+        "rol": "Bombero",
+        "status": "Activo"
+    }
+},
+{
+    "model": "web.personal",
+    "pk": 34,
+    "fields": {
+        "nombres": "Johan Gregory",
+        "apellidos": "Duran Daza",
+        "jerarquia": "Capitán",
+        "cargo": "Jefe de la Unidad de Talento Humano",
+        "cedula": "V- 17108237",
+        "sexo": "Masculino",
+        "rol": "Bombero",
+        "status": "Activo"
+    }
+},
+{
+    "model": "web.personal",
+    "pk": 35,
+    "fields": {
+        "nombres": "Wilmer David",
+        "apellidos": "Osorio Escalante",
+        "jerarquia": "Capitán",
+        "cargo": "Jefe Del Área de Emergencias Prehospitalarias",
+        "cedula": "V- 15231465",
+        "sexo": "Masculino",
+        "rol": "Bombero",
+        "status": "Activo"
+    }
+},
+{
+    "model": "web.personal",
+    "pk": 36,
+    "fields": {
+        "nombres": "Douglas Iván",
+        "apellidos": "Jaimes Ramírez",
+        "jerarquia": "Capitán",
+        "cargo": "Administrador",
+        "cedula": "V- 14502258",
+        "sexo": "Masculino",
+        "rol": "Bombero",
+        "status": "Activo"
+    }
+},
+{
+    "model": "web.personal",
+    "pk": 37,
+    "fields": {
+        "nombres": "Jhonny Hernando",
+        "apellidos": "Fajardo Elles",
+        "jerarquia": "Capitán",
+        "cargo": "Área Especializada en la Extinción de Incendios",
+        "cedula": "V- 15503008",
+        "sexo": "Masculino",
+        "rol": "Bombero",
+        "status": "Activo"
+    }
+},
+{
+    "model": "web.personal",
+    "pk": 38,
+    "fields": {
+        "nombres": "Hender Joseph",
+        "apellidos": "Alarcón Pacheco",
+        "jerarquia": "Capitán",
+        "cargo": "Área Especializada en la Extinción de Incendios",
+        "cedula": "V- 13506783",
+        "sexo": "Masculino",
+        "rol": "Bombero",
+        "status": "Activo"
+    }
+},
+{
+    "model": "web.personal",
+    "pk": 39,
+    "fields": {
+        "nombres": "Jose Eliceo",
+        "apellidos": "Arellano",
+        "jerarquia": "Capitán",
+        "cargo": "Condicion de retiro",
+        "cedula": "V- 9331004",
+        "sexo": "Masculino",
+        "rol": "Bombero",
+        "status": "Jubilado"
+    }
+},
+{
+    "model": "web.usuarios",
+    "pk": 1,
+    "fields": {
+        "user": "Sala_Situacional",
+        "password": "sala_2025",
+        "encargado": 5
+    }
+},
+{
+    "model": "web.usuarios",
+    "pk": 2,
+    "fields": {
+        "user": "Comandancia",
+        "password": "general_01",
+        "encargado": 1
+    }
+},
+{
+    "model": "web.usuarios",
+    "pk": 3,
+    "fields": {
+        "user": "SeRvEr",
+        "password": "orion_32",
+        "encargado": 4
+    }
+},
+{
+    "model": "web.usuarios",
+    "pk": 5,
+    "fields": {
+        "user": "2dacomandancia",
+        "password": "servicios_2da",
+        "encargado": 2
+    }
+},
+{
+    "model": "web.usuarios",
+    "pk": 6,
+    "fields": {
+        "user": "Operaciones01",
+        "password": "vulcano_2025",
+        "encargado": 5
+    }
+},
+{
+    "model": "web.usuarios",
+    "pk": 7,
+    "fields": {
+        "user": "Grumae02",
+        "password": "lince_2025",
+        "encargado": 5
+    }
+},
+{
+    "model": "web.usuarios",
+    "pk": 8,
+    "fields": {
+        "user": "Rescate03",
+        "password": "estacion1",
+        "encargado": 5
+    }
+},
+{
+    "model": "web.usuarios",
+    "pk": 9,
+    "fields": {
+        "user": "Prehospitalaria04",
+        "password": "alpha_2025",
+        "encargado": 5
+    }
+},
+{
+    "model": "web.usuarios",
+    "pk": 10,
+    "fields": {
+        "user": "Prevencion05",
+        "password": "inspeccion_04",
+        "encargado": 5
+    }
+},
+{
+    "model": "web.usuarios",
+    "pk": 11,
+    "fields": {
+        "user": "Serviciosmedicos06",
+        "password": "bronce_01",
+        "encargado": 5
+    }
+},
+{
+    "model": "web.usuarios",
+    "pk": 12,
+    "fields": {
+        "user": "Capacitacion07",
+        "password": "curso00",
+        "encargado": 5
+    }
+},
+{
+    "model": "web.usuarios",
+    "pk": 13,
+    "fields": {
+        "user": "Enfermeria08",
+        "password": "yelco_2025",
+        "encargado": 5
+    }
+},
+{
+    "model": "web.usuarios",
+    "pk": 14,
+    "fields": {
+        "user": "Psicologia09",
+        "password": "psicologia_2025",
+        "encargado": 5
+    }
+},
+{
+    "model": "web.divisiones",
+    "pk": 1,
+    "fields": {
+        "division": "Rescate"
+    }
+},
+{
+    "model": "web.divisiones",
+    "pk": 2,
+    "fields": {
+        "division": "Operaciones"
+    }
+},
+{
+    "model": "web.divisiones",
+    "pk": 3,
+    "fields": {
+        "division": "Prevencion"
+    }
+},
+{
+    "model": "web.divisiones",
+    "pk": 4,
+    "fields": {
+        "division": "GRUMAE"
+    }
+},
+{
+    "model": "web.divisiones",
+    "pk": 5,
+    "fields": {
+        "division": "PreHospitalaria"
+    }
+},
+{
+    "model": "web.divisiones",
+    "pk": 6,
+    "fields": {
+        "division": "Enfermeria"
+    }
+},
+{
+    "model": "web.divisiones",
+    "pk": 7,
+    "fields": {
+        "division": "Servicios Medicos"
+    }
+},
+{
+    "model": "web.divisiones",
+    "pk": 8,
+    "fields": {
+        "division": "Psicologia"
+    }
+},
+{
+    "model": "web.divisiones",
+    "pk": 9,
+    "fields": {
+        "division": "Capacitacion"
+    }
+},
+{
+    "model": "web.municipios",
+    "pk": 1,
+    "fields": {
+        "municipio": "San Cristobal"
+    }
+},
+{
+    "model": "web.municipios",
+    "pk": 2,
+    "fields": {
+        "municipio": "Cárdenas"
+    }
+},
+{
+    "model": "web.municipios",
+    "pk": 3,
+    "fields": {
+        "municipio": "Lobatera"
+    }
+},
+{
+    "model": "web.municipios",
+    "pk": 4,
+    "fields": {
+        "municipio": "Independencia"
+    }
+},
+{
+    "model": "web.municipios",
+    "pk": 5,
+    "fields": {
+        "municipio": "Libertador"
+    }
+},
+{
+    "model": "web.municipios",
+    "pk": 6,
+    "fields": {
+        "municipio": "Andrés Bello"
+    }
+},
+{
+    "model": "web.municipios",
+    "pk": 7,
+    "fields": {
+        "municipio": "Antonio Rómulo Costa"
+    }
+},
+{
+    "model": "web.municipios",
+    "pk": 8,
+    "fields": {
+        "municipio": "Ayacucho"
+    }
+},
+{
+    "model": "web.municipios",
+    "pk": 9,
+    "fields": {
+        "municipio": "Bolívar"
+    }
+},
+{
+    "model": "web.municipios",
+    "pk": 10,
+    "fields": {
+        "municipio": "Córdoba"
+    }
+},
+{
+    "model": "web.municipios",
+    "pk": 11,
+    "fields": {
+        "municipio": "Fernández Feo"
+    }
+},
+{
+    "model": "web.municipios",
+    "pk": 12,
+    "fields": {
+        "municipio": "Francisco de Miranda"
+    }
+},
+{
+    "model": "web.municipios",
+    "pk": 13,
+    "fields": {
+        "municipio": "García de Hevia"
+    }
+},
+{
+    "model": "web.municipios",
+    "pk": 14,
+    "fields": {
+        "municipio": "Guasimos"
+    }
+},
+{
+    "model": "web.municipios",
+    "pk": 15,
+    "fields": {
+        "municipio": "Jáuregui"
+    }
+},
+{
+    "model": "web.municipios",
+    "pk": 16,
+    "fields": {
+        "municipio": "Jose Maria Vargas"
+    }
+},
+{
+    "model": "web.municipios",
+    "pk": 17,
+    "fields": {
+        "municipio": "Junín"
+    }
+},
+{
+    "model": "web.municipios",
+    "pk": 18,
+    "fields": {
+        "municipio": "Libertad"
+    }
+},
+{
+    "model": "web.municipios",
+    "pk": 19,
+    "fields": {
+        "municipio": "Michelena"
+    }
+},
+{
+    "model": "web.municipios",
+    "pk": 20,
+    "fields": {
+        "municipio": "Panamericano"
+    }
+},
+{
+    "model": "web.municipios",
+    "pk": 21,
+    "fields": {
+        "municipio": "Pedro María Ureña"
+    }
+},
+{
+    "model": "web.municipios",
+    "pk": 22,
+    "fields": {
+        "municipio": "Rafael Urdaneta"
+    }
+},
+{
+    "model": "web.municipios",
+    "pk": 23,
+    "fields": {
+        "municipio": "Samuel Darío Maldonado"
+    }
+},
+{
+    "model": "web.municipios",
+    "pk": 24,
+    "fields": {
+        "municipio": "San Judas Tadeo"
+    }
+},
+{
+    "model": "web.municipios",
+    "pk": 25,
+    "fields": {
+        "municipio": "Seboruco"
+    }
+},
+{
+    "model": "web.municipios",
+    "pk": 26,
+    "fields": {
+        "municipio": "Simón Rodríguez"
+    }
+},
+{
+    "model": "web.municipios",
+    "pk": 27,
+    "fields": {
+        "municipio": "Sucre"
+    }
+},
+{
+    "model": "web.municipios",
+    "pk": 28,
+    "fields": {
+        "municipio": "Torbes"
+    }
+},
+{
+    "model": "web.municipios",
+    "pk": 29,
+    "fields": {
+        "municipio": "Uribante"
+    }
+},
+{
+    "model": "web.parroquias",
+    "pk": 0,
+    "fields": {
+        "parroquia": "Otros Municipios"
+    }
+},
+{
+    "model": "web.parroquias",
+    "pk": 1,
+    "fields": {
+        "parroquia": "La Concordia"
+    }
+},
+{
+    "model": "web.parroquias",
+    "pk": 2,
+    "fields": {
+        "parroquia": "Pedro Maria Morantes"
+    }
+},
+{
+    "model": "web.parroquias",
+    "pk": 3,
+    "fields": {
+        "parroquia": "San Juan Bautista"
+    }
+},
+{
+    "model": "web.parroquias",
+    "pk": 4,
+    "fields": {
+        "parroquia": "San Sebastian"
+    }
+},
+{
+    "model": "web.parroquias",
+    "pk": 6,
+    "fields": {
+        "parroquia": "Francisco Romero Lobo"
+    }
+},
+{
+    "model": "web.motivo_prevencion",
+    "pk": 1,
+    "fields": {
+        "motivo": "Evento deportivo"
+    }
+},
+{
+    "model": "web.motivo_prevencion",
+    "pk": 2,
+    "fields": {
+        "motivo": "Evento Musical"
+    }
+},
+{
+    "model": "web.motivo_prevencion",
+    "pk": 3,
+    "fields": {
+        "motivo": "Evento Religioso"
+    }
+},
+{
+    "model": "web.motivo_prevencion",
+    "pk": 4,
+    "fields": {
+        "motivo": "Evento Politico"
+    }
+},
+{
+    "model": "web.motivo_prevencion",
+    "pk": 5,
+    "fields": {
+        "motivo": "Evento Cultural"
+    }
+},
+{
+    "model": "web.motivo_prevencion",
+    "pk": 6,
+    "fields": {
+        "motivo": "Actividades Recreativas"
+    }
+},
+{
+    "model": "web.motivo_prevencion",
+    "pk": 7,
+    "fields": {
+        "motivo": "Acto Funebre"
+    }
+},
+{
+    "model": "web.tipo_institucion",
+    "pk": 1,
+    "fields": {
+        "nombre_institucion": "Comunidades"
+    }
+},
+{
+    "model": "web.tipo_institucion",
+    "pk": 2,
+    "fields": {
+        "nombre_institucion": "Instituciones Educativas (Publicas)"
+    }
+},
+{
+    "model": "web.tipo_institucion",
+    "pk": 3,
+    "fields": {
+        "nombre_institucion": "Instituciones Educativas (Privadas)"
+    }
+},
+{
+    "model": "web.tipo_institucion",
+    "pk": 4,
+    "fields": {
+        "nombre_institucion": "Instituciones Hospitalarias"
+    }
+},
+{
+    "model": "web.tipo_institucion",
+    "pk": 5,
+    "fields": {
+        "nombre_institucion": "Instituciones Privadas (Comercios, Empresas)"
+    }
+},
+{
+    "model": "web.tipo_institucion",
+    "pk": 6,
+    "fields": {
+        "nombre_institucion": "Instituciones Públicas (Militares, Policiales)"
+    }
+},
+{
+    "model": "web.tipo_institucion",
+    "pk": 7,
+    "fields": {
+        "nombre_institucion": "Especificar Direccion"
+    }
+},
+{
+    "model": "web.tipo_cilindro",
+    "pk": 1,
+    "fields": {
+        "nombre_cilindro": "GLP"
+    }
+},
+{
+    "model": "web.tipo_cilindro",
+    "pk": 2,
+    "fields": {
+        "nombre_cilindro": "Oxigeno"
+    }
+},
+{
+    "model": "web.tipo_cilindro",
+    "pk": 3,
+    "fields": {
+        "nombre_cilindro": "Helio"
+    }
+},
+{
+    "model": "web.tipo_apoyo",
+    "pk": 1,
+    "fields": {
+        "tipo_apoyo": "Por Rescate"
+    }
+},
+{
+    "model": "web.tipo_apoyo",
+    "pk": 2,
+    "fields": {
+        "tipo_apoyo": "Por Incendio"
+    }
+},
+{
+    "model": "web.tipo_apoyo",
+    "pk": 3,
+    "fields": {
+        "tipo_apoyo": "Por Traslado de Paciente"
+    }
+},
+{
+    "model": "web.tipo_apoyo",
+    "pk": 4,
+    "fields": {
+        "tipo_apoyo": "Por Accidente de Transito"
+    }
+},
+{
+    "model": "web.tipo_apoyo",
+    "pk": 5,
+    "fields": {
+        "tipo_apoyo": "Por Tala de Arbol"
+    }
+},
+{
+    "model": "web.tipos_procedimientos",
+    "pk": 1,
+    "fields": {
+        "tipo_procedimiento": "Abastecimiento de agua"
+    }
+},
+{
+    "model": "web.tipos_procedimientos",
+    "pk": 2,
+    "fields": {
+        "tipo_procedimiento": "Apoyo a Otras Unidades"
+    }
+},
+{
+    "model": "web.tipos_procedimientos",
+    "pk": 3,
+    "fields": {
+        "tipo_procedimiento": "Guardia de Prevencion"
+    }
+},
+{
+    "model": "web.tipos_procedimientos",
+    "pk": 4,
+    "fields": {
+        "tipo_procedimiento": "Atendido No Efectuado"
+    }
+},
+{
+    "model": "web.tipos_procedimientos",
+    "pk": 5,
+    "fields": {
+        "tipo_procedimiento": "Despliegue de Seguridad"
+    }
+},
+{
+    "model": "web.tipos_procedimientos",
+    "pk": 6,
+    "fields": {
+        "tipo_procedimiento": "Falsa Alarma"
+    }
+},
+{
+    "model": "web.tipos_procedimientos",
+    "pk": 7,
+    "fields": {
+        "tipo_procedimiento": "Atenciones Paramedicas"
+    }
+},
+{
+    "model": "web.tipos_procedimientos",
+    "pk": 9,
+    "fields": {
+        "tipo_procedimiento": "Servicios Especiales"
+    }
+},
+{
+    "model": "web.tipos_procedimientos",
+    "pk": 10,
+    "fields": {
+        "tipo_procedimiento": "Rescate"
+    }
+},
+{
+    "model": "web.tipos_procedimientos",
+    "pk": 11,
+    "fields": {
+        "tipo_procedimiento": "Incendios"
+    }
+},
+{
+    "model": "web.tipos_procedimientos",
+    "pk": 12,
+    "fields": {
+        "tipo_procedimiento": "Fallecidos"
+    }
+},
+{
+    "model": "web.tipos_procedimientos",
+    "pk": 13,
+    "fields": {
+        "tipo_procedimiento": "Mitigación de Riesgos"
+    }
+},
+{
+    "model": "web.tipos_procedimientos",
+    "pk": 14,
+    "fields": {
+        "tipo_procedimiento": "Evaluación de Riesgos"
+    }
+},
+{
+    "model": "web.tipos_procedimientos",
+    "pk": 15,
+    "fields": {
+        "tipo_procedimiento": "Puesto de Avanzada"
+    }
+},
+{
+    "model": "web.tipos_procedimientos",
+    "pk": 16,
+    "fields": {
+        "tipo_procedimiento": "Traslados"
+    }
+},
+{
+    "model": "web.tipos_procedimientos",
+    "pk": 17,
+    "fields": {
+        "tipo_procedimiento": "Asesoramiento"
+    }
+},
+{
+    "model": "web.tipos_procedimientos",
+    "pk": 18,
+    "fields": {
+        "tipo_procedimiento": "Inspeccion"
+    }
+},
+{
+    "model": "web.tipos_procedimientos",
+    "pk": 19,
+    "fields": {
+        "tipo_procedimiento": "Investigacion"
+    }
+},
+{
+    "model": "web.tipos_procedimientos",
+    "pk": 20,
+    "fields": {
+        "tipo_procedimiento": "Reinspeccion de Prevención"
+    }
+},
+{
+    "model": "web.tipos_procedimientos",
+    "pk": 21,
+    "fields": {
+        "tipo_procedimiento": "Retención Preventiva"
+    }
+},
+{
+    "model": "web.tipos_procedimientos",
+    "pk": 22,
+    "fields": {
+        "tipo_procedimiento": "Artificios Pirotécnicos"
+    }
+},
+{
+    "model": "web.tipos_procedimientos",
+    "pk": 23,
+    "fields": {
+        "tipo_procedimiento": "Inspeccion Establecimiento por Artificios Pirotecnicos"
+    }
+},
+{
+    "model": "web.tipos_procedimientos",
+    "pk": 24,
+    "fields": {
+        "tipo_procedimiento": "Valoración Medica"
+    }
+},
+{
+    "model": "web.tipos_procedimientos",
+    "pk": 25,
+    "fields": {
+        "tipo_procedimiento": "Jornada Medica"
+    }
+},
+{
+    "model": "web.tipos_procedimientos",
+    "pk": 26,
+    "fields": {
+        "tipo_procedimiento": "Administración de Medicamentos"
+    }
+},
+{
+    "model": "web.tipos_procedimientos",
+    "pk": 27,
+    "fields": {
+        "tipo_procedimiento": "Administración de Tratamiento"
+    }
+},
+{
+    "model": "web.tipos_procedimientos",
+    "pk": 28,
+    "fields": {
+        "tipo_procedimiento": "Aerosolterapia"
+    }
+},
+{
+    "model": "web.tipos_procedimientos",
+    "pk": 29,
+    "fields": {
+        "tipo_procedimiento": "Atención Local"
+    }
+},
+{
+    "model": "web.tipos_procedimientos",
+    "pk": 30,
+    "fields": {
+        "tipo_procedimiento": "Atención Prehospitalaria"
+    }
+},
+{
+    "model": "web.tipos_procedimientos",
+    "pk": 31,
+    "fields": {
+        "tipo_procedimiento": "Cuantificación de Presión Arterial"
+    }
+},
+{
+    "model": "web.tipos_procedimientos",
+    "pk": 32,
+    "fields": {
+        "tipo_procedimiento": "Cuantificación de Signos Vitales"
+    }
+},
+{
+    "model": "web.tipos_procedimientos",
+    "pk": 33,
+    "fields": {
+        "tipo_procedimiento": "Cura"
+    }
+},
+{
+    "model": "web.tipos_procedimientos",
+    "pk": 34,
+    "fields": {
+        "tipo_procedimiento": "Otro"
+    }
+},
+{
+    "model": "web.tipos_procedimientos",
+    "pk": 35,
+    "fields": {
+        "tipo_procedimiento": "Certificado de Salud Mental"
+    }
+},
+{
+    "model": "web.tipos_procedimientos",
+    "pk": 36,
+    "fields": {
+        "tipo_procedimiento": "Consulta Bombero Activo"
+    }
+},
+{
+    "model": "web.tipos_procedimientos",
+    "pk": 37,
+    "fields": {
+        "tipo_procedimiento": "Consulta Integrante Brigada Juvenil"
+    }
+},
+{
+    "model": "web.tipos_procedimientos",
+    "pk": 38,
+    "fields": {
+        "tipo_procedimiento": "Consulta Paciente Externo"
+    }
+},
+{
+    "model": "web.tipos_procedimientos",
+    "pk": 39,
+    "fields": {
+        "tipo_procedimiento": "Evaluación Psicológica Postvacacional"
+    }
+},
+{
+    "model": "web.tipos_procedimientos",
+    "pk": 40,
+    "fields": {
+        "tipo_procedimiento": "Evaluación Psicológica Prevacacional"
+    }
+},
+{
+    "model": "web.tipos_procedimientos",
+    "pk": 41,
+    "fields": {
+        "tipo_procedimiento": "Evaluación Personal Nuevo Ingreso"
+    }
+},
+{
+    "model": "web.tipos_procedimientos",
+    "pk": 45,
+    "fields": {
+        "tipo_procedimiento": "Capacitación"
+    }
+},
+{
+    "model": "web.motivo_despliegue",
+    "pk": 1,
+    "fields": {
+        "motivo": "Evento deportivo"
+    }
+},
+{
+    "model": "web.motivo_despliegue",
+    "pk": 2,
+    "fields": {
+        "motivo": "Seguridad Ciudadana"
+    }
+},
+{
+    "model": "web.tipo_rescate",
+    "pk": 1,
+    "fields": {
+        "tipo_rescate": "Rescate de Animal"
+    }
+},
+{
+    "model": "web.tipo_rescate",
+    "pk": 2,
+    "fields": {
+        "tipo_rescate": "Rescate de Persona"
+    }
+},
+{
+    "model": "web.tipo_rescate",
+    "pk": 3,
+    "fields": {
+        "tipo_rescate": "Recuperación de cadáver"
+    }
+},
+{
+    "model": "web.tipo_rescate",
+    "pk": 4,
+    "fields": {
+        "tipo_rescate": "Rescate Paciente psiquiátrico"
+    }
+},
+{
+    "model": "web.tipo_rescate",
+    "pk": 5,
+    "fields": {
+        "tipo_rescate": "Rescate en Montaña"
+    }
+},
+{
+    "model": "web.tipo_rescate",
+    "pk": 6,
+    "fields": {
+        "tipo_rescate": "Rescate en Ascensores"
+    }
+},
+{
+    "model": "web.tipo_rescate",
+    "pk": 7,
+    "fields": {
+        "tipo_rescate": "Rescate en Estructuras"
+    }
+},
+{
+    "model": "web.tipo_servicios",
+    "pk": 1,
+    "fields": {
+        "serv_especiales": "Lavado"
+    }
+},
+{
+    "model": "web.tipo_servicios",
+    "pk": 3,
+    "fields": {
+        "serv_especiales": "Regado"
+    }
+},
+{
+    "model": "web.tipo_servicios",
+    "pk": 4,
+    "fields": {
+        "serv_especiales": "Dispersion De Particulas"
+    }
+},
+{
+    "model": "web.tipo_servicios",
+    "pk": 5,
+    "fields": {
+        "serv_especiales": "Destape de Alcantarilla"
+    }
+},
+{
+    "model": "web.tipo_servicios",
+    "pk": 6,
+    "fields": {
+        "serv_especiales": "Colocacion de Drisa"
+    }
+},
+{
+    "model": "web.tipo_servicios",
+    "pk": 7,
+    "fields": {
+        "serv_especiales": "Desinfeccion Covid-19"
+    }
+},
+{
+    "model": "web.motivo_alarma",
+    "pk": 1,
+    "fields": {
+        "motivo": "Incendio"
+    }
+},
+{
+    "model": "web.motivo_alarma",
+    "pk": 2,
+    "fields": {
+        "motivo": "Hecho vial"
+    }
+},
+{
+    "model": "web.motivo_alarma",
+    "pk": 3,
+    "fields": {
+        "motivo": "Rescate"
+    }
+},
+{
+    "model": "web.motivo_riesgo",
+    "pk": 1,
+    "fields": {
+        "tipo_riesgo": "Colapso de Estructura"
+    }
+},
+{
+    "model": "web.motivo_riesgo",
+    "pk": 2,
+    "fields": {
+        "tipo_riesgo": "Inundacion"
+    }
+},
+{
+    "model": "web.motivo_riesgo",
+    "pk": 3,
+    "fields": {
+        "tipo_riesgo": "Desbordamiento de Afluentes Hidricos"
+    }
+},
+{
+    "model": "web.motivo_riesgo",
+    "pk": 4,
+    "fields": {
+        "tipo_riesgo": "Deslizamiento"
+    }
+},
+{
+    "model": "web.motivo_riesgo",
+    "pk": 5,
+    "fields": {
+        "tipo_riesgo": "Censo"
+    }
+},
+{
+    "model": "web.mitigacion_riesgo",
+    "pk": 1,
+    "fields": {
+        "tipo_servicio": "Derrame de Combustible"
+    }
+},
+{
+    "model": "web.mitigacion_riesgo",
+    "pk": 2,
+    "fields": {
+        "tipo_servicio": "Pode de Árbol"
+    }
+},
+{
+    "model": "web.mitigacion_riesgo",
+    "pk": 3,
+    "fields": {
+        "tipo_servicio": "Procedimiento por Himenopteros"
+    }
+},
+{
+    "model": "web.mitigacion_riesgo",
+    "pk": 4,
+    "fields": {
+        "tipo_servicio": "Roleada de Árbol"
+    }
+},
+{
+    "model": "web.mitigacion_riesgo",
+    "pk": 5,
+    "fields": {
+        "tipo_servicio": "Tala de Árbol"
+    }
+},
+{
+    "model": "web.motivo_avanzada",
+    "pk": 1,
+    "fields": {
+        "tipo_servicio": "Fortalecimiento de los Cuadrantes de Paz"
+    }
+},
+{
+    "model": "web.motivo_avanzada",
+    "pk": 2,
+    "fields": {
+        "tipo_servicio": "Patrullaje Mixto"
+    }
+},
+{
+    "model": "web.unidades",
+    "pk": 1,
+    "fields": {
+        "nombre_unidad": "Alfa 04"
+    }
+},
+{
+    "model": "web.unidades",
+    "pk": 2,
+    "fields": {
+        "nombre_unidad": "Alfa 01"
+    }
+},
+{
+    "model": "web.unidades",
+    "pk": 3,
+    "fields": {
+        "nombre_unidad": "Alfa 02"
+    }
+},
+{
+    "model": "web.unidades",
+    "pk": 4,
+    "fields": {
+        "nombre_unidad": "Alfa 03"
+    }
+},
+{
+    "model": "web.unidades",
+    "pk": 5,
+    "fields": {
+        "nombre_unidad": "Supresion 01"
+    }
+},
+{
+    "model": "web.unidades",
+    "pk": 6,
+    "fields": {
+        "nombre_unidad": "Supresión 02"
+    }
+},
+{
+    "model": "web.unidades",
+    "pk": 7,
+    "fields": {
+        "nombre_unidad": "Supresión 03"
+    }
+},
+{
+    "model": "web.unidades",
+    "pk": 8,
+    "fields": {
+        "nombre_unidad": "Supresión 04"
+    }
+},
+{
+    "model": "web.unidades",
+    "pk": 9,
+    "fields": {
+        "nombre_unidad": "Cisterna 01"
+    }
+},
+{
+    "model": "web.unidades",
+    "pk": 10,
+    "fields": {
+        "nombre_unidad": "Cisterna 02"
+    }
+},
+{
+    "model": "web.unidades",
+    "pk": 11,
+    "fields": {
+        "nombre_unidad": "Cisterna 03"
+    }
+},
+{
+    "model": "web.unidades",
+    "pk": 12,
+    "fields": {
+        "nombre_unidad": "Moto 45"
+    }
+},
+{
+    "model": "web.unidades",
+    "pk": 13,
+    "fields": {
+        "nombre_unidad": "Moto 47"
+    }
+},
+{
+    "model": "web.unidades",
+    "pk": 14,
+    "fields": {
+        "nombre_unidad": "Logística 31"
+    }
+},
+{
+    "model": "web.unidades",
+    "pk": 15,
+    "fields": {
+        "nombre_unidad": "Logística 36"
+    }
+},
+{
+    "model": "web.unidades",
+    "pk": 16,
+    "fields": {
+        "nombre_unidad": "R-1 (Elevacion)"
+    }
+},
+{
+    "model": "web.unidades",
+    "pk": 17,
+    "fields": {
+        "nombre_unidad": "Lince 01"
+    }
+},
+{
+    "model": "web.unidades",
+    "pk": 18,
+    "fields": {
+        "nombre_unidad": "Lince 02"
+    }
+},
+{
+    "model": "web.unidades",
+    "pk": 19,
+    "fields": {
+        "nombre_unidad": "Lince 03"
+    }
+},
+{
+    "model": "web.unidades",
+    "pk": 20,
+    "fields": {
+        "nombre_unidad": "Lince 04"
+    }
+},
+{
+    "model": "web.unidades",
+    "pk": 21,
+    "fields": {
+        "nombre_unidad": "Lince 05"
+    }
+},
+{
+    "model": "web.unidades",
+    "pk": 22,
+    "fields": {
+        "nombre_unidad": "Lince 06"
+    }
+},
+{
+    "model": "web.unidades",
+    "pk": 23,
+    "fields": {
+        "nombre_unidad": "Lince 07"
+    }
+},
+{
+    "model": "web.unidades",
+    "pk": 24,
+    "fields": {
+        "nombre_unidad": "Lince 08"
+    }
+},
+{
+    "model": "web.unidades",
+    "pk": 25,
+    "fields": {
+        "nombre_unidad": "Lince 09"
+    }
+},
+{
+    "model": "web.tipo_incendio",
+    "pk": 1,
+    "fields": {
+        "tipo_incendio": "Incendio de Estructura"
+    }
+},
+{
+    "model": "web.tipo_incendio",
+    "pk": 2,
+    "fields": {
+        "tipo_incendio": "Incendio de Vehiculo"
+    }
+},
+{
+    "model": "web.tipo_incendio",
+    "pk": 3,
+    "fields": {
+        "tipo_incendio": "Incendio de Vegetacion"
+    }
+},
+{
+    "model": "web.tipos_artificios",
+    "pk": 1,
+    "fields": {
+        "tipo": "Incendio por Artificio Pirotecnico"
+    }
+},
+{
+    "model": "web.tipos_artificios",
+    "pk": 2,
+    "fields": {
+        "tipo": "Lesionado por Artificio Pirotecnico"
+    }
+},
+{
+    "model": "web.tipos_artificios",
+    "pk": 3,
+    "fields": {
+        "tipo": "Fallecido por Artificio Pirotecnico"
+    }
+},
+{
+    "model": "web.tipos_investigacion",
+    "pk": 1,
+    "fields": {
+        "tipo_investigacion": "Incendio"
+    }
+},
+{
+    "model": "web.tipos_investigacion",
+    "pk": 2,
+    "fields": {
+        "tipo_investigacion": "Corto Circuito"
+    }
+},
+{
+    "model": "web.procedimientos",
+    "pk": 48,
+    "fields": {
+        "id_division": 4,
+        "tipo_servicio": "",
+        "id_solicitante": 3,
+        "solicitante_externo": "",
+        "unidad": 20,
+        "id_jefe_comision": 1,
+        "dependencia": "",
+        "efectivos_enviados": "5",
+        "id_municipio": 3,
+        "id_parroquia": 0,
+        "fecha": "2024-11-05",
+        "hora": "08:25:00",
+        "direccion": "ddddddddddddddddddd",
+        "id_tipo_procedimiento": 9
+    }
+},
+{
+    "model": "web.procedimientos",
+    "pk": 49,
+    "fields": {
+        "id_division": 2,
+        "tipo_servicio": "",
+        "id_solicitante": 2,
+        "solicitante_externo": "",
+        "unidad": 9,
+        "id_jefe_comision": 1,
+        "dependencia": "",
+        "efectivos_enviados": "3",
+        "id_municipio": 1,
+        "id_parroquia": 3,
+        "fecha": "2024-11-05",
+        "hora": "08:26:00",
+        "direccion": "ddddddddddddddddd",
+        "id_tipo_procedimiento": 5
+    }
+},
+{
+    "model": "web.procedimientos",
+    "pk": 50,
+    "fields": {
+        "id_division": 5,
+        "tipo_servicio": "",
+        "id_solicitante": 2,
+        "solicitante_externo": "",
+        "unidad": 3,
+        "id_jefe_comision": 1,
+        "dependencia": "",
+        "efectivos_enviados": "4",
+        "id_municipio": 1,
+        "id_parroquia": 2,
+        "fecha": "2024-11-05",
+        "hora": "08:27:00",
+        "direccion": "ddddddddddddddd",
+        "id_tipo_procedimiento": 3
+    }
+},
+{
+    "model": "web.procedimientos",
+    "pk": 51,
+    "fields": {
+        "id_division": 1,
+        "tipo_servicio": "",
+        "id_solicitante": 2,
+        "solicitante_externo": "",
+        "unidad": 16,
+        "id_jefe_comision": 1,
+        "dependencia": "",
+        "efectivos_enviados": "5",
+        "id_municipio": 1,
+        "id_parroquia": 1,
+        "fecha": "2024-11-05",
+        "hora": "08:28:00",
+        "direccion": "dddddddddddddddd",
+        "id_tipo_procedimiento": 2
+    }
+},
+{
+    "model": "web.procedimientos",
+    "pk": 52,
+    "fields": {
+        "id_division": 1,
+        "tipo_servicio": "",
+        "id_solicitante": 3,
+        "solicitante_externo": "",
+        "unidad": 16,
+        "id_jefe_comision": 2,
+        "dependencia": "",
+        "efectivos_enviados": "4",
+        "id_municipio": 2,
+        "id_parroquia": 0,
+        "fecha": "2024-11-05",
+        "hora": "08:29:00",
+        "direccion": "ddddddddddddd",
+        "id_tipo_procedimiento": 10
+    }
+},
+{
+    "model": "web.procedimientos",
+    "pk": 53,
+    "fields": {
+        "id_division": 2,
+        "tipo_servicio": "",
+        "id_solicitante": 1,
+        "solicitante_externo": "",
+        "unidad": 7,
+        "id_jefe_comision": 3,
+        "dependencia": "",
+        "efectivos_enviados": "3",
+        "id_municipio": 2,
+        "id_parroquia": 0,
+        "fecha": "2024-11-05",
+        "hora": "09:08:00",
+        "direccion": "ddddddddddddddd",
+        "id_tipo_procedimiento": 10
+    }
+},
+{
+    "model": "web.procedimientos",
+    "pk": 54,
+    "fields": {
+        "id_division": 2,
+        "tipo_servicio": "",
+        "id_solicitante": 2,
+        "solicitante_externo": "",
+        "unidad": 8,
+        "id_jefe_comision": 3,
+        "dependencia": "",
+        "efectivos_enviados": "12",
+        "id_municipio": 2,
+        "id_parroquia": 0,
+        "fecha": "2024-11-05",
+        "hora": "09:46:00",
+        "direccion": "dddddddddddd",
+        "id_tipo_procedimiento": 10
+    }
+},
+{
+    "model": "web.apoyo_unidades",
+    "pk": 13,
+    "fields": {
+        "id_procedimiento": 51,
+        "id_tipo_apoyo": 1,
+        "unidad_apoyada": "Alpha 04",
+        "descripcion": "dddddddddddddddd",
+        "material_utilizado": "-----------------",
+        "status": "En Proceso"
+    }
+},
+{
+    "model": "web.guardia_prevencion",
+    "pk": 4,
+    "fields": {
+        "id_procedimiento": 50,
+        "id_motivo_prevencion": 2,
+        "descripcion": "dddddddddddddddd",
+        "material_utilizado": "--------------------",
+        "status": "Culminado"
+    }
+},
+{
+    "model": "web.despliegue_seguridad",
+    "pk": 4,
+    "fields": {
+        "id_procedimiento": 49,
+        "motivo_despliegue": 2,
+        "descripcion": "ddddddddddddddddddddd",
+        "material_utilizado": "-------------------",
+        "status": "Culminado"
+    }
+},
+{
+    "model": "web.servicios_especiales",
+    "pk": 12,
+    "fields": {
+        "id_procedimientos": 48,
+        "tipo_servicio": 1,
+        "descripcion": "dddddddddddddddddd",
+        "material_utilizado": "------------------",
+        "status": "En Proceso"
+    }
+},
+{
+    "model": "web.rescate",
+    "pk": 21,
+    "fields": {
+        "id_procedimientos": 52,
+        "material_utilizado": "-------------",
+        "status": "Culminado",
+        "tipo_rescate": 1
+    }
+},
+{
+    "model": "web.rescate",
+    "pk": 22,
+    "fields": {
+        "id_procedimientos": 53,
+        "material_utilizado": "mmmmmmmmmmmmmmmmm",
+        "status": "En Proceso",
+        "tipo_rescate": 1
+    }
+},
+{
+    "model": "web.rescate",
+    "pk": 23,
+    "fields": {
+        "id_procedimientos": 54,
+        "material_utilizado": "---------------------",
+        "status": "Culminado",
+        "tipo_rescate": 1
+    }
+},
+{
+    "model": "web.rescate_animal",
+    "pk": 12,
+    "fields": {
+        "id_rescate": 21,
+        "especie": "Zorro",
+        "descripcion": "ddddddddddddddd"
+    }
+},
+{
+    "model": "web.rescate_animal",
+    "pk": 13,
+    "fields": {
+        "id_rescate": 22,
+        "especie": "Cordero",
+        "descripcion": "Le iban a dar matarile"
+    }
+},
+{
+    "model": "web.rescate_animal",
+    "pk": 14,
+    "fields": {
+        "id_rescate": 23,
+        "especie": "Zorro de las nieves",
+        "descripcion": "ddddddddddddd"
+    }
+},
+{
+    "model": "web.tipos_traslado",
+    "pk": 1,
+    "fields": {
+        "tipo_traslado": "Traslado en Ambulancia"
+    }
+},
+{
+    "model": "web.tipos_traslado",
+    "pk": 2,
+    "fields": {
+        "tipo_traslado": "Traslado Interhospitalario"
+    }
+},
+{
+    "model": "web.tipos_traslado",
+    "pk": 3,
+    "fields": {
+        "tipo_traslado": "Traslado Inhospitalario"
+    }
+},
+{
+    "model": "web.tipo_accidente",
+    "pk": 1,
+    "fields": {
+        "tipo_accidente": "Colision Vehiculo-Moto"
+    }
+},
+{
+    "model": "web.tipo_accidente",
+    "pk": 2,
+    "fields": {
+        "tipo_accidente": "Colision Vehiculo-Vehiculo"
+    }
+},
+{
+    "model": "web.tipo_accidente",
+    "pk": 3,
+    "fields": {
+        "tipo_accidente": "Colision Vehiculo-Moto-Objeto Fijo"
+    }
+},
+{
+    "model": "web.tipo_accidente",
+    "pk": 4,
+    "fields": {
+        "tipo_accidente": "Volcamiento"
+    }
+},
+{
+    "model": "web.tipo_accidente",
+    "pk": 5,
+    "fields": {
+        "tipo_accidente": "Colisión Moto-Moto"
+    }
+},
+{
+    "model": "web.tipo_accidente",
+    "pk": 6,
+    "fields": {
+        "tipo_accidente": "Derrape"
+    }
+},
+{
+    "model": "web.tipo_accidente",
+    "pk": 7,
+    "fields": {
+        "tipo_accidente": "Vehículo que cae al vacío"
+    }
+},
+{
+    "model": "web.tipo_accidente",
+    "pk": 8,
+    "fields": {
+        "tipo_accidente": "Vehículo que cae al cause del rio"
+    }
+}
+]
