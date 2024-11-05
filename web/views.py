@@ -796,7 +796,7 @@ def obtener_procedimientos_parroquias(request):
     # print(procedimientos)
     return JsonResponse(procedimientos)
 
-# Api para generar valores para la primera grafica de la seccion de estadistica
+# Api para generar valores para las graficas de pie de la seccion de estadistica
 def api_procedimientos_division(request):
     division_id = request.GET.get('division_id')
     mes = request.GET.get('mes')
@@ -816,7 +816,7 @@ def api_procedimientos_division(request):
 
     return JsonResponse(list(conteo_procedimientos), safe=False)
 
-# Api para generar valores para la primera grafica de la seccion de estadistica
+# Api para generar valores para las graficas de donut de la seccion de estadistica
 def api_procedimientos_division_parroquias(request):
     division_id = request.GET.get('division_id')
     mes = request.GET.get('mes')
@@ -837,6 +837,52 @@ def api_procedimientos_division_parroquias(request):
     ).annotate(count=Count('id')).order_by('id_parroquia__parroquia')
 
     # Convertir a lista y retornar
+    return JsonResponse(list(conteo_procedimientos), safe=False)
+
+# Api para generar valores para la grafica de procedimientos por tipo
+def api_procedimientos_tipo(request):
+    tipo_procedimiento_id = request.GET.get('tipo_procedimiento_id')
+    mes = request.GET.get('mes')
+
+    # Filtrar por tipo de procedimiento
+    procedimientos = Procedimientos.objects.all()
+    if tipo_procedimiento_id:
+        procedimientos = procedimientos.filter(id_tipo_procedimiento=tipo_procedimiento_id)
+
+    # Filtrar por mes si se proporciona
+    if mes:
+        fecha_inicio = datetime.strptime(mes, '%Y-%m').date()
+        fecha_fin = fecha_inicio.replace(day=1) + relativedelta(months=1)
+        procedimientos = procedimientos.filter(fecha__gte=fecha_inicio, fecha__lt=fecha_fin)
+
+    # Agrupar por división y contar procedimientos
+    conteo_procedimientos = procedimientos.values(
+        'id_division__division'  # Agrupar por nombre de la división
+    ).annotate(count=Count('id')).order_by('id_division__division')
+
+    return JsonResponse(list(conteo_procedimientos), safe=False)
+
+# Api para generar valores para la grafica de procedimientos por tipo
+def api_procedimientos_tipo_parroquias(request):
+    tipo_procedimiento_id = request.GET.get('tipo_procedimiento_id')
+    mes = request.GET.get('mes')
+
+    # Filtrar por tipo de procedimiento
+    procedimientos = Procedimientos.objects.all()
+    if tipo_procedimiento_id:
+        procedimientos = procedimientos.filter(id_tipo_procedimiento=tipo_procedimiento_id)
+
+    # Filtrar por mes si se proporciona
+    if mes:
+        fecha_inicio = datetime.strptime(mes, '%Y-%m').date()
+        fecha_fin = fecha_inicio.replace(day=1) + relativedelta(months=1)
+        procedimientos = procedimientos.filter(fecha__gte=fecha_inicio, fecha__lt=fecha_fin)
+
+    # Agrupar por parroquia y contar procedimientos
+    conteo_procedimientos = procedimientos.values(
+        'id_parroquia__parroquia'  # Cambia esto si el campo se llama de otra manera
+    ).annotate(count=Count('id')).order_by('id_parroquia__parroquia')  # Ordenar por nombre de la parroquia
+
     return JsonResponse(list(conteo_procedimientos), safe=False)
 
 # Api para generar los valores para la grafica de barras de la seccion de estadistica
