@@ -993,6 +993,58 @@ def obtener_divisiones(request):
 
     return JsonResponse(divisiones)
 
+def edit_personal(request):
+    if request.method == 'POST':
+        # Obtener el ID de la persona
+        persona_id = request.POST.get('personal_id')
+        
+        # Verificar si el ID está presente
+        if persona_id:
+            # Obtener el objeto Personal por su ID
+            personal = get_object_or_404(Personal, id=persona_id)
+            
+            cedula = request.POST.get('formulario-cedula')
+            nac = request.POST.get('formulario-nacionalidad')
+
+            # Actualizar los campos del modelo
+            personal.nombres = request.POST.get('formulario-nombres')
+            personal.apellidos = request.POST.get('formulario-apellidos')
+            personal.jerarquia = request.POST.get('formulario-jerarquia')
+            personal.cargo = request.POST.get('formulario-cargo')
+            personal.cedula = f"{nac}- {cedula}"
+            personal.sexo = request.POST.get('formulario-sexo')
+            personal.rol = request.POST.get('formulario-rol')
+            personal.status = request.POST.get('formulario-status')
+            
+            # Guardar los cambios
+            personal.save()
+            
+            # Redirigir o mostrar un mensaje de éxito
+            return redirect('/personal/')  # Reemplaza con tu vista deseada
+        else:
+            # Si no se pasó el ID
+            return redirect('/personal/')  # Redirigir a una página de error o donde desees
+    
+    # Si es GET, mostrar el formulario vacío o con los datos del objeto
+    return render(request, 'editar_personal.html')
+
+def get_persona(request, persona_id):
+    try:
+        persona = Personal.objects.get(id=persona_id)
+        data = {
+            'nombre': persona.nombres,
+            'apellido': persona.apellidos,
+            'cedula': persona.cedula,
+            'jerarquia': persona.jerarquia,
+            'cargo': persona.cargo,
+            'rol': persona.rol,
+            'sexo': persona.sexo,
+            'status': persona.status,
+        }
+        return JsonResponse(data)
+    except Personal.DoesNotExist:
+        return JsonResponse({'error': 'Persona no encontrada'}, status=404)
+
 # Login required
 def login_required(view_func):
     def _wrapped_view(request, *args, **kwargs):
