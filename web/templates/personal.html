@@ -28,6 +28,8 @@
 <div class="general-dashboard">
   <div class="div-user-name  username-space">
     <h3 class="division-title">Tabla de Personal</h3>
+    
+
     <section class="user-name">
       <p>{{ jerarquia }} {{ nombres }} {{ apellidos }} / {{ user.user }}</p>
       <svg
@@ -94,10 +96,11 @@
           <th scope="col">Apellidos</th>
           <th scope="col">Jerarquia</th>
           <th scope="col">Cargo</th>
-          <th scope="col">Cedula</th>
+          <th scope="col">Cé  dula</th>
           <th scope="col">Sexo</th>
           <th scope="col">Contrato</th>
           <th scope="col">Estado</th>
+          <th scope="col">Acción</th>
         </tr>
       </thead>
       <tbody class="table-group-divider">
@@ -116,6 +119,11 @@
           <td>{{ personal.sexo }}</td>
           <td>{{ personal.rol }}</td>
           <td>{{ personal.status }}</td>
+          <td>
+            <button class="btn btn-danger edit-button" data-id="{{ personal.id }}" data-nombres="{{ personal.nombres }}" data-apellidos="{{ personal.apellidos }}" data-jerarquia="{{ personal.jerarquia }}" data-cargo="{{ personal.cargo }}" data-cedula="{{ personal.cedula }}" data-sexo="{{ personal.sexo }}" data-rol="{{ personal.rol }}" data-status="{{ personal.status }}" data-bs-toggle="modal" data-bs-target="#modal-mod">
+              Editar
+            </button>
+          </td>
 
           <!-- prettier-ignore -->
         {% endfor %}
@@ -158,11 +166,136 @@
     </div>
   </div>
 </div>
+
+<div class="modal fade" tabindex="-1" id="modal-mod">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content modal-content-two">
+      <div class="modal-header header-dashboard-two">
+        <section class="title-icon">
+          <img src="../static/assets/logo bomberos 2.svg" alt="Logo de bomberos" />
+          <h2>Cuerpo de Bomberos</h2>
+        </section>
+      </div>
+      <div class="modal-body modal-body-two modal-body-three">
+        <section class="info-modal personal-register" id="info_modal">
+          <h2>Editar Personal</h2>
+          <form action="{% url 'edit_personal' %}" method="POST">
+            <div class="form-style">
+              {% csrf_token %}
+
+              <!-- Campo oculto para el ID -->
+              <input type="hidden" name="personal_id" id="id_persona" />
+
+              <!-- Campo de Nombres -->
+              <div bis_skin_checked="1">
+                <label for="id_nombres">Nombres:</label>
+                <input type="text" name="formulario-nombres" maxlength="50" required="" id="id_nombres">
+              </div>
+
+              <!-- Campo de Apellidos -->
+              <div bis_skin_checked="1">
+                <label for="id_apellidos">Apellidos:</label>
+                <input type="text" name="formulario-apellidos" maxlength="50" required="" id="id_apellidos">
+              </div>
+
+              <!-- Campo de Nacionalidad -->
+              <div bis_skin_checked="1">
+                <label for="id_nacionalidad">Nacionalidad:</label>
+                <select name="formulario-nacionalidad" id="id_nacionalidad">
+                  <option value="V">V</option>
+                  <option value="E">E</option>
+                </select>
+              </div>
+
+              <!-- Campo de Cedula -->
+              <div bis_skin_checked="1">
+                <label for="id_cedula">Cedula:</label>
+                <input type="number" name="formulario-cedula" required="" id="id_cedula">
+              </div>
+
+              <!-- Campo de Jerarquia -->
+              <div bis_skin_checked="1">
+                <label for="id_jerarquia">Jerarquia:</label>
+                <select name="formulario-jerarquia" class="disable-first-option" required="" id="id_jerarquia">
+                  <option value="" selected="">Seleccione Una Opcion</option>
+                  <option value="General">General</option>
+                  <option value="Coronel">Coronel</option>
+                  <option value="Teniente Coronel">Teniente Coronel</option>
+                  <option value="Mayor">Mayor</option>
+                  <option value="Capitán">Capitán</option>
+                  <option value="Primer Teniente">Primer Teniente</option>
+                  <option value="Teniente">Teniente</option>
+                  <option value="Sargento Mayor">Sargento Mayor</option>
+                  <option value="Sargento Primero">Sargento Primero</option>
+                  <option value="Sargento segundo">Sargento segundo</option>
+                  <option value="Cabo Primero">Cabo Primero</option>
+                  <option value="Cabo Segundo">Cabo Segundo</option>
+                  <option value="Distinguido">Distinguido</option>
+                  <option value="Bombero">Bombero</option>
+                </select>
+              </div>
+
+              <!-- Campo de Cargo -->
+              <div bis_skin_checked="1">
+                <label for="id_cargo">Cargo:</label>
+                <input type="text" name="formulario-cargo" maxlength="50" required="" id="id_cargo">
+              </div>
+
+              <!-- Campo de Sexo -->
+              <div bis_skin_checked="1">
+                <label for="id_sexo">Sexo:</label>
+                <select name="formulario-sexo" class="disable-first-option" required="" id="id_sexo">
+                  <option value="" selected="">Seleccione Una Opcion</option>
+                  <option value="Masculino">Masculino</option>
+                  <option value="Femenino">Femenino</option>
+                </select>
+              </div>
+
+              <!-- Campo de Rol -->
+              <div bis_skin_checked="1">
+                <label for="id_rol">Rol:</label>
+                <select name="formulario-rol" class="disable-first-option" required="" id="id_rol">
+                  <option value="" selected="">Seleccione Una Opcion</option>
+                  <option value="Administrativo">Administrativo</option>
+                  <option value="Bombero">Bombero</option>
+                </select>
+              </div>
+
+              <!-- Campo de Status -->
+              <div bis_skin_checked="1">
+                <label for="id_status">Status:</label>
+                <select name="formulario-status" class="disable-first-option" required="" id="id_status">
+                  <option value="" selected="">Seleccione Una Opcion</option>
+                  <option value="Activo">Activo</option>
+                  <option value="Jubilado">Jubilado</option>
+                  <option value="Incapacitado">Incapacitado</option>
+                </select>      
+              </div>
+            </div>
+              <!-- Boton Enviar -->
+              <div class="modal-footer modal-footer-personal" bis_skin_checked="1">
+                <button type="submit" id="button_submit" class="btn btn-danger btn-center">
+                  Aceptar
+                </button>
+                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">
+                  Cerrar
+                </button>
+              </div>
+          </form>
+        </section>
+      </div>
+    </div>
+  </div>
+</div>
+
+
 <footer class="footer">
   <section class="text-reserved">
     <h5>2024 © Cuerpo de bomberos - San Cristobal</h>
   </section>
 </footer>
 </div>
+
+<script src="../static/js/modificar_personal.js"></script>
 {% endblock %}
 
