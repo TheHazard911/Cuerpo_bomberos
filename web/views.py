@@ -386,6 +386,48 @@ def generar_excel(request):
     workbook.save(response)
     return response
 
+# Api para crear el excel de exportacion de la tabla
+def generar_excel_personal(request):
+    # Crear un libro de trabajo y una hoja
+    workbook = openpyxl.Workbook()
+    hoja = workbook.active
+    hoja.title = "Procedimientos"
+
+    # Agregar encabezados a la primera fila
+    encabezados = [
+        "Nombres", "Apellidos", "Jerarquia", "Cargo", 
+        "Cedula", "Sexo", "Contrato", "Estado"
+    ]
+    hoja.append(encabezados)
+
+    # Obtener datos de los procedimientos
+    procedimientos = Personal.objects.exclude(id__in=[0, 4])
+
+    # Agregar datos a la hoja
+    for procedimiento in procedimientos:
+        # Agregar la fila de datos
+        hoja.append([
+            procedimiento.nombres,
+            procedimiento.apellidos,
+            procedimiento.jerarquia,
+            procedimiento.cargo,
+            procedimiento.cedula,
+            procedimiento.sexo,
+            procedimiento.rol,
+            procedimiento.status,
+        ])
+
+    # Ajustar el ancho de las columnas
+    for column in hoja.columns:
+        max_length = max(len(str(cell.value)) for cell in column if cell.value) + 2
+        hoja.column_dimensions[get_column_letter(column[0].column)].width = max_length
+
+    # Configurar la respuesta HTTP para descargar el archivo
+    response = HttpResponse(content_type="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")
+    response["Content-Disposition"] = "attachment; filename=procedimientos.xlsx"
+    workbook.save(response)
+    return response
+
 # Api para crear seccion de lista de procedimientos por cada division, por tipo y parroquia en la seccion de Estadistica
 def generar_resultados(request):
     try:
@@ -1351,6 +1393,7 @@ def View_personal(request):
         return redirect('/')
     
     personal = Personal.objects.exclude(id__in=[0, 4])
+    personal = personal.order_by("id")
     personal_count = personal.count()
 
     if request.method == 'POST':
@@ -3448,7 +3491,7 @@ def tabla_general(request):
 
     # Filtra los procedimientos de las divisiones 1 a 5
     divisiones = range(1, 6)
-    datos_combined = Procedimientos.objects.filter(id_division__in=divisiones).order_by('-fecha' and '-hora')  # Orden descendente
+    datos_combined = Procedimientos.objects.filter(id_division__in=divisiones).order_by('-fecha')  # Orden descendente
 
     # Corrige el conteo
     total = datos_combined.count()
