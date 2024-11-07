@@ -892,6 +892,270 @@ document.addEventListener("DOMContentLoaded", function () {
   updateChart();
 });
 
+// Grafica de Pie3, Tipos de Procedimientos - Tipos
+document.addEventListener("DOMContentLoaded", function () {
+  const selectTipoProcedimiento = document.querySelector(".form-select-sm7");
+  const monthPicker = document.getElementById("month-picker8");
+  let chart;
+
+  // Selección por defecto
+  selectTipoProcedimiento.value = selectTipoProcedimiento.options[1].value;
+
+  async function fetchProcedimientos(tipoProcedimientoId, mes) {
+    try {
+      const response = await fetch(
+        `/api/procedimientos_tipo_detalles/?tipo_procedimiento_id=${tipoProcedimientoId}&mes=${mes}`
+      );
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.error || "Error fetching data");
+      }
+      return await response.json();
+    } catch (error) {
+      console.error('Error al obtener los procedimientos:', error); 
+      return null;
+    }
+  }
+
+  async function updateChart() {
+    const tipoProcedimientoId = selectTipoProcedimiento.value;
+    const mesSeleccionado = monthPicker.value;
+
+    const data = await fetchProcedimientos(tipoProcedimientoId, mesSeleccionado);
+
+    if (!data || data.length === 0) {
+      const ctx8 = document.getElementById("pie3").getContext("2d");
+
+      if (chart) {
+        chart.destroy();
+      }
+
+      chart = new Chart(ctx8, {
+        type: "polarArea",
+        data: {
+          labels: ["Ninguno"],
+          datasets: [
+            {
+              label: "Procedimientos",
+              data: [0],
+              borderWidth: 1,
+              backgroundColor: ["#D3D3D3"], // Color de fondo para "sin datos"
+            },
+          ],
+        },
+        options: {
+          scales: {
+            r: {
+              min: 0,
+              max: 5,
+              ticks: {
+                beginAtZero: true,
+                stepSize: 1,
+                callback: (value) => Math.round(value),
+              },
+            },
+          },
+          plugins: {
+            legend: {
+              display: true,
+              labels: {
+                font: { size: 16 },
+              },
+            },
+          },
+        },
+      });
+      return;
+    }
+
+    // Asumimos que data tiene campos `tipo_servicio` o `id_parroquia__parroquia` y `count`
+    const labels = data.map(item => item.tipo_servicio );
+    const values = data.map(item => item.count);
+
+    const ctx8 = document.getElementById("pie3").getContext("2d");
+
+    if (chart) {
+      chart.destroy();
+    }
+
+    // Crear un nuevo gráfico de área polar con los datos de la API
+    chart = new Chart(ctx8, {
+      type: "polarArea",
+      data: {
+        labels: labels,
+        datasets: [
+          {
+            label: "Procedimientos",
+            data: values,
+            borderWidth: 1,
+            backgroundColor: colors, // Colores para cada tipo de servicio
+          },
+        ],
+      },
+      options: {
+        scales: {
+          r: {
+            min: 0,
+            max: Math.max(5, Math.max(...values)),
+            ticks: {
+              beginAtZero: true,
+              stepSize: 1,
+              callback: (value) => Math.round(value),
+            },
+          },
+        },
+        plugins: {
+          legend: {
+            display: true,
+            labels: {
+              font: { size: 16 },
+            },
+          },
+        },
+      },
+    });
+  }
+
+  // Event listeners para actualizar la gráfica cuando cambia el tipo o el mes
+  selectTipoProcedimiento.addEventListener("change", updateChart);
+  monthPicker.addEventListener("change", updateChart);
+
+  // Cargar la gráfica por defecto
+  updateChart();
+});
+
+// Grafica de Pie4, Tipos de Procedimientos - Tipos
+document.addEventListener("DOMContentLoaded", function () {
+  const selectTipoProcedimiento = document.querySelector(".form-select-sm8");
+  const monthPicker = document.getElementById("month-picker9");
+  let chart;
+
+  // Selección por defecto
+  selectTipoProcedimiento.value = selectTipoProcedimiento.options[9].value;
+
+  async function fetchProcedimientos(tipoProcedimientoId, mes) {
+    try {
+      const response = await fetch(
+        `/api/procedimientos_tipo_detalles/?tipo_procedimiento_id=${tipoProcedimientoId}&mes=${mes}`
+      );
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.error || "Error fetching data");
+      }
+      return await response.json();
+    } catch (error) {
+      console.error('Error al obtener los procedimientos:', error); 
+      return null;
+    }
+  }
+
+  async function updateChart() {
+    const tipoProcedimientoId = selectTipoProcedimiento.value;
+    const mesSeleccionado = monthPicker.value;
+
+    const data = await fetchProcedimientos(tipoProcedimientoId, mesSeleccionado);
+
+    if (!data || data.length === 0) {
+      const ctx9 = document.getElementById("pie4").getContext("2d");
+
+      if (chart) {
+        chart.destroy();
+      }
+
+      chart = new Chart(ctx9, {
+        type: "polarArea",
+        data: {
+          labels: ["Ninguno"],
+          datasets: [
+            {
+              label: "Procedimientos",
+              data: [0],
+              borderWidth: 1,
+              backgroundColor: ["#D3D3D3"], // Color de fondo para "sin datos"
+            },
+          ],
+        },
+        options: {
+          scales: {
+            r: {
+              min: 0,
+              max: 5,
+              ticks: {
+                beginAtZero: true,
+                stepSize: 1,
+                callback: (value) => Math.round(value),
+              },
+            },
+          },
+          plugins: {
+            legend: {
+              display: true,
+              labels: {
+                font: { size: 16 },
+              },
+            },
+          },
+        },
+      });
+      return;
+    }
+
+    // Asumimos que data tiene campos `tipo_servicio` o `id_parroquia__parroquia` y `count`
+    const labels = data.map(item => item.tipo_servicio );
+    const values = data.map(item => item.count);
+
+    const ctx9 = document.getElementById("pie4").getContext("2d");
+
+    if (chart) {
+      chart.destroy();
+    }
+
+    // Crear un nuevo gráfico de área polar con los datos de la API
+    chart = new Chart(ctx9, {
+      type: "polarArea",
+      data: {
+        labels: labels,
+        datasets: [
+          {
+            label: "Procedimientos",
+            data: values,
+            borderWidth: 1,
+            backgroundColor: colors, // Colores para cada tipo de servicio
+          },
+        ],
+      },
+      options: {
+        scales: {
+          r: {
+            min: 0,
+            max: Math.max(5, Math.max(...values)),
+            ticks: {
+              beginAtZero: true,
+              stepSize: 1,
+              callback: (value) => Math.round(value),
+            },
+          },
+        },
+        plugins: {
+          legend: {
+            display: true,
+            labels: {
+              font: { size: 16 },
+            },
+          },
+        },
+      },
+    });
+  }
+
+  // Event listeners para actualizar la gráfica cuando cambia el tipo o el mes
+  selectTipoProcedimiento.addEventListener("change", updateChart);
+  monthPicker.addEventListener("change", updateChart);
+
+  // Cargar la gráfica por defecto
+  updateChart();
+});
+
 
 // Grafica de Barras =======================================================================================================================================================
 

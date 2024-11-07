@@ -206,7 +206,7 @@ class FormularioRegistroPersonal(forms.Form):
     cargo = forms.CharField(max_length=50)
     sexo = forms.ChoiceField(choices=[("", "Seleccione Una Opcion"), ("Masculino", "Masculino"), ("Femenino", "Femenino")], widget=forms.Select(attrs={"class": "disable-first-option"}))
     rol = forms.ChoiceField(choices=[("", "Seleccione Una Opcion"), ("Administrativo", "Administrativo"), ("Bombero", "Bombero")], widget=forms.Select(attrs={"class": "disable-first-option"}))
-    status = forms.ChoiceField(choices=[("", "Seleccione Una Opcion"), ("Activo", "Activo"), ("Jubilado", "Jubilado"), ("Incapacitado", "Incapacitado")], widget=forms.Select(attrs={"class": "disable-first-option"}))
+    status = forms.ChoiceField(choices=[("", "Seleccione Una Opcion"), ("Activo", "Activo"), ("Jubilado", "Jubilado"), ("Incapacitado", "Incapacitado"), ("Fallecido", "Fallecido")], widget=forms.Select(attrs={"class": "disable-first-option"}))
 
 # Form1
 class SelectorDivision(forms.Form):
