@@ -885,6 +885,263 @@ def api_procedimientos_tipo_parroquias(request):
 
     return JsonResponse(list(conteo_procedimientos), safe=False)
 
+# Api procedimiento por tipo de servicio - Tipo de detalles
+# API para generar valores para la gráfica de procedimientos por tipo y detalles específicos
+def api_procedimientos_tipo_detalles(request):
+    tipo_procedimiento_id = request.GET.get('tipo_procedimiento_id')
+    mes = request.GET.get('mes')
+
+    # Filtrar procedimientos por tipo de procedimiento y mes
+    procedimientos = Procedimientos.objects.all()
+    if tipo_procedimiento_id:
+        procedimientos = procedimientos.filter(id_tipo_procedimiento=tipo_procedimiento_id)
+
+    if mes:
+        fecha_inicio = datetime.strptime(mes, '%Y-%m').date()
+        fecha_fin = fecha_inicio.replace(day=1) + relativedelta(months=1)
+        procedimientos = procedimientos.filter(fecha__gte=fecha_inicio, fecha__lt=fecha_fin)
+
+    # Variable para almacenar los resultados
+    resultados = []
+
+    # Filtrar y agrupar según el tipo de procedimiento
+    if tipo_procedimiento_id == "1":  # Ejemplo: ID para "Abastecimiento de Agua"
+        abastecimiento_data = Abastecimiento_agua.objects.filter(id_procedimiento__in=procedimientos).values(
+            'id_tipo_servicio__nombre_institucion'  # Asume que `nombre` es el campo en Tipo_Institucion
+        ).annotate(count=Count('id')).order_by('id_tipo_servicio__nombre_institucion')
+
+        resultados = [
+            {"tipo_servicio": item['id_tipo_servicio__nombre_institucion'], "count": item['count']}
+            for item in abastecimiento_data
+        ]
+    # Filtrar y agrupar según el tipo de procedimiento
+    if tipo_procedimiento_id == "2":  # Ejemplo: ID para "Abastecimiento de Agua"
+        abastecimiento_data = Apoyo_Unidades.objects.filter(id_procedimiento__in=procedimientos).values(
+            'id_tipo_apoyo__tipo_apoyo'  # Asume que `nombre` es el campo en Tipo_Institucion
+        ).annotate(count=Count('id')).order_by('id_tipo_apoyo__tipo_apoyo')
+
+        resultados = [
+            {"tipo_servicio": item['id_tipo_apoyo__tipo_apoyo'], "count": item['count']}
+            for item in abastecimiento_data
+        ]
+    # Filtrar y agrupar según el tipo de procedimiento
+    if tipo_procedimiento_id == "3":  # Ejemplo: ID para "Abastecimiento de Agua"
+        abastecimiento_data = Guardia_prevencion.objects.filter(id_procedimiento__in=procedimientos).values(
+            'id_motivo_prevencion__motivo'  # Asume que `nombre` es el campo en Tipo_Institucion
+        ).annotate(count=Count('id')).order_by('id_motivo_prevencion__motivo')
+
+        resultados = [
+            {"tipo_servicio": item['id_motivo_prevencion__motivo'], "count": item['count']}
+            for item in abastecimiento_data
+        ]
+
+    # Filtrar y agrupar según el tipo de procedimiento
+    if tipo_procedimiento_id == "5":  # Ejemplo: ID para "Abastecimiento de Agua"
+        abastecimiento_data = Despliegue_Seguridad.objects.filter(id_procedimiento__in=procedimientos).values(
+            'motivo_despliegue__motivo'  # Asume que `nombre` es el campo en Tipo_Institucion
+        ).annotate(count=Count('id')).order_by('motivo_despliegue__motivo')
+
+        resultados = [
+            {"tipo_servicio": item['motivo_despliegue__motivo'], "count": item['count']}
+            for item in abastecimiento_data
+        ]
+    
+    # Filtrar y agrupar según el tipo de procedimiento
+    if tipo_procedimiento_id == "12":  # Ejemplo: ID para "Abastecimiento de Agua"
+        abastecimiento_data = Fallecidos.objects.filter(id_procedimiento__in=procedimientos).values(
+            'motivo_fallecimiento'  # Asume que `nombre` es el campo en Tipo_Institucion
+        ).annotate(count=Count('id')).order_by('motivo_fallecimiento')
+
+        resultados = [
+            {"tipo_servicio": item['motivo_fallecimiento'], "count": item['count']}
+            for item in abastecimiento_data
+        ]
+    
+    # Filtrar y agrupar según el tipo de procedimiento
+    if tipo_procedimiento_id == "6":  # Ejemplo: ID para "Abastecimiento de Agua"
+        abastecimiento_data = Falsa_Alarma.objects.filter(id_procedimiento__in=procedimientos).values(
+            'motivo_alarma__motivo'  # Asume que `nombre` es el campo en Tipo_Institucion
+        ).annotate(count=Count('id')).order_by('motivo_alarma__motivo')
+
+        resultados = [
+            {"tipo_servicio": item['motivo_alarma__motivo'], "count": item['count']}
+            for item in abastecimiento_data
+        ]
+    
+    # Filtrar y agrupar según el tipo de procedimiento
+    if tipo_procedimiento_id == "9":  # Ejemplo: ID para "Abastecimiento de Agua"
+        abastecimiento_data = Servicios_Especiales.objects.filter(id_procedimientos__in=procedimientos).values(
+            'tipo_servicio__serv_especiales'  # Asume que `nombre` es el campo en Tipo_Institucion
+        ).annotate(count=Count('id')).order_by('tipo_servicio__serv_especiales')
+
+        resultados = [
+            {"tipo_servicio": item['tipo_servicio__serv_especiales'], "count": item['count']}
+            for item in abastecimiento_data
+        ]
+
+    # Filtrar y agrupar según el tipo de procedimiento
+    if tipo_procedimiento_id == "10":  # Ejemplo: ID para "Abastecimiento de Agua"
+        abastecimiento_data = Rescate.objects.filter(id_procedimientos__in=procedimientos).values(
+            'tipo_rescate__tipo_rescate'  # Asume que `nombre` es el campo en Tipo_Institucion
+        ).annotate(count=Count('id')).order_by('tipo_rescate__tipo_rescate')
+
+        resultados = [
+            {"tipo_servicio": item['tipo_rescate__tipo_rescate'], "count": item['count']}
+            for item in abastecimiento_data
+        ]
+
+    # Filtrar y agrupar según el tipo de procedimiento
+    if tipo_procedimiento_id == "11":  # Ejemplo: ID para "Abastecimiento de Agua"
+        abastecimiento_data = Incendios.objects.filter(id_procedimientos__in=procedimientos).values(
+            'id_tipo_incendio__tipo_incendio'  # Asume que `nombre` es el campo en Tipo_Institucion
+        ).annotate(count=Count('id')).order_by('id_tipo_incendio__tipo_incendio')
+
+        resultados = [
+            {"tipo_servicio": item['id_tipo_incendio__tipo_incendio'], "count": item['count']}
+            for item in abastecimiento_data
+        ]
+
+    # Filtrar y agrupar según el tipo de procedimiento
+    if tipo_procedimiento_id == "7":  # Ejemplo: ID para "Abastecimiento de Agua"
+        abastecimiento_data = Atenciones_Paramedicas.objects.filter(id_procedimientos__in=procedimientos).values(
+            'tipo_atencion'  # Asume que `nombre` es el campo en Tipo_Institucion
+        ).annotate(count=Count('id')).order_by('tipo_atencion')
+
+        resultados = [
+            {"tipo_servicio": item['tipo_atencion'], "count": item['count']}
+            for item in abastecimiento_data
+        ]
+
+    # Filtrar y agrupar según el tipo de procedimiento
+    if tipo_procedimiento_id == "16":  # Ejemplo: ID para "Abastecimiento de Agua"
+        abastecimiento_data = Traslado_Prehospitalaria.objects.filter(id_procedimiento__in=procedimientos).values(
+            'id_tipo_traslado__tipo_traslado'  # Asume que `nombre` es el campo en Tipo_Institucion
+        ).annotate(count=Count('id')).order_by('id_tipo_traslado__tipo_traslado')
+
+        resultados = [
+            {"tipo_servicio": item['id_tipo_traslado__tipo_traslado'], "count": item['count']}
+            for item in abastecimiento_data
+        ]
+
+    # Filtrar y agrupar según el tipo de procedimiento
+    if tipo_procedimiento_id == "14":  # Ejemplo: ID para "Abastecimiento de Agua"
+        abastecimiento_data = Evaluacion_Riesgo.objects.filter(id_procedimientos__in=procedimientos).values(
+            'id_tipo_riesgo__tipo_riesgo'  # Asume que `nombre` es el campo en Tipo_Institucion
+        ).annotate(count=Count('id')).order_by('id_tipo_riesgo__tipo_riesgo')
+
+        resultados = [
+            {"tipo_servicio": item['id_tipo_riesgo__tipo_riesgo'], "count": item['count']}
+            for item in abastecimiento_data
+        ]
+
+    # Filtrar y agrupar según el tipo de procedimiento
+    if tipo_procedimiento_id == "13":  # Ejemplo: ID para "Abastecimiento de Agua"
+        abastecimiento_data = Mitigacion_Riesgos.objects.filter(id_procedimientos__in=procedimientos).values(
+            'id_tipo_servicio__tipo_servicio'  # Asume que `nombre` es el campo en Tipo_Institucion
+        ).annotate(count=Count('id')).order_by('id_tipo_servicio__tipo_servicio')
+
+        resultados = [
+            {"tipo_servicio": item['id_tipo_servicio__tipo_servicio'], "count": item['count']}
+            for item in abastecimiento_data
+        ]
+
+    # Filtrar y agrupar según el tipo de procedimiento
+    if tipo_procedimiento_id == "15":  # Ejemplo: ID para "Abastecimiento de Agua"
+        abastecimiento_data = Puesto_Avanzada.objects.filter(id_procedimientos__in=procedimientos).values(
+            'id_tipo_servicio__tipo_servicio'  # Asume que `nombre` es el campo en Tipo_Institucion
+        ).annotate(count=Count('id')).order_by('id_tipo_servicio__tipo_servicio')
+
+        resultados = [
+            {"tipo_servicio": item['id_tipo_servicio__tipo_servicio'], "count": item['count']}
+            for item in abastecimiento_data
+        ]
+
+    # Filtrar y agrupar según el tipo de procedimiento
+    if tipo_procedimiento_id == "21":  # Ejemplo: ID para "Abastecimiento de Agua"
+        abastecimiento_data = Retencion_Preventiva.objects.filter(id_procedimiento__in=procedimientos).values(
+            'tipo_cilindro'  # Asume que `nombre` es el campo en Tipo_Institucion
+        ).annotate(count=Count('id')).order_by('tipo_cilindro')
+
+        resultados = [
+            {"tipo_servicio": item['tipo_cilindro'], "count": item['count']}
+            for item in abastecimiento_data
+        ]
+
+    # Filtrar y agrupar según el tipo de procedimiento
+    if tipo_procedimiento_id == "22":  # Ejemplo: ID para "Abastecimiento de Agua"
+        abastecimiento_data = Artificios_Pirotecnicos.objects.filter(id_procedimiento__in=procedimientos).values(
+            'tipo_procedimiento__tipo'  # Asume que `nombre` es el campo en Tipo_Institucion
+        ).annotate(count=Count('id')).order_by('tipo_procedimiento__tipo')
+
+        resultados = [
+            {"tipo_servicio": item['tipo_procedimiento__tipo'], "count": item['count']}
+            for item in abastecimiento_data
+        ]
+
+    # Filtrar y agrupar según el tipo de procedimiento
+    if tipo_procedimiento_id == "45":  # Ejemplo: ID para "Abastecimiento de Agua"
+        abastecimiento_data = Procedimientos_Capacitacion.objects.filter(id_procedimientos__in=procedimientos).values(
+            'tipo_capacitacion'  # Asume que `nombre` es el campo en Tipo_Institucion
+        ).annotate(count=Count('id')).order_by('tipo_capacitacion')
+
+        resultados = [
+            {"tipo_servicio": item['tipo_capacitacion'], "count": item['count']}
+            for item in abastecimiento_data
+        ]
+
+    # Filtrar y agrupar según el tipo de procedimiento
+    if tipo_procedimiento_id == "18":  # Ejemplo: ID para "Abastecimiento de Agua"
+        abastecimiento_data = Inspeccion_Prevencion_Asesorias_Tecnicas.objects.filter(id_procedimientos__in=procedimientos).values(
+            'tipo_inspeccion'  # Asume que `nombre` es el campo en Tipo_Institucion
+        ).annotate(count=Count('id')).order_by('tipo_inspeccion')
+
+        resultados = [
+            {"tipo_servicio": item['tipo_inspeccion'], "count": item['count']}
+            for item in abastecimiento_data
+        ]
+        
+        abastecimiento_data = Inspeccion_Habitabilidad.objects.filter(id_procedimientos__in=procedimientos).values(
+            'tipo_inspeccion'  # Asume que `nombre` es el campo en Tipo_Institucion
+        ).annotate(count=Count('id')).order_by('tipo_inspeccion')
+
+        resultados += [
+            {"tipo_servicio": item['tipo_inspeccion'], "count": item['count']}
+            for item in abastecimiento_data
+        ]
+
+        abastecimiento_data = Inspeccion_Otros.objects.filter(id_procedimientos__in=procedimientos).values(
+            'tipo_inspeccion'  # Asume que `nombre` es el campo en Tipo_Institucion
+        ).annotate(count=Count('id')).order_by('tipo_inspeccion')
+
+        resultados += [
+            {"tipo_servicio": item['tipo_inspeccion'], "count": item['count']}
+            for item in abastecimiento_data
+        ]
+        
+        abastecimiento_data = Inspeccion_Arbol.objects.filter(id_procedimientos__in=procedimientos).values(
+            'tipo_inspeccion'  # Asume que `nombre` es el campo en Tipo_Institucion
+        ).annotate(count=Count('id')).order_by('tipo_inspeccion')
+
+        resultados += [
+            {"tipo_servicio": item['tipo_inspeccion'], "count": item['count']}
+            for item in abastecimiento_data
+        ]
+
+    
+    # Filtrar y agrupar según el tipo de procedimiento
+    if tipo_procedimiento_id == "19":  # Ejemplo: ID para "Abastecimiento de Agua"
+        abastecimiento_data = Investigacion.objects.filter(id_procedimientos__in=procedimientos).values(
+            'tipo_siniestro'  # Asume que `nombre` es el campo en Tipo_Institucion
+        ).annotate(count=Count('id')).order_by('tipo_siniestro')
+
+        resultados = [
+            {"tipo_servicio": item['tipo_siniestro'], "count": item['count']}
+            for item in abastecimiento_data
+        ]
+
+    # Retornar el JSON con los resultados formateados
+    return JsonResponse(resultados, safe=False)
+
 # Api para generar los valores para la grafica de barras de la seccion de estadistica
 def obtener_divisiones_estadistica(request):
     # Obtener el parámetro 'mes' (en formato 'YYYY-MM')
@@ -993,6 +1250,7 @@ def obtener_divisiones(request):
 
     return JsonResponse(divisiones)
 
+# Api para Editar la informacion seleccionada del Personal
 def edit_personal(request):
     if request.method == 'POST':
         # Obtener el ID de la persona
@@ -1028,6 +1286,7 @@ def edit_personal(request):
     # Si es GET, mostrar el formulario vacío o con los datos del objeto
     return render(request, 'editar_personal.html')
 
+# Api para obtener el valor de el personal seleccionado
 def get_persona(request, persona_id):
     try:
         persona = Personal.objects.get(id=persona_id)
