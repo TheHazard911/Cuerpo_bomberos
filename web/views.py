@@ -23,6 +23,11 @@ from datetime import timedelta
 import os
 from django.conf import settings
 import subprocess
+from django.db.models import Case, When
+
+# Vista Personalizada para el error 404
+def custom_404_view(request, exception):
+    return render(request, "404.html", status=404)
 
 # Vista para descargar la base de datos
 def descargar_base_datos(request):
@@ -68,7 +73,6 @@ def descargar_base_datos(request):
     else:
         # Otros motores de base de datos
         return HttpResponse("Motor de base de datos no compatible", status=400)
-
 
 # Api para crear el excel de exportacion de la tabla
 def generar_excel(request):
@@ -373,6 +377,48 @@ def generar_excel(request):
             detalles_str,
             personas_presentes_str,
             descripcion_str,
+        ])
+
+    # Ajustar el ancho de las columnas
+    for column in hoja.columns:
+        max_length = max(len(str(cell.value)) for cell in column if cell.value) + 2
+        hoja.column_dimensions[get_column_letter(column[0].column)].width = max_length
+
+    # Configurar la respuesta HTTP para descargar el archivo
+    response = HttpResponse(content_type="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")
+    response["Content-Disposition"] = "attachment; filename=procedimientos.xlsx"
+    workbook.save(response)
+    return response
+
+# Api para crear el excel de exportacion de la tabla
+def generar_excel_personal(request):
+    # Crear un libro de trabajo y una hoja
+    workbook = openpyxl.Workbook()
+    hoja = workbook.active
+    hoja.title = "Procedimientos"
+
+    # Agregar encabezados a la primera fila
+    encabezados = [
+        "Nombres", "Apellidos", "Jerarquia", "Cargo", 
+        "Cedula", "Sexo", "Contrato", "Estado"
+    ]
+    hoja.append(encabezados)
+
+    # Obtener datos de los procedimientos
+    procedimientos = Personal.objects.exclude(id__in=[0, 4])
+
+    # Agregar datos a la hoja
+    for procedimiento in procedimientos:
+        # Agregar la fila de datos
+        hoja.append([
+            procedimiento.nombres,
+            procedimiento.apellidos,
+            procedimiento.jerarquia,
+            procedimiento.cargo,
+            procedimiento.cedula,
+            procedimiento.sexo,
+            procedimiento.rol,
+            procedimiento.status,
         ])
 
     # Ajustar el ancho de las columnas
@@ -1354,7 +1400,19 @@ def View_personal(request):
         return redirect('/')
     
     personal = Personal.objects.exclude(id__in=[0, 4])
-    personal_count = personal.count()
+    personal = personal.order_by("id")
+    # Lista de jerarquías en el orden deseado
+    jerarquias = [
+        "General", "Coronel", "Teniente Coronel", "Mayor", "Capitán", "Primer Teniente", 
+        "Teniente", "Sargento Mayor", "Sargento Primero", "Sargento segundo", 
+        "Cabo Primero", "Cabo Segundo", "Distinguido", "Bombero"
+    ]
+
+    # Filtro y ordenación de acuerdo a las jerarquías
+    personal_ordenado =personal.order_by(
+        Case(*[When(jerarquia=nombre, then=pos) for pos, nombre in enumerate(jerarquias)])
+    )
+    personal_count = personal_ordenado.count()
 
     if request.method == 'POST':
         formulario = FormularioRegistroPersonal(request.POST, prefix='formulario')
@@ -1387,7 +1445,7 @@ def View_personal(request):
         "nombres": user["nombres"],
         "apellidos": user["apellidos"],
         "form_personal": formulario,
-        "personal": personal,
+        "personal": personal_ordenado,
         "total": personal_count
     })
 
@@ -3451,7 +3509,7 @@ def tabla_general(request):
 
     # Filtra los procedimientos de las divisiones 1 a 5
     divisiones = range(1, 6)
-    datos_combined = Procedimientos.objects.filter(id_division__in=divisiones).order_by('-fecha' and '-hora')  # Orden descendente
+    datos_combined = Procedimientos.objects.filter(id_division__in=divisiones).order_by('-fecha')  # Orden descendente
 
     # Corrige el conteo
     total = datos_combined.count()

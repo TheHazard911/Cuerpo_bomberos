@@ -96,7 +96,7 @@
           <th scope="col">Apellidos</th>
           <th scope="col">Jerarquia</th>
           <th scope="col">Cargo</th>
-          <th scope="col">Cé  dula</th>
+          <th scope="col">Cédula</th>
           <th scope="col">Sexo</th>
           <th scope="col">Contrato</th>
           <th scope="col">Estado</th>
@@ -131,6 +131,12 @@
       </tbody>
     </table>
   </div>     
+  <div class="contain-dates">
+    <section class="buttons-items">
+      <a href="{% url 'descargar_excel_personal' %}" class="btn btn-primary">Descargar Excel</a>
+    </section>
+  
+  </div>
 </div>  
 <!-- div general-dashboard fin -->
 <div class="modal fade" tabindex="-1" id="modal-info">
@@ -258,6 +264,7 @@
                   <option value="" selected="">Seleccione Una Opcion</option>
                   <option value="Administrativo">Administrativo</option>
                   <option value="Bombero">Bombero</option>
+                  <option value="Civil">Civil</option>
                 </select>
               </div>
 
