@@ -23,6 +23,11 @@ from datetime import timedelta
 import os
 from django.conf import settings
 import subprocess
+from django.db.models import Case, When
+
+# Vista Personalizada para el error 404
+def custom_404_view(request, exception):
+    return render(request, "404.html", status=404)
 
 # Vista para descargar la base de datos
 def descargar_base_datos(request):
@@ -68,7 +73,6 @@ def descargar_base_datos(request):
     else:
         # Otros motores de base de datos
         return HttpResponse("Motor de base de datos no compatible", status=400)
-
 
 # Api para crear el excel de exportacion de la tabla
 def generar_excel(request):
@@ -1394,7 +1398,18 @@ def View_personal(request):
     
     personal = Personal.objects.exclude(id__in=[0, 4])
     personal = personal.order_by("id")
-    personal_count = personal.count()
+    # Lista de jerarquías en el orden deseado
+    jerarquias = [
+        "General", "Coronel", "Teniente Coronel", "Mayor", "Capitán", "Primer Teniente", 
+        "Teniente", "Sargento Mayor", "Sargento Primero", "Sargento segundo", 
+        "Cabo Primero", "Cabo Segundo", "Distinguido", "Bombero"
+    ]
+
+    # Filtro y ordenación de acuerdo a las jerarquías
+    personal_ordenado =personal.order_by(
+        Case(*[When(jerarquia=nombre, then=pos) for pos, nombre in enumerate(jerarquias)])
+    )
+    personal_count = personal_ordenado.count()
 
     if request.method == 'POST':
         formulario = FormularioRegistroPersonal(request.POST, prefix='formulario')
@@ -1427,7 +1442,7 @@ def View_personal(request):
         "nombres": user["nombres"],
         "apellidos": user["apellidos"],
         "form_personal": formulario,
-        "personal": personal,
+        "personal": personal_ordenado,
         "total": personal_count
     })
 
