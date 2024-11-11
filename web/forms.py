@@ -1,11 +1,23 @@
 from django import forms
 from.models import *
 from django.db.models import Q
+from django.db.models import Case, When
 
 def Asignar_ops_Personal():
+    jerarquias = [
+        "General", "Coronel", "Teniente Coronel", "Mayor", "Capitán", "Primer Teniente", 
+        "Teniente", "Sargento Mayor", "Sargento Primero", "Sargento segundo", 
+        "Cabo Primero", "Cabo Segundo", "Distinguido", "Bombero"
+    ]
+
     personal = Personal.objects.all().order_by("id")
+    # Filtro y ordenación de acuerdo a las jerarquías
+
+    personal_ordenado =personal.order_by(
+        Case(*[When(jerarquia=nombre, then=pos) for pos, nombre in enumerate(jerarquias)])
+    )
     op = [("", "Seleccione Una Opcion")]
-    for persona in personal:
+    for persona in personal_ordenado:
         op.append((str(persona.id), f"{persona.jerarquia} {persona.nombres} {persona.apellidos}"))
     return op
 

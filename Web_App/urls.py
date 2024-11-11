@@ -15,14 +15,18 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
+from django.conf.urls import handler404
 from django.urls import path
 from web.views import *
+
+handler404 = custom_404_view
 
 #Se crean las rutas que se podran visitar en la aplicacion web.
 urlpatterns = [
     path('alpha04/', admin.site.urls),
     path('login/', Home, name="home"),
-    path('', Blog, name="blog"),
+    path('', inicio, name="inicio"),
+    path('informacion/', information,name='informacion') ,
     path('dashboard/', Dashboard,name='dashboard') ,
     path('personal/', View_personal) ,
     path('prueba/', Prueba),
