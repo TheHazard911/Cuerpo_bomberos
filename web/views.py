@@ -1317,8 +1317,11 @@ def logout(request):
     request.session.flush()  # Eliminar todos los datos de la sesión
     return redirect('/login/')
 
-def Blog(request):
-    return render(request, 'blog.html')
+def inicio(request):
+    return render(request, 'blog/inicio.html')
+
+def information(request):
+    return render(request, 'blog/informacion.html')
 
 # Vista de la Ventana Inicial (Login)
 @never_cache

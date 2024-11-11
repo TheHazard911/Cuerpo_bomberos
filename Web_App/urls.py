@@ -22,7 +22,8 @@ from web.views import *
 urlpatterns = [
     path('alpha04/', admin.site.urls),
     path('login/', Home, name="home"),
-    path('', Blog, name="blog"),
+    path('', inicio, name="inicio"),
+    path('informacion/', information,name='informacion') ,
     path('dashboard/', Dashboard,name='dashboard') ,
     path('personal/', View_personal) ,
     path('prueba/', Prueba),
